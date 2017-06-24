@@ -32,7 +32,7 @@ def do_math(op, operand1, operand2):
         raise ValueError('Incorrect operation.')
 
 
-if __name__ == '__main__':
+def main():
     print('4 2 *')
     print(eval_postfix('4 2 *'))
 
@@ -43,4 +43,8 @@ if __name__ == '__main__':
     print(eval_postfix('4 2 +'))
   
     print('4 2 -')
-    print(eval_postfix('4 2 -'))  
+    print(eval_postfix('4 2 -'))
+
+
+if __name__ == '__main__':
+    main()
