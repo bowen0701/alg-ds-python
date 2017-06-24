@@ -39,7 +39,7 @@ def convert_infix_to_postfix(infix_str):
     return ' '.join(postfix_ls)
 
 
-if __name__ == '__main__':
+def main():
     s = '( A + B ) * ( C + D )'
     print('Infix:', s)
     print('Postfix:', convert_infix_to_postfix(s))
@@ -55,3 +55,7 @@ if __name__ == '__main__':
     s = 'A + B * C + D'
     print('Infix:', s)
     print('Postfix:', convert_infix_to_postfix(s))
+
+
+if __name__ == '__main__':
+    main()
