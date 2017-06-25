@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 class LogicGate(object):
+    """Logic gate class."""
     def __init__(self, label):
         self.label = label
         self.output = None
@@ -15,6 +16,7 @@ class LogicGate(object):
 
 
 class BinaryGate(LogicGate):
+    """A binary gate which is a logic gate."""
     def __init__(self, label):
         super(BinaryGate, self).__init__(label)
         self.pinA = None
@@ -46,6 +48,7 @@ class BinaryGate(LogicGate):
 
 
 class UnaryGate(LogicGate):
+    """An unary gate which is logic gate."""
     def __init__(self, label):
         super(UnaryGate, self).__init__(label)
         self.pin = None
@@ -66,6 +69,7 @@ class UnaryGate(LogicGate):
 
 
 class AndGate(BinaryGate):
+    """A 'and' gate which is a binary gate."""
     def __init__(self, label):
         super(AndGate, self).__init__(label)
 
@@ -79,6 +83,7 @@ class AndGate(BinaryGate):
 
 
 class OrGate(BinaryGate):
+    """A 'or' gate which is a binary gate."""
     def __init__(self, label):
         super(OrGate, self).__init__(label)
 
@@ -92,6 +97,7 @@ class OrGate(BinaryGate):
 
 
 class NotGate(UnaryGate):
+    """A 'not' gate which is a unary gate."""
     def __init__(self, label):
         super(NotGate, self).__init__(label)
 
@@ -103,7 +109,8 @@ class NotGate(UnaryGate):
             return 1
 
 
-class Connector():
+class Connector(object):
+    """A connector class."""
     def __init__(self, fgate, tgate):
         self.fromgate = fgate
         self.togate = tgate
