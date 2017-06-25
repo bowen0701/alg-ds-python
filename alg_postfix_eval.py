@@ -3,6 +3,14 @@ from __future__ import division
 from ds_stack import Stack
 
 def eval_postfix(postfix_str):
+    """Evaluate postfix: A B * = A * B.
+
+    Args:
+      postfix_str: A string. Multiple postfix string.
+
+    Returns:
+      A float. Evaluated postfix result.
+    """
     operand_stack = Stack()
     
     token_ls = postfix_str.split()
