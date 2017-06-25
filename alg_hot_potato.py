@@ -2,6 +2,13 @@ from __future__ import print_function
 from ds_queue import Queue
 
 def pass_hot_potato(name_ls, num):
+	"""Pass hot potato.
+
+	A hot potato is sequentially passed to ones in a queue line.
+	After a number of passes, the one who got the hot potato is out.
+	Then the passing hot potato game is launched againg,
+	until the last person is remaining one.
+	"""
 	name_queue = Queue()
 
 	for name in name_ls:
