@@ -1,3 +1,8 @@
+"""Anagram detecting problem.
+
+Two strings are anagram if one is simply a rearrangement of the other.
+"""
+
 def check_anagram(s1, s2):
     """Anagram by naive check."""
     l2 = list(s2)
