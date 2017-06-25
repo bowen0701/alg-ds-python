@@ -2,6 +2,7 @@ from __future__ import print_function
 
 
 class Queue(object):
+	"""Queue class."""
 	def __init__(self):
 		self.items = []
 
