@@ -4,22 +4,23 @@ from __future__ import print_function
 class Node(object):
     """Node class as building block for unordered list."""
     def __init__(self, init_data):
-        pass
+        self.data = init_data
+        self.next = None
 
     def get_data(self):
-        pass
+        return self.data
 
     def get_next(self):
-        pass
+        return self.next
 
     def set_data(self, new_data):
-        pass
+        self.data = new_data
 
     def set_next(self, new_next):
-        pass
+        self.next = new_next
 
 
-class List(object):
+class UnorderedList(object):
     """Unordered list class.
 
     Implement unordered list by a linked list.
