@@ -36,21 +36,23 @@ class UnorderedList(object):
       - pop(pos)
     """
     def __init__(self):
-        pass
+        self.head = None
+
+    def is_empty(self):
+        return self.head == None
 
     def add(self, item):
+        temp = Node(item)
+        temp.set_next(self.head)
+        self.head = temp
+
+    def length(self):
         pass
 
     def remove(self, item):
         pass
 
     def search(self, item):
-        pass
-
-    def is_empty(self):
-        pass
-
-    def length(self):
         pass
 
     def append(self, item):
