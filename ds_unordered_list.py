@@ -56,22 +56,22 @@ class UnorderedList(object):
 
     def search(self, item):
         current = self.head
-        found_b = False
-        while not found_b and current != None:
+        found_flag = False
+        while not found_flag and current is not None:
             if current.get_data() == item:
-                found_b = True
+                found_flag = True
             else:
                 current = current.get_next()
-        return found_b
+        return found_flag
 
     def remove(self, item):
         current = self.head
         previous = None
-        found_b = False
+        found_flag = False
 
-        while not found_b and current is not None:
+        while not found_flag and current is not None:
             if current.get_data() == item:
-                found_b = True
+                found_flag = True
             else:
                 previous = current
                 current = current.get_next()
@@ -94,19 +94,26 @@ class UnorderedList(object):
 
     def index(self, item):
         current = self.head
-        found_b = False
+        found_flag = False
         counter = 0
-        while not found_b and current is not None:
+        while not found_flag and current is not None:
             if current.get_data() == item:
-                found_b = True
+                found_flag = True
             else:
                 counter += 1
                 current = current.get_next()
-        # TODO: not yet completed.
+        if not found_flag:
+            counter = None
         return counter
 
     def insert(self, pos, item):
-        pass
+        temp = Node(item)
+        current = self.head
+        previous = None
+        counter = 0
+        while current is not None and counter < pos:
+            previous = current
+            # TODO: Implement inset().
 
     def pop(self, pos):
         pass
@@ -140,7 +147,7 @@ def main():
 
     print('Index 100: {}'.format(a_list.index(100)))
     print('Index 54: {}'.format(a_list.index(54)))
-
+    print('Index 36: {}'.format(a_list.index(36)))
 
 
 if __name__ == '__main__':
