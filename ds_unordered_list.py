@@ -25,28 +25,25 @@ class UnorderedList(object):
 
     Implement unordered list by a linked list.
     Operations include the following:
-      - add(item)
-      - remove(ite)
-      - search(item)
       - is_empty()
-      - length()
+      - size()
+      - add(item)
       - append(item)
-      - index(item)
       - insert(item, pos)
       - pop(pos)
+      - remove(ite)
+      - search(item)
+      - index(item)
     """
     def __init__(self):
         self.head = None
 
     def is_empty(self):
+        """Check list is empty or not."""
         return self.head is None
 
-    def add(self, item):
-        temp = Node(item)
-        temp.set_next(self.head)
-        self.head = temp
-
     def size(self):
+        """Obtain list size."""
         current = self.head
         counter = 0
         while current is not None:
@@ -54,17 +51,38 @@ class UnorderedList(object):
             current = current.get_next()
         return counter
 
-    def search(self, item):
+    def add(self, item):
+        """Add item to list head."""
+        temp = Node(item)
+        temp.set_next(self.head)
+        self.head = temp
+
+    def append(self, item):
+        """Append item to list tail."""
+        temp = Node(item)
         current = self.head
-        found_flag = False
-        while not found_flag and current is not None:
-            if current.get_data() == item:
-                found_flag = True
-            else:
-                current = current.get_next()
-        return found_flag
+        previous = None
+        while current is not None:
+            previous = current
+            current = current.get_next()
+        previous.set_next(temp)
+
+    def insert(self, pos, item):
+        """Insert item to position of list."""
+        temp = Node(item)
+        current = self.head
+        previous = None
+        counter = 0
+        while current is not None and counter < pos:
+            previous = current
+            # TODO: Implement inset().
+
+    def pop(self, pos=-1):
+        """Pop list item at position."""
+        pass
 
     def remove(self, item):
+        """Remove item from list, if existed."""
         current = self.head
         previous = None
         found_flag = False
@@ -83,16 +101,19 @@ class UnorderedList(object):
         else:
             previous.set_next(current.get_next())
 
-    def append(self, item):
-        temp = Node(item)
+    def search(self, item):
+        """Search item in list."""
         current = self.head
-        previous = None
-        while current is not None:
-            previous = current
-            current = current.get_next()
-        previous.set_next(temp)
+        found_flag = False
+        while not found_flag and current is not None:
+            if current.get_data() == item:
+                found_flag = True
+            else:
+                current = current.get_next()
+        return found_flag
 
     def index(self, item):
+        """Obtain item's index in list."""
         current = self.head
         found_flag = False
         counter = 0
@@ -105,18 +126,6 @@ class UnorderedList(object):
         if not found_flag:
             counter = None
         return counter
-
-    def insert(self, pos, item):
-        temp = Node(item)
-        current = self.head
-        previous = None
-        counter = 0
-        while current is not None and counter < pos:
-            previous = current
-            # TODO: Implement inset().
-
-    def pop(self, pos=-1):
-        pass
 
 
 def main():
