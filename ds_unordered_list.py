@@ -115,7 +115,7 @@ class UnorderedList(object):
             previous = current
             # TODO: Implement inset().
 
-    def pop(self, pos):
+    def pop(self, pos=-1):
         pass
 
 
