@@ -36,14 +36,26 @@ def convert_decimal_to_base(dec_num, base):
     return bin_str
 
 
-def convert_decimal_to_base_by_recur_bak(dec_num, base):
-    """Convert decimal number to any base by recussion."""
-    pass
+def _recur_decimal_to_base(dec_num, base, rem_stack):
+    digits = '0123456789ABCDEF'
 
+    if dec_num < base:
+        rem_stack.push(digits[dec_num])
+    else:
+        rem_stack.push(digits[dec_num % base])
+        _recur_decimal_to_base(
+            dec_num // base, base, rem_stack)
 
 def convert_decimal_to_base_by_recur(dec_num, base):
     """Convert decimal number to any base by recussion with Stack."""
-    pass
+    rem_stack = Stack()
+    _recur_decimal_to_base(dec_num, base, rem_stack)
+
+    bin_str = ''
+    while not rem_stack.is_empty():
+        bin_str = bin_str + rem_stack.pop()
+
+    return bin_str
 
 
 def main():
@@ -58,6 +70,9 @@ def main():
           .format(dec_num, convert_decimal_to_base(dec_num, 8)))
     print('Convert {} to base 16: {}'
           .format(dec_num, convert_decimal_to_base(dec_num, 16)))
+
+    print('Convert {} to base 16: {}'
+          .format(dec_num, convert_decimal_to_base_by_recur(dec_num, 16)))
 
 
 if __name__ == '__main__':
