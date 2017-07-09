@@ -49,6 +49,7 @@ class UnorderedList(object):
         while current is not None:
             counter += 1
             current = current.get_next()
+        
         return counter
 
     def add(self, item):
@@ -65,21 +66,25 @@ class UnorderedList(object):
         while current is not None:
             previous = current
             current = current.get_next()
+        
         previous.set_next(temp)
 
     def insert(self, pos, item):
-        """Insert item to position of list."""
+        """Insert item to specified position of list."""
         temp = Node(item)
         current = self.head
         previous = None
         counter = 0
         while current is not None and counter < pos:
             previous = current
-            # TODO: Implement inset().
+            current = current.get_next()
+            counter += 1
 
-    def pop(self, pos=-1):
-        """Pop list item at position."""
-        pass
+        temp.set_next(current)
+        if pos == 0:
+            self.head = temp
+        else:
+            previous.set_next(temp)
 
     def remove(self, item):
         """Remove item from list, if existed."""
@@ -101,6 +106,10 @@ class UnorderedList(object):
         else:
             previous.set_next(current.get_next())
 
+    def pop(self, pos=-1):
+        """Pop list item at specified position."""
+        pass
+
     def search(self, item):
         """Search item in list."""
         current = self.head
@@ -110,6 +119,7 @@ class UnorderedList(object):
                 found_flag = True
             else:
                 current = current.get_next()
+        
         return found_flag
 
     def index(self, item):
@@ -123,6 +133,7 @@ class UnorderedList(object):
             else:
                 counter += 1
                 current = current.get_next()
+        
         if not found_flag:
             counter = None
         return counter
@@ -154,9 +165,18 @@ def main():
     a_list.append(100)
     print('Length: {}'.format(a_list.size()))
 
-    print('Index 100: {}'.format(a_list.index(100)))
-    print('Index 54: {}'.format(a_list.index(54)))
-    print('Index 36: {}'.format(a_list.index(36)))
+    print('Index of 100: {}'.format(a_list.index(100)))
+    print('Index of 54: {}'.format(a_list.index(54)))
+    print('Index of 36: {}'.format(a_list.index(36)))
+
+    print('Insert 36 at pos 0.')
+    a_list.insert(0, 36)
+    print('Length: {}'.format(a_list.size()))
+    print('Index of 36: {}'.format(a_list.index(36)))
+    print('Insert 99 at pos 7.')
+    a_list.insert(7, 99)
+    print('Length: {}'.format(a_list.size()))
+    print('Index of 99: {}'.format(a_list.index(99)))
 
 
 if __name__ == '__main__':
