@@ -104,12 +104,16 @@ class OrderedList(object):
         """Search item in list."""
         current = self.head
         found_flag = False
+        stop_flag = False
 
-        while not found_flag and current is not None:
+        while not found_flag and not stop_flag and current is not None:
             if current.get_data() == item:
                 found_flag = True
             else:
-                current = current.get_next()
+                if current.get_data() > item:
+                    stop_flag = True
+                else: 
+                    current = current.get_next()
         
         return found_flag
 
