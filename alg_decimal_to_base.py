@@ -36,6 +36,16 @@ def convert_decimal_to_base(dec_num, base):
     return bin_str
 
 
+def convert_decimal_to_base_by_recur_bak(dec_num, base):
+    """Convert decimal number to any base by recussion."""
+    pass
+
+
+def convert_decimal_to_base_by_recur(dec_num, base):
+    """Convert decimal number to any base by recussion with Stack."""
+    pass
+
+
 def main():
     dec_num = 1024
     print('Convert {} to base 2: {}'
