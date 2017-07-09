@@ -1,4 +1,5 @@
 from __future__ import print_function
+from numpy import inf
 
 
 class Node(object):
@@ -46,6 +47,7 @@ class UnorderedList(object):
         """Obtain list size."""
         current = self.head
         counter = 0
+
         while current is not None:
             counter += 1
             current = current.get_next()
@@ -63,6 +65,7 @@ class UnorderedList(object):
         temp = Node(item)
         current = self.head
         previous = None
+
         while current is not None:
             previous = current
             current = current.get_next()
@@ -75,7 +78,8 @@ class UnorderedList(object):
         current = self.head
         previous = None
         counter = 0
-        while current is not None and counter < pos:
+
+        while counter < pos and current is not None:
             previous = current
             current = current.get_next()
             counter += 1
@@ -106,14 +110,34 @@ class UnorderedList(object):
         else:
             previous.set_next(current.get_next())
 
-    def pop(self, pos=-1):
-        """Pop list item at specified position."""
-        pass
+    def pop(self, pos=None):
+        """Pop list item at specified position.
+
+        If pos is None, then pop the last item.
+        """
+        current = self.head
+        previous = None
+        counter = 0
+
+        if pos is None:
+            pos = self.size() - 1
+
+        while counter < pos and current is not None:
+            previous = current
+            current = current.get_next()
+            counter += 1
+
+        if previous is None:
+            self.head = current.get_next()
+        else:
+            previous.set_next(current.get_next())
+        return current.get_data()
 
     def search(self, item):
         """Search item in list."""
         current = self.head
         found_flag = False
+
         while not found_flag and current is not None:
             if current.get_data() == item:
                 found_flag = True
@@ -127,6 +151,7 @@ class UnorderedList(object):
         current = self.head
         found_flag = False
         counter = 0
+
         while not found_flag and current is not None:
             if current.get_data() == item:
                 found_flag = True
@@ -156,6 +181,7 @@ def main():
     print('Remove non-existed 100.')
     a_list.remove(100)
     print('Length: {}'.format(a_list.size()))
+    
     print('Remove existed 31.')
     a_list.remove(31)
     print('Length: {}'.format(a_list.size()))
@@ -173,10 +199,31 @@ def main():
     a_list.insert(0, 36)
     print('Length: {}'.format(a_list.size()))
     print('Index of 36: {}'.format(a_list.index(36)))
+   
     print('Insert 99 at pos 7.')
     a_list.insert(7, 99)
     print('Length: {}'.format(a_list.size()))
     print('Index of 99: {}'.format(a_list.index(99)))
+
+    print('Pop item at pos 0.')
+    print(a_list.pop(0))
+    print('Length: {}'.format(a_list.size())) 
+    
+    print('Pop item at last pos.')
+    print(a_list.pop())
+    print('Length: {}'.format(a_list.size()))
+    print(a_list.pop())
+    print('Length: {}'.format(a_list.size()))
+    print(a_list.pop())
+    print('Length: {}'.format(a_list.size()))
+    print(a_list.pop())
+    print('Length: {}'.format(a_list.size()))
+    print(a_list.pop())
+    print('Length: {}'.format(a_list.size()))
+    print(a_list.pop())
+    print('Length: {}'.format(a_list.size()))
+    print(a_list.pop())
+    print('Length: {}'.format(a_list.size()))
 
 
 if __name__ == '__main__':
