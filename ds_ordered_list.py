@@ -54,8 +54,28 @@ class OrderedList(object):
         return counter
 
     def add(self, item):
-        """Add item to list head."""
-        pass
+        """Add item to list."""
+        # temp = Node(item)
+        # temp.set_next(self.head)
+        # self.head = temp
+        current = self.head
+        previous = None
+        stop_flag = False
+        
+        while current is not None and not stop_flag:
+            if current.get_data() > item:
+                stop_flag = True
+            else:
+                previous = current
+                current = current.get_next()
+
+        temp = Node(item)
+        if previous is None:
+            temp.set_next(self.head)
+            self.head = temp
+        else:
+            temp.set_next(current)
+            previous.set_next(temp)
 
     def remove(self, item):
         """Remove item from list, if existed."""
