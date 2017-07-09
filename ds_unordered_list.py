@@ -3,7 +3,7 @@ from numpy import inf
 
 
 class Node(object):
-    """Node class as building block for unordered list."""
+    """Node class as building block for linked list."""
     def __init__(self, init_data):
         self.data = init_data
         self.next = None
