@@ -1,3 +1,8 @@
+"""Palindrome: a string that read the same forward and backward.
+
+For example: radar, madam.
+"""
+
 from __future__ import print_function
 from __future__ import division
 
@@ -5,11 +10,7 @@ import numpy as np
 
 
 def match_palindrome(a_str):
-    """Check palindrom by front & rear match with Deque.
-
-    A palindrome is a string that read the same forward and backward.
-    For example: radar, madam.
-    """
+    """Check palindrom by front & rear match by Deque."""
     from ds_deque import Deque
 
     str_deque = Deque()
