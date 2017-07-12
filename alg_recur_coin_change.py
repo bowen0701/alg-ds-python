@@ -3,7 +3,7 @@ import time
 
 
 def change_coin_recur(change, coin_val_ls):
-    """Change coin by 'naive' recursion."""
+    """Change coins by 'naive' recursion."""
     min_coins = change
     if change in coin_val_ls:
         return 1
@@ -17,7 +17,7 @@ def change_coin_recur(change, coin_val_ls):
 
 
 def change_coin_recur_cache(change, coin_val_ls, known_results_ls):
-    """Change coin by recursion with caching."""
+    """Change coins by recursion with caching."""
     min_coins = change
     if change in coin_val_ls:
         known_results_ls[change - 1] = 1
@@ -36,6 +36,7 @@ def change_coin_recur_cache(change, coin_val_ls, known_results_ls):
 
 
 def change_coin_dp(change, coin_val_ls, min_coins, used_coins):
+    """Change coins by Dynamic Programming."""
     for cents in range(change + 1):
         coin_count = cents
         new_coin = 1
@@ -48,6 +49,7 @@ def change_coin_dp(change, coin_val_ls, min_coins, used_coins):
     return min_coins[change]
 
 def print_coins(change, used_coins):
+    """Print used coins for change."""
     coin = change
     while coin > 0:
         this_coin = used_coins[coin]
