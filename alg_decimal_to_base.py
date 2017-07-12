@@ -45,16 +45,16 @@ def _recur_decimal_to_base(dec_num, base, rem_stack):
         rem_stack.push(digits[dec_num % base])
         _recur_decimal_to_base(
             dec_num // base, base, rem_stack)
+    
+    return None
 
 def convert_decimal_to_base_by_recur(dec_num, base):
     """Convert decimal number to any base by recussion with Stack."""
     rem_stack = Stack()
     _recur_decimal_to_base(dec_num, base, rem_stack)
-
     bin_str = ''
     while not rem_stack.is_empty():
         bin_str = bin_str + rem_stack.pop()
-
     return bin_str
 
 
