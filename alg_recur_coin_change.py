@@ -55,6 +55,7 @@ def print_coins(change, used_coins):
         this_coin = used_coins[coin]
         print('this_coin: {}'.format(this_coin))
         coin = coin - this_coin
+    return None
 
 
 def main():
