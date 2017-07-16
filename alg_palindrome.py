@@ -4,9 +4,7 @@ For example: radar, madam.
 """
 
 from __future__ import print_function
-from __future__ import division
-
-import numpy as np
+import time
 
 
 def match_palindrome(a_str):
@@ -29,15 +27,34 @@ def match_palindrome(a_str):
     return still_match
 
 
+def match_palindrom_recur(a_str):
+    """Check palindrome by recursion."""
+    if len(a_str) <= 1:
+        return True
+    else: 
+        return a_str[0] == a_str[-1] and match_palindrom_recur(a_str[1:-1])
+
+
 def main():
+    start_time = time.time()
     a_str = 'madam'
-    print('{0}: {1}'.format(a_str, match_palindrome(a_str)))
-    
+    print('{0}: {1}'.format(a_str, match_palindrome(a_str))) 
     a_str = 'Bowen'
     print('{0}: {1}'.format(a_str, match_palindrome(a_str)))
-
     a_str = 'toot'
     print('{0}: {1}'.format(a_str, match_palindrome(a_str)))
+    print('Time for match_palindrome(): {}'
+          .format(time.time() - start_time))
+
+    start_time = time.time()
+    a_str = 'madam'
+    print('{0}: {1}'.format(a_str, match_palindrom_recur(a_str)))    
+    a_str = 'Bowen'
+    print('{0}: {1}'.format(a_str, match_palindrom_recur(a_str)))
+    a_str = 'toot'
+    print('{0}: {1}'.format(a_str, match_palindrom_recur(a_str)))
+    print('Time for match_palindrom_recur(): {}'
+          .format(time.time() - start_time))
 
 
 if __name__ == '__main__':
