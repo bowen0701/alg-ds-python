@@ -8,7 +8,6 @@
 """
 
 from __future__ import print_function
-import time
 
 
 def fibonacci(n):
@@ -22,6 +21,7 @@ def fibonacci(n):
 
 
 def main():
+    import time
     n = 13
     print('{}th number of Fibonacci series: {}'
           .format(n, fibonacci(n)))
