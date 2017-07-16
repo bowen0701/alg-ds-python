@@ -1,5 +1,4 @@
 from __future__ import print_function
-import time
 
 
 def change_coin_recur(change, coin_val_ls):
@@ -59,6 +58,8 @@ def print_coins(change, used_coins):
 
 
 def main():
+    import time
+
     # start_time = time.time()
     # min_coins = change_coin_recur(63, [1, 5, 10, 25])
     # print('min_coins: {}'.format(min_coins))
