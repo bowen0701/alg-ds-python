@@ -4,7 +4,6 @@ For example: radar, madam.
 """
 
 from __future__ import print_function
-import time
 
 
 def match_palindrome(a_str):
@@ -36,6 +35,8 @@ def match_palindrom_recur(a_str):
 
 
 def main():
+    import time
+
     start_time = time.time()
     a_str = 'madam'
     print('{0}: {1}'.format(a_str, match_palindrome(a_str))) 
