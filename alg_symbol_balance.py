@@ -30,8 +30,8 @@ def balance_parentheses(symbol_str):
 def _match_symbols(open, close):
     opens = '([{'
     closers = ')]}'
-    match_flag = opens.index(open) == closers.index(close)
-    return match_flag
+    match_bool = opens.index(open) == closers.index(close)
+    return match_bool
 
 def balance_symbols(symbol_str):
     """Balance symbols in a string.
