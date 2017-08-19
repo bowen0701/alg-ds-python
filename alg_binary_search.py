@@ -4,19 +4,19 @@ def binary_search(a_list, item):
     """Binary search for ordered list."""
     first = 0
     last = len(a_list) - 1
-    found_flag = False
+    found_bool = False
 
-    while first <= last and not found_flag:
+    while first <= last and not found_bool:
         mid_point = (first + last) // 2
         if a_list[mid_point] == item:
-            found_flag = True
+            found_bool = True
         else:
             if item < a_list[mid_point]:
                 last = mid_point - 1
             else:
                 first = mid_point + 1
 
-    return found_flag
+    return found_bool
 
 def binary_search_by_recur(a_list, item):
     """Binary search for ordered list by recursion."""
