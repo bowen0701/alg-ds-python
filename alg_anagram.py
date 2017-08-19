@@ -38,15 +38,15 @@ def sort_anagram(s1, s2):
     l2.sort()
     
     pos = 0
-    match_flag = True
+    match_bool = True
     
-    while pos < len(s1) and match_flag:
+    while pos < len(s1) and match_bool:
         if l1[pos] == l2[pos]:
             pos = pos + 1
         else:
-            match_flag = False
+            match_bool = False
     
-    return match_flag
+    return match_bool
 
 
 def count_anagram(s1, s2):
