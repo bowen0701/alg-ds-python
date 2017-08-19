@@ -128,18 +128,18 @@ def search_from(maze, start_row, start_col):
 
     # Otherwise, use logical short circuiting to try each direction
     # in turn, if needed.
-    found_flag = (
+    found_bool = (
         search_from(maze, start_row - 1, start_col) or
         search_from(maze, start_row + 1, start_col) or
         search_from(maze, start_row, start_col - 1) or
         search_from(maze, start_row, start_col + 1))
 
-    if found_flag:
+    if found_bool:
         maze.update_position(start_row, start_col, PART_OF_PATH)
     else:
         maze.update_position(start_row, start_col, DEAD_END)
 
-    return found_flag
+    return found_bool
 
 def main():
     maze = Maze('maze_file.txt')
