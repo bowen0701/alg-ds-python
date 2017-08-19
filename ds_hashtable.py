@@ -41,18 +41,18 @@ class HashTable(object):
         start_slot = self.hash(key, len(self.slots))
 
         data = None
-        stop_flag = False
-        found_flag = False
+        stop-bool = False
+        found-bool = False
         position = start_slot
         while (self.slots[position] is not None and 
-               not found_flag and not stop_flag):
+               not found-bool and not stop-bool):
             if self.slots[position] == key:
-                found_flag = True
+                found-bool = True
                 data = self.data[position]
             else:
                 position = self.rehash(position, len(self.slots))
                 if position == start_slot:
-                    stop_flag = True
+                    stop-bool = True
 
         return data
 
