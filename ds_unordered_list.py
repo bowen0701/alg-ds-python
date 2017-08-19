@@ -94,11 +94,11 @@ class UnorderedList(object):
         """Remove item from list, if existed."""
         current = self.head
         previous = None
-        found_flag = False
+        found_bool = False
 
-        while not found_flag and current is not None:
+        while not found_bool and current is not None:
             if current.get_data() == item:
-                found_flag = True
+                found_bool = True
             else:
                 previous = current
                 current = current.get_next()
@@ -136,30 +136,30 @@ class UnorderedList(object):
     def search(self, item):
         """Search item in list."""
         current = self.head
-        found_flag = False
+        found_bool = False
 
-        while not found_flag and current is not None:
+        while not found_bool and current is not None:
             if current.get_data() == item:
-                found_flag = True
+                found_bool = True
             else:
                 current = current.get_next()
         
-        return found_flag
+        return found_bool
 
     def index(self, item):
         """Obtain item's index in list."""
         current = self.head
-        found_flag = False
+        found_bool = False
         counter = 0
 
-        while not found_flag and current is not None:
+        while not found_bool and current is not None:
             if current.get_data() == item:
-                found_flag = True
+                found_bool = True
             else:
                 counter += 1
                 current = current.get_next()
         
-        if not found_flag:
+        if not found_bool:
             counter = None
         return counter
 
