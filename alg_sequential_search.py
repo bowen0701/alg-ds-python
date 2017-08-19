@@ -3,30 +3,30 @@ from __future__ import print_function
 def sequential_search(a_list, item):
     """Sequential search."""
     pos = 0
-    found_flag = False
-    while pos < len(a_list) and not found_flag:
+    found_bool = False
+    while pos < len(a_list) and not found_bool:
         if a_list[pos] == item:
-            found_flag = True
+            found_bool = True
         else:
             pos += 1
-    return found_flag
+    return found_bool
 
 
 def ordered_sequential_search(a_list, item):
     """Ordered sequential search."""
     a_list = sorted(a_list)
     pos = 0
-    found_flag = False
-    stop_flag = False
-    while pos < len(a_list) and not found_flag and not stop_flag:
+    found_bool = False
+    stop_bool = False
+    while pos < len(a_list) and not found_bool and not stop_bool:
         if a_list[pos] == item:
-            found_flag = True
+            found_bool = True
         else:
             if a_list[pos] > item:
-                stop_flag = True
+                stop_bool = True
             else:
                 pos += 1
-    return found_flag
+    return found_bool
 
 
 def main():
