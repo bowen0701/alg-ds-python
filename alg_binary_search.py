@@ -18,7 +18,7 @@ def binary_search(a_list, item):
 
     return found_bool
 
-def binary_search_by_recur(a_list, item):
+def recur_binary_search(a_list, item):
     """Binary search for ordered list by recursion."""
     if len(a_list) == 0:
         return False
@@ -28,9 +28,9 @@ def binary_search_by_recur(a_list, item):
             return True
         else:
             if item < a_list[mid_point]:
-                return binary_search_by_recur(a_list[:mid_point], item)
+                return recur_binary_search(a_list[:mid_point], item)
             else:
-                return binary_search_by_recur(a_list[(mid_point + 1):], item)
+                return recur_binary_search(a_list[(mid_point + 1):], item)
 
 
 def main():
@@ -58,11 +58,11 @@ def main():
     start_time = time.time()
     item = None
     print('Search item {0}: {1}'
-          .format(item, binary_search_by_recur(a_list, item)))
+          .format(item, recur_binary_search(a_list, item)))
     item = 93
     print('Search item {0}: {1}'
-          .format(item, binary_search_by_recur(a_list, item)))
-    print('Time for binary_search_by_recur(): {}'
+          .format(item, recur_binary_search(a_list, item)))
+    print('Time for recur_binary_search(): {}'
           .format(time.time() - start_time))
 
 
