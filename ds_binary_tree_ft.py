@@ -3,9 +3,9 @@ from __future__ import division
 from __future__ import print_function
 
 
-def binary_tree(r):
+def binary_tree(root):
     """Binary tree using list of list."""
-    return [r, [], []]
+    return [root, [], []]
 
 
 def insert_left(root, new_branch):
