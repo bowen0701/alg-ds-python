@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-class BinaryTree(oject):
+class BinaryTree(object):
     """Binary Tree using class."""
     def __init__(self, root):
         self.key = root
@@ -29,13 +29,50 @@ class BinaryTree(oject):
     def get_root_value(self):
         return self.key
 
-    def set_root_value(self):
-        # TODO: here
-        pass
+    def set_root_value(self, new_value):
+        self.key = new_value
+
+    def get_left_tree(self):
+        return self.left_tree
+
+    def get_right_tree(self):
+        return self.right_tree
 
 
 def main():
-    pass
+    root = BinaryTree(3)
+    print('root: {}'.format(root))
+    print('Get root value: {}'
+          .format(root.get_root_value()))
+
+    root.insert_left(4)
+    print('root.insert_left(4)')
+    print('Get left value: {}'
+          .format(root.get_left_tree().get_root_value()))
+
+    root.insert_left(5)
+    print('root.insert_left(5)')
+    print('root.insert_left(5): {}'.format(root))
+
+    root.insert_right(6)
+    print('root.insert_right(6): {}'.format(root))
+
+    root.insert_right(7)
+    print('root.insert_right(7): {}'.format(root))
+
+    left = root.get_left_tree()
+    print('left: {}'.format(left))
+
+    left.set_root_value(9)
+    print('left.set_root_value(9): {}'.format(left))
+    print('root: {}'.format(root))
+
+    left.insert_left(11)
+    print('left.insert_left(11): {}'.format(left))
+    print('root: {}'.format(root))
+
+    print('Get right tree of right tree:')
+    print(root.get_right_tree().get_right_tree())
 
 
 if __name__ == '__main__':
