@@ -41,38 +41,39 @@ class BinaryTree(object):
 
 def main():
     root = BinaryTree(3)
-    print('root: {}'.format(root))
-    print('Get root value: {}'
-          .format(root.get_root_value()))
+    print('root: {}'.format(root.get_root_value()))
 
     root.insert_left(4)
-    print('root.insert_left(4)')
-    print('Get left value: {}'
+    print('root.insert_left(4): {}'
           .format(root.get_left_tree().get_root_value()))
 
     root.insert_left(5)
-    print('root.insert_left(5)')
-    print('root.insert_left(5): {}'.format(root))
+    print('root.insert_left(5): {}'
+          .format(root.get_left_tree().get_root_value()))
 
     root.insert_right(6)
-    print('root.insert_right(6): {}'.format(root))
+    print('root.insert_right(6): {}'
+          .format(root.get_right_tree().get_root_value()))
 
     root.insert_right(7)
-    print('root.insert_right(7): {}'.format(root))
+    print('root.insert_right(7): {}'
+          .format(root.get_right_tree().get_root_value()))
 
     left = root.get_left_tree()
-    print('left: {}'.format(left))
+    print('left: {}'.format(left.get_root_value()))
 
     left.set_root_value(9)
-    print('left.set_root_value(9): {}'.format(left))
-    print('root: {}'.format(root))
+    print('left.set_root_value(9): {}'
+          .format(left.get_root_value()))
 
     left.insert_left(11)
-    print('left.insert_left(11): {}'.format(left))
-    print('root: {}'.format(root))
+    print('left.insert_left(11): {}'
+          .format(left.get_left_tree().get_root_value()))
 
-    print('Get right tree of right tree:')
-    print(root.get_right_tree().get_right_tree())
+    print('Get right tree of right tree of root:')
+    print(root.get_right_tree()
+              .get_right_tree()
+              .get_root_value())
 
 
 if __name__ == '__main__':
