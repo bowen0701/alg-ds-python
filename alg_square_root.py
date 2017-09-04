@@ -3,7 +3,7 @@ from __future__ import print_function
 
 
 def square_root(n, steps=20):
-    """Newton's Method for approximating square root.
+    """Approximate square root by Newton's Method.
     
     - Initial guess: old_guess = n / 2
     - Iterations: new_guess = 1/2 * (old_guess + n / old_guess)
