@@ -35,7 +35,17 @@ def get_left_tree(root):
     return root[1]
 
 def get_right_tree(root):
-    return root[2]  
+    return root[2]
+
+
+def preorder_travel(root):
+    pass
+
+def inorder_travel(root):
+    pass
+
+def postorder_travel(root):
+    pass
 
 
 def main():
