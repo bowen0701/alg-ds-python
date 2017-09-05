@@ -55,7 +55,7 @@ def main():
     val_parse_tree = eval_parse_tree(parse_tree)
     print('{0}: {1}'.format(fp_exp, val_parse_tree))
 
-    fp_exp = '( ( 5 - 3 ) * ( 4 * 2 ) )'
+    fp_exp = '( ( 5 - 3 ) / ( 4 * 2 ) )'
     parse_tree = build_parse_tree(fp_exp)
     val_parse_tree = eval_parse_tree(parse_tree)
     print('{0}: {1}'.format(fp_exp, val_parse_tree))
