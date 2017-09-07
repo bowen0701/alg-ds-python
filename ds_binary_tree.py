@@ -15,7 +15,7 @@ class BinaryTree(object):
             self.left_tree = BinaryTree(new_node)
         else:
             t = BinaryTree(new_node)
-            t.left = self.left_tree
+            t.left_tree = self.left_tree
             self.left_tree = t
 
     def insert_right(self, new_node):
@@ -38,15 +38,34 @@ class BinaryTree(object):
     def get_right_tree(self):
         return self.right_tree
 
+    def __repr__(self):
+        return '[{0}, {1}, {2}]'.format(
+            self.key, self.left_tree, self.right_tree)
+
 
 def preorder_travel(tree):
-    pass
-
-def inorder_travel(tree):
-    pass
+    if tree:
+        print(tree.get_root_value())
+        preorder_travel(tree.get_left_tree())
+        preorder_travel(tree.get_right_tree())
+    else:
+        return None
 
 def postorder_travel(tree):
-    pass
+    if tree is not None:
+        postorder_travel(tree.get_left_tree())
+        postorder_travel(tree.get_right_tree())
+        print(tree.get_root_value())
+    else:
+        return None
+
+def inorder_travel(tree):
+    if tree is not None:
+        inorder_travel(tree.get_left_tree())
+        print(tree.get_root_value())
+        inorder_travel(tree.get_right_tree())
+    else:
+        return None
 
 
 def main():
@@ -84,6 +103,17 @@ def main():
     print(tree.get_right_tree()
               .get_right_tree()
               .get_root_value())
+
+    print('tree: {}'.format(tree))
+
+    print('preorder_travel: ')
+    print(preorder_travel(tree))
+
+    print('postorder_travel: ')
+    print(postorder_travel(tree))
+
+    print('inorder_travel: ')
+    print(inorder_travel(tree))
 
 
 if __name__ == '__main__':
