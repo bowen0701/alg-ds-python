@@ -39,13 +39,28 @@ def get_right_tree(tree):
 
 
 def preorder_travel(tree):
-    pass
-
-def inorder_travel(tree):
-    pass
+    if tree:
+        print(get_root_value(tree))
+        preorder_travel(get_left_tree(tree))
+        preorder_travel(get_right_tree(tree))
+    else:
+        return None
 
 def postorder_travel(tree):
-    pass
+    if tree:
+        postorder_travel(get_left_tree(tree))
+        postorder_travel(get_right_tree(tree))
+        print(get_root_value(tree))
+    else:
+        return None
+
+def inorder_travel(tree):
+    if tree:
+        inorder_travel(get_left_tree(tree))
+        print(get_root_value(tree))
+        inorder_travel(get_right_tree(tree))
+    else:
+        return None
 
 
 def main():
@@ -77,6 +92,15 @@ def main():
 
     print('Get right tree of right tree:')
     print(get_right_tree(get_right_tree(tree)))
+
+    print('preorder_travel: ')
+    print(preorder_travel(tree))
+
+    print('postorder_travel: ')
+    print(postorder_travel(tree))
+
+    print('inorder_travel: ')
+    print(inorder_travel(tree))
 
 
 if __name__ == '__main__':
