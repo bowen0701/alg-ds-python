@@ -48,20 +48,41 @@ def eval_tree(parse_tree):
         return parse_tree.get_root_value()
 
 
-def postorder_eval_parse_tree(parse_tree):
-    pass
+def postorder_eval_tree(parse_tree):
+    import operator
+    opers = {'+': operator.add,
+             '-': operator.sub,
+             '*': operator.mul,
+             '/': operator.truediv}
+
+    left_tree = None
+    right_tree = None  
+    if parse_tree:
+        left_tree = postorder_eval_tree(parse_tree.get_left_tree())
+        right_tree = postorder_eval_tree(parse_tree.get_right_tree())
+        if left_tree and right_tree:
+            ft = opers[parse_tree.get_root_value()]
+            return ft(left_tree, right_tree)
+        else:
+            return parse_tree.get_root_value()
 
 
 def main():
     fp_exp = '( 3 + ( 4 * 5 ) )'
     parse_tree = build_parse_tree(fp_exp)
-    val_parse_tree = eval_tree(parse_tree)
-    print('{0}: {1}'.format(fp_exp, val_parse_tree))
+    val_tree = eval_tree(parse_tree)
+    print('For eval {0}: {1}'.format(fp_exp, val_tree))
+    postorder_val_tree = postorder_eval_tree(parse_tree)
+    print('For postorder eval {0}: {1}'.format(
+        fp_exp, postorder_val_tree))
 
     fp_exp = '( ( 5 - 3 ) / ( 4 * 2 ) )'
     parse_tree = build_parse_tree(fp_exp)
-    val_parse_tree = eval_tree(parse_tree)
-    print('{0}: {1}'.format(fp_exp, val_parse_tree))
+    val_tree = eval_tree(parse_tree)
+    print('For eval {0}: {1}'.format(fp_exp, val_tree))
+    postorder_val_tree = postorder_eval_tree(parse_tree)
+    print('For postorder eval {0}: {1}'.format(
+        fp_exp, postorder_val_tree))
 
 
 if __name__ == '__main__':
