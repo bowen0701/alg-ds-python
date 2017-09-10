@@ -68,12 +68,18 @@ def postorder_eval_tree(parse_tree):
 
 
 def print_exp(parse_tree):
-    pass
+    val_str = ''
+    if parse_tree:
+        val_str = '(' + print_exp(parse_tree.get_left_tree())
+        val_str += str(parse_tree.get_root_value())
+        val_str += print_exp(parse_tree.get_right_tree()) + ')'
+    return val_str
 
 
 def main():
     fp_exp = '( 3 + ( 4 * 5 ) )'
     parse_tree = build_parse_tree(fp_exp)
+    print('Print expression: {}'.format(print_exp(parse_tree)))
     val_tree = eval_tree(parse_tree)
     print('For eval {0}: {1}'.format(fp_exp, val_tree))
     postorder_val_tree = postorder_eval_tree(parse_tree)
@@ -82,6 +88,7 @@ def main():
 
     fp_exp = '( ( 5 - 3 ) / ( 4 * 2 ) )'
     parse_tree = build_parse_tree(fp_exp)
+    print('Print expression: {}'.format(print_exp(parse_tree)))
     val_tree = eval_tree(parse_tree)
     print('For eval {0}: {1}'.format(fp_exp, val_tree))
     postorder_val_tree = postorder_eval_tree(parse_tree)
