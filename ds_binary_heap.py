@@ -22,6 +22,15 @@ class BinaryHeap(object):
         self.current_size += 1
         self._percolate_up(self.current_size)
 
+    def _percolate_down(self, i):
+        pass
+
+    def _get_min_child(self, i):
+        pass
+
+    def delete_min(self):
+        pass
+
 
 def main():
     pass
