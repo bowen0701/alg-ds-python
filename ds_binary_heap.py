@@ -50,6 +50,9 @@ class BinaryHeap(object):
         self._percolate_down(1)
         return val_del
 
+    def build_entire_heap():
+        pass
+
 
 def main():
     pass
