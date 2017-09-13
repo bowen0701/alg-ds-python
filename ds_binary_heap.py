@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-class BinaryHeap(object):
+class BinaryMinHeap(object):
     def __init__(self):
         # Put single zero as the 1st element, so that 
         # integer division can be used in later methods.
@@ -33,10 +33,10 @@ class BinaryHeap(object):
 
     def _percolate_down(self, i):
         while (i * 2) <= self.current_size:
-            min_child = _get_min_child(i)
+            min_child = self._get_min_child(i)
             if self.heap_ls[i] > self.heap_ls[min_child]:
-                tmp = self.heap_ls[1]
-                self.heap_ls[1] = self.heap_ls[min_child]
+                tmp = self.heap_ls[i]
+                self.heap_ls[i] = self.heap_ls[min_child]
                 self.heap_ls[min_child] = tmp
             else:
                 pass
@@ -50,12 +50,40 @@ class BinaryHeap(object):
         self._percolate_down(1)
         return val_del
 
-    def build_entire_heap():
-        pass
+    def build_entire_heap(self, a_list):
+        self.current_size = len(a_list)
+        self.heap_ls = [0] + a_list[:]
+        i = len(a_list) // 2
+        while i > 0:
+            self._percolate_down(i)
+            i -= 1
 
 
 def main():
-    pass
+    bh = BinaryMinHeap()
+    bh.insert(5)
+    print('Heap: {}'.format(bh.heap_ls))    
+    bh.insert(9)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(11)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(14)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(18)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(19)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(21)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(33)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(17)
+    print('Heap: {}'.format(bh.heap_ls))
+    bh.insert(27)
+    print('Heap: {}'.format(bh.heap_ls))
+
+    print(bh.delete_min())
+    print('Heap: {}'.format(bh.heap_ls))
 
 
 if __name__ == '__main__':
