@@ -85,6 +85,10 @@ def main():
     print(bh.delete_min())
     print('Heap: {}'.format(bh.heap_ls))
 
+    bh = BinaryMinHeap()
+    bh.build_entire_heap([9, 6, 5, 2, 3])
+    print('Heap: {}'.format(bh.heap_ls))
+
 
 if __name__ == '__main__':
     main()
