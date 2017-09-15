@@ -25,6 +25,12 @@ class TreeNode(object):
     def is_right_child(self):
         return self.parent and self.parent.right_child == self
 
+    def is_root(self):
+        return not self.parent
+
+    def is_leaf(self):
+        return not (self.left_child or self.right_child)
+
     # TODO: finish TreeNode class.
 
 
