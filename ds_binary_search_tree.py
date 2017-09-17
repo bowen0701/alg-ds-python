@@ -63,7 +63,10 @@ class BinarySearchTree(object):
         return self.root.__iter__()
 
     def _put(self, key, value, current_node):
-        if key < current_node.key:
+        if key == current_node.key:
+            self.replace_node_data(
+                key, value, current_node.left_child, current_node.right_child)
+        elif key < current_node.key:
             if current_node.has_left_child():
                 self._put(key, value, current_node.left_child)
             else:
@@ -82,6 +85,9 @@ class BinarySearchTree(object):
         else:
             self.root = TreeNode(key, value)
         self.size += 1
+
+    def __setitem__(self, k, v):
+        self.put(k, v)
 
 
 def main():
