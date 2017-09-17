@@ -8,7 +8,7 @@ class TreeNode(object):
     def __init__(self, key, value, 
                  left=None, right=None, parent=None):
         self.key = key
-        self.value = value
+        self.payload = value
         self.left_child = left
         self.right_child = right
         self.parent = parent
@@ -88,6 +88,15 @@ class BinarySearchTree(object):
 
     def __setitem__(self, k, v):
         self.put(k, v)
+
+    def _get(self, key, current_node):
+        pass
+
+    def get(self, key):
+        pass
+
+    def __getitem__(self, key):
+        return self.get(key)
 
 
 def main():
