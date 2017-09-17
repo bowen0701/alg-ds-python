@@ -62,6 +62,12 @@ class BinarySearchTree(object):
     def __iter__(self):
         return self.root.__iter__()
 
+    def _put():
+        pass
+
+    def put():
+        pass
+
 
 def main():
     bst = BinarySearchTree()
