@@ -31,7 +31,21 @@ class TreeNode(object):
     def is_leaf(self):
         return not (self.left_child or self.right_child)
 
-    # TODO: finish TreeNode class.
+    def has_any_children(self):
+        return self.left_child or self.right_child
+
+    def has_both_children(self):
+        return self.left_child and self.right_child
+
+    def replace_node_data(self, key, value, lc, rc):
+        self.key = key
+        self.payload = value
+        self.left_child = lc
+        self.right_child = rc
+        if self.has_left_child():
+            self.left_child.parent = self
+        if self.has_right_child():
+            self.right_child.parent = self
 
 
 class BinarySearchTree(object):
