@@ -100,7 +100,14 @@ class BinarySearchTree(object):
             return self._get(key, current_node.right_child)
 
     def get(self, key):
-        pass
+        if self.root:
+            res = self._get(key, self.root)
+            if res:
+                return res.payload
+            else:
+                return None
+        else:
+            return None
 
     def __getitem__(self, key):
         return self.get(key)
