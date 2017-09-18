@@ -90,7 +90,14 @@ class BinarySearchTree(object):
         self.put(k, v)
 
     def _get(self, key, current_node):
-        pass
+        if not curren_node:
+            return None
+        elif current_node.key == key:
+            return current_node
+        elif key < current_node.key:
+            return self._get(key, current_node.left_child)
+        else:
+            return self._get(key, current_node.right_child)
 
     def get(self, key):
         pass
