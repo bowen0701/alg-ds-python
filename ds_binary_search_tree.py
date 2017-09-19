@@ -146,9 +146,17 @@ class BinarySearchTree(object):
                 self.parent.right_child = None
         elif self.has_any_children():
             if self.has_left_child():
-                pass
+                if self.is_left_child():
+                    self.parent.left_child = self.left_child
+                else:
+                    self.parent.right_child = self.left_child
+                self.left_child.parent = self.parent
             else:
-                pass
+                if self.is_left_child():
+                    self.parent.left_child = self.right_child
+                else:
+                    self.parent.right_child = self.right_child
+                self.right_child.parent = self.parent
 
     def remove(self, current_node):
         pass
