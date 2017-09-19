@@ -118,6 +118,26 @@ class BinarySearchTree(object):
         else:
             return False
 
+    def find_min(self):
+        current = self
+        while current.has_left_child():
+            current = current.left_child
+        return current
+
+    def find_successor(self):
+        succ = None
+        if self.has_right_child():
+            succ = self.right_child.find_min()
+        else:
+            if self.parent:
+                if self.is_left_child():
+                    succ = self.parent
+                else:
+                    self.parent.right_child = None
+                    succ = self.parent.find_successor()
+                    self.parent.right_child = self
+        return succ
+
     def remove(self, current_node):
         pass
 
