@@ -118,6 +118,9 @@ class BinarySearchTree(object):
         else:
             return False
 
+    def remove(self, current_node):
+        pass
+
     def delete(self, key):
         pass
 
