@@ -138,6 +138,18 @@ class BinarySearchTree(object):
                     self.parent.right_child = self
         return succ
 
+    def splice_out(self):
+        if self.is_leaf():
+            if self.is_left_child():
+                self.parent.left_child = None
+            else:
+                self.parent.right_child = None
+        elif self.has_any_children():
+            if self.has_left_child():
+                pass
+            else:
+                pass
+
     def remove(self, current_node):
         pass
 
