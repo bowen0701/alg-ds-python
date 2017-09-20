@@ -162,9 +162,9 @@ class BinarySearchTree(object):
         if current_node.is_leaf():
             # Leaf node.
             if current_node == current_node.parent.left_child:
-                pass
+                current_node.parent.left_child = None
             else:
-                pass
+                current_node.parent.right_child = None
         elif current_node.has_both_children():
             # Interior node.
             succ = currnt_node.find_successor()
@@ -172,7 +172,7 @@ class BinarySearchTree(object):
             current_node.key = succ.key
             current_node.payload = succ.payload
         else:  
-            # Has one child.
+            # Node has one child.
             if current_node.has_left_child():
                 if current_node.is_left_child():
                     pass
