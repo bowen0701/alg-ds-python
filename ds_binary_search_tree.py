@@ -159,7 +159,34 @@ class BinarySearchTree(object):
                 self.right_child.parent = self.parent
 
     def remove(self, current_node):
-        pass
+        if current_node.is_leaf():
+            # Leaf node.
+            if current_node == current_node.parent.left_child:
+                pass
+            else:
+                pass
+        elif current_node.has_both_children():
+            # Interior node.
+            succ = currnt_node.find_successor()
+            succ.splice_out()
+            current_node.key = succ.key
+            current_node.payload = succ.payload
+        else:  
+            # Has one child.
+            if current_node.has_left_child():
+                if current_node.is_left_child():
+                    pass
+                elif currnt_node.is_right_child():
+                    pass
+                else:
+                    pass
+            else:
+                if current_node.is_left_child():
+                    pass
+                elif current_node.is_right_child():
+                    pass
+                else:
+                    pass
 
     def delete(self, key):
         if self.size > 1:
