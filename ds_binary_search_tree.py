@@ -172,7 +172,7 @@ class BinarySearchTree(object):
             current_node.key = succ.key
             current_node.payload = succ.payload
         else:  
-            # Node has one child.
+            # This node has one child.
             if current_node.has_left_child():
                 if current_node.is_left_child():
                     pass
