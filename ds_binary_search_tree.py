@@ -37,6 +37,8 @@ class TreeNode(object):
     def has_both_children(self):
         return self.left_child and self.right_child
 
+    # Note: find_min(), find_successor() and splice_out() are
+    # TreeNode's methods, not BinarySearchTree's.
     def find_min(self):
         current = self
         while current.has_left_child():
