@@ -175,18 +175,30 @@ class BinarySearchTree(object):
             # This node has one child.
             if current_node.has_left_child():
                 if current_node.is_left_child():
-                    pass
+                    current_node.left_child.parent = current_node.parent
+                    current_node.parent.left_child = current_node.left_child
                 elif currnt_node.is_right_child():
-                    pass
+                    current_node.left_child.parent = current_node.parent
+                    current_node.parent.right_child = current_node.left_child
                 else:
-                    pass
+                    current_node.replace_node_data(
+                        current_node.left_child.key,
+                        current_node.left_child.payload,
+                        current_node.left_child.left_child,
+                        current_node.left_child.right_child)
             else:
                 if current_node.is_left_child():
-                    pass
+                    current_node.right_child.parent = current_node.parent
+                    current_node.parent.left_child = current_node.right_child
                 elif current_node.is_right_child():
-                    pass
+                    current_node.right_child.parent = current_node.parent
+                    current_node.parent.right_child = current_node.right_child
                 else:
-                    pass
+                    cuurent_node.replace_node_data(
+                        current_node.right_child.key,
+                        current_node.right_child.payload,
+                        current_node.right_child.left_node,
+                        current_node.right_child.right_node)
 
     def delete(self, key):
         if self.size > 1:
