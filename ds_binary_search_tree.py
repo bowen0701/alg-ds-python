@@ -100,6 +100,7 @@ class TreeNode(object):
 
 
 class BinarySearchTree(object):
+    """Binary search tree class."""
     def __init__(self):
         self.root = None
         self.size = 0
