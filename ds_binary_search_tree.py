@@ -229,6 +229,10 @@ class BinarySearchTree(object):
         self.delete(key)
 
 
+class AVLTree(object):
+    pass
+
+
 def main():
     bst = BinarySearchTree()
     bst[3] = 'red'
