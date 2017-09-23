@@ -99,10 +99,10 @@ class TreeNode(object):
                     yield elem
 
 
-class BinarySearchTree(object):
+class AVLTree(object):
     """AVL Tree class for balanced binary search tree.
 
-    Authors: Adelson-Velskii & Landis.
+    
     """
     def __init__(self):
         self.root = None
@@ -117,6 +117,9 @@ class BinarySearchTree(object):
     def __iter__(self):
         return self.root.__iter__()
 
+    def update_balance():
+        pass
+
     def _put(self, key, value, current_node):
         if key == current_node.key:
             self.replace_node_data(
@@ -127,12 +130,14 @@ class BinarySearchTree(object):
             else:
                 current_node.left_child = TreeNode(
                     key, value, parent=current_node)
+                self.update_balance(current_node.left_child)
         else:
             if current_node.has_right_child():
                 self._put(key, value, current_node.right_child)
             else:
                 current_node.right_child = TreeNode(
                     key, value, parent=current_node)
+                self.update_balance(current_node.right_node)
 
     def put(self, key, value):
         if self.root:
