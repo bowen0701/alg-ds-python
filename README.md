@@ -1,6 +1,6 @@
 # Algorithms & Data Structures
 
-This repo is to collect my practices for **algorithms and data structures**, including study notes and implementations using Python. Now I mainly focus on 
+This repo is to collect my practices for **algorithms and data structures**, including **study notes and implementations using Python**. Now I mainly focus on 
 
 - Brad Millar and David Ranum's great book: [Problem Solving with Algorithms and Data Structures Using Python, 2ed](http://interactivepython.org/runestone/static/pythonds/index.html).
 
