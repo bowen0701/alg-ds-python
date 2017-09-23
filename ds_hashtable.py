@@ -5,13 +5,27 @@ class HashTable(object):
     """Create a HashTable class to implement Map data structure 
     with key-value mappings.
     """
-    def __init__(self, table_size):
+    def __init__(self, table_size, weighted_bool=False):
         self.size = table_size
         self.slots = [None] * self.size
         self.data = [None] * self.size
 
-    def hash(self, key, size):
-        return key % size
+    def hash(self, key, size, weighted_bool=False):
+        """Hash function for integer or string."""
+        if isinstance(key, int):
+            # Hash an integer by mode division.
+            return key % size
+        elif isinstance(key, str):
+            # Hash a string by the folding method using 
+            # (weitghted) ordinal values plus mode division.
+            ord_sum = 0
+            for pos in range(len(key)):
+                if weighted_bool:
+                    wt = pos + 1
+                else:
+                    wt = 1
+                ord_sum += wt * ord(key[pos])
+            return ord_sum % size
 
     def rehash(self, old_hash, size):
         return (old_hash + 1) % size
@@ -85,6 +99,46 @@ def main():
     print('h.data: {}'.format(h.data))
 
     print('h[99]: {}'.format(h[99]))
+
+    print('===')
+
+    h = HashTable(11)
+    h['cat'] = 'c'
+    h['dog'] = 'd'
+    h['lion'] = 'l'
+    h['tiger'] = 't'
+    h['bird'] = 'b'
+    
+    print('h.slots: {}'.format(h.slots))
+    print('h.data: {}'.format(h.data))
+    print('h["dog"]: {}'.format(h['dog']))
+    print('h["cat"]: {}'.format(h['cat']))
+
+    h['bird'] = 'bd'
+    print('Replaced h["bird"]: {}'.format(h['bird']))
+    print('h.data: {}'.format(h.data))
+
+    print('h["pig"]: {}'.format(h['pig']))
+
+    print('===')
+
+    h = HashTable(11, weighted_bool=True)
+    h['cat'] = 'c'
+    h['dog'] = 'd'
+    h['lion'] = 'l'
+    h['tiger'] = 't'
+    h['bird'] = 'b'
+    
+    print('h.slots: {}'.format(h.slots))
+    print('h.data: {}'.format(h.data))
+    print('h["dog"]: {}'.format(h['dog']))
+    print('h["cat"]: {}'.format(h['cat']))
+
+    h['bird'] = 'bd'
+    print('Replaced h["bird"]: {}'.format(h['bird']))
+    print('h.data: {}'.format(h.data))
+
+    print('h["pig"]: {}'.format(h['pig']))
 
 
 if __name__ == '__main__':
