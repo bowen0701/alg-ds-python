@@ -2,6 +2,19 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from ds_binary_search_tree import TreeNode, BinarySearchTree
+
+class AVLTreeNode(TreeNode):
+    def __init__(self, *args, **kwargs):
+        super(AVLTreeNode, self).__init__(*args, **kwargs)
+        pass
+
+
+class AVLTree(BinarySearchTree):
+    def __init__(self, *args, **kwargs):
+        super(AVLTree, self).__init__(*args, **kwargs)
+        pass
+
 
 def main():
     bst = AVLTree()
