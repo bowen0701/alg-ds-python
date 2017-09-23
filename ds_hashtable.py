@@ -13,11 +13,12 @@ class HashTable(object):
     def hash(self, key, size, weighted_bool=False):
         """Hash function for integer or string."""
         if isinstance(key, int):
-            # Hash an integer by mode division.
+            """Hash an integer by mode division."""
             return key % size
         elif isinstance(key, str):
-            # Hash a string by the folding method using 
-            # (weitghted) ordinal values plus mode division.
+            """Hash a string by the folding method using 
+            (weitghted) ordinal values plus mode division.
+            """
             ord_sum = 0
             for pos in range(len(key)):
                 if weighted_bool:
@@ -28,6 +29,7 @@ class HashTable(object):
             return ord_sum % size
 
     def rehash(self, old_hash, size):
+        """Rehash function using the linear probing method."""
         return (old_hash + 1) % size
 
     def put(self, key, data):
