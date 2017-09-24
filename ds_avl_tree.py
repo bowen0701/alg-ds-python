@@ -14,6 +14,8 @@ class AVLTreeNode(TreeNode):
 class AVLTree(BinarySearchTree):
     TreeNode = AVLTreeNode
 
+    pass
+
 
 def main():
     avlt = AVLTree()
