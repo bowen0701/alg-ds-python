@@ -112,6 +112,7 @@ class Maze(object):
 
 
 def dfs_from(maze, start_row, start_col):
+    """Depth-First Search (DFS) to find way out."""
     maze.update_position(start_row, start_col)
     # Check for base cases:
     # 1. We have run into an obstacle, return False.
