@@ -111,7 +111,7 @@ class Maze(object):
         return self.maze_list[idx]
 
 
-def search_from(maze, start_row, start_col):
+def dfs_from(maze, start_row, start_col):
     maze.update_position(start_row, start_col)
     # Check for base cases:
     # 1. We have run into an obstacle, return False.
@@ -129,10 +129,10 @@ def search_from(maze, start_row, start_col):
     # Otherwise, use logical short circuiting to try each direction
     # in turn, if needed.
     found_bool = (
-        search_from(maze, start_row - 1, start_col) or
-        search_from(maze, start_row + 1, start_col) or
-        search_from(maze, start_row, start_col - 1) or
-        search_from(maze, start_row, start_col + 1))
+        dfs_from(maze, start_row - 1, start_col) or
+        dfs_from(maze, start_row + 1, start_col) or
+        dfs_from(maze, start_row, start_col - 1) or
+        dfs_from(maze, start_row, start_col + 1))
 
     if found_bool:
         maze.update_position(start_row, start_col, PART_OF_PATH)
@@ -145,7 +145,7 @@ def main():
     maze = Maze('maze_file.txt')
     maze.draw_maze()
     maze.update_position(maze.start_row, maze.start_col)
-    search_from(maze, maze.start_row, maze.start_col)
+    dfs_from(maze, maze.start_row, maze.start_col)
 
 
 if __name__ == '__main__':
