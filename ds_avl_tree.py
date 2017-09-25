@@ -15,7 +15,19 @@ class AVLTree(BinarySearchTree):
     TreeNode = AVLTreeNode
 
     def update_balance(self, node):
-        pass
+        if self.balance_factor < -1 or self.balance_factor > 1:
+            self.rebalance(node)
+            return None
+        if node.parent is not None:
+            if node.is_left_child():
+                node.parent.balance_factor += 1
+            elif node.is_right_child():
+                node.parent.balance_factor -= 1
+            else:
+                pass
+
+            if node.parent.balance_factor != 0:
+                self.update_balance(node.parent)
 
     def _put(self, key, value, current_node):
         if key == current_node.key:
