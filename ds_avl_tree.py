@@ -14,6 +14,9 @@ class AVLTreeNode(TreeNode):
 class AVLTree(BinarySearchTree):
     TreeNode = AVLTreeNode
 
+    def rotate_left(self, rotate_root):
+        pass
+
     def update_balance(self, node):
         if self.balance_factor < -1 or self.balance_factor > 1:
             self.rebalance(node)
