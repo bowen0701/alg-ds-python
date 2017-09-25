@@ -15,13 +15,32 @@ class AVLTree(BinarySearchTree):
     TreeNode = AVLTreeNode
 
     def rotate_left(self, rotate_root):
-        pass
+        new_root = rotate_root.right_child
+        rotate_root.right_child = new_root.left_child
+        if not new_root.left_child:
+            new_root.left_child.parent = rotate_root
+        else:
+            pass
+        new_root.parent = rotate_root.parent
+
+        if rotate_root.is_root():
+            self.root = new_root
+        else:
+            if rotate_root.is_left_child():
+                rotate_root.parent.left_child = new_root
+            else: rotate_root.is_right_child():
+                rotate_root.parent.right_child = new_root
+
+        new_root.left_child = rotate_root
+        rotate_root.parent = new_root
+        rotate_root.balance_factor += 1 - min(new_root.balance_factor, 0)
+        new_root.balance_factor += 1 + max(rotate_root.balance_facor, 0)
 
     def update_balance(self, node):
         if self.balance_factor < -1 or self.balance_factor > 1:
             self.rebalance(node)
             return None
-        if node.parent is not None:
+        if not node.parent:
             if node.is_left_child():
                 node.parent.balance_factor += 1
             elif node.is_right_child():
@@ -48,8 +67,6 @@ class AVLTree(BinarySearchTree):
             else:
                 current_node.right_child = TreeNode(key, value, parent=current_node)
                 self.update_balance(current_node.right_child)
-
-    pass
 
 
 def main():
