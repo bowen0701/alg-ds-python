@@ -37,6 +37,10 @@ class AVLTree(BinarySearchTree):
         new_root.balance_factor += 1 + max(rotate_root.balance_facor, 0)
 
     def rotate_right(self, rotate_root):
+        new_root = rotate_root.left_child
+        rotate_root.left_child = new_root.right_child
+        if not new_root.right_child:
+            
         pass
 
     def update_balance(self, node):
