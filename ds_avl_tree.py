@@ -73,6 +73,9 @@ class AVLTree(BinarySearchTree):
             if node.parent.balance_factor != 0:
                 self.update_balance(node.parent)
 
+    def rebalance(self, node):
+        pass
+
     def _put(self, key, value, current_node):
         if key == current_node.key:
             self.replace_node_data(
