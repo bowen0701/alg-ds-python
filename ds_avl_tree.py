@@ -55,6 +55,7 @@ class AVLTree(BinarySearchTree):
 
         new_root.right_child = rotate_root
         rotate_root.parent = new_root
+        # TODO: Continure implementing rotate_right() 
         # rotate_root.balance
 
     def update_balance(self, node):
