@@ -58,6 +58,9 @@ class AVLTree(BinarySearchTree):
         rotate_root.balance_factor += 1 - min(new_root.balance_factor, 0)
         new_root.balance_factor += 1 + max(rotate_root.balance_factor, 0)
 
+    def rebalance(self, node):
+        pass
+
     def update_balance(self, node):
         if self.balance_factor < -1 or self.balance_factor > 1:
             self.rebalance(node)
@@ -72,9 +75,6 @@ class AVLTree(BinarySearchTree):
 
             if node.parent.balance_factor != 0:
                 self.update_balance(node.parent)
-
-    def rebalance(self, node):
-        pass
 
     def _put(self, key, value, current_node):
         if key == current_node.key:
