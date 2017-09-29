@@ -12,8 +12,6 @@ class AVLTreeNode(TreeNode):
 
 
 class AVLTree(BinarySearchTree):
-    TreeNode = AVLTreeNode
-
     def rotate_left(self, rotate_root):
         new_root = rotate_root.right_child
         rotate_root.right_child = new_root.left_child
@@ -59,10 +57,21 @@ class AVLTree(BinarySearchTree):
         new_root.balance_factor += 1 + max(rotate_root.balance_factor, 0)
 
     def rebalance(self, node):
-        pass
+        if node.balance_factor < 0:
+            if node.right_child.balance_factor > 0:
+                self.rotate_right(node.right_child)
+                self.rotate_left(node)
+            else:
+                self.rotate_left(node)
+        else:
+            if node.left_child.balance_factor < 0:
+                self.rotate_left(node.left_child)
+                self.rotate_right(node)
+            else:
+                self.rotate(node)
 
     def update_balance(self, node):
-        if self.balance_factor < -1 or self.balance_factor > 1:
+        if node.balance_factor < -1 or node.balance_factor > 1:
             self.rebalance(node)
             return None
         if not node.parent:
@@ -84,22 +93,22 @@ class AVLTree(BinarySearchTree):
             if current_node.has_left_child():
                 self._put(key, value, current_node.left_child)
             else:
-                current_node.left_child = TreeNode(key, value, parent=current_node)
+                current_node.left_child = AVLTreeNode(key, value, parent=current_node)
                 self.update_balance(current_node.left_child)
         else:
             if current_node.has_right_child():
                 self._put(key, value, current_node.right_child)
             else:
-                current_node.right_child = TreeNode(key, value, parent=current_node)
+                current_node.right_child = AVLTreeNode(key, value, parent=current_node)
                 self.update_balance(current_node.right_child)
 
 
 def main():
     avlt = AVLTree()
-    avlt[3] = 'red'
-    avlt[4] = 'blue'
-    avlt[6] = 'yellow'
-    avlt[2] = 'black'
+    avlt[2] = 'red'
+    avlt[3] = 'blue'
+    avlt[4] = 'yellow'
+    avlt[6] = 'black'
 
     print('len(avlt): {}'.format(len(avlt)))
     print('avlt.size: {}'.format(avlt.size))
