@@ -206,7 +206,7 @@ class BinarySearchTree(object):
                     current_node.right_child.parent = current_node.parent
                     current_node.parent.right_child = current_node.right_child
                 else:
-                    cuurent_node.replace_node_data(
+                    current_node.replace_node_data(
                         current_node.right_child.key,
                         current_node.right_child.payload,
                         current_node.right_child.left_node,
