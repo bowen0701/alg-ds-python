@@ -58,7 +58,7 @@ class BinaryMinHeap(object):
         return self.current_size == 0
 
     def size(self):
-        pass
+        return self.current_size
 
     def build_entire_heap(self, a_list):
         self.current_size = len(a_list)
