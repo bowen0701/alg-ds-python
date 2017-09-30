@@ -8,6 +8,24 @@ class Vertex(object):
 
     It uses a dict to keep track of the vertices which it's connected.
 	"""
+	def __init__(self, key):
+		self.id = key
+		self.connected_to_dict = {}
+
+	def add_neighnor(self, new_nb, weight=0):
+		pass
+
+	def __str__(self):
+		pass
+
+	def get_connections(self):
+		pass
+
+	def get_id(self):
+		pass
+
+	def get_weight(self, new_nb):
+		pass
 
 
 class Graph(object):
