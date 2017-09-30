@@ -13,19 +13,22 @@ class Vertex(object):
 		self.connect_dict = {}
 
 	def add_neighnor(self, new_nb, weight=0):
-		pass
+		self.connect_dict[new_nb] = weight
 
 	def __str__(self):
-		pass
+		print_str = (
+			'{} connected to {}'
+			.format(self.id, [x.id for x in self.connect_dict]))
+		return print_str
 
 	def get_connections(self):
-		pass
+		return self.connect_dict.keys()
 
 	def get_id(self):
-		pass
+		return self.id
 
 	def get_weight(self, new_nb):
-		pass
+		return self.connect_dict.get(new_nb, None)
 
 
 class Graph(object):
