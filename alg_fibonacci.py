@@ -12,7 +12,10 @@ from __future__ import print_function
 from __future__ import division
 
 def fibonacci_recur(n):
-    """Get nth number of Fibonacci series by recursion."""
+    """Get nth number of Fibonacci series by recursion.
+
+    Both of time & space complexities are O(n).
+    """
     if n <= 1:
         return n
     else:
@@ -22,7 +25,9 @@ def fibonacci_recur(n):
 def fibonacci_dp(n):
     """Get nth number of Fibonacci series by dynamic programming.
 
-    DP performs much faster than recursion.
+    DP performs much faster than recursion:
+      - Time complexity is still O(n).
+      - Space complexity is O(1), improving recusion version.
     """
     a, b = 0, 1
     for _ in xrange(n):
@@ -40,7 +45,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('{}th number of Fibonacci series by recursion: {}'
+    print('{}th number of Fibonacci series by dynamic programming: {}'
           .format(n, fibonacci_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
 
