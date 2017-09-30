@@ -10,7 +10,7 @@ class Vertex(object):
 	"""
 	def __init__(self, key):
 		self.id = key
-		self.connected_to_dict = {}
+		self.connect_dict = {}
 
 	def add_neighnor(self, new_nb, weight=0):
 		pass
@@ -33,7 +33,27 @@ class Graph(object):
 
     It contains a dict to map vertex name to vertex objects.
     """
-    pass
+    def __init__(self):
+    	self.vertex_dict = {}
+    	self.num_vertices = 0
+
+    def add_vertex(self, key):
+    	pass
+
+    def get_vertex(self, key):
+    	pass
+
+    def __contains__(self, key):
+    	pass
+
+    def add_edge(self, from_key, to_key, cost=0):
+    	pass
+
+    def get_vertices(self):
+    	pass
+
+    def __iter__(self):
+    	pass
 
 
 def main():
