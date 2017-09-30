@@ -44,7 +44,7 @@ class BinaryMinHeap(object):
             i = min_child
 
     def find_min(self):
-        pass
+        return self.heap_ls[1]
     
     def delete_min(self):
         val_del = self.heap_ls[1]
@@ -97,6 +97,8 @@ def main():
     print('Heap: {}'.format(bh.heap_ls))
     bh.insert(27)
     print('Heap: {}'.format(bh.heap_ls))
+
+    print('Find min: {}'.format(bh.find_min()))
 
     print(bh.delete_min())
     print('Heap: {}'.format(bh.heap_ls))
