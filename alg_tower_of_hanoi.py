@@ -8,5 +8,4 @@ def move_towers(height, from_pole, to_pole, with_pole):
 
 
 def move_disk(from_pole, to_pole):
-    print('Moving disk from {0} to {1}'
-          .format(from_pole, to_pole))
+    print('Moving disk from {0} to {1}'.format(from_pole, to_pole))
