@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 class BinaryMinHeap(object):
+    """Binary Min Heap class."""
     def __init__(self):
         # Put single zero as the 1st element, so that 
         # integer division can be used in later methods.
@@ -58,6 +59,12 @@ class BinaryMinHeap(object):
             self._percolate_down(i)
             i -= 1
 
+
+class BinaryMaxHeap(object):
+    """BinaryMaxHeap class."""
+    def __init__(self):
+        pass
+        
 
 def main():
     bh = BinaryMinHeap()
