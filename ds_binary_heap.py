@@ -55,7 +55,7 @@ class BinaryMinHeap(object):
         return val_del
 
     def is_empty(self):
-        pass
+        return self.current_size == 0
 
     def size(self):
         pass
@@ -76,36 +76,38 @@ class BinaryMaxHeap(object):
         
 
 def main():
-    bh = BinaryMinHeap()
-    bh.insert(5)
-    print('Heap: {}'.format(bh.heap_ls))    
-    bh.insert(9)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(11)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(14)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(18)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(19)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(21)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(33)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(17)
-    print('Heap: {}'.format(bh.heap_ls))
-    bh.insert(27)
-    print('Heap: {}'.format(bh.heap_ls))
+    bh_min = BinaryMinHeap()
+    bh_min.insert(5)
+    print('Heap: {}'.format(bh_min.heap_ls))    
+    bh_min.insert(9)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(11)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(14)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(18)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(19)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(21)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(33)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(17)
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert(27)
+    print('Heap: {}'.format(bh_min.heap_ls))
 
-    print('Find min: {}'.format(bh.find_min()))
+    print('Find min: {}'.format(bh_min.find_min()))
+    print('Is empty? {}'.format(bh_min.is_empty()))
+    print('Size? {}'.format(bh_min.size()))
 
-    print(bh.delete_min())
-    print('Heap: {}'.format(bh.heap_ls))
+    print(bh_min.delete_min())
+    print('Heap: {}'.format(bh_min.heap_ls))
 
-    bh = BinaryMinHeap()
-    bh.build_entire_heap([9, 6, 5, 2, 3])
-    print('Heap: {}'.format(bh.heap_ls))
+    bh_min = BinaryMinHeap()
+    bh_min.build_entire_heap([9, 6, 5, 2, 3])
+    print('Heap: {}'.format(bh_min.heap_ls))
 
 
 if __name__ == '__main__':
