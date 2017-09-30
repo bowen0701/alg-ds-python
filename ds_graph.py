@@ -12,7 +12,7 @@ class Vertex(object):
 		self.id = key
 		self.connect_dict = {}
 
-	def add_neighnor(self, new_nb, weight=0):
+	def add_neighbor(self, new_nb, weight=0):
 		self.connect_dict[new_nb] = weight
 
 	def __str__(self):
@@ -41,22 +41,34 @@ class Graph(object):
     	self.num_vertices = 0
 
     def add_vertex(self, key):
-    	pass
+    	self.num_vertices += 1
+    	new_vertex = Vertex(key)
+    	self.vertex_dict[key] = new_vertex
+    	return new_vertex
 
     def get_vertex(self, key):
-    	pass
+    	self.vertex_dict.get(key, None)
 
     def __contains__(self, key):
-    	pass
+    	return key in self.vertex_dict
 
-    def add_edge(self, from_key, to_key, cost=0):
-    	pass
+    def add_edge(self, from_key, to_key, weight=0):
+    	if from_key is not in self.vertex_dict:
+    		new_vertex = self.add_vertex(from_key)
+    	else:
+    		pass
+    	if to_key is not in self.vertex_dict:
+    		new_vertex = self.add_vertex(to_key)
+    	else:
+    		pass
+    	(self.vertex_dict.get(from_key)
+    		 .add_neighbor(self.vertex_dict.get(to_key), weight))
 
     def get_vertices(self):
-    	pass
+    	return self.vertex_dict.keys()
 
     def __iter__(self):
-    	pass
+    	return iter(self.vertex_dict.values())
 
 
 def main():
