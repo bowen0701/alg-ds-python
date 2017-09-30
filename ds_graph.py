@@ -53,11 +53,11 @@ class Graph(object):
     	return key in self.vertex_dict
 
     def add_edge(self, from_key, to_key, weight=0):
-    	if from_key is not in self.vertex_dict:
+    	if from_key not in self.vertex_dict:
     		new_vertex = self.add_vertex(from_key)
     	else:
     		pass
-    	if to_key is not in self.vertex_dict:
+    	if to_key not in self.vertex_dict:
     		new_vertex = self.add_vertex(to_key)
     	else:
     		pass
@@ -72,7 +72,24 @@ class Graph(object):
 
 
 def main():
-    pass
+    g = Graph()
+    for k in xrange(6):
+    	g.add_vertex(k)
+    g.vertex_dict
+
+    g.add_edge(0, 1, 5)
+    g.add_edge(0, 5, 2)
+    g.add_edge(1, 2, 4)
+    g.add_edge(2, 3, 9)
+    g.add_edge(3, 4, 7)
+    g.add_edge(3, 5, 3)
+    g.add_edge(4, 0, 1)
+    g.add_edge(5, 2, 1)
+    g.add_edge(5, 4, 8)
+
+    for k in g:
+    	for c in k.get_connections():
+    		print('({}, {})'.format(k.get_id(), c.get_id()))
 
 
 if __name__ == '__main__':
