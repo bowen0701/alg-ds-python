@@ -43,6 +43,9 @@ class BinaryMinHeap(object):
                 pass
             i = min_child
 
+    def find_min(self):
+        pass
+    
     def delete_min(self):
         val_del = self.heap_ls[1]
         self.heap_ls[1] = self.heap_ls[self.current_size]
@@ -50,6 +53,12 @@ class BinaryMinHeap(object):
         self.heap_ls.pop()
         self._percolate_down(1)
         return val_del
+
+    def is_empty(self):
+        pass
+
+    def size(self):
+        pass
 
     def build_entire_heap(self, a_list):
         self.current_size = len(a_list)
