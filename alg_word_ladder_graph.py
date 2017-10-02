@@ -3,6 +3,10 @@ from __future__ import print_function
 from __future__ import division
 
 
+def read_words():
+	pass
+
+
 def build_word_ladder_graph():
 	pass
 
