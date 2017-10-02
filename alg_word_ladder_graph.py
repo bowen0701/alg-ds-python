@@ -13,8 +13,8 @@ def read_words():
 
 
 def build_word_ladder_graph(words):
-	vertex_dict = {}
-	graph_dict = {}
+	vertex_dict = dict()
+	graph_dict = dict()
 
 	# Create buckets of words that are different by one letter.
 	for word in words:
@@ -25,7 +25,9 @@ def build_word_ladder_graph(words):
 			else:
 				vertex_dict[bucket] = list(word)
 
-	pass
+    # Add vertices and edges for words in the same buckets.
+	for bucket in vertex_dict:
+		pass
 
 
 def main():
