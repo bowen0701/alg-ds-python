@@ -21,7 +21,7 @@ def bfs(graph_dict, start_vertex):
 
 
 def traverse(graph_dict, start_vertex, end_vertex):
-	for vertex, path in breadth_first_search(graph_dict, start_vertex):
+	for vertex, path in bfs(graph_dict, start_vertex):
 		if vertex == end_vertex:
 			print(' -> '.join(path))
 
