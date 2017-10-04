@@ -24,15 +24,18 @@ class Queue(object):
 def main():
     queue = Queue()
 
-    queue.is_empty()
+    print('Is empty: {}'.format(queue.is_empty()))
 
+    print('Enqueue "dog", 4 & 8.4')
     queue.enqueue('dog')
     queue.enqueue(4)
     queue.enqueue(8.4)
+    print('Is empty: {}'.format(queue.is_empty()))
 
     print('Queue size: {}'.format(queue.size()))
 
     print('Dequeue: {}'.format(queue.dequeue()))
+    print('Is empty: {}'.format(queue.is_empty()))
     print('Queue size: {}'.format(queue.size()))
 
 if __name__ == '__main__':
