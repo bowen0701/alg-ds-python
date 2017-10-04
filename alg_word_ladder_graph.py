@@ -46,6 +46,8 @@ def build_word_ladder_graph(words):
 
 def main():
 	words = read_words()
+	words_graph = build_word_ladder_graph(words)
+	print(words_graph) 
 
 
 if __name__ == '__main__':
