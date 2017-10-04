@@ -20,6 +20,9 @@ def breadth_first_search(graph_dict, start_vertex):
 			queue.enqueue(neighbor)
 
 
+def traverse():
+	pass
+
 
 def main():
 	pass
