@@ -29,7 +29,7 @@ def bfs(graph_dict, start_vertex):
             # print('ls_queue: {}'.format(ls_queue.show()))
 
 
-def traverse(graph_dict, start_vertex, end_vertex):
+def traverse_bfs(graph_dict, start_vertex, end_vertex):
     """Traverse the breadth first search path.
 
     Take the end_vertex's path from generator of vertex and path_ls. 
@@ -61,16 +61,15 @@ def main():
 
     start_vertex = 'fool'
     end_vertex = 'sage'
-    traverse(graph_dict, start_vertex, end_vertex)
+    traverse_bfs(graph_dict, start_vertex, end_vertex)
 
     start_vertex = 'fool'
     end_vertex = 'pope'
-    traverse(graph_dict, start_vertex, end_vertex)
+    traverse_bfs(graph_dict, start_vertex, end_vertex)
 
     start_vertex = 'foul'
     end_vertex = 'sage'
-    traverse(graph_dict, start_vertex, end_vertex)
-
+    traverse_bfs(graph_dict, start_vertex, end_vertex)
 
 if __name__ == '__main__':
     main()
