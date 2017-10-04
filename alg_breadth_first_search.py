@@ -6,24 +6,37 @@ from ds_queue import Queue
 
 
 def bfs(graph_dict, start_vertex):
-    queue = Queue()
-    queue.enqueue(start_vertex)
+    """Breadth First Search algorith."""
+    ls_queue = Queue()
+    ls_queue.enqueue([start_vertex])
+    # print('ls_queue: {}'.format(ls_queue.show()))
+    
+    # Record visited vertices.
+    visited_set = set([start_vertex])
 
-    visited_set = set()
-
-    while queue:
-        path = queue.dequeue()
-        vertex = path[-1]
-        yield vertex, path
-        for neighbor in graph_dict[vertex] - visited_set:
-            visited_set.add(neighbor)
-            queue.enqueue(neighbor)
+    while ls_queue.size() > 0:
+        path_ls = ls_queue.dequeue()
+        # Take the lastest vertex as the new starting one.
+        vertex = path_ls[-1]
+        # print('path_ls: {}'.format(path_ls))
+        # print('vertex: {}'.format(vertex))
+        yield vertex, path_ls
+        for neighbor_vertex in graph_dict[vertex] - visited_set:
+            # print('neighbor_vertex: {}'.format(neighbor_vertex))
+            visited_set.add(neighbor_vertex)
+            ls_queue.enqueue(path_ls + [neighbor_vertex])
+            # print('visited_set: {}'.format(visited_set))
+            # print('ls_queue: {}'.format(ls_queue.show()))
 
 
 def traverse(graph_dict, start_vertex, end_vertex):
-    for vertex, path in bfs(graph_dict, start_vertex):
+    """Traverse the breadth first search path.
+
+    Take the end_vertex's path from generator of vertex and path_ls. 
+    """
+    for vertex, path_ls in bfs(graph_dict, start_vertex):
         if vertex == end_vertex:
-            print(' -> '.join(path))
+            print(' -> '.join(path_ls))
 
 
 def main():
@@ -36,9 +49,10 @@ def main():
         'fail': {'foil', 'fall'},
         'fall': {'fail', 'pall'},
         'pool': {'fool', 'cool', 'poll'},
-        'poll': {'pool', 'pail'},
+        'poll': {'pool', 'pall', 'pole'},
         'pall': {'fall', 'pale', 'poll'},
         'pole': {'poll', 'pope', 'pale'},
+        'pope': {'pole'},
         'pale': {'pall', 'pole', 'sale', 'page'},
         'sale': {'pale', 'sage'},
         'page': {'pale', 'sage'},
@@ -48,6 +62,15 @@ def main():
     start_vertex = 'fool'
     end_vertex = 'sage'
     traverse(graph_dict, start_vertex, end_vertex)
+
+    start_vertex = 'fool'
+    end_vertex = 'pope'
+    traverse(graph_dict, start_vertex, end_vertex)
+
+    start_vertex = 'foul'
+    end_vertex = 'sage'
+    traverse(graph_dict, start_vertex, end_vertex)
+
 
 if __name__ == '__main__':
     main()
