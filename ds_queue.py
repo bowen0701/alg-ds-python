@@ -20,6 +20,9 @@ class Queue(object):
     def size(self):
         return len(self.items)
 
+    def show(self):
+        return self.items
+
 
 def main():
     queue = Queue()
@@ -37,6 +40,8 @@ def main():
     print('Dequeue: {}'.format(queue.dequeue()))
     print('Is empty: {}'.format(queue.is_empty()))
     print('Queue size: {}'.format(queue.size()))
+
+    print('Show: {}'.format(queue.show()))
 
 if __name__ == '__main__':
     main()
