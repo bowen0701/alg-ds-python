@@ -48,7 +48,7 @@ def build_word_ladder_graph(words):
 def main():
     words = read_words()
     words_graph = build_word_ladder_graph(words)
-    # print(words_graph)
+    print(words_graph)
 
     start_word = 'ACID'
     end_word = 'EYED'
