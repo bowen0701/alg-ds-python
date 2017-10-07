@@ -31,8 +31,34 @@ def build_knight_tour_graph(board_size):
     return graph_dict
 
 
+def _dfs_traverse(path, current_vertex, graph_dict, total_squares, 
+	              sorted_func=None):
+	"""Depth First Search traverse."""
+	# Including the current square, if we have visited all squares,
+    # just return the whole path as the solution.
+	if len(path) + 1 == total_squares:
+		return path + [current_vertex]
+    else:
+    	pass
+
+    legal_vertices = graph_dict[current_vertex] - set(path)
+    if not legal_vertices:
+    	# No legal neighbor vertices, so dead end.
+    	return False
+
+    # Then try all valid paths.
+    next_vertices = sorted(legal_vertices, sorted_func)
+
+    pass
+
+def knight_tour_dfs(board_size, sorted_func=None):
+	graph_dict = build_knight_tour_graph(board_size)
+	total_squares = graph_dict * graph_dict
+	pass
+
+
 def main():
-    board_size = 8
+    board_size = 5
     graph_dict = build_knight_tour_graph(board_size)
     print(graph_dict)
 
