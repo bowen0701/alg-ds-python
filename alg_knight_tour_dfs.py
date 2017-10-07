@@ -38,8 +38,6 @@ def _dfs_traverse(path, current_vertex, graph_dict, total_squares,
     # just return the whole path as the solution.
 	if len(path) + 1 == total_squares:
 		return path + [current_vertex]
-    else:
-    	pass
 
     legal_vertices = graph_dict[current_vertex] - set(path)
     if not legal_vertices:
