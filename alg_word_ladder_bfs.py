@@ -14,6 +14,7 @@ def read_words():
     """Read words file with producing a generator."""
     with open(WORDS_FILE) as f:
         for line in f:
+            # Skip the end line symbol.
             yield line[:-1]
 
 
