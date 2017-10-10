@@ -31,6 +31,9 @@ def build_knight_tour_graph(board_size):
     return graph_dict
 
 
+def _get_first_next_vertex():
+    pass
+
 def traverse_dfs(path, current_vertex, graph_dict, total_squares, 
                  sorted_func=None):
     """Depth First Search traverse."""
