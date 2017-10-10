@@ -31,8 +31,8 @@ def build_knight_tour_graph(board_size):
     return graph_dict
 
 
-def _dfs_traverse(path, current_vertex, graph_dict, total_squares, 
-                  sorted_func=None):
+def traverse_dfs(path, current_vertex, graph_dict, total_squares, 
+                 sorted_func=None):
     """Depth First Search traverse."""
     # Including the current square, if we have visited all squares,
     # just return the whole path as the solution.
