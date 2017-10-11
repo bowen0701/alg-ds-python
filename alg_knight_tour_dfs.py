@@ -60,7 +60,8 @@ def traverse_dfs(path_ls, current_vertex,
 
 def knight_tour_dfs(board_size, sorted_func=None):
     graph_dict = build_knight_tour_graph(board_size)
-    total_squares = graph_dict * graph_dict
+    total_squares = board_size * board_size
+    
     pass
 
 
