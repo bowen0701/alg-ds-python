@@ -54,7 +54,7 @@ def traverse_dfs(path_ls, current_vertex,
     next_vertices = sorted(legal_vertices, sorted_func)
     return get_first_next_vertex(
                traverse_dfs(
-                   path_ls + [current_vertex], vertex
+                   path_ls + [current_vertex], vertex,
                    graph_dict, total_squares, sorted_func=sorted_func)
                for vertex in next_vertices)
 
@@ -73,6 +73,9 @@ def main():
     board_size = 5
     graph_dict = build_knight_tour_graph(board_size)
     print(graph_dict)
+
+    knight_tour_dfs(board_size, sorted_func=None)
+
 
 if __name__ == '__main__':
     main()
