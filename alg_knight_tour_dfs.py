@@ -62,7 +62,11 @@ def knight_tour_dfs(board_size, sorted_func=None):
     graph_dict = build_knight_tour_graph(board_size)
     total_squares = board_size * board_size
     
-    pass
+    get_first_next_vertex(
+        traverse_dfs(
+            [], start_vertex, 
+            graph_dict, total_squares, sorted_func=sorted_func)
+        for start_vertex in graph_dict)
 
 
 def main():
