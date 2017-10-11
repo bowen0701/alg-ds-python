@@ -53,20 +53,21 @@ def traverse_dfs(path_ls, current_vertex,
     # Then try all valid paths.
     next_vertices = sorted(legal_vertices, sorted_func)
     return get_first_next_vertex(
-               traverse_dfs(
-                   path_ls + [current_vertex], vertex,
-                   graph_dict, total_squares, sorted_func=sorted_func)
-               for vertex in next_vertices)
+        traverse_dfs(
+            path_ls + [current_vertex], vertex,
+            graph_dict, total_squares, sorted_func=sorted_func)
+        for vertex in next_vertices)
 
 def knight_tour_dfs(board_size, sorted_func=None):
     graph_dict = build_knight_tour_graph(board_size)
     total_squares = board_size * board_size
     
-    get_first_next_vertex(
+    path_ls = get_first_next_vertex(
         traverse_dfs(
             [], start_vertex, 
             graph_dict, total_squares, sorted_func=sorted_func)
         for start_vertex in graph_dict)
+    return path_ls
 
 
 def main():
@@ -74,8 +75,8 @@ def main():
     graph_dict = build_knight_tour_graph(board_size)
     print(graph_dict)
 
-    knight_tour_dfs(board_size, sorted_func=None)
-
+    path_ls = knight_tour_dfs(board_size, sorted_func=None)
+    print('path_ls: {}'.format(path_ls))
 
 if __name__ == '__main__':
     main()
