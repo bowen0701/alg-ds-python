@@ -20,6 +20,9 @@ class Stack(object):
     def size(self):
         return len(self.items)
 
+    def show(self):
+        return self.items
+
 
 def main():
     s = Stack()
@@ -40,6 +43,8 @@ def main():
     print(s.pop())
 
     print(s.size())
+
+    print(s.show())
 
 if __name__ == '__main__':
     main()
