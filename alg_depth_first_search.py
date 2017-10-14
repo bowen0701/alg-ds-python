@@ -13,6 +13,24 @@ def dfs(graph_dict, start_vertex):
 
 
 def main():
+    # Small word ladder graph.
+    graph_dict = {
+        'fool': {'cool', 'pool', 'foil', 'foul'},
+        'foul': {'fool', 'foil'},
+        'foil': {'fool', 'foul', 'fail'},
+        'cool': {'fool', 'cool'},
+        'fail': {'foil', 'fall'},
+        'fall': {'fail', 'pall'},
+        'pool': {'fool', 'cool', 'poll'},
+        'poll': {'pool', 'pall', 'pole'},
+        'pall': {'fall', 'pale', 'poll'},
+        'pole': {'poll', 'pope', 'pale'},
+        'pope': {'pole'},
+        'pale': {'pall', 'pole', 'sale', 'page'},
+        'sale': {'pale', 'sage'},
+        'page': {'pale', 'sage'},
+        'sage': {'sale', 'page'} 
+    }
     pass
 
 if __name__ == '__main__':
