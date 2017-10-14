@@ -5,7 +5,7 @@ from __future__ import division
 from ds_queue import Queue
 
 
-def bfs(graph_dict, start_vertex):
+def bfs(adjacency_dict, start_vertex):
     """Breadth First Search algorith."""
     ls_queue = Queue()
     ls_queue.enqueue([start_vertex])
@@ -18,7 +18,7 @@ def bfs(graph_dict, start_vertex):
         print('path_ls: {}'.format(path_ls))
         print('vertex: {}'.format(vertex))
         yield vertex, path_ls
-        for neighbor_vertex in graph_dict[vertex] - visited_set:
+        for neighbor_vertex in adjacency_dict[vertex] - visited_set:
             print('neighbor_vertex: {}'.format(neighbor_vertex))
             visited_set.add(neighbor_vertex)
             ls_queue.enqueue(path_ls + [neighbor_vertex])
@@ -26,19 +26,19 @@ def bfs(graph_dict, start_vertex):
             print('ls_queue: {}'.format(ls_queue.show()))
 
 
-def traverse_bfs(graph_dict, start_vertex, end_vertex):
+def traverse_bfs(adjacency_dict, start_vertex, end_vertex):
     """Traverse the breadth first search path.
 
     Take the end_vertex's path from generator of vertex and path_ls. 
     """
-    for vertex, path_ls in bfs(graph_dict, start_vertex):
+    for vertex, path_ls in bfs(adjacency_dict, start_vertex):
         if vertex == end_vertex:
             print(' -> '.join(path_ls))
 
 
 def main():
     # Small word ladder graph.
-    graph_dict = {
+    adjacency_dict = {
         'fool': {'cool', 'pool', 'foil', 'foul'},
         'foul': {'fool', 'foil'},
         'foil': {'fool', 'foul', 'fail'},
@@ -58,17 +58,17 @@ def main():
 
     start_vertex = 'fool'
     end_vertex = 'sage'
-    traverse_bfs(graph_dict, start_vertex, end_vertex)
+    traverse_bfs(adjacency_dict, start_vertex, end_vertex)
 
     print('===')
     start_vertex = 'fool'
     end_vertex = 'pope'
-    traverse_bfs(graph_dict, start_vertex, end_vertex)
+    traverse_bfs(adjacency_dict, start_vertex, end_vertex)
 
     print('===')
     start_vertex = 'foul'
     end_vertex = 'sage'
-    traverse_bfs(graph_dict, start_vertex, end_vertex)
+    traverse_bfs(adjacency_dict, start_vertex, end_vertex)
 
 if __name__ == '__main__':
     main()
