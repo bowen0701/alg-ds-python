@@ -6,7 +6,21 @@ from ds_stack import Stack
             
 
 def dfs(adjacency_dict, start_vertex):
-    pass
+    ls_stack = Stack()
+    ls_stack.push(start_vertex)
+    path_ls = [start_vertex]
+    while ls_stack.size() > 0:
+        # Take top vertex as the next start vertex.
+        vertex = ls_stack.peek()
+        neighbor_vertices = adjacency_dict[vertex]
+        if len(neighbor_vertices) > 0:
+            next_vertex = neighbor_vertices.pop()
+            if next_vertex not in path_ls:
+                ls_stack.push(next_vertex)
+                path_ls.append(next_vertex)
+        else:
+            ls_stack.pop()
+    return path_ls
 
 
 def dfs_recur(adjacency_dict, start_vertex, path_ls=None):
@@ -23,7 +37,7 @@ def dfs_recur(adjacency_dict, start_vertex, path_ls=None):
     return path_ls
 
 
-def traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex):
+def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
     path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
 
     end_vertex_cand = path_ls[-1]
@@ -58,7 +72,7 @@ def main():
     end_vertex = 'sage'
     # path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
     # print('path_ls: {}'.format(path_ls))
-    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
+    traverse_dfs(adjacency_dict, start_vertex, end_vertex)
 
     print(dfs(adjacency_dict, start_vertex))
 
