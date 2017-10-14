@@ -9,9 +9,6 @@ def bfs(graph_dict, start_vertex):
     """Breadth First Search algorith."""
     ls_queue = Queue()
     ls_queue.enqueue([start_vertex])
-    print('ls_queue: {}'.format(ls_queue.show()))
-    
-    # Record visited vertices.
     visited_set = set([start_vertex])
 
     while ls_queue.size() > 0:
