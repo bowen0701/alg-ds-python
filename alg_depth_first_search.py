@@ -3,25 +3,10 @@ from __future__ import print_function
 from __future__ import division
 
 from ds_stack import Stack
+            
 
-
-# def dfs(adjacency_dict, start_vertex):
-#     """Depth First Search algorith."""
-#     ls_stack = Stack()
-#     ls_stack.push([start_vertex])
-#     visited_set = set([start_vertex])
-
-#     while ls_stack.size() > 0:
-#         path_ls = ls_stack.pop()
-#         # Take the lastest vertex as the new starting one.
-#         vertex = path_ls[-1]
-#         print('path_ls: {}'.format(path_ls))
-#         print('vertex: {}'.format(vertex))
-#         yield vertex, path_ls
-#         for vertex in adjacency_dict[vertex] - set([start_vertex]):
-#             visited_set.add(vertex)
-#             ls_stack.push([vertex])
-#             dfs(adjacency_dict, vertex)
+def dfs(adjacency_dict, start_vertex):
+    pass
 
 
 def dfs_recur(adjacency_dict, start_vertex, path_ls=None):
@@ -74,6 +59,8 @@ def main():
     # path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
     # print('path_ls: {}'.format(path_ls))
     traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
+
+    print(dfs(adjacency_dict, start_vertex))
 
 if __name__ == '__main__':
     main()
