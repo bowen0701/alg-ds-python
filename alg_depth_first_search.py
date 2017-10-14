@@ -5,7 +5,7 @@ from __future__ import division
 from ds_stack import Stack
 
 
-# def dfs(graph_dict, start_vertex):
+# def dfs(adjacency_dict, start_vertex):
 #     """Depth First Search algorith."""
 #     ls_stack = Stack()
 #     ls_stack.push([start_vertex])
@@ -18,12 +18,12 @@ from ds_stack import Stack
 #         print('path_ls: {}'.format(path_ls))
 #         print('vertex: {}'.format(vertex))
 #         yield vertex, path_ls
-#         for vertex in graph_dict[vertex] - set([start_vertex]):
+#         for vertex in adjacency_dict[vertex] - set([start_vertex]):
 #             visited_set.add(vertex)
 #             ls_stack.push([vertex])
-#             dfs(graph_dict, vertex)
+#             dfs(adjacency_dict, vertex)
 
-def dfs_recur(graph_dict, start_vertex, end_vertex, path_ls=None):
+def dfs_recur(adjacency_dict, start_vertex, end_vertex, path_ls=None):
     if path_ls is None:
         path_ls = [start_vertex]
     else:
@@ -33,26 +33,16 @@ def dfs_recur(graph_dict, start_vertex, end_vertex, path_ls=None):
     if start_vertex == end_vertex:
         return path_ls
 
-    for vertex in graph_dict[start_vertex]:
+    for vertex in adjacency_dict[start_vertex]:
         if vertex not in path_ls:
-            path_ls = dfs_recur(graph_dict, vertex, end_vertex, path_ls=path_ls)
+            path_ls = dfs_recur(adjacency_dict, vertex, end_vertex, path_ls=path_ls)
 
     return path_ls
 
 
-def traverse_dfs(graph_dict, start_vertex, end_vertex):
-    """Traverse the depth first search path.
-
-    Take the end_vertex's path from generator of vertex and path_ls. 
-    """
-    for vertex, visited_set in dfs(graph_dict, start_vertex):
-        if vertex == end_vertex:
-            print(' -> '.join(path_ls))
-
-
 def main():
     # Small word ladder graph.
-    graph_dict = {
+    adjacency_dict = {
         'fool': {'cool', 'pool', 'foil', 'foul'},
         'foul': {'fool', 'foil'},
         'foil': {'fool', 'foul', 'fail'},
@@ -72,9 +62,9 @@ def main():
     
     start_vertex = 'fool'
     end_vertex = 'sage'
-    path_ls = dfs_recur(graph_dict, start_vertex, end_vertex, path_ls=None)
+    path_ls = dfs_recur(adjacency_dict, start_vertex, end_vertex, path_ls=None)
     print('path_ls: {}'.format(path_ls))
-    # traverse_dfs(graph_dict, start_vertex, end_vertex)
+    # traverse_dfs(adjacency_dict, start_vertex, end_vertex)
 
 
 if __name__ == '__main__':
