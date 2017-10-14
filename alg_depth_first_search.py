@@ -9,6 +9,7 @@ def dfs(adjacency_dict, start_vertex):
     ls_stack = Stack()
     ls_stack.push(start_vertex)
     path_ls = [start_vertex]
+    
     while ls_stack.size() > 0:
         # Take top vertex as the next start vertex.
         vertex = ls_stack.peek()
@@ -37,14 +38,21 @@ def dfs_recur(adjacency_dict, start_vertex, path_ls=None):
     return path_ls
 
 
-def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
-    path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
-
+def traverse_dfs(adjacency_dict, start_vertex):
+    path_ls = dfs(adjacency_dict, start_vertex)
     end_vertex_cand = path_ls[-1]
     while end_vertex_cand != end_vertex:
         path_ls.pop()
         end_vertex_cand = path_ls[-1]
+    print(' -> '.join(path_ls))
 
+
+def traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex):
+    path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
+    end_vertex_cand = path_ls[-1]
+    while end_vertex_cand != end_vertex:
+        path_ls.pop()
+        end_vertex_cand = path_ls[-1]
     print(' -> '.join(path_ls))
 
 
@@ -70,11 +78,27 @@ def main():
     
     start_vertex = 'fool'
     end_vertex = 'sage'
+    print('For dfs by iteration:')
+    # path_ls = dfs(adjacency_dict, start_vertex)
+    # print('path_ls: {}'.format(path_ls))
+    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
+    print('For dfs by recursion:')
     # path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
     # print('path_ls: {}'.format(path_ls))
-    traverse_dfs(adjacency_dict, start_vertex, end_vertex)
+    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
 
-    print(dfs(adjacency_dict, start_vertex))
+    print('===')
+    start_vertex = 'fool'
+    end_vertex = 'pope'
+    print('For dfs by iteration:')
+    # path_ls = dfs(adjacency_dict, start_vertex)
+    # print('path_ls: {}'.format(path_ls))
+    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
+    print('For dfs by recursion:')
+    # path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
+    # print('path_ls: {}'.format(path_ls))
+    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
+
 
 if __name__ == '__main__':
     main()
