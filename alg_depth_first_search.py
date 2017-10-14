@@ -23,21 +23,30 @@ from ds_stack import Stack
 #             ls_stack.push([vertex])
 #             dfs(adjacency_dict, vertex)
 
-def dfs_recur(adjacency_dict, start_vertex, end_vertex, path_ls=None):
+
+def dfs_recur(adjacency_dict, start_vertex, path_ls=None):
     if path_ls is None:
         path_ls = [start_vertex]
     else:
         path_ls.append(start_vertex)
     print('path_ls: {}'.format(path_ls))
 
-    if start_vertex == end_vertex:
-        return path_ls
-
     for vertex in adjacency_dict[start_vertex]:
         if vertex not in path_ls:
-            path_ls = dfs_recur(adjacency_dict, vertex, end_vertex, path_ls=path_ls)
+            path_ls = dfs_recur(adjacency_dict, vertex, path_ls=path_ls)
 
     return path_ls
+
+
+def traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex):
+    path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
+
+    end_vertex_cand = path_ls[-1]
+    while end_vertex_cand != end_vertex:
+        path_ls.pop()
+        end_vertex_cand = path_ls[-1]
+
+    print(' -> '.join(path_ls))
 
 
 def main():
@@ -62,10 +71,9 @@ def main():
     
     start_vertex = 'fool'
     end_vertex = 'sage'
-    path_ls = dfs_recur(adjacency_dict, start_vertex, end_vertex, path_ls=None)
-    print('path_ls: {}'.format(path_ls))
-    # traverse_dfs(adjacency_dict, start_vertex, end_vertex)
-
+    # path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
+    # print('path_ls: {}'.format(path_ls))
+    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
 
 if __name__ == '__main__':
     main()
