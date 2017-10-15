@@ -3,57 +3,34 @@ from __future__ import print_function
 from __future__ import division
 
 from ds_stack import Stack
-            
+
 
 def dfs(adjacency_dict, start_vertex):
     ls_stack = Stack()
-    ls_stack.push(start_vertex)
-    path_ls = [start_vertex]
+    ls_stack.push([start_vertex])
+    visited_set = set([start_vertex])
     
     while ls_stack.size() > 0:
         # Take top vertex as the next start vertex.
-        vertex = ls_stack.peek()
+        path_ls = ls_stack.peek()
+        vertex = path_ls[-1]
+        print('path_ls: {}'.format(path_ls))
+        print('vertex: {}'.format(vertex))
+        yield vertex, path_ls
         neighbor_vertices = adjacency_dict[vertex]
         if len(neighbor_vertices) > 0:
-            next_vertex = neighbor_vertices.pop()
-            if next_vertex not in path_ls:
-                ls_stack.push(next_vertex)
-                path_ls.append(next_vertex)
+            neighbor_vertex = neighbor_vertices.pop()
+            if neighbor_vertex not in path_ls:
+                visited_set.add(neighbor_vertex)
+                ls_stack.push(path_ls + [neighbor_vertex])
         else:
             ls_stack.pop()
-    return path_ls
 
-
-def dfs_recur(adjacency_dict, start_vertex, path_ls=None):
-    if path_ls is None:
-        path_ls = [start_vertex]
-    else:
-        path_ls.append(start_vertex)
-    print('path_ls: {}'.format(path_ls))
-
-    for vertex in adjacency_dict[start_vertex]:
-        if vertex not in path_ls:
-            path_ls = dfs_recur(adjacency_dict, vertex, path_ls=path_ls)
-
-    return path_ls
-
-
-def traverse_dfs(adjacency_dict, start_vertex):
-    path_ls = dfs(adjacency_dict, start_vertex)
-    end_vertex_cand = path_ls[-1]
-    while end_vertex_cand != end_vertex:
-        path_ls.pop()
-        end_vertex_cand = path_ls[-1]
-    print(' -> '.join(path_ls))
-
-
-def traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex):
-    path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
-    end_vertex_cand = path_ls[-1]
-    while end_vertex_cand != end_vertex:
-        path_ls.pop()
-        end_vertex_cand = path_ls[-1]
-    print(' -> '.join(path_ls))
+def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
+    for vertex, path_ls in dfs(adjacency_dict, start_vertex):
+        if vertex == end_vertex:
+            print(' -> '.join(path_ls))
+            break
 
 
 def main():
@@ -76,29 +53,10 @@ def main():
         'sage': {'sale', 'page'} 
     }
     
+    print('For dfs by iteration:')
     start_vertex = 'fool'
     end_vertex = 'sage'
-    print('For dfs by iteration:')
-    # path_ls = dfs(adjacency_dict, start_vertex)
-    # print('path_ls: {}'.format(path_ls))
-    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
-    print('For dfs by recursion:')
-    # path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
-    # print('path_ls: {}'.format(path_ls))
-    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
-
-    print('===')
-    start_vertex = 'fool'
-    end_vertex = 'pope'
-    print('For dfs by iteration:')
-    # path_ls = dfs(adjacency_dict, start_vertex)
-    # print('path_ls: {}'.format(path_ls))
-    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
-    print('For dfs by recursion:')
-    # path_ls = dfs_recur(adjacency_dict, start_vertex, path_ls=None)
-    # print('path_ls: {}'.format(path_ls))
-    traverse_dfs_recur(adjacency_dict, start_vertex, end_vertex)
-
+    traverse_dfs(adjacency_dict, start_vertex, end_vertex)
 
 if __name__ == '__main__':
     main()
