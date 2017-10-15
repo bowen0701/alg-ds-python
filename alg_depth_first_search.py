@@ -33,6 +33,10 @@ def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
             break
 
 
+def dfs_recur():
+    pass
+
+
 def main():
     # Small word ladder graph.
     adjacency_dict = {
