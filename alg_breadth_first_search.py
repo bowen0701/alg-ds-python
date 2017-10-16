@@ -42,7 +42,7 @@ def main():
         'fool': {'cool', 'pool', 'foil', 'foul'},
         'foul': {'fool', 'foil'},
         'foil': {'fool', 'foul', 'fail'},
-        'cool': {'fool', 'cool'},
+        'cool': {'fool', 'pool'},
         'fail': {'foil', 'fall'},
         'fall': {'fail', 'pall'},
         'pool': {'fool', 'cool', 'poll'},
