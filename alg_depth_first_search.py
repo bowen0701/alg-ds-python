@@ -33,8 +33,18 @@ def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
             break
 
 
-def dfs_recur():
-    pass
+def _dfs_recur(adjacency_dict, start_vertex, path_ls):
+    path_ls += [start_vertex]
+    for neighbor_vertex in adjacency_dict[start_vertex]:
+        if neighbor_vertex not in path_ls:
+            _dfs_recur(adjacency_dict, neighbor_vertex, path_ls)
+
+def dfs_recur(adjacency_dict, start_vertex):
+    path_ls = []
+    for start_vertex in adjacency_dict:
+        if start_vertex not in path_ls:
+            _dfs_recur(adjacency_dict, start_vertex, path_ls)
+    return path_ls
 
 
 def main():
@@ -43,7 +53,7 @@ def main():
         'fool': {'cool', 'pool', 'foil', 'foul'},
         'foul': {'fool', 'foil'},
         'foil': {'fool', 'foul', 'fail'},
-        'cool': {'fool', 'cool'},
+        'cool': {'fool', 'pool'},
         'fail': {'foil', 'fall'},
         'fall': {'fail', 'pall'},
         'pool': {'fool', 'cool', 'poll'},
@@ -57,10 +67,14 @@ def main():
         'sage': {'sale', 'page'} 
     }
     
-    print('For dfs by iteration:')
     start_vertex = 'fool'
     end_vertex = 'sage'
+    
+    print('For dfs by iteration:')
     traverse_dfs(adjacency_dict, start_vertex, end_vertex)
+
+    print('For dfs by recursion:')
+    print(dfs_recur(adjacency_dict, start_vertex))
 
 if __name__ == '__main__':
     main()
