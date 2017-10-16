@@ -10,8 +10,8 @@ def square_root_bisection(n, steps=20, epsilon=10**-5):
     high = n
     step = 1
     sqroot = (low + high) / 2
-    while abs(sqroot ** 2 - n) > epsilon and step <= steps:
-        if sqroot ** 2 < n:
+    while abs(sqroot**2 - n) > epsilon and step <= steps:
+        if sqroot**2 < n:
             low = sqroot
         else:
             high = sqroot
