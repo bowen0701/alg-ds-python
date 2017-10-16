@@ -21,7 +21,7 @@ def square_root_bisection(n, steps=20, epsilon=10**-5):
     return sqroot
 
 
-def square_root(n, steps=20, epsilon=10**-5):
+def square_root(n, steps=20):
     """Approximate square root by Newton's Method.
     
     - Initial guess: old_guess = n / 2
