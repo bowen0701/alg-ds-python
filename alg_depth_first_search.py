@@ -14,8 +14,8 @@ def dfs(adjacency_dict, start_vertex):
         # Take top vertex as the next start vertex.
         path_ls = ls_stack.peek()
         vertex = path_ls[-1]
-        print('path_ls: {}'.format(path_ls))
-        print('vertex: {}'.format(vertex))
+        # print('path_ls: {}'.format(path_ls))
+        # print('vertex: {}'.format(vertex))
         yield vertex, path_ls
         neighbor_vertices = adjacency_dict[vertex]
         if len(neighbor_vertices) > 0:
