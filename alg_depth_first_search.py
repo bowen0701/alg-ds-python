@@ -16,6 +16,7 @@ def dfs(adjacency_dict, start_vertex):
         vertex = path_ls[-1]
         # print('path_ls: {}'.format(path_ls))
         # print('vertex: {}'.format(vertex))
+        print(vertex)
         yield vertex, path_ls
         neighbor_vertices = adjacency_dict[vertex]
         if len(neighbor_vertices) > 0:
