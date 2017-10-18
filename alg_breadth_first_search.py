@@ -6,7 +6,7 @@ from ds_queue import Queue
 
 
 def bfs(adjacency_dict, start_vertex):
-    """Breadth First Search algorith."""
+    """Breadth First Search by Iteration using Queue."""
     ls_queue = Queue()
     ls_queue.enqueue([start_vertex])
     visited_set = set([start_vertex])
@@ -27,7 +27,7 @@ def bfs(adjacency_dict, start_vertex):
 
 
 def traverse_bfs(adjacency_dict, start_vertex, end_vertex):
-    """Traverse the breadth first search path.
+    """Traverse graph by Breadth First Search by Iteration using Queue.
 
     Take the end_vertex's path from generator of vertex and path_ls. 
     """
