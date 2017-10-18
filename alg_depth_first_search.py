@@ -38,8 +38,12 @@ def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
         print('No path from {0} to {1}'.format(start_vertex, end_vertex))
 
 
+def dfs_recur():
+    pass
+
+
 def main():
-    # Small word ladder graph.
+    # Connected graph.
     adjacency_dict = {
         'A': {'B', 'D'},
         'B': {'C', 'D'},
