@@ -15,8 +15,7 @@ def dfs(adjacency_dict, start_vertex):
         path_ls = ls_stack.peek()
         vertex = path_ls[-1]
         # print('path_ls: {}'.format(path_ls))
-        # print('vertex: {}'.format(vertex))
-        print(vertex)
+        print('vertex: {}'.format(vertex))
         yield vertex, path_ls
         neighbor_vertices = adjacency_dict[vertex]
         if len(neighbor_vertices) > 0:
@@ -28,54 +27,36 @@ def dfs(adjacency_dict, start_vertex):
             ls_stack.pop()
 
 def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
+    connect_bool = False
     for vertex, path_ls in dfs(adjacency_dict, start_vertex):
         if vertex == end_vertex:
+            connect_bool = True
             print(' -> '.join(path_ls))
             break
 
-
-def _dfs_recur(adjacency_dict, start_vertex, path_ls):
-    path_ls += [start_vertex]
-    for neighbor_vertex in adjacency_dict[start_vertex]:
-        if neighbor_vertex not in path_ls:
-            _dfs_recur(adjacency_dict, neighbor_vertex, path_ls)
-
-def dfs_recur(adjacency_dict, start_vertex):
-    path_ls = []
-    for start_vertex in adjacency_dict:
-        if start_vertex not in path_ls:
-            _dfs_recur(adjacency_dict, start_vertex, path_ls)
-    return path_ls
+    if not connect_bool:
+        print('No path from {0} to {1}'.format(start_vertex, end_vertex))
 
 
 def main():
     # Small word ladder graph.
     adjacency_dict = {
-        'fool': {'cool', 'pool', 'foil', 'foul'},
-        'foul': {'fool', 'foil'},
-        'foil': {'fool', 'foul', 'fail'},
-        'cool': {'fool', 'pool'},
-        'fail': {'foil', 'fall'},
-        'fall': {'fail', 'pall'},
-        'pool': {'fool', 'cool', 'poll'},
-        'poll': {'pool', 'pall', 'pole'},
-        'pall': {'fall', 'pale', 'poll'},
-        'pole': {'poll', 'pope', 'pale'},
-        'pope': {'pole'},
-        'pale': {'pall', 'pole', 'sale', 'page'},
-        'sale': {'pale', 'sage'},
-        'page': {'pale', 'sage'},
-        'sage': {'sale', 'page'} 
+        'A': {'B', 'D'},
+        'B': {'C', 'D'},
+        'C': {},
+        'D': {'E'},
+        'E': {'B', 'F'},
+        'F': {'C'},
     }
     
-    start_vertex = 'fool'
-    end_vertex = 'sage'
+    start_vertex = 'A'
+    end_vertex = 'F'
     
     print('For dfs by iteration:')
     traverse_dfs(adjacency_dict, start_vertex, end_vertex)
 
     print('For dfs by recursion:')
-    print(dfs_recur(adjacency_dict, start_vertex))
+    print('TODO')
 
 if __name__ == '__main__':
     main()
