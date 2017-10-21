@@ -26,12 +26,15 @@ def topological_sort(adjacency_dict):
 def main():
 	# DAG.
 	adjacency_dict = {
-	    'A': {},
-	    'B': {},
+	    'A': {'D'},
+	    'B': {'D'},
 	    'C': {'D'},
-	    'D': {'B'},
-	    'E': {'A', 'B'},
-	    'F': {'A', 'C'}
+	    'D': {'G', 'E'},
+	    'E': {'J'},
+	    'F': {'G'},
+	    'G': {'I'},
+	    'I': {'J'},
+	    'J': {}
 	}
 
 	topological_sort(adjacency_dict)
