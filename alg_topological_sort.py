@@ -1,8 +1,9 @@
-def topological_sort_recur():
+def topological_sort_recur(adjacency_dict, start_vertex,
+	                       visited_set, finish_ls):
 	"""Topological Sorting by Recursion."""
 	pass
 
-def topological_sort():
+def topological_sort(adjacency_dict):
 	"""Topological Sorting for Directed Acyclic Graph (DAG)."""
 	pass
 
