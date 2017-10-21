@@ -82,7 +82,7 @@ def traverse_dfs_recur(adjacency_dict, start_vertex):
                       visited_set, visit_time, path_dict)
 
     for vertex in path_dict:
-        print('{0}:\n{1}'.format(vertex, path_dict[vertex]))
+        print('{0}: {1}'.format(vertex, path_dict[vertex]))
 
 
 def main():
