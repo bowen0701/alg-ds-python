@@ -16,9 +16,10 @@ def bfs(adjacency_dict, start_vertex):
         # Take the lastest vertex as the new starting one.
         vertex = path_ls[-1]
         yield vertex, path_ls
-        for neighbor_vertex in adjacency_dict[vertex] - visited_set:
-            ls_queue.enqueue(path_ls + [neighbor_vertex])
-            visited_set.add(neighbor_vertex)
+        for neighbor_vertex in adjacency_dict[vertex]:
+            if neighbor_vertex not in visited_set:
+                ls_queue.enqueue(path_ls + [neighbor_vertex])
+                visited_set.add(neighbor_vertex)
 
 def traverse_bfs(adjacency_dict, start_vertex, end_vertex):
     """Traverse graph by Breadth First Search by Iteration with Queue."""
@@ -51,12 +52,10 @@ def main():
     end_vertex = 'sage'
     traverse_bfs(adjacency_dict, start_vertex, end_vertex)
 
-    print('===')
     start_vertex = 'fool'
     end_vertex = 'pope'
     traverse_bfs(adjacency_dict, start_vertex, end_vertex)
 
-    print('===')
     start_vertex = 'foul'
     end_vertex = 'sage'
     traverse_bfs(adjacency_dict, start_vertex, end_vertex)
