@@ -25,7 +25,7 @@ def topological_sort(adjacency_dict):
 
 def main():
 	# DAG.
-	adjacency_dict = {
+	dag_adjacency_dict = {
 	    'A': {'D'},
 	    'B': {'D'},
 	    'C': {'D'},
@@ -37,7 +37,7 @@ def main():
 	    'J': {}
 	}
 
-	topological_sort(adjacency_dict)
+	topological_sort(dag_adjacency_dict)
 
 if __name__ == '__main__':
 	main()
