@@ -2,8 +2,7 @@ def topological_sort_recur(adjacency_dict, start_vertex,
 	                       visited_set, finish_ls):
 	"""Topological Sorting by Recursion."""
 	visited_set.add(start_vertex)
-	for neighbor_vertex in adjacency_dict[start_vertex]:
-		if neighbor_vertex not in visited_set:
+	for neighbor_vertex in adjacency_dict[start_vertex] - visited_set:
 			topological_sort_recur(
 				adjacency_dict, neighbor_vertex,
 	            visited_set, finish_ls)
@@ -34,7 +33,7 @@ def main():
 	    'F': {'G'},
 	    'G': {'I'},
 	    'I': {'J'},
-	    'J': {}
+	    'J': set()
 	}
 
 	topological_sort(dag_adjacency_dict)
