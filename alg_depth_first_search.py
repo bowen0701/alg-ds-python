@@ -17,7 +17,6 @@ def dfs(adjacency_dict, start_vertex):
         # Take top vertex as the next start vertex.
         path_ls = ls_stack.peek()
         vertex = path_ls[-1]
-        # print('path_ls: {}'.format(path_ls))
         print('vertex: {}'.format(vertex))
         yield vertex, path_ls
         neighbor_vertices = adjacency_dict[vertex]
@@ -54,8 +53,7 @@ def dfs_recur(adjacency_dict, start_vertex,
     visit_time[0] += 1
     path_dict[start_vertex]['discover'] = visit_time[0]
 
-    for neighbor_vertex in adjacency_dict[start_vertex]:
-        if neighbor_vertex not in visited_set:
+    for neighbor_vertex in adjacency_dict[start_vertex] - visited_set:
             dfs_recur(adjacency_dict, neighbor_vertex, 
                       visited_set, visit_time, path_dict)
 
@@ -90,7 +88,7 @@ def main():
     adjacency_dict = {
         'A': {'B', 'D'},
         'B': {'C', 'D'},
-        'C': {},
+        'C': set(),
         'D': {'E'},
         'E': {'B', 'F'},
         'F': {'C'},
