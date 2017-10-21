@@ -15,22 +15,13 @@ def bfs(adjacency_dict, start_vertex):
         path_ls = ls_queue.dequeue()
         # Take the lastest vertex as the new starting one.
         vertex = path_ls[-1]
-        # print('path_ls: {}'.format(path_ls))
-        # print('vertex: {}'.format(vertex))
         yield vertex, path_ls
         for neighbor_vertex in adjacency_dict[vertex] - visited_set:
-            # print('neighbor_vertex: {}'.format(neighbor_vertex))
-            visited_set.add(neighbor_vertex)
             ls_queue.enqueue(path_ls + [neighbor_vertex])
-            # print('visited_set: {}'.format(visited_set))
-            # print('ls_queue: {}'.format(ls_queue.show()))
-
+            visited_set.add(neighbor_vertex)
 
 def traverse_bfs(adjacency_dict, start_vertex, end_vertex):
-    """Traverse graph by Breadth First Search by Iteration using Queue.
-
-    Take the end_vertex's path from generator of vertex and path_ls. 
-    """
+    """Traverse graph by Breadth First Search by Iteration with Queue."""
     for vertex, path_ls in bfs(adjacency_dict, start_vertex):
         if vertex == end_vertex:
             print(' -> '.join(path_ls))
