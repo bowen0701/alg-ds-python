@@ -1,7 +1,11 @@
 # Algorithms & Data Structures
 
-This repo is to collect my practices for **algorithms and data structures**, including **notes and implementations using Python**. Now I mainly focus on 
+This repo is to collect my practices for **algorithms and data structures**. The following are the main references I use and highly recommend:
 
-- Brad Millar and David Ranum's great book: [Problem Solving with Algorithms and Data Structures Using Python, 2ed](http://interactivepython.org/runestone/static/pythonds/index.html).
+- Cormen, Leisenson, Rivest & Stein (2009). Introduction to Algoruthms, 3ed.
+- Millar & Ranum (2011). [Problem Solving with Algorithms and Data Structures Using Python, 2ed](http://interactivepython.org/runestone/static/pythonds/index.html).
+- Hetland (2010). Python Algorithms.
 
-Why algorithms and data structures? Because I think both are important for us who would like to implement fast data ETL and machine learning algorithms.
+Cormen et al. (2009) is of course classic and comprehensive, containing modern algorithms's concepts, theoretical foundations and pseudo codes. Millar & Ranum (2011) explains clearly algorithms's concepts and provides implementations in Python, from which I learned a lot. Hetland (2000) goes quickly into algorithms's concepts verbosely and implementations them in Python as well.
+
+Finally, why algorithms and data structures? Because I think both are important for us who would like to implement fast data ETL and machine learning algorithms.
