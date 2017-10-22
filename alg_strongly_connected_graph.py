@@ -17,6 +17,7 @@ def strongly_connected_graph():
 
 
 def main():
+	# 3 strongly connected graphs: {A, B, D, E, G}, {C}, {F, H, I}.
     adjacency_dict = {
         'A': {'B'},
         'B': {'C', 'E'},
