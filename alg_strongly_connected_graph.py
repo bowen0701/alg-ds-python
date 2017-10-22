@@ -19,7 +19,16 @@ def traverse_dfs_recur(adj_dict):
 	return finish_ls
 
 def transpose_graph(adj_dict):
-	pass
+	tr_adj_dict = {}
+
+	for vertex in adj_dict:
+		tr_adj_dict[vertex] = set()
+
+    for vertex in adj_dict:
+    	for neighbor_vertex in adj_dict[vertex]:
+    		tr_adj_dict[neighbor_vertex].add(vertex)
+
+    return tr_adj_dict
 
 def strongly_connected_graph():
     """Find strongly connected graphs by Kosaraju's Algorithm."""
