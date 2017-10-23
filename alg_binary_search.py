@@ -10,14 +10,14 @@ def binary_search(a_list, item):
     found_bool = False
 
     while first <= last and not found_bool:
-        mid_point = (first + last) // 2
-        if a_list[mid_point] == item:
+        mid = (first + last) // 2
+        if a_list[mid] == item:
             found_bool = True
         else:
-            if item < a_list[mid_point]:
-                last = mid_point - 1
+            if item < a_list[mid]:
+                last = mid - 1
             else:
-                first = mid_point + 1
+                first = mid + 1
 
     return found_bool
 
@@ -27,31 +27,33 @@ def binary_search_recur(a_list, item):
     if len(a_list) == 0:
         return False
     else:
-        mid_point = len(a_list) // 2
-        if a_list[mid_point] == item:
+        mid = len(a_list) // 2
+        if a_list[mid] == item:
             return True
         else:
-            if item < a_list[mid_point]:
-                return binary_search_recur(a_list[:mid_point], item)
+            if item < a_list[mid]:
+                return binary_search_recur(a_list[:mid], item)
             else:
-                return binary_search_recur(a_list[(mid_point + 1):], item)
+                return binary_search_recur(a_list[(mid + 1):], item)
 
 
 def binary_search_recur_fast(a_list, item, first, last):
-    """Binary search for ordered list by recursion."""
-    if last - first <= 1:
-        return False
+    """Binary search for ordered list by recursion w/o slice.
+
+    This binary_search_recur_fast() performs faster than 
+    binary_search_recur().
+    """
+    if last - first < 2:
+        return a_list[first] == item or a_list[last] == item
     else:
-        mid_point = first + (last - first) // 2 + 1
-        print(mid_point)
-        if a_list[mid_point] == item:
+        mid = first + (last - first) // 2
+        if a_list[mid] == item:
             return True
         else:
-            if item < a_list[mid_point]:
-                return binary_search_recur_fast(a_list, item, first, mid_point - 1)
+            if item < a_list[mid]:
+                return binary_search_recur_fast(a_list, item, first, mid - 1)
             else:
-                return binary_search_recur_fast(a_list, item, mid_point + 1, last)
-    # TODO: fix bug.
+                return binary_search_recur_fast(a_list, item, mid + 1, last)
 
 
 def main():
@@ -67,7 +69,7 @@ def main():
     print('Time for sorted(): {}'
           .format(time.time() - start_time))   
 
-    # Search by binary_search().
+    # Binary search by binary_search().
     start_time = time.time()
     item = None
     print('Search item {0}: {1}'
@@ -78,7 +80,7 @@ def main():
     print('Time for binary_search(): {}'
           .format(time.time() - start_time))
 
-    # Search by binary_search_recur().
+    # Binary search by binary_search_recur().
     start_time = time.time()
     item = None
     print('Search item {0}: {1}'
@@ -89,7 +91,7 @@ def main():
     print('Time for binary_search_recur(): {}'
           .format(time.time() - start_time))
 
-    # Search by binary_search_recur_fast().
+    # Binary search by binary_search_recur_fast().
     start_time = time.time()
     item = None
     print('Search item {0}: {1}'
