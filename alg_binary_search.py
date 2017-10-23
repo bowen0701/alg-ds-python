@@ -38,10 +38,9 @@ def binary_search_recur(a_list, item):
 
 
 def binary_search_recur_fast(a_list, item, first, last):
-    """Binary search for ordered list by recursion w/o slice.
+    """Binary search for ordered list by recursion w/o slicing.
 
-    This binary_search_recur_fast() performs faster than 
-    binary_search_recur().
+    Note: It performs faster than binary_search_recur().
     """
     if last - first < 2:
         return a_list[first] == item or a_list[last] == item
