@@ -19,7 +19,7 @@ def fibonacci_recur(n):
     if n <= 1:
         return n
     else:
-        return fibonacci_recur(n-1) + fibonacci_recur(n-2)
+        return fibonacci_recur(n - 1) + fibonacci_recur(n - 2)
 
 
 def fibonacci_dp(n):
@@ -31,7 +31,7 @@ def fibonacci_dp(n):
     """
     a, b = 0, 1
     for _ in xrange(n):
-        a, b = a+b, a
+        a, b = a + b, a
     return a
 
 
