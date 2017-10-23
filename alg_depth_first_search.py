@@ -41,13 +41,16 @@ def traverse_dfs(adjacency_dict, start_vertex, end_vertex):
         print('No path from {0} to {1}'.format(start_vertex, end_vertex))
 
 
-def dfs_recur(adjacency_dict, start_vertex, visited_set, path_ls):
+def dfs_recur(adjacency_dict, start_vertex, visited_set, discover_ls, finish_ls):
     """Depth First Search by Recursion."""
     visited_set.add(start_vertex)
-    path_ls.append(start_vertex)
+    # path_ls.append(start_vertex)
+    discover_ls.append(start_vertex)
     for neighbor_vertex in adjacency_dict[start_vertex]:
         if neighbor_vertex not in visited_set:
-            dfs_recur(adjacency_dict, neighbor_vertex, visited_set, path_ls)
+            dfs_recur(adjacency_dict, neighbor_vertex, visited_set, 
+                      discover_ls, finish_ls)
+    finish_ls.insert(0, start_vertex)
 
 def traverse_dfs_recur(adjacency_dict):
     """Traverse graph by Depth First Search by Recursion.
@@ -56,22 +59,25 @@ def traverse_dfs_recur(adjacency_dict):
     are visited, we start from start_vertex to iterate all vertices.
     """
     visited_set = set()
-    path_ls = []
+    # path_ls = []
+    discover_ls = []
+    finish_ls = []
     for vertex in adjacency_dict:
         if vertex not in visited_set:
-            dfs_recur(adjacency_dict, vertex, visited_set, path_ls)
-    print(path_ls)
+            dfs_recur(adjacency_dict, vertex, visited_set, discover_ls, finish_ls)
+    print('discover_ls: {}'.format(discover_ls))
+    print('finish_ls: {}'.format(finish_ls))
 
 
 def main():
     # Connected graph.
     conn_adjacency_dict = {
-        'A': {'B', 'D'},
-        'B': {'C', 'D'},
-        'C': set(),
-        'D': {'E'},
-        'E': {'B', 'F'},
-        'F': {'C'},
+        'A': ['B', 'D'],
+        'B': ['C', 'D'],
+        'C': [],
+        'D': ['E'],
+        'E': ['B', 'F'],
+        'F': ['C'],
     }
 
     # print('For dfs by iteration:')
