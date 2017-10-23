@@ -74,10 +74,9 @@ def main():
         'F': {'C'},
     }
 
-    start_vertex = 'A'
-    end_vertex = 'F'
-
     # print('For dfs by iteration:')
+    # start_vertex = 'A'
+    # end_vertex = 'F'
     # traverse_dfs(conn_adjacency_dict, start_vertex, end_vertex)
 
     print('For dfs by recursion:')
