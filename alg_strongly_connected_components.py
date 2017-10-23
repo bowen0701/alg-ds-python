@@ -21,26 +21,30 @@ def traverse_dfs_recur(adj_dict):
         if vertex not in visited_set:
             dfs_recur(adj_dict, vertex, visited_set, 
                       discover_ls, finish_ls)
-    return finish_ls
+    return discover_ls, finish_ls
 
 def transpose_graph(adj_dict):
     tr_adj_dict = {}
 
     for vertex in adj_dict:
-        tr_adj_dict[vertex] = set()
+        tr_adj_dict[vertex] = []
 
     for vertex in adj_dict:
         for neighbor_vertex in adj_dict[vertex]:
-            tr_adj_dict[neighbor_vertex].add(vertex)
+            tr_adj_dict[neighbor_vertex].append(vertex)
 
     return tr_adj_dict
 
 def strongly_connected_components(adj_dict):
     """Find strongly connected graphs by Kosaraju's Algorithm."""
-    finish_ls = traverse_dfs_recur(adj_dict)
+    discover_ls, finish_ls = traverse_dfs_recur(adj_dict)
+    print('discover_ls for G: {}'.format(discover_ls))
+    print('finish_ls for G: {}'.format(finish_ls))
 
     tr_adj_dict = transpose_graph(adj_dict)
+    print('G^T: {}'.format(tr_adj_dict))
 
+    print('strongly connected components:')
     scc_visited_set = set()
     for vertex in finish_ls:
         scc_discover_ls = []
@@ -54,15 +58,15 @@ def strongly_connected_components(adj_dict):
 def main():
     # 3 strongly connected graphs: {A, B, D, E, G}, {C}, {F, H, I}.
     adj_dict = {
-        'A': {'B'},
-        'B': {'C', 'E'},
-        'C': {'C', 'F'},
-        'D': {'B', 'G'},
-        'E': {'A', 'D'},
-        'F': {'H'},
-        'G': {'E'},
-        'H': {'I'},
-        'I': {'F'}
+        'A': ['B'],
+        'B': ['C', 'E'],
+        'C': ['C', 'F'],
+        'D': ['B', 'G'],
+        'E': ['A', 'D'],
+        'F': ['H'],
+        'G': ['E'],
+        'H': ['I'],
+        'I': ['F']
     }
 
     strongly_connected_components(adj_dict)
