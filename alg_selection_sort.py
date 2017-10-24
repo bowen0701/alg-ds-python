@@ -4,7 +4,11 @@ def selection_sort(a_list):
     Concept: 
       - Find out the max item's original slot first,
       - then swap it and the item at the max slot. 
-      - Iterate the procedure for the next max, etc. 
+      - Iterate the procedure for the next max, etc.
+
+    Selection sort is more efficient than bubble sort
+    since the former does not swap for all successive pairs,
+    and just do one swapping for each iteration.
     """
     for max_slot in reversed(range(len(a_list))):
         select_slot = 0
