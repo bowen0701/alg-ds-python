@@ -1,5 +1,9 @@
 def selection_sort(a_list):
-    """Selection Sort algortihm."""
+    """Selection Sort algortihm.
+
+    Concept: Find out the maximun item's original slot first,
+    then switch it to the max slot. Iterate the procedure.
+    """
     for max_slot in reversed(range(len(a_list))):
         select_slot = 0
         for slot in range(1, max_slot + 1):
