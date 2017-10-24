@@ -16,7 +16,11 @@ def bubble_sort(a_list):
 
 
 def short_bubble_sort(a_list):
-    """Bubble Short algorithm with early stop."""
+    """Bubble Short algorithm with early stop.
+
+    After some bubble sort iterations,
+    if there are no swapped pairs, stop the further iterations.
+    """
     exchange_bool = True
     pass_num = len(a_list) - 1
     while pass_num > 0 and exchange_bool:
