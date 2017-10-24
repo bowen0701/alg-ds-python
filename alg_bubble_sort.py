@@ -1,5 +1,12 @@
 def bubble_sort(a_list):
-    """Naive Bubble Sort algortihm."""
+    """Bubble Sort algortihm.
+
+    Concept:
+      - Start from the item at the 1st slot to check 
+        if it is bigger than the next one. If yes, swap these two items.
+      - Then check the following successive pair and swap them if needed.
+      - Iterate the procedure over the length of the list. 
+    """
     for pass_num in reversed(range(len(a_list))):
         for i in range(pass_num):
             if a_list[i] > a_list[i + 1]:
@@ -9,6 +16,7 @@ def bubble_sort(a_list):
 
 
 def short_bubble_sort(a_list):
+    """Bubble Short algorithm with early stop."""
     exchange_bool = True
     pass_num = len(a_list) - 1
     while pass_num > 0 and exchange_bool:
