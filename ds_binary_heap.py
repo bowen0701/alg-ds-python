@@ -60,7 +60,7 @@ class BinaryMinHeap(object):
     def size(self):
         return self.current_size
 
-    def build_entire_heap(self, a_list):
+    def build_heap(self, a_list):
         self.current_size = len(a_list)
         self.heap_ls = [0] + a_list[:]
         i = len(a_list) // 2
@@ -106,7 +106,7 @@ def main():
     print('Heap: {}'.format(bh_min.heap_ls))
 
     bh_min = BinaryMinHeap()
-    bh_min.build_entire_heap([9, 6, 5, 2, 3])
+    bh_min.build_heap([9, 6, 5, 2, 3])
     print('Heap: {}'.format(bh_min.heap_ls))
 
 
