@@ -22,11 +22,16 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        pass
+        lookup_dict = {}
+        for i, num in enumerate(nums):
+            if target - num in lookup_dict:
+                return [lookup_dict[target - num], i]
+            lookup_dict[num] = i
+        return []
 
 
 def main():
-    pass
+    print Solution().twoSum([2, 7, 11, 15], 9)
 
 if __name__ == '__main__':
     main()
