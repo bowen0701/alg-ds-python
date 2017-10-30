@@ -15,11 +15,6 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 class Solution(object):
     def twoSum(self, nums, target):
         """
