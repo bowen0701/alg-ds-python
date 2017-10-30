@@ -31,7 +31,7 @@ class Solution(object):
         :type y: int
         :rtype: int
         """
-        pass
+        return bin(x ^ y).count('1')
 
 
 def main():
