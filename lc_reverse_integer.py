@@ -20,7 +20,14 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        pass
+        # Since input x is a 32-bit integer, -2^31 <= x <= 2^31 - 1.
+        if x < 0:
+            x_rev = int(str(x)[::-1][-1] + str(x)[::-1][:-1])
+        else:
+            x_rev = int(str(x)[::-1])
+        if abs(x_rev) > 0x7FFFFFFF:
+            x_rev = 0
+        return x_rev
 
 
 def main():
