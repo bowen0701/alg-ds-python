@@ -67,6 +67,9 @@ class PriorityQueue(object):
             self._percolate_down(i)
             i -= 1
 
+    def decrease_key(self, val, key):
+        pass
+
 
 def main():
     pass
