@@ -60,6 +60,9 @@ class BinaryMinHeap(object):
     def size(self):
         return self.current_size
 
+    def __contains__(self, node):
+        return node in self.heap_ls
+
     def build_heap(self, a_list):
         self.current_size = len(a_list)
         self.heap_ls = [0] + a_list[:]
@@ -108,6 +111,9 @@ def main():
     bh_min = BinaryMinHeap()
     bh_min.build_heap([9, 6, 5, 2, 3])
     print('Heap: {}'.format(bh_min.heap_ls))
+
+    print('9 in bh_min: {}'.format(9 in bh_min))
+    print('1 in bh_min: {}'.format(1 in bh_min))
 
 
 if __name__ == '__main__':
