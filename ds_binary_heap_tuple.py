@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
-class PriorityQueue(object):
+class BinaryHeap(object):
 	"""Binary Min Heap class."""
     def __init__(self, ):
         self.heap_ls = [(0, 0)]
@@ -57,6 +57,12 @@ class PriorityQueue(object):
 
     def size(self):
         return self.current_size
+
+    def __contains__(self, vertex):
+        for vertex_tp in self.heap_ls:
+            if vertex in vertex_tp[1]:
+                return True
+        return False
 
     def build_heap(self, a_list):
         # alist: a list of tuples.
