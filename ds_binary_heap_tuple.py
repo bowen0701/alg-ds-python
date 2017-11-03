@@ -74,7 +74,12 @@ class BinaryHeap(object):
             i -= 1
 
     def decrease_key(self, val, key):
-        pass
+        done_bool = False:
+        i = 1
+        vertex_tp_pos = 0
+        while not done_bool and i <= self.current_size:
+            # TODO: complete decrease_key()
+            pass
 
 
 def main():
