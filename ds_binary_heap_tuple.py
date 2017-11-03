@@ -73,10 +73,10 @@ class BinaryHeap(object):
             self._percolate_down(i)
             i -= 1
 
-    def decrease_key(self, val, key):
+    def decrease_key(self, val, new_key):
         done_bool = False:
         i = 1
-        vertex_tp_pos = 0
+        new_key_pos = 0
         while not done_bool and i <= self.current_size:
             # TODO: complete decrease_key()
             pass
