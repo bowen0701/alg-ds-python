@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 class BinaryHeap(object):
-	"""Binary Min Heap class."""
+	"""Binary Min Heap class with (key, val)."""
     def __init__(self, ):
         self.heap_ls = [(0, 0)]
         self.current_size = 0
@@ -76,10 +76,16 @@ class BinaryHeap(object):
     def decrease_key(self, val, new_key):
         done_bool = False:
         i = 1
-        new_key_pos = 0
+        new_pos = 0
         while not done_bool and i <= self.current_size:
-            # TODO: complete decrease_key()
-            pass
+            if self.heap_ls[i][1] == val:
+                done_bool = True
+                new_pos = i
+            else:
+                i += 1
+        if new_pos > 0:
+            self.heap_ls[new_pos] = (new_key, val)
+            self._percolate_up(new_pos)
 
 
 def main():
