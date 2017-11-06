@@ -74,7 +74,7 @@ class BinaryHeap(object):
             i -= 1
 
     def decrease_key(self, val, new_key):
-        done_bool = False:
+        done_bool = False
         i = 1
         new_pos = 0
         while not done_bool and i <= self.current_size:
