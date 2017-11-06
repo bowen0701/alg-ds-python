@@ -115,5 +115,7 @@ def main():
     print('9 in bh_min: {}'.format(9 in bh_min))
     print('1 in bh_min: {}'.format(1 in bh_min))
 
+    # TODO: Revise bug for no priority queue.
+
 if __name__ == '__main__':
     main()
