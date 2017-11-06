@@ -60,7 +60,7 @@ class BinaryHeap(object):
 
     def __contains__(self, vertex):
         for vertex_tp in self.heap_ls:
-            if vertex in vertex_tp[1]:
+            if vertex == vertex_tp[1]:
                 return True
         return False
 
