@@ -4,7 +4,7 @@ from __future__ import division
 
 class BinaryHeap(object):
 	"""Binary Min Heap class with (key, val)."""
-    def __init__(self, ):
+    def __init__(self):
         self.heap_ls = [(0, 0)]
         self.current_size = 0
 
