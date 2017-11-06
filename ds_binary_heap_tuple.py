@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 class BinaryHeap(object):
-	"""Binary Min Heap class with (key, val)."""
+    """Binary Min Heap class with (key, val)."""
     def __init__(self):
         self.heap_ls = [(0, 0)]
         self.current_size = 0
@@ -116,4 +116,4 @@ def main():
     print('1 in bh_min: {}'.format(1 in bh_min))
 
 if __name__ == '__main__':
-	main()
+    main()
