@@ -89,7 +89,31 @@ class BinaryHeap(object):
 
 
 def main():
-    pass
+    bh_min = BinaryHeap()
+    bh_min.insert((1, 'a'))
+    print('Heap: {}'.format(bh_min.heap_ls))    
+    bh_min.insert((3, 'c'))
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert((2, 'b'))
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert((5, 'e'))
+    print('Heap: {}'.format(bh_min.heap_ls))
+    bh_min.insert((4, 'd'))
+    print('Heap: {}'.format(bh_min.heap_ls))
+
+    print('Find min: {}'.format(bh_min.find_min()))
+    print('Is empty? {}'.format(bh_min.is_empty()))
+    print('Size? {}'.format(bh_min.size()))
+
+    print(bh_min.delete_min())
+    print('Heap: {}'.format(bh_min.heap_ls))
+
+    bh_min = BinaryHeap()
+    bh_min.build_heap([(1, 'a'), (3, 'c'), (2, 'b')])
+    print('Heap: {}'.format(bh_min.heap_ls))
+
+    print('9 in bh_min: {}'.format(9 in bh_min))
+    print('1 in bh_min: {}'.format(1 in bh_min))
 
 if __name__ == '__main__':
 	main()
