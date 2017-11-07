@@ -105,6 +105,9 @@ def main():
     print('Is empty? {}'.format(bh_min.is_empty()))
     print('Size? {}'.format(bh_min.size()))
 
+    bh_min.insert(7)
+    print('Heap: {}'.format(bh_min.heap_ls))
+
     print(bh_min.delete_min())
     print('Heap: {}'.format(bh_min.heap_ls))
 
