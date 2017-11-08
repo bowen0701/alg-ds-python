@@ -16,7 +16,6 @@ def main():
         'y': {'w': 1, 'x': 1, 'z': 1},
         'z': {'w': 5, 'y': 1}
     }
-    print(weight_graph)
 
     bh = BinaryHeap()
 
