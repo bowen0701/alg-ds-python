@@ -4,8 +4,11 @@ from __future__ import division
 
 from ds_binary_heap_tuple import BinaryHeap
 
+def dijkstra(graph, vertex_start):
+	pass
+
 def main():
-    pass
+    bh = BinaryHeap()
 
 if __name__ == '__main__':
     main()
