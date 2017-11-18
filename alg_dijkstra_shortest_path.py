@@ -11,8 +11,10 @@ def dijkstra(weighted_graph_d, start_vertex):
         vertex: inf for vertex in weighted_graph_d
     }
     vertex_distances_d[start_vertex] = 0
+
+    bh = BinaryHeap()
     
-    # TODO: Finish Dijkstra's algorithm.
+    # TODO: Continue Dijkstra's algorithm.
 
 
 def main():
@@ -24,8 +26,6 @@ def main():
         'y': {'w': 1, 'x': 1, 'z': 1},
         'z': {'w': 5, 'y': 1}
     }
-
-    bh = BinaryHeap()
 
 if __name__ == '__main__':
     main()
