@@ -7,13 +7,13 @@ from ds_binary_heap_tuple import BinaryHeap
 def dijkstra(weighted_graph_d, start_vertex):
     inf = float('inf')
 
-    vertex_distances_d = {
+    shortest_path_d = {
         vertex: inf for vertex in weighted_graph_d
     }
-    vertex_distances_d[start_vertex] = 0
+    shortest_path_d[start_vertex] = 0
 
     bh = BinaryHeap()
-    
+
     # TODO: Continue Dijkstra's algorithm.
 
 
