@@ -29,8 +29,8 @@ def _partition(a_list, first, last):
 
     done_bool = False
     while not done_bool:
-        while (left_mark <= right_mark and 
-               a_list[left_mark] <= pivot_value):
+        while (a_list[left_mark] <= pivot_value and
+               left_mark <= right_mark):
             left_mark += 1
 
         while (a_list[right_mark] >= pivot_value and 
