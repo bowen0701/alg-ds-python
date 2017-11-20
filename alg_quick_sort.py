@@ -51,42 +51,44 @@ def _partition(a_list, first, last):
     a_list[first] = a_list[right_mark]
     a_list[right_mark] = temp
     print(a_list)
+    print('split point: {}'.format(right_mark))
 
     return right_mark
 
 
-def _recur_quick_sort(a_list, first, last):
+def _quick_sort_recur(a_list, first, last):
     if first < last:
         split_point = _partition(a_list, first, last)
-        _recur_quick_sort(a_list, first, split_point - 1)
-        _recur_quick_sort(a_list, split_point + 1, last)
+        _quick_sort_recur(a_list, first, split_point - 1)
+        _quick_sort_recur(a_list, split_point + 1, last)
+
+
+def quick_sort_recur(a_list):
+    """Quick sort algortihm with recursion."""
+    _quick_sort_recur(a_list, 0, len(a_list) - 1)
 
 
 def quick_sort(a_list):
-    """Quick sort algortihm."""
-    _recur_quick_sort(a_list, 0, len(a_list) - 1)
-
-
-def quick_sort_lc_recur(a_list):
+    """Quick sort algortihm with list comprehension recursion."""
     if len(a_list) <= 1:
         return a_list
     pivot_value = a_list[len(a_list) // 2]
     left_list = [x for x in a_list if x < pivot_value]
     middle_list = [x for x in a_list if x == pivot_value]
     right_list = [x for x in a_list if x > pivot_value]
-    return quick_sort_lc_recur(left_list) + middle_list + quick_sort_lc_recur(right_list)
+    return quick_sort(left_list) + middle_list + quick_sort(right_list)
 
 
 def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('By quick sort: ')
-    quick_sort(a_list)
+    quick_sort_recur(a_list)
 
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('By quick sort with list comprehension recursion: ')
-    print(quick_sort_lc_recur(a_list))
+    print(quick_sort(a_list))
 
 if __name__ == '__main__':
     main()
