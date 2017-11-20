@@ -85,7 +85,7 @@ def main():
 
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
-    print('By quick sort with list comprehension: ')
+    print('By quick sort with list comprehension recursion: ')
     print(quick_sort_lc_recur(a_list))
 
 if __name__ == '__main__':
