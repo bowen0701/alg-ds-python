@@ -51,7 +51,6 @@ def _partition(a_list, first, last):
     a_list[first] = a_list[right_mark]
     a_list[right_mark] = temp
     print(a_list)
-    print('split point: {}'.format(right_mark))
 
     return right_mark
 
