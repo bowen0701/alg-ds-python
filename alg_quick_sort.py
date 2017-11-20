@@ -2,20 +2,20 @@ from __future__ import print_function
 from __future__ import division
 
 
-def _select_pivot_value(a_list, first, last):
-    """Select pivot value by median of three."""
-    first_value = a_list[first]
-    last_value = a_list[last]
-    middle = (first + last) // 2
-    middle_value = a_list[middle]
-    if ((first_value < middle_value < last_value) or 
-        (last_value < middle_value < first_value)):
-        return middle
-    elif ((middle_value < first_value < last_value) or
-          (last_value < first_value < middle_value)):
-        return first
-    else:
-        return last
+# def _select_pivot_value(a_list, first, last):
+#     """Select pivot value by median of three."""
+#     first_value = a_list[first]
+#     last_value = a_list[last]
+#     middle = (first + last) // 2
+#     middle_value = a_list[middle]
+#     if ((first_value < middle_value < last_value) or 
+#         (last_value < middle_value < first_value)):
+#         return middle
+#     elif ((middle_value < first_value < last_value) or
+#           (last_value < first_value < middle_value)):
+#         return first
+#     else:
+#         return last
 
 
 def _partition(a_list, first, last):
@@ -62,12 +62,12 @@ def _quick_sort_recur(a_list, first, last):
         _quick_sort_recur(a_list, split_point + 1, last)
 
 
-def quick_sort_recur(a_list):
+def quick_sort(a_list):
     """Quick sort algortihm with recursion."""
     _quick_sort_recur(a_list, 0, len(a_list) - 1)
 
 
-def quick_sort(a_list):
+def quick_sort_lc(a_list):
     """Quick sort algortihm with list comprehension recursion."""
     if len(a_list) <= 1:
         return a_list
@@ -75,19 +75,19 @@ def quick_sort(a_list):
     left_list = [x for x in a_list if x < pivot_value]
     middle_list = [x for x in a_list if x == pivot_value]
     right_list = [x for x in a_list if x > pivot_value]
-    return quick_sort(left_list) + middle_list + quick_sort(right_list)
+    return quick_sort_lc(left_list) + middle_list + quick_sort_lc(right_list)
 
 
 def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
-    print('By quick sort: ')
-    quick_sort_recur(a_list)
+    print('Quick sort: ')
+    quick_sort(a_list)
 
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
-    print('By quick sort with list comprehension recursion: ')
-    print(quick_sort(a_list))
+    print('Quick sort with list comprehension: ')
+    print(quick_sort_lc(a_list))
 
 if __name__ == '__main__':
     main()
