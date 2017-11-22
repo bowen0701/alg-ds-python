@@ -5,10 +5,8 @@ from __future__ import division
 from ds_binary_heap_tuple import BinaryHeap
 
 def dijkstra(weighted_graph_d, start_vertex):
-    inf = float('inf')
-
     shortest_path_d = {
-        vertex: inf for vertex in weighted_graph_d
+        vertex: float('inf') for vertex in weighted_graph_d
     }
     shortest_path_d[start_vertex] = 0
 
