@@ -10,8 +10,13 @@ def dijkstra(weighted_graph_d, start_vertex):
     }
     shortest_path_d[start_vertex] = 0
 
+    distance_vertex_ls = [
+        (distance, vertex) for vertex, distance 
+        in shortest_path_d.items()]
+    
     bh = BinaryHeap()
-
+    bh.build_heap(distance_vertex_ls)
+    print(bh.heap_ls)
     # TODO: Continue Dijkstra's algorithm.
 
 
@@ -24,6 +29,8 @@ def main():
         'y': {'w': 1, 'x': 1, 'z': 1},
         'z': {'w': 5, 'y': 1}
     }
+
+    dijkstra(weighted_graph_d, 'u')
 
 if __name__ == '__main__':
     main()
