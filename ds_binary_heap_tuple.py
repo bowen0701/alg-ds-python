@@ -58,6 +58,9 @@ class BinaryHeap(object):
     def size(self):
         return self.current_size
 
+    def __len__(self):
+        return self.current_size
+
     def __contains__(self, vertex):
         for vertex_tp in self.heap_ls:
             if vertex == vertex_tp[1]:
@@ -112,6 +115,8 @@ def main():
     bh_min.build_heap([(1, 'a'), (3, 'c'), (2, 'b')])
     print('Build heap: {}'.format(bh_min.heap_ls))
 
+    print('len by size(): {}'.format(bh_min.size()))
+    print('len by len(): {}'.format(len(bh_min)))
     print('c in bh_min: {}'.format('c' in bh_min))
     print('d in bh_min: {}'.format('d' in bh_min))
 
