@@ -16,8 +16,16 @@ def dijkstra(weighted_graph_d, start_vertex):
     
     bh = BinaryHeap()
     bh.build_heap(distance_vertex_ls)
-    print(bh.heap_ls)
-    # TODO: Continue Dijkstra's algorithm.
+
+    while len(bh) > 0:
+        current_distance, current_vertex = bh.delete_min()
+
+        for neighbor_vertex, neighbor_distance in weighted_graph_d[current_vertex].items():
+            distance = shortest_path_d[current_vertex] + neighbor_distance
+            if distance < shortest_path_d[neighbor_vertex]:
+                shortest_path_d[neighbor_vertex] = distance
+
+    return shortest_path_d
 
 
 def main():
@@ -29,8 +37,10 @@ def main():
         'y': {'w': 1, 'x': 1, 'z': 1},
         'z': {'w': 5, 'y': 1}
     }
-
-    dijkstra(weighted_graph_d, 'u')
+    start_vertex = 'x'
+    print('weighted_graph_d: {}'.format(weighted_graph_d))
+    print('Dijkstra shortest path from {}:'.format(start_vertex))
+    print(dijkstra(weighted_graph_d, start_vertex))
 
 if __name__ == '__main__':
     main()
