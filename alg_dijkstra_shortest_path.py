@@ -9,15 +9,16 @@ def dijkstra(weighted_graph_d, start_vertex):
         vertex: float('inf') for vertex in weighted_graph_d
     }
     shortest_path_d[start_vertex] = 0
+    
     distance_vertex_ls = [
         (distance, vertex) for vertex, distance 
         in shortest_path_d.items()]
 
-    vertex_lookup_d = {vertex: None for vertex in shortest_path_d.keys()}
-    vertex_lookup_d[start_vertex] = start_vertex
-    
     bh = BinaryHeap()
     bh.build_heap(distance_vertex_ls)
+
+    vertex_lookup_d = {vertex: None for vertex in shortest_path_d.keys()}
+    vertex_lookup_d[start_vertex] = start_vertex
 
     while len(bh) > 0:
         current_distance, current_vertex = bh.delete_min()
