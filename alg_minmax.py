@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 def find_min_max_naive(a_ls):
-    """Find mix & max in a list by naive method."""
+    """Find mix & max in a list by naive algorithm."""
     _min = a_ls[0]
     _max = a_ls[0]
     for i in range(1, len(a_ls)):
@@ -13,7 +13,7 @@ def find_min_max_naive(a_ls):
 
 
 def find_min_max_dc(a_ls):
-    """Find mix & max in a list by divide and conquer method."""
+    """Find mix & max in a list by divide and conquer algorithm."""
     if len(a_ls) == 1:
         return [a_ls[0], a_ls[0]]
     elif 1 < len(a_ls) < 3:
@@ -25,6 +25,11 @@ def find_min_max_dc(a_ls):
         [_min1, _max1] = find_min_max_dc(a_ls[:len(a_ls)//2])
         [_min2, _max2] = find_min_max_dc(a_ls[len(a_ls)//2:])
         return [min(_min1, _min2), max(_max1, _max2)]
+
+
+def find_min_max_seq(a_ls):
+    """Find mix & max in a list by sequential algorithm."""
+    pass
 
 
 def main():
