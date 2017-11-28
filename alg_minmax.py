@@ -29,20 +29,40 @@ def find_min_max_dc(a_ls):
 
 def find_min_max_seq(a_ls):
     """Find mix & max in a list by sequential algorithm."""
-    pass
+    cur_min = min(a_ls[0], a_ls[1])
+    cur_max = max(a_ls[0], a_ls[1])
+
+    for i in range(2, len(a_ls), 2):
+        if i + 1 < len(a_ls): 
+            _min = min(a_ls[i], a_ls[i + 1])
+            _max = max(a_ls[i], a_ls[i + 1])
+        else:
+            _min = min(a_ls[i], a_ls[i])
+            _max = max(a_ls[i], a_ls[i])
+
+        if _min < cur_min:
+            cur_min = _min
+        if _max > cur_max:
+            cur_max = _max
+    return [cur_min, cur_max]
 
 
 def main():
-    # a_ls = [1, 2, 3, 4, 5, 6, 7, 8]
-    a_ls = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    # List with even numbers.
+    # a_ls = [0, 1, 2, 3, 4, 5, 6, 7]
+    # List with odd numbers.
+    a_ls = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     print('A list: {}'.format(a_ls))
     print('Find min & max:')
 
-    print('By naive method: {}'
+    print('By naive algorithm: {}'
           .format(find_min_max_naive(a_ls)))
 
-    print('By divide and conquer method: {}'
+    print('By divide and conquer algorithm: {}'
           .format(find_min_max_dc(a_ls)))
+
+    print('By sequential algorithm: {}'
+          .format(find_min_max_seq(a_ls)))
 
 if __name__ == '__main__':
     main()
