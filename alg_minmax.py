@@ -16,7 +16,7 @@ def find_min_max_dc(a_ls):
     """Find mix & max in a list by divide and conquer algorithm."""
     if len(a_ls) == 1:
         return [a_ls[0], a_ls[0]]
-    elif 1 < len(a_ls) < 3:
+    elif len(a_ls) == 2:
         if a_ls[0] < a_ls[1]:
             return [a_ls[0], a_ls[1]]
         else:
