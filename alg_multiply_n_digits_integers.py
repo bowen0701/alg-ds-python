@@ -29,13 +29,11 @@ def multiply_n_digits_integers(x, y):
         n = x_n
     x_L, x_R = divmod(x, 10 ** (n // 2))
     y_L, y_R = divmod(y, 10 ** (n // 2))
-    print('x_L, x_R: {}, {}'.format(x_L, x_R))
-    print('y_L, y_R: {}, {}'.format(y_L, y_R))
     mul_L = x_L * y_L
     mul_R = x_R * y_R
     sum_mul = (x_L + x_R) * (y_L + y_R)
     mul = (
-        mul_L * (10 ** n)
+        mul_L * (10 ** ((n // 2) * 2))
         + (sum_mul - mul_L - mul_R) * (10 ** (n // 2))
         + mul_R)
     return mul
@@ -45,12 +43,12 @@ def main():
     x = 1234
     y = 1234
     print('(x, y): ({}, {})'.format(x, y))
-    print(multiply_n_digits_integers(x, y))
+    print('Multiply: {}'.format(multiply_n_digits_integers(x, y)))
 
-    x = 123456
-    y = 123456
+    x = 12345
+    y = 12345
     print('(x, y): ({}, {})'.format(x, y))
-    print(multiply_n_digits_integers(x, y))
+    print('Multiply: {}'.format(multiply_n_digits_integers(x, y)))
 
 if __name__ == '__main__':
     main()
