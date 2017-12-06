@@ -7,12 +7,14 @@ def merge_sort(a_list):
     print('Binary split: {}'.format(a_list))
     
     if len(a_list) > 1:
+        # Merge sort by recursion.
         mid = len(a_list) // 2
         left_list = a_list[:mid]
         right_list = a_list[mid:]
         merge_sort(left_list)
         merge_sort(right_list)
 
+        # Merge two small sorted lists.
         i = 0
         j = 0
         k = 0
