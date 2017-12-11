@@ -39,7 +39,7 @@ def fibonacci_memo(n):
 def fibonacci_dp(n):
     """Get the nth number of Fibonacci series by dynamic programming.
 
-    - Time complexity is still O(n), like fibonacci_arr().
+    - Time complexity is still O(n), like fibonacci_memo().
     - Space complexity is O(1), improving a lot.
     """
     a, b = 0, 1
