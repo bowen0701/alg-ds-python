@@ -12,22 +12,59 @@ from __future__ import print_function
 from __future__ import division
 
 def factorial_recur(n):
-    """Get the nth number of Fibonacci series, Fn, by recursion."""
-    pass
+    """Get the nth number of factorial series, Fn, by recursion.
+
+    - Time complexity: Fn - 1 = O(Fn); too fast.
+    - Space complexity: O(n).
+    """
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial_recur(n - 1)
 
 
 def factorial_memo(n):
-    """Get the nth number of Fibonacci series, Fn, by memorization."""
-    pass
-
+    """Get the nth number of factorial series, Fn, by memorization.
+    
+    - Time complexity: O(n).
+    - Space complexity: O(n).
+    """
+    fn_d = {}
+    fn_d[0] = 1
+    fn_d[1] = 1
+    for n in xrange(2, n + 1):
+        fn_d[n] = n * fn_d[n - 1]
+    return fn_d[n]
 
 def factorial_dp(n):
-    """Get the nth number of Fibonacci series by dynamic programming."""
-    pass
+    """Get the nth number of factorial series by dynamic programming.
+
+    - Time complexity is still O(n), like factorial_memo().
+    - Space complexity is O(1), improving a lot.
+    """
+    fn = 1
+    for i in xrange(2, n + 1):
+        fn *= i 
+    return fn
 
 
 def main():
-    pass
+    import time
+    n = 10
+    
+    print('{}th number of factorial series:'.format(n))
+
+    start_time = time.time()
+    print('By recursion: {}'.format(factorial_recur(n)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By memorization: {}'.format(factorial_memo(n)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By dynamic programming: {}'.format(factorial_dp(n)))
+    print('Time: {}'.format(time.time() - start_time))
 
 if __name__ == '__main__':
     main()
