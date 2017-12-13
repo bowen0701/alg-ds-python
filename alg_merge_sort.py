@@ -2,7 +2,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-def merge_sort(a_list):
+def merge_sort_naive(a_list):
     """Merge sort algortihm."""
     print('Binary split: {}'.format(a_list))
     
@@ -11,8 +11,8 @@ def merge_sort(a_list):
         mid = len(a_list) // 2
         left_list = a_list[:mid]
         right_list = a_list[mid:]
-        merge_sort(left_list)
-        merge_sort(right_list)
+        merge_sort_naive(left_list)
+        merge_sort_naive(right_list)
 
         # Merge two small sorted lists.
         i = 0
@@ -40,11 +40,25 @@ def merge_sort(a_list):
     print('Merge {}'.format(a_list))
 
 
+def merge_recur():
+    pass
+
+def merge_sort_dc_recur():
+    pass
+
+
+def merge_iter():
+    pass
+
+def merge_sort_dc_iter():
+    pass
+
+
 def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('By Merge Sort: ')
-    merge_sort(a_list)
+    merge_sort_naive(a_list)
 
 
 if __name__ == '__main__':
