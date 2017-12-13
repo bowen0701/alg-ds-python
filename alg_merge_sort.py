@@ -50,14 +50,33 @@ def merge_recur(x_list, y_list):
     else:
         return [y_list[0]] + merge_recur(x_list, y_list[1:])
 
-def merge_iter():
-    pass
+def merge_iter(x_list, y_list):
+    z_list = []
+    x_pos = 0
+    y_pos = 0
+    for z_pos in range(len(x_list) + len(y_list)):
+        if x_pos < len(x_list) and y_pos < len(y_list):
+            if x_list[x_pos] <= y_list[y_pos]:
+                z_list.append(x_list[x_pos])
+                x_pos += 1
+            else:
+                z_list.append(y_list[y_pos])
+                y_pos += 1      
+        elif x_pos < len(x_list) and y_pos >= len(y_list):
+            z_list.append(x_list[x_pos])
+            x_pos += 1
+        elif x_pos >= len(x_list) and y_pos < len(y_list):
+            z_list.append(y_list[y_pos])
+            y_pos += 1
+        else:
+            pass
+    return z_list
 
-def merge_sort_dc(a_list, merge_ft=merge_recur):
+def merge_sort_dc(a_list, merge_ft=merge_iter):
     if len(a_list) > 1:
         mid = len(a_list) // 2
-        return merge_ft(merge_sort_dc(a_list[:mid]), 
-                        merge_sort_dc(a_list[mid:]))
+        return merge_ft(merge_sort_dc(a_list[:mid], merge_ft), 
+                        merge_sort_dc(a_list[mid:], merge_ft))
     else:
         return a_list
 
@@ -76,7 +95,14 @@ def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('By merge sort with divide and conquer algortihm:')
-    print(merge_sort_dc(a_list))
+    print(merge_sort_dc(a_list, merge_ft=merge_recur))
+    print('Run time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    print('a_list: \n{}'.format(a_list))
+    print('By merge sort with iterative algortihm:')
+    print(merge_sort_dc(a_list, merge_ft=merge_iter))
     print('Run time: {}'.format(time.time() - start_time))
 
 if __name__ == '__main__':
