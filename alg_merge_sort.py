@@ -3,7 +3,7 @@ from __future__ import division
 
 
 def merge_sort_naive(a_list):
-    """Merge sort algortihm."""
+    """Merge sort."""
     print('Binary split: {}'.format(a_list))
     
     if len(a_list) > 1:
@@ -41,6 +41,7 @@ def merge_sort_naive(a_list):
 
 
 def merge_recur(x_list, y_list):
+    """Merge two sorted lists by recusions."""
     if len(x_list) == 0:
         return y_list
     if len(y_list) == 0:
@@ -51,6 +52,7 @@ def merge_recur(x_list, y_list):
         return [y_list[0]] + merge_recur(x_list, y_list[1:])
 
 def merge_iter(x_list, y_list):
+    """Merge two sorted lists by iteration."""
     z_list = []
     x_pos = 0
     y_pos = 0
@@ -73,6 +75,17 @@ def merge_iter(x_list, y_list):
     return z_list
 
 def merge_sort_dc(a_list, merge_ft=merge_iter):
+    """Merge sort by divide and conquer algorithm with
+    two methods for sorted sub-lists; see merge_ft.
+
+    Args:
+      a_list: A list. List to sort.
+      merge_ft: A function. Default: merge_iter.
+        - if merge_ft = merge_recur: 
+          Merge two sorted lists by recursion.
+        - if merge_ft = merge_iter: 
+          Merge two sorted lists by iteration.
+    """
     if len(a_list) > 1:
         mid = len(a_list) // 2
         return merge_ft(merge_sort_dc(a_list[:mid], merge_ft), 
