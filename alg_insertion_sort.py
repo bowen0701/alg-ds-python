@@ -1,3 +1,8 @@
+from __future__ import absolute_import
+from __future__ import print_function
+from __future__ import division
+
+
 def insertion_sort(a_list):
     """Insertion Sort algortihm."""
     for index in range(1, len(a_list)):
