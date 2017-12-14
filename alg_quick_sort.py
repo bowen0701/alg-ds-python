@@ -63,12 +63,12 @@ def _quick_sort_recur(a_list, first, last):
         _quick_sort_recur(a_list, split_point + 1, last)
 
 
-def quick_sort(a_list):
+def quick_sort_naive(a_list):
     """Quick sort algortihm with recursion."""
     _quick_sort_recur(a_list, 0, len(a_list) - 1)
 
 
-def quick_sort_lc(a_list):
+def quick_sort(a_list):
     """Quick sort algortihm with list comprehension recursion."""
     if len(a_list) <= 1:
         return a_list
@@ -76,19 +76,19 @@ def quick_sort_lc(a_list):
     left_list = [x for x in a_list if x < pivot_value]
     middle_list = [x for x in a_list if x == pivot_value]
     right_list = [x for x in a_list if x > pivot_value]
-    return quick_sort_lc(left_list) + middle_list + quick_sort_lc(right_list)
+    return quick_sort(left_list) + middle_list + quick_sort(right_list)
 
 
 def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('Quick sort: ')
-    quick_sort(a_list)
+    quick_sort_naive(a_list)
 
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('Quick sort with list comprehension: ')
-    print(quick_sort_lc(a_list))
+    print(quick_sort(a_list))
 
 if __name__ == '__main__':
     main()
