@@ -1,3 +1,8 @@
+from __future__ import absolute_import
+from __future__ import print_function
+from __future__ import division
+
+
 def bubble_sort(a_list):
     """Bubble Sort algortihm.
 
@@ -15,7 +20,7 @@ def bubble_sort(a_list):
                 a_list[i + 1] = temp
 
 
-def short_bubble_sort(a_list):
+def bubble_sort_short(a_list):
     """Bubble Short algorithm with early stop.
 
     After some bubble sort iterations,
@@ -44,9 +49,8 @@ def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: {}'.format(a_list))
     print('By short_bubble sort: ')
-    short_bubble_sort(a_list)
+    bubble_sort_short(a_list)
     print(a_list)
-
 
 if __name__ == '__main__':
     main()
