@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+
 class BinaryMinHeap(object):
     """Binary Min Heap class."""
     def __init__(self):
