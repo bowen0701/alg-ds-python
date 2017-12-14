@@ -74,7 +74,7 @@ def merge_iter(x_list, y_list):
             pass
     return z_list
 
-def merge_sort_dc(a_list, merge_ft=merge_iter):
+def merge_sort(a_list, merge_ft=merge_iter):
     """Merge sort by divide and conquer algorithm with
     two methods for sorted sub-lists; see merge_ft.
 
@@ -88,8 +88,8 @@ def merge_sort_dc(a_list, merge_ft=merge_iter):
     """
     if len(a_list) > 1:
         mid = len(a_list) // 2
-        return merge_ft(merge_sort_dc(a_list[:mid], merge_ft), 
-                        merge_sort_dc(a_list[mid:], merge_ft))
+        return merge_ft(merge_sort(a_list[:mid], merge_ft), 
+                        merge_sort(a_list[mid:], merge_ft))
     else:
         return a_list
 
@@ -108,14 +108,14 @@ def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('By merge sort with divide and conquer algortihm:')
-    print(merge_sort_dc(a_list, merge_ft=merge_recur))
+    print(merge_sort(a_list, merge_ft=merge_recur))
     print('Run time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('By merge sort with iterative algortihm:')
-    print(merge_sort_dc(a_list, merge_ft=merge_iter))
+    print(merge_sort(a_list, merge_ft=merge_iter))
     print('Run time: {}'.format(time.time() - start_time))
 
 if __name__ == '__main__':
