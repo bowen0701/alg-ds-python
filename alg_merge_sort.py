@@ -83,9 +83,9 @@ def merge_sort(a_list, merge_ft=merge_iter):
       a_list: A list. List to sort.
       merge_ft: A function. Default: merge_iter.
         - if merge_ft = merge_recur: 
-          Merge two sorted lists by recursion.
+          Merge two sorted lists by recursion: merge_recur().
         - if merge_ft = merge_iter: 
-          Merge two sorted lists by iteration.
+          Merge two sorted lists by iteration: merge_iter().
     """
     if len(a_list) > 1:
         mid = len(a_list) // 2
