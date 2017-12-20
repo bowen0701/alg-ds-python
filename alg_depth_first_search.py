@@ -9,24 +9,21 @@ def dfs_stack():
 
 
 def _previsit(v, previsit_d, ccnum_d, clock, ccid):
-    """Previsit method for _dfs_explore()."""
+    """Previsit method."""
     clock += 1
     previsit_d[v] = clock
     ccnum_d[v] = ccid
     return previsit_d, clock
 
 def _postvisit(v, postvisit_d, clock):
-    """Postvisit method for _dfs_explore()."""
+    """Postvisit method."""
     clock += 1
     postvisit_d[v] = clock
     return postvisit_d, clock
 
 def _dfs_explore(v, graph_adj_d, visited_d, 
                  previsit_d, postvisit_d, ccnum_d, clock, ccid):
-    """Explore by depth first search by recursion.
-
-    Method for dfs().
-    """
+    """Explore method by depth first search by recursion."""
     visited_d[v] = True
     previsit_d, clock = _previsit(v, previsit_d, ccnum_d, clock, ccid)
 
