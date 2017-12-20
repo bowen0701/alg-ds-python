@@ -10,35 +10,39 @@ def dfs_stack():
 
 # TODO: Pass variables into helper functions.
 
-def _previsit(v):
+def _previsit(v, previsit_d, ccnum_d, clock):
     clock += 1
     previsit_d[v] = clock
     ccnum_d[v] = ccid
 
-def _postvisit(v):
+def _postvisit(v, postvisit_d, clock):
     clock += 1
     postvisit_d[v] = clock
 
-def _dfs_explore(v):
+def _dfs_explore(v, visited_d, previsit_d, postvisit_d, 
+                 ccnum_d, clock, ccid):
     visited_d[v] = True
-    _previsit(v)
+    _previsit(v, previsit_d, ccnum_d, clock)
     for neighbor_v in graph_adj_d[v]:
         if not visited_d[neighbor_v]:
-            _dfs_explore(neighbor_v)
-    _postvisit(v)
+            _dfs_explore(neighbor_v, visited_d, previsit_d, postvisit_d, 
+                         ccnum_d, clock, ccid)
+    _postvisit(v, postvisit_d, clock)
 
 def dfs(graph_adj_d):
     """Depth first search by recursion algorithm."""
     clock = 0
     ccid = 1
     previsit_d = {}
-    ccnum_d = {}
     postvisit_d = {}
+    ccnum_d = {}
     visited_d = {v: False for v in graph_adj_d.keys()}
 
     for v in graph_adj_d.keys():
         if not visited_d[v]:
-            _dfs_explore(v)
+            _dfs_explore(
+                v, visited_d, previsit_d, postvisit_d, 
+                ccnum_d, clock, ccid)
             ccid += 1
 
     print('previsit_d: {}'.format(previsit_d))
