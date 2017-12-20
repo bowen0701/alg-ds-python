@@ -8,41 +8,50 @@ def dfs_stack():
     pass
 
 
-# TODO: Pass variables into helper functions.
-
-def _previsit(v, previsit_d, ccnum_d, clock):
+def _previsit(v, previsit_d, ccnum_d, clock, ccid):
+    """Previsit method for _dfs_explore()."""
     clock += 1
     previsit_d[v] = clock
     ccnum_d[v] = ccid
+    return previsit_d, clock
 
 def _postvisit(v, postvisit_d, clock):
+    """Postvisit method for _dfs_explore()."""
     clock += 1
     postvisit_d[v] = clock
+    return postvisit_d, clock
 
-def _dfs_explore(v, visited_d, previsit_d, postvisit_d, 
-                 ccnum_d, clock, ccid):
+def _dfs_explore(v, graph_adj_d, visited_d, 
+                 previsit_d, postvisit_d, ccnum_d, clock, ccid):
+    """Explore by depth first search by recursion.
+
+    Method for dfs().
+    """
     visited_d[v] = True
-    _previsit(v, previsit_d, ccnum_d, clock)
-    for neighbor_v in graph_adj_d[v]:
-        if not visited_d[neighbor_v]:
-            _dfs_explore(neighbor_v, visited_d, previsit_d, postvisit_d, 
-                         ccnum_d, clock, ccid)
-    _postvisit(v, postvisit_d, clock)
+    previsit_d, clock = _previsit(v, previsit_d, ccnum_d, clock, ccid)
+
+    for v_neighbor in graph_adj_d[v]:
+        if not visited_d[v_neighbor]:
+            visited_d, previsit_d, postvisit_d, ccnum_d, clock = (
+                _dfs_explore(v_neighbor, graph_adj_d, visited_d, 
+                             previsit_d, postvisit_d, ccnum_d, clock, ccid))
+    
+    postvisit_d, clock = _postvisit(v, postvisit_d, clock)
+    return visited_d, previsit_d, postvisit_d, ccnum_d, clock
 
 def dfs(graph_adj_d):
     """Depth first search by recursion algorithm."""
+    visited_d = {v: False for v in graph_adj_d.keys()}
     clock = 0
     ccid = 1
     previsit_d = {}
     postvisit_d = {}
     ccnum_d = {}
-    visited_d = {v: False for v in graph_adj_d.keys()}
 
     for v in graph_adj_d.keys():
         if not visited_d[v]:
-            _dfs_explore(
-                v, visited_d, previsit_d, postvisit_d, 
-                ccnum_d, clock, ccid)
+            _dfs_explore(v, graph_adj_d, visited_d, 
+                         previsit_d, postvisit_d, ccnum_d, clock, ccid)
             ccid += 1
 
     print('previsit_d: {}'.format(previsit_d))
