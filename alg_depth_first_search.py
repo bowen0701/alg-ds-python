@@ -37,7 +37,16 @@ def _dfs_explore(v, graph_adj_d, visited_d,
     return visited_d, previsit_d, postvisit_d, ccnum_d, clock
 
 def dfs(graph_adj_d):
-    """Depth first search by recursion algorithm."""
+    """Depth first search by recursion algorithm.
+
+    Args:
+      graph_adj_d: A dict. Graph adjacency dictionary.
+
+    Returns:
+      previsit_d: A dict. Previsit time clock.
+      postvisit_d: A dict. Postvisit time clock.
+      ccnum_d: A dict. Connected component number.
+    """
     visited_d = {v: False for v in graph_adj_d.keys()}
     clock = 0
     ccid = 1
@@ -51,9 +60,7 @@ def dfs(graph_adj_d):
                          previsit_d, postvisit_d, ccnum_d, clock, ccid)
             ccid += 1
 
-    print('previsit_d: {}'.format(previsit_d))
-    print('postvisit_d: {}'.format(postvisit_d))
-    print('ccnum_d: {}'.format(ccnum_d))
+    return previsit_d, postvisit_d, ccnum_d
 
 
 def main():
@@ -68,7 +75,10 @@ def main():
     }
     print('Graph:\n{}'.format(graph_adj_d))
 
-    dfs(graph_adj_d)
+    previsit_d, postvisit_d, ccnum_d = dfs(graph_adj_d)
+    print('previsit_d: {}'.format(previsit_d))
+    print('postvisit_d: {}'.format(postvisit_d))
+    print('ccnum_d: {}'.format(ccnum_d))
 
 if __name__ == '__main__':
     main()
