@@ -12,8 +12,8 @@ def _postvisit():
 def _dfs_explore():
     pass
 
-def checl_dag():
-    """Check DAG."""
+def check_dag():
+    """Check Directed Acyclic Graph (DAG)."""
     pass
 
 
