@@ -23,7 +23,7 @@ def topological_sort():
 
 def main():
     # DAG.
-    dag_adjacency_dict = {
+    dag_adj_d = {
         'A': ['D'],
         'B': ['D'],
         'C': ['D'],
