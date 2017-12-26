@@ -18,7 +18,7 @@ def check_dag():
 
 
 def main():
-    # DAG.
+    # Graph adjacency dictionary for DAG.
     dag_adj_d = {
         'A': ['D'],
         'B': ['D'],
@@ -29,6 +29,19 @@ def main():
         'G': ['I'],
         'I': ['J'],
         'J': []
+    }
+
+    # Graph adjacency dictionary for non-DAG.
+    nondag_adj_d = {
+        'A': ['B'],
+        'B': ['C', 'E'],
+        'C': ['C', 'F'],
+        'D': ['B', 'G'],
+        'E': ['A', 'D'],
+        'F': ['H'],
+        'G': ['E'],
+        'H': ['I'],
+        'I': ['F']
     }
 
 if __name__ == '__main__':
