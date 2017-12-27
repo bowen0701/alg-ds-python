@@ -56,8 +56,9 @@ def dfs(graph_adj_d):
 
     for v in graph_adj_d.keys():
         if not visited_d[v]:
+            visited_d, previsit_d, postvisit_d, ccnum_d, clock = (
             _dfs_explore(v, graph_adj_d, visited_d, 
-                         previsit_d, postvisit_d, ccnum_d, clock, ccid)
+                         previsit_d, postvisit_d, ccnum_d, clock, ccid))
             ccid += 1
 
     return previsit_d, postvisit_d, ccnum_d
