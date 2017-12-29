@@ -19,10 +19,10 @@ def _dfs_explore(v, graph_adj_d, visited_d,
     previsited_d, clock = _previsit(v, previsited_d, clock)
     for v_neighbor in graph_adj_d[v]:
         print('{0} -> {1}'.format(v, v_neighbor))
-        if (visited_d[v_neighbor] and
-            previsited_d[v] > previsited_d[v_neighbor] and 
-            not v_neighbor in postvisited_d):
-            dag_bool = False
+        if (visited_d[v_neighbor]):
+            if (previsited_d[v] > previsited_d[v_neighbor] and 
+                not v_neighbor in postvisited_d):
+                dag_bool = False
         if not visited_d[v_neighbor]:
             previsited_d, postvisited_d, clock, dag_bool = (
                 _dfs_explore(v_neighbor, graph_adj_d, visited_d, 
@@ -40,8 +40,8 @@ def check_dag(graph_adj_d):
     for v in graph_adj_d.keys():
         if not visited_d[v] and dag_bool:
             previsited_d, postvisited_d, clock, dag_bool = (
-            _dfs_explore(v, graph_adj_d, visited_d, 
-                         previsited_d, postvisited_d, clock, dag_bool))
+                _dfs_explore(v, graph_adj_d, visited_d, 
+                             previsited_d, postvisited_d, clock, dag_bool))
     return dag_bool
 
 
