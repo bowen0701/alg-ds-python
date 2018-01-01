@@ -4,6 +4,17 @@ from __future__ import division
 
 
 def strongly_connected_components():
+    """Strongly connected components for graph.
+
+    Procedure:
+      - Call (Depth First Search) DFS on graph G to 
+        compute finish times for each vertex.
+      - Compute the transpose graph G^T of graph G.
+      - Call DFS on G^T, but in the main loop of DFS,
+        feed the vertex in the decreasing order of finish times.
+      - Outpu the vertices of each tree in the DFS forest as
+        separate strongly connected components.
+    """
     pass
 
 
