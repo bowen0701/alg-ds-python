@@ -3,22 +3,6 @@ from __future__ import print_function
 from __future__ import division
 
 
-# def _select_pivot_value(a_list, first, last):
-#     """Select pivot value by median of three."""
-#     first_value = a_list[first]
-#     last_value = a_list[last]
-#     middle = (first + last) // 2
-#     middle_value = a_list[middle]
-#     if ((first_value < middle_value < last_value) or 
-#         (last_value < middle_value < first_value)):
-#         return middle
-#     elif ((middle_value < first_value < last_value) or
-#           (last_value < first_value < middle_value)):
-#         return first
-#     else:
-#         return last
-
-
 def _partition(a_list, first, last):
     """Get split point for patition."""
     # pivot_pos = _select_pivot_value(a_list, first, last)
