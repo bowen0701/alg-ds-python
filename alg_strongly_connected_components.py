@@ -19,7 +19,7 @@ def _transpose_graph():
     pass
 
 
-def _inverse_postvisit_vertex():
+def _decrease_postvisit_vertex():
     pass
 
 
