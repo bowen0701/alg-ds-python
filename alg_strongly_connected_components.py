@@ -11,6 +11,10 @@ def _postvisit():
     pass
 
 
+def _dfs_explore():
+    pass
+
+
 def dfs():
     pass
 
@@ -32,10 +36,19 @@ def strongly_connected_components():
       - Compute the transpose graph G^T of graph G.
       - Call DFS on G^T, but in the main loop of DFS,
         feed the vertex in the decreasing order of postvisit times.
-      - Outpu the vertices of each tree in the DFS forest as
+      - Output the vertices of each tree in the DFS forest as
         separate strongly connected components.
     """
-    pass
+    previsited_d, postvisited_d = dfs(graph_adj_d)
+    tr_graph_adj_d = _transpose_graph(graph_adj_d)
+    dec_postvisited_ls = _decrease_postvisit_vertex(postvisited_d)
+    visited_d = {v: False for v in tr_graph_adj_d}
+    sccid_d = {}
+    sccid = 0
+    for v in dec_postvisited_ls:
+        visited_d, sccid_d = _dfs_explore(tr_graph_adj_d, visited_d, sccid_d)
+        sccid += 1
+    return sccid_d
 
 
 def main():
