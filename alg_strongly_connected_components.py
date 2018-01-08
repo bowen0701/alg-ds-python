@@ -11,8 +11,16 @@ def _postvisit(v, postvisited_d, clock):
     pass
 
 
-def _dfs_explore(v, graph_adj_d, previsited_d, postvisited_d, clock):
-    pass
+def _dfs_explore(v, graph_adj_d, visited_d, 
+                 previsited_d, postvisited_d, clock):
+    previsited_d, clock = _previsit(v, previsited_d, clock)
+    for v_neighbor in graph_adj_d[v]:
+        if not visited_d[v_neighbor]:
+            visited_d, previsited_d, postvisited_d, clock = (
+                _dfs_explore(v_neighbor, graph_adj_d, visited_d,
+                             previsited_d, postvisited_d, clock))
+    postvisited_d, clock = _postvisit(v, postvisited_d, clock)
+    return visited_d, previsited_d, postvisited_d, clock
 
 
 def dfs(graph_adj_d):
