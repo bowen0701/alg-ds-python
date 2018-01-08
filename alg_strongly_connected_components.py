@@ -3,20 +3,29 @@ from __future__ import print_function
 from __future__ import division
 
 
-def _previsit():
+def _previsit(v, previsited_d, clock):
     pass
 
 
-def _postvisit():
+def _postvisit(v, postvisited_d, clock):
     pass
 
 
-def _dfs_explore():
+def _dfs_explore(v, graph_adj_d, previsited_d, postvisited_d, clock):
     pass
 
 
-def dfs():
-    pass
+def dfs(graph_adj_d):
+    visited_d = {v: False for v in graph_adj_d.keys()}
+    previsited_d = {}
+    postvisited_d = {}
+    clock = 0
+    for v in graph_adj_d.keys():
+        if not visited_d[v]:
+            visited_d, previsited, postvisited_d, clock = (
+                _dfs_explore(v, graph_adj_d, visited_d, 
+                             previsited_d, postvisited_d, clock))
+    return previsited_d, postvisited_d
 
 
 def _transpose_graph():
