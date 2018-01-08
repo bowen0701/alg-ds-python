@@ -4,11 +4,15 @@ from __future__ import division
 
 
 def _previsit(v, previsited_d, clock):
-    pass
+    clock += 1
+    previsited_d[v] = clock
+    return previsited_d, clock
 
 
 def _postvisit(v, postvisited_d, clock):
-    pass
+    clock += 1
+    postvisited_d[v] = clock
+    return postvisited_d, clock
 
 
 def _dfs_explore(v, graph_adj_d, visited_d, 
