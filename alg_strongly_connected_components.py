@@ -44,8 +44,8 @@ def _transpose_graph(graph_adj_d):
     tr_graph_adj_d = {v: [] for v in graph_adj_d.keys()}
     for v in graph_adj_d.keys():
         for v_neighbor in graph_adj_d[v]:
-            # TODO: Transpose graph.
-            pass
+            tr_graph_adj_d[v_neighbor].append(v)
+    return tr_graph_adj_d
 
 
 def _decrease_postvisit_vertex():
@@ -78,7 +78,7 @@ def strongly_connected_components():
 
 def main():
     # 3 strongly connected graphs: {A, B, D, E, G}, {C}, {F, H, I}.
-    adj_dict = {
+    graph_adj_d = {
         'A': ['B'],
         'B': ['C', 'E'],
         'C': ['C', 'F'],
@@ -90,7 +90,8 @@ def main():
         'I': ['F']
     }
 
-    strongly_connected_components(adj_dict)
+    # print(_transpose_graph(graph_adj_d))
+    # strongly_connected_components(adj_dict)
 
 if __name__ == '__main__':
     main()
