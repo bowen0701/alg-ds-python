@@ -40,8 +40,12 @@ def dfs(graph_adj_d):
     return previsited_d, postvisited_d
 
 
-def _transpose_graph():
-    pass
+def _transpose_graph(graph_adj_d):
+    tr_graph_adj_d = {v: [] for v in graph_adj_d.keys()}
+    for v in graph_adj_d.keys():
+        for v_neighbor in graph_adj_d[v]:
+            # TODO: Transpose graph.
+            pass
 
 
 def _decrease_postvisit_vertex():
