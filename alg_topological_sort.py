@@ -8,10 +8,12 @@ def _previsit(v, previsited_d, clock):
     previsited_d[v] = clock
     return previsited_d, clock
 
+
 def _postvisit(v, postvisited_d, clock):
     clock += 1
     postvisited_d[v] = clock
     return postvisited_d, clock
+
 
 def _dfs_explore(v, dag_adj_d, visited_d,
                  previsited_d, postvisited_d, clock):
@@ -24,6 +26,13 @@ def _dfs_explore(v, dag_adj_d, visited_d,
                              previsited_d, postvisited_d, clock))
     postvisited_d, clock = _postvisit(v, postvisited_d, clock)
     return visited_d, previsited_d, postvisited_d, clock
+
+def _decrease_postvisit_vertices(postvisited_d):
+    tr_postvisited_d = {postvisited_d[k]: k for k in postvisited_d.keys()}
+    dec_postvisited_ls = []
+    for pv in reversed(sorted(tr_postvisited_d.keys())):
+        dec_postvisited_ls.append(tr_postvisited_d[pv])
+    return dec_postvisited_ls
 
 def topological_sort(dag_adj_d):
     """Topological Sorting for Directed Acyclic Graph (DAG).
@@ -40,11 +49,8 @@ def topological_sort(dag_adj_d):
             visited_d, previsited_d, postvisited_d, clock = (
                 _dfs_explore(v, dag_adj_d, visited_d,
                              previsited_d, postvisited_d, clock))
-    rev_postvisited_d = {postvisited_d[k]: k for k in postvisited_d.keys()}
-    topological_sort_ls = []
-    for v in reversed(sorted(rev_postvisited_d.keys())):
-        topological_sort_ls.append(rev_postvisited_d[v])
-    return topological_sort_ls
+    dec_postvisited_ls = _decrease_postvisit_vertices(postvisited_d) 
+    return dec_postvisited_ls
 
 
 def main():
@@ -57,9 +63,8 @@ def main():
         'E': ['F'],
         'F': []
     }
-
-    topological_sort_ls = topological_sort(dag_adj_d)
-    print(topological_sort_ls)
+    
+    print(topological_sort(dag_adj_d))
 
 if __name__ == '__main__':
     main()
