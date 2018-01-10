@@ -90,8 +90,7 @@ def main():
         'E': ['A', 'F'],
         'F': ['G'],
         'G': ['F', 'H'],
-        'H': ['H'],
-        'I': ['F']
+        'H': ['H']
     }
 
     # print(_transpose_graph(graph_adj_d))
