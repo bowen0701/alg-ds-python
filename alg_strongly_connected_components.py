@@ -48,8 +48,12 @@ def _transpose_graph(graph_adj_d):
     return tr_graph_adj_d
 
 
-def _decrease_postvisit_vertex():
-    pass
+def _decrease_postvisit_vertices(postvisited_d):
+    tr_postvisited_d = {postvisited_d[k]: k for k in postvisited_d.keys()}
+    dec_postvisited_ls = []
+    for pv in reversed(sorted(tr_postvisited_d.keys())):
+        dec_postvisited_ls.append(tr_postvisited_d[pv])
+    return dec_postvisited_ls
 
 
 def strongly_connected_components():
@@ -66,7 +70,7 @@ def strongly_connected_components():
     """
     previsited_d, postvisited_d = dfs(graph_adj_d)
     tr_graph_adj_d = _transpose_graph(graph_adj_d)
-    dec_postvisited_ls = _decrease_postvisit_vertex(postvisited_d)
+    dec_postvisited_ls = _decrease_postvisit_vertices(postvisited_d)
     visited_d = {v: False for v in tr_graph_adj_d}
     sccid_d = {}
     sccid = 0
