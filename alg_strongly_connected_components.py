@@ -81,16 +81,16 @@ def strongly_connected_components():
 
 
 def main():
-    # 3 strongly connected graphs: {A, B, D, E, G}, {C}, {F, H, I}.
+    # 4 strongly connected graphs: {A, B, E}, {C, D}, {F, G}, {H}.
     graph_adj_d = {
         'A': ['B'],
-        'B': ['C', 'E'],
-        'C': ['C', 'F'],
-        'D': ['B', 'G'],
-        'E': ['A', 'D'],
-        'F': ['H'],
-        'G': ['E'],
-        'H': ['I'],
+        'B': ['C', 'E', 'F'],
+        'C': ['D', 'G'],
+        'D': ['C', 'H'],
+        'E': ['A', 'F'],
+        'F': ['G'],
+        'G': ['F', 'H'],
+        'H': ['H'],
         'I': ['F']
     }
 
