@@ -3,11 +3,6 @@ from __future__ import print_function
 from __future__ import division
 
 
-def dfs_stack():
-    """Depth first search by iteration algorithm using stack."""
-    pass
-
-
 def _previsit(v, previsit_d, ccid_d, clock, ccid):
     """Previsit method."""
     clock += 1
@@ -15,11 +10,13 @@ def _previsit(v, previsit_d, ccid_d, clock, ccid):
     ccid_d[v] = ccid
     return previsit_d, clock
 
+
 def _postvisit(v, postvisit_d, clock):
     """Postvisit method."""
     clock += 1
     postvisit_d[v] = clock
     return postvisit_d, clock
+
 
 def _dfs_explore(v, graph_adj_d, visited_d, 
                  previsit_d, postvisit_d, ccid_d, clock, ccid):
@@ -34,7 +31,9 @@ def _dfs_explore(v, graph_adj_d, visited_d,
                              previsit_d, postvisit_d, ccid_d, clock, ccid))
     
     postvisit_d, clock = _postvisit(v, postvisit_d, clock)
+    
     return visited_d, previsit_d, postvisit_d, ccid_d, clock
+
 
 def dfs(graph_adj_d):
     """Depth first search by recursion algorithm.
@@ -80,6 +79,7 @@ def main():
     print('previsit_d: {}'.format(previsit_d))
     print('postvisit_d: {}'.format(postvisit_d))
     print('ccid_d: {}'.format(ccid_d))
+
 
 if __name__ == '__main__':
     main()
