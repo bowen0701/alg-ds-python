@@ -49,9 +49,9 @@ def dfs(graph_adj_d):
     """
     visited_d = {v: False for v in graph_adj_d.keys()}
     clock = 0
-    ccid = 1
     previsit_d = {}
     postvisit_d = {}
+    ccid = 1
     ccid_d = {}
 
     for v in graph_adj_d.keys():
