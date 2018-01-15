@@ -2,35 +2,14 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
-from ds_queue import Queue
 
-
-def bfs(adjacency_dict, start_vertex):
-    """Breadth First Search by Iteration using Queue."""
-    ls_queue = Queue()
-    ls_queue.enqueue([start_vertex])
-    visited_set = set([start_vertex])
-
-    while ls_queue.size() > 0:
-        path_ls = ls_queue.dequeue()
-        # Take the lastest vertex as the new starting one.
-        vertex = path_ls[-1]
-        yield vertex, path_ls
-        for neighbor_vertex in adjacency_dict[vertex]:
-            if neighbor_vertex not in visited_set:
-                ls_queue.enqueue(path_ls + [neighbor_vertex])
-                visited_set.add(neighbor_vertex)
-
-def traverse_bfs(adjacency_dict, start_vertex, end_vertex):
-    """Traverse graph by Breadth First Search by Iteration with Queue."""
-    for vertex, path_ls in bfs(adjacency_dict, start_vertex):
-        if vertex == end_vertex:
-            print(' -> '.join(path_ls))
+def bfs():
+    pass
 
 
 def main():
     # Small word ladder graph.
-    adjacency_dict = {
+    graph_adj_d = {
         'fool': {'cool', 'pool', 'foil', 'foul'},
         'foul': {'fool', 'foil'},
         'foil': {'fool', 'foul', 'fail'},
@@ -48,17 +27,6 @@ def main():
         'sage': {'sale', 'page'} 
     }
 
-    start_vertex = 'fool'
-    end_vertex = 'sage'
-    traverse_bfs(adjacency_dict, start_vertex, end_vertex)
-
-    start_vertex = 'fool'
-    end_vertex = 'pope'
-    traverse_bfs(adjacency_dict, start_vertex, end_vertex)
-
-    start_vertex = 'foul'
-    end_vertex = 'sage'
-    traverse_bfs(adjacency_dict, start_vertex, end_vertex)
 
 if __name__ == '__main__':
     main()
