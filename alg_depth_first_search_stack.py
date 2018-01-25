@@ -3,6 +3,9 @@ from __future__ import division
 from __future__ import print_function
 
 
+def _dfs_stack_explore():
+    pass
+
 def dfs_stack():
     """Depth first search by iteration algorithm using stack."""
     pass
