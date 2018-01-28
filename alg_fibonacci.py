@@ -32,7 +32,7 @@ def fibonacci_memo(n):
     fn_d = {}
     fn_d[0] = 0
     fn_d[1] = 1
-    for n in range(2, n):
+    for n in xrange(2, n + 1):
         fn_d[n] = fn_d[n - 1] + fn_d[n - 2]
     return fn_d[n]
 
