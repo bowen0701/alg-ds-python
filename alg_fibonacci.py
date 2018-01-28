@@ -11,6 +11,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
+
 def fibonacci_recur(n):
     """Get the nth number of Fibonacci series, Fn, by recursion.
 
@@ -36,6 +37,7 @@ def fibonacci_memo(n):
         fn_d[n] = fn_d[n - 1] + fn_d[n - 2]
     return fn_d[n]
 
+
 def fibonacci_dp(n):
     """Get the nth number of Fibonacci series by dynamic programming.
 
@@ -46,6 +48,14 @@ def fibonacci_dp(n):
     for _ in xrange(n):
         a, b = a + b, a
     return a
+
+
+def fibonacci_gen(n):
+    """Get the nth number of Fibonacci series by generator."""
+    a, b = 0, 1
+    for _ in xrange(n):
+        a, b = a + b, a
+        yield a
 
 
 def main():
@@ -65,6 +75,11 @@ def main():
     start_time = time.time()
     print('By dynamic programming: {}'.format(fibonacci_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By generator: {}'.format(list(fibonacci_gen(n))[-1]))
+    print('Time: {}'.format(time.time() - start_time))
+
 
 if __name__ == '__main__':
     main()
