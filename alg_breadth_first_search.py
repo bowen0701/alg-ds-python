@@ -37,12 +37,13 @@ def main():
         'page': ['pale', 'sage'],
         'sage': ['sale', 'page'] 
     }
-    print('Graph: {}'.format(graph_adj_d))
+    print('Graph:\n{}'.format(graph_adj_d))
 
     start_vertex = 'fool'
     print('Start vertex: {}'.format(start_vertex))
     distance_d = bfs(graph_adj_d, start_vertex)
-    print('By BFS, the distance dict is {}'.format(distance_d))
+    print('Using BFS with queue, the distance dict is\n{}'
+          .format(distance_d))
 
 
 if __name__ == '__main__':
