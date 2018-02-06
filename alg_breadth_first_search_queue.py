@@ -12,6 +12,7 @@ def bfs(graph_adj_d, start_vertex):
     while visit_queue:
         v_visit = visit_queue.pop()
         for v_neighbor in graph_adj_d[v_visit]:
+            # If v_neighbor is not visited.
             if np.isinf(distance_d[v_neighbor]):
                 visit_queue.insert(0, v_neighbor)
                 distance_d[v_neighbor] = distance_d[v_visit] + 1
