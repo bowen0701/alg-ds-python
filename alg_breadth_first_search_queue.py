@@ -5,6 +5,11 @@ from __future__ import division
 import numpy as np
 
 def bfs(graph_adj_d, start_vertex):
+    """Breadth First Search (BFS) algorithm by queue.
+
+    The BFS algorithm explores the part of graph that is 
+    reachable from a particular node `start_vertex`.
+    """
     visit_queue = []
     visit_queue.insert(0, start_vertex)
     distance_d = {v: np.inf for v in graph_adj_d.keys()}
