@@ -31,8 +31,7 @@ def dfs_stack(graph_adj_d):
     for v in graph_adj_d.keys():
         if not visited_d[v]:
             previsited_d = _dfs_stack_explore(
-                v, graph_adj_d, visited_d, 
-                previsited_d, clock)
+                v, graph_adj_d, visited_d, previsited_d, clock)
     return previsited_d
 
 
