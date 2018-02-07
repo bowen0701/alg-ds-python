@@ -11,6 +11,7 @@ def dijkstra(weighted_graph_d, start_vertex):
     """
     pass
 
+
 def main():
     weighted_graph_d = {
         'u': {'v': 2, 'w': 5, 'x': 1},
@@ -27,6 +28,7 @@ def main():
         weighted_graph_d, start_vertex)
     print('shortest_path_d: {}'.format(shortest_path_d))
     print('vertex_lookup_d: {}'.format(vertex_lookup_d))
+
 
 if __name__ == '__main__':
     main()
