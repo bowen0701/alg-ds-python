@@ -4,7 +4,7 @@ from __future__ import division
 
 
 def dijkstra(weighted_graph_d, start_vertex):
-    """Dijkstra algorithm for weighted graph.
+    """Dijkstra algorithm for "weighted" graph.
 
     Finds shortest path in a weighted graph from a particular node 
     to all vertices that are reachable from it.
