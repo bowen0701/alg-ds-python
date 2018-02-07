@@ -4,6 +4,7 @@ from __future__ import division
 
 from ds_binary_heap_tuple import BinaryHeap
 
+
 def dijkstra(weighted_graph_d, start_vertex):
     shortest_path_d = {
         vertex: float('inf') for vertex in weighted_graph_d
@@ -48,6 +49,7 @@ def main():
     shortest_path_d, vertex_lookup_d = dijkstra(weighted_graph_d, start_vertex)
     print('shortest_path_d: {}'.format(shortest_path_d))
     print('vertex_lookup_d: {}'.format(vertex_lookup_d))
+
 
 if __name__ == '__main__':
     main()
