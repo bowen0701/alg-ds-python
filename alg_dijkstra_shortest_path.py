@@ -2,6 +2,8 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
+import numpy as np
+
 
 def dijkstra(weighted_graph_d, start_vertex):
     """Dijkstra algorithm for "weighted" graph.
@@ -9,6 +11,11 @@ def dijkstra(weighted_graph_d, start_vertex):
     Finds shortest path in a weighted graph from a particular node 
     to all vertices that are reachable from it.
     """
+    distance_d = {v: np.inf for v in weighted_graph_d.keys()}
+    visited_d = {v: False for v in weighted_graph_d.keys()}
+    
+    distance_d[start_vertex] = 0
+    visited_d[visited_d] = True
     pass
 
 
