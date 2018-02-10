@@ -10,10 +10,10 @@ def bfs(graph_adj_d, start_vertex):
     Find shortest path from a particular node to 
     all vertices that are reachable from it.
     """
-    visit_queue = []
-    visit_queue.insert(0, start_vertex)
     distance_d = {v: np.inf for v in graph_adj_d.keys()}
     distance_d[start_vertex] = 0
+    visit_queue = []
+    visit_queue.insert(0, start_vertex)
     while visit_queue:
         v_visit = visit_queue.pop()
         for v_neighbor in graph_adj_d[v_visit]:
