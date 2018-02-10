@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
-from ds_binary_heap_tuple import BinaryHeap
+from ds_min_binary_heap_tuple_bak import MinBinaryHeap
 
 
 def dijkstra(weighted_graph_d, start_vertex):
@@ -15,7 +15,7 @@ def dijkstra(weighted_graph_d, start_vertex):
         (distance, vertex) for vertex, distance 
         in shortest_path_d.items()]
 
-    bh = BinaryHeap()
+    bh = MinBinaryHeap()
     bh.build_heap(distance_vertex_ls)
 
     vertex_lookup_d = {vertex: None for vertex in shortest_path_d.keys()}
