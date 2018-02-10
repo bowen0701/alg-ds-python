@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-class BinaryMinHeap(object):
+class MinBinaryHeap(object):
     """Binary Min Heap class."""
     def __init__(self):
         # Put single zero as the 1st element, so that 
@@ -73,14 +73,8 @@ class BinaryMinHeap(object):
             i -= 1
 
 
-class BinaryMaxHeap(object):
-    """BinaryMaxHeap class."""
-    def __init__(self):
-        pass
-        
-
 def main():
-    bh_min = BinaryMinHeap()
+    bh_min = MinBinaryHeap()
     bh_min.insert(5)
     print('Insert 5: {}'.format(bh_min.heap_ls))    
     bh_min.insert(9)
@@ -112,7 +106,7 @@ def main():
     print('Min: {}'.format(bh_min.delete_min()))
     print('Delete min: {}'.format(bh_min.heap_ls))
 
-    bh_min = BinaryMinHeap()
+    bh_min = MinBinaryHeap()
     bh_min.build_heap([9, 6, 5, 2, 3])
     print('Build heap: {}'.format(bh_min.heap_ls))
 
