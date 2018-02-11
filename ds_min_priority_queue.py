@@ -78,7 +78,7 @@ def main():
     min_pq.min_heap_insert(1)
     min_pq.heap_show()
 
-    # Increase key 4 to 15.
+    # Decrease key 8 to 2.
     min_pq.heap_decrease_key(9, 2)
     min_pq.heap_show()
 
