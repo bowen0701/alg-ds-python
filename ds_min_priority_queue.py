@@ -65,7 +65,7 @@ class MinPriorityQueue(object):
 def main():
     min_pq = MinPriorityQueue()
 
-    # Insert sequentially [16, 14, 10, 8, 7, 9, 3, 2, 1]
+    # Insert sequentially [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
     min_pq.min_heap_insert(16)
     min_pq.min_heap_insert(14)
     min_pq.min_heap_insert(10)
