@@ -77,6 +77,7 @@ class MinBinaryHeap(object):
 
 
 def main():
+    print('Binary heap:')
     bh_min = MinBinaryHeap()
     bh_min.insert(5)
     bh_min.insert(9)
@@ -88,8 +89,6 @@ def main():
     bh_min.insert(33)
     bh_min.insert(17)
     bh_min.insert(27)
-
-    print('Binary heap:')
     bh_min.heap_show()
 
     print('Find min: {}'.format(bh_min.find_min()))
