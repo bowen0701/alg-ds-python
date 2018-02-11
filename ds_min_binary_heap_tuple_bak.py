@@ -8,6 +8,9 @@ class MinBinaryHeap(object):
         self.heap_ls = [(0, 0)]
         self.current_size = 0
 
+    def heap_show(self):
+        print(self.heap_ls)
+
     def _percolate_up(self, i):
         while i // 2 > 0:
             if self.heap_ls[i][0] < self.heap_ls[i // 2][0]:
@@ -94,15 +97,13 @@ class MinBinaryHeap(object):
 def main():
     bh_min = MinBinaryHeap()
     bh_min.insert((1, 'a'))
-    print('Insert (1, a): {}'.format(bh_min.heap_ls))    
     bh_min.insert((3, 'c'))
-    print('Insert (3, c): {}'.format(bh_min.heap_ls))
     bh_min.insert((4, 'b'))
-    print('Insert (4, b): {}'.format(bh_min.heap_ls))
     bh_min.insert((5, 'e'))
-    print('Insert (5, e): {}'.format(bh_min.heap_ls))
     bh_min.insert((2, 'd'))
-    print('Insert (2, d): {}'.format(bh_min.heap_ls))
+
+    print('Binary heap tuple:')
+    bh_min.heap_show()
 
     print('Find min: {}'.format(bh_min.find_min()))
     print('Is empty? {}'.format(bh_min.is_empty()))
