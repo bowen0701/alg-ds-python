@@ -32,6 +32,9 @@ class MinPriorityQueue(object):
     			self.heap_ls[minimum], self.heap_ls[i])
     		min_heapify(self, minimum)
 
+    def heap_show(self):
+    	print(self.heap_ls)
+
     def heap_min(self):
     	return self.heap_ls[1]
 
