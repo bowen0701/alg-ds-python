@@ -95,14 +95,13 @@ class MinBinaryHeap(object):
 
 
 def main():
+    print('Binary heap tuple:')
     bh_min = MinBinaryHeap()
     bh_min.insert((1, 'a'))
     bh_min.insert((3, 'c'))
     bh_min.insert((4, 'b'))
     bh_min.insert((5, 'e'))
     bh_min.insert((2, 'd'))
-
-    print('Binary heap tuple:')
     bh_min.heap_show()
 
     print('Find min: {}'.format(bh_min.find_min()))
