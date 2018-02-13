@@ -28,13 +28,13 @@ class MinPriorityQueue(object):
         l = left(i)
         r = right(i)
         if l <= self.heap_size and self.heap_ls[l] < self.heap_ls[i]:
-            minimum = l
+            min_i = l
         if r <= self.heap_size and self.heap_ls[r] < self.heap_ls[minimum]:
-            minimum = r
-        if minimum != i:
-            self.heap_ls[i], self.heap_ls[minimum] = (
-                self.heap_ls[minimum], self.heap_ls[i])
-            self.min_heapify(minimum)
+            min_i = r
+        if min_i != i:
+            self.heap_ls[i], self.heap_ls[min_i] = (
+                self.heap_ls[min_i], self.heap_ls[i])
+            self.min_heapify(min_i)
 
     def heap_min(self):
         return self.heap_ls[1]
