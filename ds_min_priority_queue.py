@@ -31,7 +31,7 @@ class MinPriorityQueue(object):
         if minimum != i:
             self.heap_ls[i], self.heap_ls[minimum] = (
                 self.heap_ls[minimum], self.heap_ls[i])
-            min_heapify(self, minimum)
+            self.min_heapify(minimum)
 
     def heap_show(self):
         print(self.heap_ls)
@@ -44,7 +44,7 @@ class MinPriorityQueue(object):
             raise ValueError('Heap underflow.')
         minimum = self.heap_ls[1]
         self.heap_ls[1] = self.heap_ls[self.heap_size]
-        min_heapify(self, 1)
+        self.min_heapify(1)
         return minimum
 
     def heap_decrease_key(self, i, key):
