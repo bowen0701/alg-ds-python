@@ -32,8 +32,18 @@ class MaxPriorityQueue(object):
 				self.heap_ls[max_i], self.heap_ls[i])
 			self.max_heapify(max_i)
 
-    # TODO: heap_max(), heap_extract_max(), heap_increase_key(), 
-    # and max_heap_insert(). 
+    def heap_max(self):
+        return self.heap_ls[1]
+
+    def heap_extract_max(self):
+        if self.heap_size < 1:
+            raise ValueError('Heap underflow.')
+        maximum = self.heap_ls[1]
+        self.heap_ls[1] = self.heap_ls[self.heap_size]
+        self.max_heapify(1)
+        return maximum
+
+    # TODO: heap_increase_key(), and max_heap_insert(). 
 
 
 def main():
