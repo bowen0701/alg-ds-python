@@ -43,7 +43,14 @@ class MaxPriorityQueue(object):
         self.max_heapify(1)
         return maximum
 
-    # TODO: heap_increase_key(), and max_heap_insert(). 
+    def heap_increase_key(self, i, key):
+        if key < self.heap_ls[i]:
+            raise ValueError('New key is smaller than current key.')
+        self.heap_ls[i] = key
+        while i > 1 and self.heap_ls[parent(i)] < self.heap_ls[i]:
+            self.heap_ls[i], self.heap_ls[parent(i)] = (
+                self.heap_ls[parent(i)], self.heap_ls[i])
+            i = parent(i)
 
 
 def main():
