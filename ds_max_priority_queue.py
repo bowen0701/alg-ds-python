@@ -19,6 +19,9 @@ class MaxPriorityQueue(object):
 		self.heap_ls = [0]
 		self.heap_size = 0
 
+    def heap_show(self):
+		print(self.heap_ls)
+
 	def max_heapify(self, i):
 		l = left(i)
 		r = right(r)
