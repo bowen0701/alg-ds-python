@@ -66,49 +66,25 @@ def main():
     min_pq = MinPriorityQueue()
 
     # Insert sequentially [16, 14, 10, 8, 7, 9, 3, 2, 6, 1]
-    print('Insert 16')
-    min_pq.min_heap_insert(16)
-    min_pq.heap_show()
-
-    print('Insert 14')
-    min_pq.min_heap_insert(14)
-    min_pq.heap_show()
-
-    print('Insert 10')
-    min_pq.min_heap_insert(10)
-    min_pq.heap_show()
-
-    print('Insert 8')
-    min_pq.min_heap_insert(8)
+    print('Insert 5')
+    min_pq.min_heap_insert(5)
     min_pq.heap_show()
 
     print('Insert 7')
     min_pq.min_heap_insert(7)
     min_pq.heap_show()
 
-    print('Insert 9')
-    min_pq.min_heap_insert(9)
-    min_pq.heap_show()
-
     print('Insert 3')
     min_pq.min_heap_insert(3)
-    min_pq.heap_show()
-
-    print('Insert 2')
-    min_pq.min_heap_insert(2)
-    min_pq.heap_show()
-
-    print('Insert 4')
-    min_pq.min_heap_insert(4)
     min_pq.heap_show()
 
     print('Insert 1')
     min_pq.min_heap_insert(1)
     min_pq.heap_show()
 
-    # Decrease key 6 at position 9 to 2.
-    print('Decrease key 6 at position 9 to 2.')
-    min_pq.heap_decrease_key(9, 2)
+    # Decrease key 7 at position 4 to 2.
+    print('Decrease key 7 at position 4 to 2.')
+    min_pq.heap_decrease_key(4, 2)
     min_pq.heap_show()
 
 
