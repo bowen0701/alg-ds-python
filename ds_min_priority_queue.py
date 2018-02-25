@@ -21,7 +21,7 @@ class MinPriorityQueue(object):
         self.heap_ls = [0]
         self.heap_size = 0
 
-    def heap_show(self):
+    def show(self):
         print(self.heap_ls)
 
     def min_heapify(self, i):
@@ -36,10 +36,10 @@ class MinPriorityQueue(object):
                 self.heap_ls[min_i], self.heap_ls[i])
             self.min_heapify(min_i)
 
-    def heap_min(self):
+    def find_min(self):
         return self.heap_ls[1]
 
-    def heap_extract_min(self):
+    def extract_min(self):
         if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         minimum = self.heap_ls[1]
@@ -47,7 +47,7 @@ class MinPriorityQueue(object):
         self.min_heapify(1)
         return minimum
 
-    def heap_decrease_key(self, i, key):
+    def decrease_key(self, i, key):
         if key > self.heap_ls[i]:
             raise ValueError('New key is larger than current key.')
         self.heap_ls[i] = key
@@ -56,10 +56,10 @@ class MinPriorityQueue(object):
                 self.heap_ls[parent(i)], self.heap_ls[i])
             i = parent(i)
 
-    def min_heap_insert(self, key):
+    def insert(self, key):
         self.heap_size += 1
         self.heap_ls.append(np.inf)
-        self.heap_decrease_key(self.heap_size, key)
+        self.decrease_key(self.heap_size, key)
 
 
 def main():
@@ -67,25 +67,25 @@ def main():
 
     # Insert sequentially [16, 14, 10, 8, 7, 9, 3, 2, 6, 1]
     print('Insert 5')
-    min_pq.min_heap_insert(5)
-    min_pq.heap_show()
+    min_pq.insert(5)
+    min_pq.show()
 
     print('Insert 7')
-    min_pq.min_heap_insert(7)
-    min_pq.heap_show()
+    min_pq.insert(7)
+    min_pq.show()
 
     print('Insert 3')
-    min_pq.min_heap_insert(3)
-    min_pq.heap_show()
+    min_pq.insert(3)
+    min_pq.show()
 
     print('Insert 1')
-    min_pq.min_heap_insert(1)
-    min_pq.heap_show()
+    min_pq.insert(1)
+    min_pq.show()
 
     # Decrease key 7 at position 4 to 2.
     print('Decrease key 7 at position 4 to 2.')
-    min_pq.heap_decrease_key(4, 2)
-    min_pq.heap_show()
+    min_pq.decrease_key(4, 2)
+    min_pq.show()
 
 
 if __name__ == '__main__':
