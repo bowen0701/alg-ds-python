@@ -21,7 +21,7 @@ class MaxPriorityQueue(object):
         self.heap_ls = [0]
         self.heap_size = 0
 
-    def heap_show(self):
+    def show(self):
         print(self.heap_ls)
 
     def max_heapify(self, i):
@@ -37,10 +37,10 @@ class MaxPriorityQueue(object):
                 self.heap_ls[max_i], self.heap_ls[i])
             self.max_heapify(max_i)
 
-    def heap_max(self):
+    def find_max(self):
         return self.heap_ls[1]
 
-    def heap_extract_max(self):
+    def extract_max(self):
         if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         maximum = self.heap_ls[1]
@@ -48,7 +48,7 @@ class MaxPriorityQueue(object):
         self.max_heapify(1)
         return maximum
 
-    def heap_increase_key(self, i, key):
+    def increase_key(self, i, key):
         if key < self.heap_ls[i]:
             raise ValueError('New key is smaller than current key.')
         self.heap_ls[i] = key
@@ -57,10 +57,10 @@ class MaxPriorityQueue(object):
                 self.heap_ls[parent(i)], self.heap_ls[i])
             i = parent(i)
 
-    def max_heap_insert(self, key):
+    def insert(self, key):
         self.heap_size += 1
         self.heap_ls.append(-np.inf)
-        self.heap_increase_key(self.heap_size, key)
+        self.increase_key(self.heap_size, key)
 
 
 def main():
@@ -68,49 +68,49 @@ def main():
 
     # Insert sequentially [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
     print('Insert 16')
-    max_pq.max_heap_insert(16)
-    max_pq.heap_show()
+    max_pq.insert(16)
+    max_pq.show()
 
     print('Insert 14')
-    max_pq.max_heap_insert(14)
-    max_pq.heap_show()
+    max_pq.insert(14)
+    max_pq.show()
 
     print('Insert 10')
-    max_pq.max_heap_insert(10)
-    max_pq.heap_show()
+    max_pq.insert(10)
+    max_pq.show()
 
     print('Insert 8')
-    max_pq.max_heap_insert(8)
-    max_pq.heap_show()
+    max_pq.insert(8)
+    max_pq.show()
 
     print('Insert 7')
-    max_pq.max_heap_insert(7)
-    max_pq.heap_show()
+    max_pq.insert(7)
+    max_pq.show()
 
     print('Insert 9')
-    max_pq.max_heap_insert(9)
-    max_pq.heap_show()
+    max_pq.insert(9)
+    max_pq.show()
 
     print('Insert 3')
-    max_pq.max_heap_insert(3)
-    max_pq.heap_show()
+    max_pq.insert(3)
+    max_pq.show()
 
     print('Insert 2')
-    max_pq.max_heap_insert(2)
-    max_pq.heap_show()
+    max_pq.insert(2)
+    max_pq.show()
 
     print('Insert 4')
-    max_pq.max_heap_insert(4)
-    max_pq.heap_show()
+    max_pq.insert(4)
+    max_pq.show()
 
     print('Insert 1')
-    max_pq.max_heap_insert(1)
-    max_pq.heap_show()
+    max_pq.insert(1)
+    max_pq.show()
 
     # Increase key 4 at position 9 to 15.
     print('Increase key 4 at position 9 to 15.')
-    max_pq.heap_increase_key(9, 15)
-    max_pq.heap_show()
+    max_pq.increase_key(9, 15)
+    max_pq.show()
 
 
 if __name__ == '__main__':
