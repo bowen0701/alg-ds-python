@@ -11,7 +11,7 @@ class MinBinaryHeap(object):
         self.heap_ls = [0]
         self.current_size = 0
 
-    def heap_show(self):
+    def show(self):
         print(self.heap_ls)
 
     def _percolate_up(self, i):
@@ -89,7 +89,7 @@ def main():
     bh_min.insert(33)
     bh_min.insert(17)
     bh_min.insert(27)
-    bh_min.heap_show()
+    bh_min.show()
 
     print('Find min: {}'.format(bh_min.find_min()))
     print('Is empty? {}'.format(bh_min.is_empty()))
