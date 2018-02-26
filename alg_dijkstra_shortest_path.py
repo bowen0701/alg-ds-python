@@ -23,7 +23,15 @@ def dijkstra(weighted_graph_d, start_vertex):
     distance_d[start_vertex] = 0
     visited_d[start_vertex] = True
 
-    pass
+    while min_pq.size > 0:
+        v = min_pq.extract_min()
+        visited_d[v] = True
+
+        for v_neighbor in weighted_graph_d[v].keys():
+            if (not visited_d[v_neighbor] and 
+                distance_d[v_neighbor] > 
+                    distance_d[v] + weighted_graph_d[v][v_neighbor]):
+                pass
 
 
 def main():
