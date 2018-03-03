@@ -18,7 +18,7 @@ def right(i):
 class MinPriorityQueue(object):
     """Min Priority Queue."""
     def __init__(self):
-        self.heap_ls = [0]
+        self.heap_ls = [(0, 0)]
         self.heap_size = 0
 
     def show(self):
@@ -27,13 +27,13 @@ class MinPriorityQueue(object):
     def min_heapify(self, i):
         l = left(i)
         r = right(i)
-        if l <= self.heap_size and self.heap_ls[l] < self.heap_ls[i]:
+        if l <= self.heap_size and self.heap_ls[l][0] < self.heap_ls[i][0]:
             min_i = l
-        if r <= self.heap_size and self.heap_ls[r] < self.heap_ls[minimum]:
+        if r <= self.heap_size and self.heap_ls[r][0] < self.heap_ls[minimum][0]:
             min_i = r
         if min_i != i:
-            self.heap_ls[i], self.heap_ls[min_i] = (
-                self.heap_ls[min_i], self.heap_ls[i])
+            self.heap_ls[i][1], self.heap_ls[min_i][1] = (
+                self.heap_ls[min_i][1], self.heap_ls[i][1])
             self.min_heapify(min_i)
 
     def find_min(self):
@@ -43,10 +43,12 @@ class MinPriorityQueue(object):
         if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         minimum = self.heap_ls[1]
-        self.heap_ls[1] = self.heap_ls[self.heap_size]
+        self.heap_ls[1] = self.heap_ls.pop()
+        self.heap_size -= 1
         self.min_heapify(1)
         return minimum
 
+    # TODO.
     def decrease_key(self, i, key):
         if key > self.heap_ls[i]:
             raise ValueError('New key is larger than current key.')
