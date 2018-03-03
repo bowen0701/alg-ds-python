@@ -29,7 +29,9 @@ class MinPriorityQueue(object):
         r = right(i)
         if l <= self.heap_size and self.heap_ls[l] < self.heap_ls[i]:
             min_i = l
-        if r <= self.heap_size and self.heap_ls[r] < self.heap_ls[minimum]:
+        else:
+            min_i = i
+        if r <= self.heap_size and self.heap_ls[r] < self.heap_ls[min_i]:
             min_i = r
         if min_i != i:
             self.heap_ls[i], self.heap_ls[min_i] = (
@@ -88,6 +90,11 @@ def main():
     min_pq.decrease_key(4, 2)
     min_pq.show()
 
+    print('Extract min.')
+    _min = min_pq.extract_min()
+    print('Min: {}'.format(_min))
+    print('The remaining:')
+    min_pq.show()
 
 if __name__ == '__main__':
     main()
