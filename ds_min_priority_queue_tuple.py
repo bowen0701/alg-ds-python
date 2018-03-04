@@ -50,27 +50,26 @@ class MinPriorityQueue(object):
         self.min_heapify(1)
         return minimum
 
-    # TODO.
     def decrease_key(self, i, key):
-        if key > self.heap_ls[i]:
+        if key > self.heap_ls[i][0]:
             raise ValueError('New key is larger than current key.')
-        self.heap_ls[i] = key
-        while i > 1 and self.heap_ls[parent(i)] > self.heap_ls[i]:
-            self.heap_ls[i], self.heap_ls[parent(i)] = (
-                self.heap_ls[parent(i)], self.heap_ls[i])
+        self.heap_ls[i][0] = key
+        while i > 1 and self.heap_ls[parent(i)][0] > self.heap_ls[i][0]:
+            self.heap_ls[i][1], self.heap_ls[parent(i)][1] = (
+                self.heap_ls[parent(i)][1], self.heap_ls[i][1])
             i = parent(i)
 
     def insert(self, key):
         self.heap_size += 1
-        self.heap_ls.append(np.inf)
+        self.heap_ls.append((np.inf, key))
         self.decrease_key(self.heap_size, key)
 
 
 def main():
     min_pq = MinPriorityQueue()
 
-    # Insert sequentially 5, 7, 3, 1.
-    print('Insert 5')
+    # TODO: Insert sequentially ....
+    print('Insert 5, ')
     min_pq.insert(5)
     min_pq.show()
 
