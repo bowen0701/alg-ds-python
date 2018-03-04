@@ -69,7 +69,7 @@ class MinPriorityQueue(object):
 def main():
     min_pq = MinPriorityQueue()
 
-    # Insert sequentially [16, 14, 10, 8, 7, 9, 3, 2, 6, 1]
+    # Insert sequentially 5, 7, 3, 1.
     print('Insert 5')
     min_pq.insert(5)
     min_pq.show()
