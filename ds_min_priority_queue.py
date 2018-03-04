@@ -68,28 +68,20 @@ class MinPriorityQueue(object):
 def main():
     min_pq = MinPriorityQueue()
 
-    # Insert sequentially 5, 7, 3, 1.
-    print('Insert 5, 7, 3, 1')
+    print('Insert sequentially 5, 7, 3, 1')
     min_pq.insert(5)
-    min_pq.show()
-
     min_pq.insert(7)
-    min_pq.show()
-
     min_pq.insert(3)
-    min_pq.show()
-
     min_pq.insert(1)
     min_pq.show()
 
-    # Decrease key 7 at position 4 to 2.
     print('Decrease key 7 at position 4 to 2.')
     min_pq.decrease_key(4, 2)
     min_pq.show()
 
-    print('Extract min.')
+    print('Extract min:')
     _min = min_pq.extract_min()
-    print('Min: {}'.format(_min))
+    print(_min)
     print('The remaining:')
     min_pq.show()
 
