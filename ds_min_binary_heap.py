@@ -77,7 +77,7 @@ class MinBinaryHeap(object):
 
 
 def main():
-    print('Binary heap:')
+    print('Insert 5, 9, 11, 14, 18, 19, 21, 33, 17, 27:')
     bh_min = MinBinaryHeap()
     bh_min.insert(5)
     bh_min.insert(9)
@@ -95,18 +95,20 @@ def main():
     print('Is empty? {}'.format(bh_min.is_empty()))
     print('Size? {}'.format(bh_min.size()))
 
+    print('Insert 7:')
     bh_min.insert(7)
-    print('Insert 7: {}'.format(bh_min.heap_ls))
+    bh_min.show()    
 
-    print('Min: {}'.format(bh_min.delete_min()))
-    print('Delete min: {}'.format(bh_min.heap_ls))
+    print('Delete min: {}'.format(bh_min.delete_min()))
+    bh_min.show()
 
+    print('Build heap with 9, 6, 5, 2, 3:')
     bh_min = MinBinaryHeap()
     bh_min.build_heap([9, 6, 5, 2, 3])
-    print('Build heap: {}'.format(bh_min.heap_ls))
+    bh_min.show()
 
-    print('9 in bh_min: {}'.format(9 in bh_min))
-    print('1 in bh_min: {}'.format(1 in bh_min))
+    print('9 in bh_min? {}'.format(9 in bh_min))
+    print('1 in bh_min? {}'.format(1 in bh_min))
 
 
 if __name__ == '__main__':
