@@ -79,6 +79,9 @@ def main():
     min_pq.decrease_key(4, 2)
     min_pq.show()
 
+    print('Find min:')
+    print(min_pq.find_min())
+
     print('Extract min:')
     _min = min_pq.extract_min()
     print(_min)
