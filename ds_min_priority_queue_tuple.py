@@ -18,7 +18,7 @@ def right(i):
 class MinPriorityQueue(object):
     """Min Priority Queue."""
     def __init__(self):
-        self.heap_ls = [(0, 0)]
+        self.heap_ls = [[0, 0]]
         self.heap_size = 0
 
     def show(self):
@@ -59,34 +59,25 @@ class MinPriorityQueue(object):
                 self.heap_ls[parent(i)][1], self.heap_ls[i][1])
             i = parent(i)
 
-    def insert(self, key):
+    def insert(self, new_node):
+        key, item = new_node
         self.heap_size += 1
-        self.heap_ls.append((np.inf, key))
+        self.heap_ls.append((np.inf, item))
         self.decrease_key(self.heap_size, key)
 
 
 def main():
+    print('Binary heap tuple with [1, a], [3, c]', 
+          '[4, b], [5, e], [2, d]:')
     min_pq = MinPriorityQueue()
-
-    # TODO: Insert sequentially ....
-    print('Insert 5, ')
-    min_pq.insert(5)
+    min_pq.insert([1, 'a'])
+    min_pq.insert([3, 'c'])
+    min_pq.insert([4, 'b'])
+    min_pq.insert([5, 'e'])
+    min_pq.insert([2, 'd'])
     min_pq.show()
 
-    print('Insert 7')
-    min_pq.insert(7)
-    min_pq.show()
-
-    print('Insert 3')
-    min_pq.insert(3)
-    min_pq.show()
-
-    print('Insert 1')
-    min_pq.insert(1)
-    min_pq.show()
-
-    # Decrease key 7 at position 4 to 2.
-    print('Decrease key 7 at position 4 to 2.')
+    print('Decrease key 5 at position 4 to 2.')
     min_pq.decrease_key(4, 2)
     min_pq.show()
 
