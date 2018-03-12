@@ -55,31 +55,34 @@ class MinPriorityQueue(object):
             raise ValueError('New key is larger than current key.')
         self.heap_ls[i][0] = key
         while i > 1 and self.heap_ls[parent(i)][0] > self.heap_ls[i][0]:
-            self.heap_ls[i][1], self.heap_ls[parent(i)][1] = (
-                self.heap_ls[parent(i)][1], self.heap_ls[i][1])
+            self.heap_ls[i], self.heap_ls[parent(i)] = (
+                self.heap_ls[parent(i)], self.heap_ls[i])
             i = parent(i)
 
     def insert(self, new_node):
         key, item = new_node
         self.heap_size += 1
-        self.heap_ls.append((np.inf, item))
+        self.heap_ls.append([np.inf, item])
         self.decrease_key(self.heap_size, key)
 
 
 def main():
-    print('Binary heap tuple with [1, a], [3, c]', 
-          '[4, b], [5, e], [2, d]:')
+    print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
     min_pq = MinPriorityQueue()
-    min_pq.insert([1, 'a'])
-    min_pq.insert([3, 'c'])
-    min_pq.insert([4, 'b'])
-    min_pq.insert([5, 'e'])
-    min_pq.insert([2, 'd'])
+    min_pq.insert([5, 'a'])
+    min_pq.insert([7, 'c'])
+    min_pq.insert([3, 'b'])
+    min_pq.insert([1, 'd'])
     min_pq.show()
 
     print('Decrease key 5 at position 4 to 2.')
     min_pq.decrease_key(4, 2)
     min_pq.show()
+
+    print('Find min key:')
+    print(min_pq.find_min())
+
+    # TODO: extract min key.
 
 
 if __name__ == '__main__':
