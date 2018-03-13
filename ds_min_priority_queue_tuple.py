@@ -82,7 +82,11 @@ def main():
     print('Find min key:')
     print(min_pq.find_min())
 
-    # TODO: extract min key.
+    print('Extract min key:')
+    _min = min_pq.extract_min()
+    print(_min)
+    print('The remaining:')
+    min_pq.show()
 
 
 if __name__ == '__main__':
