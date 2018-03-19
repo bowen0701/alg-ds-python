@@ -26,10 +26,11 @@ class MaxPriorityQueue(object):
 
     def max_heapify(self, i):
         l = left(i)
-        r = right(r)
-
+        r = right(i)
         if l <= self.heap_size and self.heap_ls[l] > self.heap_ls[i]:
             max_i = l
+        else:
+            max_i = i
         if r <= self.heap_size and self.heap_ls[r] > self.heap_ls[max_i]:
             max_i = r
         if max_i != i:
@@ -44,7 +45,8 @@ class MaxPriorityQueue(object):
         if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         maximum = self.heap_ls[1]
-        self.heap_ls[1] = self.heap_ls[self.heap_size]
+        self.heap_ls[1] = self.heap_ls.pop()
+        self.heap_size -= 1
         self.max_heapify(1)
         return maximum
 
@@ -66,52 +68,25 @@ class MaxPriorityQueue(object):
 def main():
     max_pq = MaxPriorityQueue()
 
-    # Insert sequentially [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
-    print('Insert 16')
-    max_pq.insert(16)
-    max_pq.show()
-
-    print('Insert 14')
-    max_pq.insert(14)
-    max_pq.show()
-
-    print('Insert 10')
-    max_pq.insert(10)
-    max_pq.show()
-
-    print('Insert 8')
-    max_pq.insert(8)
-    max_pq.show()
-
-    print('Insert 7')
+    print('Insert sequentially 5, 7, 3, 1')
+    max_pq.insert(5)
     max_pq.insert(7)
-    max_pq.show()
-
-    print('Insert 9')
-    max_pq.insert(9)
-    max_pq.show()
-
-    print('Insert 3')
     max_pq.insert(3)
-    max_pq.show()
-
-    print('Insert 2')
-    max_pq.insert(2)
-    max_pq.show()
-
-    print('Insert 4')
-    max_pq.insert(4)
-    max_pq.show()
-
-    print('Insert 1')
     max_pq.insert(1)
     max_pq.show()
 
-    # Increase key 4 at position 9 to 15.
-    print('Increase key 4 at position 9 to 15.')
-    max_pq.increase_key(9, 15)
+    print('Increase key 1 at position 4 to 6.')
+    max_pq.increase_key(4, 6)
     max_pq.show()
 
+    print('Find max:')
+    print(max_pq.find_max())
+
+    print('Extract max:')
+    _max = max_pq.extract_max()
+    print(_max)
+    print('The remaining:')
+    max_pq.show()
 
 if __name__ == '__main__':
     main()
