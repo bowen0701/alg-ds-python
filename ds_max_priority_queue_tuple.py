@@ -18,7 +18,7 @@ def right(i):
 class MaxPriorityQueue(object):
     """Max Priority Queue."""
     def __init__(self):
-        self.heap_ls = [0]
+        self.heap_ls = [[0, 0]]
         self.heap_size = 0
 
     def show(self):
@@ -27,11 +27,11 @@ class MaxPriorityQueue(object):
     def max_heapify(self, i):
         l = left(i)
         r = right(i)
-        if l <= self.heap_size and self.heap_ls[l] > self.heap_ls[i]:
+        if l <= self.heap_size and self.heap_ls[l][0] > self.heap_ls[i][0]:
             max_i = l
         else:
             max_i = i
-        if r <= self.heap_size and self.heap_ls[r] > self.heap_ls[max_i]:
+        if r <= self.heap_size and self.heap_ls[r][0] > self.heap_ls[max_i][0]:
             max_i = r
         if max_i != i:
             self.heap_ls[i], self.heap_ls[max_i] = (
@@ -51,28 +51,29 @@ class MaxPriorityQueue(object):
         return maximum
 
     def increase_key(self, i, key):
-        if key < self.heap_ls[i]:
+        if key < self.heap_ls[i][0]:
             raise ValueError('New key is smaller than current key.')
-        self.heap_ls[i] = key
-        while i > 1 and self.heap_ls[parent(i)] < self.heap_ls[i]:
+        self.heap_ls[i][0] = key
+        while i > 1 and self.heap_ls[parent(i)][0] < self.heap_ls[i][0]:
             self.heap_ls[i], self.heap_ls[parent(i)] = (
                 self.heap_ls[parent(i)], self.heap_ls[i])
             i = parent(i)
 
-    def insert(self, key):
+    def insert(self, new_mode):
+        key, item = new_mode
         self.heap_size += 1
-        self.heap_ls.append(-np.inf)
+        self.heap_ls.append([-np.inf, item])
         self.increase_key(self.heap_size, key)
 
 
 def main():
     max_pq = MaxPriorityQueue()
 
-    print('Insert sequentially 5, 7, 3, 1')
-    max_pq.insert(5)
-    max_pq.insert(7)
-    max_pq.insert(3)
-    max_pq.insert(1)
+    print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
+    max_pq.insert([5, 'a'])
+    max_pq.insert([7, 'c'])
+    max_pq.insert([3, 'b'])
+    max_pq.insert([1, 'd'])
     max_pq.show()
 
     print('Increase key 1 at position 4 to 6.')
