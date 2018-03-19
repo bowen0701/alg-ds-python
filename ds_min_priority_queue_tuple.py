@@ -34,8 +34,8 @@ class MinPriorityQueue(object):
         if r <= self.heap_size and self.heap_ls[r][0] < self.heap_ls[min_i][0]:
             min_i = r
         if min_i != i:
-            self.heap_ls[i][1], self.heap_ls[min_i][1] = (
-                self.heap_ls[min_i][1], self.heap_ls[i][1])
+            self.heap_ls[i], self.heap_ls[min_i] = (
+                self.heap_ls[min_i], self.heap_ls[i])
             self.min_heapify(min_i)
 
     def find_min(self):
@@ -67,15 +67,16 @@ class MinPriorityQueue(object):
 
 
 def main():
-    print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
     min_pq = MinPriorityQueue()
+
+    print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
     min_pq.insert([5, 'a'])
     min_pq.insert([7, 'c'])
     min_pq.insert([3, 'b'])
     min_pq.insert([1, 'd'])
     min_pq.show()
 
-    print('Decrease key 5 at position 4 to 2.')
+    print('Decrease key 7 at position 4 to 2.')
     min_pq.decrease_key(4, 2)
     min_pq.show()
 
