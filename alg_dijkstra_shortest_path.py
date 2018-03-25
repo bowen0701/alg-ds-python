@@ -10,8 +10,8 @@ from ds_min_priority_queue import MinPriorityQueue
 def dijkstra(w_graph_d, start_vertex):
     """Dijkstra algorithm for "weighted" graph.
 
-    Finds shortest path in a weighted graph from a particular node 
-    to all vertices that are reachable from it.
+    Finds shortest path in a weighted graph from a particular 
+    node to all vertices that are reachable from it.
     """
     min_pq = MinPriorityQueue()
 
@@ -19,12 +19,12 @@ def dijkstra(w_graph_d, start_vertex):
     visited_d = {v: False for v in w_graph_d.keys()}
     previous_d = {v: None for v in w_graph_d.keys()}
     
-    min_pq.insert(start_vertex)
+    # min_pq.insert(start_vertex)
     distance_d[start_vertex] = 0
     visited_d[start_vertex] = True
 
     while min_pq.size > 0:
-        v = min_pq.extract_min()
+        # v = min_pq.extract_min()
         visited_d[v] = True
 
         for v_neighbor in w_graph_d[v].keys():
