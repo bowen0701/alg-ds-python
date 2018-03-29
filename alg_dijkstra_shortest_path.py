@@ -19,12 +19,12 @@ def dijkstra(w_graph_d, start_vertex):
     visited_d = {v: False for v in w_graph_d.keys()}
     previous_d = {v: None for v in w_graph_d.keys()}
     
-    # min_pq.insert(start_vertex)
+    min_pq.insert([0, start_vertex])
     distance_d[start_vertex] = 0
     visited_d[start_vertex] = True
 
-    while min_pq.size > 0:
-        # v = min_pq.extract_min()
+    while min_pq.heap_size > 0:
+        k, v = min_pq.extract_min()
         visited_d[v] = True
 
         for v_neighbor in w_graph_d[v].keys():
@@ -33,7 +33,12 @@ def dijkstra(w_graph_d, start_vertex):
                     distance_d[v] + w_graph_d[v][v_neighbor]):
                 distance_d[v_neighbor] = distance_d[v] + w_graph_d[v][v_neighbor]
                 previous_d[v_neighbor] = v
-                min_pq.insert(v_neighbor)
+                
+                print('Show min_pq:')
+                min_pq.show()
+                print('v_neighbor: {}'.format(v_neighbor))
+                print('distance_d[v_neighbor]: {}'.format(distance_d[v_neighbor]))
+                min_pq.insert([distance_d[v_neighbor], v_neighbor])
 
     return distance_d, previous_d, visited_d
 
