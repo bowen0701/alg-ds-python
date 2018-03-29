@@ -4,7 +4,7 @@ from __future__ import division
 
 import numpy as np
 
-from ds_min_priority_queue import MinPriorityQueue
+from ds_min_priority_queue_tuple import MinPriorityQueue
 
 
 def dijkstra(w_graph_d, start_vertex):
