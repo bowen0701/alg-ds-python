@@ -42,17 +42,22 @@ class MinPriorityQueue(object):
         return self.heap_ls[1]
 
     def extract_min(self):
+        print('Extract min:')
         if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         minimum = self.heap_ls[1]
         # self.heap_ls[1] = self.heap_ls.pop()
         last = self.heap_ls.pop()
+        print('After extraction, self.heap_ls: {}'.format(self.heap_ls))
         self.heap_ls.insert(1, last)
+        print('After insertion: self.heap_ls: {}'.format(self.heap_ls))
         self.heap_size -= 1
+        print('heap size: {}'.format(self.heap_size))
         self.min_heapify(1)
         return minimum
 
     def decrease_key(self, i, key):
+        print('i: {}'.format(i))
         print('key: {}'.format(key))
         print('self.heap_ls[{}][0]: {}'.format(i, self.heap_ls[i][0]))
 
@@ -66,11 +71,14 @@ class MinPriorityQueue(object):
 
     def insert(self, new_node):
         key, item = new_node
+        print('Heap_size: {}'.format(self.heap_size))        
+        
         self.heap_ls.append([np.inf, item])
-        
-        print('In insert, heap_ls: {}'.format(self.heap_ls))
-        
+        print('Insert to heap_ls: {}'.format(self.heap_ls))
+
         self.heap_size += 1
+        print('After insertion: heap_size: {}'.format(self.heap_size))
+
         self.decrease_key(self.heap_size, key)
 
 
