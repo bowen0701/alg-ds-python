@@ -46,11 +46,11 @@ class MinPriorityQueue(object):
             raise ValueError('Heap underflow.')
         minimum = self.heap_ls[1]
         last = self.heap_ls.pop()
+        self.heap_size -= 1
         if self.heap_size < 1:
             self.heap_ls.append(last)
         else:
             self.heap_ls[1] = last        
-        self.heap_size -= 1
         self.min_heapify(1)
         return minimum
 
