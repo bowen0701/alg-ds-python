@@ -33,11 +33,6 @@ def dijkstra(w_graph_d, start_vertex):
                     distance_d[v] + w_graph_d[v][v_neighbor]):
                 distance_d[v_neighbor] = distance_d[v] + w_graph_d[v][v_neighbor]
                 previous_d[v_neighbor] = v
-                
-                print('Show min_pq:')
-                min_pq.show()
-                print('v_neighbor: {}'.format(v_neighbor))
-                print('distance_d[v_neighbor]: {}'.format(distance_d[v_neighbor]))
                 min_pq.insert([distance_d[v_neighbor], v_neighbor])
 
     return distance_d, previous_d, visited_d
@@ -61,7 +56,7 @@ def main():
         dijkstra(w_graph_d, start_vertex))
 
     print('distance_d: {}'.format(distance_d))
-    print('previous_d: {}'.format(distance_d))
+    print('previous_d: {}'.format(previous_d))
     print('visited_d: {}'.format(visited_d))
    
 
