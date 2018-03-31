@@ -48,7 +48,8 @@ class MinPriorityQueue(object):
         last = self.heap_ls.pop()
         self.heap_size -= 1
         if self.heap_size < 1:
-            self.heap_ls.append(last)
+            # The last element is minimum.
+            pass
         else:
             self.heap_ls[1] = last
         self.min_heapify(1)
@@ -80,12 +81,12 @@ def main():
     min_pq.insert([1, 'd'])
     min_pq.show()
 
-    print('Decrease key 7 at position 4 to 2.')
-    min_pq.decrease_key(4, 2)
-    min_pq.show()
+    # print('Decrease key 7 at position 4 to 2.')
+    # min_pq.decrease_key(4, 2)
+    # min_pq.show()
 
-    print('Find min key:')
-    print(min_pq.find_min())
+    # print('Find min key:')
+    # print(min_pq.find_min())
 
     print('Extract min key:')
     _min = min_pq.extract_min()

@@ -48,7 +48,8 @@ class MinPriorityQueue(object):
         last = self.heap_ls.pop()
         self.heap_size -= 1
         if self.heap_size < 1:
-            self.heap_ls.append(last)
+            # The last element is minimum.
+            pass
         else:
             self.heap_ls[1] = last        
         self.min_heapify(1)
