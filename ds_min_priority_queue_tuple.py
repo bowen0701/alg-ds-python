@@ -46,21 +46,16 @@ class MinPriorityQueue(object):
         if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         minimum = self.heap_ls[1]
-        # self.heap_ls[1] = self.heap_ls.pop()
         last = self.heap_ls.pop()
-        print('After extraction, self.heap_ls: {}'.format(self.heap_ls))
-        self.heap_ls.insert(1, last)
-        print('After insertion: self.heap_ls: {}'.format(self.heap_ls))
+        if self.heap_size < 1:
+            self.heap_ls.append(last)
+        else:
+            self.heap_ls[1] = last
         self.heap_size -= 1
-        print('heap size: {}'.format(self.heap_size))
         self.min_heapify(1)
         return minimum
 
     def decrease_key(self, i, key):
-        print('i: {}'.format(i))
-        print('key: {}'.format(key))
-        print('self.heap_ls[{}][0]: {}'.format(i, self.heap_ls[i][0]))
-
         if key > self.heap_ls[i][0]:
             raise ValueError('New key is larger than current key.')
         self.heap_ls[i][0] = key
@@ -70,15 +65,9 @@ class MinPriorityQueue(object):
             i = parent(i)
 
     def insert(self, new_node):
-        key, item = new_node
-        print('Heap_size: {}'.format(self.heap_size))        
-        
+        key, item = new_node        
         self.heap_ls.append([np.inf, item])
-        print('Insert to heap_ls: {}'.format(self.heap_ls))
-
         self.heap_size += 1
-        print('After insertion: heap_size: {}'.format(self.heap_size))
-
         self.decrease_key(self.heap_size, key)
 
 
@@ -101,8 +90,8 @@ def main():
 
     print('Extract min key:')
     _min = min_pq.extract_min()
-    print(_min)
-    print('The remaining:')
+    print('- Min: {}'.format(_min))
+    print('- The remaining:')
     min_pq.show()
 
 
