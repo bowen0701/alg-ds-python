@@ -45,8 +45,13 @@ class MaxPriorityQueue(object):
         if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         maximum = self.heap_ls[1]
-        self.heap_ls[1] = self.heap_ls.pop()
+        last = self.heap_ls.pop()
         self.heap_size -= 1
+        if self.heap_size < 1:
+            # The last element is maximum.
+            pass
+        else:
+            self.heap_ls[1] = last
         self.max_heapify(1)
         return maximum
 
