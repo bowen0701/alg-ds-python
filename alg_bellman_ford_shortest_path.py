@@ -2,11 +2,25 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
+import numpy as np
+
+
+def update_distance(v, v_neighbor, w_graph_d, previous_d):
+    if (distance_d[v_neighbor] > 
+            distance_d[v] + w_graph_d[v][v_neighbor]):
+        distance_d[v_neighbor] = (
+            distance_d[v] + w_graph_d[v][v_neighbor])
+        previous_d[v_neighbor] = v
+
 
 def bellman_ford(w_graph_d, start_vertex):
-    """Bellman-Ford algorithm for weighted / negative graph.
-    """
-    pass
+    """Bellman-Ford algorithm for weighted / negative graph."""
+    distance_d = {v: np.inf for v in w_graph_d.keys()}
+    previous_d = {v: None for v in w_graph_d.keys()}
+
+    n = len(w_graph_d.keys())
+    for i in xrange(1, n):
+        pass
 
 
 def main():
