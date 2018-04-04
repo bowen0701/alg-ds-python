@@ -60,7 +60,21 @@ def main():
     distance_d, previous_d = bellman_ford(w_graph_d, start_vertex)
     print('distance_d: {}'.format(distance_d))
     print('previous_d: {}'.format(previous_d))
-   
+
+    # Weighted negative graph with negative cycle.
+    w_graph_d = {
+        's': {'a': 2, 'b': 6},
+        'a': {'b': 3, 'c': 1},
+        'b': {'a': -5, 'd': 2},
+        'c': {'b': 1, 'e': 4, 'f': 2},
+        'd': {'c': 3, 'f': 2},
+        'e': {},
+        'f': {'e': 1}
+    }
+    start_vertex = 's'
+
+    distance_d, previous_d = bellman_ford(w_graph_d, start_vertex)
+
 
 if __name__ == '__main__':
     main()
