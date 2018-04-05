@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 def prim():
-	"""Prim's Minimum Spanning Tree."""
+	"""Prim's Minimum Spanning Tree in weighted graph."""
 	pass
 
 
