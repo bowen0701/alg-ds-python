@@ -15,9 +15,7 @@ def bubble_sort(a_list):
     for pass_num in reversed(range(len(a_list))):
         for i in range(pass_num):
             if a_list[i] > a_list[i + 1]:
-                temp = a_list[i] 
-                a_list[i] = a_list[i + 1]
-                a_list[i + 1] = temp
+                a_list[i + 1], a_list[i] = a_list[i], a_list[i + 1] 
 
 
 def bubble_sort_short(a_list):
@@ -33,24 +31,22 @@ def bubble_sort_short(a_list):
         for i in range(pass_num):
             if a_list[i] > a_list[i + 1]:
                 exchange_bool = True
-                temp = a_list[i] 
-                a_list[i] = a_list[i + 1]
-                a_list[i + 1] = temp
+                a_list[i + 1], a_list[i] = a_list[i], a_list[i + 1]
         pass_num -= 1
 
 
 def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: {}'.format(a_list))
+    
     print('By bubble sort: ')
     bubble_sort(a_list)
     print(a_list)
 
-    a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-    print('a_list: {}'.format(a_list))
     print('By short_bubble sort: ')
     bubble_sort_short(a_list)
     print(a_list)
+
 
 if __name__ == '__main__':
     main()
