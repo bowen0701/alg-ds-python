@@ -49,7 +49,7 @@ def main():
         'f': {'e': 1}
     }
     start_vertex = 's'
-    print('w_graph_d: {}'.format(w_graph_d))
+    print('w_graph_d:\n{}'.format(w_graph_d))
     print('Dijkstra shortest path from {}:'.format(start_vertex))
     
     distance_d, previous_d, visited_d = (
