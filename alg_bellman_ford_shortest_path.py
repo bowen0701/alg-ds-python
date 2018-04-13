@@ -16,7 +16,11 @@ def update_distance(v, v_neighbor,
 
 
 def bellman_ford(w_graph_d, start_vertex):
-    """Bellman-Ford algorithm for weighted / negative graph."""
+    """Bellman-Ford algorithm for single-source shortest path problem
+    in weighted and negative graph.
+
+    Time complexity for graph G(V, W): O(|V|*|E|).
+    """
     distance_d = {v: np.inf for v in w_graph_d.keys()}
     previous_d = {v: None for v in w_graph_d.keys()}
 
