@@ -5,8 +5,8 @@ from __future__ import print_function
 import math
 
 
-def multiply_n_digits_integers(x, y):
-    """Multiply 2 n-bits integers by divide-and-conquer algorithm.
+def karatsuba_multiplication(x, y):
+    """Multiply 2 n-bits integers by Karatsuba's algorithm.
   
     We would like to multiply two long n-bits integers, where
       x = x_L * 10^(n/2) + x_R
@@ -17,7 +17,7 @@ def multiply_n_digits_integers(x, y):
            + 2^(n/2) [(x_L + x_R)((y_L + y_R) - x_L y_L - x_R y_R] 
            + x_R y_R
 
-    The divide-and-conquer algorithm using the 2nd equality would
+    This divide-and-conquer algorithm using the 2nd equality would
     result in much faster runtime O(n^1.59) 
     compared with using the 1st one with O(n^2).
     """
@@ -43,12 +43,12 @@ def main():
     x = 1234
     y = 1234
     print('(x, y): ({}, {})'.format(x, y))
-    print('Multiply: {}'.format(multiply_n_digits_integers(x, y)))
+    print('Multiply: {}'.format(karatsuba_multiplication(x, y)))
 
     x = 12345
     y = 12345
     print('(x, y): ({}, {})'.format(x, y))
-    print('Multiply: {}'.format(multiply_n_digits_integers(x, y)))
+    print('Multiply: {}'.format(karatsuba_multiplication(x, y)))
 
 if __name__ == '__main__':
     main()
