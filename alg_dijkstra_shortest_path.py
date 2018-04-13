@@ -8,10 +8,10 @@ from ds_min_priority_queue_tuple import MinPriorityQueue
 
 
 def dijkstra(w_graph_d, start_vertex):
-    """Dijkstra algorithm for "weighted" graph.
-
-    Finds shortest path in a weighted graph from a particular 
-    node to all vertices that are reachable from it.
+    """Dijkstra algorithm for singel-source shortest path problem 
+    in a "weighted" graph.
+    
+    Time complexity for graph G(V, W): (|V|+|E|)log(|V|).
     """
     min_pq = MinPriorityQueue()
 
