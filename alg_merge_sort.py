@@ -62,16 +62,15 @@ def merge_sort(a_list, merge_ft=_merge_iter):
 def main():
     import time
 
-    start_time = time.time()
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
+
+    start_time = time.time()
     print('By merge sort with divide and conquer algortihm:')
     print(merge_sort(a_list, merge_ft=_merge_recur))
     print('Run time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-    print('a_list: \n{}'.format(a_list))
     print('By merge sort with iterative algortihm:')
     print(merge_sort(a_list, merge_ft=_merge_iter))
     print('Run time: {}'.format(time.time() - start_time))
