@@ -21,9 +21,8 @@ def selection_sort(a_list):
             if a_list[slot] > a_list[select_slot]:
                 select_slot = slot
 
-        temp = a_list[max_slot]
-        a_list[max_slot] = a_list[select_slot]
-        a_list[select_slot] = temp
+        a_list[select_slot], a_list[max_slot] = (
+            a_list[max_slot], a_list[select_slot])
 
 
 def main():
