@@ -51,12 +51,12 @@ def merge_sort(a_list, merge_ft=_merge_iter):
         - if merge_ft = merge_iter: 
           Merge two sorted lists by iteration: merge_iter().
     """
-    if len(a_list) > 1:
+    if len(a_list) == 1:
+        return a_list
+    else:
         mid = len(a_list) // 2
         return merge_ft(merge_sort(a_list[:mid], merge_ft), 
                         merge_sort(a_list[mid:], merge_ft))
-    else:
-        return a_list
 
 
 def main():
@@ -66,12 +66,12 @@ def main():
     print('a_list: \n{}'.format(a_list))
 
     start_time = time.time()
-    print('By merge sort with divide and conquer algortihm:')
+    print('By merge sort with recusions:')
     print(merge_sort(a_list, merge_ft=_merge_recur))
     print('Run time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By merge sort with iterative algortihm:')
+    print('By merge sort with iterations:')
     print(merge_sort(a_list, merge_ft=_merge_iter))
     print('Run time: {}'.format(time.time() - start_time))
 
