@@ -50,11 +50,10 @@ def main():
     }
     start_vertex = 's'
     print('w_graph_d:\n{}'.format(w_graph_d))
-    print('Dijkstra shortest path from {}:'.format(start_vertex))
     
+    print('Dijkstra shortest path from {}:'.format(start_vertex))
     distance_d, previous_d, visited_d = (
         dijkstra(w_graph_d, start_vertex))
-
     print('distance_d: {}'.format(distance_d))
     print('previous_d: {}'.format(previous_d))
     print('visited_d: {}'.format(visited_d))
