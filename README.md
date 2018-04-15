@@ -2,7 +2,7 @@
 
 Algorithms and data structures implementations in Python. 
 
-The following are the main references I use and highly recommend:
+The following are the main references I use:
 
 - [Cormen, Leiserson, Rivest, and Stein (2009). Introduction to Algorithms, 3rd edition.](http://mitpress.mit.edu/books/introduction-algorithms-third-edition)
 - [Jordan's Berkeley CS 170 Course: Efficient Algorithms and Intractable Problems, a.k.a. Introduction to CS Theory.](http://people.eecs.berkeley.edu/~jordan/courses/170-fall05/) (free source). 
