@@ -3,7 +3,10 @@ from __future__ import division
 from __future__ import print_function
 
 def kruskal():
-	"""Kruskal's Minimum Spanning Tree in weighted graph."""
+	"""Kruskal's algorithm for minimum spanning tree in weighted graph.
+
+    Time complexity for graph G(V, E): TBD.
+	"""
 	pass
 
 
