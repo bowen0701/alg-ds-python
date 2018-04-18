@@ -49,7 +49,7 @@ def main():
     }
     print('w_graph_d:\n{}'.format(w_graph_d))
 
-    print('Prim minimum spanning tree')
+    print('Prim\'s minimum spanning tree:')
     key_d, previous_d, visited_d = prim(w_graph_d)
     print('key_d: {}'.format(key_d))
     print('previous_d: {}'.format(previous_d))
