@@ -36,15 +36,9 @@ def _dfs_explore(v, graph_adj_d, visited_d,
 
 
 def dfs(graph_adj_d):
-    """Depth first search by recursion algorithm.
+    """Depth first search with single source by recursion algorithm.
 
-    Args:
-      graph_adj_d: A dict. Graph adjacency dictionary.
-
-    Returns:
-      previsit_d: A dict. Previsit time clock.
-      postvisit_d: A dict. Postvisit time clock.
-      ccid_d: A dict. Connected component number.
+    Time complexity for G(V, E): O(|V|+|E|). 
     """
     visited_d = {v: False for v in graph_adj_d.keys()}
     clock = 0
