@@ -24,7 +24,11 @@ def _dfs_stack_explore(v, graph_adj_d, visited_d,
 
 
 def dfs_stack(graph_adj_d):
-    """Depth first search by iteration algorithm using stack."""
+    """Depth first search by iteration algorithm with single source 
+    using stack.
+
+    Time complexity for G(V, E): O(|V|+|E|).
+    """
     visited_d = {v: False for v in graph_adj_d.keys()}
     previsited_d = {}
     clock = 0
