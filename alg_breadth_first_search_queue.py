@@ -5,10 +5,10 @@ from __future__ import division
 import numpy as np
 
 def bfs(graph_adj_d, start_vertex):
-    """Breadth First Search (BFS) algorithm by queue.
+    """Breadth First Search (BFS) algorithm with single source 
+    by queue.
 
-    Find shortest path from a particular node to 
-    all vertices that are reachable from it.
+    Time complexity for graph G(V, E): O(|V|+|E|).
     """
     distance_d = {v: np.inf for v in graph_adj_d.keys()}
     distance_d[start_vertex] = 0
