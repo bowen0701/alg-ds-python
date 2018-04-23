@@ -2,12 +2,31 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+
+def make_set():
+	pass
+
+
+def link():
+	pass
+
+
+def find():
+	pass
+
+
+def union():
+	pass
+
+
 def kruskal():
 	"""Kruskal's algorithm for minimum spanning tree 
 	in weighted graph.
 
     Time complexity for graph G(V, E): 
-    O(|E|+|V|+|E|log(|V|)) = O(|E|log(|V|^2)) = O(|E|log(|V|)).
+        O(|E|+|V|+|E|log(|V|)) 
+        = O(|E|log(|V|^2)) 
+        = O(|E|log(|V|)).
 	"""
 	pass
 
