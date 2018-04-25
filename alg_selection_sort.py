@@ -6,11 +6,6 @@ from __future__ import division
 def selection_sort(a_list):
     """Selection Sort algortihm.
 
-    Procedure: 
-      - Find out the max item's original slot first,
-      - then swap it and the item at the max slot. 
-      - Iterate the procedure for the next max, etc.
-
     Time complexity: O(n^2).
     """
     for max_slot in reversed(range(len(a_list))):
