@@ -6,11 +6,7 @@ from __future__ import division
 def bubble_sort(a_list):
     """Bubble Sort algortihm.
 
-    Concept:
-      - Start from the item at the 1st slot to check 
-        if it is bigger than the next one. If yes, swap these two items.
-      - Then check the following successive pair and swap them if needed.
-      - Iterate the procedure over the length of the list. 
+    Time complexity: O(n^2). 
     """
     for pass_num in reversed(range(len(a_list))):
         for i in range(pass_num):
@@ -19,11 +15,7 @@ def bubble_sort(a_list):
 
 
 def bubble_sort_short(a_list):
-    """Bubble Short algorithm with early stop.
-
-    After some bubble sort iterations,
-    if there are no swapped pairs, stop the further iterations.
-    """
+    """Bubble Short algorithm with early stop."""
     exchange_bool = True
     pass_num = len(a_list) - 1
     while pass_num > 0 and exchange_bool:
