@@ -4,7 +4,10 @@ from __future__ import division
 
 
 def quick_sort(a_list):
-    """Quick sort algortihm with list comprehension recursion."""
+    """Quick sort algortihm with list comprehension recursion.
+    
+    Time complexity: O(n*logn).
+    """
     if len(a_list) <= 1:
         return a_list
     pivot_value = a_list[len(a_list) // 2]
