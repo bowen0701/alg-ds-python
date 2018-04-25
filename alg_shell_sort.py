@@ -16,7 +16,10 @@ def _gap_insertion_sort(a_list, start, gap):
 
 
 def shell_sort(a_list):
-    """Shell Sort algortihm."""
+    """Shell Sort algortihm.
+
+    Time complexity: O(n^2).
+    """
     sublist_count = len(a_list) // 2
     while sublist_count > 0:
         for start_pos in range(sublist_count):
