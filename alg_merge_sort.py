@@ -40,16 +40,9 @@ def _merge_iter(x_list, y_list):
 
 
 def merge_sort(a_list, merge_ft=_merge_iter):
-    """Merge sort by divide and conquer algorithm with
-    two methods for sorted sub-lists; see merge_ft.
+    """Merge sort by divide and conquer algorithm.
 
-    Args:
-      a_list: A list. List to sort.
-      merge_ft: A function. Default: merge_iter.
-        - if merge_ft = merge_recur: 
-          Merge two sorted lists by recursion: merge_recur().
-        - if merge_ft = merge_iter: 
-          Merge two sorted lists by iteration: merge_iter().
+    Time complexity: O(n*logn).
     """
     if len(a_list) == 1:
         return a_list
