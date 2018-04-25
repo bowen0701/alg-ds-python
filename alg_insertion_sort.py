@@ -4,7 +4,10 @@ from __future__ import division
 
 
 def insertion_sort(a_list):
-    """Insertion Sort algortihm."""
+    """Insertion Sort algortihm.
+
+    Time complexity: O(n^2).
+    """
     for index in range(1, len(a_list)):
         current_value = a_list[index]
         position = index
