@@ -21,7 +21,7 @@ def union():
 
 def kruskal():
 	"""Kruskal's algorithm for minimum spanning tree 
-	in weighted graph.
+	in weighted undirected graph.
 
     Time complexity for graph G(V, E): 
         O(|E|+|V|+|E|log(|V|)) 
