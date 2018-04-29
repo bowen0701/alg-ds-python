@@ -8,7 +8,8 @@ from ds_min_priority_queue_tuple import MinPriorityQueue
 
 
 def prim(w_graph_d):
-    """Prim's algorithm for minimum spanning tree in weighted graph.
+    """Prim's algorithm for minimum spanning tree 
+    in weighted undirected graph.
 
     Time complexity for graph G(V, E): O((|V|+|E|)log(|V|)).
     """
