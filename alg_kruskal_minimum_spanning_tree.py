@@ -3,8 +3,9 @@ from __future__ import division
 from __future__ import print_function
 
 
-def make_set():
-	pass
+def make_set(v, previous_d, rank_d):
+	previous_d[v] = v
+	rank_d[v] = 0
 
 
 def link():
