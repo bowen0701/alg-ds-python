@@ -19,7 +19,12 @@ def link(v, u, previous_d, rank_d):
 	Changes the parent pointer of one of roots, say v,
 	and makes it point to y. Return the root of composit tree u.
 	"""
-	pass
+	if rank_d[v] > rank_d[u]:
+		u, v = v, u
+	if rank_d[v] = rank_d[u]:
+		rank_d[u] += 1
+	previous_d[v] = u
+	return u, previous_d, rank_d
 
 
 def find(v, previous_d):
@@ -27,7 +32,11 @@ def find(v, previous_d):
 
 	Make each vertices point directly to the root.
 	"""
-	pass
+	if v != previous_d[v]:
+		previous_d[v] = find(v, previous_d)
+		return previous_d[v], previous_d
+	else:
+		return v, previous_d
 
 
 def union(v, u, previous_d, rank_d):
@@ -35,7 +44,9 @@ def union(v, u, previous_d, rank_d):
     
     Make the shorter tree nodes to the root of the longer.
 	"""
-	pass
+	find_v, previous_d = find(v, previous_d)
+	find_u, previous_d = find(u, previous_d)
+	return link(find_v, find_u, previous_d, rank_d)
 
 
 def kruskal(w_graph_d):
