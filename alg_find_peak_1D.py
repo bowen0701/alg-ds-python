@@ -8,10 +8,10 @@ def find_peak_naive(arr):
 
     Time complexity: O(n).
     """
-    for i, a in enumerate(arr):
-        if i == 0 and a > arr[i + 1]:
+    for i in range(len(arr)):
+        if i == 0 and arr[i] > arr[i + 1]:
             return arr[i]
-        elif i == (len(arr) - 1) and a > arr[i - 1]:
+        elif i == (len(arr) - 1) and arr[i] > arr[i - 1]:
             return arr[i]
         elif (0 < i < (len(arr) - 1) and 
               arr[i] > arr[i - 1] and arr[i] > arr[i + 1]):
