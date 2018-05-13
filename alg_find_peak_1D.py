@@ -10,13 +10,13 @@ def find_peak_naive(arr):
     """
     for i in range(len(arr)):
         if i == 0:
-            if arr[i] > arr[i + 1]:
+            if arr[i] >= arr[i + 1]:
                 return arr[i]
         elif i == (len(arr) - 1):
-            if arr[i] > arr[i - 1]:
+            if arr[i] >= arr[i - 1]:
                 return arr[i]
         else:
-            if arr[i] > arr[i - 1] and arr[i] > arr[i + 1]:
+            if arr[i] >= arr[i - 1] and arr[i] >= arr[i + 1]:
                 return arr[i]
 
 
@@ -29,9 +29,9 @@ def find_peak(arr):
         return arr[0]
     else:
         mid = len(arr) // 2
-        if arr[mid] < arr[mid - 1]:
+        if arr[mid] <= arr[mid - 1]:
             return find_peak(arr[:mid-1])
-        elif arr[mid] < arr[mid + 1]:
+        elif arr[mid] <= arr[mid + 1]:
             return find_peak(arr[mid+1:])
         else:
             return arr[mid]
