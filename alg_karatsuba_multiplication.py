@@ -7,6 +7,8 @@ import math
 
 def karatsuba_multiplication(x, y):
     """Multiply 2 n-bits integers by Karatsuba's algorithm.
+
+    This is a divide-and-conquer algorithm.
   
     We would like to multiply two long n-bits integers, where
       x = x_L * 10^(n/2) + x_R
@@ -17,9 +19,8 @@ def karatsuba_multiplication(x, y):
            + 2^(n/2) [(x_L + x_R)((y_L + y_R) - x_L y_L - x_R y_R] 
            + x_R y_R
 
-    This divide-and-conquer algorithm using the 2nd equality would
-    result in much faster runtime O(n^1.59) 
-    compared with using the 1st one with O(n^2).
+    Time complexity: O((n+n)^log3) = O(n^1.59), much faster than 
+    the naive one with O(n^2).
     """
     x_n = int(math.log10(x)) + 1
     y_n = int(math.log10(y)) + 1
