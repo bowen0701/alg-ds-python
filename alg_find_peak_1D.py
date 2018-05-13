@@ -19,6 +19,7 @@ def find_peak_naive(arr):
         else:
             pass
 
+
 def find_peak(arr):
     """Find peak by divide-end-conquer algorithm.
 
