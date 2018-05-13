@@ -4,7 +4,10 @@ from __future__ import print_function
 
 
 def find_peak_naive(arr):
-    """Find peak by naive iteration."""
+    """Find peak by naive iteration.
+
+    Time complexity: O(n).
+    """
     for i, a in enumerate(arr):
         if i == 0 and a > arr[i + 1]:
             return arr[i]
@@ -17,7 +20,10 @@ def find_peak_naive(arr):
             pass
 
 def find_peak(arr):
-    """Find peak by divide-end-conquer algorithm."""
+    """Find peak by divide-end-conquer algorithm.
+
+    Time complexity: O(logn).
+    """
     if len(arr) == 1:
         return arr[0]
     else:
