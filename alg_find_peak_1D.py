@@ -39,6 +39,7 @@ def find_peak(arr):
 def main():
     import time
 
+    # Array with peak 4.
     arr = [0, 1, 4, 3, 2]
     
     # Find peak by naive version.
