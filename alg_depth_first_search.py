@@ -20,7 +20,7 @@ def _postvisit(v, postvisit_d, clock):
 
 def _dfs_explore(v, graph_adj_d, visited_d, 
                  previsit_d, postvisit_d, ccid_d, clock, ccid):
-    """Explore method by depth first search by recursion."""
+    """Explore method for depth first search by recursion."""
     visited_d[v] = True
     previsit_d, clock = _previsit(v, previsit_d, ccid_d, clock, ccid)
 
@@ -36,9 +36,9 @@ def _dfs_explore(v, graph_adj_d, visited_d,
 
 
 def dfs(graph_adj_d):
-    """Depth first search with single source by recursion algorithm.
+    """Depth first search by recursion algorithm.
 
-    Time complexity for G(V, E): O(|V|+|E|). 
+    Time complexity for graph G(V, E): O(|V|+|E|). 
     """
     visited_d = {v: False for v in graph_adj_d.keys()}
     clock = 0
