@@ -4,7 +4,6 @@ from __future__ import division
 
 
 def _previsit(v, previsit_d, ccid_d, clock, ccid):
-    """Previsit method."""
     clock += 1
     previsit_d[v] = clock
     ccid_d[v] = ccid
@@ -12,7 +11,6 @@ def _previsit(v, previsit_d, ccid_d, clock, ccid):
 
 
 def _postvisit(v, postvisit_d, clock):
-    """Postvisit method."""
     clock += 1
     postvisit_d[v] = clock
     return postvisit_d, clock
@@ -20,7 +18,7 @@ def _postvisit(v, postvisit_d, clock):
 
 def _dfs_explore(v, graph_adj_d, visited_d, 
                  previsit_d, postvisit_d, ccid_d, clock, ccid):
-    """Explore method for depth first search by recursion."""
+    """Explore by recursion."""
     visited_d[v] = True
     previsit_d, clock = _previsit(v, previsit_d, ccid_d, clock, ccid)
 
