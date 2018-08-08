@@ -58,7 +58,8 @@ def undirected_graph_connected_components(graph_adj_d):
 
 
 def main():
-    # Connected graph by adjacency dictionary.
+    # Undirected graph by adjacency dictionary.
+    # TODO: Define Undirected graph.
     graph_adj_d = {
         'A': ['B', 'F'],
         'B': ['A', 'C', 'G'],
@@ -70,7 +71,7 @@ def main():
     print('Graph:\n{}'.format(graph_adj_d))
 
     print('Find connected components by DFS.')
-    ccid_d, previsit_d, postvisit_d = dfs(graph_adj_d)
+    ccid_d, previsit_d, postvisit_d = undirected_graph_connected_components(graph_adj_d)
     print('ccid_d: {}'.format(ccid_d))
     print('previsit_d: {}'.format(previsit_d))
     print('postvisit_d: {}'.format(postvisit_d))
