@@ -18,7 +18,7 @@ def _postvisit(v, postvisit_d, clock):
 
 def _dfs_explore(v, graph_adj_d, visited_d, 
                  previsit_d, postvisit_d, ccid_d, ccid, clock):
-    """Explore by recursion."""
+    """DFS explore by recursion."""
     visited_d[v] = True
     previsit_d, ccid_d, clock = _previsit(v, previsit_d, ccid_d, ccid, clock)
 
