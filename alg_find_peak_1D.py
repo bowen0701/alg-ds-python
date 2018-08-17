@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+"""Find a peak in 1D array."""
 
 def find_peak_naive(arr):
     """Find peak by naive iteration.
@@ -42,6 +43,7 @@ def main():
 
     # Array with peak 4.
     arr = [0, 1, 4, 3, 2]
+    print('Array: {}'.format(arr))
     
     # Find peak by naive version.
     time_start = time.time()
