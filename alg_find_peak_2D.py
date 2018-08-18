@@ -75,25 +75,35 @@ def find_peak_naive(arr):
                 return arr[i][j]
 
 
-def _find_max(arr):
-    max = arr[0]
-    
-
+def _find_max_1D(arr):
+    """Find max in 1D array."""
+    max_id = 0
+    max_item = arr[0]
+    for i in range(1, len(arr)):
+        if arr[i] > max_item:
+            max_id = i
+            max_item = arr[i]
+    return max_id, max_item
 
 def find_peak(arr):
-    """Find peak by Divide and Conquer algorithm.
+    """Find peak in 2D array by Divide and Conquer algorithm.
 
     Time complexity: O(nlog(m)).
     """
-    nrow, ncol = length(arr), length(arr[0])
+    nrow, ncol = len(arr), len(arr[0])
 
-    if ncol == 1:
-
-    mid_col = m // 2
-
-
-
-    col_max = find_max()
+    if nrow == 1:
+        _, max_item = _find_max_1D(arr)
+        return max_item
+    else:
+        mid_row_id = nrow // 2
+        max_col_id, _ = _find_max_1D(arr[mid_row_id])
+        if arr[mid_row_id][max_col_id] < arr[mid_row_id - 1][max_col_id]:
+            return find_peak(arr[:mid_row_id])
+        elif arr[mid_row_id][max_col_id] < arr[mid_row_id + 1][max_col_id]:
+            return find_peak(arr[(mid_row_id + 1):])
+        else:
+            return arr[mid_row_id][max_col_id]
 
 
 def main():
@@ -109,8 +119,13 @@ def main():
     peak = find_peak_naive(arr)
     time_run = time.time() - time_start
     print('Peak: {}'.format(peak))
-    print('Time for naive alg: {}'.format(time_run))
+    print('Time for find_peak_naive(): {}'.format(time_run))
 
+    time_start = time.time()
+    peak = find_peak(arr)
+    time_run = time.time() - time_start
+    print('Peak: {}'.format(peak))
+    print('Time for find_peak(): {}'.format(time_run))
 
 if __name__ == '__main__':
     main()
