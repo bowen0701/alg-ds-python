@@ -75,8 +75,25 @@ def find_peak_naive(arr):
                 return arr[i][j]
 
 
+def _find_max(arr):
+    max = arr[0]
+    
+
+
 def find_peak(arr):
-    pass
+    """Find peak by Divide and Conquer algorithm.
+
+    Time complexity: O(nlog(m)).
+    """
+    nrow, ncol = length(arr), length(arr[0])
+
+    if ncol == 1:
+
+    mid_col = m // 2
+
+
+
+    col_max = find_max()
 
 
 def main():
