@@ -4,7 +4,14 @@ from __future__ import print_function
 
 import numpy as np
 
-"""Find a peak in 1D array."""
+"""Find a peak in 1D array.
+
+Support a is an array of length n.
+If a is an array of length 1, a[0] is a peak.
+In general k, a[k] is a peak iff a[k] >= a[k - 1] and a[k] >= a[k + 1].
+If a[0] >= a[1], then a[0] is a peak.
+If a[n - 1] >= a[n - 2], then a[n - 1] is a peak.  
+"""
 
 def find_peak_naive(arr):
     """Find peak by naive iteration.
@@ -58,8 +65,8 @@ def main():
     print('Peak: {}'.format(peak))
     print('Time for find_peak_naive(): {}'.format(time_run))
 
-    # Array of length 1000,000.
-    arr = np.random.permutation(1000000)
+    # Array of long length.
+    arr = np.random.permutation(10000000)
 
     time_start = time.time()
     peak = find_peak_naive(arr)
