@@ -4,14 +4,22 @@ from __future__ import print_function
 
 import itertools
 
+"""Find a peak in 2D array.
+
+Support a is an array of length (m, n).
+If a is an array of length (1, 1), a[0][0] is a peak.
+In general, a[i][j] is a peak iff 
+  a[i][j] >= a[i][j - 1] and a[i][j] >= a[i][j + 1] and
+  a[i][j] >= a[i + 1][j] and a[i][j] >= a[i - 1][j] 
+Similarly for corner cases, a[i][j], i = 0 or m - 1, or j = 0 or n -1.
+"""
 
 def find_peak_naive(arr):
     """Find peak by naive algorithm.
 
     Time complexity: O(nm).
     """
-    nrow = len(arr)
-    ncol = len(arr)
+    nrow, ncol = len(arr), len(arr[0])
 
     for (i, j) in itertools.product(range(nrow), range(ncol)):
         if (i, j) == (0, 0):
@@ -75,10 +83,10 @@ def main():
     import time
 
     # 2D array with peak 21.
-    arr = [[10, 8, 10, 10], 
-           [14, 13, 12, 11], 
-           [15, 9, 11, 21], 
-           [16, 17, 19, 20]]
+    arr = [[10, 8, 10, 10, 7], 
+           [14, 13, 12, 11, 9], 
+           [15, 9, 11, 21, 22], 
+           [16, 17, 19, 20, 18]]
 
     time_start = time.time()
     peak = find_peak_naive(arr)
