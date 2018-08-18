@@ -8,7 +8,7 @@ import numpy as np
 
 Support a is an array of length n.
 If a is an array of length 1, a[0] is a peak.
-In general k, a[k] is a peak iff a[k] >= a[k - 1] and a[k] >= a[k + 1].
+In general, a[k] is a peak iff a[k] >= a[k - 1] and a[k] >= a[k + 1].
 If a[0] >= a[1], then a[0] is a peak.
 If a[n - 1] >= a[n - 2], then a[n - 1] is a peak.  
 """
