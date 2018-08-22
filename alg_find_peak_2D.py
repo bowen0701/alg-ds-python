@@ -17,7 +17,7 @@ Similarly for corner cases, a[i][j], i = 0 or m - 1, or j = 0 or n -1.
 def find_peak_naive(arr):
     """Find peak by naive algorithm.
 
-    Time complexity: O(nm).
+    Time complexity: O(n * m).
     """
     nrow, ncol = len(arr), len(arr[0])
 
@@ -76,7 +76,7 @@ def find_peak_naive(arr):
 
 
 def _find_max_1D(arr):
-    """Find max in 1D array."""
+    """Find max in 1D array, with time complexity O(m)."""
     max_id = 0
     max_item = arr[0]
     for i in range(1, len(arr)):
