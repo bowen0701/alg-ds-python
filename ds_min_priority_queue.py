@@ -2,96 +2,115 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
 
-
-def parent(i):
-    return i // 2
-
-def left(i):
-    return 2 * i
-
-def right(i):
-    return 2 * i + 1
-
-
-class MinPriorityQueue(object):
-    """Min Priority Queue."""
+class MinBinaryHeap(object):
+    """Binary Min Heap class."""
     def __init__(self):
+        # Put single zero as the 1st element, so that 
+        # integer division can be used in later methods.
         self.heap_ls = [0]
-        self.heap_size = 0
+        self.current_size = 0
 
     def show(self):
         print(self.heap_ls)
 
-    def min_heapify(self, i):
-        l = left(i)
-        r = right(i)
-        if l <= self.heap_size and self.heap_ls[l] < self.heap_ls[i]:
-            min_i = l
+    def _percolate_up(self, i):
+        while i // 2 > 0:
+            if self.heap_ls[i] < self.heap_ls[i // 2]:
+                tmp = self.heap_ls[i // 2]
+                self.heap_ls[i // 2] = self.heap_ls[i]
+                self.heap_ls[i] = tmp
+            i = i // 2
+
+    def insert(self, new_node):
+        self.heap_ls.append(new_node)
+        self.current_size += 1
+        self._percolate_up(self.current_size)
+
+    def _get_min_child(self, i):
+        if (i * 2 + 1) > self.current_size:
+            return i * 2
         else:
-            min_i = i
-        if r <= self.heap_size and self.heap_ls[r] < self.heap_ls[min_i]:
-            min_i = r
-        if min_i != i:
-            self.heap_ls[i], self.heap_ls[min_i] = (
-                self.heap_ls[min_i], self.heap_ls[i])
-            self.min_heapify(min_i)
+            if self.heap_ls[i * 2] < self.heap_ls[i * 2 + 1]:
+                return i * 2
+            else:
+                return i * 2 + 1
+
+    def _percolate_down(self, i):
+        while (i * 2) <= self.current_size:
+            min_child = self._get_min_child(i)
+            if self.heap_ls[i] > self.heap_ls[min_child]:
+                tmp = self.heap_ls[i]
+                self.heap_ls[i] = self.heap_ls[min_child]
+                self.heap_ls[min_child] = tmp
+            else:
+                pass
+            i = min_child
 
     def find_min(self):
         return self.heap_ls[1]
+    
+    def delete_min(self):
+        val_del = self.heap_ls[1]
+        self.heap_ls[1] = self.heap_ls[self.current_size]
+        self.current_size -= 1
+        self.heap_ls.pop()
+        self._percolate_down(1)
+        return val_del
 
-    def extract_min(self):
-        if self.heap_size < 1:
-            raise ValueError('Heap underflow.')
-        minimum = self.heap_ls[1]
-        last = self.heap_ls.pop()
-        self.heap_size -= 1
-        if self.heap_size < 1:
-            # The last element is minimum.
-            pass
-        else:
-            self.heap_ls[1] = last        
-        self.min_heapify(1)
-        return minimum
+    def is_empty(self):
+        return self.current_size == 0
 
-    def decrease_key(self, i, key):
-        if key > self.heap_ls[i]:
-            raise ValueError('New key is larger than current key.')
-        self.heap_ls[i] = key
-        while i > 1 and self.heap_ls[parent(i)] > self.heap_ls[i]:
-            self.heap_ls[i], self.heap_ls[parent(i)] = (
-                self.heap_ls[parent(i)], self.heap_ls[i])
-            i = parent(i)
+    def size(self):
+        return self.current_size
 
-    def insert(self, key):
-        self.heap_size += 1
-        self.heap_ls.append(np.inf)
-        self.decrease_key(self.heap_size, key)
+    def __contains__(self, node):
+        return node in self.heap_ls
+
+    def build_heap(self, a_list):
+        self.current_size = len(a_list)
+        self.heap_ls = [0] + a_list[:]
+        i = len(a_list) // 2
+        while i > 0:
+            self._percolate_down(i)
+            i -= 1
 
 
 def main():
-    min_pq = MinPriorityQueue()
+    print('Insert 5, 9, 11, 14, 18, 19, 21, 33, 17, 27:')
+    bh_min = MinBinaryHeap()
+    bh_min.insert(5)
+    bh_min.insert(9)
+    bh_min.insert(11)
+    bh_min.insert(14)
+    bh_min.insert(18)
+    bh_min.insert(19)
+    bh_min.insert(21)
+    bh_min.insert(33)
+    bh_min.insert(17)
+    bh_min.insert(27)
+    bh_min.show()
 
-    print('Insert sequentially 5, 7, 3, 1')
-    min_pq.insert(5)
-    min_pq.insert(7)
-    min_pq.insert(3)
-    min_pq.insert(1)
-    min_pq.show()
+    print('Find min: {}'.format(bh_min.find_min()))
+    print('Is empty? {}'.format(bh_min.is_empty()))
+    print('Size? {}'.format(bh_min.size()))
 
-    print('Decrease key 7 at position 4 to 2.')
-    min_pq.decrease_key(4, 2)
-    min_pq.show()
+    print('Insert 7:')
+    bh_min.insert(7)
+    bh_min.show()    
 
-    print('Find min:')
-    print(min_pq.find_min())
+    print('Delete min: {}'.format(bh_min.delete_min()))
+    bh_min.show()
 
-    print('Extract min:')
-    _min = min_pq.extract_min()
-    print(_min)
-    print('The remaining:')
-    min_pq.show()
+    print('Build heap with 9, 6, 5, 2, 3:')
+    bh_min = MinBinaryHeap()
+    bh_min.build_heap([9, 6, 5, 2, 3])
+    bh_min.show()
+
+    print('9 in bh_min? {}'.format(9 in bh_min))
+    print('1 in bh_min? {}'.format(1 in bh_min))
+
 
 if __name__ == '__main__':
     main()
+
