@@ -47,7 +47,7 @@ def _quick_sort_recur(a_list, first, last):
         _quick_sort_recur(a_list, split_point + 1, last)
 
 
-def quick_sort_naive(a_list):
+def quick_sort_raw(a_list):
     """Quick sort algortihm with recursion."""
     _quick_sort_recur(a_list, 0, len(a_list) - 1)
 
@@ -56,7 +56,7 @@ def main():
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print('a_list: \n{}'.format(a_list))
     print('Quick sort: ')
-    quick_sort_naive(a_list)
+    quick_sort_raw(a_list)
 
 
 if __name__ == '__main__':
