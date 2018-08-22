@@ -19,8 +19,8 @@ def karatsuba_multiplication(x, y):
            + 2^(n/2) [(x_L + x_R)((y_L + y_R) - x_L y_L - x_R y_R] 
            + x_R y_R
 
-    Time complexity: O((n+n)^log3) = O(n^1.59), much faster than 
-    the naive one with O(n^2).
+    Time complexity: O((n + n)^log3) = O(n^1.59), 
+    much faster than the naive one with O(n^2).
     """
     x_n = int(math.log10(x)) + 1
     y_n = int(math.log10(y)) + 1
