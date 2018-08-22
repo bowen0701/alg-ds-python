@@ -86,9 +86,9 @@ def _find_max_1D(arr):
     return max_id, max_item
 
 def find_peak(arr):
-    """Find peak in 2D array by Divide and Conquer algorithm.
+    """Find peak in 2D (n x m) array by Divide and Conquer algorithm.
 
-    Time complexity: O(nlog(m)).
+    Time complexity: O(m * log(n)).
     """
     nrow, ncol = len(arr), len(arr[0])
 
