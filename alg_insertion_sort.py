@@ -7,6 +7,9 @@ def insertion_sort(a_list):
     """Insertion Sort algortihm.
 
     Time complexity: O(n^2).
+
+    Although its complexity is bigger than the ones with O(n*logn), 
+    one advantage is the sorting happens in place.
     """
     gen = ((i, v) for i, v in enumerate(a_list) if i > 0)
     for (i, v) in gen:
