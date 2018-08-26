@@ -10,11 +10,11 @@ def insertion_sort(a_list):
     """
     gen = ((i, v) for i, v in enumerate(a_list) if i > 0)
     for (i, v) in gen:
-        pos = i
-        while pos > 0 and a_list[pos - 1] > v:
-            a_list[pos] = a_list[pos - 1]
-            pos -= 1
-        a_list[pos] = v
+        key = i
+        while key > 0 and a_list[key - 1] > v:
+            a_list[key] = a_list[key - 1]
+            key -= 1
+        a_list[key] = v
 
 
 def main():
