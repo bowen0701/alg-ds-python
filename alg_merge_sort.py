@@ -4,7 +4,7 @@ from __future__ import division
 
 
 def _merge_recur(x_list, y_list):
-    """Merge two sorted lists by recusions."""
+    """Merge two sorted lists by Recusions."""
     if len(x_list) == 0:
         return y_list
     if len(y_list) == 0:
@@ -16,7 +16,7 @@ def _merge_recur(x_list, y_list):
 
 
 def _merge_iter(x_list, y_list):
-    """Merge two sorted lists by iteration."""
+    """Merge two sorted lists by Iteration (i.e. Two Fingers Algorithm)."""
     z_list = []
     x_pos = 0
     y_pos = 0
@@ -40,7 +40,7 @@ def _merge_iter(x_list, y_list):
 
 
 def merge_sort(a_list, merge):
-    """Merge sort by divide and conquer algorithm.
+    """Merge sort by Divide and Conquer Algorithm.
 
     Time complexity: O(n*logn).
     """
