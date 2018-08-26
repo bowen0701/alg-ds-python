@@ -39,7 +39,7 @@ def _merge_iter(x_list, y_list):
     return z_list
 
 
-def merge_sort(a_list, merge_ft):
+def merge_sort(a_list, merge):
     """Merge sort by divide and conquer algorithm.
 
     Time complexity: O(n*logn).
@@ -48,8 +48,8 @@ def merge_sort(a_list, merge_ft):
         return a_list
     else:
         mid = len(a_list) // 2
-        return merge_ft(merge_sort(a_list[:mid], merge_ft), 
-                        merge_sort(a_list[mid:], merge_ft))
+        return merge(merge_sort(a_list[:mid], merge), 
+                     merge_sort(a_list[mid:], merge))
 
 
 def main():
