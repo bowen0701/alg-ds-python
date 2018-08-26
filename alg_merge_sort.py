@@ -39,7 +39,7 @@ def _merge_iter(x_list, y_list):
     return z_list
 
 
-def merge_sort(a_list, merge_ft=_merge_iter):
+def merge_sort(a_list, merge_ft):
     """Merge sort by divide and conquer algorithm.
 
     Time complexity: O(n*logn).
@@ -56,17 +56,16 @@ def main():
     import time
 
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-    print('a_list: \n{}'.format(a_list))
 
     start_time = time.time()
-    print('By merge sort with recusions:')
-    print(merge_sort(a_list, merge_ft=_merge_recur))
-    print('Run time: {}'.format(time.time() - start_time))
+    print(merge_sort(a_list, _merge_recur))
+    print('Run time of merge sort with recusions: {}'
+          .format(time.time() - start_time))
 
     start_time = time.time()
-    print('By merge sort with iterations:')
-    print(merge_sort(a_list, merge_ft=_merge_iter))
-    print('Run time: {}'.format(time.time() - start_time))
+    print(merge_sort(a_list, _merge_iter))
+    print('Run time of merge sort with iterations: {}'
+          .format(time.time() - start_time))
 
 
 if __name__ == '__main__':
