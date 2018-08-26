@@ -33,8 +33,8 @@ def _dfs_explore(v, graph_adj_d, visited_d,
     return visited_d, previsit_d, postvisit_d, clock, ccid_d
 
 
-def undirected_graph_connected_components(graph_adj_d):
-    """Connected components for undirected graph by DFS.
+def connected_components(graph_adj_d):
+    """Connected components in undirected graph by the DFS.
 
     Time complexity for graph G(V, E): O(|V|+|E|). 
     """
@@ -58,7 +58,7 @@ def undirected_graph_connected_components(graph_adj_d):
 
 
 def main():
-    # Undirected graph by adjacency dictionary, with connected component = 1.
+    # Undirected graph with connected component = 1.
     # graph_adj_d = {
     #     'A': ['B', 'F'],
     #     'B': ['A', 'C', 'G'],
@@ -71,7 +71,7 @@ def main():
     #     'I': ['E', 'H']
     # }
 
-    # Undirected graph with connected component = 2.
+    # Undirected graph with connected components = 2.
     graph_adj_d = {
         'A': ['B', 'F'],
         'B': ['A', 'G'],
@@ -83,7 +83,7 @@ def main():
         'I': ['E', 'H']
     }
 
-    ccid_d, previsit_d, postvisit_d = undirected_graph_connected_components(graph_adj_d)
+    ccid_d, previsit_d, postvisit_d = connected_components(graph_adj_d)
     print('ccid_d: {}'.format(ccid_d))
     print('previsit_d: {}'.format(previsit_d))
     print('postvisit_d: {}'.format(postvisit_d))
