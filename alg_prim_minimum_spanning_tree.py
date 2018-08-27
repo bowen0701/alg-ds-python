@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import numpy as np
 
-from ds_min_priority_queue_tuple import MinPriorityQueue
+from ds_min_binary_heap_tuple import MinBinaryHeapTuple
 
 
 def prim(w_graph_d):
@@ -13,7 +13,7 @@ def prim(w_graph_d):
 
     Time complexity for graph G(V, E): O((|V|+|E|)log(|V|)).
     """
-    min_pq = MinPriorityQueue()
+    min_pq = MinBinaryHeapTuple()
 
     key_d = {v: np.inf for v in w_graph_d.keys()}
     previous_d = {v: None for v in w_graph_d.keys()}
