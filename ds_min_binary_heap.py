@@ -15,8 +15,8 @@ def right(i):
     return 2 * i + 1
 
 
-class MinPriorityQueue(object):
-    """Min Priority Queue."""
+class MinBinaryHeap(object):
+    """Min Binary Heap implementation for Priority Queue."""
     def __init__(self):
         self.heap_ls = [0]
         self.heap_size = 0
@@ -71,7 +71,7 @@ class MinPriorityQueue(object):
 
 
 def main():
-    min_pq = MinPriorityQueue()
+    min_pq = MinBinaryHeap()
 
     print('Insert sequentially 5, 7, 3, 1')
     min_pq.insert(5)

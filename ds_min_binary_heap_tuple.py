@@ -15,8 +15,8 @@ def right(i):
     return 2 * i + 1
 
 
-class MinPriorityQueue(object):
-    """Min Priority Queue."""
+class MinBinaryHeapTuple(object):
+    """Min Binary Heap tuple implmentation for Priority Queue."""
     def __init__(self):
         self.heap_ls = [[0, 0]]
         self.heap_size = 0
@@ -72,7 +72,7 @@ class MinPriorityQueue(object):
 
 
 def main():
-    min_pq = MinPriorityQueue()
+    min_pq = MinBinaryHeapTuple()
 
     print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
     min_pq.insert([5, 'a'])
