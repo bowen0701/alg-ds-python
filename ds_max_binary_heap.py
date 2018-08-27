@@ -15,8 +15,8 @@ def right(i):
     return 2 * i + 1
 
 
-class MaxPriorityQueue(object):
-    """Max Priority Queue."""
+class MaxBinaryHeap(object):
+    """Max Binary Heap implementation for Priority Queue."""
     def __init__(self):
         self.heap_ls = [0]
         self.heap_size = 0
@@ -71,7 +71,7 @@ class MaxPriorityQueue(object):
 
 
 def main():
-    max_pq = MaxPriorityQueue()
+    max_pq = MaxBinaryHeap()
 
     print('Insert sequentially 5, 7, 3, 1')
     max_pq.insert(5)

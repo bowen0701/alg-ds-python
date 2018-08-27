@@ -15,8 +15,8 @@ def right(i):
     return 2 * i + 1
 
 
-class MaxPriorityQueue(object):
-    """Max Priority Queue."""
+class MaxBinaryHeapTuple(object):
+    """Max Binray Heap tuple implementation for Priority Queue."""
     def __init__(self):
         self.heap_ls = [[0, 0]]
         self.heap_size = 0
@@ -72,7 +72,7 @@ class MaxPriorityQueue(object):
 
 
 def main():
-    max_pq = MaxPriorityQueue()
+    max_pq = MaxBinaryHeapTuple()
 
     print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
     max_pq.insert([5, 'a'])
