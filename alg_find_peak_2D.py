@@ -4,7 +4,8 @@ from __future__ import print_function
 
 import itertools
 
-"""Find a peak in 2D array.
+"""
+Find a peak in 2D array.
 
 Support a is an array of length (m, n).
 If a is an array of length (1, 1), a[0][0] is a peak.
