@@ -4,7 +4,8 @@ from __future__ import print_function
 
 import numpy as np
 
-"""Find a peak in 1D array.
+"""
+Find a peak in 1D array.
 
 Support a is an array of length n.
 If a is an array of length 1, a[0] is a peak.
