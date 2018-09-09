@@ -18,57 +18,57 @@ def right(i):
 class MinBinaryHeap(object):
     """Min Binary Heap tuple implmentation for Priority Queue."""
     def __init__(self):
-        self.heap_ls = [[0, 0]]
-        self.heap_size = 0
+        self.A = [[0, 0]]
+        self.size = 0
 
     def show(self):
-        print(self.heap_ls)
+        print(self.A)
 
     def min_heapify(self, i):
         l = left(i)
         r = right(i)
-        if l <= self.heap_size and self.heap_ls[l][0] < self.heap_ls[i][0]:
+        if l <= self.size and self.A[l][0] < self.A[i][0]:
             min_i = l
         else:
             min_i = i
-        if r <= self.heap_size and self.heap_ls[r][0] < self.heap_ls[min_i][0]:
+        if r <= self.size and self.A[r][0] < self.A[min_i][0]:
             min_i = r
         if min_i != i:
-            self.heap_ls[i], self.heap_ls[min_i] = (
-                self.heap_ls[min_i], self.heap_ls[i])
+            self.A[i], self.A[min_i] = (
+                self.A[min_i], self.A[i])
             self.min_heapify(min_i)
 
     def find_min(self):
-        return self.heap_ls[1]
+        return self.A[1]
 
     def extract_min(self):
-        if self.heap_size < 1:
+        if self.size < 1:
             raise ValueError('Heap underflow.')
-        minimum = self.heap_ls[1]
-        last = self.heap_ls.pop()
-        self.heap_size -= 1
-        if self.heap_size < 1:
+        minimum = self.A[1]
+        last = self.A.pop()
+        self.size -= 1
+        if self.size < 1:
             # The last element is minimum.
             pass
         else:
-            self.heap_ls[1] = last
+            self.A[1] = last
         self.min_heapify(1)
         return minimum
 
     def decrease_key(self, i, key):
-        if key > self.heap_ls[i][0]:
+        if key > self.A[i][0]:
             raise ValueError('New key is larger than current key.')
-        self.heap_ls[i][0] = key
-        while i > 1 and self.heap_ls[parent(i)][0] > self.heap_ls[i][0]:
-            self.heap_ls[i], self.heap_ls[parent(i)] = (
-                self.heap_ls[parent(i)], self.heap_ls[i])
+        self.A[i][0] = key
+        while i > 1 and self.A[parent(i)][0] > self.A[i][0]:
+            self.A[i], self.A[parent(i)] = (
+                self.A[parent(i)], self.A[i])
             i = parent(i)
 
     def insert(self, new_node):
         key, item = new_node        
-        self.heap_ls.append([np.inf, item])
-        self.heap_size += 1
-        self.decrease_key(self.heap_size, key)
+        self.A.append([np.inf, item])
+        self.size += 1
+        self.decrease_key(self.size, key)
 
 
 def main():
