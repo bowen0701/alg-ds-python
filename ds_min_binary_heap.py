@@ -16,9 +16,9 @@ def right(i):
 
 
 class MinBinaryHeap(object):
-    """Min Binary Heap implementation for Priority Queue."""
+    """Min Binary Heap tuple implmentation for Priority Queue."""
     def __init__(self):
-        self.heap_ls = [0]
+        self.heap_ls = [[0, 0]]
         self.heap_size = 0
 
     def show(self):
@@ -27,11 +27,11 @@ class MinBinaryHeap(object):
     def min_heapify(self, i):
         l = left(i)
         r = right(i)
-        if l <= self.heap_size and self.heap_ls[l] < self.heap_ls[i]:
+        if l <= self.heap_size and self.heap_ls[l][0] < self.heap_ls[i][0]:
             min_i = l
         else:
             min_i = i
-        if r <= self.heap_size and self.heap_ls[r] < self.heap_ls[min_i]:
+        if r <= self.heap_size and self.heap_ls[r][0] < self.heap_ls[min_i][0]:
             min_i = r
         if min_i != i:
             self.heap_ls[i], self.heap_ls[min_i] = (
@@ -51,47 +51,49 @@ class MinBinaryHeap(object):
             # The last element is minimum.
             pass
         else:
-            self.heap_ls[1] = last        
+            self.heap_ls[1] = last
         self.min_heapify(1)
         return minimum
 
     def decrease_key(self, i, key):
-        if key > self.heap_ls[i]:
+        if key > self.heap_ls[i][0]:
             raise ValueError('New key is larger than current key.')
-        self.heap_ls[i] = key
-        while i > 1 and self.heap_ls[parent(i)] > self.heap_ls[i]:
+        self.heap_ls[i][0] = key
+        while i > 1 and self.heap_ls[parent(i)][0] > self.heap_ls[i][0]:
             self.heap_ls[i], self.heap_ls[parent(i)] = (
                 self.heap_ls[parent(i)], self.heap_ls[i])
             i = parent(i)
 
-    def insert(self, key):
+    def insert(self, new_node):
+        key, item = new_node        
+        self.heap_ls.append([np.inf, item])
         self.heap_size += 1
-        self.heap_ls.append(np.inf)
         self.decrease_key(self.heap_size, key)
 
 
 def main():
     min_pq = MinBinaryHeap()
 
-    print('Insert sequentially 5, 7, 3, 1')
-    min_pq.insert(5)
-    min_pq.insert(7)
-    min_pq.insert(3)
-    min_pq.insert(1)
+    print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
+    min_pq.insert([5, 'a'])
+    min_pq.insert([7, 'c'])
+    min_pq.insert([3, 'b'])
+    min_pq.insert([1, 'd'])
     min_pq.show()
 
-    print('Decrease key 7 at position 4 to 2.')
-    min_pq.decrease_key(4, 2)
-    min_pq.show()
+    # print('Decrease key 7 at position 4 to 2.')
+    # min_pq.decrease_key(4, 2)
+    # min_pq.show()
 
-    print('Find min:')
-    print(min_pq.find_min())
+    # print('Find min key:')
+    # print(min_pq.find_min())
 
-    print('Extract min:')
+    print('Extract min key:')
     _min = min_pq.extract_min()
-    print(_min)
-    print('The remaining:')
+    print('- Min: {}'.format(_min))
+    print('- The remaining:')
     min_pq.show()
+
 
 if __name__ == '__main__':
     main()
