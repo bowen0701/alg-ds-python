@@ -18,7 +18,7 @@ def right(i):
 class MaxBinaryHeap(object):
     """Max Binray Heap tuple implementation for Priority Queue."""
     def __init__(self):
-        self.A = [[0, 0]]
+        self.A = [0]
         self.size = 0
 
     def show(self):
@@ -27,15 +27,14 @@ class MaxBinaryHeap(object):
     def max_heapify(self, i):
         l = left(i)
         r = right(i)
-        if l <= self.size and self.A[l][0] > self.A[i][0]:
+        if l <= self.size and self.A[l] > self.A[i]:
             max_i = l
         else:
             max_i = i
-        if r <= self.size and self.A[r][0] > self.A[max_i][0]:
+        if r <= self.size and self.A[r] > self.A[max_i]:
             max_i = r
         if max_i != i:
-            self.A[i], self.A[max_i] = (
-                self.A[max_i], self.A[i])
+            self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.max_heapify(max_i)
 
     def find_max(self):
@@ -56,29 +55,27 @@ class MaxBinaryHeap(object):
         return maximum
 
     def increase_key(self, i, key):
-        if key < self.A[i][0]:
+        if key < self.A[i]:
             raise ValueError('New key is smaller than current key.')
-        self.A[i][0] = key
-        while i > 1 and self.A[parent(i)][0] < self.A[i][0]:
-            self.A[i], self.A[parent(i)] = (
-                self.A[parent(i)], self.A[i])
+        self.A[i] = key
+        while i > 1 and self.A[parent(i)] < self.A[i]:
+            self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
 
-    def insert(self, new_mode):
-        key, item = new_mode
+    def insert(self, new_key):
         self.size += 1
-        self.A.append([-np.inf, item])
-        self.increase_key(self.size, key)
+        self.A.append(-np.inf)
+        self.increase_key(self.size, new_key)
 
 
 def main():
     max_pq = MaxBinaryHeap()
 
-    print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
-    max_pq.insert([5, 'a'])
-    max_pq.insert([7, 'c'])
-    max_pq.insert([3, 'b'])
-    max_pq.insert([1, 'd'])
+    print('Binary heap tuple with 5, 7, 3, 1:')
+    max_pq.insert(5)
+    max_pq.insert(7)
+    max_pq.insert(3)
+    max_pq.insert(1)
     max_pq.show()
 
     print('Increase key 1 at position 4 to 6.')
