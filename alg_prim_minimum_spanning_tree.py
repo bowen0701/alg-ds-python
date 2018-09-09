@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import numpy as np
 
-from ds_min_binary_heap_tuple import MinBinaryHeapTuple
+from ds_min_binary_heap import MinBinaryHeap
 
 
 def prim(w_graph_d):
@@ -13,14 +13,14 @@ def prim(w_graph_d):
 
     Time complexity for graph G(V, E): O((|V|+|E|)log(|V|)).
     """
-    min_pq = MinBinaryHeapTuple()
+    min_pq = MinBinaryHeap()
 
     key_d = {v: np.inf for v in w_graph_d.keys()}
     previous_d = {v: None for v in w_graph_d.keys()}
     visited_d = {v: False for v in w_graph_d.keys()}
 
     # Pick an arbitrary vertex as start.
-    s = w_graph_d.keys()[0]
+    s = list(w_graph_d.keys())[0]
     visited_d[s] = True
     key_d[s] = 0
     min_pq.insert([key_d[s], s])
