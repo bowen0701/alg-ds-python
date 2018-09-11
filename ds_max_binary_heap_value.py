@@ -16,7 +16,7 @@ def right(i):
 
 
 class MaxBinaryHeapValue(object):
-    """Max Binary Heap with value implementation for Priority Queue.
+    """Max Binary Heap with value implementation of Priority Queue.
 
     Max-heap property: A[parent(i)][0] >= A[i][0].
     """

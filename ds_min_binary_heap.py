@@ -16,7 +16,7 @@ def right(i):
 
 
 class MinBinaryHeap(object):
-    """Min Binary Heap implmentation for Priority Queue.
+    """Min Binary Heap implmentation of Priority Queue.
 
     Min-heap property: A[parent(i)] <= A[i].
     """

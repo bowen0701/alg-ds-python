@@ -16,7 +16,7 @@ def right(i):
 
 
 class MaxBinaryHeap(object):
-    """Max Binary Heap implementation for Priority Queue.
+    """Max Binary Heap implementation of Priority Queue.
 
     Application: Heapsort Algorithm.
 

@@ -16,7 +16,7 @@ def right(i):
 
 
 class MinBinaryHeapValue(object):
-    """Min Binary Heap with value implmentation for Priority Queue.
+    """Min Binary Heap with value implmentation of Priority Queue.
 
     Applications:
       - Dijkstra's Algorithm.
