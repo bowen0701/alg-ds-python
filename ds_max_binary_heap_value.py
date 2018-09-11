@@ -47,6 +47,10 @@ class MaxBinaryHeapValue(object):
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.max_heapify(max_i)
 
+    def build_max_heap():
+        """Build max heap operation from unordered array."""
+        pass
+
     def extract_max(self):
         if self.size < 1:
             raise ValueError('Heap underflow.')

@@ -47,6 +47,10 @@ class MinBinaryHeap(object):
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
             self.min_heapify(min_i)
 
+    def build_min_heap():
+        """Build min heap operation from unordered array."""
+        pass
+
     def extract_min(self):
         if self.size < 1:
             raise ValueError('Heap underflow.')
