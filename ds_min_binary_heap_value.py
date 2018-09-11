@@ -16,7 +16,10 @@ def right(i):
 
 
 class MinBinaryHeapValue(object):
-    """Min Binary Heap tuple implmentation for Priority Queue."""
+    """Min Binary Heap with value implmentation for Priority Queue.
+
+    Min-heap property: A[parent(i)][0] <= A[i][0].
+    """
     def __init__(self):
         self.A = [[0, 0]]
         self.size = 0
