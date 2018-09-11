@@ -16,7 +16,10 @@ def right(i):
 
 
 class MaxBinaryHeapValue(object):
-    """Max Binray Heap tuple implementation for Priority Queue."""
+    """Max Binary Heap with value implementation for Priority Queue.
+
+    Max-heap property: A[parent(i)][0] >= A[i][0].
+    """
     def __init__(self):
         self.A = [[0, 0]]
         self.size = 0
