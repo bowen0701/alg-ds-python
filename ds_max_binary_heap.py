@@ -18,6 +18,8 @@ def right(i):
 class MaxBinaryHeap(object):
     """Max Binary Heap implementation for Priority Queue.
 
+    Application: Heapsort Algorithm.
+
     Max-heap property: A[parent(i)] >= A[i].
     """
     def __init__(self):
