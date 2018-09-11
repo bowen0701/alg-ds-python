@@ -29,7 +29,14 @@ class MaxBinaryHeap(object):
     def show(self):
         print(self.A)
 
+    def find_max(self):
+        return self.A[1]
+
     def max_heapify(self, i):
+        """Max heapify operation.
+
+        Complexity: log(n).
+        """
         l = left(i)
         r = right(i)
         if l <= self.size and self.A[l] > self.A[i]:
@@ -41,9 +48,6 @@ class MaxBinaryHeap(object):
         if max_i != i:
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.max_heapify(max_i)
-
-    def find_max(self):
-        return self.A[1]
 
     def extract_max(self):
         if self.size < 1:

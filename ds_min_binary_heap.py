@@ -27,7 +27,14 @@ class MinBinaryHeap(object):
     def show(self):
         print(self.A)
 
+    def find_min(self):
+        return self.A[1]
+
     def min_heapify(self, i):
+        """Min heapify operation.
+
+        Complexity: log(n).
+        """
         l = left(i)
         r = right(i)
         if l <= self.size and self.A[l] < self.A[i]:
@@ -39,9 +46,6 @@ class MinBinaryHeap(object):
         if min_i != i:
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
             self.min_heapify(min_i)
-
-    def find_min(self):
-        return self.A[1]
 
     def extract_min(self):
         if self.size < 1:
