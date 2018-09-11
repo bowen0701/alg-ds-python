@@ -18,6 +18,10 @@ def right(i):
 class MinBinaryHeapValue(object):
     """Min Binary Heap with value implmentation for Priority Queue.
 
+    Applications:
+      - Dijkstra's Algorithm.
+      - Prim's Minimum Spanning Tree Algorithm.
+
     Min-heap property: A[parent(i)][0] <= A[i][0].
     """
     def __init__(self):
