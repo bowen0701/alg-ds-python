@@ -22,7 +22,7 @@ class MinBinaryHeap(object):
     """
     def __init__(self):
         self.A = [0]
-        self.size = 0
+        self.heap_size = 0
 
     def show(self):
         print(self.A)
@@ -37,11 +37,11 @@ class MinBinaryHeap(object):
         """
         l = left(i)
         r = right(i)
-        if l <= self.size and self.A[l] < self.A[i]:
+        if l <= self.heap_size and self.A[l] < self.A[i]:
             min_i = l
         else:
             min_i = i
-        if r <= self.size and self.A[r] < self.A[min_i]:
+        if r <= self.heap_size and self.A[r] < self.A[min_i]:
             min_i = r
         if min_i != i:
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
@@ -52,12 +52,12 @@ class MinBinaryHeap(object):
         pass
 
     def extract_min(self):
-        if self.size < 1:
+        if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         minimum = self.A[1]
         last = self.A.pop()
-        self.size -= 1
-        if self.size < 1:
+        self.heap_size -= 1
+        if self.heap_size < 1:
             # The last element is minimum.
             pass
         else:
@@ -75,8 +75,8 @@ class MinBinaryHeap(object):
 
     def insert(self, new_key):
         self.A.append(np.inf)
-        self.size += 1
-        self.decrease_key(self.size, new_key)
+        self.heap_size += 1
+        self.decrease_key(self.heap_size, new_key)
 
 
 def main():

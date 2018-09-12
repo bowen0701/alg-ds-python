@@ -22,7 +22,7 @@ class MaxBinaryHeapValue(object):
     """
     def __init__(self):
         self.A = [[0, 0]]
-        self.size = 0
+        self.heap_size = 0
 
     def show(self):
         print(self.A)
@@ -37,11 +37,11 @@ class MaxBinaryHeapValue(object):
         """ 
         l = left(i)
         r = right(i)
-        if l <= self.size and self.A[l][0] > self.A[i][0]:
+        if l <= self.heap_size and self.A[l][0] > self.A[i][0]:
             max_i = l
         else:
             max_i = i
-        if r <= self.size and self.A[r][0] > self.A[max_i][0]:
+        if r <= self.heap_size and self.A[r][0] > self.A[max_i][0]:
             max_i = r
         if max_i != i:
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
@@ -52,12 +52,12 @@ class MaxBinaryHeapValue(object):
         pass
 
     def extract_max(self):
-        if self.size < 1:
+        if self.heap_size < 1:
             raise ValueError('Heap underflow.')
         maximum = self.A[1]
         last = self.A.pop()
-        self.size -= 1
-        if self.size < 1:
+        self.heap_size -= 1
+        if self.heap_size < 1:
             # The last element is maximum.
             pass
         else:
@@ -75,9 +75,9 @@ class MaxBinaryHeapValue(object):
 
     def insert(self, new_mode):
         key, item = new_mode
-        self.size += 1
+        self.heap_size += 1
         self.A.append([-np.inf, item])
-        self.increase_key(self.size, key)
+        self.increase_key(self.heap_size, key)
 
 
 def main():
