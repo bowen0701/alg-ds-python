@@ -85,9 +85,8 @@ class MinBinaryHeapValue(object):
 
 
 def main():
-    min_pq = MinBinaryHeapValue()
-
     print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
+    min_pq = MinBinaryHeapValue()
     min_pq.insert([5, 'a'])
     min_pq.insert([7, 'c'])
     min_pq.insert([3, 'b'])

@@ -81,9 +81,8 @@ class MaxBinaryHeapValue(object):
 
 
 def main():
-    max_pq = MaxBinaryHeapValue()
-
     print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
+    max_pq = MaxBinaryHeapValue()
     max_pq.insert([5, 'a'])
     max_pq.insert([7, 'c'])
     max_pq.insert([3, 'b'])

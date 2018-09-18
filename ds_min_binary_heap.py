@@ -80,9 +80,8 @@ class MinBinaryHeap(object):
 
 
 def main():
-    min_pq = MinBinaryHeap()
-
     print('Binary heap with 5, 7, 3, 1:')
+    min_pq = MinBinaryHeap()
     min_pq.insert(5)
     min_pq.insert(7)
     min_pq.insert(3)
