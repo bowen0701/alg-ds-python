@@ -35,7 +35,7 @@ class MinBinaryHeapValue(object):
         return self.A[1]
 
     def min_heapify(self, i):
-        """Min heapify operation.
+        """Min heapify.
 
         Complexity: log(n).
         """ 
@@ -52,7 +52,7 @@ class MinBinaryHeapValue(object):
             self.min_heapify(min_i)
 
     def build_min_heap():
-        """Build min heap operation from unordered array."""
+        """Build min heap from unordered array."""
         pass
 
     def extract_min(self):
@@ -94,12 +94,12 @@ def main():
     min_pq.insert([1, 'd'])
     min_pq.show()
 
-    # print('Decrease key 7 at position 4 to 2.')
-    # min_pq.decrease_key(4, 2)
-    # min_pq.show()
+    print('Decrease key 7 at position 4 to 2.')
+    min_pq.decrease_key(4, 2)
+    min_pq.show()
 
-    # print('Find min key:')
-    # print(min_pq.find_min())
+    print('Find min key:')
+    print(min_pq.find_min())
 
     print('Extract min key:')
     _min = min_pq.extract_min()

@@ -31,7 +31,7 @@ class MinBinaryHeap(object):
         return self.A[1]
 
     def min_heapify(self, i):
-        """Min heapify operation.
+        """Min heapify.
 
         Complexity: log(n).
         """
@@ -48,7 +48,7 @@ class MinBinaryHeap(object):
             self.min_heapify(min_i)
 
     def build_min_heap():
-        """Build min heap operation from unordered array."""
+        """Build min heap from unordered array."""
         pass
 
     def extract_min(self):

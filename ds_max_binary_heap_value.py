@@ -31,7 +31,7 @@ class MaxBinaryHeapValue(object):
         return self.A[1]
 
     def max_heapify(self, i):
-        """Max heapify operation.
+        """Max heapify.
 
         Complexity: log(n).
         """ 
@@ -48,7 +48,7 @@ class MaxBinaryHeapValue(object):
             self.max_heapify(max_i)
 
     def build_max_heap():
-        """Build max heap operation from unordered array."""
+        """Build max heap from unordered array."""
         pass
 
     def extract_max(self):
