@@ -57,7 +57,7 @@ class MaxBinaryHeap(object):
         A.insert(0, 0)
         self.A = A
         self.heap_size = len(self.A) - 1
-        for i in reversed(range(1, self.heap_size // 2)):
+        for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
             # Start from the level-1 nodes from leaves back to level-log(n) node.
             self.max_heapify(i)
 
