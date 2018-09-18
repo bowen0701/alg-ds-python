@@ -33,7 +33,7 @@ class MaxBinaryHeapValue(object):
     def max_heapify(self, i):
         """Max heapify.
 
-        Complexity: log(n).
+        Complexity: (log(n)).
         """ 
         l = left(i)
         r = right(i)
@@ -102,6 +102,7 @@ def main():
     print(_max)
     print('The remaining:')
     max_pq.show()
+
 
 if __name__ == '__main__':
     main()

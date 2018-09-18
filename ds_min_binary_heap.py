@@ -33,7 +33,7 @@ class MinBinaryHeap(object):
     def min_heapify(self, i):
         """Min heapify.
 
-        Complexity: log(n).
+        Complexity: O(log(n)).
         """
         l = left(i)
         r = right(i)
@@ -89,12 +89,12 @@ def main():
     min_pq.insert(1)
     min_pq.show()
 
-    # print('Decrease key 7 at position 4 to 2.')
-    # min_pq.decrease_key(4, 2)
-    # min_pq.show()
+    print('Decrease key 7 at position 4 to 2.')
+    min_pq.decrease_key(4, 2)
+    min_pq.show()
 
-    # print('Find min key:')
-    # print(min_pq.find_min())
+    print('Find min key:')
+    print(min_pq.find_min())
 
     print('Extract min key:')
     _min = min_pq.extract_min()

@@ -37,7 +37,7 @@ class MinBinaryHeapValue(object):
     def min_heapify(self, i):
         """Min heapify.
 
-        Complexity: log(n).
+        Complexity: O(log(n)).
         """ 
         l = left(i)
         r = right(i)

@@ -35,7 +35,7 @@ class MaxBinaryHeap(object):
     def max_heapify(self, i):
         """Max heapify operation.
 
-        Complexity: log(n).
+        Complexity: O(log(n)).
         """
         l = left(i)
         r = right(i)
@@ -50,7 +50,10 @@ class MaxBinaryHeap(object):
             self.max_heapify(max_i)
 
     def build_max_heap(self, A):
-        """Build max heap from unordered array."""
+        """Build max heap from unordered array.
+
+        Complexity: O(n*log(n)) via simple analysis. Actually: O(n).
+        """
         A.insert(0, 0)
         self.A = A
         self.heap_size = len(A) - 1
@@ -113,6 +116,7 @@ def main():
     print(_max)
     print('The remaining:')
     max_pq.show()
+
 
 if __name__ == '__main__':
     main()
