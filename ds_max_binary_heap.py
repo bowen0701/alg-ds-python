@@ -49,9 +49,13 @@ class MaxBinaryHeap(object):
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.max_heapify(max_i)
 
-    def build_max_heap():
-        """Build max heap operation from unordered array."""
-        pass
+    def build_max_heap(self, A):
+        """Build max heap from unordered array."""
+        A.insert(0, 0)
+        self.A = A
+        self.heap_size = len(A) - 1
+        for i in reversed(range(1, self.heap_size // 2)):
+            self.max_heapify(i)
 
     def extract_max(self):
         if self.heap_size < 1:
@@ -85,11 +89,17 @@ def main():
     max_pq = MaxBinaryHeap()
 
     print('Binary heap tuple with 5, 7, 3, 1:')
+    max_pq = MaxBinaryHeap()
     max_pq.insert(5)
     max_pq.insert(7)
     max_pq.insert(3)
     max_pq.insert(1)
     max_pq.show()
+
+    print('Build max heap from unordered list [5, 7, 3, 1]:')
+    max_pq = MaxBinaryHeap()
+    max_pq.build_max_heap([5, 7, 3, 1])
+    max_pq.show()   
 
     print('Increase key 1 at position 4 to 6.')
     max_pq.increase_key(4, 6)
