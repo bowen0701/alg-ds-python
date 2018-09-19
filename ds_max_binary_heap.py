@@ -52,6 +52,9 @@ class MaxBinaryHeap(object):
     def build_max_heap(self, A):
         """Build max heap from unordered array.
 
+        Start from the level-1 nodes from leaves back to level-log(n) node.
+        Specifically, node (n / 2), node (n / 2 - 1), ..., node 1.
+
         Complexity: O(n*log(n)) via simple analysis. Actually: O(n).
         """
         A.insert(0, 0)
