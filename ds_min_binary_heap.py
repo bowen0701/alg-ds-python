@@ -48,13 +48,18 @@ class MinBinaryHeap(object):
             self.min_heapify(min_i)
 
     def build_min_heap(self, A):
-        """Build min heap from unordered array."""
+        """Build min heap from unordered array.
+
+        Start from the level-1 nodes from leaves back to level-log(n) node.
+        Specifically, node (n / 2), node (n / 2 - 1), ..., node 1.
+
+        Complexity: O(n*log(n)) via simple analysis. Actually: O(n).
+        """
         A.insert(0, 0)
         self.A = A
         self.heap_size = len(self.A) - 1
         print(self.heap_size)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
-            # Start from the level-1 nodes from leaves back to level-log(n) node.
             self.min_heapify(i)
 
     def extract_min(self):
