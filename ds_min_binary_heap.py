@@ -44,6 +44,7 @@ class MinBinaryHeap(object):
         if r <= self.heap_size and self.A[r] < self.A[min_i]:
             min_i = r
         if min_i != i:
+            # Swap node i and node min_i.
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
             self.min_heapify(min_i)
 
@@ -55,11 +56,10 @@ class MinBinaryHeap(object):
 
         Complexity: O(n*log(n)) via simple analysis. Actually: O(n).
         """
-        A.insert(0, 0)
         self.A = A
-        self.heap_size = len(self.A) - 1
-        print(self.heap_size)
-        for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
+        self.heap_size = len(self.A)
+        self.A.insert(0, 0)
+        for i in reversed(range(1, self.heap_size // 2 + 1)):
             self.min_heapify(i)
 
     def extract_min(self):
@@ -73,7 +73,7 @@ class MinBinaryHeap(object):
             pass
         else:
             self.A[1] = last
-        self.min_heapify(1)
+            self.min_heapify(1)
         return minimum
 
     def decrease_key(self, i, key):
@@ -81,6 +81,7 @@ class MinBinaryHeap(object):
             raise ValueError('New key is larger than current key.')
         self.A[i] = key
         while i > 1 and self.A[parent(i)] > self.A[i]:
+            # Swap node i and node parent(i).
             self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
 
@@ -91,17 +92,17 @@ class MinBinaryHeap(object):
 
 
 def main():
-    print('Binary heap with 5, 7, 3, 1:')
+    print('Binary heap with 3, 7, 5, 1:')
     min_pq = MinBinaryHeap()
-    min_pq.insert(5)
-    min_pq.insert(7)
     min_pq.insert(3)
+    min_pq.insert(7)
+    min_pq.insert(5)
     min_pq.insert(1)
     min_pq.show()
 
     print('Build min heap from unordered list [5, 7, 3, 1]:')
     min_pq = MinBinaryHeap()
-    min_pq.build_min_heap([5, 7, 3, 1])
+    min_pq.build_min_heap([3, 7, 5, 1])
     min_pq.show()
 
     print('Decrease key 7 at position 4 to 2.')
