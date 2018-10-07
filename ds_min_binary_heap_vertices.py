@@ -66,7 +66,7 @@ class MinBinaryHeapVertices(object):
             pass
         else:
             self.A[1] = last
-        self.min_heapify(1)
+            self.min_heapify(1)
         return minimum
 
     def decrease_key(self, i, key):
@@ -74,6 +74,7 @@ class MinBinaryHeapVertices(object):
             raise ValueError('New key is larger than current key.')
         self.A[i][0] = key
         while i > 1 and self.A[parent(i)][0] > self.A[i][0]:
+            # Swap node i and node parent(i).
             self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
 
@@ -87,9 +88,9 @@ class MinBinaryHeapVertices(object):
 def main():
     print('Binary heap of vertices with [5, a], [7, c], [3, b], [1, e]:')
     min_pq = MinBinaryHeapVertices()
-    min_pq.insert([5, 'a'])
+    min_pq.insert([3, 'a'])
     min_pq.insert([7, 'c'])
-    min_pq.insert([3, 'b'])
+    min_pq.insert([5, 'b'])
     min_pq.insert([1, 'd'])
     min_pq.show()
 
