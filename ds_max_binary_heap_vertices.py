@@ -15,8 +15,8 @@ def right(i):
     return 2 * i + 1
 
 
-class MaxBinaryHeapValue(object):
-    """Max Binary Heap with value implementation of Priority Queue.
+class MaxBinaryHeapVertices(object):
+    """Max Binary Heap of vetices implementation of Priority Queue.
 
     Max-heap property: A[parent(i)][0] >= A[i][0].
     """
@@ -81,8 +81,8 @@ class MaxBinaryHeapValue(object):
 
 
 def main():
-    print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
-    max_pq = MaxBinaryHeapValue()
+    print('Binary heap of vertices with [5, a], [7, c], [3, b], [1, e]:')
+    max_pq = MaxBinaryHeapVertices()
     max_pq.insert([5, 'a'])
     max_pq.insert([7, 'c'])
     max_pq.insert([3, 'b'])
