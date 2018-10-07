@@ -15,7 +15,7 @@ def right(i):
     return 2 * i + 1
 
 
-class MinBinaryHeapValue(object):
+class MinBinaryHeapVertices(object):
     """Min Binary Heap with value implmentation of Priority Queue.
 
     Applications:
@@ -86,7 +86,7 @@ class MinBinaryHeapValue(object):
 
 def main():
     print('Binary heap tuple with [5, a], [7, c], [3, b], [1, e]:')
-    min_pq = MinBinaryHeapValue()
+    min_pq = MinBinaryHeapVertices()
     min_pq.insert([5, 'a'])
     min_pq.insert([7, 'c'])
     min_pq.insert([3, 'b'])
