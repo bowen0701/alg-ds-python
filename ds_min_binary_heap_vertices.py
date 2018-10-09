@@ -51,9 +51,19 @@ class MinBinaryHeapVertices(object):
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
             self.min_heapify(min_i)
 
-    def build_min_heap():
-        """Build min heap from unordered array."""
-        pass
+    def build_min_heap(self, A):
+        """Build min heap from unordered array.
+
+        Start from level-1 nodes from leaves back to level-long(n) nodes.
+        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where 
+        n is the number of nodes including the root node.
+
+        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
+        """
+        self.A.extend(A)
+        self.heap_size = len(A)
+        for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
+            self.min_heapify(i)
 
     def extract_min(self):
         if self.heap_size < 1:
@@ -86,12 +96,18 @@ class MinBinaryHeapVertices(object):
 
 
 def main():
-    print('Binary heap of vertices with [5, a], [7, c], [3, b], [1, e]:')
+    print('Binary heap of vertices by inserting [3, a], [7, c], [5, b], [1, e]:')
     min_pq = MinBinaryHeapVertices()
     min_pq.insert([3, 'a'])
     min_pq.insert([7, 'c'])
     min_pq.insert([5, 'b'])
-    min_pq.insert([1, 'd'])
+    min_pq.insert([1, 'e'])
+    min_pq.show()
+
+    print('Build min heap of vertices from unordered list')
+    print('by inserting [[3, a], [7, c], [5, b], [1, e]]:')
+    min_pq = MinBinaryHeapVertices()
+    min_pq.build_min_heap([[3, 'a'], [7, 'c'], [5, 'b'], [1, 'e']])
     min_pq.show()
 
     print('Decrease key 7 at position 4 to 2.')
