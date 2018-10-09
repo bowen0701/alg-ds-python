@@ -53,7 +53,7 @@ class MaxBinaryHeap(object):
         """Build max heap from unordered array.
 
         Start from the level-1 nodes from leaves back to level-log(n) node.
-        Specifically, node (n / 2), node (n / 2 - 1), ..., node 1.
+        Specifically, node (n/2), node (n/2 - 1), ..., node 1.
 
         Complexity: O(n*log(n)) via simple analysis. Actually: O(n).
         """
