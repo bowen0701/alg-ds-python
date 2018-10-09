@@ -57,9 +57,8 @@ class MinBinaryHeap(object):
 
         Complexity: O(n*log(n)) via simple analysis. Actually O(n).
         """
-        self.A = A
-        self.heap_size = len(self.A)
-        self.A.insert(0, 0)
+        self.A.extend(A)
+        self.heap_size = len(A)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
             self.min_heapify(i)
 
