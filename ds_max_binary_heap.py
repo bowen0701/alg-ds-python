@@ -46,6 +46,7 @@ class MaxBinaryHeap(object):
         if r <= self.heap_size and self.A[r] > self.A[max_i]:
             max_i = r
         if max_i != i:
+            # Swap node i and node min_i.
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.max_heapify(max_i)
 
@@ -83,6 +84,7 @@ class MaxBinaryHeap(object):
             raise ValueError('New key is smaller than current key.')
         self.A[i] = key
         while i > 1 and self.A[parent(i)] < self.A[i]:
+            # Swap node i and node parent(i).
             self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
 
