@@ -33,7 +33,7 @@ class MaxBinaryHeapVertices(object):
     def max_heapify(self, i):
         """Max heapify.
 
-        Complexity: (log(n)).
+        Complexity: O(log(n)).
         """ 
         l = left(i)
         r = right(i)
@@ -47,9 +47,19 @@ class MaxBinaryHeapVertices(object):
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.max_heapify(max_i)
 
-    def build_max_heap():
-        """Build max heap from unordered array."""
-        pass
+    def build_max_heap(self, A):
+        """Build max heap from unordered array.
+
+        Start from level-1 nodes from leaves back to level-log(n) node.
+        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
+        n is the number of nodes including the root node. 
+
+        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
+        """
+        self.A.extend(A)
+        self.heap_size = len(A)
+        for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
+            self.max_heapify(i)
 
     def extract_max(self):
         if self.heap_size < 1:
@@ -81,12 +91,18 @@ class MaxBinaryHeapVertices(object):
 
 
 def main():
-    print('Binary heap of vertices with [5, a], [7, c], [3, b], [1, e]:')
+    print('Binary heap of vertices by inserting [5, a], [7, c], [3, b], [1, e]:')
     max_pq = MaxBinaryHeapVertices()
     max_pq.insert([5, 'a'])
     max_pq.insert([7, 'c'])
     max_pq.insert([3, 'b'])
-    max_pq.insert([1, 'd'])
+    max_pq.insert([1, 'e'])
+    max_pq.show()
+
+    print('Build heap of vertices from unordered list')
+    print('[[5, a], [7, c], [3, b], [1, e]]:')
+    max_pq = MaxBinaryHeapVertices()
+    max_pq.build_max_heap([[5, 'a'], [7, 'c'], [3, 'b'], [1, 'e']])
     max_pq.show()
 
     print('Increase key 1 at position 4 to 6.')
