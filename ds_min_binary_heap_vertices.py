@@ -105,7 +105,7 @@ def main():
     min_pq.show()
 
     print('Build min heap of vertices from unordered list')
-    print('by inserting [[3, a], [7, c], [5, b], [1, e]]:')
+    print('[[3, a], [7, c], [5, b], [1, e]]:')
     min_pq = MinBinaryHeapVertices()
     min_pq.build_min_heap([[3, 'a'], [7, 'c'], [5, 'b'], [1, 'e']])
     min_pq.show()
