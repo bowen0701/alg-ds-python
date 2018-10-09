@@ -56,13 +56,12 @@ class MaxBinaryHeap(object):
         Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
         n is the number of nodes including the root one.
 
-        Complexity: O(n*log(n)) via simple analysis. Actually: O(n).
+        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
         """
-        A.insert(0, 0)
         self.A = A
-        self.heap_size = len(self.A) - 1
+        self.heap_size = len(self.A)
+        A.insert(0, 0)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
-            # Start from the level-1 nodes from leaves back to level-log(n) node.
             self.max_heapify(i)
 
     def extract_max(self):

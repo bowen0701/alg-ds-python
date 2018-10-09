@@ -55,12 +55,12 @@ class MinBinaryHeap(object):
         Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
         n is the number of nodes including the root one.
 
-        Complexity: O(n*log(n)) via simple analysis. Actually: O(n).
+        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
         """
         self.A = A
         self.heap_size = len(self.A)
         self.A.insert(0, 0)
-        for i in reversed(range(1, self.heap_size // 2 + 1)):
+        for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
             self.min_heapify(i)
 
     def extract_min(self):
