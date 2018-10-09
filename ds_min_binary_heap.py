@@ -92,7 +92,7 @@ class MinBinaryHeap(object):
 
 
 def main():
-    print('Binary heap with 3, 7, 5, 1:')
+    print('Binary heap by inserting 3, 7, 5, 1:')
     min_pq = MinBinaryHeap()
     min_pq.insert(3)
     min_pq.insert(7)
@@ -100,7 +100,7 @@ def main():
     min_pq.insert(1)
     min_pq.show()
 
-    print('Build min heap from unordered list [5, 7, 3, 1]:')
+    print('Build min heap from unordered list [3, 7, 5, 1]:')
     min_pq = MinBinaryHeap()
     min_pq.build_min_heap([3, 7, 5, 1])
     min_pq.show()
