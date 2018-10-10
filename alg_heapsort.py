@@ -50,18 +50,28 @@ def build_max_heap(A):
 
 
 def heapsort(A):
-    # Build max heap from unordered list.
+    """Heapsort Algorithm.
+
+    Notes:
+      - Build max heap from unordered list.
+      - Swap node n and node 1.
+      - Discard node n from heap by decrementing heap_size.
+      - Run max_heapify to fix max heap violation in node 1.
+      - Go to Step 2 unless heap is empty.
+      - Output heapsorted A by ignoring redundant root.
+
+    Complexity: O(n*log(n)),
+      - since after n iterations the heap is empty,
+      - and every iteration involves a swap and a max_heapify operation,
+        hence it takes O(log(n)) time.
+    """
     max_pq, heap_size = build_max_heap(A)
 
     while heap_size > 0:
-        # Swap node n and node 1.
         max_pq[heap_size], max_pq[1] = max_pq[1], max_pq[heap_size]
-        # Discard node n from heap by decrementing heap_size.
         heap_size -= 1
-        # Run max_heapify to fix max heap violation in node 1.
         max_heapify(max_pq, heap_size, 1)
 
-    # Output heapsorted A by ignoring redundant root.
     heapsort_A = max_pq[1:]
     return heapsort_A
 
