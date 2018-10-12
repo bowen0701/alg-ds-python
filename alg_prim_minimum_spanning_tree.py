@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import numpy as np
 
-from ds_min_binary_heap_value import MinBinaryHeapValue
+from ds_min_binary_heap_vertices import MinBinaryHeapVertices
 
 
 def prim(w_graph_d):
@@ -13,7 +13,7 @@ def prim(w_graph_d):
 
     Time complexity for graph G(V, E): O((|V|+|E|)log(|V|)).
     """
-    min_pq = MinBinaryHeapValue()
+    min_pq = MinBinaryHeapVertices()
 
     key_d = {v: np.inf for v in w_graph_d.keys()}
     previous_d = {v: None for v in w_graph_d.keys()}
