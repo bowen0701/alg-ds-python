@@ -27,7 +27,6 @@ def _dfs_explore(v, graph_adj_d, visited_d, previsit_d, postvisit_d, clock):
                              previsit_d, postvisit_d, clock))
     
     postvisit_d, clock = _postvisit(v, postvisit_d, clock)
-    
     return visited_d, previsit_d, postvisit_d, clock
 
 
