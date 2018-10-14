@@ -25,23 +25,16 @@ def bfs(graph_adj_d, start_vertex):
 
 
 def main():
-    # Small word ladder graph.
+    # Undirected graph by adjacency list.
     graph_adj_d = {
-        'fool': ['cool', 'pool', 'foil', 'foul'],
-        'foul': ['fool', 'foil'],
-        'foil': ['fool', 'foul', 'fail'],
-        'cool': ['fool', 'pool'],
-        'fail': ['foil', 'fall'],
-        'fall': ['fail', 'pall'],
-        'pool': ['fool', 'cool', 'poll'],
-        'poll': ['pool', 'pall', 'pole'],
-        'pall': ['fall', 'pale', 'poll'],
-        'pole': ['poll', 'pope', 'pale'],
-        'pope': ['pole'],
-        'pale': ['pall', 'pole', 'sale', 'page'],
-        'sale': ['pale', 'sage'],
-        'page': ['pale', 'sage'],
-        'sage': ['sale', 'page'] 
+        'A': ['B', 'D', 'G'],
+        'B': ['A', 'E', 'F'],
+        'C': ['F', 'H'],
+        'D': ['A', 'F'],
+        'E': ['B', 'G'],
+        'F': ['B', 'C', 'D'],
+        'G': ['A', 'E'],
+        'H': ['C']
     }
     print('Graph:\n{}'.format(graph_adj_d))
 

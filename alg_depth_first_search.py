@@ -15,7 +15,8 @@ def _postvisit(v, postvisit_d, clock):
     return postvisit_d, clock
 
 
-def _dfs_explore(v, graph_adj_d, visited_d, previsit_d, postvisit_d, clock):
+def _dfs_explore(v, graph_adj_d, visited_d, 
+                 previsit_d, postvisit_d, clock):
     """DFS explore by recursion."""
     visited_d[v] = True
     previsit_d, clock = _previsit(v, previsit_d, clock)
@@ -50,14 +51,16 @@ def dfs(graph_adj_d):
 
 
 def main():
-    # Connected graph by adjacency dictionary.
+    # Undirected graph by adjacency list:
     graph_adj_d = {
-        'A': ['B', 'D'],
-        'B': ['C', 'D'],
-        'C': [],
-        'D': ['E'],
-        'E': ['B', 'F'],
-        'F': ['C'],
+        'A': ['B', 'D', 'G'],
+        'B': ['A', 'E', 'F'],
+        'C': ['F', 'H'],
+        'D': ['A', 'F'],
+        'E': ['B', 'G'],
+        'F': ['B', 'C', 'D'],
+        'G': ['A', 'E'],
+        'H': ['C']
     }
     print('Graph:\n{}'.format(graph_adj_d))
 
