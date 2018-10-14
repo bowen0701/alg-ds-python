@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import numpy as np
 
-from ds_min_binary_heap_vertices import MinBinaryHeapVertices
+from ds_min_binary_heap_attribute import MinBinaryHeapAttribute
 
 
 def dijkstra(w_graph_d, start_vertex):
@@ -13,7 +13,7 @@ def dijkstra(w_graph_d, start_vertex):
 
     Time complexity for graph G(V, E): (|V|+|E|)log(|V|).
     """
-    min_pq = MinBinaryHeapVertices()
+    min_pq = MinBinaryHeapAttribute()
 
     distance_d = {v: np.inf for v in w_graph_d.keys()}
     visited_d = {v: False for v in w_graph_d.keys()}
