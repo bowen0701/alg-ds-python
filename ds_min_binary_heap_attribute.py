@@ -15,8 +15,8 @@ def right(i):
     return 2 * i + 1
 
 
-class MinBinaryHeapVertices(object):
-    """Min Binary Heap of vertices implmentation of Priority Queue.
+class MinBinaryHeapAttribute(object):
+    """Min Binary Heap with Attribute implmentation of Priority Queue.
 
     Applications:
       - Dijkstra's Algorithm.
@@ -97,7 +97,7 @@ class MinBinaryHeapVertices(object):
 
 def main():
     print('Binary heap of vertices by inserting [3, a], [7, c], [5, b], [1, e]:')
-    min_pq = MinBinaryHeapVertices()
+    min_pq = MinBinaryHeapAttribute()
     min_pq.insert([3, 'a'])
     min_pq.insert([7, 'c'])
     min_pq.insert([5, 'b'])
@@ -106,7 +106,7 @@ def main():
 
     print('Build min heap of vertices from unordered list')
     print('[[3, a], [7, c], [5, b], [1, e]]:')
-    min_pq = MinBinaryHeapVertices()
+    min_pq = MinBinaryHeapAttribute()
     min_pq.build_min_heap([[3, 'a'], [7, 'c'], [5, 'b'], [1, 'e']])
     min_pq.show()
 
