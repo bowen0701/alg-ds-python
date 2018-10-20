@@ -10,8 +10,8 @@ def _previsit(v_visit, previsited_d, clock):
     return previsited_d, clock
 
 
-def _dfs_stack(v, graph_adj_d, visited_d, previsited_d, clock):
-    """Explore using stack."""
+def _dfs_visit_stack(v, graph_adj_d, visited_d, previsited_d, clock):
+    """DFS visit using stack."""
     visit_stack = []
     visit_stack.append(v)
     while visit_stack:
@@ -35,7 +35,7 @@ def dfs(graph_adj_d):
     previsited_d = {}
     for v in graph_adj_d.keys():
         if not visited_d[v]:
-            previsited_d = _dfs_stack(
+            previsited_d = _dfs_visit_stack(
                 v, graph_adj_d, visited_d, previsited_d, clock)
     return previsited_d
 
