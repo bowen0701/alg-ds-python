@@ -25,7 +25,7 @@ def fibonacci_recur(n):
 
 
 def fibonacci_memo(n):
-    """Get the nth number of Fibonacci series, Fn, by memorization.
+    """Get the nth number of Fibonacci series, Fn, by memoization.
 
     - Time complexity: O(n).
     - Space complexity: O(n).
