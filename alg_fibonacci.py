@@ -33,7 +33,7 @@ def fibonacci_memo(n):
     fn_d = {}
     fn_d[0] = 0
     fn_d[1] = 1
-    for n in xrange(2, n + 1):
+    for n in range(2, n + 1):
         fn_d[n] = fn_d[n - 1] + fn_d[n - 2]
     return fn_d[n]
 
@@ -45,7 +45,7 @@ def fibonacci_dp(n):
     - Space complexity is O(1), improving a lot.
     """
     a, b = 0, 1
-    for _ in xrange(n):
+    for _ in range(n):
         a, b = a + b, a
     return a
 
@@ -53,7 +53,7 @@ def fibonacci_dp(n):
 def fibonacci_gen(n):
     """Get the nth number of Fibonacci series by generator."""
     a, b = 0, 1
-    for _ in xrange(n):
+    for _ in range(n):
         a, b = a + b, a
         yield a
 
