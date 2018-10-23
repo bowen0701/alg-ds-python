@@ -48,21 +48,30 @@ def find_min_max_seq(a_ls):
 
 
 def main():
+    import time
+
     # List with even numbers.
     # a_ls = [0, 1, 2, 3, 4, 5, 6, 7]
     # List with odd numbers.
-    a_ls = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    print('A list: {}'.format(a_ls))
-    print('Find min & max:')
+    # a_ls = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    a_ls = range(int(1e8))
+    print('Find min & max for list: {}'.format(a_ls))
 
+    start_time = time.time()
     print('By naive algorithm: {}'
           .format(find_min_max_naive(a_ls)))
+    print('Time: {}'.format(time.time() - start_time))
 
+    start_time = time.time()
     print('By divide and conquer algorithm: {}'
           .format(find_min_max_dc(a_ls)))
+    print('Time: {}'.format(time.time() - start_time))
 
+    start_time = time.time()
     print('By sequential algorithm: {}'
           .format(find_min_max_seq(a_ls)))
+    print('Time: {}'.format(time.time() - start_time))
+
 
 if __name__ == '__main__':
     main()
