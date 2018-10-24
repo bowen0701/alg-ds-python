@@ -19,7 +19,7 @@ class SolutionRecur(object):
     Space complexity: O(mn).
     """
     def uniquePaths(self, m, n):
-        if m == 1 and n == 1:
+        if m == 1 or n == 1:
             return 1
         return self.uniquePaths(m - 1, n) + self.uniquePaths(m, n - 1)
 
@@ -64,8 +64,7 @@ class SolutionDp2(object):
 
 
 def main():
-    x = SolutionRecur()
-    print x.uniquePaths(3, 2)
+    print SolutionRecur().uniquePaths(3, 2)
     print SolutionDp().uniquePaths(3, 2)
     print SolutionDp2().uniquePaths(3, 2)
 
