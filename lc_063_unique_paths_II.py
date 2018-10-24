@@ -24,8 +24,43 @@ Input:
 Output: 2
 """
 
+class Solution(object):
+    def uniquePathsWithObstacles(self, obstacleGrid):
+        """Unique paths with obstacles.
+
+        Time complexity: O(mn).
+        Space complexity: O(mn).
+        """
+        m, n = len(obstacleGrid), len(obstacleGrid[0])
+        path = [[0] * n for _ in range(m)]
+        
+        if obstacleGrid[0][0] == 0:
+            path[0][0] = 1
+            
+        for j in range(1, n):
+            if obstacleGrid[0][j] == 0:
+                path[0][j] = path[0][j - 1]
+        
+        for i in range(1, m):
+            if obstacleGrid[i][0] == 0:
+                path[i][0] = path[i - 1][0]
+        
+        for i in range(1, m):
+            for j in range(1, n):
+                if obstacleGrid[i][j] == 0:
+                    path[i][j] = path[i - 1][j] + path[i][j - 1]
+        
+        return path[-1][-1]
+
+
 def main():
-    pass
+    obstacleGrid = [
+        [0,0,0],
+        [0,1,0],
+        [0,0,0]
+    ]
+    
+    print Solution().uniquePathsWithObstacles(obstacleGrid)
 
 
 if __name__ == '__main__':
