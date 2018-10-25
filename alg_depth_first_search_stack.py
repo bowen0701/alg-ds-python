@@ -3,24 +3,25 @@ from __future__ import print_function
 from __future__ import division
 
 
-def _previsit(v_visit, previsited_d, clock):
-    clock += 1
-    previsited_d[v_visit] = clock
-    return previsited_d, clock
+def _dfs_visit_stack(v, graph_adj_d, visited_ls):
+    """DFS visit using stack.
 
+    Ref: https://www.youtube.com/watch?v=or9xlA3YYzo
+    """
+    visited_ls.append(v)
 
-def _dfs_visit_stack(v, graph_adj_d, visited_d, previsited_d, clock):
-    """DFS visit using stack."""
-    visited_d[v] = True
     visit_stack = []
     visit_stack.append(v)
-
     while visit_stack:
-        previsited_d, clock = _previsit(v_visit, previsited_d, clock)
-        for v_neighbor in graph_adj_d[v_visit]:
-            if not visited_d[v_neighbor]:
-                visit_stack.append(v_neighbor)
-    return previsited_d
+        if set(graph_adj_d[visit_stack[-1]]) - set(visited_ls):
+            for v_neighbor in graph_adj_d[visit_stack[-1]]:
+                if v_neighbor not in visited_ls:
+                    visited_ls.append(v_neighbor)
+                    visit_stack.append(v_neighbor)
+                    break
+        else:
+            visit_stack.pop()
+    return visited_ls
 
 
 def dfs(graph_adj_d):
@@ -28,14 +29,11 @@ def dfs(graph_adj_d):
 
     Time complexity for G(V, E): O(|V|+|E|).
     """
-    visited_d = {v: False for v in graph_adj_d.keys()}
-    clock = 0
-    previsited_d = {}
+    visited_ls = []
     for v in graph_adj_d.keys():
-        if not visited_d[v]:
-            previsited_d = _dfs_visit_stack(
-                v, graph_adj_d, visited_d, previsited_d, clock)
-    return previsited_d
+        if v not in visited_ls:
+            visited_ls = _dfs_visit_stack(v, graph_adj_d, visited_ls)
+    return visited_ls
 
 
 def main():
@@ -52,9 +50,9 @@ def main():
     }
     print('Graph:\n{}'.format(graph_adj_d))
 
-    print('Start DFS by stack.')
-    previsit_d = dfs(graph_adj_d)
-    print('previsit_d: {}'.format(previsit_d))
+    print('Start DFS by stack:')
+    visited_ls = dfs(graph_adj_d)
+    print('visited_ls: {}'.format(visited_ls))
 
 
 if __name__ == '__main__':
