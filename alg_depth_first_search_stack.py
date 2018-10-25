@@ -6,18 +6,16 @@ from __future__ import division
 def _previsit(v_visit, previsited_d, clock):
     clock += 1
     previsited_d[v_visit] = clock
-    print('{0}: {1}'.format(v_visit, clock))
     return previsited_d, clock
 
 
 def _dfs_visit_stack(v, graph_adj_d, visited_d, previsited_d, clock):
     """DFS visit using stack."""
+    visited_d[v] = True
     visit_stack = []
     visit_stack.append(v)
+
     while visit_stack:
-        print('visit_stack: {}'.format(visit_stack))
-        v_visit = visit_stack.pop()
-        visited_d[v_visit] = True
         previsited_d, clock = _previsit(v_visit, previsited_d, clock)
         for v_neighbor in graph_adj_d[v_visit]:
             if not visited_d[v_neighbor]:
