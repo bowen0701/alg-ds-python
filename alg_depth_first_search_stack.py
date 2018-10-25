@@ -14,12 +14,16 @@ def _dfs_visit_stack(v, graph_adj_d, visited_ls):
     visit_stack.append(v)
     while visit_stack:
         if set(graph_adj_d[visit_stack[-1]]) - set(visited_ls):
+            # Travel stack last node's neighbor, if not visited, 
+            # add the neighbor to visited list and directly go to next traverse.  
             for v_neighbor in graph_adj_d[visit_stack[-1]]:
                 if v_neighbor not in visited_ls:
                     visited_ls.append(v_neighbor)
                     visit_stack.append(v_neighbor)
                     break
         else:
+            # When there is no neighbor to travel, pop out stack last node,
+            # and step back for further traverse.
             visit_stack.pop()
     return visited_ls
 
