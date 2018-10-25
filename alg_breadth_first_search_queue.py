@@ -20,7 +20,7 @@ def bfs(graph_adj_d, start_vertex):
             # If v_neighbor is not visited.
             if np.isinf(distance_d[v_neighbor]):
                 visit_queue.insert(0, v_neighbor)
-                distance_d[v_neighbor] = distance_d[v_visit] + 1
+                distance_d[v_neighbor] += 1
     return distance_d
 
 
@@ -38,7 +38,7 @@ def main():
     }
     print('Graph:\n{}'.format(graph_adj_d))
 
-    start_vertex = 'fool'
+    start_vertex = 'A'
     print('Start vertex: {}'.format(start_vertex))
     distance_d = bfs(graph_adj_d, start_vertex)
     print('Using BFS with queue, the distance dict is\n{}'
