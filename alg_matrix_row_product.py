@@ -14,7 +14,7 @@ def row_product(arr):
 
 
 def main():
-	arr = [[1, 2, 3], [4, 5, 6]]
+	arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 	print('Row product: {}'.format(row_product(arr)))
 
