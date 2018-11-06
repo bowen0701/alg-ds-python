@@ -20,10 +20,10 @@ def histogram(x_ls, num_bins):
     bin_counters_ls = [0 for _ in range(num_bins)]
     for x in x_ls:
         if x != x_max:
-            b = (x - x_min) // bin_size
+            b = int((x - x_min) // bin_size)
         else:
-            b = num_bins - 1
-        bin_counters_ls[int(b)] += 1
+            b = int(num_bins - 1)
+        bin_counters_ls[b] += 1
     return bin_counters_ls
     
 
@@ -31,8 +31,6 @@ def main():
     x_ls = range(100)
     num_bins = 8
     bin_counters_ls = histogram(x_ls, num_bins)
-    print('x_ls = range(100)')
-    print('num_bins: {}'.format(num_bins))
     print(bin_counters_ls)
 
 if __name__ == '__main__':
