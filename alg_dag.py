@@ -40,11 +40,13 @@ def dag(graph_adj_d):
     postvisited_d = {}
     clock = 0
     dag_bool = True
+
     for v in graph_adj_d.keys():
         if not visited_d[v] and dag_bool:
             previsited_d, postvisited_d, clock, dag_bool = (
                 _dfs_explore(v, graph_adj_d, visited_d, 
                              previsited_d, postvisited_d, clock, dag_bool))
+    
     return dag_bool
 
 
