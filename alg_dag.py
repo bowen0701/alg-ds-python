@@ -8,10 +8,12 @@ def _previsit(v, previsited_d, clock):
     previsited_d[v] = clock
     return previsited_d, clock
 
+
 def _postvisit(v, postvisited_d, clock):
     clock += 1
     postvisited_d[v] = clock
     return postvisited_d, clock
+
 
 def _dfs_explore(v, graph_adj_d, visited_d, 
                  previsited_d, postvisited_d, clock, dag_bool):
@@ -33,6 +35,7 @@ def _dfs_explore(v, graph_adj_d, visited_d,
     postvisited_d, clock = _postvisit(v, postvisited_d, clock)
     return previsited_d, postvisited_d, clock, dag_bool
 
+
 def dag(graph_adj_d):
     """Check Directed Acyclic Graph (DAG)."""
     visited_d = {v: False for v in graph_adj_d.keys()}
@@ -46,7 +49,7 @@ def dag(graph_adj_d):
             previsited_d, postvisited_d, clock, dag_bool = (
                 _dfs_explore(v, graph_adj_d, visited_d, 
                              previsited_d, postvisited_d, clock, dag_bool))
-    
+
     return dag_bool
 
 
@@ -72,6 +75,7 @@ def main():
     }
     print('nondag_adj_d: {}'.format(nondag_adj_d))
     print('Is DAG: {}'.format(dag(nondag_adj_d)))
+
 
 if __name__ == '__main__':
     main()
