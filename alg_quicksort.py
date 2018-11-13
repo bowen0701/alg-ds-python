@@ -21,31 +21,25 @@ def _partition(a_list, first, last):
     """Get split point for patition."""
     pivot_value = a_list[first]
     
-    left_mark = first + 1
-    right_mark = last
-
+    left = first + 1
+    right = last
     done_bool = False
+
     while not done_bool:
-        while (a_list[left_mark] <= pivot_value and
-               left_mark <= right_mark):
-            left_mark += 1
+        while a_list[left] <= pivot_value and left <= right:
+            left += 1
 
-        while (a_list[right_mark] >= pivot_value and 
-               right_mark >= left_mark):
-            right_mark -= 1
+        while a_list[right] >= pivot_value and right >= left:
+            right -= 1
 
-        if right_mark < left_mark:
+        if right < left:
             done_bool = True
         else:
-            temp = a_list[left_mark]
-            a_list[left_mark] = a_list[right_mark]
-            a_list[right_mark] = temp
+            a_list[right], a_list[left] = a_list[left], a_list[right]
 
-    temp = a_list[first]
-    a_list[first] = a_list[right_mark]
-    a_list[right_mark] = temp
+    a_list[right], a_list[first] = a_list[first], a_list[right]
 
-    return right_mark
+    return right
 
 
 def _quicksort_recur(a_list, first, last):
@@ -65,13 +59,12 @@ def main():
     import time
 
     a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-    print('a_list: {}'.format(a_list))
-
     start_time = time.time()
     print(quicksort(a_list))
     print('Run time of Quick Sort with list comprehension:: {}'
           .format(time.time() - start_time))
 
+    a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     start_time = time.time()
     print(quicksort_raw(a_list))
     print('Run time of Quick Sort with recursion:: {}'
