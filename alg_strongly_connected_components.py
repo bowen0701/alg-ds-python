@@ -78,12 +78,9 @@ def strongly_connected_components(graph_adj_d):
         separate strongly connected components.
     """
     previsited_d, postvisited_d = dfs(graph_adj_d)
-    print('previsited_d: {}'.format(previsited_d))
-    print('postvisited_d: {}'.format(postvisited_d))    
     tr_graph_adj_d = _transpose_graph(graph_adj_d)
     dec_postvisited_ls = _decrease_postvisit_vertices(postvisited_d)
-    print('tr_graph_adj_d: {}'.format(tr_graph_adj_d))
-    print('dec_postvisited_ls: {}'.format(dec_postvisited_ls))
+
     tr_visited_d = {v: False for v in tr_graph_adj_d}
     clock = 0
     tr_previsited_d = {}
@@ -97,7 +94,9 @@ def strongly_connected_components(graph_adj_d):
                 v, tr_graph_adj_d, tr_visited_d, 
                 tr_previsited_d, tr_postvisited_d, clock, sccid_d, sccid)
             sccid += 1
-    return sccid_d
+
+    return (sccid_d, previsited_d, postvisited_d, 
+            tr_graph_adj_d, dec_postvisited_ls)
 
 
 def main():
@@ -113,7 +112,18 @@ def main():
         'H': ['H']
     }
 
-    print(strongly_connected_components(graph_adj_d))
+    (sccid_d, previsited_d, postvisited_d, 
+     tr_graph_adj_d, dec_postvisited_ls) = strongly_connected_components(graph_adj_d)
+
+    print('previsited_d: {}'.format(previsited_d))
+    print('postvisited_d: {}'.format(postvisited_d))
+    print('tr_graph_adj_d: {}'.format(tr_graph_adj_d))
+    print('dec_postvisited_ls: {}'.format(dec_postvisited_ls))
+
+    print('Strongly connect components: {}'.format(sccid_d))
+
+
+
 
 
 if __name__ == '__main__':
