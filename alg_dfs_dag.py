@@ -13,8 +13,8 @@ def _postvisit(v, postvisited_d, clock):
     postvisited_d[v] = clock[0]
 
 
-def _dfs_explore(v, graph_adj_d, visited_d, 
-                 previsited_d, postvisited_d, clock, dag_bool):
+def _dfs_visit(v, graph_adj_d, visited_d, 
+               previsited_d, postvisited_d, clock, dag_bool):
     visited_d[v] = True
     _previsit(v, previsited_d, clock)
 
@@ -27,8 +27,8 @@ def _dfs_explore(v, graph_adj_d, visited_d,
                 dag_bool[0] = False
         else:
             # If v_neighbor is not visited yet.
-            _dfs_explore(v_neighbor, graph_adj_d, visited_d, 
-                         previsited_d, postvisited_d, clock, dag_bool)
+            _dfs_visit(v_neighbor, graph_adj_d, visited_d, 
+                       previsited_d, postvisited_d, clock, dag_bool)
 
     _postvisit(v, postvisited_d, clock)
 
@@ -43,8 +43,8 @@ def dag(graph_adj_d):
 
     for v in graph_adj_d.keys():
         if not visited_d[v] and dag_bool:
-            _dfs_explore(v, graph_adj_d, visited_d, 
-                         previsited_d, postvisited_d, clock, dag_bool)
+            _dfs_visit(v, graph_adj_d, visited_d, 
+                       previsited_d, postvisited_d, clock, dag_bool)
 
     return dag_bool[0]
 

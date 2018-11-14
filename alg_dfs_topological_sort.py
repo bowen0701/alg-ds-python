@@ -13,15 +13,15 @@ def _postvisit(v, postvisited_d, clock):
     postvisited_d[v] = clock[0]
 
 
-def _dfs_explore(v, dag_adj_d, visited_d,
-                 previsited_d, postvisited_d, clock):
+def _dfs_visit(v, dag_adj_d, visited_d,
+               previsited_d, postvisited_d, clock):
     visited_d[v] = True
     _previsit(v, previsited_d, clock)
 
     for v_neighbor in dag_adj_d[v]:
         if not visited_d[v_neighbor]:
-            _dfs_explore(v_neighbor, dag_adj_d, visited_d,
-                         previsited_d, postvisited_d, clock)
+            _dfs_visit(v_neighbor, dag_adj_d, visited_d,
+                       previsited_d, postvisited_d, clock)
 
     _postvisit(v, postvisited_d, clock)
 
@@ -48,8 +48,8 @@ def topological_sort(dag_adj_d):
 
     for v in dag_adj_d.keys():
         if not visited_d[v]:
-            _dfs_explore(v, dag_adj_d, visited_d,
-                         previsited_d, postvisited_d, clock)
+            _dfs_visit(v, dag_adj_d, visited_d,
+                       previsited_d, postvisited_d, clock)
 
     dec_postvisited_ls = _decrease_postvisit_vertices(postvisited_d)
 
