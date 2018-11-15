@@ -5,7 +5,7 @@ from __future__ import print_function
 import math
 
 
-def karatsuba_multiplication(x, y):
+def karatsuba_integer_multiply(x, y):
     """Multiply 2 n-bits integers by Karatsuba's algorithm.
 
     This is a divide-and-conquer algorithm.
@@ -44,12 +44,12 @@ def main():
     x = 1234
     y = 1234
     print('(x, y): ({}, {})'.format(x, y))
-    print('Multiply: {}'.format(karatsuba_multiplication(x, y)))
+    print('Multiply: {}'.format(karatsuba_integer_multiply(x, y)))
 
     x = 12345
     y = 12345
     print('(x, y): ({}, {})'.format(x, y))
-    print('Multiply: {}'.format(karatsuba_multiplication(x, y)))
+    print('Multiply: {}'.format(karatsuba_integer_multiply(x, y)))
 
 if __name__ == '__main__':
     main()

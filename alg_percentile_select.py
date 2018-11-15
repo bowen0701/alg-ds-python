@@ -14,7 +14,7 @@ def percentile_select(ls, k):
     The algorithm performs in place without allocating
     new memory for the three sublists using three pointers.
 
-    Complexity: O(n).
+    Time complexity: O(n).
 	"""
 	v = random.sample(ls, 1)[0]
 	idx_eq_v = [i for i, a in enumerate(ls) if a == v]
