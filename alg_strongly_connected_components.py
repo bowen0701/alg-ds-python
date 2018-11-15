@@ -66,10 +66,10 @@ def _decrease_postvisit_vertices(postvisited_d):
 
 
 def strongly_connected_components(graph_adj_d):
-    """Strongly connected components for graph.
+    """Strongly connected components in directed graph by the DFS.
 
     Procedure:
-      - Call (Depth First Search) DFS on graph G to 
+      - Call the DFS on graph G to 
         compute finish times for each vertex.
       - Compute the transpose graph G^T of graph G.
       - Call DFS on G^T, but in the main loop of DFS,
