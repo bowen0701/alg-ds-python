@@ -6,50 +6,56 @@ import math
 
 
 def karatsuba_integer_multiply(x, y):
-    """Multiply 2 n-bits integers by Karatsuba's algorithm.
+    """Multiply 2 n-digits integers by Karatsuba's algorithm.
 
     This is a divide-and-conquer algorithm.
   
-    We would like to multiply two long n-bits integers, where
+    We would like to multiply two long n-bits integers (of maybe not equal 
+    length), where
       x = x_L * 10^(n/2) + x_R
       y = y_L * 10^(n/2) + y_R
     Since
-      xy = 2^n x_L y_L + 2^(n/2) (x_L y_R + x_R y_L) + x_R y_R
-         = 2^n x_L y_L 
-           + 2^(n/2) [(x_L + x_R)((y_L + y_R) - x_L y_L - x_R y_R] 
+      xy = x_L y_L 10^n + (x_L y_R + x_R y_L) 10^(n/2) + x_R y_R
+         = x_L y_L 10^n
+           + [(x_L + x_R)((y_L + y_R) - x_L y_L - x_R y_R] 10^(n/2)
            + x_R y_R
 
     Time complexity: O((n + n)^log3) = O(n^1.59), 
     much faster than the naive one with O(n^2).
     """
-    x_n = int(math.log10(x)) + 1
-    y_n = int(math.log10(y)) + 1
-    if x_n != y_n:
-        raise ValueError('The 2 integers are not of equal length.')
-    else:
-        n = x_n
-    x_L, x_R = divmod(x, 10 ** (n // 2))
-    y_L, y_R = divmod(y, 10 ** (n // 2))
-    mul_L = x_L * y_L
-    mul_R = x_R * y_R
-    sum_mul = (x_L + x_R) * (y_L + y_R)
-    mul = (
-        mul_L * (10 ** ((n // 2) * 2))
-        + (sum_mul - mul_L - mul_R) * (10 ** (n // 2))
-        + mul_R)
-    return mul
+    n_x = int(math.log10(x))
+    n_y = int(math.log10(y))
+
+    if n_x <= 1 or n_y <= 1:
+        return x * y
+
+    # Since x and y may be not of equal size, take smaller size.
+    n = min(n_x, n_y)
+
+    # Split x and number in the middle.
+    x_l, x_r = divmod(x, 10 ** (n // 2))
+    y_l, y_r = divmod(y, 10 ** (n // 2))
+    
+    xy_l = karatsuba_integer_multiply(x_l, y_l)
+    xy_sum = karatsuba_integer_multiply(x_l + x_r, y_l + y_r)
+    xy_r = karatsuba_integer_multiply(x_r, y_r)
+
+    return (xy_l * (10 ** n)
+            + (xy_sum - xy_l - xy_r) * (10 ** (n // 2))
+            + xy_r)
 
 
 def main():
-    x = 1234
+    x = 1
     y = 1234
     print('(x, y): ({}, {})'.format(x, y))
     print('Multiply: {}'.format(karatsuba_integer_multiply(x, y)))
 
-    x = 12345
+    x = 12
     y = 12345
     print('(x, y): ({}, {})'.format(x, y))
     print('Multiply: {}'.format(karatsuba_integer_multiply(x, y)))
+
 
 if __name__ == '__main__':
     main()
