@@ -1,11 +1,23 @@
-def compute_gcd(m, n):
-    """Compute the greatest common divisor (GCD) by Euclid's Algorithm.
+def gcd(m, n):
+    """Greatest Common Divisor (GCD) by Euclid's Algorithm.
 
     Time complexity: O(m%n).
     """
-    while m % n != 0:
-        old_m = m
-        old_n = n
-        m = old_n
-        n = old_m % old_n
-    return n
+    while n != 0:
+        m, n = n, m % n
+    return m
+
+
+def main():
+    print(gcd(4, 2))
+    print(gcd(2, 4))
+
+    print(gcd(10, 4))
+    print(gcd(4, 10))
+
+    print(gcd(10, 1))
+    print(gcd(1, 10))
+
+
+if __name__ == '__main__':
+    main()
