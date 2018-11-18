@@ -29,7 +29,7 @@ def _dfs_visit(v, graph_adj_d, visited_d,
     
 
 def connected_components(graph_adj_d):
-    """Connected components in undirected graph by the DFS.
+    """Connected Components for Undirected Graph by the DFS.
 
     Time complexity for graph G(V, E): O(|V|+|E|). 
     """

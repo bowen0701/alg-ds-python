@@ -34,7 +34,7 @@ def _dfs_visit(v, graph_adj_d, visited_d,
 
 
 def dag(graph_adj_d):
-    """Check Directed Acyclic Graph (DAG) by the DFS"""
+    """Check Directed Acyclic Graph (DAG) by DFS"""
     visited_d = {v: False for v in graph_adj_d.keys()}
     previsited_d = {}
     postvisited_d = {}

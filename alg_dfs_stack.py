@@ -29,7 +29,7 @@ def _dfs_visit_stack(v, graph_adj_d, visited_ls):
 
 
 def dfs(graph_adj_d):
-    """Depth first search by iteration algorithm using stack.
+    """Depth First Search (DFS) by iteration algorithm using Stack.
 
     Time complexity for G(V, E): O(|V|+|E|).
     """

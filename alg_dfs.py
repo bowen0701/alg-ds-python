@@ -28,7 +28,7 @@ def _dfs_visit(v, graph_adj_d, visited_d,
 
 
 def dfs(graph_adj_d):
-    """Depth first search (DFS) by recursion algorithm.
+    """Depth First Search (DFS) by recursion algorithm.
 
     Time complexity for graph G(V, E): O(|V|+|E|). 
     """
