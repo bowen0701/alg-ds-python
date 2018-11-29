@@ -11,6 +11,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
+
 def factorial_recur(n):
     """Get the nth number of factorial series, Fn, by recursion.
 
@@ -35,6 +36,7 @@ def factorial_memo(n):
     for n in xrange(2, n + 1):
         fn_d[n] = n * fn_d[n - 1]
     return fn_d[n]
+
 
 def factorial_dp(n):
     """Get the nth number of factorial series by dynamic programming.
