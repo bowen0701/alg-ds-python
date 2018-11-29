@@ -42,10 +42,14 @@ class Solution(object):
         for j in range(1, n):
             if obstacleGrid[0][j] == 0:
                 path[0][j] = path[0][j - 1]
+            else:
+                break
         
         for i in range(1, m):
             if obstacleGrid[i][0] == 0:
                 path[i][0] = path[i - 1][0]
+            else:
+                break
         
         for i in range(1, m):
             for j in range(1, n):
