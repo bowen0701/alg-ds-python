@@ -37,12 +37,11 @@ def factorial_memo(n):
         fn_d[n] = n * fn_d[n - 1]
     return fn_d[n]
 
-
 def factorial_dp(n):
     """Get the nth number of factorial series by dynamic programming.
 
-    - Time complexity is still O(n), like factorial_memo().
-    - Space complexity is O(1), improving a lot.
+    - Time complexity: O(n), like factorial_memo().
+    - Space complexity: O(1), improving a lot.
     """
     fn = 1
     for i in xrange(2, n + 1):
