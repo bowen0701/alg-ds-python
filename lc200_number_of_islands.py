@@ -38,7 +38,7 @@ class Solution(object):
 
         for r in range(n_rows):
             for c in range(n_cols):
-                if grid[r][c] == '1' and visited_grid[r][c] is False:
+                if grid[r][c] == '1' and not visited_grid[r][c]:
                     n_islands += 1
                     self.dfs(r, c, grid, visited_grid, n_rows, n_cols)
 
@@ -48,16 +48,16 @@ class Solution(object):
         visited_grid[r][c] = True
 
         if 0 <= r - 1: # Up.
-            if grid[r - 1][c] == '1' and visited_grid[r - 1][c] is False:
+            if grid[r - 1][c] == '1' and not visited_grid[r - 1][c]:
                 self.dfs(r - 1, c, grid, visited_grid, n_rows, n_cols)
         if r + 1 < n_rows: # Down.
-            if grid[r + 1][c] == '1' and visited_grid[r + 1][c] is False:
+            if grid[r + 1][c] == '1' and not visited_grid[r + 1][c]:
                 self.dfs(r + 1, c, grid, visited_grid, n_rows, n_cols)
         if 0 <= c - 1: # Left.
-            if grid[r][c - 1] == '1' and visited_grid[r][c - 1] is False:
+            if grid[r][c - 1] == '1' and not visited_grid[r][c - 1]:
                 self.dfs(r, c - 1, grid, visited_grid, n_rows, n_cols)
         if c + 1 < n_cols: # Right.
-            if grid[r][c + 1] == '1' and visited_grid[r][c + 1] is False:
+            if grid[r][c + 1] == '1' and not visited_grid[r][c + 1]:
                 self.dfs(r, c + 1, grid, visited_grid, n_rows, n_cols)
 
 
