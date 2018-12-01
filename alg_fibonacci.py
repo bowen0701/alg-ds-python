@@ -41,26 +41,19 @@ def fibonacci_memo(n):
 def fibonacci_dp(n):
     """Get the nth number of Fibonacci series by dynamic programming.
 
-    - Time complexity is still O(n), like fibonacci_memo().
-    - Space complexity is O(1), improving a lot.
+    - Time complexity: O(n), like fibonacci_memo().
+    - Space complexity: O(1), improving a lot.
     """
     a, b = 0, 1
     for _ in range(n):
-        a, b = a + b, a
+        # Add two numbers and then shift position by one.
+        a, b = b, a + b
     return a
-
-
-def fibonacci_gen(n):
-    """Get the nth number of Fibonacci series by generator."""
-    a, b = 0, 1
-    for _ in range(n):
-        a, b = a + b, a
-        yield a
 
 
 def main():
     import time
-    n = 30
+    n = 40
     
     print('{}th number of Fibonacci series:'.format(n))
 
@@ -69,15 +62,11 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By memorization: {}'.format(fibonacci_memo(n)))
+    print('By memoization: {}'.format(fibonacci_memo(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By dynamic programming: {}'.format(fibonacci_dp(n)))
-    print('Time: {}'.format(time.time() - start_time))
-
-    start_time = time.time()
-    print('By generator: {}'.format(list(fibonacci_gen(n))[-1]))
+    print('By DP: {}'.format(fibonacci_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
 
 
