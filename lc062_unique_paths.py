@@ -1,4 +1,5 @@
 """Leetcode 62. Unique Paths.
+Medium
 
 URL: https://leetcode.com/problems/unique-paths/
 

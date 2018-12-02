@@ -1,4 +1,5 @@
 """Leetcode 200. Number of Islands
+Medium
 
 URL: https://leetcode.com/problems/number-of-islands/description/
 

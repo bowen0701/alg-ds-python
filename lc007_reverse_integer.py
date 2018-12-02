@@ -1,4 +1,5 @@
 """Leetcode 7. Reverse Integer
+Easy
 
 URL: https://leetcode.com/problems/reverse-integer/description/
 

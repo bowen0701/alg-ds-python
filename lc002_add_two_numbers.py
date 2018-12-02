@@ -1,4 +1,5 @@
 """Leetcode 2. Add Two Numbers
+Medium
 
 URL: https://leetcode.com/problems/add-two-numbers/
 

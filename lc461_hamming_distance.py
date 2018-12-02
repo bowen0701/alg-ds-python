@@ -1,4 +1,5 @@
 """Leetcode 461. Hamming Distance
+Medium
 
 URL: https://leetcode.com/problems/hamming-distance/description/
 
