@@ -19,6 +19,9 @@ class Solution(object):
         """
         :type x: int
         :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
         # Since input x is a 32-bit integer, -2^31 <= x <= 2^31 - 1.
         if x < 0:
