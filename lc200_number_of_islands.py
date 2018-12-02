@@ -28,6 +28,9 @@ class Solution(object):
         """
         :type grid: List[List[str]]
         :rtype: int
+
+        Time complexity: O(m * n).
+        Space complexity: O(m * n).
         """
         if not grid:
             return 0
