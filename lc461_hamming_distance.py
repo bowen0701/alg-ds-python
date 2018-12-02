@@ -30,6 +30,9 @@ class Solution(object):
         :type x: int
         :type y: int
         :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
         return bin(x ^ y).count('1')
 
