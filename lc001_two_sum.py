@@ -21,6 +21,9 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         lookup_dict = {}
         for i, num in enumerate(nums):
