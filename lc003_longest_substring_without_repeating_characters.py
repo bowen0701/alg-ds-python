@@ -30,12 +30,46 @@ class Solution(object):
         """
         :type s: str
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(k), k is the number of characters.
         """
-        pass
+        start = 0
+        max_len = 0
+        char_d = {}
+
+        for i, c in enumerate(s):
+            if c in char_d and start <= char_d[c]:
+                # When repeating char is visited.
+                start = char_d[c] + 1
+            else:
+                # If not, update max length.
+                max_len = max(max_len, i - start + 1)
+
+            # Always update char dict for every char in s.
+            char_d[c] = i
+
+        return max_len
 
 
 def main():
-    pass
+    import time
+
+    start_time = time.time()
+
+    # Example 1: "abcabcbb" -> 3 ("abc")
+    s = "abcabcbb"
+    print('For {0}: {1}'.format(s, Solution().lengthOfLongestSubstring(s)))
+
+    # Example 2: "bbbbb" -> 1 ("b")
+    s = "bbbbb"
+    print('For {0}: {1}'.format(s, Solution().lengthOfLongestSubstring(s)))
+
+    # Example 3: "pwwkew" -> 3 ("wke")
+    s = "pwwkew"
+    print('For {0}: {1}'.format(s, Solution().lengthOfLongestSubstring(s)))
+
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
