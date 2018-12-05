@@ -25,6 +25,9 @@ class Solution(object):
         :type nums1: List[int]
         :type nums2: List[int]
         :rtype: float
+
+        Time complexity: O(log(m + n))
+        Space complexity: O(1)
         """
         l = len(nums1) + len(nums2)
         if l % 2 == 1:
