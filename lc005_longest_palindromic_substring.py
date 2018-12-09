@@ -24,9 +24,11 @@ class Solution(object):
 
 
 def main():
-	s = "babad"
+	s = 'babad'
+	print(Solution().longestPalindrome(s))
 
-	s = "cbbd"
+	s = 'cbbd'
+	print(Solution().longestPalindrome(s))
 
 
 if __name__ == '__main__':
