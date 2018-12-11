@@ -33,6 +33,8 @@ class HashMap(object):
         return (old_hash + 1) % self.size
 
     def put(self, key, value):
+        # Time complexity: averate case O(1), worst case O(n).
+        # Space complexity: O(1).
         key_hash = self.hash(key)
 
         # If key_hash's slot does not exist, set slots & map as key & value.
@@ -58,6 +60,8 @@ class HashMap(object):
                     self.maps[next_slot] = value
 
     def get(self, key):
+        # Time complexity: averate case O(1), worst case O(n).
+        # Space complexity: O(1).
         start_key_hash = self.hash(key)
 
         value = None
