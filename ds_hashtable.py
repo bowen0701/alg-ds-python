@@ -5,16 +5,16 @@ class HashTable(object):
     """Create a HashTable class to implement Map data structure 
     with key-value mappings.
     """
-    def __init__(self, table_size, weighted_bool=False):
-        self.table_size = table_size
-        self.slots = [None] * self.table_size
-        self.data = [None] * self.table_size
+    def __init__(self, size, weighted_bool=False):
+        self.size = size
+        self.slots = [None] * self.size
+        self.data = [None] * self.size
 
     def hash(self, key, weighted_bool=False):
         """Hash function for integer or string."""
         if isinstance(key, int):
             """Hash an integer by mode division."""
-            return key % self.table_size
+            return key % self.size
         elif isinstance(key, str):
             """Hash a string by the Folding Method using 
             (weitghted) ordinal values plus mode division.
@@ -26,27 +26,27 @@ class HashTable(object):
                 else:
                     wt = 1
                 ord_sum += wt * ord(key[pos])
-            return ord_sum % self.table_size
+            return ord_sum % self.size
 
     def rehash(self, old_hash):
         """Rehash function using the linear probing method."""
-        return (old_hash + 1) % self.table_size
+        return (old_hash + 1) % self.size
 
     def put(self, key, data):
-        hash_value = self.hash(key)
+        key_hash = self.hash(key)
 
-        # If hash_value's slot does not exist, set slot & data as key & data.
-        if not self.slots[hash_value]:
-            self.slots[hash_value] = key
-            self.data[hash_value] = data
+        # If key_hash's slot does not exist, set slot & data as key & data.
+        if not self.slots[key_hash]:
+            self.slots[key_hash] = key
+            self.data[key_hash] = data
         else:
-            # If hash_value's slot is key, update its data.
-            if self.slots[hash_value] == key:
-                self.data[hash_value] = data
+            # If key_hash's slot is key, update its data.
+            if self.slots[key_hash] == key:
+                self.data[key_hash] = data
             else:
-                # If collision exists for hash_value, keep rehashing till
-                # new hash_value's slot does not exist or is key.
-                next_slot = self.rehash(hash_value)
+                # If collision exists for key_hash, keep rehashing till
+                # new key_hash's slot does not exist or is key.
+                next_slot = self.rehash(key_hash)
                 while (self.slots[next_slot] and 
                        self.slots[next_slot] is not key):
                     next_slot = self.rehash(next_slot)
@@ -58,20 +58,20 @@ class HashTable(object):
                     self.data[next_slot] = data
 
     def get(self, key):
-        start_slot = self.hash(key)
+        start_key_hash = self.hash(key)
 
         data = None
         stop_bool = False
         found_bool = False
-        hash_slot = start_slot
-        while (self.slots[hash_slot] and 
+        key_hash = start_key_hash
+        while (self.slots[key_hash] and 
                not found_bool and not stop_bool):
-            if self.slots[hash_slot] == key:
+            if self.slots[key_hash] == key:
                 found_bool = True
-                data = self.data[hash_slot]
+                data = self.data[key_hash]
             else:
-                hash_slot = self.rehash(hash_slot)
-                if hash_slot == start_slot:
+                key_hash = self.rehash(key_hash)
+                if key_hash == start_key_hash:
                     stop_bool = True
 
         return data
