@@ -95,16 +95,16 @@ def main():
     h[44] = 'goat'
     h[55] = 'pig'
     h[20] = 'chicken'   
-    print('h.slots: {}'.format(h.slots))
-    print('h.data: {}'.format(h.data))
-    print('h[20]: {}'.format(h[20]))
-    print('h[17]: {}'.format(h[17]))
+    print('- h.slots: {}'.format(h.slots))
+    print('- h.data: {}'.format(h.data))
+    print('- h[20]: {}'.format(h[20]))
+    print('- h[17]: {}'.format(h[17]))
 
     h[20] = 'duck'
-    print('Replaced h[20]: {}'.format(h[20]))
-    print('h.data: {}'.format(h.data))
+    print('- replace h[20]: {}'.format(h[20]))
+    print('- h.data: {}'.format(h.data))
 
-    print('h[99]: {}'.format(h[99]))
+    print('- h[99]: {}'.format(h[99]))
 
     print('Hash Table with string keys:')
     h = HashTable(11)
@@ -113,16 +113,16 @@ def main():
     h['lion'] = 'l'
     h['tiger'] = 't'
     h['bird'] = 'b'   
-    print('h.slots: {}'.format(h.slots))
-    print('h.data: {}'.format(h.data))
-    print('h["dog"]: {}'.format(h['dog']))
-    print('h["cat"]: {}'.format(h['cat']))
+    print('- h.slots: {}'.format(h.slots))
+    print('- h.data: {}'.format(h.data))
+    print('- h["dog"]: {}'.format(h['dog']))
+    print('- h["cat"]: {}'.format(h['cat']))
 
     h['bird'] = 'bd'
-    print('Replaced h["bird"]: {}'.format(h['bird']))
-    print('h.data: {}'.format(h.data))
+    print('- replacee h["bird"]: {}'.format(h['bird']))
+    print('- h.data: {}'.format(h.data))
 
-    print('h["pig"]: {}'.format(h['pig']))
+    print('- h["pig"]: {}'.format(h['pig']))
 
     print('Hash Table with string keys by weighted folding method:')
     h = HashTable(11, weighted_bool=True)
@@ -131,16 +131,16 @@ def main():
     h['lion'] = 'l'
     h['tiger'] = 't'
     h['bird'] = 'b'   
-    print('h.slots: {}'.format(h.slots))
-    print('h.data: {}'.format(h.data))
-    print('h["dog"]: {}'.format(h['dog']))
-    print('h["cat"]: {}'.format(h['cat']))
+    print('- h.slots: {}'.format(h.slots))
+    print('- h.data: {}'.format(h.data))
+    print('- h["dog"]: {}'.format(h['dog']))
+    print('- h["cat"]: {}'.format(h['cat']))
 
     h['bird'] = 'bd'
-    print('Replaced h["bird"]: {}'.format(h['bird']))
-    print('h.data: {}'.format(h.data))
+    print('- replace h["bird"]: {}'.format(h['bird']))
+    print('- h.data: {}'.format(h.data))
 
-    print('h["pig"]: {}'.format(h['pig']))
+    print('- h["pig"]: {}'.format(h['pig']))
 
 
 if __name__ == '__main__':
