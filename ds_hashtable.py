@@ -35,13 +35,17 @@ class HashTable(object):
     def put(self, key, data):
         hash_value = self.hash(key)
 
+        # If hash_value's slot does not exist, set slot & data as key & data.
         if not self.slots[hash_value]:
             self.slots[hash_value] = key
             self.data[hash_value] = data
         else:
+            # If hash_value's slot is key, update its data.
             if self.slots[hash_value] == key:
-                self.data[hash_value] = data  # Replace data.
+                self.data[hash_value] = data
             else:
+                # If collision exists for hash_value, keep rehashing till
+                # new hash_value's slot does not exist or is key.
                 next_slot = self.rehash(hash_value)
                 while (self.slots[next_slot] and 
                        self.slots[next_slot] is not key):
@@ -51,7 +55,7 @@ class HashTable(object):
                     self.slots[next_slot] = key
                     self.data[next_slot] = data
                 else:
-                    self.data[next_slot] = data  # Replace data.
+                    self.data[next_slot] = data
 
     def get(self, key):
         start_slot = self.hash(key)
@@ -59,15 +63,15 @@ class HashTable(object):
         data = None
         stop_bool = False
         found_bool = False
-        position = start_slot
-        while (self.slots[position] and 
+        hash_slot = start_slot
+        while (self.slots[hash_slot] and 
                not found_bool and not stop_bool):
-            if self.slots[position] == key:
+            if self.slots[hash_slot] == key:
                 found_bool = True
-                data = self.data[position]
+                data = self.data[hash_slot]
             else:
-                position = self.rehash(position)
-                if position == start_slot:
+                hash_slot = self.rehash(hash_slot)
+                if hash_slot == start_slot:
                     stop_bool = True
 
         return data
