@@ -77,8 +77,9 @@ def heapsort(A):
 
 
 def main():
-    print('Heapsort for unordered list [5, 7, 3, 1]:')
-    print(heapsort([5, 7, 3, 1]))
+    arr = [5, 7, 3, 1]
+    print('Heapsort for unordered list {}:'.format(arr))
+    print(heapsort(arr))
 
 
 if __name__ == '__main__':
