@@ -1,8 +1,8 @@
 from __future__ import print_function
 
 
-class HashMap(object):
-    """Create a HashMap class to implement Map data structure 
+class HashTable(object):
+    """Create a HashTable class to implement Map data structure 
     with key-value mappings.
     """
     def __init__(self, size, weighted_bool=False):
@@ -89,7 +89,7 @@ class HashMap(object):
 
 def main():
     print('HashMap with integer keys:')
-    h = HashMap(11)
+    h = HashTable(11)
     h[54] = 'cat'
     h[26] = 'dog'
     h[93] = 'lion'
@@ -111,7 +111,7 @@ def main():
     print('- h[99]: {}'.format(h[99]))
 
     print('Hash Map with string keys:')
-    h = HashMap(11)
+    h = HashTable(11)
     h['cat'] = 'c'
     h['dog'] = 'd'
     h['lion'] = 'l'
@@ -129,7 +129,7 @@ def main():
     print('- h["pig"]: {}'.format(h['pig']))
 
     print('Hash Map with string keys by weighted folding method:')
-    h = HashMap(11, weighted_bool=True)
+    h = HashTable(11, weighted_bool=True)
     h['cat'] = 'c'
     h['dog'] = 'd'
     h['lion'] = 'l'
