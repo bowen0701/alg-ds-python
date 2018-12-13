@@ -13,12 +13,11 @@ class HashTable(object):
     def hash(self, key, weighted_bool=False):
         """Hash function for integer or string."""
         if isinstance(key, int):
-            """Hash an integer by mode division."""
+            # Hash an integer by mode division.
             return key % self.size
         elif isinstance(key, str):
-            """Hash a string by the Folding Method using 
-            (weitghted) ordinal values plus mode division.
-            """
+            # Hash a string by the Folding Method using 
+            # (weitghted) ordinal values plus mode division.
             ord_sum = 0
             for pos in range(len(key)):
                 if weighted_bool:
@@ -33,8 +32,10 @@ class HashTable(object):
         return (old_hash + 1) % self.size
 
     def put(self, key, value):
-        # Time complexity: averate case O(1), worst case O(size).
-        # Space complexity: O(1).
+        """
+        Time complexity: average case O(1), worst case O(size).
+        Space complexity: O(1).
+        """
         key_hash = self.hash(key)
 
         # If key_hash's slot does not exist, set slots & map as key & value.
@@ -60,8 +61,10 @@ class HashTable(object):
                     self.maps[next_slot] = value
 
     def get(self, key):
-        # Time complexity: averate case O(1), worst case O(size).
-        # Space complexity: O(1).
+        """
+        Time complexity: average case O(1), worst case O(size).
+        Space complexity: O(1).
+        """
         start_key_hash = self.hash(key)
 
         value = None
