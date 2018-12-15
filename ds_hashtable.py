@@ -2,10 +2,12 @@ from __future__ import print_function
 
 
 class HashTable(object):
-    """HashTable with the "open addressing" technique.
+    """HashTable by the "division method" with "open addressing".
 
-    Note: The open addressing is applied here to resolve 
-    collision (two keys may hash to the same slot).
+    - Division method: Compute the hash value as the remainder when 
+      the key is divided by a specified prime number
+    - Open addressing technique: Resolve collision (two keys may hash 
+      to the same slot).
     """
     def __init__(self, size, weighted_bool=False):
         self.size = size
