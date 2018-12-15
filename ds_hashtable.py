@@ -2,8 +2,10 @@ from __future__ import print_function
 
 
 class HashTable(object):
-    """Create a HashTable class to implement Map data structure 
-    with key-value mappings.
+    """HashTable with the Open Addressing.
+
+    Note: The Open Addressing technique is applied here to 
+    resolve collision (two keys may hash to the same slot).
     """
     def __init__(self, size, weighted_bool=False):
         self.size = size
