@@ -75,6 +75,7 @@ class HashTable(object):
         stop_bool = False
         found_bool = False
         key_hash = start_key_hash
+
         while (self.slots[key_hash] and 
                not found_bool and not stop_bool):
             if self.slots[key_hash] == key:
@@ -87,11 +88,36 @@ class HashTable(object):
 
         return value
 
+    def delete(self, key):
+        """
+        Time complexity: average case O(1), worst case O(size).
+        Space complexity: O(1).
+        """
+        start_key_hash = self.hash(key)
+
+        stop_bool = False
+        found_bool = False
+        key_hash = start_key_hash
+
+        while (self.slots[key_hash] and
+               not found_bool and not stop_bool):
+            if self.slots[key_hash] == key:
+                found_bool = True
+                self.slots[key_hash] = None
+                self.maps[key_hash] = None
+            else:
+                key_hash = self.rehash(key_hash)
+                if key_hash == start_key_hash:
+                    stop_bool = True
+
     def __setitem__(self, key, value):
         self.put(key, value)
 
     def __getitem__(self, key):
         return self.get(key)
+
+    def __delitem__(self, key):
+        self.delete(key)
 
 
 def main():
@@ -152,6 +178,10 @@ def main():
     print('- h.maps: {}'.format(h.maps))
 
     print('- h["pig"]: {}'.format(h['pig']))
+
+    del h['bird']
+    print('- h.slots: {}'.format(h.slots))
+    print('- h.maps: {}'.format(h.maps))
 
 
 if __name__ == '__main__':
