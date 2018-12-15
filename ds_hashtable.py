@@ -2,10 +2,10 @@ from __future__ import print_function
 
 
 class HashTable(object):
-    """HashTable with the Open Addressing.
+    """HashTable with the "open addressing" technique.
 
-    Note: The Open Addressing technique is applied here to 
-    resolve collision (two keys may hash to the same slot).
+    Note: The open addressing is applied here to resolve 
+    collision (two keys may hash to the same slot).
     """
     def __init__(self, size, weighted_bool=False):
         self.size = size
