@@ -2,7 +2,8 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
-def find_min_max_naive(a_ls):
+
+def minmax_naive(a_ls):
     """Find mix & max in a list by naive algorithm.
 
     - Time complexity: O(n).
@@ -18,7 +19,7 @@ def find_min_max_naive(a_ls):
     return [_min, _max]
 
 
-def find_min_max_dc(a_ls):
+def minmax_dc(a_ls):
     """Find mix & max in a list by divide and conquer algorithm.
 
     - Time complexity: O(n).
@@ -33,8 +34,8 @@ def find_min_max_dc(a_ls):
             return [a_ls[1], a_ls[0]]
     else:
         len_a = len(a_ls)
-        [_min1, _max1] = find_min_max_dc(a_ls[:len_a//2])
-        [_min2, _max2] = find_min_max_dc(a_ls[len_a//2:])
+        [_min1, _max1] = minmax_dc(a_ls[:(len_a // 2)])
+        [_min2, _max2] = minmax_dc(a_ls[(len_a // 2):])
 
         if _min1 < _min2:
             _min = _min1
@@ -49,7 +50,7 @@ def find_min_max_dc(a_ls):
         return [_min, _max]
 
 
-def find_min_max_seq(a_ls):
+def minmax_seq(a_ls):
     """Find mix & max in a list by sequential algorithm.
 
     - Time complexity: O(n).
@@ -80,26 +81,21 @@ def find_min_max_seq(a_ls):
 def main():
     import time
 
-    # List with even numbers.
-    # a_ls = [0, 1, 2, 3, 4, 5, 6, 7]
-    # List with odd numbers.
-    # a_ls = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     a_ls = range(int(1e6))
-    print('Find min & max for list: {}'.format(a_ls))
 
     start_time = time.time()
     print('By naive algorithm: {}'
-          .format(find_min_max_naive(a_ls)))
+          .format(minmax_naive(a_ls)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('By divide and conquer algorithm: {}'
-          .format(find_min_max_dc(a_ls)))
+          .format(minmax_dc(a_ls)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('By sequential algorithm: {}'
-          .format(find_min_max_seq(a_ls)))
+          .format(minmax_seq(a_ls)))
     print('Time: {}'.format(time.time() - start_time))
 
 
