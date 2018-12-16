@@ -86,6 +86,7 @@ def square_matrix_multiply_dc(A, B):
             )
         _matrix_assign(C, range(n // 2, n), range(n // 2), C21)
 
+
         # C22 = A21 * B12 + A22 * B22
         C22 = _matrix_sum(
             square_matrix_multiply_dc(
@@ -116,11 +117,12 @@ def strassen_square_matrix_multiply(A, B):
 def main():
     import time
 
-    # From CLRS, Ex 4.2-1, p. 83. 
     A = [[1, 3], [7, 5]]
     B = [[6, 8], [4, 2]]
     # A = [[1, 3, 4, 6], [7, 5, 9, 5], [2, 6, 5, 7], [3, 7, 5, 4]]
     # B = [[6, 8, 5, 9], [4, 2, 8, 2], [3, 1, 9, 5], [5, 2, 1, 8]]
+    # A = [[1 for j in range(32)] for i in range(32)]
+    # B = [[1 for j in range(32)] for i in range(32)]
 
     start_time = time.time()
     print('By naive algorithm:\n{}'.format(square_matrix_multiply(A, B)))
