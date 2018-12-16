@@ -14,7 +14,13 @@ def square_matrix_multiply(A, B):
     return C
 
 
+def _matrix_index_calculation(A, row_indices, col_indices):
+    """Sub-matrix by index calculation."""
+    return [[A[i][j] for j in col_indices] for i in row_indices]
+
+
 def _matrix_sum(A, B):
+    """Sum of two matrices."""
     m, n = len(A), len(A[0])
     C = [[0 for j in range(n)] for i in range(m)]
     for i in range(n):
@@ -23,43 +29,75 @@ def _matrix_sum(A, B):
     return C
 
 
+def _matrix_assign(A, A_row_indices, A_col_indices, B):
+    """Assign matrix B to sub-matrix A by index calculation."""
+    for i in range(len(A_row_indices)):
+        for j in range(len(A_col_indices)):
+            A[A_row_indices[i]][A_col_indices[j]] = B[i][j]
+
+
 def square_matrix_multiply_dc(A, B):
-    """Square matrix multiplication by simple divide & conquer algorithm"""
+    """Square matrix multiplication by simple divide & conquer algorithm.
+
+    Assume: the square matrix's dimension n is an exact power of 2.
+    """
     n = len(A)
-    print('n: {}'.format(n))
     C = [[0 for j in range(n)] for i in range(n)]
 
     if n == 1:
         C[0][0] = A[0][0] * B[0][0]
     else:
-        # TODO: Come up with how to do index calculation.
         # C11 = A11 * B11 + A12 * B21
-        C[:(n // 2)][:(n // 2)] = _square_matrix_sum(
+        C11 = _matrix_sum(
             square_matrix_multiply_dc(
-                A[:(n // 2)][:(n // 2)], B[:(n // 2)][:(n // 2)]),
+                _matrix_index_calculation(A, range(n // 2), range(n // 2)),
+                _matrix_index_calculation(B, range(n // 2), range(n // 2))
+                ),
             square_matrix_multiply_dc(
-                A[:(n // 2)][(n // 2):], B[(n // 2):][:(n // 2)]))
+                _matrix_index_calculation(A, range(n // 2), range(n // 2, n)),
+                _matrix_index_calculation(B, range(n // 2, n), range(n // 2))
+                )
+            )
+        _matrix_assign(C, range(n // 2), range(n // 2), C11)
 
         # C12 = A11 * B12 + A12 * B22
-        C[:(n // 2)][(n // 2):] = _square_matrix_sum(
+        C12 = _matrix_sum(
             square_matrix_multiply_dc(
-                A[:(n // 2)][:(n // 2)], B[:(n // 2)][(n // 2):]),
+                _matrix_index_calculation(A, range(n // 2), range(n // 2)),
+                _matrix_index_calculation(B, range(n // 2), range(n // 2, n))
+                ),
             square_matrix_multiply_dc(
-                A[:(n // 2)][(n // 2):], B[:(n // 2)][:(n // 2)]))
+                _matrix_index_calculation(A, range(n // 2), range(n // 2, n)),
+                _matrix_index_calculation(B, range(n // 2, n), range(n // 2, n))
+                )
+            )
+        _matrix_assign(C, range(n // 2), range(n // 2, n), C12)
 
         # C21 = A21 * B11 + A22 * B21
-        C[(n // 2):][:(n // 2)] = _square_matrix_sum(
+        C21 = _matrix_sum(
             square_matrix_multiply_dc(
-                A[(n // 2):][:(n // 2)], B[:(n // 2)][:(n // 2)]),
+                _matrix_index_calculation(A, range(n // 2, n), range(n // 2)),
+                _matrix_index_calculation(B, range(n // 2), range(n // 2))
+                ),
             square_matrix_multiply_dc(
-                A[(n // 2):][(n // 2):], B[(n // 2):][:(n // 2)]))
+                _matrix_index_calculation(A, range(n // 2, n), range(n // 2, n)),
+                _matrix_index_calculation(B, range(n // 2, n), range(n // 2))
+                )
+            )
+        _matrix_assign(C, range(n // 2, n), range(n // 2), C21)
 
         # C22 = A21 * B12 + A22 * B22
-        C[(n // 2):][(n // 2):] = _square_matrix_sum(
+        C22 = _matrix_sum(
             square_matrix_multiply_dc(
-                A[(n // 2):][:(n // 2)], B[:(n // 2)][(n // 2):]),
+                _matrix_index_calculation(A, range(n // 2, n), range(n // 2)),
+                _matrix_index_calculation(B, range(n // 2), range(n // 2, n))
+                ),
             square_matrix_multiply_dc(
-                A[(n // 2):][(n // 2):], B[(n // 2):][(n // 2):]))
+                _matrix_index_calculation(A, range(n // 2, n), range(n // 2, n)),
+                _matrix_index_calculation(B, range(n // 2, n), range(n // 2, n))
+                )
+            )
+        _matrix_assign(C, range(n // 2, n), range(n // 2, n), C22)
         
     return C
 
@@ -67,7 +105,7 @@ def square_matrix_multiply_dc(A, B):
 def strassen_square_matrix_multiply(A, B):
     """square matrix multiplication by Strassen's algorithm.
 
-    Note: Here assume the square matrix's dimension n is an exact power of 2.
+    Assume: the square matrix's dimension n is an exact power of 2.
 
     Time complexity: O(n^log7)
     Space complexity: O(1).
@@ -81,15 +119,17 @@ def main():
     # From CLRS, Ex 4.2-1, p. 83. 
     A = [[1, 3], [7, 5]]
     B = [[6, 8], [4, 2]]
+    # A = [[1, 3, 4, 6], [7, 5, 9, 5], [2, 6, 5, 7], [3, 7, 5, 4]]
+    # B = [[6, 8, 5, 9], [4, 2, 8, 2], [3, 1, 9, 5], [5, 2, 1, 8]]
 
     start_time = time.time()
     print('By naive algorithm:\n{}'.format(square_matrix_multiply(A, B)))
     print('Time: {}'.format(time.time() - start_time))
 
-    # start_time = time.time()
-    # print('By simple divide & conquer algorithm:\n{}'
-    #       .format(square_matrix_multiply_dc(A, B)))
-    # print('Time: {}'.format(time.time() - start_time))
+    start_time = time.time()
+    print('By simple divide & conquer algorithm:\n{}'
+          .format(square_matrix_multiply_dc(A, B)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
