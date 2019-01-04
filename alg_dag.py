@@ -23,7 +23,8 @@ def _dfs_visit(v, graph_adj_d, visited_d,
             # If v_neighbor was visited.
             if (previsited_d[v_neighbor] < previsited_d[v] and 
                 not v_neighbor in postvisited_d):
-                # If v's neighbor is visited before v, then not DAG.
+                # If v's neighbor is visited before v during exploration, 
+                # then not DAG.
                 dag_bool[0] = False
         else:
             # If v_neighbor is not visited yet.
