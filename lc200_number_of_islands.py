@@ -32,6 +32,11 @@ class Solution(object):
 
         Time complexity: O(m * n).
         Space complexity: O(m * n).
+
+        Procedure:
+          - Starting from the top-left corner, run DFS with counter n_islands.
+          - If the grid was not visited before, mark it as visited and 
+            add n_islands by 1; if yes, skip DFS.
         """
         if not grid:
             return 0
