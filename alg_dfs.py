@@ -39,6 +39,7 @@ def dfs(graph_adj_d):
 
     for v in graph_adj_d.keys():
         if not visited_d[v]:
+            # If vertex is not visited, re-start the DFS visit.
             _dfs_visit(v, graph_adj_d, visited_d, 
                        previsit_d, postvisit_d, clock)
 
