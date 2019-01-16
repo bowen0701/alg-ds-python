@@ -22,10 +22,9 @@ class Node(object):
         self.next = new_next
 
 
-class OrderedList(object):
-    """Ordered list class.
+class LinkedListOrdered(object):
+    """Ordered singly linked list class.
 
-    Implement ordered list by a linked list.
     Operations include the following:
       - is_empty()
       - size()
@@ -158,7 +157,7 @@ class OrderedList(object):
 
 
 def main():
-    a_list = OrderedList()
+    a_list = LinkedListOrdered()
     a_list.add(31)
     a_list.add(77)
     a_list.add(17)
