@@ -24,10 +24,9 @@ class Node(object):
         self.next = new_next
 
 
-class UnorderedList(object):
-    """Unordered list class.
+class LinkedList(object):
+    """Singly linked list class.
 
-    Implement unordered list by a linked list.
     Operations include the following:
       - is_empty()
       - size()
@@ -168,7 +167,7 @@ class UnorderedList(object):
 
 
 def main():
-    a_list = UnorderedList()
+    a_list = LinkedList()
     a_list.add(31)
     a_list.add(77)
     a_list.add(17)
