@@ -3,8 +3,8 @@
 Two strings are anagram if one is simply a rearrangement of the other.
 """
 
-def check_anagram(s1, s2):
-    """Anagram by naive check."""
+def anagram_iter(s1, s2):
+    """Anagram by naive iteration."""
     l2 = list(s2)
 
     pos1 = 0
@@ -29,7 +29,7 @@ def check_anagram(s1, s2):
     return still_ok 
 
 
-def sort_anagram(s1, s2):
+def anagram_sort(s1, s2):
     """Anagram by sorting."""
     l1 = list(s1)
     l2 = list(s2)
@@ -49,7 +49,7 @@ def sort_anagram(s1, s2):
     return match_bool
 
 
-def count_anagram(s1, s2):
+def anagram_count(s1, s2):
     """Anagram by counting."""
     c1 = [0] * 26
     c2 = [0] * 26
