@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-def invert_dictionaries():
+def invert_hashtables():
 	pass
 
 
