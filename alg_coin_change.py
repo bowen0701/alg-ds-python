@@ -4,7 +4,7 @@ from __future__ import division
 
 
 def change_coin_recur(change, coin_val_ls):
-    """Change coins by 'naive' recursion."""
+    """Change coins by naive recursion."""
     min_coins = change
     if change in coin_val_ls:
         return 1
@@ -37,7 +37,7 @@ def change_coin_recur_cache(change, coin_val_ls, known_results_ls):
 
 
 def change_coin_dp(change, coin_val_ls, min_coins, used_coins):
-    """Change coins by Dynamic Programming."""
+    """Change coins by dynamic programming."""
     for cents in range(change + 1):
         coin_count = cents
         new_coin = 1
@@ -63,27 +63,29 @@ def print_coins(change, used_coins):
 def main():
     import time
 
+    # change = 63
+    # coin_val_ls = [1, 5, 10, 25]
     # start_time = time.time()
-    # min_coins = change_coin_recur(63, [1, 5, 10, 25])
+    # min_coins = change_coin_recur(change, coin_val_ls)
     # print('min_coins: {}'.format(min_coins))
     # print('Time for change_coin_recur(): {}'
     #       .format(time.time() - start_time))
 
+    change = 63
+    coin_val_ls = [1, 5, 10, 25]
     start_time = time.time()
-    min_coins = change_coin_recur_cache(63, [1, 5, 10, 25], [0]*63)
+    min_coins = change_coin_recur_cache(change, coin_val_ls, [0]*change)
     print('min_coins: {}'.format(min_coins))
     print('Time for change_coin_recur_cache(): {}'
           .format(time.time() - start_time))
 
     start_time = time.time()
-    change = 63
-    coint_count = [0] * (change + 1)
+    coin_count = [0] * (change + 1)
     used_coins = [0] * (change + 1)
     min_coins = change_coin_dp(
-        change, [1, 5, 10, 21, 25], 
-        coint_count, used_coins)
+        change, coin_val_ls, coin_count, used_coins)
     print('min_coins: {}'.format(min_coins))
-    print('Time for change_coin_recur_cache(): {}'
+    print('Time for change_coin_dp(): {}'
           .format(time.time() - start_time))
     print('used_coins: {}'.format(used_coins))
     print_coins(change, used_coins)
