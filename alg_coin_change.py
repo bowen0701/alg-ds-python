@@ -35,34 +35,33 @@ def change_coin_recur_memo(change, coins_ls, min_coins_memo_ls):
     return min_coins
 
 
-def change_coin_dp(change, coins_ls, min_coins, used_coins):
+def change_coin_dp(change, coins_ls, min_coins_ls, used_coins_ls):
     """Change coins by dynamic programming."""
     for cents in range(change + 1):
-        coin_count = cents
+        num_coins = cents
         new_coin = 1
         for m in [c for c in coins_ls if c <= cents]:
-            if min_coins[cents - m] + 1 < coin_count:
-                coin_count = min_coins[cents - m] + 1
+            if min_coins_ls[cents - m] + 1 < num_coins:
+                num_coins = min_coins_ls[cents - m] + 1
                 new_coin = m
-        min_coins[cents] = coin_count
-        used_coins[cents] = new_coin
-    return min_coins[change]
+        min_coins_ls[cents] = num_coins
+        used_coins_ls[cents] = new_coin
+    return min_coins_ls[change]
 
 
-def print_coins(change, used_coins):
+def print_coins(change, used_coins_ls):
     """Print used coins for change."""
     coin = change
     while coin > 0:
-        this_coin = used_coins[coin]
-        print('this_coin: {}'.format(this_coin))
-        coin = coin - this_coin
+        used_coin = used_coins_ls[coin]
+        print('used_coin: {}'.format(used_coin))
+        coin = coin - used_coin
     return None
 
 
 def main():
     import time
 
-    # change = 6
     change = 63
     coins_ls = [1, 5, 10, 25]
 
@@ -78,16 +77,15 @@ def main():
     print('Time for change_coin_recur_memo(): {}'
           .format(time.time() - start_time))
 
-    # start_time = time.time()
-    # coin_count = [0] * (change + 1)
-    # used_coins = [0] * (change + 1)
-    # min_coins = change_coin_dp(
-    #     change, coins_ls, coin_count, used_coins)
-    # print('min_coins: {}'.format(min_coins))
-    # print('Time for change_coin_dp(): {}'
-    #       .format(time.time() - start_time))
-    # print('used_coins: {}'.format(used_coins))
-    # print_coins(change, used_coins)
+    start_time = time.time()
+    min_coins_ls = [0] * (change + 1)
+    used_coins_ls = [0] * (change + 1)
+    min_coins = change_coin_dp(change, coins_ls, min_coins_ls, used_coins_ls)
+    print('min_coins: {}'.format(min_coins))
+    print('used_coins_ls: {}'.format(used_coins_ls))
+    print_coins(change, used_coins_ls)
+    print('Time for change_coin_dp(): {}'
+          .format(time.time() - start_time))
 
 
 if __name__ == '__main__':
