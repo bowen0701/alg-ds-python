@@ -9,7 +9,7 @@ def change_coin_recur(change, coins_ls):
     if change in coins_ls:
         return 1
     else:
-        for m in [c for c in coins_ls if c < change]:
+        for m in [c for c in coins_ls if c <= change]:
             num_coins = 1 + change_coin_recur(change - m, coins_ls)
             if num_coins < min_coins:
                 min_coins = num_coins
