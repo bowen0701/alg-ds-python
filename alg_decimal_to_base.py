@@ -4,6 +4,8 @@ from __future__ import division
 
 from ds_stack import Stack
 
+digits = '0123456789ABCDEF'
+
 
 def convert_decimal_to_base2(dec_num):
     """Convert decimal number to binary number."""
@@ -24,8 +26,6 @@ def convert_decimal_to_base(dec_num, base):
     """Convert decimal number to any base."""
     rem_stack = Stack()
 
-    digits = '0123456789ABCDEF'
-
     while dec_num > 0:
         dec_num, rem = divmod(dec_num, base)
         rem_stack.push(rem)
@@ -38,8 +38,6 @@ def convert_decimal_to_base(dec_num, base):
 
 
 def _recur_decimal_to_base(dec_num, base, rem_stack):
-    digits = '0123456789ABCDEF'
-
     if dec_num < base:
         rem_stack.push(digits[dec_num])
     else:
