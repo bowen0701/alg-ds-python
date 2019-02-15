@@ -13,7 +13,7 @@ from __future__ import division
 
 
 def factorial_recur(n):
-    """Get the nth number of factorial series, Fn, by recursion.
+    """Get the nth number of factorial series by recursion.
 
     - Time complexity: Fn - 1 = O(Fn); too fast.
     - Space complexity: O(n).
@@ -25,7 +25,7 @@ def factorial_recur(n):
 
 
 def factorial_memo(n):
-    """Get the nth number of factorial series, Fn, by memorization.
+    """Get the nth number of factorial series by memorization.
     
     - Time complexity: O(n).
     - Space complexity: O(n).
@@ -33,9 +33,10 @@ def factorial_memo(n):
     fn_d = {}
     fn_d[0] = 1
     fn_d[1] = 1
-    for n in xrange(2, n + 1):
+    for n in range(2, n + 1):
         fn_d[n] = n * fn_d[n - 1]
     return fn_d[n]
+
 
 def factorial_dp(n):
     """Get the nth number of factorial series by dynamic programming.
@@ -44,7 +45,7 @@ def factorial_dp(n):
     - Space complexity: O(1), improving a lot.
     """
     fn = 1
-    for i in xrange(2, n + 1):
+    for i in range(2, n + 1):
         fn *= i 
     return fn
 
@@ -66,6 +67,7 @@ def main():
     start_time = time.time()
     print('By dynamic programming: {}'.format(factorial_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
+
 
 if __name__ == '__main__':
     main()
