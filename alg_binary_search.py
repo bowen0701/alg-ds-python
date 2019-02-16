@@ -4,7 +4,11 @@ from __future__ import division
 
 
 def binary_search(a_list, item):
-    """Binary search for ordered list."""
+    """Binary search for ordered list.
+
+    Time complexity: O(logn).
+    Space complexity: O(1).
+    """
     first = 0
     last = len(a_list) - 1
     found_bool = False
@@ -23,7 +27,11 @@ def binary_search(a_list, item):
 
 
 def binary_search_recur(a_list, item):
-    """Binary search for ordered list by recursion."""
+    """Binary search for ordered list by recursion.
+
+    Time complexity: O(logn).
+    Space complexity: O(1).
+    """
     if len(a_list) == 0:
         return False
     else:
@@ -41,6 +49,8 @@ def binary_search_recur_fast(a_list, item, first, last):
     """Binary search for ordered list by recursion w/o slicing.
 
     Note: It performs faster than binary_search_recur().
+    Time complexity: O(logn).
+    Space complexity: O(1).
     """
     if last - first < 2:
         return a_list[first] == item or a_list[last] == item
@@ -58,48 +68,30 @@ def binary_search_recur_fast(a_list, item, first, last):
 def main():
     import time
 
-    a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20, 65]
-    print('a_list: {}'.format(a_list))
-
-    # Sort the list.
-    start_time = time.time()
-    a_list = sorted(a_list)
-    print('Sorted a_list: {}'.format(a_list))
-    print('Time for sorted(): {}'
-          .format(time.time() - start_time))   
+    a_list = [17, 20, 26, 31, 44, 54, 55, 65, 77, 93]
+    item = 65
+    print('In sorted list {0}: search {1}'.format(a_list, item))
 
     # Binary search by binary_search().
     start_time = time.time()
-    item = None
-    print('Search item {0}: {1}'
-          .format(item, binary_search(a_list, item)))
-    item = 93
-    print('Search item {0}: {1}'
-          .format(item, binary_search(a_list, item)))
+    print('Binary search: {}'.format(binary_search(a_list, item)))
     print('Time for binary_search(): {}'
           .format(time.time() - start_time))
 
     # Binary search by binary_search_recur().
     start_time = time.time()
-    item = None
-    print('Search item {0}: {1}'
-          .format(item, binary_search_recur(a_list, item)))
-    item = 93
-    print('Search item {0}: {1}'
-          .format(item, binary_search_recur(a_list, item)))
+    print('Binary search by recursion: {}'
+          .format(binary_search_recur(a_list, item)))
     print('Time for binary_search_recur(): {}'
           .format(time.time() - start_time))
 
     # Binary search by binary_search_recur_fast().
     start_time = time.time()
-    item = None
-    print('Search item {0}: {1}'
-          .format(item, binary_search_recur_fast(a_list, item, 0, len(a_list) - 1)))
-    item = 93
-    print('Search item {0}: {1}'
-          .format(item, binary_search_recur_fast(a_list, item, 0, len(a_list) - 1)))
-    print('Time for binary_search_recur(): {}'
+    print('Binary search by fast recursion: {}'
+          .format(binary_search_recur_fast(a_list, item, 0, len(a_list) - 1)))
+    print('Time for binary_search_recur_fast(): {}'
           .format(time.time() - start_time))
+
 
 if __name__ == '__main__':
     main()
