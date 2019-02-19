@@ -15,10 +15,10 @@ In general, a[i][j] is a peak iff
 Similarly for corner cases, a[i][j], i = 0 or m - 1, or j = 0 or n -1.
 """
 
-def find_peak_naive(arr):
-    """Find peak by naive algorithm.
+def peak_2D_iter(arr):
+    """Find peak in 2D array (nxm) by iterative algorithm.
 
-    Time complexity: O(n * m).
+    Time complexity: O(n*m).
     """
     nrow, ncol = len(arr), len(arr[0])
 
@@ -76,7 +76,7 @@ def find_peak_naive(arr):
                 return arr[i][j]
 
 
-def _find_max_1D(arr):
+def _max_1D(arr):
     """Find max in 1D array, with time complexity O(m)."""
     max_id = 0
     max_item = arr[0]
@@ -86,25 +86,26 @@ def _find_max_1D(arr):
             max_item = arr[i]
     return max_id, max_item
 
-def find_peak(arr):
-    """Find peak in 2D (n x m) array by Divide and Conquer algorithm.
 
-    Time complexity: O(m * log(n)).
+def peak_2D(arr):
+    """Find peak in 2D array (nxm) by divide & conquer algorithm.
+
+    Time complexity: O(m*log(n)).
     """
     nrow, ncol = len(arr), len(arr[0])
 
     if nrow == 1:
-        _, max_item = _find_max_1D(arr)
+        _, max_item = _max_1D(arr)
         return max_item
     else:
-        mid_row_id = nrow // 2
-        max_col_id, _ = _find_max_1D(arr[mid_row_id])
-        if arr[mid_row_id][max_col_id] < arr[mid_row_id - 1][max_col_id]:
-            return find_peak(arr[:mid_row_id])
-        elif arr[mid_row_id][max_col_id] < arr[mid_row_id + 1][max_col_id]:
-            return find_peak(arr[(mid_row_id + 1):])
+        mid_row = nrow // 2
+        max_col, _ = _max_1D(arr[mid_row])
+        if arr[mid_row][max_col] < arr[mid_row - 1][max_col]:
+            return peak_2D(arr[:mid_row])
+        elif arr[mid_row][max_col] < arr[mid_row + 1][max_col]:
+            return peak_2D(arr[(mid_row + 1):])
         else:
-            return arr[mid_row_id][max_col_id]
+            return arr[mid_row][max_col]
 
 
 def main():
@@ -116,17 +117,14 @@ def main():
            [15, 9, 11, 21, 22], 
            [16, 17, 19, 20, 18]]
 
-    time_start = time.time()
-    peak = find_peak_naive(arr)
-    time_run = time.time() - time_start
-    print('Peak: {}'.format(peak))
-    print('Time for find_peak_naive(): {}'.format(time_run))
+    start_time = time.time()
+    print('Peak: {}'.format(peak_2D_iter(arr)))
+    print('Time for peak_2D_iter(): {}'.format(time.time() - start_time))
 
-    time_start = time.time()
-    peak = find_peak(arr)
-    time_run = time.time() - time_start
-    print('Peak: {}'.format(peak))
-    print('Time for find_peak(): {}'.format(time_run))
+    start_time = time.time()
+    print('Peak: {}'.format(peak_2D(arr)))
+    print('Time for peak_2D(): {}'.format(time.time() - start_time))
+
 
 if __name__ == '__main__':
     main()
