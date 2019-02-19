@@ -2,8 +2,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
-
 """
 Find a peak in 1D array.
 
@@ -14,7 +12,7 @@ If a[0] >= a[1], then a[0] is a peak.
 If a[n - 1] >= a[n - 2], then a[n - 1] is a peak.  
 """
 
-def find_peak_naive(arr):
+def peak_1D_iter(arr):
     """Find peak by naive iteration.
 
     Time complexity: O(n).
@@ -31,8 +29,8 @@ def find_peak_naive(arr):
                 return arr[i]
 
 
-def find_peak(arr):
-    """Find peak by divide-end-conquer algorithm.
+def peak_1D(arr):
+    """Find peak by divide-and-conquer algorithm.
 
     Time complexity: O(logn).
     """
@@ -41,45 +39,39 @@ def find_peak(arr):
     else:
         mid = len(arr) // 2
         if arr[mid] <= arr[mid - 1]:
-            return find_peak(arr[:mid-1])
+            return peak_1D(arr[:mid-1])
         elif arr[mid] <= arr[mid + 1]:
-            return find_peak(arr[mid+1:])
+            return peak_1D(arr[mid+1:])
         else:
             return arr[mid]
 
 
 def main():
     import time
+    import numpy as np
 
     # Array of length 5 with peak 4.
     arr = [0, 1, 4, 3, 2]
     
-    time_start = time.time()
-    peak = find_peak_naive(arr)
-    time_run = time.time() - time_start
-    print('Peak: {}'.format(peak))
-    print('Time for find_peak_naive(): {}'.format(time_run))
+    start_time = time.time()
+    print('Peak: {}'.format(peak_1D_iter(arr)))
+    print('Time for peak_1D_iter(): {}'.format(time.time() - start_time))
 
-    time_start = time.time()
-    peak = find_peak(arr)
-    time_run = time.time() - time_start
-    print('Peak: {}'.format(peak))
-    print('Time for find_peak_naive(): {}'.format(time_run))
+    start_time = time.time()
+    print('Peak: {}'.format(peak_1D(arr)))
+    print('Time for peak_1D(): {}'.format(time.time() - start_time))
 
     # Array of long length.
-    arr = np.random.permutation(10000000)
+    np.random.seed(71)
+    arr = np.random.permutation(1000000)
 
-    time_start = time.time()
-    peak = find_peak_naive(arr)
-    time_run = time.time() - time_start
-    print('Peak: {}'.format(peak))
-    print('Time for find_peak_naive(): {}'.format(time_run))
+    start_time = time.time()
+    print('Peak: {}'.format(peak_1D_iter(arr)))
+    print('Time for peak_1D_iter(): {}'.format(time.time() - start_time))
 
-    time_start = time.time()
-    peak = find_peak(arr)
-    time_run = time.time() - time_start
-    print('Peak: {}'.format(peak))
-    print('Time for find_peak_naive(): {}'.format(time_run))
+    start_time = time.time()
+    print('Peak: {}'.format(peak_1D(arr)))
+    print('Time for peak_1D(): {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
