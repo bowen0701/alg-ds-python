@@ -15,7 +15,7 @@ from __future__ import division
 def fibonacci_recur(n):
     """Get the nth number of Fibonacci series, Fn, by recursion.
 
-    - Time complexity: 2Fn - 1 = O(Fn); too fast.
+    - Time complexity: O(2^n); too fast.
     - Space complexity: O(n).
     """
     if n <= 1:
