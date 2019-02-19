@@ -22,7 +22,8 @@ Explanation:
 4   (0 1 0 0)
        ↑   ↑
 
-The above arrows point to positions where the corresponding bits are different.
+The above arrows point to positions where the corresponding bits 
+are different.
 """
 
 class Solution(object):
@@ -40,6 +41,7 @@ class Solution(object):
 
 def main():
     print Solution().hammingDistance(1, 4)
+
 
 if __name__ == '__main__':
     main()
