@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-def sum_list_for(num_ls):
+def sum_list_iter(num_ls):
     """Sum number list by for loop."""
     _sum = 0
     for num in num_ls:
@@ -22,10 +22,10 @@ def sum_list_recur(num_ls):
 def main():
     import time
 
-    num_ls = [0, 1, 2, 3, 4, 5]
+    num_ls = range(100)
     
     start_time = time.time()
-    print('By for loop: {}'.format(sum_list_for(num_ls)))
+    print('By iteration: {}'.format(sum_list_iter(num_ls)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
