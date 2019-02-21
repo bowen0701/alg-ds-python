@@ -4,6 +4,7 @@ from __future__ import division
 
 import numpy as np
 
+
 def bfs(graph_adj_d, start_vertex):
     """Breadth First Search (BFS) algorithm with single source 
     by queue.
