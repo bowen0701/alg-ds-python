@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-def hash_str(a_str, table_size):
+def hash_string(a_str, table_size):
 	"""Hash a string by the folding method.
  
     - Get ordinal number for each char.
@@ -16,7 +16,7 @@ def hash_str(a_str, table_size):
 	return sum % table_size
 
 
-def weighted_hash_str(a_str, table_size):
+def hash_string_weighted(a_str, table_size):
 	"""Weighted-Hash a string by the folding method.
 
     - Get ordinal number for each char.
@@ -31,9 +31,10 @@ def weighted_hash_str(a_str, table_size):
 
 def main():
 	a_str = 'cat'
-	print('For hash_str(): {}'.format(hash_str(a_str, 11)))
-	print('For weighted_hash_str(): {}'
-		  .format(weighted_hash_str(a_str, 11)))
+	print('For hash_string(): {}'
+		  .format(hash_string(a_str, 11)))
+	print('For hash_string_weighted(): {}'
+		  .format(hash_string_weighted(a_str, 11)))
 
 
 if __name__ == '__main__':
