@@ -54,12 +54,15 @@ class MaxHeap(object):
         """
         l = left(i)
         r = right(i)
+
+        # Get max index from node i and its two child nodes.
         if l <= self.size and self.A[l] > self.A[i]:
             max_i = l
         else:
             max_i = i
         if r <= self.size and self.A[r] > self.A[max_i]:
             max_i = r
+
         if max_i != i:
             # Swap node i and node max_i.
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]

@@ -57,12 +57,15 @@ class MinHeapAttribute(object):
         """ 
         l = left(i)
         r = right(i)
+
+        # Get min index from node i and its two child nodes.
         if l <= self.size and self.A[l][0] < self.A[i][0]:
             min_i = l
         else:
             min_i = i
         if r <= self.size and self.A[r][0] < self.A[min_i][0]:
             min_i = r
+
         if min_i != i:
             # Swap node i and node min_i.
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
