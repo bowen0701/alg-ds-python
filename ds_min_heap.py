@@ -63,20 +63,6 @@ class MinHeap(object):
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
             self.heapify_down(min_i)
 
-    def build(self, arr):
-        """Build min heap from unordered array.
-
-        Start from the level-1 nodes from leaves back to level-log(n) node.
-        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
-        n is the number of nodes including the root one.
-
-        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
-        """
-        self.A.extend(arr)
-        self.size = len(arr)
-        for i in reversed(range(1, (self.size + 1) // 2 + 1)):
-            self.heapify_down(i)
-
     def extract_min(self):
         if self.size < 1:
             raise ValueError('Heap underflow.')
@@ -91,6 +77,20 @@ class MinHeap(object):
             self.heapify_down(1)
         return minimum
 
+    def build(self, arr):
+        """Build min heap from unordered array.
+
+        Start from the level-1 nodes from leaves back to level-log(n) node.
+        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
+        n is the number of nodes including the root one.
+
+        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
+        """
+        self.A.extend(arr)
+        self.size = len(arr)
+        for i in reversed(range(1, (self.size + 1) // 2 + 1)):
+            self.heapify_down(i)
+
 
 def main():
     print('Min heap by inserting 7, 5, 3, 1:')
@@ -101,11 +101,6 @@ def main():
     min_pq.add(1)
     min_pq.show()
 
-    print('Build min heap from unordered list [7, 5, 3, 1]:')
-    min_pq = MinHeap()
-    min_pq.build([7, 5, 3, 1])
-    min_pq.show()
-
     print('Get min key:')
     print(min_pq.get_min())
 
@@ -113,6 +108,11 @@ def main():
     _min = min_pq.extract_min()
     print('- Min: {}'.format(_min))
     print('- The remaining:')
+    min_pq.show()
+
+    print('Build min heap from unordered list [7, 5, 3, 1]:')
+    min_pq = MinHeap()
+    min_pq.build([7, 5, 3, 1])
     min_pq.show()
 
 

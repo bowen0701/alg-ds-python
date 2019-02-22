@@ -63,20 +63,6 @@ class MaxHeapAttribute(object):
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.heapify_down(max_i)
 
-    def build(self, arr):
-        """Build max heap from unordered array.
-
-        Start from level-1 nodes from leaves back to level-log(n) node.
-        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
-        n is the number of nodes including the root node. 
-
-        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
-        """
-        self.A.extend(arr)
-        self.size = len(arr)
-        for i in reversed(range(1, (self.size + 1) // 2 + 1)):
-            self.heapify_down(i)
-
     def extract_max(self):
         if self.size < 1:
             raise ValueError('Heap underflow.')
@@ -91,6 +77,20 @@ class MaxHeapAttribute(object):
         self.heapify_down(1)
         return maximum
 
+    def build(self, arr):
+        """Build max heap from unordered array.
+
+        Start from level-1 nodes from leaves back to level-log(n) node.
+        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
+        n is the number of nodes including the root node. 
+
+        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
+        """
+        self.A.extend(arr)
+        self.size = len(arr)
+        for i in reversed(range(1, (self.size + 1) // 2 + 1)):
+            self.heapify_down(i)
+
 
 def main():
     print('Max heap of vertices by inserting [1, a], [3, c], [5, b], [7, e]:')
@@ -101,12 +101,6 @@ def main():
     max_pq.add([7, 'e'])
     max_pq.show()
 
-    print('Build heap of vertices from unordered list')
-    print('[[1, a], [3, c], [5, b], [7, e]]:')
-    max_pq = MaxHeapAttribute()
-    max_pq.build([[1, 'a'], [3, 'c'], [5, 'b'], [7, 'e']])
-    max_pq.show()
-
     print('Get max:')
     print(max_pq.get_max())
 
@@ -114,6 +108,12 @@ def main():
     _max = max_pq.extract_max()
     print(_max)
     print('The remaining:')
+    max_pq.show()
+
+    print('Build heap of vertices from unordered list')
+    print('[[1, a], [3, c], [5, b], [7, e]]:')
+    max_pq = MaxHeapAttribute()
+    max_pq.build([[1, 'a'], [3, 'c'], [5, 'b'], [7, 'e']])
     max_pq.show()
 
 
