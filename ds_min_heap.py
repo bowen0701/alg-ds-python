@@ -15,10 +15,10 @@ def right(i):
     return 2 * i + 1
 
 
-class MinBinaryHeap(object):
-    """Min Binary Heap implmentation of Priority Queue.
+class MinHeap(object):
+    """Min Heap implmentation of Priority Queue.
 
-    Min-heap property: A[parent(i)] <= A[i].
+    Min-heap property: A[parent(i)] <= A[i], i = left, right.
     """
     def __init__(self):
         self.A = [0]
@@ -48,7 +48,7 @@ class MinBinaryHeap(object):
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
             self.min_heapify(min_i)
 
-    def build_min_heap(self, A):
+    def build_min_heap(self, arr):
         """Build min heap from unordered array.
 
         Start from the level-1 nodes from leaves back to level-log(n) node.
@@ -57,8 +57,8 @@ class MinBinaryHeap(object):
 
         Complexity: O(n*log(n)) via simple analysis. Actually O(n).
         """
-        self.A.extend(A)
-        self.heap_size = len(A)
+        self.A.extend(arr)
+        self.heap_size = len(arr)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
             self.min_heapify(i)
 
@@ -92,8 +92,8 @@ class MinBinaryHeap(object):
 
 
 def main():
-    print('Binary heap by inserting 3, 7, 5, 1:')
-    min_pq = MinBinaryHeap()
+    print('Min heap by inserting 3, 7, 5, 1:')
+    min_pq = MinHeap()
     min_pq.insert(3)
     min_pq.insert(7)
     min_pq.insert(5)
@@ -101,7 +101,7 @@ def main():
     min_pq.show()
 
     print('Build min heap from unordered list [3, 7, 5, 1]:')
-    min_pq = MinBinaryHeap()
+    min_pq = MinHeap()
     min_pq.build_min_heap([3, 7, 5, 1])
     min_pq.show()
 

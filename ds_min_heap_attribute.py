@@ -15,14 +15,14 @@ def right(i):
     return 2 * i + 1
 
 
-class MinBinaryHeapAttribute(object):
-    """Min Binary Heap with Attribute implmentation of Priority Queue.
+class MinHeapAttribute(object):
+    """Min Heap with Attribute implmentation of Priority Queue.
+
+    Min-heap property: A[parent(i)][0] <= A[i][0], i = left, right.
 
     Applications:
       - Dijkstra's Algorithm.
       - Prim's Minimum Spanning Tree Algorithm.
-
-    Min-heap property: A[parent(i)][0] <= A[i][0].
     """
     def __init__(self):
         self.A = [[0, 0]]
@@ -51,7 +51,7 @@ class MinBinaryHeapAttribute(object):
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
             self.min_heapify(min_i)
 
-    def build_min_heap(self, A):
+    def build_min_heap(self, arr):
         """Build min heap from unordered array.
 
         Start from level-1 nodes from leaves back to level-long(n) nodes.
@@ -60,8 +60,8 @@ class MinBinaryHeapAttribute(object):
 
         Complexity: O(n*log(n)) via simple analysis. Actually O(n).
         """
-        self.A.extend(A)
-        self.heap_size = len(A)
+        self.A.extend(arr)
+        self.heap_size = len(arr)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
             self.min_heapify(i)
 
@@ -96,8 +96,8 @@ class MinBinaryHeapAttribute(object):
 
 
 def main():
-    print('Binary heap of vertices by inserting [3, a], [7, c], [5, b], [1, e]:')
-    min_pq = MinBinaryHeapAttribute()
+    print('Min Heap of vertices by inserting [3, a], [7, c], [5, b], [1, e]:')
+    min_pq = MinHeapAttribute()
     min_pq.insert([3, 'a'])
     min_pq.insert([7, 'c'])
     min_pq.insert([5, 'b'])
@@ -106,7 +106,7 @@ def main():
 
     print('Build min heap of vertices from unordered list')
     print('[[3, a], [7, c], [5, b], [1, e]]:')
-    min_pq = MinBinaryHeapAttribute()
+    min_pq = MinHeapAttribute()
     min_pq.build_min_heap([[3, 'a'], [7, 'c'], [5, 'b'], [1, 'e']])
     min_pq.show()
 
