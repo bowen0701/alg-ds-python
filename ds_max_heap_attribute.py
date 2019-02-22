@@ -30,7 +30,7 @@ class MaxHeapAttribute(object):
     def find_max(self):
         return self.A[1]
 
-    def max_heapify(self, i):
+    def heapify(self, i):
         """Max heapify.
 
         Complexity: O(log(n)).
@@ -45,9 +45,9 @@ class MaxHeapAttribute(object):
             max_i = r
         if max_i != i:
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
-            self.max_heapify(max_i)
+            self.heapify(max_i)
 
-    def build_max_heap(self, arr):
+    def build(self, arr):
         """Build max heap from unordered array.
 
         Start from level-1 nodes from leaves back to level-log(n) node.
@@ -59,7 +59,7 @@ class MaxHeapAttribute(object):
         self.A.extend(arr)
         self.heap_size = len(arr)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
-            self.max_heapify(i)
+            self.heapify(i)
 
     def extract_max(self):
         if self.heap_size < 1:
@@ -72,7 +72,7 @@ class MaxHeapAttribute(object):
             pass
         else:
             self.A[1] = last
-        self.max_heapify(1)
+        self.heapify(1)
         return maximum
 
     def increase_key(self, i, key):
@@ -102,7 +102,7 @@ def main():
     print('Build heap of vertices from unordered list')
     print('[[5, a], [7, c], [3, b], [1, e]]:')
     max_pq = MaxHeapAttribute()
-    max_pq.build_max_heap([[5, 'a'], [7, 'c'], [3, 'b'], [1, 'e']])
+    max_pq.build([[5, 'a'], [7, 'c'], [3, 'b'], [1, 'e']])
     max_pq.show()
 
     print('Increase key 1 at position 4 to 6.')

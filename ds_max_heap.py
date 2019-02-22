@@ -31,7 +31,7 @@ class MaxHeap(object):
     def find_max(self):
         return self.A[1]
 
-    def max_heapify(self, i):
+    def heapify(self, i):
         """Max heapify operation.
 
         Complexity: O(log(n)).
@@ -47,9 +47,9 @@ class MaxHeap(object):
         if max_i != i:
             # Swap node i and node min_i.
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
-            self.max_heapify(max_i)
+            self.heapify(max_i)
 
-    def build_max_heap(self, arr):
+    def build(self, arr):
         """Build max heap from unordered array.
 
         Start from the level-1 nodes from leaves back to level-log(n) node.
@@ -61,7 +61,7 @@ class MaxHeap(object):
         self.A.extend(arr)
         self.heap_size = len(arr)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
-            self.max_heapify(i)
+            self.heapify(i)
 
     def extract_max(self):
         if self.heap_size < 1:
@@ -74,7 +74,7 @@ class MaxHeap(object):
             pass
         else:
             self.A[1] = last
-        self.max_heapify(1)
+        self.heapify(1)
         return maximum
 
     def increase_key(self, i, key):
@@ -103,7 +103,7 @@ def main():
 
     print('Build max heap from unordered list [5, 7, 3, 1]:')
     max_pq = MaxHeap()
-    max_pq.build_max_heap([5, 7, 3, 1])
+    max_pq.build([5, 7, 3, 1])
     max_pq.show()   
 
     print('Increase key 1 at position 4 to 6.')

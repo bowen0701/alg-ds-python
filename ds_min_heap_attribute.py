@@ -34,7 +34,7 @@ class MinHeapAttribute(object):
     def find_min(self):
         return self.A[1]
 
-    def min_heapify(self, i):
+    def heapify(self, i):
         """Min heapify.
 
         Complexity: O(log(n)).
@@ -49,9 +49,9 @@ class MinHeapAttribute(object):
             min_i = r
         if min_i != i:
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
-            self.min_heapify(min_i)
+            self.heapify(min_i)
 
-    def build_min_heap(self, arr):
+    def build(self, arr):
         """Build min heap from unordered array.
 
         Start from level-1 nodes from leaves back to level-long(n) nodes.
@@ -63,7 +63,7 @@ class MinHeapAttribute(object):
         self.A.extend(arr)
         self.heap_size = len(arr)
         for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
-            self.min_heapify(i)
+            self.heapify(i)
 
     def extract_min(self):
         if self.heap_size < 1:
@@ -76,7 +76,7 @@ class MinHeapAttribute(object):
             pass
         else:
             self.A[1] = last
-            self.min_heapify(1)
+            self.heapify(1)
         return minimum
 
     def decrease_key(self, i, key):
@@ -107,7 +107,7 @@ def main():
     print('Build min heap of vertices from unordered list')
     print('[[3, a], [7, c], [5, b], [1, e]]:')
     min_pq = MinHeapAttribute()
-    min_pq.build_min_heap([[3, 'a'], [7, 'c'], [5, 'b'], [1, 'e']])
+    min_pq.build([[3, 'a'], [7, 'c'], [5, 'b'], [1, 'e']])
     min_pq.show()
 
     print('Decrease key 7 at position 4 to 2.')
