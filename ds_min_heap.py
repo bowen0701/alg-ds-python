@@ -22,7 +22,7 @@ class MinHeap(object):
     """
     def __init__(self):
         self.A = [0]
-        self.heap_size = 0
+        self.size = 0
 
     def show(self):
         print(self.A)
@@ -30,23 +30,38 @@ class MinHeap(object):
     def get_min(self):
         return self.A[1]
 
-    def heapify(self, i):
-        """Min heapify.
+    def heapify_up(self, i):
+        """Min heapify up.
+
+        Complexity: O(log(n)).
+        """ 
+        while i > 1 and self.A[parent(i)] > self.A[i]:
+            # Swap node i and node parent(i).
+            self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
+            i = parent(i)
+
+    def add(self, new_key):
+        self.A.append(new_key)
+        self.size += 1
+        self.heapify_up(self.size)
+
+    def heapify_down(self, i):
+        """Min heapify down.
 
         Complexity: O(log(n)).
         """
         l = left(i)
         r = right(i)
-        if l <= self.heap_size and self.A[l] < self.A[i]:
+        if l <= self.size and self.A[l] < self.A[i]:
             min_i = l
         else:
             min_i = i
-        if r <= self.heap_size and self.A[r] < self.A[min_i]:
+        if r <= self.size and self.A[r] < self.A[min_i]:
             min_i = r
         if min_i != i:
             # Swap node i and node min_i.
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
-            self.heapify(min_i)
+            self.heapify_down(min_i)
 
     def build(self, arr):
         """Build min heap from unordered array.
@@ -58,55 +73,37 @@ class MinHeap(object):
         Complexity: O(n*log(n)) via simple analysis. Actually O(n).
         """
         self.A.extend(arr)
-        self.heap_size = len(arr)
-        for i in reversed(range(1, (self.heap_size + 1) // 2 + 1)):
-            self.heapify(i)
+        self.size = len(arr)
+        for i in reversed(range(1, (self.size + 1) // 2 + 1)):
+            self.heapify_down(i)
 
     def extract_min(self):
-        if self.heap_size < 1:
+        if self.size < 1:
             raise ValueError('Heap underflow.')
         minimum = self.A[1]
         last = self.A.pop()
-        self.heap_size -= 1
-        if self.heap_size < 1:
+        self.size -= 1
+        if self.size < 1:
             # The last element is minimum.
             pass
         else:
             self.A[1] = last
-            self.heapify(1)
+            self.heapify_down(1)
         return minimum
-
-    def decrease_key(self, i, key):
-        if self.A[i] < key:
-            raise ValueError('New key is larger than current key.')
-        self.A[i] = key
-        while i > 1 and self.A[parent(i)] > self.A[i]:
-            # Swap node i and node parent(i).
-            self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
-            i = parent(i)
-
-    def insert(self, new_key):
-        self.A.append(np.inf)
-        self.heap_size += 1
-        self.decrease_key(self.heap_size, new_key)
 
 
 def main():
     print('Min heap by inserting 7, 5, 3, 1:')
     min_pq = MinHeap()
-    min_pq.insert(7)
-    min_pq.insert(5)
-    min_pq.insert(3)
-    min_pq.insert(1)
+    min_pq.add(7)
+    min_pq.add(5)
+    min_pq.add(3)
+    min_pq.add(1)
     min_pq.show()
 
     print('Build min heap from unordered list [7, 5, 3, 1]:')
     min_pq = MinHeap()
     min_pq.build([7, 5, 3, 1])
-    min_pq.show()
-
-    print('Decrease key 7 at position 4 to 2.')
-    min_pq.decrease_key(4, 2)
     min_pq.show()
 
     print('Get min key:')
