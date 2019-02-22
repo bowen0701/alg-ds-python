@@ -27,7 +27,7 @@ class MinHeap(object):
     def show(self):
         print(self.A)
 
-    def find_min(self):
+    def get_min(self):
         return self.A[1]
 
     def heapify(self, i):
@@ -77,7 +77,7 @@ class MinHeap(object):
         return minimum
 
     def decrease_key(self, i, key):
-        if key > self.A[i]:
+        if self.A[i] < key:
             raise ValueError('New key is larger than current key.')
         self.A[i] = key
         while i > 1 and self.A[parent(i)] > self.A[i]:
@@ -92,25 +92,25 @@ class MinHeap(object):
 
 
 def main():
-    print('Min heap by inserting 3, 7, 5, 1:')
+    print('Min heap by inserting 7, 5, 3, 1:')
     min_pq = MinHeap()
-    min_pq.insert(3)
     min_pq.insert(7)
     min_pq.insert(5)
+    min_pq.insert(3)
     min_pq.insert(1)
     min_pq.show()
 
-    print('Build min heap from unordered list [3, 7, 5, 1]:')
+    print('Build min heap from unordered list [7, 5, 3, 1]:')
     min_pq = MinHeap()
-    min_pq.build([3, 7, 5, 1])
+    min_pq.build([7, 5, 3, 1])
     min_pq.show()
 
     print('Decrease key 7 at position 4 to 2.')
     min_pq.decrease_key(4, 2)
     min_pq.show()
 
-    print('Find min key:')
-    print(min_pq.find_min())
+    print('Get min key:')
+    print(min_pq.get_min())
 
     print('Extract min key:')
     _min = min_pq.extract_min()

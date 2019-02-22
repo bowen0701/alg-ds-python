@@ -19,6 +19,7 @@ class MaxHeap(object):
     """Max Heap implementation of Priority Queue.
 
     Max-heap property: A[parent(i)] >= A[i], i = left, right.
+
     Application: Heapsort Algorithm.
     """
     def __init__(self):
@@ -28,7 +29,7 @@ class MaxHeap(object):
     def show(self):
         print(self.A)
 
-    def find_max(self):
+    def get_max(self):
         return self.A[1]
 
     def heapify(self, i):
@@ -45,7 +46,7 @@ class MaxHeap(object):
         if r <= self.heap_size and self.A[r] > self.A[max_i]:
             max_i = r
         if max_i != i:
-            # Swap node i and node min_i.
+            # Swap node i and node max_i.
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.heapify(max_i)
 
@@ -78,7 +79,7 @@ class MaxHeap(object):
         return maximum
 
     def increase_key(self, i, key):
-        if key < self.A[i]:
+        if self.A[i] > key:
             raise ValueError('New key is smaller than current key.')
         self.A[i] = key
         while i > 1 and self.A[parent(i)] < self.A[i]:
@@ -93,25 +94,25 @@ class MaxHeap(object):
 
 
 def main():
-    print('Max Heap by inserting 5, 7, 3, 1:')
+    print('Max Heap by inserting 1, 3, 5, 7:')
     max_pq = MaxHeap()
+    max_pq.insert(1)
+    max_pq.insert(3)
     max_pq.insert(5)
     max_pq.insert(7)
-    max_pq.insert(3)
-    max_pq.insert(1)
     max_pq.show()
 
-    print('Build max heap from unordered list [5, 7, 3, 1]:')
+    print('Build max heap from unordered list [1, 3, 5, 7]:')
     max_pq = MaxHeap()
-    max_pq.build([5, 7, 3, 1])
+    max_pq.build([1, 3, 5, 7])
     max_pq.show()   
 
     print('Increase key 1 at position 4 to 6.')
     max_pq.increase_key(4, 6)
     max_pq.show()
 
-    print('Find max:')
-    print(max_pq.find_max())
+    print('Get max:')
+    print(max_pq.get_max())
 
     print('Extract max:')
     _max = max_pq.extract_max()
