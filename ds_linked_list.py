@@ -7,21 +7,9 @@ from numpy import inf
 
 class Node(object):
     """Node class as building block for linked list."""
-    def __init__(self, init_data):
-        self.data = init_data
+    def __init__(self, data):
+        self.data = data
         self.next = None
-
-    def get_data(self):
-        return self.data
-
-    def get_next(self):
-        return self.next
-
-    def set_data(self, new_data):
-        self.data = new_data
-
-    def set_next(self, new_next):
-        self.next = new_next
 
 
 class LinkedList(object):
@@ -30,13 +18,13 @@ class LinkedList(object):
     Operations include the following:
       - is_empty()
       - size()
-      - add(item)
-      - append(item)
-      - insert(item, pos)
+      - prepend(data)
+      - append(data)
+      - delete_with_data(data)
+      - insert(pos, data)
       - pop(pos)
-      - remove(ite)
-      - search(item)
-      - index(item)
+      - search(node)
+      - index(node)
     """
     def __init__(self):
         self.head = None
@@ -49,113 +37,121 @@ class LinkedList(object):
         """Obtain list size."""
         current = self.head
         counter = 0
-
         while current is not None:
             counter += 1
-            current = current.get_next()
-        
+            current = current.next    
         return counter
 
-    def add(self, item):
-        """Add item to list head."""
-        temp = Node(item)
-        temp.set_next(self.head)
-        self.head = temp
+    def prepend(self, data):
+        """Prepend data to list head.
 
-    def append(self, item):
-        """Append item to list tail."""
-        temp = Node(item)
+        Time complexity: O(1).
+        """
+        new_head = Node(data)
+        new_head.next = self.head
+        self.head = new_head
+
+    def append(self, data):
+        """Append data to list tail.
+
+        Time complexity: O(n).
+        """
+        if self.head is None:
+            self.head = Node(data)
+            return None
         current = self.head
-        previous = None
+        while current.next is not None:
+            current = current.next
+        current.next = Node(data)
 
-        while current is not None:
-            previous = current
-            current = current.get_next()
-        
-        previous.set_next(temp)
+    def delete_with_data(self, data):
+        """Remove data from list, if existed.
 
-    def insert(self, pos, item):
-        """Insert item to specified position of list."""
-        temp = Node(item)
+        Time complexity: O(n).
+        """
+        if self.head is None:
+            return None
+        if self.head.data == data:
+            # Skip deleted node.
+            self.head = self.head.next
+            return None
+
         current = self.head
-        previous = None
-        counter = 0
-
-        while counter < pos and current is not None:
-            previous = current
-            current = current.get_next()
-            counter += 1
-
-        temp.set_next(current)
-        if pos == 0:
-            self.head = temp
-        else:
-            previous.set_next(temp)
-
-    def remove(self, item):
-        """Remove item from list, if existed."""
-        current = self.head
-        previous = None
-        found_bool = False
-
-        while not found_bool and current is not None:
-            if current.get_data() == item:
-                found_bool = True
+        while current.next is not None:
+            if current.next.data == data:
+                # Skip deleted node.
+                current.next = current.next.next
+                return None
             else:
-                previous = current
-                current = current.get_next()
+                current = current.next
 
-        if current is None:
-            print('{}: not existed'.format(item))
-        elif previous is None:
-            self.head = current.get_next()
-        else:
-            previous.set_next(current.get_next())
+    def insert(self, pos, data):
+        """Insert data to specified position of list.
 
-    def pop(self, pos=None):
-        """Pop list item at specified position.
-
-        If pos is None, then pop the last item.
+        Time complexity = O(pos).
         """
         current = self.head
         previous = None
         counter = 0
 
+        while counter < pos and current.next is not None:
+            previous = current
+            current = current.next
+            counter += 1
+
+        insert_node = Node(data)
+        insert_node.next = current
+        if pos == 0:
+            self.head = insert_node
+        else:
+            previous.next = insert_node
+
+    def pop(self, pos=None):
+        """Pop list node at specified position.
+
+        Time complexity: O(pos).
+        """
         if pos is None:
             pos = self.size() - 1
 
-        while counter < pos and current is not None:
+        current = self.head
+        previous = None
+        counter = 0
+
+        while counter < pos and current.next is not None:
             previous = current
-            current = current.get_next()
+            current = current.next
             counter += 1
 
         if previous is None:
-            self.head = current.get_next()
+            self.head = current.next
         else:
-            previous.set_next(current.get_next())
-        return current.get_data()
+            previous.next = current.next       
+        return current.data
 
-    def search(self, item):
-        """Search item in list."""
+    # TODO: Refactor the following search, index.
+
+    def search(self, data):
+        """Search data in list."""
         current = self.head
         found_bool = False
 
-        while not found_bool and current is not None:
-            if current.get_data() == item:
+        while not found_bool and current.next is not None:
+            if current.data == data:
                 found_bool = True
             else:
-                current = current.get_next()
+                current = current.next
         
         return found_bool
 
-    def index(self, item):
-        """Obtain item's index in list."""
+    def index(self, node):
+        """Obtain node's index in list."""
         current = self.head
         found_bool = False
         counter = 0
 
         while not found_bool and current is not None:
-            if current.get_data() == item:
+            if current.get_data() == node:
                 found_bool = True
             else:
                 counter += 1
@@ -167,65 +163,25 @@ class LinkedList(object):
 
 
 def main():
+    # - is_empty()
+    # - size()
+    # - prepend(data)
+    # - append(data)
+    # - delete_with_data(data)
+    # - insert(pos, data)
+    # - pop(pos)
+
     a_list = LinkedList()
-    a_list.add(31)
-    a_list.add(77)
-    a_list.add(17)
-    a_list.add(93)
-    a_list.add(26)
-    a_list.add(54)
+    a_list.prepend(31)
+    a_list.prepend(77)
+    a_list.prepend(17)
+    a_list.prepend(93)
+    a_list.prepend(26)
+    a_list.prepend(54)
     print('Is empty: {}'.format(a_list.is_empty()))
     print('Size: {}'.format(a_list.size()))
-
-    print('Search existed 31: {}'.format(a_list.search(31)))
-    print('Search non-existed 100: {}'.format(a_list.search(100)))
-
-    print('Remove non-existed 100.')
-    a_list.remove(100)
-    print('Length: {}'.format(a_list.size()))
     
-    print('Remove existed 31.')
-    a_list.remove(31)
-    print('Length: {}'.format(a_list.size()))
-    print('Search removed 31: {}'.format(a_list.search(31)))
-
-    print('Append 100.')
-    a_list.append(100)
-    print('Length: {}'.format(a_list.size()))
-
-    print('Index of 100: {}'.format(a_list.index(100)))
-    print('Index of 54: {}'.format(a_list.index(54)))
-    print('Index of 36: {}'.format(a_list.index(36)))
-
-    print('Insert 36 at pos 0.')
-    a_list.insert(0, 36)
-    print('Length: {}'.format(a_list.size()))
-    print('Index of 36: {}'.format(a_list.index(36)))
-   
-    print('Insert 99 at pos 7.')
-    a_list.insert(7, 99)
-    print('Length: {}'.format(a_list.size()))
-    print('Index of 99: {}'.format(a_list.index(99)))
-
-    print('Pop item at pos 0.')
-    print(a_list.pop(0))
-    print('Length: {}'.format(a_list.size())) 
-    
-    print('Pop item at last pos.')
-    print(a_list.pop())
-    print('Length: {}'.format(a_list.size()))
-    print(a_list.pop())
-    print('Length: {}'.format(a_list.size()))
-    print(a_list.pop())
-    print('Length: {}'.format(a_list.size()))
-    print(a_list.pop())
-    print('Length: {}'.format(a_list.size()))
-    print(a_list.pop())
-    print('Length: {}'.format(a_list.size()))
-    print(a_list.pop())
-    print('Length: {}'.format(a_list.size()))
-    print(a_list.pop())
-    print('Length: {}'.format(a_list.size()))
+    pass
 
 
 if __name__ == '__main__':
