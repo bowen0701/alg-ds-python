@@ -81,6 +81,7 @@ class LinkedList(object):
     def delete_with_data(self, data):
         """Remove data from list, if existed.
 
+        If pos is None, then pop the last item.
         Time complexity: O(n).
         """
         if self.head is None:
@@ -158,7 +159,7 @@ class LinkedList(object):
         Time complexity: O(n).
         """
         if self.head is None:
-            return None
+            return False
 
         current = self.head
         found_bool = False
@@ -201,9 +202,9 @@ def main():
     a_list.prepend(93)
     a_list.prepend(26)
     a_list.prepend(54)
+    a_list.show()
     print('Is empty: {}'.format(a_list.is_empty()))
     print('Size: {}'.format(a_list.size()))
-    a_list.show()
     
     print('Append 45:')
     a_list.append(45)
