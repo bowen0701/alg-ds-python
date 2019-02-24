@@ -30,6 +30,7 @@ class LinkedListOrdered(object):
         """Check list is empty or not.
 
         Time complexity: O(1).
+        Space complexity: O(1).
         """
         return self.head is None
 
@@ -37,6 +38,7 @@ class LinkedListOrdered(object):
         """Obtain list size.
 
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         current = self.head
         counter = 0
@@ -49,6 +51,7 @@ class LinkedListOrdered(object):
         """Print the list.
 
         Time complexity: O(n).
+        Space complexity: O(n).
         """
         a_list = []
         current = self.head
@@ -61,6 +64,7 @@ class LinkedListOrdered(object):
         """Add data to list.
 
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         if self.head is None:
             self.head = Node(data)
@@ -97,6 +101,7 @@ class LinkedListOrdered(object):
         """Delete data from list, if existed.
 
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         if self.head is None:
             return None
@@ -117,7 +122,9 @@ class LinkedListOrdered(object):
         """Pop list item at specified position.
 
         If pos is None, then pop the last item.
+
         Time complexity: O(pos).
+        Space complexity: O(1).
         """
         if self.head is None:
             return None
@@ -144,6 +151,7 @@ class LinkedListOrdered(object):
         """Search data in list.
 
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         if self.head is None:
             return False
@@ -168,6 +176,7 @@ class LinkedListOrdered(object):
         """Obtain data's index in list.
 
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         if self.head is None:
             return None

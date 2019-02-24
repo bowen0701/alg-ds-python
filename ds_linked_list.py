@@ -31,11 +31,19 @@ class LinkedList(object):
         self.head = None
 
     def is_empty(self):
-        """Check list is empty or not."""
+        """Check list is empty or not.
+
+        Time complexity: O(1).
+        Space complexity: O(1).
+        """
         return self.head is None
 
     def size(self):
-        """Obtain list size."""
+        """Obtain list size.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
         current = self.head
         counter = 0
         while current is not None:
@@ -47,6 +55,7 @@ class LinkedList(object):
         """Show the list.
 
         Time complexity: O(n).
+        Space complexity: O(n).
         """
         a_list = []
         current = self.head
@@ -60,6 +69,7 @@ class LinkedList(object):
         """Prepend data to list head.
 
         Time complexity: O(1).
+        Space complexity: O(1).
         """
         new_head = Node(data)
         new_head.next = self.head
@@ -69,6 +79,7 @@ class LinkedList(object):
         """Append data to list tail.
 
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         if self.head is None:
             self.head = Node(data)
@@ -82,7 +93,9 @@ class LinkedList(object):
         """Remove data from list, if existed.
 
         If pos is None, then pop the last item.
+
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         if self.head is None:
             return None
@@ -104,6 +117,7 @@ class LinkedList(object):
         """Insert data to specified position of list.
 
         Time complexity = O(pos).
+        Space complexity: O(1).
         """
         if self.head is None and pos > 0:
             print('Cannot insert to empty list.')
@@ -132,6 +146,7 @@ class LinkedList(object):
         """Pop list node at specified position.
 
         Time complexity: O(pos).
+        Space complexity: O(1).
         """
         if self.head is None:
             return None
@@ -157,6 +172,7 @@ class LinkedList(object):
         """Search data in list.
 
         Time complexity: O(n).
+        Space complexity: O(1).
         """
         if self.head is None:
             return False
@@ -173,7 +189,11 @@ class LinkedList(object):
         return found_bool
 
     def index(self, data):
-        """Obtain node's index in list."""
+        """Obtain node's index in list.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
         if self.head is None:
             return None
 
