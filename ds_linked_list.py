@@ -18,6 +18,7 @@ class LinkedList(object):
     Operations include the following:
       - is_empty()
       - size()
+      - show()
       - prepend(data)
       - append(data)
       - delete_with_data(data)
