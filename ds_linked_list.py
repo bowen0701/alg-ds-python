@@ -23,8 +23,8 @@ class LinkedList(object):
       - delete_with_data(data)
       - insert(pos, data)
       - pop(pos)
-      - search(node)
-      - index(node)
+      - search(data)
+      - index(data)
     """
     def __init__(self):
         self.head = None
@@ -41,6 +41,19 @@ class LinkedList(object):
             counter += 1
             current = current.next    
         return counter
+
+    def show(self):
+        """Show the list.
+
+        Time complexity: O(n).
+        """
+        a_list = []
+        current = self.head
+        while current is not None:
+            a_list.append(current.data)
+            current = current.next
+        print(a_list)
+
 
     def prepend(self, data):
         """Prepend data to list head.
@@ -129,10 +142,11 @@ class LinkedList(object):
             previous.next = current.next       
         return current.data
 
-    # TODO: Refactor the following search, index.
-
     def search(self, data):
-        """Search data in list."""
+        """Search data in list.
+
+        Time complexity: O(n).
+        """
         current = self.head
         found_bool = False
 
@@ -141,24 +155,25 @@ class LinkedList(object):
                 found_bool = True
             else:
                 current = current.next
-        
+
         return found_bool
 
-    def index(self, node):
+    def index(self, data):
         """Obtain node's index in list."""
         current = self.head
         found_bool = False
         counter = 0
 
-        while not found_bool and current is not None:
-            if current.get_data() == node:
+        while not found_bool and current.next is not None:
+            if current.data == data:
                 found_bool = True
             else:
+                current = current.next
                 counter += 1
-                current = current.get_next()
         
         if not found_bool:
             counter = None
+
         return counter
 
 
@@ -180,8 +195,32 @@ def main():
     a_list.prepend(54)
     print('Is empty: {}'.format(a_list.is_empty()))
     print('Size: {}'.format(a_list.size()))
+    a_list.show()
     
-    pass
+    print('Append 45:')
+    a_list.append(45)
+    print('Size: {}'.format(a_list.size()))
+    a_list.show()
+
+    print('Delete non-existed 100:')
+    a_list.delete_with_data(100)
+    a_list.show()
+
+    print('Delete 31:')
+    a_list.delete_with_data(31)
+    a_list.show()
+
+    print('Delete 45:')
+    a_list.delete_with_data(45)
+    a_list.show()
+
+    print('Insert 27 at pos 3:')
+    a_list.insert(3, 27)
+    a_list.show()
+
+    print('Pop pos 3:')
+    a_list.pop(3)
+    a_list.show()
 
 
 if __name__ == '__main__':
