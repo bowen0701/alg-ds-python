@@ -179,14 +179,6 @@ class LinkedList(object):
 
 
 def main():
-    # - is_empty()
-    # - size()
-    # - prepend(data)
-    # - append(data)
-    # - delete_with_data(data)
-    # - insert(pos, data)
-    # - pop(pos)
-
     a_list = LinkedList()
     a_list.prepend(31)
     a_list.prepend(77)
@@ -222,6 +214,12 @@ def main():
     print('Pop pos 3:')
     a_list.pop(3)
     a_list.show()
+
+    print('Search non-existed 100: {}'.format(a_list.search(100)))
+    print('Search 93: {}'.format(a_list.search(93)))
+
+    print('Index non-existed 100: {}'.format(a_list.index(100)))
+    print('Index 93: {}'.format(a_list.index(93)))
 
 
 if __name__ == '__main__':
