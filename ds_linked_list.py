@@ -104,9 +104,16 @@ class LinkedList(object):
 
         Time complexity = O(pos).
         """
+        if self.head is None and pos > 0:
+            print('Cannot insert to empty list.')
+            return None
+
         current = self.head
         previous = None
         counter = 0
+
+        if self.head is None:
+            self.prepend(data)
 
         while counter < pos and current.next is not None:
             previous = current
@@ -125,6 +132,8 @@ class LinkedList(object):
 
         Time complexity: O(pos).
         """
+        if self.head is None:
+            return None
         if pos is None:
             pos = self.size() - 1
 
@@ -148,6 +157,9 @@ class LinkedList(object):
 
         Time complexity: O(n).
         """
+        if self.head is None:
+            return None
+
         current = self.head
         found_bool = False
 
@@ -161,6 +173,9 @@ class LinkedList(object):
 
     def index(self, data):
         """Obtain node's index in list."""
+        if self.head is None:
+            return None
+
         current = self.head
         found_bool = False
         counter = 0
