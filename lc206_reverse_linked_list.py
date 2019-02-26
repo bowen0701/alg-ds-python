@@ -18,25 +18,40 @@ class ListNode(object):
         self.next = None
 
 
-class Solution(object):
+class SolutionIter(object):
     def reverseList(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        if head is None:
-            return None
-        new_head = ListNode(head.val)
-        current = head
         previous = None
-        # TODO: Revise reversion.
-        while current.next is not None:
-            print current.val
-            new_head = current
-            current = current.next
-            previous = new_head
-            new_head.next = previous
-        return new_head
+        while head:
+            current = ListNode(head.val)
+            current.next = previous
+            previous = current
+            head = head.next
+        return previous
+
+
+class SolutionRecur(object):
+    def reverseList(self, head, previous=None):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if not head:
+            return previous
+        current = ListNode(head.val)
+        current.next = previous
+        head = head.next
+        previous = current
+        return self.reverseList(head, previous)
 
 
 def main():
@@ -47,17 +62,18 @@ def main():
     node4 = ListNode(4)
     node5 = ListNode(5)
 
-    print node1.val
     node1.next = node2
-    print node2.val
     node2.next = node3
-    print node3.val
     node3.next = node4
-    print node4.val
     node4.next = node5
-    print node5.val
 
-    # print Solution().reverseList(node1).val
+    # 5->4->3->2->1->NULL
+    print SolutionIter().reverseList(node1).val
+    print SolutionRecur().reverseList(node1).val
+    # Shoule be 4.
+    print SolutionRecur().reverseList(node1).next.val
+    # Shoule be 3.
+    print SolutionRecur().reverseList(node1).next.next.val
 
 
 if __name__ == '__main__':
