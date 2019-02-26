@@ -46,7 +46,7 @@ class LinkedList(object):
         """
         current = self.head
         counter = 0
-        while current is not None:
+        while current:
             counter += 1
             current = current.next    
         return counter
@@ -59,7 +59,7 @@ class LinkedList(object):
         """
         a_list = []
         current = self.head
-        while current is not None:
+        while current:
             a_list.append(current.data)
             current = current.next
         print(a_list)
@@ -85,7 +85,7 @@ class LinkedList(object):
             self.head = Node(data)
             return None
         current = self.head
-        while current.next is not None:
+        while current.next:
             current = current.next
         current.next = Node(data)
 
@@ -97,7 +97,7 @@ class LinkedList(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if self.head is None:
+        if not self.head:
             return None
         if self.head.data == data:
             # Skip deleted node.
@@ -105,7 +105,7 @@ class LinkedList(object):
             return None
 
         current = self.head
-        while current.next is not None:
+        while current.next:
             if current.next.data == data:
                 # Skip deleted node.
                 current.next = current.next.next
@@ -119,7 +119,7 @@ class LinkedList(object):
         Time complexity = O(pos).
         Space complexity: O(1).
         """
-        if self.head is None and pos > 0:
+        if not self.head and pos > 0:
             print('Cannot insert to empty list.')
             return None
 
@@ -127,10 +127,10 @@ class LinkedList(object):
         previous = None
         counter = 0
 
-        if self.head is None:
+        if not self.head:
             self.prepend(data)
 
-        while counter < pos and current.next is not None:
+        while counter < pos and current.next:
             previous = current
             current = current.next
             counter += 1
@@ -148,21 +148,21 @@ class LinkedList(object):
         Time complexity: O(pos).
         Space complexity: O(1).
         """
-        if self.head is None:
+        if not self.head:
             return None
-        if pos is None:
+        if not pos:
             pos = self.size() - 1
 
         current = self.head
         previous = None
         counter = 0
 
-        while counter < pos and current.next is not None:
+        while counter < pos and current.next:
             previous = current
             current = current.next
             counter += 1
 
-        if previous is None:
+        if not previous:
             self.head = current.next
         else:
             previous.next = current.next       
@@ -174,13 +174,13 @@ class LinkedList(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if self.head is None:
+        if not self.head:
             return False
 
         current = self.head
         found_bool = False
 
-        while not found_bool and current.next is not None:
+        while not found_bool and current.next:
             if current.data == data:
                 found_bool = True
             else:
@@ -201,7 +201,7 @@ class LinkedList(object):
         found_bool = False
         counter = 0
 
-        while not found_bool and current.next is not None:
+        while not found_bool and current.next:
             if current.data == data:
                 found_bool = True
             else:
