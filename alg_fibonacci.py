@@ -13,7 +13,7 @@ from __future__ import division
 
 
 def fibonacci_recur(n):
-    """Get the nth number of Fibonacci series, Fn, by recursion.
+    """Fibonacci series by recursion.
 
     - Time complexity: O(2^n); too fast.
     - Space complexity: O(n).
@@ -25,7 +25,7 @@ def fibonacci_recur(n):
 
 
 def fibonacci_memo(n):
-    """Get the nth number of Fibonacci series, Fn, by memoization.
+    """Fibonacci series by iteration and memoization.
 
     - Time complexity: O(n).
     - Space complexity: O(n).
@@ -39,7 +39,7 @@ def fibonacci_memo(n):
 
 
 def fibonacci_dp(n):
-    """Get the nth number of Fibonacci series by dynamic programming.
+    """Fibonacci series by iteration in dynamic programming.
 
     - Time complexity: O(n), like fibonacci_memo().
     - Space complexity: O(1), improving a lot.
