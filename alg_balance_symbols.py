@@ -2,29 +2,27 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from ds_stack import Stack
 
-
-def balance_parentheses(symbol_str):
+def balance_parentheses(a_str):
     """Balance parentheses in a string."""
-    s = Stack()
+    stack = []
     balanced = True
-    index = 0
-    while index < len(symbol_str) and balanced:
-        symbol = symbol_str[index]
+    pos = 0
+    while pos < len(a_str) and balanced:
+        symbol = a_str[pos]
         if symbol == '(':
-            s.push(symbol)
+            stack.append(symbol)
         elif symbol == ')':
-            if s.is_empty():
+            if not stack:
                 balanced = False
                 break
             else:
-                s.pop()
+                stack.pop()
         else:
             pass
-        index += 1
+        pos += 1
 
-    if balanced and s.is_empty():
+    if balanced and not stack:
         return True
     else:
         return False
@@ -37,31 +35,31 @@ def _match_symbols(opener, closer):
     return match_bool
 
 
-def balance_symbols(symbol_str):
+def balance_symbols(a_str):
     """Balance "arbitrary" symbols in a string.
     The symbols here are '()', '[]' and '{}'. 
     """
-    s = Stack()
+    stack = []
     balanced = True
-    index = 0
-    while index < len(symbol_str) and balanced:
-        symbol = symbol_str[index]
+    pos = 0
+    while pos < len(a_str) and balanced:
+        symbol = a_str[pos]
         if symbol in '([{':
-            s.push(symbol)
+            stack.append(symbol)
         elif symbol in ')]}':
-            if s.is_empty():
+            if not stack:
                 balanced = False
                 break
             else:
-                open_symbol = s.pop()
+                open_symbol = stack.pop()
                 if not _match_symbols(open_symbol, symbol):
                     balanced = False
                     break
         else:
             pass
-        index += 1
+        pos += 1
 
-    if balanced and s.is_empty():
+    if balanced and not stack:
         return True
     else:
         return False
@@ -100,7 +98,6 @@ def main():
     print('By balance_symbols(): {}'
           .format(balance_symbols(text_unmatch)))
     print('Time: {}'.format(time.time() - start_time))
-
 
 
 if __name__ == '__main__':
