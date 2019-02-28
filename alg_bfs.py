@@ -9,6 +9,9 @@ def bfs(graph_adj_d, v_start):
     """Breadth First Search (BFS) algorithm with single source 
     by iteration using queue.
 
+    Note: There is no intuitive way to combine BFS & recursion,
+    since BFS goes level by level.
+
     Time complexity for graph G(V, E): O(|V|+|E|).
     """
     distance_d = {v: np.inf for v in graph_adj_d.keys()}
