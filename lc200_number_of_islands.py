@@ -25,6 +25,22 @@ Answer: 3
 """
 
 class Solution(object):
+    def dfs(self, r, c, grid, visited_grid, n_rows, n_cols):
+        visited_grid[r][c] = True
+
+        if 0 <= r - 1: # Up.
+            if grid[r - 1][c] == '1' and not visited_grid[r - 1][c]:
+                self.dfs(r - 1, c, grid, visited_grid, n_rows, n_cols)
+        if r + 1 < n_rows: # Down.
+            if grid[r + 1][c] == '1' and not visited_grid[r + 1][c]:
+                self.dfs(r + 1, c, grid, visited_grid, n_rows, n_cols)
+        if 0 <= c - 1: # Left.
+            if grid[r][c - 1] == '1' and not visited_grid[r][c - 1]:
+                self.dfs(r, c - 1, grid, visited_grid, n_rows, n_cols)
+        if c + 1 < n_cols: # Right.
+            if grid[r][c + 1] == '1' and not visited_grid[r][c + 1]:
+                self.dfs(r, c + 1, grid, visited_grid, n_rows, n_cols)
+    
     def numIslands(self, grid):
         """
         :type grid: List[List[str]]
@@ -52,22 +68,6 @@ class Solution(object):
                     self.dfs(r, c, grid, visited_grid, n_rows, n_cols)
 
         return n_islands
-
-    def dfs(self, r, c, grid, visited_grid, n_rows, n_cols):
-        visited_grid[r][c] = True
-
-        if 0 <= r - 1: # Up.
-            if grid[r - 1][c] == '1' and not visited_grid[r - 1][c]:
-                self.dfs(r - 1, c, grid, visited_grid, n_rows, n_cols)
-        if r + 1 < n_rows: # Down.
-            if grid[r + 1][c] == '1' and not visited_grid[r + 1][c]:
-                self.dfs(r + 1, c, grid, visited_grid, n_rows, n_cols)
-        if 0 <= c - 1: # Left.
-            if grid[r][c - 1] == '1' and not visited_grid[r][c - 1]:
-                self.dfs(r, c - 1, grid, visited_grid, n_rows, n_cols)
-        if c + 1 < n_cols: # Right.
-            if grid[r][c + 1] == '1' and not visited_grid[r][c + 1]:
-                self.dfs(r, c + 1, grid, visited_grid, n_rows, n_cols)
 
 
 def main():
