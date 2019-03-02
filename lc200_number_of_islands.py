@@ -29,20 +29,20 @@ class SolutionRecur(object):
         visited_d[(r, c)] = True
 
         if 0 <= r - 1: # Up.
-            if grid[r - 1][c] == '1' and not visited_d[(r - 1, c)]:
+            if grid[r - 1][c] == '1' and not visited_d.get((r - 1, c)):
                 self.dfs(r - 1, c, grid, visited_d, n_rows, n_cols)
         if r + 1 < n_rows: # Down.
-            if grid[r + 1][c] == '1' and not visited_d[(r + 1, c)]:
+            if grid[r + 1][c] == '1' and not visited_d.get((r + 1, c)):
                 self.dfs(r + 1, c, grid, visited_d, n_rows, n_cols)
         if 0 <= c - 1: # Left.
-            if grid[r][c - 1] == '1' and not visited_d[(r, c - 1)]:           
+            if grid[r][c - 1] == '1' and not visited_d.get((r, c - 1)):           
                 self.dfs(r, c - 1, grid, visited_d, n_rows, n_cols)
         if c + 1 < n_cols: # Right.
-            if grid[r][c + 1] == '1' and not visited_d[(r, c + 1)]:
+            if grid[r][c + 1] == '1' and not visited_d.get((r, c + 1)):
                 self.dfs(r, c + 1, grid, visited_d, n_rows, n_cols)
 
     def numIslands(self, grid):
-        """
+        """Number of islands by recursion.
         :type grid: List[List[str]]
         :rtype: int
 
@@ -63,7 +63,71 @@ class SolutionRecur(object):
 
         for r in range(n_rows):
             for c in range(n_cols):
-                if grid[r][c] == '1' and visited_d.get((r, c)):
+                if grid[r][c] == '1' and not visited_d.get((r, c)):
+                    n_islands += 1
+                    self.dfs(r, c, grid, visited_d, n_rows, n_cols)
+
+        return n_islands
+
+
+class SolutionIter(object):
+    def get_tovisit_ls(self, v_start, grid, n_rows, n_cols):
+        (r, c) = v_start
+        tovisit_ls = []
+
+        if r - 1 >= 0:
+            if grid[r - 1][c] == '1':
+                tovisit_ls.append((r - 1, c))
+        if r + 1 < n_rows:
+            if grid[r + 1][c] == '1':
+                tovisit_ls.append((r + 1, c))
+        if c - 1 >= 0:
+            if grid[r][c - 1] == '1':
+                tovisit_ls.append((r, c - 1))
+        if c + 1 < n_cols:
+            if grid[r][c + 1] == '1':
+                tovisit_ls.append((r, c + 1))
+
+        return tovisit_ls
+
+    def get_visited_ls(self, visited_d):
+        return [k for (k, v) in visited_d.items() if v is True]
+
+    def dfs(self, r, c, grid, visited_d, n_rows, n_cols):
+        visited_d[(r, c)] = True
+        stack = []
+        stack.append((r, c))
+
+        while stack:
+            tovisit_ls = self.get_tovisit_ls(stack[-1], grid, n_rows, n_cols)
+            visited_ls = self.get_visited_ls(visited_d)
+
+            if set(tovisit_ls) - set(visited_ls):
+                for v_neighbor in tovisit_ls:
+                    if v_neighbor not in visited_ls:
+                        (r_neighbor, c_neighbor) = v_neighbor
+                        visited_d[(r_neighbor, c_neighbor)] = True
+                        stack.append((r_neighbor, c_neighbor))
+                        break
+            else:
+                stack.pop()
+
+    def numIslands(self, grid):
+        """Number of islands by iteration using stack.
+
+        Time complexity: O(m * n).
+        Space complexity: O(m * n).
+        """
+        if not grid:
+            return 0
+
+        n_rows, n_cols = len(grid), len(grid[0])
+        visited_d = {}
+        n_islands = 0
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if grid[r][c] == '1' and not visited_d.get((r, c)):
                     n_islands += 1
                     self.dfs(r, c, grid, visited_d, n_rows, n_cols)
 
@@ -73,15 +137,19 @@ class SolutionRecur(object):
 def main():
     import time
 
-    start_time = time.time()
-
     # Num of islands = 1.
     grid1 = [['1', '1', '1', '1', '0'],
              ['1', '1', '0', '1', '0'], 
              ['1', '1', '0', '0', '0'],
              ['0', '0', '0', '0', '0']]
 
+    start_time = time.time()
     print SolutionRecur().numIslands(grid1)
+    print 'Time for recursion: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionIter().numIslands(grid1)
+    print 'Time for iteration: {}'.format(time.time() - start_time)
 
     # Num of islands = 3.
     grid2 = [['1', '1', '0', '0', '0'],
@@ -89,10 +157,13 @@ def main():
              ['0', '0', '1', '0', '0'],
              ['0', '0', '0', '1', '1']]
 
+    start_time = time.time()
     print SolutionRecur().numIslands(grid2)
+    print 'Time for recursion: {}'.format(time.time() - start_time)
 
-    print('Time: {}'.format(time.time() - start_time))
-
+    start_time = time.time()
+    print SolutionIter().numIslands(grid2)
+    print 'Time for iteration: {}'.format(time.time() - start_time)
 
 if __name__ == '__main__':
     main()
