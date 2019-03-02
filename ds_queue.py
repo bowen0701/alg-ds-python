@@ -11,6 +11,9 @@ class Queue(object):
     def is_empty(self):
         return self.items == []
 
+    def peek(self):
+        return self.items[-1]
+
     def enqueue(self, item):
         self.items.insert(0, item)
 
@@ -25,23 +28,25 @@ class Queue(object):
 
 
 def main():
-    queue = Queue()
+    q = Queue()
 
-    print('Is empty: {}'.format(queue.is_empty()))
+    print('Is empty: {}'.format(q.is_empty()))
 
     print('Enqueue "dog", 4 & 8.4')
-    queue.enqueue('dog')
-    queue.enqueue(4)
-    queue.enqueue(8.4)
-    print('Is empty: {}'.format(queue.is_empty()))
+    q.enqueue('dog')
+    q.enqueue(4)
+    q.enqueue(8.4)
+    print(q.peek())
+    print('Is empty: {}'.format(q.is_empty()))
 
-    print('Queue size: {}'.format(queue.size()))
+    print('Queue size: {}'.format(q.size()))
 
-    print('Dequeue: {}'.format(queue.dequeue()))
-    print('Is empty: {}'.format(queue.is_empty()))
-    print('Queue size: {}'.format(queue.size()))
+    print('Dequeue: {}'.format(q.dequeue()))
+    print('Is empty: {}'.format(q.is_empty()))
+    print('Queue size: {}'.format(q.size()))
 
-    print('Show: {}'.format(queue.show()))
+    print('Show: {}'.format(q.show()))
+
 
 if __name__ == '__main__':
     main()
