@@ -58,8 +58,8 @@ class SolutionRecur(object):
             return 0
 
         n_rows, n_cols = len(grid), len(grid[0])
-        visited_grid = [[False for _ in range(n_cols)] 
-                        for _ in range(n_rows)]
+        visited_grid = [[False for c in range(n_cols)] 
+                        for r in range(n_rows)]
         n_islands = 0
 
         for r in range(n_rows):
