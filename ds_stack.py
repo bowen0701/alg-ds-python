@@ -11,14 +11,14 @@ class Stack(object):
     def is_empty(self):
         return self.items == []
 
+    def peek(self):
+        return self.items[-1]
+
     def push(self, item):
         self.items.append(item)
 
     def pop(self):
         return self.items.pop()
-
-    def peek(self):
-        return self.items[len(self.items) - 1]
 
     def size(self):
         return len(self.items)
@@ -29,25 +29,25 @@ class Stack(object):
 
 def main():
     s = Stack()
-    print(s.is_empty())
+    print('Is empty: {}'.format(s.is_empty()))
     
     s.push(4)
     s.push('dog')
-    print(s.peek())
+    print('Peek: {}'.format(s.peek()))
 
     s.push(True)
-    print(s.size())
+    print('Size: {}'.format(s.size()))
 
-    print(s.is_empty())
+    print('Is empty: {}'.format(s.is_empty()))
 
     s.push(8.4)
 
-    print(s.pop())
-    print(s.pop())
+    print('Pop: {}'.format(s.pop()))
+    print('Pop: {}'.format(s.pop()))
 
-    print(s.size())
+    print('Size: {}'.format(s.size()))
+    print('Show: {}'.format(s.show()))
 
-    print(s.show())
 
 if __name__ == '__main__':
     main()
