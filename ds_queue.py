@@ -4,7 +4,7 @@ from __future__ import division
 
 
 class QueueLs(object):
-    """Queue class."""
+    """Queue using list."""
     def __init__(self):
         self.items = []
 
@@ -27,8 +27,76 @@ class QueueLs(object):
         return self.items
 
 
+class ListNode(object):
+    """List Node for QueueLl class."""
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class QueueLl(object):
+    """Queue using linked list.
+
+    Queue: Head->Node1->Node2->Tail
+      - Enqueue: from Tail
+      - Dequeue: from Head
+    """
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def is_empty(self):
+        return self.head is None
+
+    def peek(self):
+        if not self.head:
+            return None
+        return self.head.data
+
+    def enqueue(self, data):
+        node = ListNode(data)
+
+        if not self.tail:
+            self.tail = node
+        else:
+            self.tail.next = node
+            self.tail = node
+
+        if not self.head:
+            self.head = node
+
+    def dequeue(self):
+        if not self.head:
+            return None
+
+        data = self.head.data
+        self.head = self.head.next
+        if not self.head:
+            self.tail = None
+
+        return data
+
+    def size(self):
+        counter = 0
+        head = self.head
+        while head:
+            counter += 1
+            head = head.next
+        return counter
+
+    def show(self):
+        queue = []
+        head = self.head
+        while head:
+            queue.insert(0, head.data)
+            head = head.next
+        return queue
+
+
 def main():
-    q = QueueLs()
+    # Initiate Queue instance by QueueLs() or QueueLl().
+    # q = QueueLs()
+    q = QueueLl()
     print('Is empty: {}'.format(q.is_empty()))
 
     q.enqueue('dog')
