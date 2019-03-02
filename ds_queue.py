@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-class Queue(object):
+class QueueLs(object):
     """Queue class."""
     def __init__(self):
         self.items = []
@@ -28,23 +28,23 @@ class Queue(object):
 
 
 def main():
-    q = Queue()
-
+    q = QueueLs()
     print('Is empty: {}'.format(q.is_empty()))
 
-    print('Enqueue "dog", 4 & 8.4')
     q.enqueue('dog')
     q.enqueue(4)
     q.enqueue(8.4)
-    print(q.peek())
-    print('Is empty: {}'.format(q.is_empty()))
 
-    print('Queue size: {}'.format(q.size()))
+    print('Show: {}'.format(q.show()))
+    print('Peek: {}'.format(q.peek()))
+    print('Is empty: {}'.format(q.is_empty()))
+    print('Size: {}'.format(q.size()))
 
     print('Dequeue: {}'.format(q.dequeue()))
-    print('Is empty: {}'.format(q.is_empty()))
-    print('Queue size: {}'.format(q.size()))
+    print('Dequeue: {}'.format(q.dequeue()))
 
+    print('Is empty: {}'.format(q.is_empty()))
+    print('Size: {}'.format(q.size()))
     print('Show: {}'.format(q.show()))
 
 

@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-class Stack(object):
+class StackLs(object):
     """Stack class."""
     def __init__(self):
         self.items = []
@@ -28,23 +28,22 @@ class Stack(object):
 
 
 def main():
-    s = Stack()
+    s = StackLs()
     print('Is empty: {}'.format(s.is_empty()))
-    
-    s.push(4)
+
     s.push('dog')
-    print('Peek: {}'.format(s.peek()))
-
-    s.push(True)
-    print('Size: {}'.format(s.size()))
-
-    print('Is empty: {}'.format(s.is_empty()))
-
+    s.push(4)
     s.push(8.4)
 
+    print('Show: {}'.format(s.show()))
+    print('Peek: {}'.format(s.peek()))
+    print('Is empty: {}'.format(s.is_empty()))
+    print('Size: {}'.format(s.size()))
+
     print('Pop: {}'.format(s.pop()))
     print('Pop: {}'.format(s.pop()))
 
+    print('Is empty: {}'.format(s.is_empty()))
     print('Size: {}'.format(s.size()))
     print('Show: {}'.format(s.show()))
 
