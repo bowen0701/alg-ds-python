@@ -24,21 +24,21 @@ Example 2:
 Answer: 3
 """
 
-class Solution(object):
+class SolutionRecur(object):
     def dfs(self, r, c, grid, visited_grid, n_rows, n_cols):
-        visited_grid[(r, c)] = True
+        visited_grid[r][c] = True
 
         if 0 <= r - 1: # Up.
-            if grid[r - 1][c] == '1' and not visited_grid.get((r - 1, c)):
+            if grid[r - 1][c] == '1' and not visited_grid[r - 1][c]:
                 self.dfs(r - 1, c, grid, visited_grid, n_rows, n_cols)
         if r + 1 < n_rows: # Down.
-            if grid[r + 1][c] == '1' and not visited_grid.get((r + 1, c)):
+            if grid[r + 1][c] == '1' and not visited_grid[r + 1][c]:
                 self.dfs(r + 1, c, grid, visited_grid, n_rows, n_cols)
         if 0 <= c - 1: # Left.
-            if grid[r][c - 1] == '1' and not visited_grid.get((r, c - 1)):
+            if grid[r][c - 1] == '1' and not visited_grid[r][c - 1]:           
                 self.dfs(r, c - 1, grid, visited_grid, n_rows, n_cols)
         if c + 1 < n_cols: # Right.
-            if grid[r][c + 1] == '1' and not visited_grid.get((r, c + 1)):
+            if grid[r][c + 1] == '1' and not visited_grid[r][c + 1]:
                 self.dfs(r, c + 1, grid, visited_grid, n_rows, n_cols)
 
     def numIslands(self, grid):
@@ -49,7 +49,7 @@ class Solution(object):
         Time complexity: O(m * n).
         Space complexity: O(m * n).
 
-        Procedure:
+        Recursive procedure:
           - Starting from the top-left corner, run DFS with counter n_islands.
           - If the grid was not visited before, mark it as visited and 
             add n_islands by 1; if yes, skip DFS.
@@ -58,12 +58,13 @@ class Solution(object):
             return 0
 
         n_rows, n_cols = len(grid), len(grid[0])
-        visited_grid = {}
+        visited_grid = [[False for _ in range(n_cols)] 
+                        for _ in range(n_rows)]
         n_islands = 0
 
         for r in range(n_rows):
             for c in range(n_cols):
-                if grid[r][c] == '1' and not visited_grid.get((r, c)):
+                if grid[r][c] == '1' and not visited_grid[r][c]:
                     n_islands += 1
                     self.dfs(r, c, grid, visited_grid, n_rows, n_cols)
 
@@ -81,7 +82,7 @@ def main():
              ['1', '1', '0', '0', '0'],
              ['0', '0', '0', '0', '0']]
 
-    print Solution().numIslands(grid1)
+    print SolutionRecur().numIslands(grid1)
 
     # Num of islands = 3.
     grid2 = [['1', '1', '0', '0', '0'],
@@ -89,7 +90,7 @@ def main():
              ['0', '0', '1', '0', '0'],
              ['0', '0', '0', '1', '1']]
 
-    print Solution().numIslands(grid2)
+    print SolutionRecur().numIslands(grid2)
 
     print('Time: {}'.format(time.time() - start_time))
 
