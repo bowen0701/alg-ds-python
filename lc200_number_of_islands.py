@@ -28,18 +28,18 @@ class SolutionRecur(object):
     def dfs(self, r, c, grid, visited_d, n_rows, n_cols):
         visited_d[(r, c)] = True
 
-        if 0 <= r - 1: # Up.
-            if grid[r - 1][c] == '1' and not visited_d.get((r - 1, c)):
-                self.dfs(r - 1, c, grid, visited_d, n_rows, n_cols)
-        if r + 1 < n_rows: # Down.
-            if grid[r + 1][c] == '1' and not visited_d.get((r + 1, c)):
-                self.dfs(r + 1, c, grid, visited_d, n_rows, n_cols)
-        if 0 <= c - 1: # Left.
-            if grid[r][c - 1] == '1' and not visited_d.get((r, c - 1)):           
-                self.dfs(r, c - 1, grid, visited_d, n_rows, n_cols)
-        if c + 1 < n_cols: # Right.
-            if grid[r][c + 1] == '1' and not visited_d.get((r, c + 1)):
-                self.dfs(r, c + 1, grid, visited_d, n_rows, n_cols)
+        if (0 <= r - 1 and grid[r - 1][c] == '1' and 
+            not visited_d.get((r - 1, c))):  # Up.
+            self.dfs(r - 1, c, grid, visited_d, n_rows, n_cols)
+        if (r + 1 < n_rows and grid[r + 1][c] == '1' and 
+            not visited_d.get((r + 1, c))):  # Down.
+            self.dfs(r + 1, c, grid, visited_d, n_rows, n_cols)
+        if (0 <= c - 1 and grid[r][c - 1] == '1' and 
+            not visited_d.get((r, c - 1))):  # Left.
+            self.dfs(r, c - 1, grid, visited_d, n_rows, n_cols)
+        if (c + 1 < n_cols and grid[r][c + 1] == '1' and 
+            not visited_d.get((r, c + 1))):  # Right.
+            self.dfs(r, c + 1, grid, visited_d, n_rows, n_cols)
 
     def numIslands(self, grid):
         """Number of islands by recursion.
@@ -75,17 +75,13 @@ class SolutionIter(object):
         (r, c) = v_start
         tovisit_ls = []
 
-        if r - 1 >= 0:
-            if grid[r - 1][c] == '1':
-                tovisit_ls.append((r - 1, c))
-        if r + 1 < n_rows:
-            if grid[r + 1][c] == '1':
-                tovisit_ls.append((r + 1, c))
-        if c - 1 >= 0:
-            if grid[r][c - 1] == '1':
-                tovisit_ls.append((r, c - 1))
-        if c + 1 < n_cols:
-            if grid[r][c + 1] == '1':
+        if r - 1 >= 0 and grid[r - 1][c] == '1':  # Up.
+            tovisit_ls.append((r - 1, c))
+        if r + 1 < n_rows and grid[r + 1][c] == '1':  # Down.
+            tovisit_ls.append((r + 1, c))
+        if c - 1 >= 0 and grid[r][c - 1] == '1':  # Left.
+            tovisit_ls.append((r, c - 1))
+        if c + 1 < n_cols and grid[r][c + 1] == '1':  # Right.
                 tovisit_ls.append((r, c + 1))
 
         return tovisit_ls
