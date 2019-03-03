@@ -4,7 +4,13 @@ from __future__ import print_function
 
 
 class BinaryTree(object):
-    """Binary Tree using class."""
+    """Binary Tree using class.
+
+    Travesal:
+    - Inorder (typical): left -> root -> right
+    - Preorder: root -> left -> right
+    - Postorder: left -> right -> root
+    """
     def __init__(self, root):
         self.key = root
         self.left_tree = None
