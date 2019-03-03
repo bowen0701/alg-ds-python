@@ -3,12 +3,12 @@ from __future__ import division
 from __future__ import print_function
 
 
-class TreeNode(object):
-    """Tree node class collects helper functions for BinarySearchTree."""
-    def __init__(self, key, value, 
+class Node(object):
+    """Node class collects helper functions for BinarySearchTree."""
+    def __init__(self, key, data, 
                  left=None, right=None, parent=None):
         self.key = key
-        self.payload = value
+        self.data = data
         self.left_child = left
         self.right_child = right
         self.parent = parent
@@ -77,9 +77,9 @@ class TreeNode(object):
                     self.parent.right_child = self.right_child
                 self.right_child.parent = self.parent
 
-    def replace_node_data(self, key, value, lc, rc):
+    def replace_node_data(self, key, data, lc, rc):
         self.key = key
-        self.payload = value
+        self.data = data
         self.left_child = lc
         self.right_child = rc
         if self.has_left_child():
@@ -100,7 +100,17 @@ class TreeNode(object):
 
 
 class BinarySearchTree(object):
-    """Binary search tree class."""
+    """Binary search tree class.
+
+    Property:
+    On any subtree, the left nodes are less than the root node,
+    which is less than all of the right nods.
+
+    Travesal:
+    - Inorder (typical): left -> root -> right
+    - Preorder: root -> left -> right
+    - Postorder: left -> right -> root
+    """
     def __init__(self):
         self.root = None
         self.size = 0
@@ -114,28 +124,28 @@ class BinarySearchTree(object):
     def __iter__(self):
         return self.root.__iter__()
 
-    def _put(self, key, value, current_node):
+    def _put(self, key, data, current_node):
         if key == current_node.key:
             self.replace_node_data(
-                key, value, current_node.left_child, current_node.right_child)
+                key, data, current_node.left_child, current_node.right_child)
         elif key < current_node.key:
             if current_node.has_left_child():
-                self._put(key, value, current_node.left_child)
+                self._put(key, data, current_node.left_child)
             else:
-                current_node.left_child = TreeNode(
-                    key, value, parent=current_node)
+                current_node.left_child = Node(
+                    key, data, parent=current_node)
         else:
             if current_node.has_right_child():
-                self._put(key, value, current_node.right_child)
+                self._put(key, data, current_node.right_child)
             else:
-                current_node.right_child = TreeNode(
-                    key, value, parent=current_node)
+                current_node.right_child = Node(
+                    key, data, parent=current_node)
 
-    def put(self, key, value):
+    def put(self, key, data):
         if self.root:
-            self._put(key, value, self.root)
+            self._put(key, data, self.root)
         else:
-            self.root = TreeNode(key, value)
+            self.root = Node(key, data)
         self.size += 1
 
     def __setitem__(self, k, v):
@@ -155,7 +165,7 @@ class BinarySearchTree(object):
         if self.root:
             res = self._get(key, self.root)
             if res:
-                return res.payload
+                return res.data
             else:
                 return None
         else:
@@ -182,7 +192,7 @@ class BinarySearchTree(object):
             succ = current_node.find_successor()
             succ.splice_out()
             current_node.key = succ.key
-            current_node.payload = succ.payload
+            current_node.data = succ.data
         else:  
             # This node has one child.
             if current_node.has_left_child():
@@ -195,7 +205,7 @@ class BinarySearchTree(object):
                 else:
                     current_node.replace_node_data(
                         current_node.left_child.key,
-                        current_node.left_child.payload,
+                        current_node.left_child.data,
                         current_node.left_child.left_child,
                         current_node.left_child.right_child)
             else:
@@ -208,7 +218,7 @@ class BinarySearchTree(object):
                 else:
                     current_node.replace_node_data(
                         current_node.right_child.key,
-                        current_node.right_child.payload,
+                        current_node.right_child.data,
                         current_node.right_child.left_child,
                         current_node.right_child.right_child)
 
