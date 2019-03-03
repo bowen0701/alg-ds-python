@@ -5,98 +5,12 @@ from __future__ import print_function
 
 class Node(object):
     """Node class collects helper functions for BinarySearchTree."""
-    def __init__(self, key, data, 
-                 left=None, right=None, parent=None):
+    def __init__(self, key, data=None, left=None, right=None, parent=None):
         self.key = key
         self.data = data
-        self.left_child = left
-        self.right_child = right
+        self.left = left
+        self.right = right
         self.parent = parent
-
-    def has_left_child(self):
-        return self.left_child
-
-    def has_right_child(self):
-        return self.right_child
-
-    def is_left_child(self):
-        return self.parent and self.parent.left_child == self
-
-    def is_right_child(self):
-        return self.parent and self.parent.right_child == self
-
-    def is_root(self):
-        return not self.parent
-
-    def is_leaf(self):
-        return not (self.left_child or self.right_child)
-
-    def has_any_children(self):
-        return self.left_child or self.right_child
-
-    def has_both_children(self):
-        return self.left_child and self.right_child
-
-    def find_min(self):
-        current = self
-        while current.has_left_child():
-            current = current.left_child
-        return current
-
-    def find_successor(self):
-        succ = None
-        if self.has_right_child():
-            succ = self.right_child.find_min()
-        else:
-            if self.parent:
-                if self.is_left_child():
-                    succ = self.parent
-                else:
-                    self.parent.right_child = None
-                    succ = self.parent.find_successor()
-                    self.parent.right_child = self
-        return succ
-
-    def splice_out(self):
-        if self.is_leaf():
-            if self.is_left_child():
-                self.parent.left_child = None
-            else:
-                self.parent.right_child = None
-        elif self.has_any_children():
-            if self.has_left_child():
-                if self.is_left_child():
-                    self.parent.left_child = self.left_child
-                else:
-                    self.parent.right_child = self.left_child
-                self.left_child.parent = self.parent
-            else:
-                if self.is_left_child():
-                    self.parent.left_child = self.right_child
-                else:
-                    self.parent.right_child = self.right_child
-                self.right_child.parent = self.parent
-
-    def replace_node_data(self, key, data, lc, rc):
-        self.key = key
-        self.data = data
-        self.left_child = lc
-        self.right_child = rc
-        if self.has_left_child():
-            self.left_child.parent = self
-        if self.has_right_child():
-            self.right_child.parent = self
-
-    def __iter__(self):
-        # Inorder traversal algorithm.
-        if self:
-            if self.has_left_child():
-                for elem in self.left_child:
-                    yield elem
-            yield self.key
-            if self.has_right_child():
-                for elem in self.right_child:
-                    yield elem
 
 
 class BinarySearchTree(object):
@@ -113,172 +27,247 @@ class BinarySearchTree(object):
     """
     def __init__(self):
         self.root = None
-        self.size = 0
 
-    def length(self):
-        return self.size
+    def search(self, node, key):
+        """Search node with key.
 
-    def __len__(self):
-        return self.size
-
-    def __iter__(self):
-        return self.root.__iter__()
-
-    def _put(self, key, data, current_node):
-        if key == current_node.key:
-            self.replace_node_data(
-                key, data, current_node.left_child, current_node.right_child)
-        elif key < current_node.key:
-            if current_node.has_left_child():
-                self._put(key, data, current_node.left_child)
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        current = node
+        while current and key != current.key:
+            if key < current.key:
+                current = current.left
             else:
-                current_node.left_child = Node(
-                    key, data, parent=current_node)
-        else:
-            if current_node.has_right_child():
-                self._put(key, data, current_node.right_child)
+                current = current.right
+        return current
+
+    def find_minimum(self, node):
+        """Find minimum starting from node.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        current = node
+        while current.left:
+            current = current.left
+        return current
+
+    def find_maximum(self, node):
+        """Find maximum starting from node.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        current = node
+        while current.right:
+            current = current.right
+        return current
+
+    def find_successor(self, node):
+        """Find succesor of node (next biggest node).
+
+        If node's right existed, find its minimum,
+        if not, find the 1st node whose left is one of the ancestors.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        current = node
+        if current.right:
+            return self.find_minimum(current.right)
+
+        parent = current.parent
+        while parent and current == parent.right:
+            current = parent
+            parent = parent.parent
+        return parent
+
+    def find_predecessor(self, node):
+        """Find predecessor of node (previous biggest node).
+
+        If node's left existed, find its maximum,
+        if not, find the 1st node whose right is one of the ancestors.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        current = node
+        if current.left:
+            return self.find_maximum(current.left)
+
+        parent = current.parent
+        while parent and current == parent.left:
+            current = parent
+            parent = parent.parent
+        return parent
+
+    def insert(self, new_key, new_data=None):
+        """Insert a new node with key.
+
+        Use current and parent to track new node's insertion postion
+        and its parent.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        new_node = Node(new_key, data=new_data)
+        parent = None
+        current = self.root
+
+        while current:
+            parent = current
+            if new_node.key < current.key:
+                current = current.left
             else:
-                current_node.right_child = Node(
-                    key, data, parent=current_node)
+                current = current.right
 
-    def put(self, key, data):
-        if self.root:
-            self._put(key, data, self.root)
+        new_node.parent = parent
+        if not parent:
+            self.root = new_node
+        elif new_node.key < parent.key:
+            parent.left = new_node
         else:
-            self.root = Node(key, data)
-        self.size += 1
+            parent.right = new_node
 
-    def __setitem__(self, k, v):
-        self.put(k, v)
-
-    def _get(self, key, current_node):
-        if not current_node:
-            return None
-        elif current_node.key == key:
-            return current_node
-        elif key < current_node.key:
-            return self._get(key, current_node.left_child)
+    def _transplant(self, to_node, from_node):
+        """Transplant helper function for delete().
+        
+        Time complexity: O(1).
+        Space complexity: O(1).
+        """
+        if not to_node.parent:
+            self.root = from_node
+        elif to_node == to_node.parent.left:
+            # If to_node is its parent's left node.
+            to_node.parent.left = from_node
         else:
-            return self._get(key, current_node.right_child)
+            # If to_node is its parent's right node.
+            to_node.parent.right = from_node
+        if not from_node:
+            from_node.parent = to_node.parent
 
-    def get(self, key):
-        if self.root:
-            res = self._get(key, self.root)
-            if res:
-                return res.data
-            else:
-                return None
+    def delete(self, del_node):
+        """Delete node.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        if not del_node.left:
+            # Node has only left child.
+            self._transplant(del_node, del_node.right)
+        elif not del_node.right:
+            # Node has only right child.
+            self._transplant(del_node, del_node.left)
         else:
-            return None
+            # Node has both left & right children.
+            # Find its minimum which has no left child.
+            trans_node = self.find_minimum(del_node.right)
 
-    def __getitem__(self, key):
-        return self.get(key)
+            # If trans_node's parent is not del_node,
+            # transplant its right node to it, and 
+            # take over del_node's right. 
+            if trans_node.parent != del_node:
+                self._transplant(trans_node, trans_node.right)
+                trans_node.right = del_node.right
+                trans_node.right.parent = trans_node
 
-    def __contains__(self, key):
-        if self._get(key, self.root):
-            return True
-        else:
-            return False
+            # Finally, transplant trans_node to del_node.
+            self._transplant(del_node, trans_node)
+            trans_node.left = del_node.left
+            trans_node.left.parent = trans_node
 
-    def remove(self, current_node):
-        if current_node.is_leaf():
-            # Leaf node.
-            if current_node == current_node.parent.left_child:
-                current_node.parent.left_child = None
-            else:
-                current_node.parent.right_child = None
-        elif current_node.has_both_children():
-            # Interior node.
-            succ = current_node.find_successor()
-            succ.splice_out()
-            current_node.key = succ.key
-            current_node.data = succ.data
-        else:  
-            # This node has one child.
-            if current_node.has_left_child():
-                if current_node.is_left_child():
-                    current_node.left_child.parent = current_node.parent
-                    current_node.parent.left_child = current_node.left_child
-                elif current_node.is_right_child():
-                    current_node.left_child.parent = current_node.parent
-                    current_node.parent.right_child = current_node.left_child
-                else:
-                    current_node.replace_node_data(
-                        current_node.left_child.key,
-                        current_node.left_child.data,
-                        current_node.left_child.left_child,
-                        current_node.left_child.right_child)
-            else:
-                if current_node.is_left_child():
-                    current_node.right_child.parent = current_node.parent
-                    current_node.parent.left_child = current_node.right_child
-                elif current_node.is_right_child():
-                    current_node.right_child.parent = current_node.parent
-                    current_node.parent.right_child = current_node.right_child
-                else:
-                    current_node.replace_node_data(
-                        current_node.right_child.key,
-                        current_node.right_child.data,
-                        current_node.right_child.left_child,
-                        current_node.right_child.right_child)
 
-    def delete(self, key):
-        if self.size > 1:
-            node_to_remove = self._get(key, self.root)
-            if node_to_remove:
-                self.remove(node_to_remove)
-                self.size -= 1
-            else:
-                raise KeyError('Error: key not in tree.')
-        elif self.size == 1 and self.root.key == key:
-            self.root = None
-            self.size -= 1
-        else:
-            raise KeyError('Error: key not in tree.')
+    def inorder_walk(self, node):
+        """Inorder walk: left -> root -> right.
 
-    def __delitem__(self, key):
-        self.delete(key)
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if node:
+            if node.left:
+                self.inorder_walk(node.left)
+            print(node.key)
+            if node.right:
+                self.inorder_walk(node.right)
+
+    def preorder_walk(self, node):
+        """Preorder walk: root -> left -> right.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if node:
+            print(node.key)
+            if node.left:
+                self.preorder_walk(node.left)
+            if node.right:
+                self.preorder_walk(node.right)
+
+    def postorder_walk(self, node):
+        """Postorder walk: left -> right -> root.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if node:
+            if node.left:
+                self.postorder_walk(node.left)
+            if node.right:
+                self.postorder_walk(node.right)
+            print(node.key)
 
 
 def main():
     bst = BinarySearchTree()
-    bst[3] = 'red'
-    bst[4] = 'blue'
-    bst[6] = 'yellow'
-    bst[2] = 'black'
+    bst.insert(6)
+    bst.insert(5)
+    bst.insert(7)
+    bst.insert(2)
+    bst.insert(5)
+    bst.insert(8)    
 
-    print('len(bst): {}'.format(len(bst)))
-    print('bst.size: {}'.format(bst.size))
+    # Inorder walk: 2, 5, 5, 6, 7, 8.
+    print('Inorder walk:')
+    bst.inorder_walk(bst.root)
+    # Preorder walk: 6, 5, 2, 5, 7, 8.
+    print('Preorder walk:')
+    bst.preorder_walk(bst.root)
+    # Postorder walk: 2, 5, 5, 8, 7, 6.
+    print('Postorder walk:')
+    bst.postorder_walk(bst.root)
 
-    print(bst[6])
-    print(bst[2])
+    # Find min of root: 2.
+    print('Find min: {}'.format(bst.find_minimum(bst.root).key))
+    # Find min of root's right: 7.
+    print('Find min from 7: {}'.format(bst.find_minimum(bst.root.right).key))
 
-    print('Iterate by the inorder traversal algorithm:')
-    for x in bst:
-        print(x)
+    # Find max of root: 2.
+    print('Find max: {}'.format(bst.find_maximum(bst.root).key))
+    # Find max of root's right: 8.
+    print('Find max from 7: {}'.format(bst.find_maximum(bst.root.right).key))
 
-    print('Remove bst[2] and then put it back')
-    del bst[2]
-    for x in bst:
-        print(x)
-    bst[2] = 'black'
+    # Find successor of root: 7.
+    print('Find successor: {}'.format(bst.find_successor(bst.root).key))
+    # Find successor of root's left's right: 6.
+    print('Find successor from second 5: {}'
+          .format(bst.find_successor(bst.root.left.right).key))
 
-    print('Remove bst[6] and then put it back')
-    del bst[6]
-    for x in bst:
-        print(x)
-    bst[6] = 'yellow'
+    # Find predecessor of root: 6.
+    print('Find predecessor: {}'.format(bst.find_predecessor(bst.root).key))
+    # Find successor of root's left's right: 5.
+    print('Find predecessor from 5: {}'
+          .format(bst.find_predecessor(bst.root.left).key))
 
-    print('Remove bst[4] and then put it back')
-    del bst[4]
-    for x in bst:
-        print(x)
-    bst[4] = 'blue'
+    # Delete root's left, the run inorder walk: 2, 5, 6, 7, 8.
+    bst.delete(bst.root.left)
+    print('Inorder walk:')
+    bst.inorder_walk(bst.root)
 
-    print('Iterate after del bst[3]:')
-    del bst[3]
-    for x in bst:
-        print(x)
+    # Further delete root, the run inorder walk: 2, 5, 7, 8.
+    bst.delete(bst.root)
+    print('Inorder walk:')
+    bst.inorder_walk(bst.root)
 
 
 if __name__ == '__main__':
