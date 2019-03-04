@@ -43,7 +43,16 @@ class Trie(object):
         Time complexity: O(l), where l is average length of word.
         Space complexity: O(1).
         """
-        pass
+        node = self.root
+
+        for char in word:
+            if char in node.children:
+                node = node.children[char]
+            else:
+                return False
+
+        return True
+
 
     def delete(self, word):
         """Delete a word.
@@ -60,10 +69,13 @@ def main():
     trie = Trie()
 
     trie.insert('Bowen', 1)
-    print('trie: {}'.format(trie.root
+    print('{}'.format(trie.root
         .children['B'].children['o']
         .children['w'].children['e']
         .children['n'].word))
+
+    print(trie.find('Bowen'))
+    print(trie.find('Yiying'))
 
 
 if __name__ == '__main__':
