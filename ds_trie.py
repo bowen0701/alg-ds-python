@@ -28,7 +28,7 @@ class Trie(object):
     def __init__(self):
         self.root = Node()
 
-    def insert(self, word, data):
+    def insert(self, word, data=None):
         """Insert a word.
 
         Time complexity: O(k), where k is the word key length.
@@ -37,7 +37,7 @@ class Trie(object):
         current = self.root
 
         for char in word:
-            if current.children.get(char):
+            if char in current.children:
                 current = current.children[char]
             else:
                 new = Node(char)
@@ -98,7 +98,7 @@ class Trie(object):
                 current = current.children[char]
                 visit_stack.append(current)
             else:
-                print('The word {} does not exist'.format(word))
+                # The word does not exist.
                 return None
 
         if current.children:
@@ -128,11 +128,11 @@ class Trie(object):
 
         # Arrive at the prefix node.
         for char in prefix:
-            if current.children.get(char):
-                current = current.children.get(char)
+            if char in current.children:
+                current = current.children[char]
             else:
-                print('The prefix {} does not exits.'.format(prefix))
-                return
+                # The prefix does not exits.
+                return None
         
         # Check whether prefix is a word, if yes, add it first.
         if current.word:
@@ -154,7 +154,19 @@ class Trie(object):
 
     def get_data(self, word):
         """Get word's data."""
-        pass
+        current = self.root
+
+        for char in word:
+            if char in current.children:
+                current = current.children[char]
+            else:
+                # The word does not exist.
+                return None
+
+        if not current.data:
+            # No data is stored for word.
+            return None
+        return current.data
 
 
 def main():
@@ -170,6 +182,8 @@ def main():
     trie.insert('cdf', 3)
     trie.insert('abcd', 4)
     trie.insert('lmn', 5)
+    trie.insert('lmnz')
+
 
     print('Prefix "ab": {}'.format(trie.root
         .children['a'].children['b']
@@ -179,6 +193,12 @@ def main():
     print('Search word "cdf" (True): {}'.format(trie.search_word('cdf')))
     print('Search word "abcd" (True): {}'.format(trie.search_word('abcd')))
     print('Search word "lmn" (True): {}'.format(trie.search_word('lmn')))
+
+    print('Get data for "abgl" (2): {}'.format(trie.get_data('abgl')))
+    print('Get data for "lmn" (5): {}'.format(trie.get_data('lmn')))
+    print('Get data for non-existed "abk"'.format(trie.get_data('abk')))
+    print('Get data for "lmnz" without data'.format(trie.get_data('lmnz')))
+
 
     print('Search prefix "ab" (True): {}'.format(trie.search_prefix('ab')))
     print('Search prefix "lo" (False)'.format(trie.search_prefix('lo')))
