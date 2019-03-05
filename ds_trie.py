@@ -2,6 +2,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import numpy as np
+
 
 class Node(object):
     """Node class for Trie class."""
@@ -20,7 +22,7 @@ class Trie(object):
       - search_prefix()
       - search_word()
       - delete()
-      - start_with_prefix()
+      - have_prefix()
       - get_data()
     """
     def __init__(self):
@@ -29,9 +31,8 @@ class Trie(object):
     def insert(self, word, data):
         """Insert a word.
 
-        Time complexity: O(l*n), where l is average length of word, and 
-          n is the number of words.
-        Space complexity: O(l).
+        Time complexity: O(k), where k is the word key length.
+        Space complexity: O(k).
         """
         current = self.root
 
@@ -49,7 +50,7 @@ class Trie(object):
     def search_prefix(self, prefix):
         """Search a prefix.
 
-        Time complexity: O(l), where l is average length of word.
+        Time complexity: O(k), where k is the prefix key length.
         Space complexity: O(1).
         """
         current = self.root
@@ -65,7 +66,7 @@ class Trie(object):
     def search_word(self, word):
         """Search a word.
 
-        Time complexity: O(l), where l is average length of word.
+        Time complexity: O(k), where k is the word key length.
         Space complexity: O(1).
         """
         current = self.root
@@ -85,9 +86,8 @@ class Trie(object):
     def delete(self, word):
         """Delete a word.
 
-        Time complexity: O(l*n), where l is average length of word, and 
-          n is the number of words.        
-        Space complexity: O(l).
+        Time complexity: O(k), where k is the word key length.       
+        Space complexity: O(k).
         """
         current = self.root
         visit_stack = []
@@ -115,9 +115,42 @@ class Trie(object):
                 else:
                     break
      
-    def start_with_prefix(self, prefix):
-        """Get words starting with prefix."""
-        pass
+    def have_prefix(self, prefix):
+        """Get words starting with prefix.
+
+        Time complexity: O(l*m), where 
+          - l is the average word lenght,
+          - m is the average number of connected words for each word.
+        Space complexity: O(l*m).
+        """
+        words_ls = []
+        current = self.root
+
+        # Arrive at the prefix node.
+        for char in prefix:
+            if current.children.get(char):
+                current = current.children.get(char)
+            else:
+                print('The prefix {} does not exits.'.format(prefix))
+                return
+        
+        # Check whether prefix is a word, if yes, add it first.
+        if current.word:
+            words_ls.append(current.word)
+
+        # Run BFS to collect the following char's.
+        visit_queue = []
+        visit_queue.insert(0, current)
+
+        while visit_queue:
+            node = visit_queue.pop()
+            for key, node_neighbor in node.children.items():
+                visit_queue.insert(0, node_neighbor)
+                if node_neighbor.word:
+                    words_ls.append(node_neighbor.word)
+
+        return words_ls
+
 
     def get_data(self, word):
         """Get word's data."""
@@ -127,6 +160,7 @@ class Trie(object):
 def main():
     trie = Trie()
 
+    # Trie example: https://www.youtube.com/watch?v=AXjmTQ8LEoI
     trie.insert('abc', 1)
     print('{}'.format(trie.root
         .children['a'].children['b']
@@ -149,6 +183,13 @@ def main():
     print('Search prefix "ab" (True): {}'.format(trie.search_prefix('ab')))
     print('Search prefix "lo" (False)'.format(trie.search_prefix('lo')))
 
+    print('Start with prefix "ab": (abc, abgl, abcd): {}'
+          .format(trie.have_prefix('ab')))
+    print('Start with prefix "abc": (abc, abcd): {}'
+          .format(trie.have_prefix('abc')))
+    print('Start with prefix "cd": (cdf): {}'
+          .format(trie.have_prefix('cd')))
+
     print('Search word "lmn" (True): {}'.format(trie.search_word('lmn')))
     print('Search word "ab" (False): {}'.format(trie.search_word('ab')))
     print('Search word "cdf" (True): {}'.format(trie.search_word('cdf')))
@@ -157,17 +198,20 @@ def main():
     print('Delete word "abc":')
     trie.delete('abc')
     print('Search word "abc" (False): {}'.format(trie.search_word('abc')))
-    print('Show keys with prefix "ab": {}'.format(trie.root
+    print('Show keys with prefix "ab": {}'.format(
+        trie.root
         .children['a'].children['b']
         .children.keys()))
 
     print('Delete word "abgl":')
     trie.delete('abgl')
     print('Search word "abgl" (False): {}'.format(trie.search_word('abgl')))
-    print('Show children with prefix "ab": {}'.format(trie.root
+    print('Show children with prefix "ab": {}'.format(
+        trie.root
         .children['a'].children['b']
         .children.keys()))
-    print('Show children with prefix "ab": {}'.format(trie.root
+    print('Show children with prefix "ab": {}'.format(
+        trie.root
         .children['a'].children['b']
         .children['c'].children.keys()))
 
