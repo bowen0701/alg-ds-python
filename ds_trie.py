@@ -33,18 +33,18 @@ class Trie(object):
           n is the number of words.
         Space complexity: O(l).
         """
-        node = self.root
+        current = self.root
 
         for char in word:
-            if node.children.get(char):
-                node = node.children[char]
+            if current.children.get(char):
+                current = current.children[char]
             else:
-                new_node = Node(char)
-                node.children[char] = new_node
-                node = new_node
+                new = Node(char)
+                current.children[char] = new
+                current = new
 
-        node.data = data
-        node.word = word
+        current.data = data
+        current.word = word
 
     def search_prefix(self, prefix):
         """Search a prefix.
@@ -52,11 +52,11 @@ class Trie(object):
         Time complexity: O(l), where l is average length of word.
         Space complexity: O(1).
         """
-        node = self.root
+        current = self.root
 
         for char in prefix:
-            if char in node.children:
-                node = node.children[char]
+            if char in current.children:
+                current = current.children[char]
             else:
                 return False
 
@@ -68,15 +68,15 @@ class Trie(object):
         Time complexity: O(l), where l is average length of word.
         Space complexity: O(1).
         """
-        node = self.root
+        current = self.root
 
         for char in word:
-            if char in node.children:
-                node = node.children[char]
+            if char in current.children:
+                current = current.children[char]
             else:
                 return False
 
-        if node.word == word:
+        if current.word == word:
             return True
         else:
             return False
@@ -87,30 +87,31 @@ class Trie(object):
 
         Time complexity: O(l*n), where l is average length of word, and 
           n is the number of words.        
-        Space complexity: O(1).
+        Space complexity: O(l).
         """
-        previous = None
-        node = self.root
+        current = self.root
+        visit_stack = []
+        visit_stack.append(current)
 
         for char in word:
-            if char in node.children:
-                previous = node
-                node = node.children[char]
+            if char in current.children:
+                current = current.children[char]
+                visit_stack.append(current)
             else:
                 print('The word {} does not exist'.format(word))
                 return None
 
-        # TODO: Fix bug for delete redundant nodes.
-        if node.children:
-            node.data = None
-            node.word = None
+        if current.children:
+            current.data = None
+            current.word = None
             return None
         else:
+            visit_stack.pop()
+
             for char in word[::-1]:
-                print(char)
-                if not node.children:
-                    node = previous
-                    node.children.pop(char)
+                if not current.children:
+                    current = visit_stack.pop()
+                    pop_node = current.children.pop(char)
                 else:
                     break
      
@@ -135,6 +136,11 @@ def main():
     trie.insert('cdf', 3)
     trie.insert('abcd', 4)
     trie.insert('lmn', 5)
+
+    print('Prefix "ab": {}'.format(trie.root
+        .children['a'].children['b']
+        .children.keys()))
+
     print('Search word "abgl" (True): {}'.format(trie.search_word('abgl')))
     print('Search word "cdf" (True): {}'.format(trie.search_word('cdf')))
     print('Search word "abcd" (True): {}'.format(trie.search_word('abcd')))
@@ -151,14 +157,24 @@ def main():
     print('Delete word "abc":')
     trie.delete('abc')
     print('Search word "abc" (False): {}'.format(trie.search_word('abc')))
+    print('Show keys with prefix "ab": {}'.format(trie.root
+        .children['a'].children['b']
+        .children.keys()))
 
     print('Delete word "abgl":')
     trie.delete('abgl')
     print('Search word "abgl" (False): {}'.format(trie.search_word('abgl')))
+    print('Show children with prefix "ab": {}'.format(trie.root
+        .children['a'].children['b']
+        .children.keys()))
+    print('Show children with prefix "ab": {}'.format(trie.root
+        .children['a'].children['b']
+        .children['c'].children.keys()))
 
     print('Delete word "abcd":')
     trie.delete('abcd')
     print('Search word "abcd" (False): {}'.format(trie.search_word('abcd')))
+    print('Show root\'s children: {}'.format(trie.root.children.keys()))
 
 
 if __name__ == '__main__':
