@@ -82,7 +82,6 @@ class Trie(object):
         else:
             return False
 
-
     def delete(self, word):
         """Delete a word.
 
@@ -150,7 +149,6 @@ class Trie(object):
                     words_ls.append(node_neighbor.word)
 
         return words_ls
-
 
     def get_data(self, word):
         """Get word's data."""
