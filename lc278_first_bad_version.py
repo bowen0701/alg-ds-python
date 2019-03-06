@@ -1,4 +1,4 @@
-"""Leetcode 278. 278. First Bad Version
+"""Leetcode 278. First Bad Version
 Easy
 
 URL: https://leetcode.com/problems/first-bad-version/
@@ -30,7 +30,7 @@ Then 4 is the first bad version.
 # @param version, an integer
 # @return a bool
 def isBadVersion(version):
-	pass
+    return VERSION_FAILURES[version - 1]
 
 
 class Solution(object):
@@ -38,13 +38,32 @@ class Solution(object):
         """
         :type n: int
         :rtype: int
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
         """
-        pass
+        start = 1
+        final = n
+
+        while final - start > 0:
+            middle = start + (final - start) // 2
+            if isBadVersion(middle):
+                # Since middle is bad, use it as next final.
+                final = middle
+            else:
+                # Since middle is good, use its next as next start.
+                start = middle + 1
+
+        return final
 
 
 def main():
-	pass
+    global VERSION_FAILURES
+    VERSION_FAILURES = [False] * 1000 + [True] * 100
+    n = len(VERSION_FAILURES)
+    
+    print Solution().firstBadVersion(n)
 
 
-if __init__ == '__main__':
-	main()
+if __name__ == '__main__':
+    main()
