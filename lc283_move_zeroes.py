@@ -19,13 +19,29 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        start = 0
+        end = len(nums) - 1
+        while start < end:
+            if nums[start] == 0:
+                nums.append(nums.pop(start))
+                end -= 1
+            else:
+                start += 1
 
 
 def main():
-	pass
+    nums1 = [0, 1, 0, 3, 12]
+    Solution().moveZeroes(nums1)
+    print nums1
+
+    nums2 = [0, 0, 3, 12, 1, 0, 5]
+    Solution().moveZeroes(nums2)
+    print nums2
 
 
-if __init__ == '__main__':
-	main()
+if __name__ == '__main__':
+    main()
