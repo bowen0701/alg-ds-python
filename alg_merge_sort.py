@@ -4,7 +4,7 @@ from __future__ import division
 
 
 def merge_recur(x_list, y_list):
-    """Merge two sorted lists by Recusions."""
+    """Merge two sorted lists by recusions."""
     if len(x_list) == 0:
         return y_list
     if len(y_list) == 0:
@@ -16,11 +16,11 @@ def merge_recur(x_list, y_list):
 
 
 def merge_iter(x_list, y_list):
-    """Merge two sorted lists by Iteration (i.e. Two Fingers Algorithm)."""
+    """Merge two sorted lists by iteration (i.e. two fingers method)."""
     z_list = []
     x_pos = 0
     y_pos = 0
-    for z_pos in range(len(x_list) + len(y_list)):
+    for _ in range(len(x_list) + len(y_list)):
         if x_pos < len(x_list) and y_pos < len(y_list):
             if x_list[x_pos] <= y_list[y_pos]:
                 z_list.append(x_list[x_pos])
@@ -29,33 +29,36 @@ def merge_iter(x_list, y_list):
                 z_list.append(y_list[y_pos])
                 y_pos += 1      
         elif x_pos < len(x_list) and y_pos >= len(y_list):
-            z_list.append(x_list[x_pos])
-            x_pos += 1
+            z_list.extend(x_list[x_pos:])
+            break
         elif x_pos >= len(x_list) and y_pos < len(y_list):
-            z_list.append(y_list[y_pos])
-            y_pos += 1
+            z_list.extend(y_list[y_pos:])
+            break
         else:
             pass
     return z_list
 
 
 def merge_sort(a_list, merge):
-    """Merge sort by Divide and Conquer Algorithm.
+    """Merge sort algorithm by divide and conquer method with recursion.
 
     Time complexity: O(n*logn).
+    Space complexity: O(n).
     """
     if len(a_list) == 1:
         return a_list
     else:
-        mid = len(a_list) // 2
-        return merge(merge_sort(a_list[:mid], merge), 
-                     merge_sort(a_list[mid:], merge))
+        middle = len(a_list) // 2
+        return merge(merge_sort(a_list[:middle], merge), 
+                     merge_sort(a_list[middle:], merge))
 
 
 def main():
     import time
+    import random
 
-    a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    a_list = range(100)
+    random.shuffle(a_list)
 
     start_time = time.time()
     print(merge_sort(a_list, merge_recur))
