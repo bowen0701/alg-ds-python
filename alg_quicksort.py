@@ -52,7 +52,7 @@ def _quicksort_recur(a_list, left, right):
         pivot = left + (right - left) // 2
         partition = _partition(a_list, left, right, pivot)
         _quicksort_recur(a_list, left, partition - 1)
-        _quicksort_recur(a_list, partition, right)
+        _quicksort_recur(a_list, partition + 1, right)
 
 
 def quicksort_raw(a_list):
