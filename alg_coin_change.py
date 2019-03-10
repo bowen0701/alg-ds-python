@@ -19,7 +19,7 @@ def coin_change_recur(change, coins_ls):
 
 
 def _coin_change_memo(change, coins_ls, min_coins_memo_ls):
-    """Helper function for change_min_coins_memo()."""    
+    """Helper function for coin_change_memo()."""    
     min_coins = change
 
     if change in coins_ls:
