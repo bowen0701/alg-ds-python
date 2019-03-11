@@ -4,7 +4,9 @@ from __future__ import division
 
 
 def coin_change_recur(change, coins_ls):
-    """Change minimum coins by naive recursion."""    
+    """Change minimum coins by naive top-down recursion."""   
+    # TODO: Fix bug for unchangeable amount.
+
     min_coins = change
 
     if change in coins_ls:
@@ -18,37 +20,45 @@ def coin_change_recur(change, coins_ls):
     return min_coins
 
 
-def _coin_change_memo(change, coins_ls, min_coins_memo_ls):
+def _coin_change_memo(amount, coins_ls, min_coins_ls):
     """Helper function for coin_change_memo()."""    
-    min_coins = change
-
-    if change in coins_ls:
-        min_coins_memo_ls[change] = 1
-        return 1
+    if amount < 0:
+        return -1
+    if amount == 0:
+        return 0
     
-    if min_coins_memo_ls[change] > 0:
-        return min_coins_memo_ls[change]
-    
-    for m in [c for c in coins_ls if c <= change]:
-        num_coins = (
-            1 + _coin_change_memo(
-                change - m, coins_ls, min_coins_memo_ls))
-        if num_coins < min_coins:
-            min_coins = num_coins
-            min_coins_memo_ls[change] = min_coins
+    if min_coins_ls[amount] > 0:
+        return min_coins_ls[amount]
 
-    return min_coins
+    min_coins = float('inf')
+
+    for c in coins_ls:
+        extra_coins = _coin_change_memo(amount - c, coins_ls, min_coins_ls)
+        if extra_coins >= 0 and extra_coins < min_coins:
+            min_coins = 1 + extra_coins
+
+    if min_coins != float('inf'):
+        min_coins_ls[amount] = min_coins
+    else:
+        min_coins_ls[amount] = -1
+
+    return min_coins_ls[amount]
 
 
-def coin_change_memo(change, coins_ls):
-    """Change minimum coins by recursion + memoization."""
-    min_coins_memo_ls = [0] * (change + 1)
-    min_coins = _coin_change_memo(change, coins_ls, min_coins_memo_ls)
+def coin_change_memo(amount, coins_ls):
+    """Change minimum coins by top-down recursion + memoization."""
+    if amount < 1:
+        return 0
+
+    min_coins_ls = [0] * (amount + 1)
+    min_coins = _coin_change_memo(amount, coins_ls, min_coins_ls)
     return min_coins
 
 
 def coin_change_dp(change, coins_ls):
     """Change minimum coins by dynamic programming."""
+    # TODO: Fix bug for unchangeable amount.
+
     min_coins_ls = [0] * (change + 1)
 
     for _change in range(change + 1):
@@ -68,8 +78,9 @@ def coin_change_dp(change, coins_ls):
 def main():
     import time
 
-    change = 28
-    coins_ls = [1, 5, 10, 20, 50]    # Must have coin 1.
+    change = 17
+    coins_ls = [1, 5, 10, 20, 50]    # Include coin 1.
+    # coins_ls = [5, 10, 20, 50]     # Exclude coin 1.
 
     start_time = time.time()
     min_coins = coin_change_recur(change, coins_ls)
