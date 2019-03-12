@@ -79,9 +79,17 @@ def coin_change_memo(amount, coins_ls):
 
 def coin_change_dp(amount, coins_ls):
     """Change minimum coins by dynamic programming by bottom-up."""
+    # Why sorted coin list? Since we want to start from smaller coins.
+    coins_ls = sorted(coins_ls)
+
     n_coins = len(coins_ls)
-    min_coins_arr = [[float('inf')]*(amount + 1) for r in range(n_coins)]
+    min_coins_arr = [[float('inf')]*(amount + 1) for c in range(n_coins)]
+
     # TODO: Apply DP with 2-d array and fix bug for unchangeable amount.
+    # Base case for amount 0.
+    for c in range(n_coins):
+        min_coins_arr[c][0] = 0
+
     pass
 
 
