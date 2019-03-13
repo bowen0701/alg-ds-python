@@ -15,8 +15,8 @@ from __future__ import division
 def fibonacci_recur(n):
     """Fibonacci series by recursion.
 
-    - Time complexity: O(2^n); too fast.
-    - Space complexity: O(n).
+    - Time complexity: O(2^n)
+    - Space complexity: O(1).
     """
     if n <= 1:
         return n
@@ -24,25 +24,46 @@ def fibonacci_recur(n):
         return fibonacci_recur(n - 1) + fibonacci_recur(n - 2)
 
 
+def _fibonacci_memo(n, memo):
+    """Fibonacci series by top-down memoization.
+
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
+    if memo[n]:
+        return memo[n]
+
+    if n <= 1:
+        memo[n] = n
+    else:
+        memo[n] = _fibonacci_memo(n - 1, memo) + _fibonacci_memo(n - 2, memo)
+    return memo[n]
+
+
 def fibonacci_memo(n):
-    """Fibonacci series by iteration and memoization.
+    memo = [None for _ in range(n + 1)]
+    return _fibonacci_memo(n, memo)
+
+
+def fibonacci_dp(n):
+    """Fibonacci series by bottom-up dynamic programming.
 
     - Time complexity: O(n).
     - Space complexity: O(n).
     """
-    fn_d = {}
-    fn_d[0] = 0
-    fn_d[1] = 1
+    memo = [None for _ in range(n + 1)]
+    memo[0] = 0
+    memo[1] = 1
     for n in range(2, n + 1):
-        fn_d[n] = fn_d[n - 1] + fn_d[n - 2]
-    return fn_d[n]
+        memo[n] = memo[n - 1] + memo[n - 2]
+    return memo[n]
 
 
-def fibonacci_dp(n):
-    """Fibonacci series by iteration in dynamic programming.
+def fibonacci_dp2(n):
+    """Fibonacci series by bottom-up dynamic programming with min space.
 
-    - Time complexity: O(n), like fibonacci_memo().
-    - Space complexity: O(1), improving a lot.
+    - Time complexity: O(n).
+    - Space complexity: O(1).
     """
     a, b = 0, 1
     for _ in range(n):
@@ -53,7 +74,7 @@ def fibonacci_dp(n):
 
 def main():
     import time
-    n = 40
+    n = 20
     
     print('{}th number of Fibonacci series:'.format(n))
 
@@ -66,7 +87,11 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(fibonacci_dp(n)))
+    print('By dynamic programming: {}'.format(fibonacci_dp(n)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By optimized DP: {}'.format(fibonacci_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
 
 
