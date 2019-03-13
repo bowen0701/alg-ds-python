@@ -5,6 +5,11 @@ from __future__ import division
 
 
 def tower_of_hanoi(height, from_pole, to_pole, with_pole, counter):
+    """Tower of Hanoi.
+
+    Time complexity: T(1) = 1, T(n) = 2T(n - 1) + 1 => O(2^n).
+    Space complexity: O(1).
+    """
     if height == 1:
         counter[0] += 1
         print('{0} -> {1}'.format(from_pole, to_pole))
