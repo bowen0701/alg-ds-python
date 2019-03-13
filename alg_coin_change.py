@@ -96,13 +96,13 @@ def coin_change_dp(amount, coins):
                 # Directly use coin c to change total amount.
                 T[c][a] = 1
             elif a - coins[c] >= 0:
-                # TODO: Revise comments.
                 # If coin c can be included, decide which uses less coins:
                 # 1. previous coins without coin c to make a.
                 # 2. previous coins without coin c to make a - coins[c]
-                #    plus this 1 extra coin.
+                #    plus this 1 extra coin c.
                 T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c]])
             else:
+                # If coin c cannot be included, use previous coins.
                 T[c][a] = T[c - 1][a]
 
     min_coins = T[-1][-1]
