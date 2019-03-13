@@ -4,29 +4,20 @@ from __future__ import division
 
 """Coin Change.
 
-You are given coins of different denominations and a total amount of 
-money amount. Write a function to compute the fewest number of coins 
-that you need to make up that amount. 
+Compute the fewest number of coins that you need to make up that amount. 
 If that amount of money cannot be made up by any combination of the 
 coins, return -1.
 
-Example 1:
-Input: coins = [1, 2, 5], amount = 11
-Output: 3 
-Explanation: 11 = 5 + 5 + 1
-
-Example 2:
-Input: coins = [2], amount = 3
-Output: -1
-
-Note: You may assume that you have an infinite number of each kind of coin.
-
-Ref: Leetcode 322. Coin Change (Medium)
+Assume that you have an infinite number of each kind of coin.
 """
 
 
 def coin_change_recur(amount, coins):
-    """Change minimum coins by naive top-down recursion."""
+    """Change minimum coins by naive top-down recursion.
+
+    Time complexity: O(c^a), where c is number of coins, and a is amount.
+    Space complexity: O(1).
+    """
     if amount < 0:
         return -1
     if amount == 0:
@@ -71,14 +62,23 @@ def _coin_change_memo(amount, coins, L):
 
 
 def coin_change_memo(amount, coins):
-    """Change minimum coins by top-down recursion + memoization."""
+    """Change minimum coins by top-down dynamic programming: 
+    recursion + memoization.
+
+    Time complexity: O(c * a), where c is number of coins, and a is amount.
+    Space complexity: O(a).
+    """
     L = [0] * (amount + 1)
     min_coins = _coin_change_memo(amount, coins, L)
     return min_coins
 
 
 def coin_change_dp(amount, coins):
-    """Change minimum coins by dynamic programming by bottom-up."""
+    """Change minimum coins by bottom-up dynamic programming.
+
+    Time complexity: O(c * a), where c is number of coins, and a is amount.
+    Space complexity: O(c * a).
+    """
     # Why sorted coin list? Since we want to start from smaller coins.
     coins = sorted(coins)
 
