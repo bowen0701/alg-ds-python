@@ -53,7 +53,11 @@ def _make_change_memo(amount, coins, T):
 
 def make_change_memo(amount, coins):
     """Make change by top-bottom dynamic programming: 
-    recursion + memoization."""
+    recursion + memoization.
+
+    Time complexity: O(a * c), where a is amount, and c is number of coins.
+    Space complexity: O(a * c).
+    """
     n = len(coins)
     T = [[0] * (amount + 1) for c in range(n)]
 
