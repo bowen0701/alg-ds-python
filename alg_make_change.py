@@ -26,8 +26,11 @@ def make_change_recur(amount, coins):
     if n <= 0 and amount >= 1:
         return 0
 
-    return (make_change_recur(amount - coins[n - 1], coins)
-            + make_change_recur(amount, coins[:(n - 1)]))
+    # Compute ways with coin n included plus that with coin excluded.
+    counter_in = make_change_recur(amount - coins[n - 1], coins)
+    counter_ex = make_change_recur(amount, coins[:(n - 1)])
+    counter = counter_in + counter_ex
+    return counter
 
 
 def _make_change_memo(amount, coins, T):
@@ -42,8 +45,8 @@ def _make_change_memo(amount, coins, T):
         return 0
 
     counter_in = _make_change_memo(amount - coins[n - 1], coins, T)
-    counter_out = _make_change_memo(amount, coins[:(n - 1)], T)
-    T[n - 1][amount] = counter_in + counter_out
+    counter_ex = _make_change_memo(amount, coins[:(n - 1)], T)
+    T[n - 1][amount] = counter_in + counter_ex
 
     return T[n - 1][amount]
 
