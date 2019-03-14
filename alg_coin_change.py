@@ -13,7 +13,7 @@ Assume that you have an infinite number of each kind of coin.
 
 
 def coin_change_recur(amount, coins):
-    """Change minimum coins by naive top-down recursion.
+    """Change minimum coins by naive recursion.
 
     Time complexity: O(c^a), where c is number of coins, and a is amount.
     Space complexity: O(1).
