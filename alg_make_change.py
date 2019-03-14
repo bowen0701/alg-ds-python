@@ -68,8 +68,20 @@ def make_change_memo(amount, coins):
 
 
 def make_change_dp(amount, coins):
-    """Make change by bottom-up dynamic programming."""
-    pass
+    """Make change by bottom-up dynamic programming.
+
+    Time complexity: O(a * c), where a is amount, and c is number of coins.
+    Space complexity: O(a * c).
+    """
+    n = len(coins)
+    T = [[0] * (amount + 1) for c in range(n)]
+
+    for c in range(n):
+        T[c][0] = 1
+
+    for c in range(n):
+        for a in range(1, amount + 1):
+            pass
 
 
 def main():
