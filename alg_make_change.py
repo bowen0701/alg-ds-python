@@ -27,10 +27,10 @@ def make_change_recur(amount, coins):
         return 0
 
     # Compute ways with coin n included plus that with coin excluded.
-    counter_in = make_change_recur(amount - coins[n - 1], coins)
-    counter_ex = make_change_recur(amount, coins[:(n - 1)])
-    counter = counter_in + counter_ex
-    return counter
+    count_in = make_change_recur(amount - coins[n - 1], coins)
+    count_ex = make_change_recur(amount, coins[:(n - 1)])
+    count = count_in + count_ex
+    return count
 
 
 def _make_change_memo(amount, coins, T):
@@ -44,9 +44,9 @@ def _make_change_memo(amount, coins, T):
     if n <= 0 and amount >= 1:
         return 0
 
-    counter_in = _make_change_memo(amount - coins[n - 1], coins, T)
-    counter_ex = _make_change_memo(amount, coins[:(n - 1)], T)
-    T[n - 1][amount] = counter_in + counter_ex
+    count_in = _make_change_memo(amount - coins[n - 1], coins, T)
+    count_ex = _make_change_memo(amount, coins[:(n - 1)], T)
+    T[n - 1][amount] = count_in + count_ex
 
     return T[n - 1][amount]
 
@@ -81,7 +81,19 @@ def make_change_dp(amount, coins):
 
     for c in range(n):
         for a in range(1, amount + 1):
-            pass
+            if a >= coins[c]:
+                count_in = T[c][a - coins[c]]
+            else:
+                count_in = 0
+
+            if c >= 1:
+                count_ex = T[c - 1][a]
+            else:
+                count_ex = 0
+
+            T[c][a] = count_in + count_ex
+
+    return T[-1][-1]
 
 
 def main():
@@ -98,6 +110,11 @@ def main():
     start_time = time.time()
     print('Make change by memo: {}'
           .format(make_change_memo(amount, coins)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('Make change by DP: {}'
+          .format(make_change_dp(amount, coins)))
     print('Time: {}'.format(time.time() - start_time))
 
 
