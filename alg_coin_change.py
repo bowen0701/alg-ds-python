@@ -95,7 +95,7 @@ def coin_change_dp(amount, coins):
             if coins[c] == a:
                 # Directly use coin c to change total amount.
                 T[c][a] = 1
-            elif a - coins[c] >= 0:
+            elif a - coins[c] > 0:
                 # If coin c can be included, decide which uses less coins:
                 # 1. previous coins without coin c to make a.
                 # 2. previous coins without coin c to make a - coins[c]
