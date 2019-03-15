@@ -21,12 +21,36 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        pass
+        # Compute the max number.
+        m = int(pow(n, 0.5))
+        sq_nums = [pow(s, 2) for s in range(1, m + 1)]
 
+        T = [[float('inf')] * (n + 1) for s in range(m)]
+
+        # Base case for integer 0.
+        for s in range(m):
+            T[s][0] = 1
+
+        for s in range(m):
+            for i in range(1, n + 1):
+                if i == sq_nums[s]:
+                    T[s][i] = 1
+                elif i > sq_nums[s]:
+                    T[s][i] = min(1 + T[s][i - sq_nums[s]], T[s - 1][i])
+                else:
+                    T[s][i] = T[s - 1][i]
+
+        return T[-1][-1]
 
 def main():
-	pass
+    import time
+
+    n = 12
+    print Solution().numSquares(n)
+
+    n = 13
+    print Solution().numSquares(n)
 
 
 if __name__ == '__main__':
-	main()
+    main()
