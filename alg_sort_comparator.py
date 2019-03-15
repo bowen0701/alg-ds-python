@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 class Person(object):
-    def __init__(name, score):
+    def __init__(self, name, score):
         self.name = name
         self.score = score
 
@@ -21,12 +21,16 @@ def compare(a, b):
     return b.score - a.score < 0
 
 
-def quicksort_comparator(a_list):
-    n = len(a_list)
-    pivot = a_list[n // 2]
+def sort_comparator(a_list):
+    """Sort a list with comparator by quick sort algorithm."""
+    if len(a_list) <= 1:
+        return a_list
+
+    pivot = a_list[len(a_list) // 2]
     left_list = [x for x in a_list if compare(x, pivot)]
     middle_list = [pivot]
     right_list = [x for x in a_list if compare(pivot, x)]
+
     return (
         quicksort_comparator(left_list) 
         + middle_list 
@@ -43,7 +47,7 @@ def main():
     andy = Person('Andy', 1400)
     davis = Person('Davis', 1400)
 
-    a_list = [davis, gayle, john, andy]
+    a_list = [davis, john, andy, gayle]
 
     sorted_list = quicksort_comparator(a_list)
     print_person(sorted_list)
