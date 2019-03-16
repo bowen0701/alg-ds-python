@@ -16,7 +16,7 @@ def fibonacci_recur(n):
     """Fibonacci series by recursion.
 
     - Time complexity: O(2^n)
-    - Space complexity: O(1).
+    - Space complexity: O(n).
     """
     if n <= 1:
         return n
@@ -24,25 +24,25 @@ def fibonacci_recur(n):
         return fibonacci_recur(n - 1) + fibonacci_recur(n - 2)
 
 
-def _fibonacci_memo(n, memo):
+def _fibonacci_memo(n, F):
     """Fibonacci series by top-down memoization.
 
     Time complexity: O(n).
     Space complexity: O(n).
     """
-    if memo[n]:
-        return memo[n]
+    if F[n]:
+        return F[n]
 
     if n <= 1:
-        memo[n] = n
+        F[n] = n
     else:
-        memo[n] = _fibonacci_memo(n - 1, memo) + _fibonacci_memo(n - 2, memo)
-    return memo[n]
+        F[n] = _fibonacci_memo(n - 1, F) + _fibonacci_memo(n - 2, F)
+    return F[n]
 
 
 def fibonacci_memo(n):
-    memo = [None for _ in range(n + 1)]
-    return _fibonacci_memo(n, memo)
+    F = [None for _ in range(n + 1)]
+    return _fibonacci_memo(n, F)
 
 
 def fibonacci_dp(n):
@@ -51,16 +51,16 @@ def fibonacci_dp(n):
     - Time complexity: O(n).
     - Space complexity: O(n).
     """
-    memo = [None for _ in range(n + 1)]
-    memo[0] = 0
-    memo[1] = 1
+    F = [None for _ in range(n + 1)]
+    F[0] = 0
+    F[1] = 1
     for n in range(2, n + 1):
-        memo[n] = memo[n - 1] + memo[n - 2]
-    return memo[n]
+        F[n] = F[n - 1] + F[n - 2]
+    return F[n]
 
 
 def fibonacci_dp2(n):
-    """Fibonacci series by bottom-up dynamic programming with min space.
+    """Fibonacci series by bottom-up dynamic programming with optimized space.
 
     - Time complexity: O(n).
     - Space complexity: O(1).
