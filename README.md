@@ -1,4 +1,4 @@
-# Algorithms and Data Structures in Python. 
+# Algorithms and Data Structures in Python
 
 The following are the main references I use:
 
