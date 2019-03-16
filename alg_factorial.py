@@ -15,7 +15,7 @@ from __future__ import division
 def factorial_recur(n):
     """Get the nth number of factorial series by recursion.
 
-    - Time complexity: Fn - 1 = O(Fn); too fast.
+    - Time complexity: O(n)
     - Space complexity: O(n).
     """
     if n <= 1:
@@ -30,19 +30,20 @@ def factorial_memo(n):
     - Time complexity: O(n).
     - Space complexity: O(n).
     """
-    fn_d = {}
-    fn_d[0] = 1
-    fn_d[1] = 1
+    fn = [None for _ in range(n + 1)]
+    fn[0] = 1
+    fn[1] = 1
+
     for n in range(2, n + 1):
-        fn_d[n] = n * fn_d[n - 1]
-    return fn_d[n]
+        fn[n] = n * fn[n - 1]
+    return fn[n]
 
 
 def factorial_dp(n):
     """Get the nth number of factorial series by dynamic programming.
 
-    - Time complexity: O(n), like factorial_memo().
-    - Space complexity: O(1), improving a lot.
+    - Time complexity: O(n).
+    - Space complexity: O(1).
     """
     fn = 1
     for i in range(2, n + 1):
