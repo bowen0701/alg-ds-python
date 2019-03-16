@@ -17,23 +17,23 @@ def quicksort(a_list):
     """
     if len(a_list) <= 1:
         return a_list
-    pivot_value = a_list[len(a_list) // 2]
-    left_list = [x for x in a_list if x < pivot_value]
-    middle_list = [x for x in a_list if x == pivot_value]
-    right_list = [x for x in a_list if x > pivot_value]
+    pivot = a_list[len(a_list) // 2]
+    left_list = [x for x in a_list if x < pivot]
+    middle_list = [x for x in a_list if x == pivot]
+    right_list = [x for x in a_list if x > pivot]
     return quicksort(left_list) + middle_list + quicksort(right_list)
 
 
 def _partition(a_list, left, right, pivot):
     """Get partition point for patition."""
-    pivot_value = a_list[pivot]
+    pivot = a_list[pivot]
 
     while left <= right:
-        while a_list[left] < pivot_value:
+        while a_list[left] < pivot:
             # Find left element which is bigger than pivot.
             left += 1
 
-        while a_list[right] > pivot_value:
+        while a_list[right] > pivot:
             # Find right element which is smaller than pivot.
             right -= 1
 
