@@ -1,6 +1,4 @@
-# Algorithms & Data Structures
-
-Algorithms and data structures implementations in Python. 
+# Algorithms and Data Structures in Python. 
 
 The following are the main references I use:
 
