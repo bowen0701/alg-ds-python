@@ -58,8 +58,8 @@ class SolutionIter(object):
         """
         for i, n in enumerate(nums):
             ss_excluded = self.sum_squares(nums) - pow(n, 2)
-            nums_excluded = list(set(nums[:i] + nums[(i + 1):]))
-            ss_set_excluded = self.sum_squares(nums_excluded)
+            set_excluded = set(nums[:i] + nums[(i + 1):])
+            ss_set_excluded = self.sum_squares(list(set_excluded))
             if ss_excluded == 2 * ss_set_excluded:
                 return n
 
