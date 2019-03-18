@@ -16,28 +16,49 @@ def arithmetic_series_recur(n):
     return n + arithmetic_series_recur(n - 1)
 
 
+def _arithmetic_series_memo(n, s):
+    if s[n]:
+        return s[n]
+
+    if n <= 1:
+        s[n] = n
+    else:
+        s[n] = n + _arithmetic_series_memo(n - 1, s)
+    return s[n]
+
+
 def arithmetic_series_memo(n):
     """Arithmetic series by recursion.
 
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    # Implement arithmetic_series_memo().
-    if n <= 1:
-        return n
-    return n + arithmetic_series_recur(n - 1)
+    s = [None for _ in range(n + 1)]
+    return _arithmetic_series_memo(n, s)
 
 
 def arithmetic_series_dp(n):
-    """Arithmetic series by bottom-up dynamic programming 
-    w/ optimized space.
+    """Arithmetic series by bottom-up DP w/ optimized space.
+
+    Time complexity: O(n).
+    Space complexity: O(n)
+    """
+    s = [None for _ in range(n + 1)]
+    s[0] = 0
+    s[1] = 1
+    for k in range(2, n + 1):
+        s[k] = k + s[k - 1]
+    return s[n]
+
+
+def arithmetic_series_dp2(n):
+    """Arithmetic series by bottom-up DP w/ optimized space.
 
     Time complexity: O(n).
     Space complexity: O(1)
     """
-    a_list = range(1, n + 1)
     s = 0
-    for x in a_list:
+    for x in range(1, n + 1):
         s += x
     return s
 
@@ -59,7 +80,15 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By optimized DP: {}'.format(arithmetic_series_dp(100)))
+    print('By memo: {}'.format(arithmetic_series_memo(100)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By DP: {}'.format(arithmetic_series_dp(100)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By optimized DP: {}'.format(arithmetic_series_dp2(100)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
