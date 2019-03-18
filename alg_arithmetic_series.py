@@ -38,7 +38,7 @@ def arithmetic_series_memo(n):
 
 
 def arithmetic_series_dp(n):
-    """Arithmetic series by bottom-up DP w/ optimized space.
+    """Arithmetic series by bottom-up DP.
 
     Time complexity: O(n).
     Space complexity: O(n)
