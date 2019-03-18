@@ -11,7 +11,7 @@ Input: pattern = "abba", str = "dog cat cat dog"
 Output: true
 
 Example 2:
-Input:pattern = "abba", str = "dog cat cat fish"
+Input: pattern = "abba", str = "dog cat cat fish"
 Output: false
 
 Example 3:
@@ -34,12 +34,48 @@ class Solution(object):
         :type str: str
         :rtype: bool
         """
-        pass
+        s = str.split(' ')
+        if len(pattern) != len(s):
+            return False
+        
+        d = {}
+        for i, p in enumerate(pattern):
+            if d.get(p, None):
+                if d[p] != s[i]:
+                    return False
+            else:
+                if s[i] in d.values():
+                    return False
+                d[p] = s[i]              
+        return True
 
 
 def main():
-	pass
+    pattern = "abba"
+    str = "dog cat cat dog"    # Ans: True.
+    output = Solution().wordPattern(pattern, str)
+    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+
+    pattern = "abba"
+    str = "dog cat cat fish"    # Ans: False.
+    output = Solution().wordPattern(pattern, str)
+    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+
+    pattern = "aaaa"
+    str = "dog cat cat dog"    # Ans: False.
+    output = Solution().wordPattern(pattern, str)
+    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+
+    pattern = "abba"
+    str = "dog dog dog dog"    # Ans: False.
+    output = Solution().wordPattern(pattern, str)
+    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+
+    pattern = "jquery"
+    str = "jquery"    # Ans: False.
+    output = Solution().wordPattern(pattern, str)
+    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
 
 
 if __name__ == '__main__':
-	main()
+    main()
