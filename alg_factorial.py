@@ -30,14 +30,14 @@ def factorial_memo(n):
     - Time complexity: O(n).
     - Space complexity: O(n).
     """
-    F = [None for _ in range(n + 1)]
-    F[0] = 1
-    F[1] = 1
+    f = [None for _ in range(n + 1)]
+    f[0] = 1
+    f[1] = 1
 
     for k in range(2, n + 1):
-        F[k] = k * F[k - 1]
+        f[k] = k * f[k - 1]
 
-    return F[n]
+    return f[n]
 
 
 def factorial_dp(n):

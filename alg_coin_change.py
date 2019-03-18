@@ -36,29 +36,29 @@ def coin_change_recur(amount, coins):
         return -1
 
 
-def _coin_change_memo(amount, coins, L):
+def _coin_change_memo(amount, coins, m):
     """Helper function for coin_change_memo()."""    
     if amount < 0:
         return -1
     if amount == 0:
         return 0
     
-    if L[amount] > 0:
-        return L[amount]
+    if m[amount] > 0:
+        return m[amount]
 
     min_coins = float('inf')
 
     for c in coins:
-        extra_coins = _coin_change_memo(amount - c, coins, L)
+        extra_coins = _coin_change_memo(amount - c, coins, m)
         if extra_coins >= 0 and extra_coins < min_coins:
             min_coins = 1 + extra_coins
 
     if min_coins != float('inf'):
-        L[amount] = min_coins
+        m[amount] = min_coins
     else:
-        L[amount] = -1
+        m[amount] = -1
 
-    return L[amount]
+    return m[amount]
 
 
 def coin_change_memo(amount, coins):
@@ -68,8 +68,8 @@ def coin_change_memo(amount, coins):
     Time complexity: O(c * a), where c is number of coins, and a is amount.
     Space complexity: O(a).
     """
-    L = [0] * (amount + 1)
-    min_coins = _coin_change_memo(amount, coins, L)
+    m = [0] * (amount + 1)
+    min_coins = _coin_change_memo(amount, coins, m)
     return min_coins
 
 
@@ -83,29 +83,29 @@ def coin_change_dp(amount, coins):
     coins = sorted(coins)
 
     n_coins = len(coins)
-    T = [[float('inf')]*(amount + 1) for c in range(n_coins)]
+    M = [[float('inf')]*(amount + 1) for c in range(n_coins)]
 
     # Base case for amount 0.
     for c in range(n_coins):
-        T[c][0] = 0
+        M[c][0] = 0
 
     # Start from smallest coin to change from amount 0 to total amount.
     for c in range(n_coins):
         for a in range(1, amount + 1):
             if coins[c] == a:
                 # Directly use coin c to change total amount.
-                T[c][a] = 1
+                M[c][a] = 1
             elif a - coins[c] > 0:
                 # If coin c can be included, decide which uses less coins:
                 # 1. previous coins without coin c to make a.
                 # 2. previous coins without coin c to make a - coins[c]
                 #    plus this 1 extra coin c.
-                T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c]])
+                M[c][a] = min(M[c - 1][a], 1 + M[c][a - coins[c]])
             else:
                 # If coin c cannot be included, use previous coins.
-                T[c][a] = T[c - 1][a]
+                M[c][a] = M[c - 1][a]
 
-    min_coins = T[-1][-1]
+    min_coins = M[-1][-1]
     if min_coins != float('inf'):
         return min_coins
     else:
