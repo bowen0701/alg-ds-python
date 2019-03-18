@@ -3,15 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-"""Arithmetic series: 1 + 2 + 3 + ... + 100."""
-
-def _arithmetic_series_recur(a_list):
-    """Helper function for geometric_series_recur()."""
-    if len(a_list) == 1:
-        return a_list[0]
-    else:
-        return a_list[0] + _arithmetic_series_recur(a_list[1:])
-
+"""Arithmetic series: 1 + 2 + 3 + ... + n."""
 
 def arithmetic_series_recur(n):
     """Arithmetic series by recursion.
@@ -19,8 +11,21 @@ def arithmetic_series_recur(n):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    a_list = range(1, n + 1)
-    return _arithmetic_series_recur(a_list)
+    if n <= 1:
+        return n
+    return n + arithmetic_series_recur(n - 1)
+
+
+def arithmetic_series_memo(n):
+    """Arithmetic series by recursion.
+
+    Time complexity: O(n).
+    Space complexity: O(n)
+    """
+    # Implement arithmetic_series_memo().
+    if n <= 1:
+        return n
+    return n + arithmetic_series_recur(n - 1)
 
 
 def arithmetic_series_dp(n):
