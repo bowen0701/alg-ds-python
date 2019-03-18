@@ -10,36 +10,54 @@ def geometric_series_recur(n, r):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    # a_list = [pow(2, x) for x in range(n + 1)]
-    # return _geometric_series_recur(a_list)
     if n == 0:
         return 1
-    return pow(r, n) +  geometric_series_recur(n - 1, r)
+    return pow(r, n) + geometric_series_recur(n - 1, r)
+
+
+def _geometric_series_memo(n, r, s):
+    if s[n]:
+        return s[n]
+
+    if n == 0:
+        s[n] = 1
+    else:
+        s[n] = pow(r, n) + _geometric_series_memo(n - 1, r, s)
+    return s[n]
 
 
 def geometric_series_memo(n, r):
-    """Geometric series by recursion.
+    """Geometric series by recursion+memoization.
 
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    # TODO: Implement geometric_series_memo().
-    if n == 0:
-        return 1
-    return pow(r, n) +  geometric_series_recur(n - 1, r)
+    s = [None for _ in range(n + 1)]
+    return _geometric_series_memo(n, r, s)
 
 
 def geometric_series_dp(n, r):
-    """Geometric series by bottom-up dynamic programming 
-    w/ optimized space.
+    """Geometric series by bottom-up DP.
+
+    Time complexity: O(n).
+    Space complexity: O(n)
+    """
+    s = [None for x in range(n + 1)]
+    s[0] = 1
+    for k in range(1, n + 1):
+        s[k] = pow(r, k) + s[k - 1]
+    return s[n]
+
+
+def geometric_series_dp2(n, r):
+    """Geometric series by bottom-up DP w/ optimized space.
 
     Time complexity: O(n).
     Space complexity: O(1)
     """
-    a_list = [pow(r, x) for x in range(n + 1)]
     s = 0
-    for x in a_list:
-        s += x
+    for k in range(1, n + 1):
+        s += pow(r, k)
     return s
 
 
@@ -49,22 +67,30 @@ def geometric_series(n, r):
     Time complexity: O(1).
     Space complexity: O(1)
     """
-    return 1 * (pow(r, n + 1) - 1) / (r - 1)
+    return (pow(r, n + 1) - 1) / (r - 1)
 
 
 def main():
     import time
 
     start_time = time.time()
-    print('By recursion: {}'.format(geometric_series_recur(63)))
+    print('By recursion: {}'.format(geometric_series_recur(63, 2)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By optimized DP: {}'.format(geometric_series_dp(63)))
+    print('By memo: {}'.format(geometric_series_memo(63, 2)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By closed form: {}'.format(geometric_series(63)))
+    print('By DP: {}'.format(geometric_series_dp(63, 2)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By optimized DP: {}'.format(geometric_series_dp2(63, 2)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By closed form: {}'.format(geometric_series(63, 2)))
     print('Time: {}'.format(time.time() - start_time))
 
 
