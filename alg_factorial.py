@@ -13,7 +13,7 @@ from __future__ import division
 
 
 def factorial_recur(n):
-    """Get the nth number of factorial series by recursion.
+    """Nth number of factorial series by recursion.
 
     - Time complexity: O(n)
     - Space complexity: O(n).
@@ -24,8 +24,29 @@ def factorial_recur(n):
         return n * factorial_recur(n - 1)
 
 
+def _factorial_memo(n, f):
+    if f[n]:
+        return f[n]
+
+    if n <= 1:
+        f[n] = 1
+    else:
+        f[n] = n * _factorial_memo(n - 1, f)
+    return f[n]
+
+
 def factorial_memo(n):
-    """Get the nth number of factorial series by memorization.
+    """Nth number of factorial series by top-down DP w/ recursion + memo.
+
+    - Time complexity: O(n)
+    - Space complexity: O(n).
+    """
+    f = [None for _ in range(n + 1)]
+    return _factorial_memo(n, f)
+
+
+def factorial_dp(n):
+    """Nth number of factorial series by bottom-up DP.
     
     - Time complexity: O(n).
     - Space complexity: O(n).
@@ -40,15 +61,15 @@ def factorial_memo(n):
     return f[n]
 
 
-def factorial_dp(n):
-    """Get the nth number of factorial series by dynamic programming.
+def factorial_dp2(n):
+    """Nth number of factorial series by bottom-up DP w/ optimized space.
 
     - Time complexity: O(n).
     - Space complexity: O(1).
     """
     fn = 1
-    for i in range(2, n + 1):
-        fn *= i 
+    for k in range(2, n + 1):
+        fn *= k 
     return fn
 
 
@@ -63,11 +84,15 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By memorization: {}'.format(factorial_memo(n)))
+    print('By memo: {}'.format(factorial_memo(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By dynamic programming: {}'.format(factorial_dp(n)))
+    print('By DP: {}'.format(factorial_dp(n)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By optimized DP: {}'.format(factorial_dp2(n)))
     print('Time: {}'.format(time.time() - start_time))
 
 
