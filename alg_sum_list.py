@@ -6,17 +6,30 @@ from __future__ import division
 def sum_list_recur(a_list):
     """Sum list by recursion.
 
-    Time complexity: O(n), where n is the list length.
+    Time complexity: O(n).
     Space complexity: O(n).
     """
     if len(a_list) == 1:
         return a_list[0]
     else:
-        return a_list[0] + sum_list_recur(a_list[1:])
+        return a_list[-1] + sum_list_recur(a_list[:-1])
 
 
 def sum_list_dp(a_list):
     """Sum list by bottom-up dynamic programming.
+
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
+    s = [None for _ in range(len(a_list))]
+    s[0] = a_list[0]
+    for i, x in enumerate(a_list[1:]):
+        s[i + 1] = x + s[i]
+    return s[-1]
+
+
+def sum_list_dp2(a_list):
+    """Sum list by bottom-up dynamic programming w/ optimized space.
 
     Time complexity: O(n).
     Space complexity: O(1).
@@ -37,9 +50,12 @@ def main():
     print('By recursion: {}'.format(sum_list_recur(a_list)))
     print('Time: {}'.format(time.time() - start_time))
 
-    
     start_time = time.time()
     print('By DP: {}'.format(sum_list_dp(a_list)))
+    print('Time: {}'.format(time.time() - start_time))
+    
+    start_time = time.time()
+    print('By DP: {}'.format(sum_list_dp2(a_list)))
     print('Time: {}'.format(time.time() - start_time))
 
 
