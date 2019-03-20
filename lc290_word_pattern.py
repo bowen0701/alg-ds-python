@@ -37,16 +37,23 @@ class Solution(object):
         s = str.split(' ')
         if len(pattern) != len(s):
             return False
-        
-        d = {}
+
+        p2s_d = {}
+        s2p_d = {}
+
         for i, p in enumerate(pattern):
-            if d.get(p, None):
-                if d[p] != s[i]:
+            if p2s_d.get(p, None):
+                if p2s_d[p] != s[i]:
                     return False
             else:
-                if s[i] in d.values():
+                p2s_d[p] = s[i]
+
+            if s2p_d.get(s[i], None):
+                if s2p_d[s[i]] != p:
                     return False
-                d[p] = s[i]              
+            else:
+                s2p_d[s[i]] = p
+
         return True
 
 
