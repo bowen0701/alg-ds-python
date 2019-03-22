@@ -27,6 +27,29 @@ class SolutionRecur(object):
         return self.uniquePaths(m - 1, n) + self.uniquePaths(m, n - 1)
 
 
+class SolutionMemo(object):
+    """Unique paths by top-down dynamic programming w/ memoization."
+
+    Time complexity: O(mn.
+    Space complexity: O(mn).
+    """  
+    def _uniquePaths(self, m, n, path):
+        if path[m][n]:
+            return path[m][n]
+
+        if m == 1 or n == 1:
+            path[m][n] = 1
+        else:
+            path[m][n] = (
+                self._uniquePaths(m - 1, n, path) + 
+                self._uniquePaths(m, n - 1, path))
+        return path[m][n]
+
+    def uniquePaths(self, m, n):
+        path = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+        return self._uniquePaths(m, n, path)
+
+
 class SolutionDp(object):
     """Unique paths by Dynamic Programming."
 
@@ -68,16 +91,22 @@ class SolutionDp2(object):
 def main():
     import time
 
+    m, n = 3, 2
+
     start_time = time.time()
-    print SolutionRecur().uniquePaths(3, 2)
+    print SolutionRecur().uniquePaths(m, n)
     print 'Recursion: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionMemo().uniquePaths(m, n)
+    print 'Memo: {}'.format(time.time() - start_time)
     
     start_time = time.time()
-    print SolutionDp().uniquePaths(3, 2)
+    print SolutionDp().uniquePaths(m, n)
     print 'By DP: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionDp2().uniquePaths(3, 2)
+    print SolutionDp2().uniquePaths(m, n)
     print 'By DP 2: {}'.format(time.time() - start_time)
 
 
