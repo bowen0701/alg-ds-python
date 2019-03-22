@@ -8,41 +8,40 @@ Given weights and values of n items, put these items in a knapsack of
 capacity to get the maximum total value in the knapsack. 
 """
 
-def knapsack01_recur(val, wt, wt_cap):
+def knapsack01_recur(val, wt, wt_cap, n):
     """0-1 Knapsack Problem by naive recursion.
 
     Time complexity: O(2^n), where n is the number of items.
     Space complexity: O(n).
     """
-    if len(wt) == 0 or wt_cap == 0:
+    if n < 0 or wt_cap == 0:
         return 0
-    elif wt[-1] > wt_cap:
-        return knapsack01_recur(val[:-1], wt[:-1], wt_cap)
+    elif wt[n] > wt_cap:
+        return knapsack01_recur(val, wt, wt_cap, n - 1)
     else:
-        last_excluded = knapsack01_recur(val[:-1], wt[:-1], wt_cap)
-        last_included = (
-            val[-1] + knapsack01_recur(val[:-1], wt[:-1], wt_cap - wt[-1]))
-        return max(last_excluded, last_included)
+        val_in = val[n] + knapsack01_recur(val, wt, wt_cap - wt[n], n - 1)
+        val_ex = knapsack01_recur(val, wt, wt_cap, n - 1)
+        return max(val_in, val_ex)
 
 
-def _knapsack01_memo(val, wt, wt_cap, M):
-    if M[len(wt) - 1][wt_cap]:
-        return M[len(wt)][wt_cap]
+def _knapsack01_memo(val, wt, wt_cap, M, n):
+    if M[n][wt_cap]:
+        return M[n][wt_cap]
 
-    if len(wt) == 0 or wt_cap == 0:
+    if n < 0 or wt_cap == 0:
         return 0
-    elif wt[-1] > wt_cap:
-        memo = knapsack01_recur(val[:-1], wt[:-1], wt_cap)
+    elif wt[n] > wt_cap:
+        memo = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
     else:
-        last_excluded = knapsack01_recur(val[:-1], wt[:-1], wt_cap)
-        last_included = (
-            val[-1] + knapsack01_recur(val[:-1], wt[:-1], wt_cap - wt[-1]))
-        memo = max(last_excluded, last_included)
-    M[len(wt) - 1][wt_cap] = memo
+        val_in = val[n] + _knapsack01_memo(val, wt, wt_cap - wt[n], M, n - 1)
+        val_ex = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
+        memo = max(val_in, val_ex)
+    M[n][wt_cap] = memo
+
     return memo
 
 
-def knapsack01_memo(val, wt, wt_cap):
+def knapsack01_memo(val, wt, wt_cap, n):
     """0-1 Knapsack Problem by top-down dynamic programming w/ memoization.
 
     Time complexity: O(nC), where 
@@ -50,11 +49,11 @@ def knapsack01_memo(val, wt, wt_cap):
       - C is the weight capacity.
     Space complexity: O(nC).
     """
-    M = [[None for j in range(wt_cap + 1)] for i in range(len(wt))]
-    for i in range(len(wt)):
+    M = [[None for j in range(wt_cap + 1)] for i in range(n + 1)]
+    for i in range(n + 1):
         M[i][0] = 0
 
-    return _knapsack01_memo(val, wt, wt_cap, M)
+    return _knapsack01_memo(val, wt, wt_cap, M, n)
 
 
 def knapsack_dp(val, wt, wt_cap):
@@ -106,14 +105,15 @@ def main():
     val = [6, 3, 5, 4, 6]
     wt = [2, 5, 4, 2, 3]
     wt_cap = 10
+    n = len(wt) - 1
     # Ans: 17
 
     start_time = time.time()
-    print(knapsack01_recur(val, wt, wt_cap))
+    print(knapsack01_recur(val, wt, wt_cap, n))
     print('Time by recursion: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print(knapsack01_memo(val, wt, wt_cap))
+    print(knapsack01_memo(val, wt, wt_cap, n))
     print('Time by memo: {}'.format(time.time() - start_time))
 
     start_time = time.time()
