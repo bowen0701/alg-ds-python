@@ -4,7 +4,7 @@ from __future__ import print_function
 
 
 """0-1 Knapsack Problem
-Given weights and values of n items, put these items in a knapsack of 
+Given weights and values of n "non-splittable" items, put these items in a knapsack of 
 capacity to get the maximum total value in the knapsack. 
 """
 
