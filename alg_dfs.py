@@ -46,8 +46,8 @@ def dfs_recur(graph_adj_d):
     return previsit_d, postvisit_d
 
 
-def dfs_iter_visit(v, graph_adj_d, visited_d, 
-                   previsit_d, postvisit_d, clock):
+def _dfs_iter_visit(v, graph_adj_d, visited_d, 
+                    previsit_d, postvisit_d, clock):
     """DFS helper by iteration using stack."""
     # visited_ls.append(v)
     visited_d[v] = True
@@ -87,8 +87,8 @@ def dfs_iter(graph_adj_d):
 
     for v in graph_adj_d.keys():
         if not visited_d[v]:
-            dfs_iter_visit(v, graph_adj_d, visited_d, 
-                           previsit_d, postvisit_d, clock)
+            _dfs_iter_visit(v, graph_adj_d, visited_d, 
+                            previsit_d, postvisit_d, clock)
     return previsit_d, postvisit_d
 
 
