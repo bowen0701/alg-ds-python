@@ -13,16 +13,16 @@ def _postvisit(v, postvisit_d, clock):
     postvisit_d[v] = clock[0]
 
 
-def _dfs_visit(v, graph_adj_d, visited_d, 
-               previsit_d, postvisit_d, clock):
+def _dfs_recur_visit(v, graph_adj_d, visited_d, 
+                     previsit_d, postvisit_d, clock):
     """DFS helper by recursion."""
     visited_d[v] = True
     _previsit(v, previsit_d, clock)
 
     for v_neighbor in graph_adj_d[v]:
         if not visited_d[v_neighbor]:
-            _dfs_visit(v_neighbor, graph_adj_d, visited_d, 
-                       previsit_d, postvisit_d, clock)
+            _dfs_recur_visit(v_neighbor, graph_adj_d, visited_d, 
+                             previsit_d, postvisit_d, clock)
     
     _postvisit(v, postvisit_d, clock)
 
@@ -40,8 +40,8 @@ def dfs_recur(graph_adj_d):
     for v in graph_adj_d.keys():
         if not visited_d[v]:
             # If vertex is not visited, re-start the DFS visit.
-            _dfs_visit(v, graph_adj_d, visited_d, 
-                       previsit_d, postvisit_d, clock)
+            _dfs_recur_visit(v, graph_adj_d, visited_d, 
+                             previsit_d, postvisit_d, clock)
 
     return previsit_d, postvisit_d
 
@@ -105,12 +105,12 @@ def main():
         'H': ['C']
     }
 
-    print('Start DFS by recursion.')
+    print('DFS by recursion:')
     previsit_d, postvisit_d = dfs_recur(graph_adj_d)
     print('previsit_d: {}'.format(previsit_d))
     print('postvisit_d: {}'.format(postvisit_d))
 
-    print('Start DFS by iteration.')
+    print('DFS by iteration:')
     previsit_dd, postvisit_dd = dfs_iter(graph_adj_d)
     print('previsit_dd: {}'.format(previsit_dd))
     print('postvisit_dd: {}'.format(postvisit_dd))
