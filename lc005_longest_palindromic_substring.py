@@ -44,15 +44,69 @@ class SolutionDP(object):
         :type s: str
         :rtype: str
         """
-        pass
+        if not len(s):
+            return ''
+
+        n = len(s)
+        M = [[False] * n for _ in range(n)]
+
+        for i in range(n):
+            M[i][i] = True
+            max_len = 1
+            pal_s = s[i]
+            
+        for i in range(n - 1):
+            if s[i] == s[i + 1]:
+                M[i][i + 1] = True
+                max_len = 2
+                pal_s = s[i:(i + 2)]
+
+        for j in range(n):
+            for i in range(0, j - 1):
+                if s[i] == s[j] and M[i + 1][j - 1]:
+                    M[i][j] = True
+                    if max_len < j - i + 1:
+                        max_len = j - i + 1
+                        pal_s = s[i:(j + 1)]
+        return pal_s
 
 
 def main():
+    import time
+
     s = 'babad'    # Ans: bab.
-    print(SolutionNaive().longestPalindrome(s))
+    
+    start_time = time.time()
+    print('By naive: {}'
+          .format(SolutionNaive().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
 
     s = 'cbbd'     # Ans: bb.
-    print(SolutionNaive().longestPalindrome(s))
+
+    start_time = time.time()
+    print('By naive: {}'
+          .format(SolutionNaive().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    s = 'abcba'    # Ans: abcba
+
+    start_time = time.time()
+    print('By naive: {}'
+          .format(SolutionNaive().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
