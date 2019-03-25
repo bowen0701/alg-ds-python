@@ -35,8 +35,6 @@ class SolutionNaive(object):
                         max_len = ij_len
                         max_i = i
                         max_j = j
-                else:
-                    break
         return s[max_i:(max_j + 1)]
 
 
