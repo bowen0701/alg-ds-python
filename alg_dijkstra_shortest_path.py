@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
+# import numpy as np
 
 from ds_min_heap_attribute import MinHeapAttribute
 
@@ -14,22 +14,17 @@ def dijkstra_shortest_path(w_graph_d, v_start):
     Time complexity: O(|V|+|E|)log(|V|).
     Space complexity: O(|V|).
     """
-    min_pq = MinHeapAttribute()
-
-    distance_d = {v: np.inf for v in w_graph_d.keys()}
-    visited_d = {v: False for v in w_graph_d.keys()}
-    
-    min_pq.add([0, v_start])
+    distance_d = {v: float('inf') for v in w_graph_d.keys()}
     distance_d[v_start] = 0
-    visited_d[v_start] = True
+    
+    min_pq = MinHeapAttribute()    
+    min_pq.add([0, v_start])
 
     while min_pq.size > 0:
         k, v = min_pq.extract_min()
-        visited_d[v] = True
 
         for v_neighbor in w_graph_d[v].keys():
-            if (not visited_d[v_neighbor] and 
-                distance_d[v_neighbor] > 
+            if (distance_d[v_neighbor] > 
                     distance_d[v] + w_graph_d[v][v_neighbor]):
                 distance_d[v_neighbor] = distance_d[v] + w_graph_d[v][v_neighbor]
                 min_pq.add([distance_d[v_neighbor], v_neighbor])
