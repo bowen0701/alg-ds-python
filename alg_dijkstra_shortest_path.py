@@ -7,20 +7,21 @@ import numpy as np
 from ds_min_heap_attribute import MinHeapAttribute
 
 
-def dijkstra_shortest_path(w_graph_d, start_vertex):
+def dijkstra_shortest_path(w_graph_d, v_start):
     """Dijkstra algorithm for singel-source shortest path problem 
-    in a "weighted" graph.
+    in a "weighted" graph G(V, E) by BFS with min binary heap.
 
-    Time complexity for graph G(V, E): (|V|+|E|)log(|V|).
+    Time complexity: O(|V|+|E|)log(|V|).
+    Space complexity: O(|V|).
     """
     min_pq = MinHeapAttribute()
 
     distance_d = {v: np.inf for v in w_graph_d.keys()}
     visited_d = {v: False for v in w_graph_d.keys()}
     
-    min_pq.add([0, start_vertex])
-    distance_d[start_vertex] = 0
-    visited_d[start_vertex] = True
+    min_pq.add([0, v_start])
+    distance_d[v_start] = 0
+    visited_d[v_start] = True
 
     while min_pq.size > 0:
         k, v = min_pq.extract_min()
