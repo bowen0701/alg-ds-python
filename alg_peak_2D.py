@@ -15,10 +15,11 @@ In general, a[i][j] is a peak iff
 Similarly for corner cases, a[i][j], i = 0 or m - 1, or j = 0 or n -1.
 """
 
-def peak_2D_iter(arr):
+def peak_2d_iter(arr):
     """Find peak in 2D array (nxm) by iterative algorithm.
 
     Time complexity: O(n*m).
+    Space complexity: O(1).
     """
     nrow, ncol = len(arr), len(arr[0])
 
@@ -76,8 +77,12 @@ def peak_2D_iter(arr):
                 return arr[i][j]
 
 
-def _max_1D(arr):
-    """Find max in 1D array, with time complexity O(m)."""
+def _max_1d(arr):
+    """Find max in 1D array.
+
+    Time complexity: O(m).
+    Space complexity: O(1).
+    """
     max_id = 0
     max_item = arr[0]
     for i in range(1, len(arr)):
@@ -87,23 +92,26 @@ def _max_1D(arr):
     return max_id, max_item
 
 
-def peak_2D(arr):
+def peak_2d(arr, start_row, end_row):
     """Find peak in 2D array (nxm) by divide & conquer algorithm.
 
-    Time complexity: O(m*log(n)).
-    """
-    nrow, ncol = len(arr), len(arr[0])
+    Procedure:
+    - Find max element in mid row to get max column.
+    - Find peak in max column.
 
-    if nrow == 1:
-        _, max_item = _max_1D(arr)
+    Time complexity: O(m*log(n)).
+    Space complexity: O(1).
+    """
+    if end_row - start_row == 0:
+        _, max_item = _max_1d(arr)
         return max_item
     else:
-        mid_row = nrow // 2
-        max_col, _ = _max_1D(arr[mid_row])
+        mid_row = start_row + (end_row - start_row) // 2
+        max_col, _ = _max_1d(arr[mid_row])
         if arr[mid_row][max_col] < arr[mid_row - 1][max_col]:
-            return peak_2D(arr[:mid_row])
+            return peak_2d(arr, start_row, mid_row - 1)
         elif arr[mid_row][max_col] < arr[mid_row + 1][max_col]:
-            return peak_2D(arr[(mid_row + 1):])
+            return peak_2d(arr, mid_row + 1, end_row)
         else:
             return arr[mid_row][max_col]
 
@@ -118,11 +126,12 @@ def main():
            [16, 17, 19, 20, 18]]
 
     start_time = time.time()
-    print('Peak: {}'.format(peak_2D_iter(arr)))
+    print('Peak: {}'.format(peak_2d_iter(arr)))
     print('Time for peak_2D_iter(): {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('Peak: {}'.format(peak_2D(arr)))
+    start_row, end_row = 0, len(arr) - 1
+    print('Peak: {}'.format(peak_2d(arr, start_row, end_row)))
     print('Time for peak_2D(): {}'.format(time.time() - start_time))
 
 
