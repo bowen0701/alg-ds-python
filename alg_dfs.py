@@ -28,9 +28,10 @@ def _dfs_recur_visit(v, graph_adj_d, visited_d,
 
 
 def dfs_recur(graph_adj_d):
-    """Depth First Search (DFS) by recursion algorithm.
+    """Depth First Search (DFS) in graph G(V, E) by recursion algorithm.
 
-    Time complexity for graph G(V, E): O(|V|+|E|). 
+    Time complexity: O(|V|+|E|).
+    Space complexity: O(|V|).
     """
     visited_d = {v: False for v in graph_adj_d.keys()}
     clock = [0]
@@ -49,7 +50,7 @@ def dfs_recur(graph_adj_d):
 def _dfs_iter_visit(v, graph_adj_d, visited_d, 
                     previsit_d, postvisit_d, clock):
     """DFS helper by iteration using stack."""
-    # visited_ls.append(v)
+    _previsit(v, previsit_d, clock)
     visited_d[v] = True
 
     visit_stack = []
@@ -75,10 +76,11 @@ def _dfs_iter_visit(v, graph_adj_d, visited_d,
 
 
 def dfs_iter(graph_adj_d):
-    """Depth First Search (DFS) by iteration algorithm by iterative 
-    algorithm using Stack.
+    """Depth First Search (DFS) in graph G(V, E) 
+    by iteration algorithm using Stack.
 
-    Time complexity for G(V, E): O(|V|+|E|).
+    Time complexity: O(|V|+|E|).
+    Space complexity: O(|V|).
     """
     visited_d = {v: False for v in graph_adj_d.keys()}
     clock = [0]
