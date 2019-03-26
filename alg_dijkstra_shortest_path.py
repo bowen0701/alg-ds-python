@@ -17,17 +17,17 @@ def dijkstra_shortest_path(w_graph_d, v_start):
     distance_d = {v: float('inf') for v in w_graph_d.keys()}
     distance_d[v_start] = 0
     
-    min_pq = MinHeapAttribute()    
-    min_pq.add([0, v_start])
+    visited_pq = MinHeapAttribute()    
+    visited_pq.add([0, v_start])
 
-    while min_pq.size > 0:
-        k, v = min_pq.extract_min()
+    while visited_pq.size > 0:
+        k, v = visited_pq.extract_min()
 
         for v_neighbor in w_graph_d[v].keys():
             if (distance_d[v_neighbor] > 
                     distance_d[v] + w_graph_d[v][v_neighbor]):
                 distance_d[v_neighbor] = distance_d[v] + w_graph_d[v][v_neighbor]
-                min_pq.add([distance_d[v_neighbor], v_neighbor])
+                visited_pq.add([distance_d[v_neighbor], v_neighbor])
 
     return distance_d
 
