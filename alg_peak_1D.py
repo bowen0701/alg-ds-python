@@ -39,7 +39,7 @@ def peak_1d(arr, start, end):
     if end - start == 0:
         return arr[start]
     else:
-        mid = (end - start) // 2
+        mid = start + (end - start) // 2
         if arr[mid - 1] >= arr[mid]:
             return peak_1d(arr, start, mid - 1)
         elif arr[mid] <= arr[mid + 1]:
