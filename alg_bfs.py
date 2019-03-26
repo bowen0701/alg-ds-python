@@ -2,19 +2,21 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
-import numpy as np
-
 
 def bfs(graph_adj_d, v_start):
-    """Breadth First Search (BFS) algorithm with single source 
-    by iteration using queue.
+    """Breadth first search (BFS) algorithm in graph G(V, E) 
+    with single source by iteration using queue.
 
-    Note: There is no intuitive way to combine BFS & recursion,
-    since BFS goes level by level.
+    Note: 
+    - There is no intuitive way to combine BFS & recursion,
+      since BFS goes level by level.
+    - This BFS algorithm can find Shortes Reach Problem
+      in "un-weighted" graph.
 
-    Time complexity for graph G(V, E): O(|V|+|E|).
+    Time complexity: O(|V|+|E|).
+    Space complexity: O(|V|).
     """
-    distance_d = {v: np.inf for v in graph_adj_d.keys()}
+    distance_d = {v: float('inf') for v in graph_adj_d.keys()}
     distance_d[v_start] = 0
 
     visit_queue = []
@@ -24,7 +26,7 @@ def bfs(graph_adj_d, v_start):
         v_visit = visit_queue.pop()
         for v_neighbor in graph_adj_d[v_visit]:
             # If v_neighbor is not visited.
-            if np.isinf(distance_d[v_neighbor]):
+            if distance_d[v_neighbor] == float('inf'):
                 visit_queue.insert(0, v_neighbor)
                 distance_d[v_neighbor] = distance_d[v_visit] + 1
     return distance_d
@@ -46,7 +48,7 @@ def main():
     v_start = 'A'
     print('Start vertex: {}'.format(v_start))
     distance_d = bfs(graph_adj_d, v_start)
-    print('Using BFS with queue, the distance dict is\n{}'
+    print('BFS with distance dict:\n{}'
           .format(distance_d))
 
 
