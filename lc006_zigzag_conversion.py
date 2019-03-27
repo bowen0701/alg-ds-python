@@ -1,28 +1,29 @@
 """Leetcode 6. ZigZag Conversion
 Medium
 
-The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
-
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number 
+of rows like this: (you may want to display this pattern in a fixed font for 
+better legibility)
 P   A   H   N
 A P L S I I G
 Y   I   R
 And then read line by line: "PAHNAPLSIIGYIR"
 
-Write the code that will take a string and make this conversion given a number of rows:
+Write the code that will take a string and make this conversion given a 
+number of rows:
 
 string convert(string s, int numRows);
-Example 1:
 
+Example 1:
 Input: s = "PAYPALISHIRING", numRows = 3
 Output: "PAHNAPLSIIGYIR"
-Example 2:
 
+Example 2:
 Input: s = "PAYPALISHIRING", numRows = 4
 Output: "PINALSIGYAHRPI"
 Explanation:
-
-P     I    N
-A   L S  I G
+P     I     N
+A   L S   I G
 Y A   H R
 P     I
 """
@@ -35,12 +36,47 @@ class Solution(object):
         :type numRows: int
         :rtype: str
         """
-        pass
+        if len(s) <= numRows or numRows == 1:
+            return s
+
+        len_s = len(s)
+        base = (numRows - 1) * 2
+
+        zigzag = ''
+        for r in range(numRows):
+            if r == 0:             # First row.
+                for i in range(0, len_s, base):
+                    zigzag += s[i]
+            elif r == numRows - 1: # Last row.
+                for i in range(r, len_s, base):
+                    zigzag += s[i]
+            else:                  # Middle rows.
+                for i in range(r, len_s, base):
+                    zigzag += s[i]
+                    if i + (base - 2 * r) < len_s:
+                        zigzag += s[i + (base - 2 * r)]
+        return zigzag
 
 
 def main():
-	pass
+    s = "PAYPALISHIRING"
+
+    numRows = 3
+    zigzag = Solution().convert(s, numRows)
+    print zigzag
+    assert zigzag == 'PAHNAPLSIIGYIR'
+
+    numRows = 4
+    zigzag = Solution().convert(s, numRows)
+    print zigzag
+    assert Solution().convert(s, numRows) == 'PINALSIGYAHRPI'
+
+    s = "PAYPALISHIRING"
+    numRows = 3
+    zigzag = Solution().convert(s, numRows)
+    print zigzag
+    assert Solution().convert(s, numRows) == 'PAHNAPLSIIGYIR'
 
 
 if __name__ == '__main__':
-	main()
+    main()
