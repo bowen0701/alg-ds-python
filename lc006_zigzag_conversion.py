@@ -28,8 +28,29 @@ Y A   H R
 P     I
 """
 
-
 class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if len(s) <= numRows or numRows == 1:
+            return s
+
+        zigzag_rows = ['' for _ in range(numRows)]
+        row = 0
+        for x in s:
+            zigzag_rows[row] += x
+            if row == 0:
+                step = 1
+            elif row == numRows - 1:
+                step = -1
+            row += step
+        return ''.join(zigzag_rows)
+
+
+class SolutionMath(object):
     def convert(self, s, numRows):
         """
         :type s: str
@@ -69,13 +90,29 @@ def main():
     numRows = 4
     zigzag = Solution().convert(s, numRows)
     print zigzag
-    assert Solution().convert(s, numRows) == 'PINALSIGYAHRPI'
+    assert zigzag == 'PINALSIGYAHRPI'
+
+    numRows = 3
+    zigzag = SolutionMath().convert(s, numRows)
+    print zigzag
+    assert zigzag == 'PAHNAPLSIIGYIR'
+
+    numRows = 4
+    zigzag = SolutionMath().convert(s, numRows)
+    print zigzag
+    assert zigzag == 'PINALSIGYAHRPI'
 
     s = "PAYPALISHIRING"
+
     numRows = 3
     zigzag = Solution().convert(s, numRows)
     print zigzag
-    assert Solution().convert(s, numRows) == 'PAHNAPLSIIGYIR'
+    assert zigzag == 'PAHNAPLSIIGYIR'
+
+    numRows = 3
+    zigzag = SolutionMath().convert(s, numRows)
+    print zigzag
+    assert zigzag == 'PAHNAPLSIIGYIR'
 
 
 if __name__ == '__main__':
