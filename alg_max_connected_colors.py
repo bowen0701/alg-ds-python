@@ -1,3 +1,8 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+
 def _dfs_recur(r, c, grid, visited_d, max_num):
     visited_d[(r, c)] = True
     color = grid[r][c]
