@@ -3,10 +3,9 @@ from __future__ import print_function
 from __future__ import division
 
 
-def _previsit(v, previsit_d, clock, ccid, ccid_d):
+def _previsit(v, previsit_d, clock):
     clock[0] += 1
     previsit_d[v] = clock[0]
-    ccid_d[v] = ccid
 
 
 def _postvisit(v, postvisit_d, clock):
@@ -18,7 +17,9 @@ def _dfs_visit(v, graph_adj_d, visited_d,
                previsit_d, postvisit_d, clock, ccid, ccid_d):
     """DFS visit by recursion."""
     visited_d[v] = True
-    _previsit(v, previsit_d, clock, ccid, ccid_d)
+    ccid_d[v] = ccid
+
+    _previsit(v, previsit_d, clock)
 
     for v_neighbor in graph_adj_d[v]:
         if not visited_d[v_neighbor]:
@@ -52,19 +53,6 @@ def connected_components(graph_adj_d):
 
 
 def main():
-    # Undirected graph with connected component = 1.
-    # graph_adj_d = {
-    #     'A': ['B', 'F'],
-    #     'B': ['A', 'C', 'G'],
-    #     'C': ['B', 'D', 'G', 'H'],
-    #     'D': ['C', 'E', 'H'],
-    #     'E': ['D', 'I'],
-    #     'F': ['A', 'G'],
-    #     'G': ['B', 'C', 'F', 'H'],
-    #     'H': ['C', 'D', 'G', 'I'],
-    #     'I': ['E', 'H']
-    # }
-
     # Undirected graph with connected components = 2.
     graph_adj_d = {
         'A': ['B', 'F'],
