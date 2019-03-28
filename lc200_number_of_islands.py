@@ -69,6 +69,53 @@ class SolutionRecur(object):
         return n_islands
 
 
+class SolutionRecur2(object):
+    def dfs(self, r, c, grid, visited_d):
+        if grid[r][c] == '0' or visited_d.get((r, c)):
+            return 0
+
+        visited_d[(r, c)] = True
+        n_connects = 1
+
+        if 0 <= r - 1:  # Up.
+            n_connects += self.dfs(r - 1, c, grid, visited_d)
+        if r + 1 < len(grid):  # Down.
+            n_connects += self.dfs(r + 1, c, grid, visited_d)
+        if 0 <= c - 1:  # Left.
+            n_connects += self.dfs(r, c - 1, grid, visited_d)
+        if c + 1 < len(grid[0]):  # Right.
+            n_connects += self.dfs(r, c + 1, grid, visited_d)
+        return n_connects
+
+    def numIslands(self, grid):
+        """Number of islands by recursion.
+        :type grid: List[List[str]]
+        :rtype: int
+
+        Time complexity: O(m * n).
+        Space complexity: O(m * n).
+
+        Recursive procedure:
+        - Starting from the top-left corner, run DFS with counter n_islands.
+        - If the grid was not visited before, mark it as visited and 
+          add n_islands by 1; if yes, skip DFS.
+        """
+        if not grid:
+            return 0
+
+        visited_d = {}
+        n_islands = 0
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == '1' and not visited_d.get((r, c)):
+                    n_connects = self.dfs(r, c, grid, visited_d)
+                    if n_connects > 0:
+                        n_islands += 1
+
+        return n_islands
+
+
 class SolutionIter(object):
     def get_tovisit_ls(self, v_start, grid):
         (r, c) = v_start
@@ -142,6 +189,10 @@ def main():
     print 'Time for recursion: {}'.format(time.time() - start_time)
 
     start_time = time.time()
+    print SolutionRecur2().numIslands(grid1)
+    print 'Time for recursion: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print SolutionIter().numIslands(grid1)
     print 'Time for iteration: {}'.format(time.time() - start_time)
 
@@ -153,6 +204,10 @@ def main():
 
     start_time = time.time()
     print SolutionRecur().numIslands(grid2)
+    print 'Time for recursion: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionRecur2().numIslands(grid2)
     print 'Time for recursion: {}'.format(time.time() - start_time)
 
     start_time = time.time()
