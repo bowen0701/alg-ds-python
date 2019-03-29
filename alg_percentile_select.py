@@ -16,26 +16,28 @@ def percentile_select(ls, k):
 
     Time complexity: O(n).
 	"""
-	v = random.sample(ls, 1)[0]
+	v = random.choice(ls)
 	idx_eq_v = [i for i, a in enumerate(ls) if a == v]
 	idx_le_v = [i for i, a in enumerate(ls) if a < v]
 	idx_ge_v = [i for i, a in enumerate(ls) if a > v]
+	n_le = len(idx_le_v)
+	n_eq = len(idx_eq_v)
 
-	if k <= len(idx_le_v):
+	if k <= n_le:
 		le_v_ls = [ls[idx] for idx in idx_le_v]
 		return percentile_select(le_v_ls, k)
-	elif len(idx_le_v) < k <= len(idx_le_v) + len(idx_eq_v):
+	elif n_le < k <= n_le + n_eq:
 		return v
-	elif k > len(idx_le_v) + len(idx_eq_v):
+	elif k > n_le + n_eq:
 		ge_v_ls = [ls[idx] for idx in idx_ge_v]
-		return percentile_select(ge_v_ls, k - len(idx_le_v) - len(idx_eq_v))
+		return percentile_select(ge_v_ls, k - n_le - n_eq)
 
 
 def main():
 	n = 100
 	ls = range(n)
 	random.shuffle(ls)
-	print('List: {}'.format(ls))
+
 	print('Get median by selection:')
 	print(percentile_select(ls, n // 2))
 	print('Get min by selection:')
