@@ -37,6 +37,7 @@ class Solution(object):
 def main():
     print Solution().reverse(123)
     print Solution().reverse(-123)
+    print Solution().reverse(-pow(2, 31))
 
 
 if __name__ == '__main__':
