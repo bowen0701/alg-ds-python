@@ -82,8 +82,7 @@ class LinkedListOrdered(object):
         while not stop_bool and current.next:
             if current.next.data > data:
                 stop_bool = True
-            else:
-                pass
+
             previous = current
             current = current.next
 
