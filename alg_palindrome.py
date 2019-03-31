@@ -9,23 +9,18 @@ from __future__ import print_function
 
 
 def palindrome(a_str):
-    """Check palindrom by front & rear match by Deque."""
-    from ds_deque import Deque
+    """Check palindrom by front & rear match."""
+    ls = list(a_str)
 
-    str_deque = Deque()
+    is_match = True
 
-    for s in a_str:
-        str_deque.add_rear(s)
-
-    still_match = True
-
-    while str_deque.size() > 1 and still_match:
-        first = str_deque.remove_front()
-        last = str_deque.remove_rear()
+    while len(ls) > 1 and is_match:
+        first = ls.pop(0)
+        last = ls.pop()
         if first != last:
-            still_match = False
+            is_match = False
     
-    return still_match
+    return is_match
 
 
 def palindrom_recur(a_str):
@@ -34,6 +29,11 @@ def palindrom_recur(a_str):
         return True
     else: 
         return a_str[0] == a_str[-1] and palindrom_recur(a_str[1:-1])
+
+
+def palindrom(a_str):
+    """Check palindrome by inverse slicing."""
+    return a_str == a_str[::-1]
 
 
 def main():
@@ -57,6 +57,16 @@ def main():
     a_str = 'toot'
     print('{0}: {1}'.format(a_str, palindrom_recur(a_str)))
     print('Time for palindrom_recur(): {}'
+          .format(time.time() - start_time))
+
+    start_time = time.time()
+    a_str = 'madam'
+    print('{0}: {1}'.format(a_str, palindrom(a_str)))    
+    a_str = 'Bowen'
+    print('{0}: {1}'.format(a_str, palindrom(a_str)))
+    a_str = 'toot'
+    print('{0}: {1}'.format(a_str, palindrom(a_str)))
+    print('Time for palindrom(): {}'
           .format(time.time() - start_time))
 
 
