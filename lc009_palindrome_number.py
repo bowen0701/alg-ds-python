@@ -18,20 +18,51 @@ Example 3:
 Input: 10
 Output: false
 Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+
+Follow up:
+Coud you solve it without converting the integer to a string?
 """
 
 class Solution(object):
-	def isPalindrome(self, x):
-		"""
+    def isPalindrome(self, x):
+        """
         :type x: int
         :rtype: bool
         """
-        pass
+        x_str = str(x)
+        return x_str == x_str[::-1]
+
+class Solution2(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        if x < 0:
+            return False
+
+        ls = []
+        while x > 0:
+            div, mod = divmod(x, 10)
+            x = div
+            ls.append(mod)
+
+        return ls == ls[::-1]
 
 
 def main():
-	pass
+    x = 121  # Ans: True.
+    print(Solution().isPalindrome(x))
+    print(Solution2().isPalindrome(x))
+
+    x = -121  # Ans: False.
+    print(Solution().isPalindrome(x))
+    print(Solution2().isPalindrome(x))
+
+    x = 10  # Ans: False.
+    print(Solution().isPalindrome(x))
+    print(Solution2().isPalindrome(x))
 
 
 if __name__ == '__main__':
-	main()
+    main()
