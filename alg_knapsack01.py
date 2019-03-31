@@ -15,13 +15,14 @@ def knapsack01_recur(val, wt, wt_cap, n):
     Space complexity: O(n).
     """
     if n < 0 or wt_cap == 0:
-        return 0
+        result = 0
     elif wt[n] > wt_cap:
-        return knapsack01_recur(val, wt, wt_cap, n - 1)
+        result = knapsack01_recur(val, wt, wt_cap, n - 1)
     else:
         val_in = val[n] + knapsack01_recur(val, wt, wt_cap - wt[n], n - 1)
         val_ex = knapsack01_recur(val, wt, wt_cap, n - 1)
-        return max(val_in, val_ex)
+        result = max(val_in, val_ex)
+    return result
 
 
 def _knapsack01_memo(val, wt, wt_cap, M, n):
@@ -29,16 +30,16 @@ def _knapsack01_memo(val, wt, wt_cap, M, n):
         return M[n][wt_cap]
 
     if n < 0 or wt_cap == 0:
-        return 0
+        result = 0
     elif wt[n] > wt_cap:
-        memo = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
+        result = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
     else:
         val_in = val[n] + _knapsack01_memo(val, wt, wt_cap - wt[n], M, n - 1)
         val_ex = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
-        memo = max(val_in, val_ex)
-    M[n][wt_cap] = memo
+        result = max(val_in, val_ex)
+    M[n][wt_cap] = result
 
-    return memo
+    return result
 
 
 def knapsack01_memo(val, wt, wt_cap, n):
