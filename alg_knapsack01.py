@@ -4,8 +4,8 @@ from __future__ import print_function
 
 
 """0-1 Knapsack Problem
-Given weights and values of n "non-splittable" items, put these items in a knapsack of 
-capacity to get the maximum total value in the knapsack. 
+Given weights and values of n "non-splittable" items, put these items in a 
+knapsack of capacity to get the maximum total value in the knapsack. 
 """
 
 def knapsack01_recur(val, wt, wt_cap, n):
@@ -15,14 +15,14 @@ def knapsack01_recur(val, wt, wt_cap, n):
     Space complexity: O(n).
     """
     if n < 0 or wt_cap == 0:
-        result = 0
+        max_val = 0
     elif wt[n] > wt_cap:
-        result = knapsack01_recur(val, wt, wt_cap, n - 1)
+        max_val = knapsack01_recur(val, wt, wt_cap, n - 1)
     else:
         val_in = val[n] + knapsack01_recur(val, wt, wt_cap - wt[n], n - 1)
         val_ex = knapsack01_recur(val, wt, wt_cap, n - 1)
-        result = max(val_in, val_ex)
-    return result
+        max_val = max(val_in, val_ex)
+    return max_val
 
 
 def _knapsack01_memo(val, wt, wt_cap, M, n):
@@ -30,16 +30,15 @@ def _knapsack01_memo(val, wt, wt_cap, M, n):
         return M[n][wt_cap]
 
     if n < 0 or wt_cap == 0:
-        result = 0
+        max_val = 0
     elif wt[n] > wt_cap:
-        result = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
+        max_val = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
     else:
         val_in = val[n] + _knapsack01_memo(val, wt, wt_cap - wt[n], M, n - 1)
         val_ex = _knapsack01_memo(val, wt, wt_cap, M, n - 1)
-        result = max(val_in, val_ex)
-    M[n][wt_cap] = result
-
-    return result
+        max_val = max(val_in, val_ex)
+    M[n][wt_cap] = max_val
+    return max_val
 
 
 def knapsack01_memo(val, wt, wt_cap, n):
