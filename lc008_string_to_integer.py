@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Leetcode 8. String to Integer (atoi)
 Medium
 
@@ -53,21 +55,55 @@ Example 5:
 Input: "-91283472332"
 Output: -2147483648
 Explanation: The number "-91283472332" is out of the range of a 32-bit signed 
-integer. Thefore INT_MIN (−231) is returned.
+integer. Thefore INT_MIN (−2^31) is returned.
 """
 
 class Solution(object):
-    def myAtoi(self, str):
+    def myAtoi(self, s):
         """
-        :type str: str
+        :type s: str
         :rtype: int
         """
-        pass
+        ls = list(s.strip())
+        if len(ls) == 0:
+            return 0
+
+        if ls[0] == '-':
+            sign = -1
+        else:
+            sign = 1
+
+        if ls[0] in ['-', '+']:
+            del ls[0]
+
+        uatoi, i = 0, 0
+        while i < len(ls) and ls[i].isdigit():
+            uatoi = uatoi * 10 + int(ls[i])
+            i += 1
+        atoi = sign * uatoi
+
+        return max(-pow(2,31), (min(atoi, pow(2, 31) - 1)))
 
 
 def main():
-	pass
+    s = '42'
+    print(Solution().myAtoi(s))
+
+    s = '   -42'
+    print(Solution().myAtoi(s))
+
+    s = '4193 with words'
+    print(Solution().myAtoi(s))
+
+    s = 'words and 987'
+    print(Solution().myAtoi(s))
+
+    s = '-91283472332'
+    print(Solution().myAtoi(s))
+
+    s = ' '
+    print(Solution().myAtoi(s))    
 
 
 if __name__ == '__main__':
-	main()
+    main()
