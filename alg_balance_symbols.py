@@ -18,8 +18,6 @@ def balance_parentheses(a_str):
                 break
             else:
                 stack.pop()
-        else:
-            pass
         pos += 1
 
     if balanced and not stack:
@@ -55,8 +53,6 @@ def balance_symbols(a_str):
                 if not _match_symbols(open_symbol, symbol):
                     balanced = False
                     break
-        else:
-            pass
         pos += 1
 
     if balanced and not stack:
@@ -68,7 +64,7 @@ def balance_symbols(a_str):
 def main():
     import time
 
-    text_match = '(abcd)'
+    text_match = '(abcd)'  # Ans: True.
 
     start_time = time.time()
     print('By balance_parentheses(): {}'
@@ -80,14 +76,14 @@ def main():
           .format(balance_symbols(text_match)))
     print('Time: {}'.format(time.time() - start_time))
 
-    text_match2 = '([abcd]efg)'
+    text_match2 = '([abcd]efg)'  # Ans: True.
 
     start_time = time.time()
     print('By balance_symbols(): {}'
           .format(balance_symbols(text_match2)))
     print('Time: {}'.format(time.time() - start_time))
 
-    text_unmatch = '(abcd]'
+    text_unmatch = '(abcd]'  # Ans: False.
 
     start_time = time.time()
     print('By balance_parentheses(): {}'
