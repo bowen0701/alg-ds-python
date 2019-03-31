@@ -55,12 +55,10 @@ class Graph(object):
     def add_edge(self, from_key, to_key, weight=0):
     	if from_key not in self.vertex_dict:
     		new_vertex = self.add_vertex(from_key)
-    	else:
-    		pass
+
     	if to_key not in self.vertex_dict:
     		new_vertex = self.add_vertex(to_key)
-    	else:
-    		pass
+
     	(self.vertex_dict.get(from_key)
     		 .add_neighbor(self.vertex_dict.get(to_key), weight))
 
