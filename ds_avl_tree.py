@@ -17,8 +17,7 @@ class AVLTree(BinarySearchTree):
         rotate_root.right_child = new_root.left_child
         if not new_root.left_child:
             new_root.left_child.parent = rotate_root
-        else:
-            pass
+
         new_root.parent = rotate_root.parent
 
         if rotate_root.is_root():
@@ -39,8 +38,7 @@ class AVLTree(BinarySearchTree):
         rotate_root.left_child = new_root.right_child
         if not new_root.right_child:
             new_root.right_child.parent = roate_root
-        else:
-            pass
+
         new_root.parent = rotate_root.parent
 
         if rotate_root.is_root():
@@ -79,8 +77,6 @@ class AVLTree(BinarySearchTree):
                 node.parent.balance_factor += 1
             elif node.is_right_child():
                 node.parent.balance_factor -= 1
-            else:
-                pass
 
             if node.parent.balance_factor != 0:
                 self.update_balance(node.parent)
