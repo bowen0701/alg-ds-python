@@ -34,8 +34,6 @@ def merge_iter(x_list, y_list):
         elif x_pos >= len(x_list) and y_pos < len(y_list):
             z_list.extend(y_list[y_pos:])
             break
-        else:
-            pass
     return z_list
 
 
