@@ -27,6 +27,9 @@ class Solution(object):
         """
         :type numRows: int
         :rtype: List[List[int]]
+
+        Time complexity: O(n^2).
+        Space complexity: O(n^2).
         """
         if numRows == 0:
             return []
