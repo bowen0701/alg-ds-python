@@ -22,11 +22,6 @@ Output:
 """
 
 class Solution(object):
-    def get_num(self, last_row, i):
-        if i < 0 or i >= len(last_row):
-            return 0
-        return last_row[i]
-
     def generate(self, numRows):
         """
         :type numRows: int
