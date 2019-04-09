@@ -3,23 +3,23 @@ from __future__ import division
 from __future__ import print_function
 
 
-def _dfs_recur(r, c, grid, visited_d, max_num):
+def _dfs_recur(r, c, grid, visited_d, cc):
     visited_d[(r, c)] = True
     color = grid[r][c]
-    max_num[0] += 1
+    cc[0] += 1
 
     if (r - 1 >= 0 and not visited_d.get((r - 1, c)) and
         color == grid[r - 1][c]):    # Up.
-        _dfs_recur(r - 1, c, grid, visited_d, max_num)
+        _dfs_recur(r - 1, c, grid, visited_d, cc)
     if (r + 1 <= len(grid) - 1 and not visited_d.get((r + 1, c)) and
         color == grid[r + 1][c]):    # Down.
-        _dfs_recur(r + 1, c, grid, visited_d, max_num)
+        _dfs_recur(r + 1, c, grid, visited_d, cc)
     if (c - 1 >= 0 and not visited_d.get((r, c - 1)) and
         color == grid[r][c - 1]):    # Left.
-        _dfs_recur(r, c - 1, grid, visited_d, max_num)    
+        _dfs_recur(r, c - 1, grid, visited_d, cc)
     if (c + 1 <= len(grid[0]) - 1 and not visited_d.get((r, c + 1)) and
         color == grid[r][c + 1]):    # Right.
-        _dfs_recur(r, c + 1, grid, visited_d, max_num)
+        _dfs_recur(r, c + 1, grid, visited_d, cc)
 
 
 def max_connected_colors(grid):
@@ -31,56 +31,54 @@ def max_connected_colors(grid):
     Space complexity: O(m * n).
     """
     visited_d = {}
-    max_num = 0
+    max_cc = 0
 
     for r in range(len(grid)):
         for c in range(len(grid[0])):
-            max_num_rc = [0]
-            _dfs_recur(r, c, grid, visited_d, max_num_rc)
+            cc = [0]
+            _dfs_recur(r, c, grid, visited_d, cc)
+            max_cc = max(cc[0], max_cc)
 
-            if max_num_rc[0] > max_num:
-                max_num = max_num_rc[0]
-
-    return max_num
+    return max_cc
 
 
-def _dfs_recur2(r, c, grid, visited_d):
-    if visited_d.get((r, c)):
+def _dfs_recur2(r, c, grid, color, visited_d):
+    if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
+        return 0
+
+    if color != grid[r][c] or visited_d.get((r, c)):
         return 0
 
     visited_d[(r, c)] = True
-    color = grid[r][c]
-    max_num = 1
+    cc = 1
 
-    if (r - 1 >= 0 and color == grid[r - 1][c]):  # Up.
-        max_num += _dfs_recur2(r - 1, c, grid, visited_d)
-    if (r + 1 <= len(grid) - 1 and color == grid[r + 1][c]):  # Down.
-        max_num += _dfs_recur2(r + 1, c, grid, visited_d)
-    if (c - 1 >= 0 and color == grid[r][c - 1]):  # Left.
-        max_num += _dfs_recur2(r, c - 1, grid, visited_d)
-    if (c + 1 <= len(grid[0]) - 1 and color == grid[r][c + 1]):  # Right.
-        max_num += _dfs_recur2(r, c + 1, grid, visited_d)
-    return max_num
+    for r_neighbor in range(r - 1, r + 2, 2):  # Up & down.
+        cc += _dfs_recur2(r_neighbor, c, grid, color, visited_d)
+
+    for c_neighbor in range(c - 1, c + 2, 2):  # Left & right.
+        cc += _dfs_recur2(r, c_neighbor, grid, color, visited_d)
+
+    return cc
 
 
 def max_connected_colors2(grid):
     """Maximum number of connected colors.
 
-    Technique: DFS in a double for loops.
+    Technique: DFS in a double for loops by return.
 
     Time complexity: O(m * n).
     Space complexity: O(m * n).
     """
     visited_d = {}
-    max_num = 0
+    max_cc = 0
 
     for r in range(len(grid)):
         for c in range(len(grid[0])):
-            max_num_rc = _dfs_recur2(r, c, grid, visited_d)
-            if max_num_rc > max_num:
-                max_num = max_num_rc
+            color = grid[r][c]
+            cc = _dfs_recur2(r, c, grid, color, visited_d)
+            max_cc = max(cc, max_cc)
 
-    return max_num
+    return max_cc
 
 
 def main():
@@ -88,6 +86,7 @@ def main():
     grid = [[1, 1, 2, 3],
             [1, 2, 3, 2],
             [3, 2, 2, 2]]
+
     print(max_connected_colors(grid))
     print(max_connected_colors2(grid))
 
