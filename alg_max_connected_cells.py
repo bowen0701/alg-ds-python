@@ -19,6 +19,14 @@ def _dfs(r, c, grid, visited_d):
     return cc
 
 def max_connected_cells(grid):
+    """Maximum number of connected cells.
+
+    Connected cells: vertically, horizontally or diagonally.
+    Technique: DFS in a double for loops.
+
+    Time complexity: O(m * n).
+    Space complexity: O(m * n).
+    """
     visited_d = {}
     max_cc = 0
     for r in range(len(grid)):
