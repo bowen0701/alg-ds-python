@@ -52,10 +52,10 @@ def _dfs_recur(r, c, grid, color, visited_d):
     visited_d[(r, c)] = True
     cc = 1
 
-    for r_neighbor in range(r - 1, r + 2, 2):  # Up & down.
+    for r_neighbor in [r - 1, r + 1]:  # Up & down.
         cc += _dfs_recur(r_neighbor, c, grid, color, visited_d)
 
-    for c_neighbor in range(c - 1, c + 2, 2):  # Left & right.
+    for c_neighbor in [c - 1, c + 1]:  # Left & right.
         cc += _dfs_recur(r, c_neighbor, grid, color, visited_d)
 
     return cc
