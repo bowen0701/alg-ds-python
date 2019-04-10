@@ -111,24 +111,30 @@ class BinarySearchTree(object):
         Time complexity: O(logn).
         Space complexity: O(1).
         """
-        new_node = Node(new_key, data=new_data)
+        new = Node(new_key, data=new_data)
+
+        if not self.root:
+            self.root = new
+            return None
+
         parent = None
         current = self.root
 
         while current:
-            parent = current
-            if new_node.key < current.key:
-                current = current.left
+            if new_key < current.key:
+                if current.left:
+                    current = current.left
+                else:
+                    new.parent = current
+                    current.left = new
+                    break
             else:
-                current = current.right
-
-        new_node.parent = parent
-        if not parent:
-            self.root = new_node
-        elif new_node.key < parent.key:
-            parent.left = new_node
-        else:
-            parent.right = new_node
+                if current.right:
+                    current = current.right
+                else:
+                    new.parent = current
+                    current.right = new
+                    break
 
     def _transplant(self, to_node, from_node):
         """Transplant helper function for delete().
@@ -219,13 +225,21 @@ class BinarySearchTree(object):
 
 
 def main():
+    """
+    Tree:
+        6
+       / \
+      5   7
+     / \   \
+    2   5   8
+    """
     bst = BinarySearchTree()
     bst.insert(6)
     bst.insert(5)
     bst.insert(7)
     bst.insert(2)
     bst.insert(5)
-    bst.insert(8)    
+    bst.insert(8)
 
     # Inorder walk: 2, 5, 5, 6, 7, 8.
     print('Inorder walk:')
