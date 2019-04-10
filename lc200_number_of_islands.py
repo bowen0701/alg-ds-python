@@ -34,10 +34,10 @@ class SolutionRecur(object):
 
         visited_d[(r, c)] = True
 
-        for r_neighbor in range(r - 1, r + 2, 2):  # Up & down.
+        for r_neighbor in [r - 1, r + 1]:  # Up & down.
             self.dfs(r_neighbor, c, grid, visited_d)
 
-        for c_neighbor in range(c - 1, c + 2, 2):  # Left & right.
+        for c_neighbor in [c - 1, c + 1]:  # Left & right.
             self.dfs(r, c_neighbor, grid, visited_d)
 
 
@@ -48,11 +48,6 @@ class SolutionRecur(object):
 
         Time complexity: O(m * n).
         Space complexity: O(m * n).
-
-        Recursive procedure:
-        - Starting from the top-left corner, run DFS with counter n_islands.
-        - If the grid was not visited before, mark it as visited and 
-          add n_islands by 1; if yes, skip DFS.
         """
         if not grid:
             return 0
@@ -71,34 +66,30 @@ class SolutionRecur(object):
 
 class SolutionRecur2(object):
     def dfs(self, r, c, grid, visited_d):
+        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
+            return 0
+
         if grid[r][c] == '0' or visited_d.get((r, c)):
             return 0
 
         visited_d[(r, c)] = True
         n_connects = 1
 
-        if 0 <= r - 1:  # Up.
-            n_connects += self.dfs(r - 1, c, grid, visited_d)
-        if r + 1 < len(grid):  # Down.
-            n_connects += self.dfs(r + 1, c, grid, visited_d)
-        if 0 <= c - 1:  # Left.
-            n_connects += self.dfs(r, c - 1, grid, visited_d)
-        if c + 1 < len(grid[0]):  # Right.
-            n_connects += self.dfs(r, c + 1, grid, visited_d)
+        for r_neighbor in [r - 1, r + 1]:  # Up & down.
+            n_connects += self.dfs(r_neighbor, c, grid, visited_d)
+
+        for c_neighbor in [c - 1, c + 1]:  # Left & right.
+            n_connects += self.dfs(r, c_neighbor, grid, visited_d)
+
         return n_connects
 
     def numIslands(self, grid):
-        """Number of islands by recursion.
+        """Number of islands by recursion w/ return.
         :type grid: List[List[str]]
         :rtype: int
 
         Time complexity: O(m * n).
         Space complexity: O(m * n).
-
-        Recursive procedure:
-        - Starting from the top-left corner, run DFS with counter n_islands.
-        - If the grid was not visited before, mark it as visited and 
-          add n_islands by 1; if yes, skip DFS.
         """
         if not grid:
             return 0
