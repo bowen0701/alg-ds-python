@@ -26,20 +26,20 @@ Answer: 3
 
 class SolutionRecur(object):
     def dfs(self, r, c, grid, visited_d):
+        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
+            return None
+
+        if grid[r][c] == '0' or visited_d.get((r, c)):
+            return None
+
         visited_d[(r, c)] = True
 
-        if (0 <= r - 1 and grid[r - 1][c] == '1' and 
-            not visited_d.get((r - 1, c))):  # Up.
-            self.dfs(r - 1, c, grid, visited_d)
-        if (r + 1 < len(grid) and grid[r + 1][c] == '1' and 
-            not visited_d.get((r + 1, c))):  # Down.
-            self.dfs(r + 1, c, grid, visited_d)
-        if (0 <= c - 1 and grid[r][c - 1] == '1' and 
-            not visited_d.get((r, c - 1))):  # Left.
-            self.dfs(r, c - 1, grid, visited_d)
-        if (c + 1 < len(grid[0]) and grid[r][c + 1] == '1' and 
-            not visited_d.get((r, c + 1))):  # Right.
-            self.dfs(r, c + 1, grid, visited_d)
+        for r_neighbor in range(r - 1, r + 2, 2):  # Up & down.
+            self.dfs(r_neighbor, c, grid, visited_d)
+
+        for c_neighbor in range(c - 1, c + 2, 2):  # Left & right.
+            self.dfs(r, c_neighbor, grid, visited_d)
+
 
     def numIslands(self, grid):
         """Number of islands by recursion.
