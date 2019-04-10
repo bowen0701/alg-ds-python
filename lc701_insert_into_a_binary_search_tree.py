@@ -50,11 +50,57 @@ class Solution(object):
         :type val: int
         :rtype: TreeNode
         """
-        pass
+        new = TreeNode(val)
+        current = root
+
+        while current:
+            if val > current.val:
+                if current.right:
+                    current = current.right
+                else:
+                    current.right = new
+                    break
+            else:
+                if current.left:
+                    current = current.left
+                else:
+                    current.left = new
+                    break
+
+        return root
 
 
 def main():
-    pass
+    """
+    Given the tree:
+        4
+       / \
+      2   7
+     / \
+    1   3
+    """
+    bst = TreeNode(4)
+    bst = Solution().insertIntoBST(bst, 2)
+    bst = Solution().insertIntoBST(bst, 7)
+    bst = Solution().insertIntoBST(bst, 1)
+    bst = Solution().insertIntoBST(bst, 3)
+
+    print bst.val
+    print bst.left.val
+    print bst.right.val
+    print bst.left.left.val
+    print bst.left.right.val
+
+    """
+    Insert: 5
+         4
+       /   \
+      2     7
+     / \   /
+    1   3 5
+    """
+    bst = Solution().insertIntoBST(bst, 5)
+    print bst.right.left.val
 
 
 if __name__ == '__main__':
