@@ -26,11 +26,11 @@ class Solution(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        lookup_dict = {}
+        num_idx_d = {}
         for i, num in enumerate(nums):
-            if target - num in lookup_dict:
-                return [lookup_dict[target - num], i]
-            lookup_dict[num] = i
+            if target - num in num_idx_d:
+                return [num_idx_d[target - num], i]
+            num_idx_d[num] = i
         return []
 
 
