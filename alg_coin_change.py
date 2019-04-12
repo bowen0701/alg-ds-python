@@ -36,29 +36,29 @@ def coin_change_recur(amount, coins):
         return -1
 
 
-def _coin_change_memo(amount, coins, m):
-    """Helper function for coin_change_memo()."""    
+def _coin_change_memo(amount, coins, T):
+    """Helper function for coin_change_memo()."""
     if amount < 0:
         return -1
     if amount == 0:
         return 0
-    
-    if m[amount] > 0:
-        return m[amount]
+
+    if T[amount] > 0:
+        return T[amount]
 
     min_coins = float('inf')
 
     for c in coins:
-        extra_coins = _coin_change_memo(amount - c, coins, m)
+        extra_coins = _coin_change_memo(amount - c, coins, T)
         if extra_coins >= 0 and extra_coins < min_coins:
             min_coins = 1 + extra_coins
 
     if min_coins != float('inf'):
-        m[amount] = min_coins
+        T[amount] = min_coins
     else:
-        m[amount] = -1
+        T[amount] = -1
 
-    return m[amount]
+    return T[amount]
 
 
 def coin_change_memo(amount, coins):
@@ -68,9 +68,8 @@ def coin_change_memo(amount, coins):
     Time complexity: O(c * a), where c is number of coins, and a is amount.
     Space complexity: O(a).
     """
-    m = [0] * (amount + 1)
-    min_coins = _coin_change_memo(amount, coins, m)
-    return min_coins
+    T = [0] * (amount + 1)
+    return _coin_change_memo(amount, coins, T)
 
 
 def coin_change_dp(amount, coins):
