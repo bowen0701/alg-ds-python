@@ -35,6 +35,9 @@ def _count_subsets_memo(arr, total, T, n):
     if n < 0:
         return 0
 
+    if T[n][total]:
+        return T[n][total]
+
     if total < arr[n]:
         n_subsets = count_subsets_total_recur(arr, total, n - 1)
     else:
@@ -47,7 +50,7 @@ def _count_subsets_memo(arr, total, T, n):
 
 
 def count_subsets_total_memo(arr, total):
-    """Count subsets given total by memoization.
+    """Count subsets given total by top-down memoization.
 
     Time complexity: O(nm), where n is length of array, and m is total.
     Space complexity: O(nm).
@@ -56,19 +59,31 @@ def count_subsets_total_memo(arr, total):
 
     T = [[0] * (total + 1) for _ in range(n + 1)]
 
-    for r in range(n + 1):
-        T[r][0] = 1
+    for a in range(n):
+        T[a][0] = 1
 
     return _count_subsets_memo(arr, total, T, n)
 
 
-def count_subsets_total_dp():
-    """Count subsets given total by dynamic programming.
+def count_subsets_total_dp(arr, total):
+    """Count subsets given total by bottom-up dynamic programming.
 
-    Time complexity: O(?).
-    Space complexity: O(?).
+    Time complexity: O(nm).
+    Space complexity: O(nm).
     """
-    pass
+    n = len(arr) - 1
+    T = [[0] * (total + 1) for _ in range(n + 1)]
+
+    for a in range(n + 1):
+        T[a][0] = 1
+
+    for a in range(n):
+        for t in range(1, total + 1):
+            if t < arr[a]:
+                T[a][t] = 0
+            else:
+                pass
+    # TODO: Implement DP.
 
 
 def main():
