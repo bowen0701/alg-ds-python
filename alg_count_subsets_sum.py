@@ -3,7 +3,15 @@ from __future__ import division
 from __future__ import print_function
 
 
-def count_sets_for_sum():
+def count_subsets_sum_recur():
+	pass
+
+
+def count_subsets_sum_memo():
+	pass
+
+
+def count_subsets_sum_dp():
 	pass
 
 
