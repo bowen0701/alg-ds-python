@@ -27,8 +27,8 @@ def count_changes_recur(amount, coins, n):
 
     # Compute ways with coin n included plus that with coin excluded.
     count_in = count_changes_recur(amount - coins[n], coins, n)
-    count_ex = count_changes_recur(amount, coins, n - 1)
-    count = count_in + count_ex
+    count_out = count_changes_recur(amount, coins, n - 1)
+    count = count_in + count_out
     return count
 
 
@@ -43,8 +43,8 @@ def _count_changes_memo(amount, coins, T, n):
         return 0
 
     count_in = _count_changes_memo(amount - coins[n - 1], coins, T, n)
-    count_ex = _count_changes_memo(amount, coins, T, n - 1)
-    T[n - 1][amount] = count_in + count_ex
+    count_out = _count_changes_memo(amount, coins, T, n - 1)
+    T[n - 1][amount] = count_in + count_out
 
     return T[n - 1][amount]
 
@@ -84,11 +84,11 @@ def count_changes_dp(amount, coins):
                 count_in = 0
 
             if c >= 1:
-                count_ex = T[c - 1][a]
+                count_out = T[c - 1][a]
             else:
-                count_ex = 0
+                count_out = 0
 
-            T[c][a] = count_in + count_ex
+            T[c][a] = count_in + count_out
 
     return T[-1][-1]
 
