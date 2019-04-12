@@ -49,13 +49,14 @@ def _count_changes_memo(amount, coins, T, n):
     return T[n - 1][amount]
 
 
-def count_changes_memo(amount, coins, n):
+def count_changes_memo(amount, coins):
     """Count changes by top-bottom dynamic programming: 
     recursion + memoization.
 
     Time complexity: O(a * c), where a is amount, and c is number of coins.
     Space complexity: O(a * c).
     """
+    n = len(coins) - 1
     T = [[0] * (amount + 1) for c in range(n + 1)]
 
     for c in range(n + 1):
@@ -107,7 +108,7 @@ def main():
 
     start_time = time.time()
     print('Make change by memo: {}'
-          .format(count_changes_memo(amount, coins, n)))
+          .format(count_changes_memo(amount, coins)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
