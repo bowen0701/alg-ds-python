@@ -18,14 +18,14 @@ def count_subset_sum_recur(arr, total, n):
         return 0
 
     if total < arr[n]:
-        return count_subsets_total_recur(arr, total, n - 1)
+        return count_subset_sum_recur(arr, total, n - 1)
     else:
-        n_subsets_in = count_subsets_total_recur(arr, total - arr[n], n - 1)
-        n_subsets_out = count_subsets_total_recur(arr, total, n - 1)
+        n_subsets_in = count_subset_sum_recur(arr, total - arr[n], n - 1)
+        n_subsets_out = count_subset_sum_recur(arr, total, n - 1)
         return n_subsets_in + n_subsets_out
 
 
-def _count_subset_sum_memo(arr, total, T, n):
+def _count_subset_sum_memo(arr, total, n, T):
     """Helper function for count_subsets_total_memo()."""
     if total < 0:
         return 0
@@ -39,10 +39,10 @@ def _count_subset_sum_memo(arr, total, T, n):
         return T[n][total]
 
     if total < arr[n]:
-        n_subsets = count_subsets_total_recur(arr, total, n - 1)
+        n_subsets = _count_subset_sum_memo(arr, total, n - 1, T)
     else:
-        n_subsets_in = count_subsets_total_recur(arr, total - arr[n], n - 1)
-        n_subsets_out = count_subsets_total_recur(arr, total, n - 1)
+        n_subsets_in = _count_subset_sum_memo(arr, total - arr[n], n - 1, T)
+        n_subsets_out = _count_subset_sum_memo(arr, total, n - 1, T)
         n_subsets = n_subsets_in + n_subsets_out
 
     T[n][total] = n_subsets
@@ -62,7 +62,7 @@ def count_subset_sum_memo(arr, total):
     for a in range(n):
         T[a][0] = 1
 
-    return _count_subsets_memo(arr, total, T, n)
+    return _count_subset_sum_memo(arr, total, n, T)
 
 
 def count_subset_sum_dp(arr, total):
@@ -80,7 +80,7 @@ def count_subset_sum_dp(arr, total):
     for a in range(n):
         for t in range(1, total + 1):
             if t < arr[a]:
-                T[a][t] = T[a - 1][t]
+                T[a][t] = 0
             else:
                 n_subsets_in = T[a - 1][t - arr[a]]
                 n_subsets_out = T[a - 1][t]
