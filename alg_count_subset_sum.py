@@ -3,8 +3,8 @@ from __future__ import division
 from __future__ import print_function
 
 
-def count_subsets_total_recur(arr, total, n):
-    """Count subsets given total by recusrion.
+def count_subset_sum_recur(arr, total, n):
+    """Count subsets given sum by recusrion.
 
     Time complexity: O(2^n), where n is length of array.
     Space complexity: O(1).
@@ -25,7 +25,7 @@ def count_subsets_total_recur(arr, total, n):
         return n_subsets_in + n_subsets_out
 
 
-def _count_subsets_memo(arr, total, T, n):
+def _count_subset_sum_memo(arr, total, T, n):
     """Helper function for count_subsets_total_memo()."""
     if total < 0:
         return 0
@@ -49,8 +49,8 @@ def _count_subsets_memo(arr, total, T, n):
     return n_subsets
 
 
-def count_subsets_total_memo(arr, total):
-    """Count subsets given total by top-down memoization.
+def count_subset_sum_memo(arr, total):
+    """Count subsets given sum by top-down memoization.
 
     Time complexity: O(nm), where n is length of array, and m is total.
     Space complexity: O(nm).
@@ -65,8 +65,8 @@ def count_subsets_total_memo(arr, total):
     return _count_subsets_memo(arr, total, T, n)
 
 
-def count_subsets_total_dp(arr, total):
-    """Count subsets given total by bottom-up dynamic programming.
+def count_subset_sum_dp(arr, total):
+    """Count subsets given sum by bottom-up dynamic programming.
 
     Time complexity: O(nm).
     Space complexity: O(nm).
@@ -80,10 +80,14 @@ def count_subsets_total_dp(arr, total):
     for a in range(n):
         for t in range(1, total + 1):
             if t < arr[a]:
-                T[a][t] = 0
+                T[a][t] = T[a - 1][t]
             else:
-                pass
-    # TODO: Implement DP.
+                n_subsets_in = T[a - 1][t - arr[a]]
+                n_subsets_out = T[a - 1][t]
+                n_subsets = n_subsets_in + n_subsets_out
+                T[a][t] = n_subsets
+
+    return T[-1][-1]
 
 
 def main():
@@ -94,12 +98,17 @@ def main():
     n = len(arr) - 1
 
     start_time = time.time()
-    n_subsets = count_subsets_total_recur(arr, total, n)
+    n_subsets = count_subset_sum_recur(arr, total, n)
     print('Recursion: {}'.format(n_subsets))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    n_subsets = count_subsets_total_memo(arr, total)
+    n_subsets = count_subset_sum_memo(arr, total)
+    print('Memo: {}'.format(n_subsets))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    n_subsets = count_subset_sum_dp(arr, total)
     print('Memo: {}'.format(n_subsets))
     print('Time: {}'.format(time.time() - start_time))
 
