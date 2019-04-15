@@ -53,13 +53,13 @@ class SolutionDP(object):
         for i in range(n):
             M[i][i] = True
             max_len = 1
-            pal_s = s[i]
+            s_pal = s[i]
             
         for i in range(n - 1):
             if s[i] == s[i + 1]:
                 M[i][i + 1] = True
                 max_len = 2
-                pal_s = s[i:(i + 2)]
+                s_pal = s[i:(i + 2)]
 
         for j in range(n):
             for i in range(0, j - 1):
@@ -67,8 +67,8 @@ class SolutionDP(object):
                     M[i][j] = True
                     if max_len < j - i + 1:
                         max_len = j - i + 1
-                        pal_s = s[i:(j + 1)]
-        return pal_s
+                        s_pal = s[i:(j + 1)]
+        return s_pal
 
 
 def main():
