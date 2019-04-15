@@ -3,14 +3,14 @@ from __future__ import division
 from __future__ import print_function
 
 
-"""Count Changes.
+"""Count Coin Changes.
 
 Count how many distinct ways you can make change that amount.
 Assume that you have an infinite number of each kind of coin.
 """
 
 
-def count_changes_recur(amount, coins, n):
+def count_coin_changes_recur(amount, coins, n):
     """Count changes by recursion.
 
     Time complexity: O(2^n).
@@ -26,12 +26,12 @@ def count_changes_recur(amount, coins, n):
         return 0
 
     # Compute ways with coin n included plus that with coin excluded.
-    count_in = count_changes_recur(amount - coins[n], coins, n)
-    count_out = count_changes_recur(amount, coins, n - 1)
+    count_in = count_coin_changes_recur(amount - coins[n], coins, n)
+    count_out = count_coin_changes_recur(amount, coins, n - 1)
     return count_in + count_out
 
 
-def _count_changes_memo(amount, coins, T, n):
+def _count_coin_changes_memo(amount, coins, T, n):
     """Helper function for count_changes_memo()."""
     if amount == 0:
         return 1
@@ -44,14 +44,14 @@ def _count_changes_memo(amount, coins, T, n):
     if T[n][amount]:
         return T[n][amount]
 
-    count_in = _count_changes_memo(amount - coins[n - 1], coins, T, n)
-    count_out = _count_changes_memo(amount, coins, T, n - 1)
+    count_in = _count_coin_changes_memo(amount - coins[n - 1], coins, T, n)
+    count_out = _count_coin_changes_memo(amount, coins, T, n - 1)
     T[n][amount] = count_in + count_out
 
     return T[n][amount]
 
 
-def count_changes_memo(amount, coins):
+def count_coin_changes_memo(amount, coins):
     """Count changes by top-bottom dynamic programming: 
     recursion + memoization.
 
@@ -64,22 +64,22 @@ def count_changes_memo(amount, coins):
     for c in range(n + 1):
         T[c][0] = 1
 
-    return _count_changes_memo(amount, coins, T, n)
+    return _count_coin_changes_memo(amount, coins, T, n)
 
 
-def count_changes_dp(amount, coins):
+def count_coin_changes_dp(amount, coins):
     """Count changes by bottom-up dynamic programming.
 
     Time complexity: O(a * c), where a is amount, and c is number of coins.
     Space complexity: O(a * c).
     """
-    n = len(coins)
-    T = [[0] * (amount + 1) for c in range(n)]
+    n = len(coins) - 1
+    T = [[0] * (amount + 1) for c in range(n + 1)]
 
     for c in range(n):
         T[c][0] = 1
 
-    for c in range(n):
+    for c in range(n + 1):
         for a in range(1, amount + 1):
             if a >= coins[c]:
                 count_in = T[c][a - coins[c]]
@@ -105,17 +105,17 @@ def main():
 
     start_time = time.time()
     print('Make change by recursion: {}'
-          .format(count_changes_recur(amount, coins, n)))
+          .format(count_coin_changes_recur(amount, coins, n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('Make change by memo: {}'
-          .format(count_changes_memo(amount, coins)))
+          .format(count_coin_changes_memo(amount, coins)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('Make change by DP: {}'
-          .format(count_changes_dp(amount, coins)))
+          .format(count_coin_changes_dp(amount, coins)))
     print('Time: {}'.format(time.time() - start_time))
 
 
