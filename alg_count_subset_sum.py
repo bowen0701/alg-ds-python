@@ -77,15 +77,12 @@ def count_subset_sum_dp(arr, total):
     for a in range(n + 1):
         T[a][0] = 1
 
-    for a in range(n):
+    for a in range(n + 1):
         for t in range(1, total + 1):
             if t < arr[a]:
-                T[a][t] = 0
+                T[a][t] = T[a - 1][t]
             else:
-                n_subsets_in = T[a - 1][t - arr[a]]
-                n_subsets_out = T[a - 1][t]
-                n_subsets = n_subsets_in + n_subsets_out
-                T[a][t] = n_subsets
+                T[a][t] = T[a - 1][t] + T[a - 1][t - arr[a]]
 
     return T[-1][-1]
 
@@ -109,7 +106,7 @@ def main():
 
     start_time = time.time()
     n_subsets = count_subset_sum_dp(arr, total)
-    print('Memo: {}'.format(n_subsets))
+    print('DP: {}'.format(n_subsets))
     print('Time: {}'.format(time.time() - start_time))
 
 
