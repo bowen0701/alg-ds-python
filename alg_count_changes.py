@@ -73,13 +73,13 @@ def count_changes_dp(amount, coins):
     Time complexity: O(a * c), where a is amount, and c is number of coins.
     Space complexity: O(a * c).
     """
-    n = len(coins)
-    T = [[0] * (amount + 1) for c in range(n)]
+    n = len(coins) - 1
+    T = [[0] * (amount + 1) for c in range(n + 1)]
 
     for c in range(n):
         T[c][0] = 1
 
-    for c in range(n):
+    for c in range(n + 1):
         for a in range(1, amount + 1):
             if a >= coins[c]:
                 count_in = T[c][a - coins[c]]
