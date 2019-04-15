@@ -62,9 +62,7 @@ def longest_common_subsequence_dp(s1, s2, n1, n2):
             if s1[r] == s2[c]:
                 M[r][c] = 1 + M[r - 1][c - 1]
             elif s1[r] != s2[c]:
-                lcs1 = M[r - 1][c]
-                lcs2 = M[r][c - 1]
-                M[r][c] = max(lcs1, lcs2)
+                M[r][c] = max(M[r - 1][c], M[r][c - 1])
     return M[-1][-1]
 
 
