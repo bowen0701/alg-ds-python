@@ -22,13 +22,13 @@ class SolutionNaive(object):
 
         Time limit exceeded.
         """
-        n = len(s)
+        n = len(s) - 1
         max_len = 1
         max_i = 0
         max_j = 0
         
-        for i in range(n):
-            for j in range(i + 1, n):
+        for i in range(n + 1):
+            for j in range(i + 1, n + 1):
                 if s[i:(j + 1)] == s[i:(j + 1)][::-1]:
                     ij_len = j - i + 1
                     if ij_len > max_len:
@@ -47,21 +47,21 @@ class SolutionDP(object):
         if not len(s):
             return ''
 
-        n = len(s)
-        M = [[False] * n for _ in range(n)]
+        n = len(s) - 1
+        M = [[False] * (n + 1) for _ in range(n + 1)]
 
-        for i in range(n):
+        for i in range(n + 1):
             M[i][i] = True
             max_len = 1
             s_pal = s[i]
             
-        for i in range(n - 1):
+        for i in range(n):
             if s[i] == s[i + 1]:
                 M[i][i + 1] = True
                 max_len = 2
                 s_pal = s[i:(i + 2)]
 
-        for j in range(n):
+        for j in range(n + 1):
             for i in range(0, j - 1):
                 if s[i] == s[j] and M[i + 1][j - 1]:
                     M[i][j] = True
