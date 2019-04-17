@@ -77,7 +77,7 @@ def _dfs_iter_visit(v, graph_adj_d, visited_d,
 
 def dfs_iter(graph_adj_d):
     """Depth First Search (DFS) in graph G(V, E) 
-    by iteration algorithm using Stack.
+    by iteration algorithm using stack.
 
     Time complexity: O(|V|+|E|).
     Space complexity: O(|V|).
