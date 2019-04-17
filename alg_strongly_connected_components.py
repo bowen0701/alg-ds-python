@@ -67,13 +67,16 @@ def _decrease_postvisit_vertices(postvisited_d):
 
 
 def strongly_connected_components(graph_adj_d):
-    """Strongly Connected Components for Directed Graph by DFS.
+    """Strongly connected components for directed graph G(V, E) by DFS.
 
     Procedure:
-      - Obtain the reverse graph G^R of graph G.
-      - Call DFS on G^R in the decreasing order of postvisit number found
-        in step 1.
-      - Output the labeled connected components found in step 2.
+    - Obtain the reverse graph G^R of graph G.
+    - Call DFS on G^R in the decreasing order of postvisit number found
+      in step 1.
+    - Output the labeled connected components found in step 2.
+
+    Time complexity: O(|V| + |E|).
+    Space complexity: O(|V|).
     """
     visited_d = {v: False for v in graph_adj_d}
     clock = [0]
