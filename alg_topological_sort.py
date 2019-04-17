@@ -36,10 +36,14 @@ def _decrease_postvisit_vertices(postvisited_d):
 
 
 def topological_sort(dag_adj_d):
-    """Topological Sorting for DAG by the DFS.
+    """Topological Sorting for DAG G(V, E) by the DFS.
 
-    To topologically sort a DAG, we simply do depth first search,
-    then arrange DAG's vertices in decreasing order of postvisits.
+    To topologically sort a DAG, 
+    - we simply do depth first search,
+    - then arrange DAG's vertices in decreasing order of postvisits.
+
+    Time complexity: O(|V| + |E|).
+    Space complexity: O(|V|).
     """
     visited_d = {v: False for v in dag_adj_d.keys()}
     previsited_d = {}
