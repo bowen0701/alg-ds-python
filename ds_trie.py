@@ -36,12 +36,12 @@ class Trie(object):
         """
         current = self.root
 
-        for char in word:
-            if char in current.children:
-                current = current.children[char]
+        for c in word:
+            if c in current.children:
+                current = current.children[c]
             else:
-                new = Node(char)
-                current.children[char] = new
+                new = Node(c)
+                current.children[c] = new
                 current = new
 
         current.data = data
@@ -55,9 +55,9 @@ class Trie(object):
         """
         current = self.root
 
-        for char in prefix:
-            if char in current.children:
-                current = current.children[char]
+        for c in prefix:
+            if c in current.children:
+                current = current.children[c]
             else:
                 return False
 
@@ -71,9 +71,9 @@ class Trie(object):
         """
         current = self.root
 
-        for char in word:
-            if char in current.children:
-                current = current.children[char]
+        for c in word:
+            if c in current.children:
+                current = current.children[c]
             else:
                 return False
 
@@ -92,9 +92,9 @@ class Trie(object):
         visit_stack = []
         visit_stack.append(current)
 
-        for char in word:
-            if char in current.children:
-                current = current.children[char]
+        for c in word:
+            if c in current.children:
+                current = current.children[c]
                 visit_stack.append(current)
             else:
                 # The word does not exist.
@@ -107,10 +107,10 @@ class Trie(object):
         else:
             visit_stack.pop()
 
-            for char in word[::-1]:
+            for c in word[::-1]:
                 if not current.children:
                     current = visit_stack.pop()
-                    pop_node = current.children.pop(char)
+                    pop_node = current.children.pop(c)
                 else:
                     break
      
@@ -126,9 +126,9 @@ class Trie(object):
         current = self.root
 
         # Arrive at the prefix node.
-        for char in prefix:
-            if char in current.children:
-                current = current.children[char]
+        for c in prefix:
+            if c in current.children:
+                current = current.children[c]
             else:
                 # The prefix does not exits.
                 return None
@@ -137,7 +137,7 @@ class Trie(object):
         if current.word:
             words_ls.append(current.word)
 
-        # Run BFS to collect the following char's.
+        # Run BFS to collect the following characters.
         visit_queue = []
         visit_queue.insert(0, current)
 
@@ -154,9 +154,9 @@ class Trie(object):
         """Get word's data."""
         current = self.root
 
-        for char in word:
-            if char in current.children:
-                current = current.children[char]
+        for c in word:
+            if c in current.children:
+                current = current.children[c]
             else:
                 # The word does not exist.
                 return None
