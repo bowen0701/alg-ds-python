@@ -1,6 +1,10 @@
 """The maze search problem."""
+from __future__ import absolute_import
+from __future__ import division
 from __future__ import print_function
+
 import turtle
+
 
 PART_OF_PATH = 'O'
 TRIED = '.'
@@ -111,7 +115,7 @@ class Maze(object):
         return self.maze_list[idx]
 
 
-def dfs_from(maze, start_row, start_col):
+def dfs(maze, start_row, start_col):
     """Depth-First Search (DFS) to find way out."""
     maze.update_position(start_row, start_col)
     # Check for base cases:
@@ -130,10 +134,10 @@ def dfs_from(maze, start_row, start_col):
     # Otherwise, use logical short circuiting to try each direction
     # in turn, if needed.
     found_bool = (
-        dfs_from(maze, start_row - 1, start_col) or
-        dfs_from(maze, start_row + 1, start_col) or
-        dfs_from(maze, start_row, start_col - 1) or
-        dfs_from(maze, start_row, start_col + 1))
+        dfs(maze, start_row - 1, start_col) or
+        dfs(maze, start_row + 1, start_col) or
+        dfs(maze, start_row, start_col - 1) or
+        dfs(maze, start_row, start_col + 1))
 
     if found_bool:
         maze.update_position(start_row, start_col, PART_OF_PATH)
@@ -146,7 +150,7 @@ def main():
     maze = Maze('maze_file.txt')
     maze.draw_maze()
     maze.update_position(maze.start_row, maze.start_col)
-    dfs_from(maze, maze.start_row, maze.start_col)
+    dfs(maze, maze.start_row, maze.start_col)
 
 
 if __name__ == '__main__':
