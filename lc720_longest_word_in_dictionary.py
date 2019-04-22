@@ -49,7 +49,17 @@ class Solution(object):
         return longest
 
 
+class Node(object):
+    def __init__(self, key=None, word=None):
+        self.key = key
+        self.word = word
+        self.children = {}
+
+
 class SolutionTrie(object):
+    def __init__(self):
+        self.root = Node()
+
     def longestWord(self, words):
         """
         :type words: List[str]
@@ -58,17 +68,58 @@ class SolutionTrie(object):
         Time complexity: O(??).
         Space complexity: O(??).
         """
-        pass
+        # Build Trie for words in dictionary.
+        for w in words:
+            current = self.root
+            for c in w:
+                if c in current.children:
+                    current = current.children[c]
+                else:
+                    new = Node(c)
+                    current.children[c] = new
+                    current = new
+            current.word = w
+
+        # DFS for longest word.
+        stack = list(self.root.children.values())
+        longest = ''
+
+        while stack:
+            current = stack.pop()
+            if current.word:
+                if (len(longest) < len(current.word) or 
+                    (len(longest) == len(current.word) and
+                     current.word < longest)):
+                    longest = current.word
+                stack.extend(list(current.children.values()))
+
+        return longest
 
 
 def main():
+    import time
+
     # Ans: "world".
-    words = ["w","wo","wor","worl", "world"]
-    print(Solution().longestWord(words))
+    words = ["w", "wo", "wor", "worl", "world"]
+
+    start_time = time.time()
+    print('By string slice: {}'.format(Solution().longestWord(words)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By Trie: {}'.format(SolutionTrie().longestWord(words)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Ans: "apple".
     words = ["a", "banana", "app", "appl", "ap", "apply", "apple"]
-    print(Solution().longestWord(words))
+
+    start_time = time.time()
+    print('By string slice: {}'.format(Solution().longestWord(words)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By Trie: {}'.format(SolutionTrie().longestWord(words)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
