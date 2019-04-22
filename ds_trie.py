@@ -182,7 +182,6 @@ def main():
     trie.insert('lmn', 5)
     trie.insert('lmnz')
 
-
     print('Prefix "ab": {}'.format(trie.root
         .children['a'].children['b']
         .children.keys()))
@@ -196,7 +195,6 @@ def main():
     print('Get data for "lmn" (5): {}'.format(trie.get_data('lmn')))
     print('Get data for non-existed "abk"'.format(trie.get_data('abk')))
     print('Get data for "lmnz" without data'.format(trie.get_data('lmnz')))
-
 
     print('Search prefix "ab" (True): {}'.format(trie.search_prefix('ab')))
     print('Search prefix "lo" (False)'.format(trie.search_prefix('lo')))
