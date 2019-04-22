@@ -38,17 +38,27 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
 
-        Time complexity: O(n).
-        Space complexity: O(1).
+        Time complexity: O(n), where n is the length of words.
+        Space complexity: O(m), where m is the max length of word.
         """
         prefix = longest = ''
         for w in sorted(words):
             if w[:len(w) - 1] == prefix[:len(w) - 1]:
-                print prefix, w
                 prefix = w
                 longest = max([longest, prefix], key=len)
-
         return longest
+
+
+class SolutionTrie(object):
+    def longestWord(self, words):
+        """
+        :type words: List[str]
+        :rtype: str
+
+        Time complexity: O(??).
+        Space complexity: O(??).
+        """
+        pass
 
 
 def main():
