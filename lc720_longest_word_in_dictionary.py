@@ -38,7 +38,7 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
 
-        Time complexity: O(n), where n is the length of words.
+        Time complexity: O(nm), where n is the length of words.
         Space complexity: O(m), where m is the max length of word.
         """
         prefix = longest = ''
