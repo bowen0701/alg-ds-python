@@ -37,13 +37,29 @@ class Solution(object):
         """
         :type words: List[str]
         :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        prefix = longest = ''
+        for w in sorted(words):
+            if w[:len(w) - 1] == prefix[:len(w) - 1]:
+                print prefix, w
+                prefix = w
+                longest = max([longest, prefix], key=len)
+
+        return longest
 
 
 def main():
-	pass
+    # Ans: "world".
+    words = ["w","wo","wor","worl", "world"]
+    print(Solution().longestWord(words))
+
+    # Ans: "apple".
+    words = ["a", "banana", "app", "appl", "ap", "apply", "apple"]
+    print(Solution().longestWord(words))
 
 
 if __name__ == '__main__':
-	main()
+    main()
