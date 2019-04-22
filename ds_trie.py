@@ -7,8 +7,7 @@ import numpy as np
 
 class Node(object):
     """Node class for Trie class."""
-    def __init__(self, key=None, data=None):
-        self.key = key
+    def __init__(self, data=None):
         self.data = data
         self.word = None
         self.children = {}
