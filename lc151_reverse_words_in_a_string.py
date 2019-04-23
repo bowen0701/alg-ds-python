@@ -33,7 +33,11 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        pass
+        w_split_ls = s.split(' ')
+        w_strip_ls = [w for w in w_split_ls if w != '']
+        w_reverse_ls = w_strip_ls[::-1]
+        s_reverse = ' '.join(w_reverse_ls)
+        return s_reverse
 
 
 def main():
@@ -41,12 +45,15 @@ def main():
 
     # Ans: "blue is sky the".
     s = 'the sky is blue'
+    print Solution().reverseWords(s)
 
     # Ans: "world! hello".
     s = '  hello world!  '
+    print Solution().reverseWords(s)
 
     # Ans: "example good a".
     s = 'a good   example'
+    print Solution().reverseWords(s)
 
 
 if __name__ == '__main__':
