@@ -29,7 +29,6 @@ Output: 0
 Example 4:
 Input: "()))(("
 Output: 4
- 
 
 Note:
 S.length <= 1000
@@ -42,11 +41,37 @@ class Solution(object):
         :type S: str
         :rtype: int
         """
-        pass
+        count = 0
+        stack = []
+
+        for c in S:
+            if c == '(':
+                stack.append(c)
+            elif stack:
+                stack.pop()
+            else:
+                count += 1
+
+        count += len(stack)
+
+        return count
 
 
 def main():
-    pass
+    S = '(())'  # Ans: 0.
+    print(Solution().minAddToMakeValid(S))
+
+    S = '())'  # Ans: 1.
+    print(Solution().minAddToMakeValid(S))
+
+    S = '((('  # Ans: 3.
+    print(Solution().minAddToMakeValid(S))
+
+    S = '()'  # Ans: 0.
+    print(Solution().minAddToMakeValid(S))
+
+    S = '()))((' # Ans: 4.
+    print(Solution().minAddToMakeValid(S))
 
 
 if __name__ == '__main__':
