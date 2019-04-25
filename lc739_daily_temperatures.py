@@ -22,7 +22,7 @@ class SolutionNaive(object):
         Time complexity: O(n^2).
         Space complexity: O(n).
         """
-        D = [0 for _ in range(len(T))]
+        D = [0] * len(T)
         for i, t in enumerate(T):
             for j in range(i + 1, len(T)):
                 if T[j] > t:
@@ -32,15 +32,22 @@ class SolutionNaive(object):
 
 
 class Solution(object):
-    def dailyTemperature(self, T):
+    def dailyTemperatures(self, T):
         """
         :type T: List[int]
         :rtype: List[int]
 
-        Time complexity: ??
-        Space complexity: ??
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        D = [0] * len(T)
+        stack = []
+        for i, t in enumerate(T):
+            while stack and T[stack[-1]] < t:
+                current = stack.pop()
+                D[current] = i - current
+            stack.append(i)
+        return D
 
 
 def main():
@@ -50,11 +57,13 @@ def main():
     # Ans: [1, 1, 4, 2, 1, 1, 0, 0]
   
     print SolutionNaive().dailyTemperatures(T)
+    print Solution().dailyTemperatures(T)
 
     T = [73, 73, 75, 71, 69, 70, 76, 77]
     # Ans: [2, 1, 4, 3, 1, 1, 1, 0]
 
     print SolutionNaive().dailyTemperatures(T)
+    print Solution().dailyTemperatures(T)
 
 
 if __name__ == '__main__':
