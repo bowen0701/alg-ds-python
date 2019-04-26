@@ -56,14 +56,13 @@ def main():
     T = [73, 74, 75, 71, 69, 72, 76, 73]
     # Ans: [1, 1, 4, 2, 1, 1, 0, 0]
   
-    print SolutionNaive().dailyTemperatures(T)
-    print Solution().dailyTemperatures(T)
+    start_time = time.time()
+    print 'Naive: {}'.format(SolutionNaive().dailyTemperatures(T))
+    print 'Time: {}'.format(time.time() - start_time)
 
-    T = [73, 73, 75, 71, 69, 70, 76, 77]
-    # Ans: [2, 1, 4, 3, 1, 1, 1, 0]
-
-    print SolutionNaive().dailyTemperatures(T)
-    print Solution().dailyTemperatures(T)
+    start_time = time.time()
+    print 'Stack: {}'.format(Solution().dailyTemperatures(T))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
