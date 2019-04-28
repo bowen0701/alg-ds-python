@@ -81,7 +81,7 @@ class LinkedList(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if self.head is None:
+        if not self.head:
             self.head = Node(data)
             return None
         current = self.head
@@ -194,7 +194,7 @@ class LinkedList(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if self.head is None:
+        if not self.head:
             return None
 
         current = self.head
