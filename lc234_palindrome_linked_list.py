@@ -54,12 +54,10 @@ class Solution1(object):
             stack.append(current.val)
             current = current.next
 
-        # for i in range(len(stack) // 2):
-        #     if stack[i] != stack[len(stack) - 1 - i]:
-        #         return False
-        # return True
-
-        return stack == stack[::-1]
+        for i in range(len(stack) // 2):
+            if stack[i] != stack[len(stack) - 1 - i]:
+                return False
+        return True
 
 
 class Solution2(object):
