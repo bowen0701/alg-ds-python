@@ -19,22 +19,69 @@ Could you do it in O(n) time and O(1) space?
 
 # Definition for singly-linked list.
 class ListNode(object):
-    def __init__(self, x):
-        self.val = x
+    def __init__(self, val):
+        self.val = val
         self.next = None
 
 
-class Solution(object):
+class LinkedList(object):
+    def __init__(self):
+        self.head = None
+
+    def append(self, val):
+        if not self.head:
+            self.head = ListNode(val)
+            return None
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = ListNode(val)
+
+
+class Solution1(object):
     def isPalindrome(self, head):
         """
         :type head: ListNode
         :rtype: bool
         """
-        pass
+        a_list = []
+        current = head
+
+        while current:
+            a_list.append(current.val)
+            current = current.next
+
+        return a_list == a_list[::-1]
 
 
 def main():
-    pass
+    # 1->2->2->1: Yes.
+    a_list = LinkedList()
+    a_list.append(1)
+    a_list.append(2)
+    a_list.append(2)
+    a_list.append(1)
+    
+    print a_list.head.val
+    print a_list.head.next.val
+    print a_list.head.next.next.val
+    print a_list.head.next.next.next.val
+
+    print Solution1().isPalindrome(a_list.head)
+
+    # 1->2->3->1: No.
+    a_list = LinkedList()
+    a_list.append(1)
+    a_list.append(2)
+    a_list.append(3)
+    a_list.append(1)
+    
+    print a_list.head.val
+    print a_list.head.next.val
+    print a_list.head.next.next.val
+    print a_list.head.next.next.next.val
+
+    print Solution1().isPalindrome(a_list.head)
 
 
 if __name__ == '__main__':
