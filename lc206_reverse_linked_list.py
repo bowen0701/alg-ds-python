@@ -8,7 +8,8 @@ Input: 1->2->3->4->5->NULL
 Output: 5->4->3->2->1->NULL
 
 Follow up:
-A linked list can be reversed either iteratively or recursively. Could you implement both?
+A linked list can be reversed either iteratively or recursively. 
+Could you implement both?
 """
 
 # Definition for singly-linked list.
@@ -68,12 +69,13 @@ def main():
     node4.next = node5
 
     # 5->4->3->2->1->NULL
+    # Should be 5.
     print SolutionIter().reverseList(node1).val
     print SolutionRecur().reverseList(node1).val
-    # Shoule be 4.
-    print SolutionRecur().reverseList(node1).next.val
-    # Shoule be 3.
-    print SolutionRecur().reverseList(node1).next.next.val
+    # Ans: 4.
+    print SolutionIter().reverseList(node1).next.val
+    # Ans: 3.
+    print SolutionIter().reverseList(node1).next.next.val
 
 
 if __name__ == '__main__':
