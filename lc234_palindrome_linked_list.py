@@ -57,7 +57,44 @@ class Solution1(object):
         return a_list == a_list[::-1]
 
 
+class Solution2(object):
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """        
+        # Find the middle node: slow
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        # Reverse the 2nd half of linked list using slow.
+        reverse = None
+        while slow:
+            nxt = slow.next
+            slow.next = reverse
+            reverse = slow
+            slow = nxt
+        
+        # Traverse the 1st half and reversed 2nd half at the same time
+        # and compare their val.
+        while reverse:
+            if reverse.val != head.val:
+                return False
+
+            reverse = reverse.next
+            head = head.next
+
+        return True
+
+
 def main():
+    import time
+
     # 1->2->2->1: Yes.
     a_list = LinkedList()
     a_list.append(1)
@@ -70,7 +107,13 @@ def main():
     print a_list.head.next.next.val
     print a_list.head.next.next.next.val
 
-    print Solution1().isPalindrome(a_list.head)
+    start_time = time.time()
+    print 'Naive: {}'.format(Solution1().isPalindrome(a_list.head))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'Optimized: {}'.format(Solution2().isPalindrome(a_list.head))
+    print 'Time: {}'.format(time.time() - start_time)
 
     # 1->2->3->1: No.
     a_list = LinkedList()
@@ -84,7 +127,13 @@ def main():
     print a_list.head.next.next.val
     print a_list.head.next.next.next.val
 
-    print Solution1().isPalindrome(a_list.head)
+    start_time = time.time()
+    print 'Naive: {}'.format(Solution1().isPalindrome(a_list.head))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'Optimized: {}'.format(Solution2().isPalindrome(a_list.head))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
