@@ -47,14 +47,19 @@ class Solution1(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        a_list = []
+        stack = []
         current = head
 
         while current:
-            a_list.append(current.val)
+            stack.append(current.val)
             current = current.next
 
-        return a_list == a_list[::-1]
+        # for i in range(len(stack) // 2):
+        #     if stack[i] != stack[len(stack) - 1 - i]:
+        #         return False
+        # return True
+
+        return stack == stack[::-1]
 
 
 class Solution2(object):
