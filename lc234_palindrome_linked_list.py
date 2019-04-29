@@ -43,6 +43,9 @@ class Solution1(object):
         """
         :type head: ListNode
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         a_list = []
         current = head
