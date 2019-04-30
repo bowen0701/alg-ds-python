@@ -19,14 +19,40 @@ class Solution(object):
         """
         :type height: List[int]
         :rtype: int
+
+        Two pointer method:
+        - Start from the widest container, its area = shorter height * wide.
+        - Since all of the remaining containers are less wide, to get bigger area,
+          they must be higher. Thus skip those containers which are not higher.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        max_area = area = 0
+        l, r = 0, len(height) - 1
+
+        while l < r:
+            height_l, height_r = height[l], height[r]
+
+            if height_l < height_r:
+                area = (r - l) * height_l
+                while height[l] <= height_l and l < r:
+                    l += 1
+            else:
+                area = (r - l) * height_r
+                while height[r] <= height_r and l < r:
+                    r -= 1
+
+            if area > max_area:
+                max_area = area
+
+        return max_area
 
 
 def main():
     height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
     # Ans: 49 = (8 - 1) * 7
-    pass
+    print Solution().maxArea(height)
 
 
 if __name__ == '__main__':
