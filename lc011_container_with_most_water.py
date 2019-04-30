@@ -28,23 +28,19 @@ class Solution(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        max_area = area = 0
+        max_area = 0
         l, r = 0, len(height) - 1
-
+        
         while l < r:
-            height_l, height_r = height[l], height[r]
+            hl, hr = height[l], height[r]
 
-            if height_l < height_r:
-                area = (r - l) * height_l
-                while height[l] <= height_l and l < r:
-                    l += 1
-            else:
-                area = (r - l) * height_r
-                while height[r] <= height_r and l < r:
-                    r -= 1
+            hm = min(hl, hr)
+            max_area = max(max_area, (r - l) * hm)
 
-            if area > max_area:
-                max_area = area
+            while height[l] <= hm and l < r:
+                l += 1
+            while height[r] <= hm and l < r:
+                r -= 1
 
         return max_area
 
