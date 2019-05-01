@@ -22,19 +22,20 @@ class Solution(object):
 
         Two pointer method:
         - Start from the widest container, its area = shorter height * wide.
-        - Since all of the remaining containers are less wide, to get bigger area,
-          they must be higher. Thus skip those containers which are not higher.
+        - Since all of the remaining containers are less wide, 
+          to get bigger area, they must be higher. 
+          Thus skip those containers which are not higher.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
         max_area = 0
         l, r = 0, len(height) - 1
-        
+
         while l < r:
             hl, hr = height[l], height[r]
-
             hm = min(hl, hr)
+
             max_area = max(max_area, (r - l) * hm)
 
             while height[l] <= hm and l < r:
