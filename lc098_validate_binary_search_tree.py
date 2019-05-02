@@ -74,6 +74,9 @@ class SolutionMinMax(object):
         """
         :type root: TreeNode
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         min_val, max_val = float('-inf'), float('inf')
         return self.isValidBSTUtil(root, min_val, max_val)
@@ -93,13 +96,46 @@ class SolutionMinMax(object):
                 self.isValidBSTUtil(root.right, root.val, max_val))
 
 
+class SolutionInorder(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        self.previous = None
+        return self.isValidBSTUtil(root)
+
+    def isValidBSTUtil(self, root):
+        if not root:
+            return True
+ 
+        # Start inorder traverse:
+        # Left tree.
+        if not self.isValidBSTUtil(root.left):
+            return False
+        # Root.
+        if self.previous and self.previous.val >= root.val:
+            return False
+        else:
+            self.previous = root
+        # Right tree.
+        if not self.isValidBSTUtil(root.right):
+            return False
+
+        return True
+
+
 def main():
     # Input: [2,1,3]
     # Output: true
     bt = BinaryTree()
     bt.insert([2, 1, 3])
     print 'BT:', (bt.root.val, bt.root.left.val, bt.root.right.val)
-    print 'isValidBST:', SolutionMinMax().isValidBST(bt.root)
+    print 'MinMax:', SolutionMinMax().isValidBST(bt.root)
+    print 'Inorder:', SolutionInorder().isValidBST(bt.root)
 
     # Input: [5,1,4,null,null,3,6]
     # Output: false
@@ -108,7 +144,8 @@ def main():
     print 'BT:', (
         bt.root.val, bt.root.left.val, bt.root.right.val, None, None,
         bt.root.right.left.val, bt.root.right.right.val)
-    print 'isValidBST:', SolutionMinMax().isValidBST(bt.root)
+    print 'MinMax:', SolutionMinMax().isValidBST(bt.root)
+    print 'Inorder:', SolutionInorder().isValidBST(bt.root)
 
     # Input: [10,5,15,null,null,6,20]
     # Output: false
@@ -117,8 +154,9 @@ def main():
     print 'BT:', (
         bt.root.val, bt.root.left.val, bt.root.right.val, None, None,
         bt.root.right.left.val, bt.root.right.right.val)
-    print 'isValidBST:', SolutionMinMax().isValidBST(bt.root)
-    
+    print 'MinMax:', SolutionMinMax().isValidBST(bt.root)
+    print 'Inorder:', SolutionInorder().isValidBST(bt.root)
+
 
 if __name__ == '__main__':
     main()
