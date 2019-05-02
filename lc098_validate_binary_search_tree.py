@@ -69,16 +69,28 @@ class BinaryTree(object):
                     current.right = None
 
 
-class Solution(object):
+class SolutionMinMax(object):
     def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        min_val, max_val = float('-inf'), float('inf')
+        return self.isValidBSTUtil(root, min_val, max_val)
+
+    def isValidBSTUtil(self, root, min_val, max_val):
         """
         :type root: TreeNode
         :rtype: bool
         """
         if not root:
             return True
+        
+        if root.val <= min_val or root.val >= max_val:
+            return False
 
-        pass
+        return (self.isValidBSTUtil(root.left, min_val, root.val) and
+                self.isValidBSTUtil(root.right, root.val, max_val))
 
 
 def main():
@@ -87,7 +99,7 @@ def main():
     bt = BinaryTree()
     bt.insert([2, 1, 3])
     print 'BT:', (bt.root.val, bt.root.left.val, bt.root.right.val)
-    print 'isValidBST:', Solution().isValidBST(bt.root)
+    print 'isValidBST:', SolutionMinMax().isValidBST(bt.root)
 
     # Input: [5,1,4,null,null,3,6]
     # Output: false
@@ -96,7 +108,7 @@ def main():
     print 'BT:', (
         bt.root.val, bt.root.left.val, bt.root.right.val, None, None,
         bt.root.right.left.val, bt.root.right.right.val)
-    print 'isValidBST:', Solution().isValidBST(bt.root)
+    print 'isValidBST:', SolutionMinMax().isValidBST(bt.root)
 
     # Input: [10,5,15,null,null,6,20]
     # Output: false
@@ -105,7 +117,7 @@ def main():
     print 'BT:', (
         bt.root.val, bt.root.left.val, bt.root.right.val, None, None,
         bt.root.right.left.val, bt.root.right.right.val)
-    print 'isValidBST:', Solution().isValidBST(bt.root)
+    print 'isValidBST:', SolutionMinMax().isValidBST(bt.root)
     
 
 if __name__ == '__main__':
