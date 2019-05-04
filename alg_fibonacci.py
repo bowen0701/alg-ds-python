@@ -59,7 +59,7 @@ def fibonacci_dp(n):
     return f[n]
 
 
-def fibonacci_dp2(n):
+def fibonacci_iter(n):
     """Fibonacci series by bottom-up dynamic programming with optimized space.
 
     - Time complexity: O(n).
@@ -91,7 +91,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By optimized DP: {}'.format(fibonacci_dp(n)))
+    print('By iteration: {}'.format(fibonacci_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
 
 
