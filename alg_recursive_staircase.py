@@ -13,8 +13,31 @@ from __future__ import division
 from __future__ import print_function
 
 
+def staircase_recur(steps):
+    """Staircase by recursion.
+
+    Time complexity: O(3^n).
+    Space complexity: O(n).
+    """
+    if steps < 0:
+        return 0
+
+    if steps == 0:
+        return 1
+
+    return (staircase_recur(steps - 1) + 
+            staircase_recur(steps - 2) + 
+            staircase_recur(steps - 3))
+
+
 def main():
-    pass
+    import time
+
+    steps = 10
+
+    start_time = time.time()
+    print('Recursion: {}'.format(staircase_recur(steps)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
