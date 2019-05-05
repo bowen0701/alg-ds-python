@@ -61,7 +61,7 @@ def factorial_dp(n):
     return f[n]
 
 
-def factorial_dp2(n):
+def factorial_iter(n):
     """Nth number of factorial series by bottom-up DP w/ optimized space.
 
     - Time complexity: O(n).
@@ -80,19 +80,19 @@ def main():
     print('{}th number of factorial series:'.format(n))
 
     start_time = time.time()
-    print('By recursion: {}'.format(factorial_recur(n)))
+    print('Recur: {}'.format(factorial_recur(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By memo: {}'.format(factorial_memo(n)))
+    print('Memo: {}'.format(factorial_memo(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(factorial_dp(n)))
+    print('DP: {}'.format(factorial_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By optimized DP: {}'.format(factorial_dp2(n)))
+    print('Iter: {}'.format(factorial_iter(n)))
     print('Time: {}'.format(time.time() - start_time))
 
 
