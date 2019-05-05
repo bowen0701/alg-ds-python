@@ -13,7 +13,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-def staircase_recur(steps):
+def recursive_staircase_recur(steps):
     """Staircase by top-down recursion.
 
     Time complexity: O(3^n).
@@ -25,9 +25,9 @@ def staircase_recur(steps):
     if steps == 0:
         return 1
 
-    return (staircase_recur(steps - 1) + 
-            staircase_recur(steps - 2) + 
-            staircase_recur(steps - 3))
+    return (recursive_staircase_recur(steps - 1) + 
+            recursive_staircase_recur(steps - 2) + 
+            recursive_staircase_recur(steps - 3))
 
 
 def _staircase_memo(steps, M):
@@ -46,7 +46,7 @@ def _staircase_memo(steps, M):
     return M[steps]
 
 
-def staircase_memo(steps):
+def recursive_staircase_memo(steps):
     """Staircase by top-down memoization.
 
     Time complexity: O(n).
@@ -56,7 +56,7 @@ def staircase_memo(steps):
     return _staircase_memo(steps, M)
 
 
-def staircase_dp(steps):
+def recursive_staircase_dp(steps):
     """Staircase by bottom-up dynamic programming.
 
     Time complexity: O(n).
@@ -72,21 +72,41 @@ def staircase_dp(steps):
     return M[steps]
 
 
+def recursive_staircase_iter(steps):
+    """Staircase by bottom-up iteration w/ optimized space.
+
+    Time complexity: O(n).
+    Space complexity: O(1).
+    """
+    # Track the last three staircase results.
+    a, b, c = 1, 1, 2
+
+    # Iterate through the remaining steps 3 ~ end.
+    for s in range(3, steps + 1):
+        # Add three numbers and then shift position by one.
+        a, b, c = b, c, a + b + c
+    return c
+
+
 def main():
     import time
 
     steps = 20
 
     start_time = time.time()
-    print('Recursion: {}'.format(staircase_recur(steps)))
+    print('Recur: {}'.format(recursive_staircase_recur(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('Memo: {}'.format(staircase_memo(steps)))
+    print('Memo: {}'.format(recursive_staircase_memo(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('DP: {}'.format(staircase_dp(steps)))
+    print('DP: {}'.format(recursive_staircase_dp(steps)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('Iter: {}'.format(recursive_staircase_iter(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
 
