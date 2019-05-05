@@ -60,16 +60,17 @@ def fibonacci_dp(n):
 
 
 def fibonacci_iter(n):
-    """Fibonacci series by bottom-up dynamic programming with optimized space.
+    """Fibonacci series by bottom-up iteration with optimized space.
 
     - Time complexity: O(n).
     - Space complexity: O(1).
     """
+    # Track the last two fib numbers.
     a, b = 0, 1
-    for _ in range(n):
+    for _ in range(2, n + 1):
         # Add two numbers and then shift position by one.
         a, b = b, a + b
-    return a
+    return b
 
 
 def main():
@@ -79,19 +80,19 @@ def main():
     print('{}th number of Fibonacci series:'.format(n))
 
     start_time = time.time()
-    print('By recursion: {}'.format(fibonacci_recur(n)))
+    print('Recur: {}'.format(fibonacci_recur(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By memoization: {}'.format(fibonacci_memo(n)))
+    print('Memo: {}'.format(fibonacci_memo(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By dynamic programming: {}'.format(fibonacci_dp(n)))
+    print('DP: {}'.format(fibonacci_dp(n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By iteration: {}'.format(fibonacci_dp(n)))
+    print('Iter: {}'.format(fibonacci_iter(n)))
     print('Time: {}'.format(time.time() - start_time))
 
 
