@@ -56,6 +56,22 @@ def staircase_memo(steps):
     return _staircase_memo(steps, M)
 
 
+def staircase_dp(steps):
+    """Staircase by bottom-up dynamic programming.
+
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
+    M = [0] * (steps + 1)
+    M[0] = 1
+    M[1] = 1
+    M[2] = 2
+    
+    for s in range(3, steps + 1):
+        M[s] = M[s - 1] + M[s - 2] + M[s - 3]
+    return M[steps]
+
+
 def main():
     import time
 
@@ -67,6 +83,10 @@ def main():
 
     start_time = time.time()
     print('Memo: {}'.format(staircase_memo(steps)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('DP: {}'.format(staircase_dp(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
 
