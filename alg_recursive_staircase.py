@@ -6,6 +6,8 @@ F(n) = F(n - 1) + F(n - 2) + F(n - 3)
 - F(0) = 1  # Stay put.
 - F(1) = 1  # Take 1-step leap.
 - F(2) = 2  # Take 2 1-step leaps or 1 2-step leap.
+
+Remark: This is just like a variant of Fibonacci series.
 """
 
 from __future__ import absolute_import
