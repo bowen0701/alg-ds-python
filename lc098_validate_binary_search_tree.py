@@ -37,6 +37,7 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
 # Definition for a binary tree.
 class BinaryTree(object):
     def __init__(self):
@@ -70,17 +71,6 @@ class BinaryTree(object):
 
 
 class SolutionMinMax(object):
-    def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-
-        Time complexity: O(n).
-        Space complexity: O(1).
-        """
-        min_val, max_val = float('-inf'), float('inf')
-        return self.isValidBSTUtil(root, min_val, max_val)
-
     def isValidBSTUtil(self, root, min_val, max_val):
         """
         :type root: TreeNode
@@ -95,8 +85,6 @@ class SolutionMinMax(object):
         return (self.isValidBSTUtil(root.left, min_val, root.val) and
                 self.isValidBSTUtil(root.right, root.val, max_val))
 
-
-class SolutionInorder(object):
     def isValidBST(self, root):
         """
         :type root: TreeNode
@@ -105,9 +93,11 @@ class SolutionInorder(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        self.previous = None
-        return self.isValidBSTUtil(root)
+        min_val, max_val = float('-inf'), float('inf')
+        return self.isValidBSTUtil(root, min_val, max_val)
 
+
+class SolutionInorder(object):
     def isValidBSTUtil(self, root):
         if not root:
             return True
@@ -126,6 +116,17 @@ class SolutionInorder(object):
             return False
 
         return True
+
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        self.previous = None
+        return self.isValidBSTUtil(root)
 
 
 def main():
