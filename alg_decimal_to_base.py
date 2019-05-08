@@ -19,7 +19,11 @@ def decimal_to_base2(decimal):
 
 
 def decimal_to_base_iter(decimal, base):
-    """Convert decimal number to base 2 ~ 16."""
+    """Convert decimal number to base 2 ~ 16.
+
+    Time complexity: O(d/b).
+    Space complexity: O(d/b).
+    """
     rem_stack = []
     while decimal > 0:
         decimal, rem = divmod(decimal, base)
@@ -41,7 +45,11 @@ def _decimal_to_base_recur(decimal, base, rem_stack):
 
 
 def decimal_to_base_recur(decimal, base):
-    """Convert decimal number to base 2 ~ 16 by recussion with Stack."""
+    """Convert decimal number to base 2 ~ 16 by recussion with Stack.
+
+    Time complexity: O(d/b).
+    Space complexity: O(d/b).
+    """
     rem_stack = []
     _decimal_to_base_recur(decimal, base, rem_stack)
 
@@ -54,16 +62,16 @@ def decimal_to_base_recur(decimal, base):
 def main():
     # Binary: (37)_10 = (100101)_2
     decimal = 37
-    print('Convert {} to binary: {}'
+    print('Iter: {} -> {}'
           .format(decimal, decimal_to_base2(decimal)))
-    print('Convert {} to binary: {}'
+    print('Iter: {} -> {}'
           .format(decimal, decimal_to_base_iter(decimal, 2)))
 
     # Hexadecimal: (1728)_10 = (6C0)_16
     decimal = 1728
-    print('Convert {} to hexadecimal: {}'
+    print('Iter: {} -> {}'
           .format(decimal, decimal_to_base_iter(decimal, 16)))
-    print('Convert {} to hexadecimal: {}'
+    print('Recur: {} -> {}'
           .format(decimal, decimal_to_base_recur(decimal, 16)))
 
 
