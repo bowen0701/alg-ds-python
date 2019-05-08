@@ -5,66 +5,66 @@ from __future__ import division
 digits = '0123456789ABCDEF'
 
 
-def decimal_to_base2(dec_num):
+def decimal_to_base2(decimal):
     """Convert decimal number to binary number."""
     rem_stack = []
-    while dec_num > 0:
-        dec_num, rem = divmod(dec_num, 2)
+    while decimal > 0:
+        decimal, rem = divmod(decimal, 2)
         rem_stack.append(rem)
 
-    bin_str = ''
+    bin_num = ''
     while rem_stack:
-        bin_str += str(rem_stack.pop())
-    return bin_str
+        bin_num += str(rem_stack.pop())
+    return bin_num
 
 
-def decimal_to_base_iter(dec_num, base):
+def decimal_to_base_iter(decimal, base):
     """Convert decimal number to base 2 ~ 16."""
     rem_stack = []
-    while dec_num > 0:
-        dec_num, rem = divmod(dec_num, base)
+    while decimal > 0:
+        decimal, rem = divmod(decimal, base)
         rem_stack.append(rem)
 
-    bin_str = ''
+    base_num = ''
     while rem_stack:
-        bin_str += digits[rem_stack.pop()]
-    return bin_str
+        base_num += digits[rem_stack.pop()]
+    return base_num
 
 
-def _decimal_to_base_recur(dec_num, base, rem_stack):
-    if dec_num < base:
-        rem_stack.append(dec_num)
+def _decimal_to_base_recur(decimal, base, rem_stack):
+    if decimal < base:
+        rem_stack.append(decimal)
     else:
-        dec_num, rem = divmod(dec_num, base)
+        decimal, rem = divmod(decimal, base)
         rem_stack.append(rem)
-        _decimal_to_base_recur(dec_num, base, rem_stack)
+        _decimal_to_base_recur(decimal, base, rem_stack)
 
 
-def decimal_to_base_recur(dec_num, base):
+def decimal_to_base_recur(decimal, base):
     """Convert decimal number to base 2 ~ 16 by recussion with Stack."""
     rem_stack = []
-    _decimal_to_base_recur(dec_num, base, rem_stack)
+    _decimal_to_base_recur(decimal, base, rem_stack)
 
-    bin_str = ''
+    base_num = ''
     while rem_stack:
-        bin_str += digits[rem_stack.pop()]
-    return bin_str
+        base_num += digits[rem_stack.pop()]
+    return base_num
 
 
 def main():
     # Binary: (37)_10 = (100101)_2
-    dec_num = 37
+    decimal = 37
     print('Convert {} to binary: {}'
-          .format(dec_num, decimal_to_base2(dec_num)))
+          .format(decimal, decimal_to_base2(decimal)))
     print('Convert {} to binary: {}'
-          .format(dec_num, decimal_to_base_iter(dec_num, 2)))
+          .format(decimal, decimal_to_base_iter(decimal, 2)))
 
     # Hexadecimal: (1728)_10 = (6C0)_16
-    dec_num = 1728
+    decimal = 1728
     print('Convert {} to hexadecimal: {}'
-          .format(dec_num, decimal_to_base_iter(dec_num, 16)))
+          .format(decimal, decimal_to_base_iter(decimal, 16)))
     print('Convert {} to hexadecimal: {}'
-          .format(dec_num, decimal_to_base_recur(dec_num, 16)))
+          .format(decimal, decimal_to_base_recur(decimal, 16)))
 
 
 if __name__ == '__main__':
