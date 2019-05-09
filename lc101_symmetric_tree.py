@@ -64,24 +64,51 @@ class BinaryTree(object):
                     current.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def isMirror(self, left, right):
+        # Check left & right nodes' existence.
+        if not left and not right:
+            return True
+        elif not left or not right:
+            return False
+
+        # Check left & right nodes' values and their children's mirroring.
+        if left.val != right.val:
+            return False
+        else:
+            out_pair = self.isMirror(left.left, right.right)
+            in_pair = self.isMirror(left.right, right.left)
+            return out_pair and in_pair
+
     def isSymmetric(self, root):
         """
         :type root: TreeNode
         :rtype: bool
         """
-        pass
-        
+        if not root:
+            return True
+
+        return self.isMirror(root.left, root.right)
+
 
 def main():
     a_list = [1, 2, 2, 3, 4, 4, 3]
     # Output: True.
     bt = BinaryTree()
     bt.insert(a_list)
-    print(bt.root.val, bt.root.left.val, bt.root.right.val,
-          bt.root.left.left.val, bt.root.left.right.val,
-          bt.root.right.left.val, bt.root.right.right.val)
+    print (bt.root.val, bt.root.left.val, bt.root.right.val,
+           bt.root.left.left.val, bt.root.left.right.val,
+           bt.root.right.left.val, bt.root.right.right.val)
+    print SolutionRecur().isSymmetric(bt.root)
 
+    a_list = [1, 2, 2, None, 3, None, 3]
+    # Output: False.
+    bt = BinaryTree()
+    bt.insert(a_list)
+    print (bt.root.val, bt.root.left.val, bt.root.right.val,
+           None, bt.root.left.right.val,
+           None, bt.root.right.right.val)
+    print SolutionRecur().isSymmetric(bt.root)
 
 
 if __name__ == '__main__':
