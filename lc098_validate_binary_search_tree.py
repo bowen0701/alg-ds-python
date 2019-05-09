@@ -46,6 +46,7 @@ class BinaryTree(object):
     def insert(self, a_list):
         self.root = TreeNode(a_list[0])
 
+        # Use stack to track current node.
         stack = []
         stack.insert(0, self.root)
 
