@@ -46,27 +46,27 @@ class BinaryTree(object):
     def insert(self, a_list):
         self.root = TreeNode(a_list[0])
 
-        # Use stack to track current node.
-        stack = []
-        stack.insert(0, self.root)
+        # Use queue to track current node.
+        queue = []
+        queue.insert(0, self.root)
 
         for i in range(1, len(a_list)):
             # Update current node after inserting left and right nodes.
             if i % 2 == 1:
-                current = stack.pop()
+                current = queue.pop()
 
             # Left node.
             if i % 2 == 1:
                 if a_list[i]:
                     current.left = TreeNode(a_list[i])
-                    stack.insert(0, current.left)
+                    queue.insert(0, current.left)
                 else:
                     current.left = None
             # Right node.
             elif i % 2 == 0:
                 if a_list[i]:
                     current.right = TreeNode(a_list[i])
-                    stack.insert(0, current.right)
+                    queue.insert(0, current.right)
                 else:
                     current.right = None
 
