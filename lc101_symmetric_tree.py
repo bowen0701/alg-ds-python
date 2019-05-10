@@ -84,11 +84,23 @@ class SolutionRecur(object):
         """
         :type root: TreeNode
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         if not root:
             return True
 
         return self.isMirror(root.left, root.right)
+
+
+class SolutionIter(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        pass
 
 
 def main():
