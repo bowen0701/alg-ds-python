@@ -100,6 +100,9 @@ class SolutionIter(object):
         """
         :type root: TreeNode
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         if not root:
             return True
