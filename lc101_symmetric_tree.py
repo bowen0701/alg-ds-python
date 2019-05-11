@@ -72,10 +72,11 @@ class SolutionRecur(object):
         elif not left or not right:
             return False
 
-        # Check left & right nodes' values and their children's mirroring.
+        # Check left & right nodes' values.
         if left.val != right.val:
             return False
         else:
+            # Check outside & inside pairs.
             out_pair = self.isMirror(left.left, right.right)
             in_pair = self.isMirror(left.right, right.left)
             return out_pair and in_pair
@@ -100,7 +101,28 @@ class SolutionIter(object):
         :type root: TreeNode
         :rtype: bool
         """
-        pass
+        if not root:
+            return True
+
+        queue = [(root.left, root.right)]
+
+        while queue:
+            left, right = queue.pop()
+
+            if not left and not right:
+                continue
+            elif not left or not right:
+                return False
+
+            # Check left & right nodes' values.
+            if left.val != right.val:
+                return False
+            else:
+                # Check outside & inside pairs.
+                queue.insert(0, (left.left, right.right))
+                queue.insert(0, (left.right, right.left))
+
+        return True
 
 
 def main():
