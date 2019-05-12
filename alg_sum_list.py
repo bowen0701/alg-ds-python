@@ -30,8 +30,8 @@ def sum_list_dp(a_list, n):
     return s[-1]
 
 
-def sum_list_dp2(a_list):
-    """Sum list by bottom-up dynamic programming w/ optimized space.
+def sum_list_iter(a_list):
+    """Sum list by bottom-up iteration w/ optimized space.
 
     Time complexity: O(n).
     Space complexity: O(1).
@@ -58,7 +58,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
     
     start_time = time.time()
-    print('By DP: {}'.format(sum_list_dp2(a_list)))
+    print('By DP: {}'.format(sum_list_iter(a_list)))
     print('Time: {}'.format(time.time() - start_time))
 
 
