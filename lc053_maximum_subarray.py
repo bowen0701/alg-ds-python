@@ -33,7 +33,7 @@ class SolutionDp(object):
         for i in range(1, len(sums)):
         	# Compute current max subarray sum before pos i.  
         	sums[i] = max(sums[i - 1] + nums[i], nums[i])
-        	# Track global max sum before pos i.
+        	# Update global max sum before pos i.
         	max_sum = max(max_sum, sums[i])
 
         return max_sum
@@ -53,7 +53,9 @@ class SolutionIter(object):
         current_max_sum = global_max_sum = nums[0]
 
         for i in range(1, len(nums)):
+        	# Track current max subarray sum before pos i.
         	current_max_sum = max(current_max_sum + nums[i], nums[i])
+        	# Update global max sum before pos i.
         	global_max_sum = max(global_max_sum, current_max_sum)
 
         return global_max_sum
