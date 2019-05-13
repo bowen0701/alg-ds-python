@@ -22,6 +22,9 @@ class SolutionDp(object):
         :rtype: int
         
         Maximum subarray sum by Kadane's algorithm.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         sums = [0] * len(nums)
         sums[0] = nums[0]
@@ -36,11 +39,32 @@ class SolutionDp(object):
         return max_sum
 
 
+class SolutionIter(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        
+        Maximum subarray sum by Kadane's algorithm w/ optimized space.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """        
+        current_max_sum = global_max_sum = nums[0]
+
+        for i in range(1, len(nums)):
+        	current_max_sum = max(current_max_sum + nums[i], nums[i])
+        	global_max_sum = max(global_max_sum, current_max_sum)
+
+        return global_max_sum
+
+
 def main():
     nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
     # Output: 6.
 
     print SolutionDp().maxSubArray(nums)
+    print SolutionIter().maxSubArray(nums)
 
 
 if __name__ == '__main__':
