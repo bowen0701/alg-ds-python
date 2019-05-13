@@ -15,18 +15,32 @@ If you have figured out the O(n) solution, try coding another solution using
 the divide and conquer approach, which is more subtle.
 """
 
-class Solution(object):
+class SolutionDp(object):
     def maxSubArray(self, nums):
         """
         :type nums: List[int]
         :rtype: int
+        
+        Maximum subarray sum by Kadane's algorithm.
         """
-        pass
+        sums = [0] * len(nums)
+        sums[0] = nums[0]
+        max_sum = sums[0]
+
+        for i in range(1, len(sums)):
+        	# Compute current max subarray sum before pos i.  
+        	sums[i] = max(sums[i - 1] + nums[i], nums[i])
+        	# Track global max sum before pos i.
+        	max_sum = max(max_sum, sums[i])
+
+        return max_sum
 
 
 def main():
     nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
     # Output: 6.
+
+    print SolutionDp().maxSubArray(nums)
 
 
 if __name__ == '__main__':
