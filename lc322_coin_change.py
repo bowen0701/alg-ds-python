@@ -22,28 +22,40 @@ Note:
 You may assume that you have an infinite number of each kind of coin.
 """
 
-class Solution(object):
+class SolutionDp(object):
     def coinChange(self, coins, amount):
         """
         :type coins: List[int]
         :type amount: int
         :rtype: int
+
+        Time complexity: O(c * a), where c is number of coins, and a is amount.
+        Space complexity: O(c * a).
         """
+        # Why sorted coin list? Since we want to start from smaller coins.
         coins = sorted(coins)
 
         n_coins = len(coins)
         T = [[float('inf')]*(amount + 1) for _ in range(n_coins)]
 
+        # Base case for amount 0.
         for c in range(n_coins):
             T[c][0] = 0
 
+        # Start from smallest coin to change from amount 0 to total amount.
         for c in range(n_coins):
             for a in range(1, amount + 1):
                 if a == coins[c]:
+                    # Directly use coin c to change total amount.
                     T[c][a] = 1
                 elif a >= coins[c]:
+                    # If coin c can be included, decide which uses less coins:
+                    # 1. previous coins without coin c to make a.
+                    # 2. previous coins without coin c to make a - coins[c]
+                    #    plus this 1 extra coin c.
                     T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c]])
                 else:
+                    # If coin c cannot be included, use previous coins.
                     T[c][a] = T[c - 1][a]
 
         if T[-1][-1] != float('inf'):
@@ -55,11 +67,11 @@ class Solution(object):
 def main():
     coins = [1, 2, 5]
     amount = 11
-    print Solution().coinChange(coins, amount)
+    print SolutionDp().coinChange(coins, amount)
 
     coins = [2]
     amount = 3
-    print Solution().coinChange(coins, amount)
+    print SolutionDp().coinChange(coins, amount)
 
 
 if __name__ == '__main__':
