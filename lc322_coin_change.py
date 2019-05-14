@@ -22,6 +22,31 @@ Note:
 You may assume that you have an infinite number of each kind of coin.
 """
 
+class SolutionRecur(object):
+    def coinChange(self, coins, amount):
+        """Change minimum coins by naive recursion.
+
+        Time complexity: O(c^a), where c is number of coins, and a is amount.
+        Space complexity: O(1).
+        """
+        if amount < 0:
+            return -1
+        if amount == 0:
+            return 0
+
+        min_coins = float('inf')
+
+        for c in coins:
+            extra_coins = self.coinChange(coins, amount - c)
+            if extra_coins >= 0 and extra_coins < min_coins:
+                min_coins = 1 + extra_coins
+
+        if min_coins != float('inf'):
+            return min_coins
+        else:
+            return -1
+
+
 class SolutionMemo(object):
     def _coin_change_memo(self, coins, amount, T):
         """Helper function for coin_change_memo()."""
@@ -104,11 +129,13 @@ class SolutionDp(object):
 def main():
     coins = [1, 2, 5]
     amount = 11
+    print SolutionRecur().coinChange(coins, amount)
     print SolutionMemo().coinChange(coins, amount)
     print SolutionDp().coinChange(coins, amount)
 
     coins = [2]
     amount = 3
+    print SolutionRecur().coinChange(coins, amount)
     print SolutionMemo().coinChange(coins, amount)
     print SolutionDp().coinChange(coins, amount)
 
