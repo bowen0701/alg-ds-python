@@ -22,6 +22,43 @@ Note:
 You may assume that you have an infinite number of each kind of coin.
 """
 
+class SolutionMemo(object):
+    def _coin_change_memo(self, coins, amount, T):
+        """Helper function for coin_change_memo()."""
+        if amount < 0:
+            return -1
+        if amount == 0:
+            return 0
+
+        if T[amount] > 0:
+            return T[amount]
+
+        min_coins = float('inf')
+
+        for c in coins:
+            extra_coins = self._coin_change_memo(coins, amount - c, T)
+            if extra_coins >= 0 and extra_coins < min_coins:
+                min_coins = 1 + extra_coins
+
+        if min_coins != float('inf'):
+            T[amount] = min_coins
+        else:
+            T[amount] = -1
+
+        return T[amount]
+
+
+    def coinChange(self, coins, amount):
+        """Change minimum coins by top-down dynamic programming: 
+        recursion + memoization.
+
+        Time complexity: O(c * a), where c is number of coins, and a is amount.
+        Space complexity: O(a).
+        """
+        T = [0] * (amount + 1)
+        return self._coin_change_memo(coins, amount, T)
+
+
 class SolutionDp(object):
     def coinChange(self, coins, amount):
         """
@@ -67,10 +104,12 @@ class SolutionDp(object):
 def main():
     coins = [1, 2, 5]
     amount = 11
+    print SolutionMemo().coinChange(coins, amount)
     print SolutionDp().coinChange(coins, amount)
 
     coins = [2]
     amount = 3
+    print SolutionMemo().coinChange(coins, amount)
     print SolutionDp().coinChange(coins, amount)
 
 
