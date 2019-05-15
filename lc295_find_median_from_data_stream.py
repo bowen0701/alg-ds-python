@@ -31,27 +31,44 @@ Follow up:
   how would you optimize it?
 """
 
-class MedianFinder(object):
+import heapq
 
+
+class MedianFinder(object):
     def __init__(self):
         """
         initialize your data structure here.
         """
-        pass
-        
+        self.small_maxheap = []
+        self.large_minheap = []
 
     def addNum(self, num):
         """
         :type num: int
         :rtype: None
         """
-        pass        
+        if not self.small_maxheap or num < -self.small_maxheap[0]:
+            heapq.heappush(self.small_maxheap, -num)
+        else:
+            heapq.heappush(self.large_minheap, num)
+
+        if len(self.small_maxheap) - len(self.large_minheap) == 2:
+            pop_item = -heapq.heappop(self.small_maxheap)
+            heapq.heappush(self.large_minheap, pop_item)
+        elif len(self.small_maxheap) - len(self.large_minheap) == -2:
+            pop_item = heapq.heappop(self.large_minheap)
+            heapq.heappush(self.small_maxheap, -pop_item)
 
     def findMedian(self):
         """
         :rtype: float
         """
-        pass
+        if len(self.small_maxheap) == len(self.large_minheap):
+            return ((-1 * self.small_maxheap[0]) + self.large_minheap[0]) / 2.0
+        elif len(self.small_maxheap) > len(self.large_minheap):
+            return -self.small_maxheap[0]
+        elif len(self.small_maxheap) < len(self.large_minheap):
+            return self.large_minheap[0]
 
 
 def main():
@@ -59,8 +76,13 @@ def main():
     # obj = MedianFinder()
     # obj.addNum(num)
     # param_2 = obj.findMedian()
-    pass
-   
+    obj = MedianFinder()
+    obj.addNum(1)
+    obj.addNum(2)
+    print obj.findMedian()
+    obj.addNum(3)
+    print obj.findMedian()
+
 
 if __name__ == '__main__':
     main()
