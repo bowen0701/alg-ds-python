@@ -47,11 +47,13 @@ class MedianFinder(object):
         :type num: int
         :rtype: None
         """
+        # For max heap, push negative item to obtain a negative min heap.
         if not self.small_maxheap or num < -self.small_maxheap[0]:
             heapq.heappush(self.small_maxheap, -num)
         else:
             heapq.heappush(self.large_minheap, num)
 
+        # Rebalance two heaps if one is much bigger than the other by 2.
         if len(self.small_maxheap) - len(self.large_minheap) == 2:
             pop_item = -heapq.heappop(self.small_maxheap)
             heapq.heappush(self.large_minheap, pop_item)
@@ -63,8 +65,10 @@ class MedianFinder(object):
         """
         :rtype: float
         """
+        # If two heaps are balanced, return mean of their peek as median. 
         if len(self.small_maxheap) == len(self.large_minheap):
             return ((-1 * self.small_maxheap[0]) + self.large_minheap[0]) / 2.0
+        # If no balanced, return bigger heap's peek.
         elif len(self.small_maxheap) > len(self.large_minheap):
             return -self.small_maxheap[0]
         elif len(self.small_maxheap) < len(self.large_minheap):
