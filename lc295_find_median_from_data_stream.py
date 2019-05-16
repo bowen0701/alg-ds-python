@@ -47,8 +47,9 @@ class MedianFinder(object):
         :type num: int
         :rtype: None
         """
-        # For max heap, push negative item to obtain a negative min heap.
+        # Store small half and large one to max heap and min heap, respectively. 
         if not self.small_maxheap or num < -self.small_maxheap[0]:
+            # To obtain a max heap, push negative item to a negative min heap.
             heapq.heappush(self.small_maxheap, -num)
         else:
             heapq.heappush(self.large_minheap, num)
