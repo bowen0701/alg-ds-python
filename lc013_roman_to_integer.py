@@ -92,6 +92,9 @@ class Solution(object):
         """
         :type s: str
         :rtype: int
+
+        Time complexity: O(n), where n is the length of s.
+        Space complexity: O(1), which is the size of roman to integer dict.
         """
         self.s = s
         integer = 0
