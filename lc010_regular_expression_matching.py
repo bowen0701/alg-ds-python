@@ -59,8 +59,10 @@ class Solution(object):
         :type p: str
         :rtype: bool
 
-
         Regular expression matching by bottom-up dynamic programming.
+
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         T = [[False] * (len(p) + 1) for _ in range((len(s) + 1))]
 
