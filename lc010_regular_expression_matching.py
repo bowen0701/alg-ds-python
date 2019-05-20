@@ -71,28 +71,28 @@ class Solution(object):
 
         # For empty s and p = a*, a*b*, or a*b*c*.
         for j in range(2, len(p) + 1):
-        	if p[j - 1] == '*':
-        		T[0][j] = T[0][j - 2]
+            if p[j - 1] == '*':
+                T[0][j] = T[0][j - 2]
 
         # Update the table for s's char along the p's char.
         for i in range(1, len(s) + 1):
-        	for j in range(1, len(p) + 1):
-        		if s[i] == p[j] or p[j] == '.':
-        			# Check match without s[i] & p[j].
-        			T[i][j] = T[i - 1][j - 1]
-        		elif p[j] == '*':
-        			# Check match for p before a*.
-        			T[i][j] = T[i][j - 2]
-        			if s[i] == p[j - 1] or p[j - 1] == '.':
-        				# Further check s[i] and char or '.' before '*'.
-        				T[i][j] |= T[i - 1][j]
+            for j in range(1, len(p) + 1):
+                if s[i] == p[j] or p[j] == '.':
+                    # Check match without s[i] & p[j].
+                    T[i][j] = T[i - 1][j - 1]
+                elif p[j] == '*':
+                    # Check match for p before a*.
+                    T[i][j] = T[i][j - 2]
+                    if s[i] == p[j - 1] or p[j - 1] == '.':
+                        # Further check s[i] and char or '.' before '*'.
+                        T[i][j] |= T[i - 1][j]
 
         return T[-1][-1]
 
 
 def main():
-	pass
+    pass
 
 
 if __init__ == '__main__':
-	main()
+    main()
