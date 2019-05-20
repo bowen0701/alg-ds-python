@@ -61,7 +61,8 @@ class Solution(object):
 
         Regular expression matching by bottom-up dynamic programming.
 
-        Time complexity: O(m*n).
+        Time complexity: O(m*n), where m is the length of string, and
+          n is the lenght of pattern.
         Space complexity: O(m*n).
         """
         T = [[False] * (len(p) + 1) for _ in range((len(s) + 1))]
@@ -77,13 +78,13 @@ class Solution(object):
         # Update the table for s's char along the p's char.
         for i in range(1, len(s) + 1):
             for j in range(1, len(p) + 1):
-                if s[i] == p[j] or p[j] == '.':
+                if s[i - 1] == p[j - 1] or p[j - 1] == '.':
                     # Check match without s[i] & p[j].
                     T[i][j] = T[i - 1][j - 1]
-                elif p[j] == '*':
+                elif p[j - 1] == '*':
                     # Check match for p before a*.
                     T[i][j] = T[i][j - 2]
-                    if s[i] == p[j - 1] or p[j - 1] == '.':
+                    if s[i - 1] == p[j - 2] or p[j - 2] == '.':
                         # Further check s[i] and char or '.' before '*'.
                         T[i][j] |= T[i - 1][j]
 
@@ -93,7 +94,27 @@ class Solution(object):
 def main():
     s = "aa"
     p = "a"
-    # Output: False.
+    # Output: false.
+    print Solution().isMatch(s, p)
+
+    s = "aa"
+    p = "a*"
+    # Output: true.
+    print Solution().isMatch(s, p)
+
+    s = "ab"
+    p = ".*"
+    # Output: true.
+    print Solution().isMatch(s, p)
+
+    s = "aab"
+    p = "c*a*b"
+    # Output: true.
+    print Solution().isMatch(s, p)
+
+    s = "mississippi"
+    p = "mis*is*p*."
+    # Output: false.
     print Solution().isMatch(s, p)
 
 
