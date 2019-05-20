@@ -91,8 +91,11 @@ class Solution(object):
 
 
 def main():
-    pass
+    s = "aa"
+    p = "a"
+    # Output: False.
+    print Solution().isMatch(s, p)
 
 
-if __init__ == '__main__':
+if __name__ == '__main__':
     main()
