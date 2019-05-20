@@ -1,4 +1,4 @@
-"""Recursive Staircase.
+"""Climbing Stairs.
 
 How many paths up a stair of say 100 steps if the child jumps 1, 2 or 3 steps?
 
@@ -15,7 +15,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-def recursive_staircase_recur(steps):
+def climbing_stairs_recur(steps):
     """Staircase by top-down recursion.
 
     Time complexity: O(3^n).
@@ -27,12 +27,12 @@ def recursive_staircase_recur(steps):
     if steps == 0:
         return 1
 
-    return (recursive_staircase_recur(steps - 1) + 
-            recursive_staircase_recur(steps - 2) + 
-            recursive_staircase_recur(steps - 3))
+    return (climbing_stairs_recur(steps - 1) + 
+            climbing_stairs_recur(steps - 2) + 
+            climbing_stairs_recur(steps - 3))
 
 
-def _staircase_memo(steps, M):
+def _climbing_stairs_memo(steps, M):
     if steps < 0:
         return 0
 
@@ -42,23 +42,23 @@ def _staircase_memo(steps, M):
     if M[steps]:
         return M[steps]
 
-    M[steps] = (_staircase_memo(steps - 1, M) +
-                _staircase_memo(steps - 2, M) + 
-                _staircase_memo(steps - 3, M))
+    M[steps] = (_climbing_stairs_memo(steps - 1, M) +
+                _climbing_stairs_memo(steps - 2, M) + 
+                _climbing_stairs_memo(steps - 3, M))
     return M[steps]
 
 
-def recursive_staircase_memo(steps):
+def climbing_stairs_memo(steps):
     """Staircase by top-down memoization.
 
     Time complexity: O(n).
     Space complexity: O(n).
     """
     M = [0] * (steps + 1)
-    return _staircase_memo(steps, M)
+    return _climbing_stairs_memo(steps, M)
 
 
-def recursive_staircase_dp(steps):
+def climbing_stairs_dp(steps):
     """Staircase by bottom-up dynamic programming.
 
     Time complexity: O(n).
@@ -74,7 +74,7 @@ def recursive_staircase_dp(steps):
     return M[steps]
 
 
-def recursive_staircase_iter(steps):
+def climbing_stairs_iter(steps):
     """Staircase by bottom-up iteration w/ optimized space.
 
     Time complexity: O(n).
@@ -96,19 +96,19 @@ def main():
     steps = 20
 
     start_time = time.time()
-    print('Recur: {}'.format(recursive_staircase_recur(steps)))
+    print('Recur: {}'.format(climbing_stairs_recur(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('Memo: {}'.format(recursive_staircase_memo(steps)))
+    print('Memo: {}'.format(climbing_stairs_memo(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('DP: {}'.format(recursive_staircase_dp(steps)))
+    print('DP: {}'.format(climbing_stairs_dp(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('Iter: {}'.format(recursive_staircase_iter(steps)))
+    print('Iter: {}'.format(climbing_stairs_iter(steps)))
     print('Time: {}'.format(time.time() - start_time))
 
 
