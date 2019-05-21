@@ -38,7 +38,7 @@ class Solution(object):
         head = ListNode(0)
         current, carry = head, 0
 
-        while l1 or l2 or carry:
+        while l1 > 0 or l2 > 0 or carry > 0:
             val1 = val2 = 0
             if l1:
                 val1 = l1.val
@@ -47,9 +47,8 @@ class Solution(object):
                 val2 = l2.val
                 l2 = l2.next
     
-            carry, val = (
-                (val1 + val2 + carry) // 10, 
-                (val1 + val2 + carry) % 10)
+            total = val1 + val2 + carry
+            carry, val = total // 10, total % 10
 
             current.next = ListNode(val)
             current = current.next
