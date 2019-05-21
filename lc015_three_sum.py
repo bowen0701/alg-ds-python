@@ -24,12 +24,15 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
+
+        Time complexity: O(n*logn + n^2) = O(n^2).
+        Space complexity: O(n).
         """
         three_sum_ls = []
 
         # Sort the list for easily iterating to check the triplets.
         nums.sort()
-        
+
         for i in range(len(nums) - 2):
             # In sorted nums, if entry i > 0, no more triplets satisfy 3 sum.
             if nums[i] > 0:
