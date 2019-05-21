@@ -29,6 +29,9 @@ class Solution(object):
         :type a: str
         :type b: str
         :rtype: str
+
+        Time complexity: O(n), where n is the length of the longer string.
+        Space complexity: O(1).
         """
         # Normalize a and b to equal size by padding 0's to shorer one.
         a, b = self.normalize(a, b)
@@ -36,7 +39,7 @@ class Solution(object):
         # Add numbers in a reversed order with carry.
         s, carry = '', 0
         i = len(a) - 1
-        
+
         while i >= 0 or carry > 0:
             if i >= 0: 
                 total = int(a[i]) + int(b[i]) + carry
