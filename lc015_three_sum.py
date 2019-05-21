@@ -25,11 +25,50 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        pass
+        three_sum_ls = []
+
+        # Sort the list for easily iterating to check the triplets.
+        nums.sort()
+        
+        for i in range(len(nums) - 2):
+            # In sorted nums, if entry i > 0, no more triplets satisfy 3 sum.
+            if nums[i] > 0:
+                break
+            
+            # To avoid duplicate triplets.
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            # Check triplets starting from the RHS of entry i by two pointers.
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                total = nums[i] + nums[l] + nums[r]
+
+                if total < 0:
+                    # The 3 sum is too small, increase it by moving left to right. 
+                    l += 1
+                elif total > 0:
+                    # The 3 sum is too big, decrease it by moving right to left. 
+                    r -= 1
+                else:
+                    three_sum_ls.append([nums[i], nums[l], nums[r]])
+                    # If left's right is right's left is the same as 
+                    # left and right, respectively, increment it. 
+                    while l < r and nums[l] == nums[l + 1]:
+                        l += 1
+                    while l < r and nums[r] == nums[r - 1]:
+                        r -= 1
+                    # Checkout another triplet by incrementing left and right.
+                    l += 1
+                    r -= 1
+
+        return three_sum_ls
 
 
 def main():
-    pass
+    nums = [-1, 0, 1, 2, -1, -4]
+    # Output: [[-1, 0, 1], [-1, -1, 2]]
+    print Solution().threeSum(nums)
 
 
 if __name__ == '__main__':
