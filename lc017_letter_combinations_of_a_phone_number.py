@@ -23,6 +23,11 @@ class Solution(object):
         """
         :type digits: str
         :rtype: List[str]
+ 
+        Time complexity: O(n * m^2)
+          - n is the length of digits,
+          - m is the mean length of digit's letters, basically 3.
+        Space complexity: O(m^n).
         """
         # Store digit->letter-list dict.
         d2l_d = {
