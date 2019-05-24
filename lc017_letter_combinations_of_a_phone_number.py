@@ -24,11 +24,41 @@ class Solution(object):
         :type digits: str
         :rtype: List[str]
         """
-        pass
+        # Store digit->letter-list dict.
+        d2l_d = {
+            '2': ['a', 'b', 'c'],
+            '3': ['d', 'e', 'f'],
+            '4': ['g', 'h', 'i'],
+            '5': ['j', 'k' ,'l'],
+            '6': ['m', 'n', 'o'],
+            '7': ['p', 'q', 'r', 's'],
+            '8': ['t', 'u', 'v'],
+            '9': ['w', 'x', 'y', 'z']
+        }
+        
+        # Edge cases handling.
+        if not digits:
+            return []
+        if len(digits) == 1:
+            return d2l_d[digits]
+
+        # Initialize output lc by the 0th digit's letter-list.
+        lc = d2l_d[digits[0]]
+
+        # Run for loop over digits starting from index i = 1.
+        #   - Get the ith digit's letter list li.
+        #   - Use list comprehension to combine lc and li to replace lc.
+        for i in range(1, len(digits)):
+            li = d2l_d[digits[i]]
+            lc = [m + n for m in lc for n in li]
+        
+        return lc
 
 
 def main():
-    pass
+    digits =  "23"
+    # Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+    print Solution().letterCombinations(digits)
 
 
 if __name__ == '__main__':
