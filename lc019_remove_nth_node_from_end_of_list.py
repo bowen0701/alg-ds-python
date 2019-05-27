@@ -31,21 +31,55 @@ class LinkedList(object):
     def append(self, val):
         if not self.head:
             self.head = ListNode(val)
+            return None
 
         current = self.head
-        if current.next:
+        while current.next:
             current = current.next
         current.next = ListNode(val)
+        return None
+
+    def show(self):
+        ls = []
+        current = self.head
+        while current:
+            ls.append(current.val)
+            current = current.next
+        print(ls)
 
 
-class Solution(object):
+class SolutionTwoPasses(object):
     def removeNthFromEnd(self, head, n):
         """
         :type head: ListNode
         :type n: int
         :rtype: ListNode
         """
-        pass
+        # Get the size of the linked list.
+        size = 0
+        current = head
+        while current:
+            size += 1
+            current = current.next
+
+        # Arrive at the (N-1)th node.
+        pos = -1
+        previous = None
+        current = head
+        while pos < size - n - 1:
+            pos += 1
+            previous = current
+            current = current.next
+
+        # If the Nth node is head, return head.next.
+        if current == head:
+            return head.next
+
+        # If the Nth node exists, replace the Nth node by the (N+1)th,
+        # and return head.
+        if current:
+            previous.next = previous.next.next
+        return head
 
 
 def main():
@@ -57,7 +91,16 @@ def main():
     ll.append(3)
     ll.append(4)
     ll.append(5)
-    
+    ll.show()
+
+    print SolutionTwoPasses().removeNthFromEnd(ll.head, 2).next.next.next.val
+
+    # After removing the 5th node from the end: 2->3->4->5.
+    print SolutionTwoPasses().removeNthFromEnd(ll.head, 5).val
+
+    # After removing the 0th node from the end: 1->2->3->4->5.
+    print SolutionTwoPasses().removeNthFromEnd(ll.head, 0).val
+
 
 if __name__ == '__main__':
     main()
