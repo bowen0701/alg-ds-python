@@ -74,6 +74,7 @@ class LinkedList(object):
         new_head = Node(data)
         new_head.next = self.head
         self.head = new_head
+        return None
 
     def append(self, data):
         """Append data to list tail.
@@ -88,6 +89,7 @@ class LinkedList(object):
         while current.next:
             current = current.next
         current.next = Node(data)
+        return None
 
     def delete_with_data(self, data):
         """Remove data from list, if existed.
@@ -112,6 +114,7 @@ class LinkedList(object):
                 return None
             else:
                 current = current.next
+        return None
 
     def insert(self, pos, data):
         """Insert data to specified position of list.
@@ -141,6 +144,7 @@ class LinkedList(object):
             self.head = insert_node
         else:
             previous.next = insert_node
+        return None
 
     def pop(self, pos=None):
         """Pop list node at specified position.
