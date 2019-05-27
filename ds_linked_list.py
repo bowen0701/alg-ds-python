@@ -82,9 +82,12 @@ class LinkedList(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        # If linked list is empty.
         if not self.head:
             self.head = Node(data)
             return None
+
+        # If linked list exits, append new node after the tail node.
         current = self.head
         while current.next:
             current = current.next
@@ -220,6 +223,15 @@ class LinkedList(object):
 
 def main():
     a_list = LinkedList()
+    a_list.append(31)
+    a_list.append(77)
+    a_list.append(17)
+    a_list.append(93)
+    a_list.append(26)
+    a_list.append(54)
+    a_list.show()
+
+    a_list = LinkedList()
     a_list.prepend(31)
     a_list.prepend(77)
     a_list.prepend(17)
@@ -229,7 +241,7 @@ def main():
     a_list.show()
     print('Is empty: {}'.format(a_list.is_empty()))
     print('Size: {}'.format(a_list.size()))
-    
+
     print('Append 45:')
     a_list.append(45)
     print('Size: {}'.format(a_list.size()))
