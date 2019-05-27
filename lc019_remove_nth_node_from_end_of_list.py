@@ -130,6 +130,9 @@ def main():
 
     start_time = time.time()
 
+    # Solution = SolutionTwoPasses
+    Solution = SolutionOnePass
+
     # Given linked list: 1->2->3->4->5, and n = 2.
     # After removing the 2nd node from the end: 1->2->3->5.
     ll = LinkedList()
@@ -139,8 +142,7 @@ def main():
     ll.append(4)
     ll.append(5)
     ll.show()
-    print SolutionTwoPasses().removeNthFromEnd(ll.head, 2).next.next.next.val
-    # print SolutionOnePass().removeNthFromEnd(ll.head, 2).next.next.next.val
+    print Solution().removeNthFromEnd(ll.head, 2).next.next.next.val
 
     # After removing the 5th node from the end: 2->3->4->5.
     ll = LinkedList()
@@ -150,8 +152,7 @@ def main():
     ll.append(4)
     ll.append(5)
     ll.show()
-    print SolutionTwoPasses().removeNthFromEnd(ll.head, 5).val
-    # print SolutionOnePass().removeNthFromEnd(ll.head, 5).val
+    Solution().removeNthFromEnd(ll.head, 5).val
 
     # After removing the 0th node from the end: 1->2->3->4->5.
     ll = LinkedList()
@@ -161,8 +162,7 @@ def main():
     ll.append(4)
     ll.append(5)
     ll.show()
-    print SolutionTwoPasses().removeNthFromEnd(ll.head, 0).val
-    # print SolutionOnePass().removeNthFromEnd(ll.head, 0).val
+    print Solution().removeNthFromEnd(ll.head, 0).val
 
     print 'Time: {}'.format(time.time() - start_time)
 
