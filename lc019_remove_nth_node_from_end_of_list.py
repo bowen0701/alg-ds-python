@@ -54,6 +54,9 @@ class SolutionTwoPasses(object):
         :type head: ListNode
         :type n: int
         :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # If no node will be removed.
         if n == 0:
@@ -93,6 +96,9 @@ class SolutionOnePass(object):
         :type head: ListNode
         :type n: int
         :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # If no node will be removed.
         if n == 0:
@@ -108,13 +114,11 @@ class SolutionOnePass(object):
         while current.next:
             current_pos += 1
             previous_pos += 1
-
+            current = current.next
             if previous_pos == 0:
                 previous = head
             elif previous_pos > 0:
                 previous = previous.next
-
-            current = current.next
 
         # It previous_pos < 0, it means head will be removed.
         # Else, remove the Nth node.
