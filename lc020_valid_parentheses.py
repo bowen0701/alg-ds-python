@@ -39,12 +39,71 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        pass
+        # Make a open->close brackets dict.
+        open_close_d = {
+            '(': ')',
+            '[': ']',
+            '{': '}'
+        }
+
+        stack = []
+        for c in s:
+            # If c is open bracket, push to stack.
+            if c in '([{':
+                stack.append(c)
+                continue
+            # If c in close bracket, pop element from stack and check match.
+            if c in ')]}':
+                # If no open bracket in stack, we have non-matched close one.
+                if not stack:
+                    return False
+                open_c = stack.pop()
+                if open_close_d.get(open_c) != c:
+                    return False
+
+        # Check whether there is non-matched open bracket.
+        if not stack:
+            return True
+        else:
+            return False
 
 
 def main():
-	pass
+    # Input: "()"
+    # Output: true
+    s = '()'
+    print Solution().isValid(s)
+
+    # Input: "()[]{}"
+    # Output: true
+    s = '()[]{}'
+    print Solution().isValid(s)
+
+    # Input: "(]"
+    # Output: false
+    s = '(]'
+    print Solution().isValid(s)
+
+    # Input: "([)]"
+    # Output: false
+    s = '([)]'
+    print Solution().isValid(s)
+
+    # Input: "{[]}"
+    # Output: true
+    s = '{[]}'
+    print Solution().isValid(s)
+
+    # Input: '['
+    # Output: False
+    s = '['
+    print Solution().isValid(s)
+
+    # Input: ']'
+    # Output: False
+    s = ']'
+    print Solution().isValid(s)
 
 
 if __name__ == '__main__':
-	main()
+    main()
