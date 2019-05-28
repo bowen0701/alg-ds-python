@@ -38,6 +38,9 @@ class Solution(object):
         """
         :type s: str
         :rtype: bool
+
+        Time complexity: O(n), where n is the length of the string.
+        Space complexity: O(n).
         """
         # Make a open->close brackets dict.
         open_close_d = {
@@ -61,7 +64,7 @@ class Solution(object):
                 if open_close_d.get(open_c) != c:
                     return False
 
-        # Check whether there is non-matched open bracket.
+        # Check whether there is non-matched open bracket left.
         if not stack:
             return True
         else:
