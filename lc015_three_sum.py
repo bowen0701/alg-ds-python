@@ -53,7 +53,7 @@ class Solution(object):
                 elif total > 0:
                     # The 3 sum is too big, decrease it by moving right to left. 
                     r -= 1
-                else:
+                elif total == 0:
                     three_sum_ls.append([nums[i], nums[l], nums[r]])
                     # If left's right is right's left is the same as 
                     # left and right, respectively, increment it. 
