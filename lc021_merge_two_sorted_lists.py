@@ -32,6 +32,9 @@ class Solution(object):
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
+
+        Time complexity: O(n1 + n2), where n is the lengths of two lists.
+        Space complexity: O(n1 + n2).
         """
         if not l1 and not l2:
             return None
