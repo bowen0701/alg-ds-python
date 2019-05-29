@@ -38,11 +38,14 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
 
-        Time complexity: O(nm), where n is the length of words.
-        Space complexity: O(m), where m is the max length of word.
+        Time complexity: O((n*logn)*m), 
+          where n is the length of words, and m is the max length of word.
+        Space complexity: O(m).
         """
         prefix = longest = ''
+
         for w in sorted(words):
+            # Check word's prefix is part of prefix.
             if w[:len(w) - 1] == prefix[:len(w) - 1]:
                 prefix = w
                 longest = max([longest, prefix], key=len)
@@ -65,8 +68,8 @@ class SolutionTrie(object):
         :type words: List[str]
         :rtype: str
 
-        Time complexity: O(??).
-        Space complexity: O(??).
+        Time complexity: O(nm).
+        Space complexity: O(nm).
         """
         # Build Trie for words in dictionary.
         for w in words:
