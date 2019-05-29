@@ -28,12 +28,17 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        # Two pointer method: previous & head.
         previous = None
         while head:
+            # Create new node as current, and 
+            # reverse the list by pointing to previous.
             current = ListNode(head.val)
             current.next = previous
-            previous = current
+
+            # Move head and previous to next nodes.
             head = head.next
+            previous = current
         return previous
 
 
@@ -48,8 +53,10 @@ class SolutionRecur(object):
         """
         if not head:
             return previous
+
         current = ListNode(head.val)
         current.next = previous
+
         head = head.next
         previous = current
         return self.reverseList(head, previous)
