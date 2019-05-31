@@ -24,12 +24,15 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: int
+
+        Time complexity: O(n^2), where n is the length of the nums.
+        Space complexity: O(n).
         """
         if not nums:
             return 0
 
-        # Create a table and set all elements to 1, because the 
-        # LIS of each element is at least 1.
+        # Dynamic programming: Create a table and set all elements to 1, 
+        # because the LIS of each element is at least 1.
         T = [1] * len(nums)
 
         # Apply two pointer method: if element j is smaller than element i,
