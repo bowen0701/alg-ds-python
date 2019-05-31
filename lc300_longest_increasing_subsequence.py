@@ -25,11 +25,27 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        pass
+        if not nums:
+            return 0
+
+        # Create a table and set all elements to 1, because the 
+        # LIS of each element is at least 1.
+        T = [1] * len(nums)
+
+        # Apply two pointer method: if element j is smaller than element i,
+        # update T[i] = max(T[i], T[j] + 1).
+        for i in range(1, len(nums)):
+            for j in range(0, i):
+                if nums[j] < nums[i]:
+                    T[i] = max(T[i], T[j] + 1)
+
+        # Return max elements of table as LIS. 
+        return max(T)
 
 
 def main():
-    pass
+    nums = [10, 9, 2, 5, 3, 7, 101, 18]
+    print Solution().lengthOfLIS(nums)
 
 
 if __name__ == '__main__':
