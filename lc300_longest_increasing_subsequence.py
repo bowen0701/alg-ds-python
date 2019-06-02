@@ -19,7 +19,7 @@ Your algorithm should run in O(n2) complexity.
 Follow up: Could you improve it to O(n log n) time complexity?
 """
 
-class Solution(object):
+class SolutionDp(object):
     def lengthOfLIS(self, nums):
         """
         :type nums: List[int]
@@ -48,7 +48,7 @@ class Solution(object):
 
 def main():
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
-    print Solution().lengthOfLIS(nums)
+    print SolutionDp().lengthOfLIS(nums)
 
 
 if __name__ == '__main__':
