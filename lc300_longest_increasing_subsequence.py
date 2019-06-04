@@ -19,9 +19,31 @@ Your algorithm should run in O(n2) complexity.
 Follow up: Could you improve it to O(n log n) time complexity?
 """
 
+
+class SolutionRecur(object):
+    def _LISBigger(self, prev, nums):
+        if not nums:
+            return 0
+        
+        lis = self._LISBigger(prev, nums[1:])
+        if nums[0] > prev:
+            lis_with = 1 + self._LISBigger(nums[0], nums[1:])
+            if lis_with > lis:
+                lis = lis_with
+        return lis
+
+    def lengthOfLIS(self, nums):
+        """Length of LIS by recursion.
+
+        Time complexity: O(2^n).
+        Space complexity: O(n).
+        """
+        return self._LISBigger(-float('inf'), nums)
+
+
 class SolutionDp(object):
     def lengthOfLIS(self, nums):
-        """
+        """Length of LIS by dynamic programming.
         :type nums: List[int]
         :rtype: int
 
@@ -31,7 +53,7 @@ class SolutionDp(object):
         if not nums:
             return 0
 
-        # Dynamic programming: Create a table and set all elements to 1, 
+        # Create a table and set all elements to 1,
         # because the LIS of each element is at least 1.
         T = [1] * len(nums)
 
@@ -48,6 +70,7 @@ class SolutionDp(object):
 
 def main():
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
+    print SolutionRecur().lengthOfLIS(nums)
     print SolutionDp().lengthOfLIS(nums)
 
 
