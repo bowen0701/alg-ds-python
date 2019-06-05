@@ -21,13 +21,13 @@ Follow up: Could you improve it to O(n log n) time complexity?
 
 
 class SolutionRecur(object):
-    def _LISBigger(self, prev, nums, start, end):
+    def _LIS_bigger(self, prev, nums, start, end):
         if end - start == 0:
             return 0
 
-        lis = self._LISBigger(prev, nums, start + 1, end)
+        lis = self._LIS_bigger(prev, nums, start + 1, end)
         if nums[start] > prev:
-            lis_with = 1 + self._LISBigger(nums[start], nums, start + 1, end)
+            lis_with = 1 + self._LIS_bigger(nums[start], nums, start + 1, end)
             if lis_with > lis:
                 lis = lis_with
         return lis
@@ -36,10 +36,10 @@ class SolutionRecur(object):
         """Length of LIS by recursion.
 
         Time complexity: O(2^n).
-        Space complexity: O(n).
+        Space complexity: O(1).
         """
         start, end = 0, len(nums) - 1
-        return self._LISBigger(-float('inf'), nums, start, end)
+        return self._LIS_bigger(-float('inf'), nums, start, end)
 
 
 class SolutionDp(object):
