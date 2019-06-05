@@ -21,13 +21,13 @@ Follow up: Could you improve it to O(n log n) time complexity?
 
 
 class SolutionRecur(object):
-    def _LISBigger(self, prev, nums):
-        if not nums:
+    def _LISBigger(self, prev, nums, start, end):
+        if end - start == 0:
             return 0
-        
-        lis = self._LISBigger(prev, nums[1:])
-        if nums[0] > prev:
-            lis_with = 1 + self._LISBigger(nums[0], nums[1:])
+
+        lis = self._LISBigger(prev, nums, start + 1, end)
+        if nums[start] > prev:
+            lis_with = 1 + self._LISBigger(nums[start], nums, start + 1, end)
             if lis_with > lis:
                 lis = lis_with
         return lis
@@ -38,7 +38,8 @@ class SolutionRecur(object):
         Time complexity: O(2^n).
         Space complexity: O(n).
         """
-        return self._LISBigger(-float('inf'), nums)
+        start, end = 0, len(nums) - 1
+        return self._LISBigger(-float('inf'), nums, start, end)
 
 
 class SolutionDp(object):
