@@ -25,10 +25,10 @@ class SolutionRecur(object):
         if start == end:
             return 0
 
-        # The LIS of nums[0:n] is either a LIS of nums[1:n], without nums[0]. 
+        # The LIS of nums[0:n] is either a LIS of nums[1:n], without nums[0].
         lis = self._LIS_bigger(prev, nums, start + 1, end)
 
-        # Or the LIS is 1 + a LIS of nums[1:n], with nums[0], 
+        # Or the LIS is 1 + a LIS of nums[1:n], with nums[0],
         # if nums[0] is bigger than the previous. Update the LIS if suitable.
         if nums[start] > prev:
             lis_with = 1 + self._LIS_bigger(nums[start], nums, start + 1, end)
