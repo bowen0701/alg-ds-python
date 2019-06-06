@@ -22,10 +22,14 @@ Follow up: Could you improve it to O(n log n) time complexity?
 
 class SolutionRecur(object):
     def _LIS_bigger(self, prev, nums, start, end):
-        if end - start == 0:
+        if start == end:
             return 0
 
+        # The LIS of nums[0:n] is either a LIS of nums[1:n], without nums[0]. 
         lis = self._LIS_bigger(prev, nums, start + 1, end)
+
+        # Or the LIS is 1 + a LIS of nums[1:n], with nums[0], 
+        # if nums[0] is bigger than the previous. Update the LIS if suitable.
         if nums[start] > prev:
             lis_with = 1 + self._LIS_bigger(nums[start], nums, start + 1, end)
             if lis_with > lis:
@@ -71,6 +75,13 @@ class SolutionDp(object):
 
 class SolutionBinarySearch(object):
     def lengthOfLIS(self, nums):
+        """Length of LIS by binary search.
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n*logn), where n is the length of the nums.
+        Space complexity: O(n).
+        """
         if not nums:
             return 0
 
