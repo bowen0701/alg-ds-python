@@ -69,22 +69,25 @@ class SolutionDp(object):
         return max(T)
 
 
-class SolutionOpt(object):
+class SolutionBinarySearch(object):
     def lengthOfLIS(self, nums):
+        if not nums:
+            return 0
+
         tails = [0] * len(nums)
         lis = 0
 
         for n in nums:
-            i, j = 0, lis
-            while i != j:
-                m = (i + j) // 2
-                if tails[m] < n:
-                    i = m + 1
+            left, right = 0, lis
+            while left != right:
+                mid = (left + right) // 2
+                if tails[mid] < n:
+                    left = mid + 1
                 else:
-                    j = m
+                    right = mid
 
-            tails[i] = n
-            lis = max(i + 1, lis)
+            tails[left] = n
+            lis = max(left + 1, lis)
         return lis
 
 
@@ -92,7 +95,7 @@ def main():
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
     print SolutionRecur().lengthOfLIS(nums)
     print SolutionDp().lengthOfLIS(nums)
-    print SolutionOpt().lengthOfLIS(nums)
+    print SolutionBinarySearch().lengthOfLIS(nums)
 
 
 if __name__ == '__main__':
