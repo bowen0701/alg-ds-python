@@ -69,10 +69,30 @@ class SolutionDp(object):
         return max(T)
 
 
+class SolutionOpt(object):
+    def lengthOfLIS(self, nums):
+        tails = [0] * len(nums)
+        lis = 0
+
+        for n in nums:
+            i, j = 0, lis
+            while i != j:
+                m = (i + j) // 2
+                if tails[m] < n:
+                    i = m + 1
+                else:
+                    j = m
+
+            tails[i] = n
+            lis = max(i + 1, lis)
+        return lis
+
+
 def main():
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
     print SolutionRecur().lengthOfLIS(nums)
     print SolutionDp().lengthOfLIS(nums)
+    print SolutionOpt().lengthOfLIS(nums)
 
 
 if __name__ == '__main__':
