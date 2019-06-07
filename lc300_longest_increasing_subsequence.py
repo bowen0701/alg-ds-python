@@ -87,8 +87,11 @@ class SolutionBinarySearch(object):
 
         tails = [0] * len(nums)
         lis = 0
-
+ 
+        # If n is larger than all tails, append it and increase the size by 1.
+        # Further, if tails[i-1] < x <= tails[i], update tails[i].
         for n in nums:
+            # Use binary search to find the correct tail for new item.
             left, right = 0, lis
             while left != right:
                 mid = (left + right) // 2
@@ -99,6 +102,8 @@ class SolutionBinarySearch(object):
 
             tails[left] = n
             lis = max(left + 1, lis)
+            print 'tails: {}'.format(tails)
+            print 'lis: {}'.format(lis)
         return lis
 
 
