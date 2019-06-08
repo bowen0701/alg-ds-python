@@ -57,8 +57,19 @@ class Solution(object):
         :rtype: List[int]
         """
         size = len(nums)
+        prods = [1] * size
 
-        
+        # Compute prods as product of numbers left to nums[i].
+        for i in range(1, size):
+            prods[i] = prods[i - 1] * nums[i - 1]
+
+        # Multiply prods and product of numbers right to nums[i].
+        right_prods = 1
+        for i in range(size - 1, -1, -1):
+            prods[i] *= right_prods
+            right_prods *= nums[i]
+
+        return prods
 
 
 def main():
@@ -67,6 +78,7 @@ def main():
     nums = [2, 3, 4, 5]
 
     print SolutionLeftRight().productExceptSelf(nums)
+    print Solution().productExceptSelf(nums)
 
 
 if __name__ == '__main__':
