@@ -43,11 +43,39 @@ class SolutionRecur(object):
         if not root:
             return None
 
+        # Recursively invert left subtree and right subtree.
         left = self.invertTree(root.left)
         right = self.invertTree(root.right)
 
+        # Invert tree by interchanging left and right trees.
         root.left = right
         root.right = left
+        return root
+
+
+class SolutionIter(object):
+    def invertTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        if not root:
+            return root
+
+        # Apply BFS w/ queue to iteratively visit and invert tree.
+        queue = [root]
+        while queue:
+            visit = queue.pop()
+            # Invert tree by interchanging left and right trees.
+            visit.left, visit.right = visit.right, visit.left
+            if visit.left:
+                queue.insert(0, visit.left)
+            if visit.right:
+                queue.insert(0, visit.right)
+
         return root
 
 
@@ -60,7 +88,8 @@ def main():
     root.right.left = TreeNode(6)
     root.right.right = TreeNode(9)
 
-    root = SolutionRecur().invertTree(root)
+    # root = SolutionRecur().invertTree(root)
+    root = SolutionIter().invertTree(root)
     print root.val              # Should be 4.
     print root.left.val         # Should be 7.
     print root.right.val        # Should be 2.
