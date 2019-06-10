@@ -19,34 +19,6 @@ Note:
 You may assume k is always valid, 1 <= k <= array's length.
 """
 
-class SolutionQuickSort(object):
-    def quicksort(self, nums):
-        if len(nums) <= 1:
-            return nums
-
-        pivot = nums[len(nums) // 2]
-
-        left_nums = [n for n in nums if n < pivot]
-        mid_nums = [n for n in nums if n == pivot]
-        right_nums = [n for n in nums if n > pivot]
-
-        return self.quicksort(left_nums) + mid_nums + self.quicksort(right_nums)
-
-    def findKthLargest(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-
-        Apply quick sort algorithm.
-
-        Time complexity: O(n*logn), where n is the length of nums.
-        Space complexity: O(n).
-        """
-        sorted_nums = self.quick_sort(nums)
-        return sorted_nums[-k]
-
-
 class SolutionSelectionSort(object):
     def findKthLargest(self, nums, k):
         """
@@ -95,6 +67,65 @@ class SolutionIter(object):
         return k_nums[0]
 
 
+class SolutionQuickSort(object):
+    def quicksort(self, nums):
+        if len(nums) <= 1:
+            return nums
+
+        pivot = nums[len(nums) // 2]
+
+        left_nums = [n for n in nums if n < pivot]
+        mid_nums = [n for n in nums if n == pivot]
+        right_nums = [n for n in nums if n > pivot]
+
+        return self.quicksort(left_nums) + mid_nums + self.quicksort(right_nums)
+
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+
+        Apply quick sort algorithm.
+
+        Time complexity: O(n*logn), where n is the length of nums.
+        Space complexity: O(n).
+        """
+        sorted_nums = self.quicksort(nums)
+        return sorted_nums[-k]
+
+
+class SolutionSelect(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+
+        Select w/o consider the relative order of other elements.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        pivot = nums[len(nums) // 2]
+
+        pos_gr = [pos for pos, n in enumerate(nums) if n > pivot]
+        pos_eq = [pos for pos, n in enumerate(nums) if n == pivot]
+        pos_le = [pos for pos, n in enumerate(nums) if n < pivot]
+
+        n_gr = len(pos_gr)
+        n_eq = len(pos_eq)
+
+        if k <= n_gr:
+            nums_gr = [nums[pos] for pos in pos_gr]
+            return self.findKthLargest(nums_gr, k)
+        elif n_gr < k <= n_eq + n_gr:
+            return pivot
+        elif k > n_eq + n_gr:
+            nums_le = [nums[pos] for pos in pos_le]
+            return self.findKthLargest(nums_le, k - n_gr - n_eq)
+
+
 def main():
     import time
 
@@ -104,16 +135,21 @@ def main():
     k = 2
 
     start_time = time.time()
-    print SolutionQuickSort().findKthLargest(nums, k)
-    print 'Time by quick sort:', time.time() - start_time
-
-    start_time = time.time()
     print SolutionSelectionSort().findKthLargest(nums, k)
     print 'Time by selection sort:', time.time() - start_time
 
     start_time = time.time()
     print SolutionIter().findKthLargest(nums, k)
     print 'Time by iteration:', time.time() - start_time
+
+    start_time = time.time()
+    print SolutionQuickSort().findKthLargest(nums, k)
+    print 'Time by quick sort:', time.time() - start_time
+
+    start_time = time.time()
+    print SolutionSelect().findKthLargest(nums, k)
+    print 'Time by selection:', time.time() - start_time
+
 
     # Input: [3,2,3,1,2,4,5,5,6] and k = 4
     # Output: 4
@@ -121,16 +157,20 @@ def main():
     k = 4
 
     start_time = time.time()
-    print SolutionQuickSort().findKthLargest(nums, k)
-    print 'Time by sorting:', time.time() - start_time
-
-    start_time = time.time()
     print SolutionSelectionSort().findKthLargest(nums, k)
     print 'Time by selection sort:', time.time() - start_time
 
     start_time = time.time()
     print SolutionIter().findKthLargest(nums, k)
     print 'Time by iteration:', time.time() - start_time
+
+    start_time = time.time()
+    print SolutionQuickSort().findKthLargest(nums, k)
+    print 'Time by quick sort:', time.time() - start_time
+
+    start_time = time.time()
+    print SolutionSelect().findKthLargest(nums, k)
+    print 'Time by selection:', time.time() - start_time
 
 
 if __name__ == '__main__':
