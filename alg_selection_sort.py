@@ -9,14 +9,14 @@ def selection_sort(ls):
     Time complexity: O(n^2).
     Space complexity: O(1).
     """
-    # Start from the last elemenet reversely: len(ls) - 1, ..., 0.
-    for i_max in reversed(range(len(ls))):
-        # Select the next max, and interchange it with corresponding element.
+    # Start from the last position reversely: len(ls) - 1, ..., 0.
+    for i in reversed(range(len(ls))):
+        # Select next max element, and swap it and element at position i.
         s = 0
-        for i in range(1, i_max + 1):
-            if ls[i] > ls[s]:
-                s = i
-        ls[s], ls[i_max] = ls[i_max], ls[s]
+        for j in range(1, i + 1):
+            if ls[j] > ls[s]:
+                s = j
+        ls[s], ls[i] = ls[i], ls[s]
 
 
 def main():
