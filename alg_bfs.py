@@ -19,14 +19,14 @@ def bfs(graph_adj_d, v_start):
     distance_d = {v: float('inf') for v in graph_adj_d.keys()}
     distance_d[v_start] = 0
 
-    visit_queue = [v_start]
+    queue = [v_start]
     
-    while visit_queue:
-        v_visit = visit_queue.pop()
+    while queue:
+        v_visit = queue.pop()
         for v_neighbor in graph_adj_d[v_visit]:
             # If v_neighbor is not visited.
             if distance_d[v_neighbor] == float('inf'):
-                visit_queue.insert(0, v_neighbor)
+                queue.insert(0, v_neighbor)
                 distance_d[v_neighbor] = distance_d[v_visit] + 1
     return distance_d
 
