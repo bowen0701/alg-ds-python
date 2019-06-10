@@ -18,17 +18,45 @@ You may assume k is always valid, 1 <= k <= array's length.
 """
 
 class Solution(object):
+    def quick_sort(self, nums):
+        if len(nums) <= 1:
+            return nums
+
+        pivot = nums[len(nums) // 2]
+
+        left_nums = [n for n in nums if n < pivot]
+        mid_nums = [n for n in nums if n == pivot]
+        right_nums = [n for n in nums if n > pivot]
+
+        return self.quick_sort(left_nums) + mid_nums + self.quick_sort(right_nums)
+
     def findKthLargest(self, nums, k):
         """
         :type nums: List[int]
         :type k: int
         :rtype: int
+
+        Find the Kth largest by quick sort algorithm.
+
+        Time complexity: O(n*logn), where n is the length of nums.
+        Space complexity: O(n).
         """
-        pas
+        sorted_nums = self.quick_sort(nums)
+        return sorted_nums[-k]
 
 
 def main():
-    pass
+    # Input: [3,2,1,5,6,4] and k = 2
+    # Output: 5
+    nums = [3, 2, 1, 5, 6, 4]
+    k = 2
+    print Solution().findKthLargest(nums, k)
+
+    # Input: [3,2,3,1,2,4,5,5,6] and k = 4
+    # Output: 4
+    nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
+    k = 4
+    print Solution().findKthLargest(nums, k)
 
 
 if __name__ == '__main__':
