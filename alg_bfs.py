@@ -19,8 +19,7 @@ def bfs(graph_adj_d, v_start):
     distance_d = {v: float('inf') for v in graph_adj_d.keys()}
     distance_d[v_start] = 0
 
-    visit_queue = []
-    visit_queue.insert(0, v_start)
+    visit_queue = [v_start]
     
     while visit_queue:
         v_visit = visit_queue.pop()
