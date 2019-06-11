@@ -74,11 +74,13 @@ class SolutionQuickSort(object):
 
         pivot = nums[len(nums) // 2]
 
-        nums_left = [x for x in nums if x < pivot]
-        nums_mid = [x for x in nums if x == pivot]
-        nums_right = [x for x in nums if x > pivot]
+        nums_smaller = [x for x in nums if x < pivot]
+        nums_middle = [x for x in nums if x == pivot]
+        nums_bigger = [x for x in nums if x > pivot]
 
-        return self.quicksort(nums_left) + nums_mid + self.quicksort(nums_right)
+        return (self.quicksort(nums_smaller)
+                + nums_middle
+                + self.quicksort(nums_bigger))
 
     def findKthLargest(self, nums, k):
         """
@@ -109,21 +111,21 @@ class SolutionSelect(object):
         """
         pivot = nums[len(nums) // 2]
 
-        pos_gr = [pos for pos, x in enumerate(nums) if x > pivot]
-        pos_eq = [pos for pos, x in enumerate(nums) if x == pivot]
-        pos_le = [pos for pos, x in enumerate(nums) if x < pivot]
+        pos_bigger = [pos for pos, x in enumerate(nums) if x > pivot]
+        pos_middle = [pos for pos, x in enumerate(nums) if x == pivot]
+        pos_smaller = [pos for pos, x in enumerate(nums) if x < pivot]
 
-        n_gr = len(pos_gr)
-        n_eq = len(pos_eq)
+        n_bigger = len(pos_bigger)
+        n_middle = len(pos_middle)
 
-        if k <= n_gr:
-            nums_gr = [nums[pos] for pos in pos_gr]
+        if k <= n_bigger:
+            nums_gr = [nums[pos] for pos in pos_bigger]
             return self.findKthLargest(nums_gr, k)
-        elif n_gr < k <= n_eq + n_gr:
+        elif n_bigger < k <= n_middle + n_bigger:
             return pivot
-        elif k > n_eq + n_gr:
-            nums_le = [nums[pos] for pos in pos_le]
-            return self.findKthLargest(nums_le, k - n_gr - n_eq)
+        elif k > n_middle + n_bigger:
+            nums_le = [nums[pos] for pos in pos_smaller]
+            return self.findKthLargest(nums_le, k - n_bigger - n_middle)
 
 
 def main():

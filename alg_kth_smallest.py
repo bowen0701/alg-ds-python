@@ -16,21 +16,21 @@ def kth_smallest(nums, k):
 	"""
 	pivot = random.choice(nums)
 
-	pos_eq = [pos for pos, x in enumerate(nums) if x == pivot]
-	pos_le = [pos for pos, x in enumerate(nums) if x < pivot]
-	pos_gr = [pos for pos, x in enumerate(nums) if x > pivot]
+	pos_middle = [pos for pos, x in enumerate(nums) if x == pivot]
+	pos_smaller = [pos for pos, x in enumerate(nums) if x < pivot]
+	pos_bigger = [pos for pos, x in enumerate(nums) if x > pivot]
 
-	n_le = len(pos_le)
-	n_eq = len(pos_eq)
+	n_smaller = len(pos_smaller)
+	n_middle = len(pos_middle)
 
-	if k <= n_le:
-		nums_le = [nums[pos] for pos in pos_le]
-		return kth_smallest(nums_le, k)
-	elif n_le < k <= n_le + n_eq:
+	if k <= n_smaller:
+		nums_smaller = [nums[pos] for pos in pos_smaller]
+		return kth_smallest(nums_smaller, k)
+	elif n_smaller < k <= n_smaller + n_middle:
 		return pivot
-	elif k > n_le + n_eq:
-		nums_gr = [nums[pos] for pos in pos_gr]
-		return kth_smallest(nums_gr, k - n_le - n_eq)
+	elif k > n_smaller + n_middle:
+		nums_bigger = [nums[pos] for pos in pos_bigger]
+		return kth_smallest(nums_bigger, k - n_smaller - n_middle)
 
 
 def main():
@@ -40,7 +40,7 @@ def main():
 
 	print('Median: {}'.format(kth_smallest(nums, n // 2)))
 	print('Min: {}'.format(kth_smallest(nums, 1)))
-	print('Max: {}'.format(kth_smallest(nums, len(ls))))
+	print('Max: {}'.format(kth_smallest(nums, len(nums))))
 
 
 if __name__ == '__main__':
