@@ -57,10 +57,10 @@ class SolutionIter(object):
         k_nums = [-float('inf')] * k
 
         # Iterate over nums, and insert it to suitable position w/ pop.
-        for n in nums:
+        for x in nums:
             for j in range(k - 1, -1, -1):
-                if n > k_nums[j]:
-                    k_nums.insert(j + 1, n)
+                if x > k_nums[j]:
+                    k_nums.insert(j + 1, x)
                     k_nums.pop(0)
                     break
 
@@ -74,11 +74,11 @@ class SolutionQuickSort(object):
 
         pivot = nums[len(nums) // 2]
 
-        left_nums = [n for n in nums if n < pivot]
-        mid_nums = [n for n in nums if n == pivot]
-        right_nums = [n for n in nums if n > pivot]
+        nums_left = [x for x in nums if x < pivot]
+        nums_mid = [x for x in nums if x == pivot]
+        nums_right = [x for x in nums if x > pivot]
 
-        return self.quicksort(left_nums) + mid_nums + self.quicksort(right_nums)
+        return self.quicksort(nums_left) + nums_mid + self.quicksort(nums_right)
 
     def findKthLargest(self, nums, k):
         """
@@ -109,9 +109,9 @@ class SolutionSelect(object):
         """
         pivot = nums[len(nums) // 2]
 
-        pos_gr = [pos for pos, n in enumerate(nums) if n > pivot]
-        pos_eq = [pos for pos, n in enumerate(nums) if n == pivot]
-        pos_le = [pos for pos, n in enumerate(nums) if n < pivot]
+        pos_gr = [pos for pos, x in enumerate(nums) if x > pivot]
+        pos_eq = [pos for pos, x in enumerate(nums) if x == pivot]
+        pos_le = [pos for pos, x in enumerate(nums) if x < pivot]
 
         n_gr = len(pos_gr)
         n_eq = len(pos_eq)
