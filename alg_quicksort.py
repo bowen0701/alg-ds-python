@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-def quicksort(a_list):
+def quicksort(nums):
     """Quick sort algortihm by recursion with list comprehension.
 
     Procedure:
@@ -15,72 +15,75 @@ def quicksort(a_list):
     Time complexity: O(n*logn).
     Space complexity: O(n).
     """
-    if len(a_list) <= 1:
-        return a_list
-    pivot = a_list[len(a_list) // 2]
-    left_list = [x for x in a_list if x < pivot]
-    middle_list = [x for x in a_list if x == pivot]
-    right_list = [x for x in a_list if x > pivot]
-    return quicksort(left_list) + middle_list + quicksort(right_list)
+    if len(nums) <= 1:
+        return nums
+    pivot = nums[len(nums) // 2]
+
+    small_nums = [x for x in nums if x < pivot]
+    mid_nums = [x for x in nums if x == pivot]
+    large_nums = [x for x in nums if x > pivot]
+
+    return quicksort(small_nums) + mid_nums + quicksort(large_nums)
 
 
-def _partition(a_list, left, right, pivot):
-    """Get partition point for patition."""
-    pivot = a_list[pivot]
+def _partition(nums, left, right, mid):
+    """Get partition point."""
+    pivot = nums[mid]
 
     while left <= right:
-        while a_list[left] < pivot:
+        while nums[left] < pivot:
             # Find left element which is bigger than pivot.
             left += 1
 
-        while a_list[right] > pivot:
+        while nums[right] > pivot:
             # Find right element which is smaller than pivot.
             right -= 1
 
         if left <= right:
             # If "bigger" left element is on left side of "smaller" right,
             # swap the two elements, and then keep moving.
-            a_list[right], a_list[left] = a_list[left], a_list[right]
+            nums[right], nums[left] = nums[left], nums[right]
             left += 1
             right -= 1
 
     return left
 
 
-def _quicksort_recur(a_list, left, right):
+def _quicksort_recur(nums, left, right):
+    """Quick sort by recursion."""
     if left < right:
-        pivot = left + (right - left) // 2
-        partition = _partition(a_list, left, right, pivot)
-        _quicksort_recur(a_list, left, partition - 1)
-        _quicksort_recur(a_list, partition + 1, right)
+        mid = left + (right - left) // 2
+        partition = _partition(nums, left, right, mid)
+        _quicksort_recur(nums, left, partition - 1)
+        _quicksort_recur(nums, partition + 1, right)
 
 
-def quicksort_raw(a_list):
-    """Quick sort algortihm with raw recursion.
+def quicksort_raw(nums):
+    """Raw quick sort algortihm with recursion.
 
     Time complexity: O(n*logn).
     Space complexity: O(n).
     """
-    _quicksort_recur(a_list, 0, len(a_list) - 1)
-    return a_list
+    _quicksort_recur(nums, 0, len(nums) - 1)
+    return nums
 
 
 def main():
     import time
     import random
 
-    # a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-    a_list = range(100)
-    random.shuffle(a_list)
+    # nums = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    nums = range(100)
+    random.shuffle(nums)
 
     start_time = time.time()
-    print(quicksort(a_list))
-    print('Time for quick sort by recursion with list comprehension:: {}'
+    print(quicksort(nums))
+    print('Time for quick sort by recursion: {}'
           .format(time.time() - start_time))
 
     start_time = time.time()
-    print(quicksort_raw(a_list))
-    print('Time for quick sort by raw recursion:: {}'
+    print(quicksort_raw(nums))
+    print('Time for quick sort by "raw" recursion: {}'
           .format(time.time() - start_time))
 
 
