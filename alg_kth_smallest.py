@@ -16,21 +16,21 @@ def kth_smallest(nums, k):
 	"""
 	pivot = random.choice(nums)
 
-	pos_middle = [pos for pos, x in enumerate(nums) if x == pivot]
-	pos_smaller = [pos for pos, x in enumerate(nums) if x < pivot]
-	pos_bigger = [pos for pos, x in enumerate(nums) if x > pivot]
+	mid_pos = [pos for pos, x in enumerate(nums) if x == pivot]
+	small_pos = [pos for pos, x in enumerate(nums) if x < pivot]
+	large_pos = [pos for pos, x in enumerate(nums) if x > pivot]
 
-	n_smaller = len(pos_smaller)
-	n_middle = len(pos_middle)
+	n_small = len(small_pos)
+	n_mid = len(mid_pos)
 
-	if k <= n_smaller:
-		nums_smaller = [nums[pos] for pos in pos_smaller]
-		return kth_smallest(nums_smaller, k)
-	elif n_smaller < k <= n_smaller + n_middle:
+	if k <= n_small:
+		small_nums = [nums[pos] for pos in small_pos]
+		return kth_smallest(small_nums, k)
+	elif n_small < k <= n_small + n_mid:
 		return pivot
-	elif k > n_smaller + n_middle:
-		nums_bigger = [nums[pos] for pos in pos_bigger]
-		return kth_smallest(nums_bigger, k - n_smaller - n_middle)
+	elif k > n_small + n_mid:
+		large_nums = [nums[pos] for pos in large_pos]
+		return kth_smallest(large_nums, k - n_small - n_mid)
 
 
 def main():
