@@ -74,13 +74,13 @@ class SolutionQuickSort(object):
 
         pivot = nums[len(nums) // 2]
 
-        nums_smaller = [x for x in nums if x < pivot]
-        nums_middle = [x for x in nums if x == pivot]
-        nums_bigger = [x for x in nums if x > pivot]
+        small_nums = [x for x in nums if x < pivot]
+        mid_nums = [x for x in nums if x == pivot]
+        large_nums = [x for x in nums if x > pivot]
 
-        return (self.quicksort(nums_smaller)
-                + nums_middle
-                + self.quicksort(nums_bigger))
+        return (self.quicksort(small_nums)
+                + mid_nums
+                + self.quicksort(large_nums))
 
     def findKthLargest(self, nums, k):
         """
@@ -111,21 +111,21 @@ class SolutionSelect(object):
         """
         pivot = nums[len(nums) // 2]
 
-        pos_bigger = [pos for pos, x in enumerate(nums) if x > pivot]
-        pos_middle = [pos for pos, x in enumerate(nums) if x == pivot]
-        pos_smaller = [pos for pos, x in enumerate(nums) if x < pivot]
+        large_pos = [pos for pos, x in enumerate(nums) if x > pivot]
+        mid_pos = [pos for pos, x in enumerate(nums) if x == pivot]
+        small_pos = [pos for pos, x in enumerate(nums) if x < pivot]
 
-        n_bigger = len(pos_bigger)
-        n_middle = len(pos_middle)
+        n_large = len(large_pos)
+        n_mid = len(mid_pos)
 
-        if k <= n_bigger:
-            nums_gr = [nums[pos] for pos in pos_bigger]
-            return self.findKthLargest(nums_gr, k)
-        elif n_bigger < k <= n_middle + n_bigger:
+        if k <= n_large:
+            large_nums = [nums[pos] for pos in large_pos]
+            return self.findKthLargest(large_nums, k)
+        elif n_large < k <= n_mid + n_large:
             return pivot
-        elif k > n_middle + n_bigger:
-            nums_le = [nums[pos] for pos in pos_smaller]
-            return self.findKthLargest(nums_le, k - n_bigger - n_middle)
+        elif k > n_mid + n_large:
+            small_nums = [nums[pos] for pos in small_pos]
+            return self.findKthLargest(small_nums, k - n_large - n_mid)
 
 
 def main():
@@ -151,7 +151,6 @@ def main():
     start_time = time.time()
     print SolutionSelect().findKthLargest(nums, k)
     print 'Time by selection:', time.time() - start_time
-
 
     # Input: [3,2,3,1,2,4,5,5,6] and k = 4
     # Output: 4
