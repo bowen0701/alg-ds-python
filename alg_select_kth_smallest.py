@@ -5,7 +5,7 @@ from __future__ import print_function
 import random
 
 
-def kth_smallest(nums, k):
+def select_kth_smallest(nums, k):
 	"""Kth smallest element selection.
 
     Just select the kth element, without caring about the 
@@ -25,12 +25,12 @@ def kth_smallest(nums, k):
 
 	if k <= n_small:
 		small_nums = [nums[pos] for pos in small_pos]
-		return kth_smallest(small_nums, k)
+		return select_kth_smallest(small_nums, k)
 	elif n_small < k <= n_small + n_mid:
 		return pivot
 	elif k > n_small + n_mid:
 		large_nums = [nums[pos] for pos in large_pos]
-		return kth_smallest(large_nums, k - n_small - n_mid)
+		return select_kth_smallest(large_nums, k - n_small - n_mid)
 
 
 def main():
@@ -38,9 +38,9 @@ def main():
 	nums = list(range(1, n))
 	random.shuffle(nums)
 
-	print('Median: {}'.format(kth_smallest(nums, n // 2)))
-	print('Min: {}'.format(kth_smallest(nums, 1)))
-	print('Max: {}'.format(kth_smallest(nums, len(nums))))
+	print('Median: {}'.format(select_kth_smallest(nums, n // 2)))
+	print('Min: {}'.format(select_kth_smallest(nums, 1)))
+	print('Max: {}'.format(select_kth_smallest(nums, len(nums))))
 
 
 if __name__ == '__main__':
