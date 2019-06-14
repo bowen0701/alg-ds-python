@@ -81,19 +81,19 @@ class SolutionBinarySearch(object):
         # Perform binary search in 2D matrix.
         n_rows, n_cols = len(matrix), len(matrix[0])
         first, last = 0, n_rows * n_cols - 1
-        found_bool = False
+        is_found = False
 
-        while first <= last and not found_bool:
+        while first <= last and not is_found:
             mid = first + (last - first) // 2
             i, j = mid // n_cols, mid % n_cols
             if matrix[i][j] == target:
-                found_bool = True
+                is_found = True
             elif matrix[i][j] < target:
                 first = mid + 1
             elif matrix[i][j] > target:
                 last = mid - 1
 
-        return found_bool
+        return is_found
 
 
 def main():
