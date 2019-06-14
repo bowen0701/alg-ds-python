@@ -11,19 +11,19 @@ def binary_search_iter(a_list, item):
     """
     first = 0
     last = len(a_list) - 1
-    found_bool = False
+    is_found = False
 
-    while first <= last and not found_bool:
+    while first <= last and not is_found:
         mid = first + (last - first) // 2
         if a_list[mid] == item:
-            found_bool = True
+            is_found = True
         else:
             if item < a_list[mid]:
                 last = mid - 1
             else:
                 first = mid + 1
 
-    return found_bool
+    return is_found
 
 
 def binary_search_recur(a_list, item):
