@@ -13,9 +13,9 @@ def anagram_iter(s1, s2):
     l2 = list(s2)
 
     pos1 = 0
-    match_bool = True
+    is_match = True
 
-    while pos1 < len(s1) and match_bool:
+    while pos1 < len(s1) and is_match:
         pos2 = 0
         found = False
 
@@ -28,12 +28,12 @@ def anagram_iter(s1, s2):
         if found:
             l2[pos2] = None
         else:
-            match_bool = False
+            is_match = False
             break
 
         pos1 += 1
 
-    return match_bool 
+    return is_match 
 
 
 def anagram_sort(s1, s2):
@@ -45,16 +45,16 @@ def anagram_sort(s1, s2):
     l2.sort()
     
     pos = 0
-    match_bool = True
+    is_match = True
     
-    while pos < len(s1) and match_bool:
+    while pos < len(s1) and is_match:
         if l1[pos] == l2[pos]:
             pos += 1
         else:
-            match_bool = False
+            is_match = False
             break
     
-    return match_bool
+    return is_match
 
 
 def anagram_count(s1, s2):
@@ -71,16 +71,16 @@ def anagram_count(s1, s2):
         c2[pos] += 1
     
     j = 0
-    match_bool = True
+    is_match = True
     
-    while j < 26 and match_bool:
+    while j < 26 and is_match:
         if c1[j] == c2[j]:
             j += 1
         else:
-            match_bool = False
+            is_match = False
             break
     
-    return match_bool
+    return is_match
 
 
 def main():
