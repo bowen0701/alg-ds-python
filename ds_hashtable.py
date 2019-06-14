@@ -11,12 +11,12 @@ class HashTable(object):
     - Open addressing technique: Resolve collision (two keys may hash 
       to the same slot).
     """
-    def __init__(self, size, weighted_bool=False):
+    def __init__(self, size, is_weighted=False):
         self.size = size
         self.slots = [None] * self.size
         self.maps = [None] * self.size
 
-    def hash(self, key, weighted_bool=False):
+    def hash(self, key, is_weighted=False):
         """Hash function for integer or string."""
         if isinstance(key, int):
             # Hash an integer by mode division.
@@ -26,7 +26,7 @@ class HashTable(object):
             # (weitghted) ordinal values plus mode division.
             ord_sum = 0
             for pos in range(len(key)):
-                if weighted_bool:
+                if is_weighted:
                     wt = pos + 1
                 else:
                     wt = 1
@@ -74,19 +74,19 @@ class HashTable(object):
         start_key_hash = self.hash(key)
 
         value = None
-        stop_bool = False
-        found_bool = False
+        is_stop = False
+        is_found = False
         key_hash = start_key_hash
 
         while (self.slots[key_hash] and 
-               not found_bool and not stop_bool):
+               not is_found and not is_stop):
             if self.slots[key_hash] == key:
-                found_bool = True
+                is_found = True
                 value = self.maps[key_hash]
             else:
                 key_hash = self.rehash(key_hash)
                 if key_hash == start_key_hash:
-                    stop_bool = True
+                    is_stop = True
 
         return value
 
@@ -97,20 +97,20 @@ class HashTable(object):
         """
         start_key_hash = self.hash(key)
 
-        stop_bool = False
-        found_bool = False
+        is_stop = False
+        is_found = False
         key_hash = start_key_hash
 
         while (self.slots[key_hash] and
-               not found_bool and not stop_bool):
+               not is_found and not is_stop):
             if self.slots[key_hash] == key:
-                found_bool = True
+                is_found = True
                 self.slots[key_hash] = None
                 self.maps[key_hash] = None
             else:
                 key_hash = self.rehash(key_hash)
                 if key_hash == start_key_hash:
-                    stop_bool = True
+                    is_stop = True
 
     def __setitem__(self, key, value):
         self.put(key, value)
@@ -164,7 +164,7 @@ def main():
     print('- h["pig"]: {}'.format(h['pig']))
 
     print('Hash Map with string keys by weighted folding method:')
-    h = HashTable(11, weighted_bool=True)
+    h = HashTable(11, is_weighted=True)
     h['cat'] = 'c'
     h['dog'] = 'd'
     h['lion'] = 'l'
