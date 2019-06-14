@@ -133,18 +133,18 @@ def dfs(maze, start_row, start_col):
 
     # Otherwise, use logical short circuiting to try each direction
     # in turn, if needed.
-    found_bool = (
+    is_found = (
         dfs(maze, start_row - 1, start_col) or
         dfs(maze, start_row + 1, start_col) or
         dfs(maze, start_row, start_col - 1) or
         dfs(maze, start_row, start_col + 1))
 
-    if found_bool:
+    if is_found:
         maze.update_position(start_row, start_col, PART_OF_PATH)
     else:
         maze.update_position(start_row, start_col, DEAD_END)
 
-    return found_bool
+    return is_found
 
 def main():
     maze = Maze('maze_file.txt')
