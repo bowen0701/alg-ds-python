@@ -29,8 +29,8 @@ def balance_parentheses(a_str):
 def _match_symbols(opener, closer):
     openers = '([{'
     closers = ')]}'
-    match_bool = openers.index(opener) == closers.index(closer)
-    return match_bool
+    is_match = openers.index(opener) == closers.index(closer)
+    return is_match
 
 
 def balance_symbols(a_str):
