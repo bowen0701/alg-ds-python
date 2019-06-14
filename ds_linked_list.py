@@ -185,15 +185,15 @@ class LinkedList(object):
             return False
 
         current = self.head
-        found_bool = False
+        is_found = False
 
-        while not found_bool and current.next:
+        while not is_found and current.next:
             if current.data == data:
-                found_bool = True
+                is_found = True
             else:
                 current = current.next
 
-        return found_bool
+        return is_found
 
     def index(self, data):
         """Obtain node's index in list.
@@ -205,17 +205,17 @@ class LinkedList(object):
             return None
 
         current = self.head
-        found_bool = False
+        is_found = False
         counter = 0
 
-        while not found_bool and current.next:
+        while not is_found and current.next:
             if current.data == data:
-                found_bool = True
+                is_found = True
             else:
                 current = current.next
                 counter += 1
         
-        if not found_bool:
+        if not is_found:
             counter = None
 
         return counter

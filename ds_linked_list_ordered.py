@@ -77,11 +77,11 @@ class LinkedListOrdered(object):
 
         current = self.head
         previous = None
-        stop_bool = False
+        is_stop = False
         
-        while not stop_bool and current.next:
+        while not is_stop and current.next:
             if current.next.data > data:
-                stop_bool = True
+                is_stop = True
 
             previous = current
             current = current.next
@@ -90,7 +90,7 @@ class LinkedListOrdered(object):
         if not previous:
             current.next = new_node
         else:
-            if not stop_bool:
+            if not is_stop:
                 current.next = new_node
             else:
                 new_node.next = current
@@ -156,19 +156,19 @@ class LinkedListOrdered(object):
             return False
 
         current = self.head
-        found_bool = False
-        stop_bool = False
+        is_found = False
+        is_stop = False
 
-        while not found_bool and not stop_bool and current.next:
+        while not is_found and not is_stop and current.next:
             if current.data == data:
-                found_bool = True
+                is_found = True
             else:
                 if current.data > data:
-                    stop_bool = True
+                    is_stop = True
                 else: 
                     current = current.next
         
-        return found_bool
+        return is_found
 
     def index(self, data):
         """Obtain data's index in list.
@@ -180,21 +180,21 @@ class LinkedListOrdered(object):
             return None
 
         current = self.head
-        found_bool = False
-        stop_bool = False
+        is_found = False
+        is_stop = False
         counter = 0
 
-        while not found_bool and not stop_bool and current.next:
+        while not is_found and not is_stop and current.next:
             if current.data == data:
-                found_bool = True
+                is_found = True
             else:
                 if current.data > data:
-                    stop_bool = True
+                    is_stop = True
                 else:
                     current = current.next
                     counter += 1
         
-        if not found_bool:
+        if not is_found:
             counter = None
 
         return counter
