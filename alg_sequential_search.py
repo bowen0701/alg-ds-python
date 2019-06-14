@@ -6,30 +6,30 @@ from __future__ import division
 def sequential_search(a_list, item):
     """Sequential search by iteration."""
     pos = 0
-    found_bool = False
-    while pos < len(a_list) and not found_bool:
+    is_found = False
+    while pos < len(a_list) and not is_found:
         if a_list[pos] == item:
-            found_bool = True
+            is_found = True
         else:
             pos += 1
-    return found_bool
+    return is_found
 
 
 def sequential_search_ordered(a_list, item):
     """Sequential search by ordering first."""
     a_list = sorted(a_list)
     pos = 0
-    found_bool = False
-    stop_bool = False
-    while pos < len(a_list) and not found_bool and not stop_bool:
+    is_found = False
+    is_stop = False
+    while pos < len(a_list) and not is_found and not is_stop:
         if a_list[pos] == item:
-            found_bool = True
+            is_found = True
         else:
             if a_list[pos] > item:
-                stop_bool = True
+                is_stop = True
             else:
                 pos += 1
-    return found_bool
+    return is_found
 
 
 def main():
