@@ -1,7 +1,8 @@
 """Leetcode 98. Validate Binary Search Tree
-Medium
 
 URL: https://leetcode.com/problems/validate-binary-search-tree/
+
+Medium
 
 Given a binary tree, determine if it is a valid binary search tree (BST).
 
