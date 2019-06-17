@@ -48,8 +48,7 @@ class BinaryTree(object):
         self.root = TreeNode(a_list[0])
 
         # Use queue to track current node.
-        queue = []
-        queue.insert(0, self.root)
+        queue = [self.root]
 
         for i in range(1, len(a_list)):
             # Update current node after inserting left and right nodes.
@@ -132,13 +131,21 @@ class SolutionInorder(object):
 
 
 def main():
+    import time
+
     # Input: [2,1,3]
     # Output: true
     bt = BinaryTree()
     bt.insert([2, 1, 3])
     print 'BT:', (bt.root.val, bt.root.left.val, bt.root.right.val)
-    print 'MinMax:', SolutionMinMax().isValidBST(bt.root)
+
+    start_time = time.time()
+    print SolutionMinMax().isValidBST(bt.root)
+    print 'Time by MinMax: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print 'Inorder:', SolutionInorder().isValidBST(bt.root)
+    print 'Time by Iteration: {}'.format(time.time() - start_time)
 
     # Input: [5,1,4,null,null,3,6]
     # Output: false
@@ -147,8 +154,14 @@ def main():
     print 'BT:', (
         bt.root.val, bt.root.left.val, bt.root.right.val, None, None,
         bt.root.right.left.val, bt.root.right.right.val)
-    print 'MinMax:', SolutionMinMax().isValidBST(bt.root)
+
+    start_time = time.time()
+    print SolutionMinMax().isValidBST(bt.root)
+    print 'Time by MinMax: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print 'Inorder:', SolutionInorder().isValidBST(bt.root)
+    print 'Time by Iteration: {}'.format(time.time() - start_time)
 
     # Input: [10,5,15,null,null,6,20]
     # Output: false
@@ -157,8 +170,14 @@ def main():
     print 'BT:', (
         bt.root.val, bt.root.left.val, bt.root.right.val, None, None,
         bt.root.right.left.val, bt.root.right.right.val)
-    print 'MinMax:', SolutionMinMax().isValidBST(bt.root)
+
+    start_time = time.time()
+    print SolutionMinMax().isValidBST(bt.root)
+    print 'Time by MinMax: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print 'Inorder:', SolutionInorder().isValidBST(bt.root)
+    print 'Time by Iteration: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
