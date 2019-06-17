@@ -17,32 +17,9 @@ Could you implement both?
 
 # Definition for singly-linked list.
 class ListNode(object):
-    def __init__(self, x):
-        self.val = x
+    def __init__(self, val):
+        self.val = val
         self.next = None
-
-
-class SolutionIter(object):
-    def reverseList(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-
-        Time complexity: O(n).
-        Space complexity: O(1).
-        """
-        # Two pointer method: previous & head.
-        previous = None
-        while head:
-            # Create new node as current, and 
-            # reverse the list by pointing to previous.
-            current = ListNode(head.val)
-            current.next = previous
-
-            # Move head and previous to next nodes.
-            head = head.next
-            previous = current
-        return previous
 
 
 class SolutionRecur(object):
@@ -65,6 +42,29 @@ class SolutionRecur(object):
         return self.reverseList(head, previous)
 
 
+class SolutionIter(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        # Two pointer method: previous & head.
+        previous = None
+        while head:
+            # Create new node as current by head.
+            current = ListNode(head.val)
+            # Reverse the list by pointing to previous.
+            current.next = previous
+
+            # Move head and previous to next nodes.
+            head = head.next
+            previous = current
+        return previous
+
+
 def main():
     # 1->2->3->4->5->NULL
     node1 = ListNode(1)
@@ -80,11 +80,11 @@ def main():
 
     # 5->4->3->2->1->NULL
     # Should be 5.
-    print SolutionIter().reverseList(node1).val
     print SolutionRecur().reverseList(node1).val
-    # Ans: 4.
+    print SolutionIter().reverseList(node1).val
+    # Should be 4.
     print SolutionIter().reverseList(node1).next.val
-    # Ans: 3.
+    # Should be 3.
     print SolutionIter().reverseList(node1).next.next.val
 
 
