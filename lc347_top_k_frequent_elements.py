@@ -27,34 +27,35 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        freq_d = {}
+        num_freq_d = {}
 
         for n in nums:
-            if n in freq_d:
-                freq_d[n] += 1
+            if n in num_freq_d:
+                num_freq_d[n] += 1
             else:
-                freq_d[n] = 1
+                num_freq_d[n] = 1
                 
-        sorted_freq_ls = sorted(
-            freq_d.items(), key=lambda x: x[1], reverse=True)
-        topk_ls = [t[0] for t in sorted_freq_ls[:k]]
-        return topk_ls
+        sorted_num_freq_ls = sorted(num_freq_d.items(),
+                                    key=lambda x: x[1],
+                                    reverse=True)
+        topk_nums = [num for (num, freq) in sorted_num_freq_ls[:k]]
+        return topk_nums
 
 
 def main():
     nums = [1, 1, 1, 2, 2, 3]
     k = 2
-    # Output: [1,2]
+    # Should be: [1,2]
     print Solution().topKFrequent(nums, k)
 
     nums = [1]
     k = 1
-    # Output: [1]
+    # Should be: [1]
     print Solution().topKFrequent(nums, k)
 
     nums = [3,2,3,1,2,4,5,5,6,7,7,8,2,3,1,1,1,10,11,5,6,2,4,7,8,5,6]
     k = 10
-    # Output: [1,2,5,3,7,6,4,8,10,11]
+    # Should be: [1,2,5,3,7,6,4,8,10,11]
     print Solution().topKFrequent(nums, k)
 
 
