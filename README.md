@@ -1,5 +1,7 @@
 # Algorithms and Data Structures in Python
 
+## Introduction
+
 The following are the main references I use:
 
 - [Cormen, Leiserson, Rivest, and Stein (2009). Introduction to Algorithms, 3rd ed.](http://mitpress.mit.edu/books/introduction-algorithms-third-edition)
