@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-def binary_search_iter(a_list, item):
+def binary_search_iter(a_list, target):
     """Binary search for ordered list by iteration.
 
     Time complexity: O(logn).
@@ -15,10 +15,10 @@ def binary_search_iter(a_list, item):
 
     while first <= last and not is_found:
         mid = first + (last - first) // 2
-        if a_list[mid] == item:
+        if a_list[mid] == target:
             is_found = True
         else:
-            if item < a_list[mid]:
+            if a_list[mid] > target:
                 last = mid - 1
             else:
                 first = mid + 1
@@ -26,7 +26,7 @@ def binary_search_iter(a_list, item):
     return is_found
 
 
-def binary_search_recur(a_list, item):
+def binary_search_recur(a_list, target):
     """Binary search for ordered list by recursion.
 
     Time complexity: O(logn).
@@ -36,16 +36,16 @@ def binary_search_recur(a_list, item):
         return False
     else:
         mid = len(a_list) // 2
-        if a_list[mid] == item:
+        if a_list[mid] == target:
             return True
         else:
-            if item < a_list[mid]:
-                return binary_search_recur(a_list[:mid], item)
+            if a_list[mid] > target:
+                return binary_search_recur(a_list[:mid], target)
             else:
-                return binary_search_recur(a_list[(mid + 1):], item)
+                return binary_search_recur(a_list[(mid + 1):], target)
 
 
-def binary_search_recur_fast(a_list, item, first, last):
+def binary_search_recur_fast(a_list, target, first, last):
     """Binary search for ordered list by recursion w/o slicing.
 
     Note: It performs faster than binary_search_recur().
@@ -56,40 +56,40 @@ def binary_search_recur_fast(a_list, item, first, last):
         return False
 
     mid = first + (last - first) // 2
-    if a_list[mid] == item:
+    if a_list[mid] == target:
         return True
     else:
-        if item < a_list[mid]:
-            return binary_search_recur_fast(a_list, item, first, mid - 1)
+        if a_list[mid] > target:
+            return binary_search_recur_fast(a_list, target, first, mid - 1)
         else:
-            return binary_search_recur_fast(a_list, item, mid + 1, last)
+            return binary_search_recur_fast(a_list, target, mid + 1, last)
 
 
 def main():
     import time
 
     a_list = [17, 20, 26, 31, 44, 54, 55, 65, 77, 93, 100]
-    item = 65
-    print('In sorted list {0}: search {1}'.format(a_list, item))
+    target = 65
+    print('In sorted list {0}: search {1}'.format(a_list, target))
 
     # Binary search by binary_search().
     start_time = time.time()
     print('Binary search by iteration: {}'
-          .format(binary_search_iter(a_list, item)))
+          .format(binary_search_iter(a_list, target)))
     print('Time for binary_search_iter(): {}'
           .format(time.time() - start_time))
 
     # Binary search by binary_search_recur().
     start_time = time.time()
     print('Binary search by recursion: {}'
-          .format(binary_search_recur(a_list, item)))
+          .format(binary_search_recur(a_list, target)))
     print('Time for binary_search_recur(): {}'
           .format(time.time() - start_time))
 
     # Binary search by binary_search_recur_fast().
     start_time = time.time()
     print('Binary search by fast recursion: {}'.format(
-            binary_search_recur_fast(a_list, item, 0, len(a_list) - 1)))
+            binary_search_recur_fast(a_list, target, 0, len(a_list) - 1)))
     print('Time for binary_search_recur_fast(): {}'
           .format(time.time() - start_time))
 
