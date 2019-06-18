@@ -30,7 +30,7 @@ def binary_search_recur(sorted_nums, target):
     """Binary search for ordered list by recursion.
 
     Time complexity: O(logn).
-    Space complexity: O(1).
+    Space complexity: O(n).
     """
     if len(sorted_nums) == 0:
         return False
