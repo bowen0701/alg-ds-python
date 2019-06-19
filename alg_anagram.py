@@ -9,7 +9,11 @@ from __future__ import print_function
 
 
 def anagram_iter(s1, s2):
-    """Anagram by iteration."""
+    """Anagram by iteration.
+
+    Time complexity: O(n^2).
+    Space complexity: O(n).
+    """
     l2 = list(s2)
 
     pos1 = 0
@@ -37,7 +41,11 @@ def anagram_iter(s1, s2):
 
 
 def anagram_sort(s1, s2):
-    """Anagram by sorting."""
+    """Anagram by sorting.
+
+    Time complexity: O(nlogn).
+    Space complexity: O(n).
+    """
     l1 = list(s1)
     l2 = list(s2)
 
@@ -58,7 +66,11 @@ def anagram_sort(s1, s2):
 
 
 def anagram_count(s1, s2):
-    """Anagram by counting."""
+    """Anagram by counting.
+
+    Time complexity: O(n).
+    Space complexity: O(1).
+    """
     c1 = [0] * 26
     c2 = [0] * 26
     
