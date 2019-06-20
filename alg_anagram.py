@@ -21,15 +21,15 @@ def anagram_iter(s1, s2):
 
     while pos1 < len(s1) and is_match:
         pos2 = 0
-        found = False
+        is_found = False
 
-        while pos2 < len(l2) and not found:
+        while pos2 < len(l2) and not is_found:
             if s1[pos1] == l2[pos2]:
-                found = True
+                is_found = True
             else:
                 pos2 += 1
 
-        if found:
+        if is_found:
             l2[pos2] = None
         else:
             is_match = False
