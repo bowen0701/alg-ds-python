@@ -29,6 +29,11 @@ class Solution(object):
         :type matrix: List[List[int]]
         :type target: int
         :rtype: bool
+
+        Time complexity: O(m+n), where 
+          - m is the row number, and 
+          - n is the column number.
+        Space complexity: O(1).
         """
         if not len(matrix) or not len(matrix[0]):
             return False
