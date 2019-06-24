@@ -82,12 +82,12 @@ def anagram_count(s1, s2):
         pos = ord(s2[i]) - ord('a')
         c2[pos] += 1
     
-    j = 0
+    pos = 0
     is_match = True
     
-    while j < 26 and is_match:
-        if c1[j] == c2[j]:
-            j += 1
+    while pos < 26 and is_match:
+        if c1[pos] == c2[pos]:
+            pos += 1
         else:
             is_match = False
             break
