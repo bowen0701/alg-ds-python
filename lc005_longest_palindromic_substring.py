@@ -14,35 +14,14 @@ Input: "cbbd"
 Output: "bb"
 """
 
-class SolutionNaive(object):
-    def longestPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: str
-
-        Time limit exceeded.
-        """
-        n = len(s) - 1
-        max_len = 1
-        max_i = 0
-        max_j = 0
-        
-        for i in range(n + 1):
-            for j in range(i + 1, n + 1):
-                if s[i:(j + 1)] == s[i:(j + 1)][::-1]:
-                    ij_len = j - i + 1
-                    if ij_len > max_len:
-                        max_len = ij_len
-                        max_i = i
-                        max_j = j
-        return s[max_i:(max_j + 1)]
-
-
 class SolutionDP(object):
     def longestPalindrome(self, s):
         """
         :type s: str
         :rtype: str
+
+        Time complexity: O(n^3).
+        Space complexity: O(n).
         """
         if not len(s):
             return ''
@@ -53,13 +32,13 @@ class SolutionDP(object):
         for i in range(n + 1):
             M[i][i] = True
             max_len = 1
-            s_pal = s[i]
+            pal_s = s[i]
             
         for i in range(n):
             if s[i] == s[i + 1]:
                 M[i][i + 1] = True
                 max_len = 2
-                s_pal = s[i:(i + 2)]
+                pal_s = s[i:(i + 2)]
 
         for j in range(n + 1):
             for i in range(0, j - 1):
@@ -67,8 +46,8 @@ class SolutionDP(object):
                     M[i][j] = True
                     if max_len < j - i + 1:
                         max_len = j - i + 1
-                        s_pal = s[i:(j + 1)]
-        return s_pal
+                        pal_s = s[i:(j + 1)]
+        return pal_s
 
 
 def main():
@@ -77,32 +56,16 @@ def main():
     s = 'babad'    # Ans: bab.
     
     start_time = time.time()
-    print('By naive: {}'
-          .format(SolutionNaive().longestPalindrome(s)))
-    print('Time: {}'.format(time.time() - start_time))
-
-    start_time = time.time()
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
-
     s = 'cbbd'     # Ans: bb.
-
-    start_time = time.time()
-    print('By naive: {}'
-          .format(SolutionNaive().longestPalindrome(s)))
-    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     s = 'abcba'    # Ans: abcba
-
-    start_time = time.time()
-    print('By naive: {}'
-          .format(SolutionNaive().longestPalindrome(s)))
-    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
