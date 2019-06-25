@@ -73,6 +73,41 @@ class SolutionDP(object):
         return s[start:(start + max_len)]
 
 
+class SolutionIter(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+
+        Apply iteration.
+
+        Time complexity: O(n^2).
+        Space complexity: O(n).
+        """
+        if not len(s):
+            return ''
+
+        start = 0
+        max_len = 1
+
+        # If we increase s by 1 character, we could only increase LPS by 2 or 1.
+        for i in range(1, len(s)):
+            if (i - max_len >= 1 and 
+                s[(i - max_len - 1):(i + 1)] == s[(i - max_len - 1):(i + 1)][::-1]):
+                # Increase LPS by 2: check start's left and end's right.
+                start = i - max_len - 1
+                max_len += 2
+                continue
+
+            if (i - max_len >= 0 and 
+                s[(i - max_len):(i + 1)] == s[(i - max_len):(i + 1)][::-1]):
+                # Increase LPS by 1: check end's right only.
+                start = i - max_len
+                max_len += 1
+
+        return s[start:(start + max_len)]
+
+
 def main():
     import time
 
@@ -86,6 +121,10 @@ def main():
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
+    start_time = time.time()
+    print('By DP: {}'.format(SolutionIter().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
     s = 'cbbd'     # Ans: bb.
 
     start_time = time.time()
@@ -96,6 +135,10 @@ def main():
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
+    start_time = time.time()
+    print('By DP: {}'.format(SolutionIter().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
     s = 'abcba'    # Ans: abcba
 
     start_time = time.time()
@@ -104,6 +147,10 @@ def main():
 
     start_time = time.time()
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By DP: {}'.format(SolutionIter().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
 
