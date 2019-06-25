@@ -39,34 +39,38 @@ class SolutionDP(object):
         :type s: str
         :rtype: str
 
-        Time complexity: O(n^3).
+        Apply dynamic programming with botton-up memoization,
+        but track longest palindrom.
+
+        Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
         if not len(s):
             return ''
 
-        n = len(s) - 1
-        M = [[False] * (n + 1) for _ in range(n + 1)]
+        n = len(s)
+        T = [[False] * n for _ in range(n)]
 
-        for i in range(n + 1):
-            M[i][i] = True
-            max_len = 1
-            pal_s = s[i]
-            
         for i in range(n):
+            T[i][i] = True
+            start = i
+            max_len = 1
+            
+        for i in range(n - 1):
             if s[i] == s[i + 1]:
-                M[i][i + 1] = True
+                T[i][i + 1] = True
+                start = i
                 max_len = 2
-                pal_s = s[i:(i + 2)]
 
-        for j in range(n + 1):
-            for i in range(0, j - 1):
-                if s[i] == s[j] and M[i + 1][j - 1]:
-                    M[i][j] = True
-                    if max_len < j - i + 1:
+        for j in range(2, n):
+            for i in range(0, j):
+                if s[i] == s[j] and T[i + 1][j - 1]:
+                    T[i][j] = True
+                    if j - i + 1 > max_len:
+                        start = i
                         max_len = j - i + 1
-                        pal_s = s[i:(j + 1)]
-        return pal_s
+
+        return s[start:(start + max_len)]
 
 
 def main():
