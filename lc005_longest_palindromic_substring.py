@@ -23,14 +23,14 @@ class SolutionNaive(object):
         Time complexity: O(n^3).
         Space complexity: O(1).
         """
-        pal_s = ''
+        lps = ''
 
         for i in range(len(s)):
             for j in range(1, len(s) + 1):
-                if s[i:j] == s[i:j][::-1] and j - i > len(pal_s):
-                    pal_s = s[i:j]
+                if s[i:j] == s[i:j][::-1] and j - i > len(lps):
+                    lps = s[i:j]
 
-        return pal_s
+        return lps
 
 
 class SolutionDP(object):
