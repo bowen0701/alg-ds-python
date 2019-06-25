@@ -14,6 +14,25 @@ Input: "cbbd"
 Output: "bb"
 """
 
+class SolutionNaive(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+
+        Time complexity: O(n^3).
+        Space complexity: O(1).
+        """
+        pal_s = ''
+
+        for i in range(len(s)):
+            for j in range(1, len(s) + 1):
+                if s[i:j] == s[i:j][::-1] and j - i > len(pal_s):
+                    pal_s = s[i:j]
+
+        return pal_s
+
+
 class SolutionDP(object):
     def longestPalindrome(self, s):
         """
@@ -21,7 +40,7 @@ class SolutionDP(object):
         :rtype: str
 
         Time complexity: O(n^3).
-        Space complexity: O(n).
+        Space complexity: O(n^2).
         """
         if not len(s):
             return ''
@@ -54,7 +73,11 @@ def main():
     import time
 
     s = 'babad'    # Ans: bab.
-    
+   
+    start_time = time.time()
+    print('By naive: {}'.format(SolutionNaive().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
     start_time = time.time()
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
@@ -62,10 +85,18 @@ def main():
     s = 'cbbd'     # Ans: bb.
 
     start_time = time.time()
+    print('By naive: {}'.format(SolutionNaive().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     s = 'abcba'    # Ans: abcba
+
+    start_time = time.time()
+    print('By naive: {}'.format(SolutionNaive().longestPalindrome(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
