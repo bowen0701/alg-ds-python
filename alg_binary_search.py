@@ -67,10 +67,10 @@ def binary_search_recur_fast(sorted_nums, target, first, last):
 
 def main():
     import time
+    import random
 
-    sorted_nums = [17, 20, 26, 31, 44, 54, 55, 65, 77, 93, 100]
-    target = 65
-    print('In sorted list {0}: search {1}'.format(sorted_nums, target))
+    sorted_nums = range(10000)
+    target = 9999
 
     # Binary search by binary_search().
     start_time = time.time()
