@@ -32,8 +32,8 @@ class KthLargestSort(object):
 
     Apply naive sorting to obtain the top k largest elements.
 
-    Time complexity: O(n*logn).
-    Space complexity: O(1).
+    Time complexity: O(n*logn), where n is the length of the original nums.
+    Space complexity: O(k).
     """
     def __init__(self, k, nums):
         """
