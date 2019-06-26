@@ -24,7 +24,7 @@ kthLargest.add(9);   // returns 8
 kthLargest.add(4);   // returns 8
 
 Note: 
-You may assume that nums' length ≥ k-1 and k ≥ 1.
+You may assume that nums' length >= k-1 and k >= 1.
 """
 
 class KthLargest(object):
@@ -43,12 +43,12 @@ class KthLargest(object):
         pass
 
 
-# Your KthLargest object will be instantiated and called as such:
-# obj = KthLargest(k, nums)
-# param_1 = obj.add(val)
-
-
 def main():
+    # Your KthLargest object will be instantiated and called as such:
+    # obj = KthLargest(k, nums)
+    # param_1 = obj.add(val)
+    k = 3
+    nums = [4, 5, 8, 2]
     pass
 
 
