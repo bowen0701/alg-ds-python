@@ -34,9 +34,12 @@ class SolutionRecur(object):
         if not head:
             return previous
 
+        # Two pointers method: head + previous.
+        # Create new current and current.next by reversing previous.
         current = ListNode(head.val)
         current.next = previous
 
+        # Increment head + previous and apply recursion.
         head = head.next
         previous = current
         return self.reverseList(head, previous)
@@ -51,17 +54,18 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Two pointer method: previous & head.
+        # Two pointer method: head + previous.
         previous = None
+
         while head:
-            # Create new node as current by head.
+            # Create new current and current.next by reversing previous.
             current = ListNode(head.val)
-            # Reverse the list by pointing to previous.
             current.next = previous
 
-            # Move head and previous to next nodes.
+            # Increment head + previous and apply iteration.
             head = head.next
             previous = current
+   
         return previous
 
 
