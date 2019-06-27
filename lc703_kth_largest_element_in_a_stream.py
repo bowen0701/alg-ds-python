@@ -27,7 +27,7 @@ Note:
 You may assume that nums' length >= k-1 and k >= 1.
 """
 
-class KthLargestNaiveSort(object):
+class KthLargestSort(object):
     """Kth Largest Element in a Stream
 
     Apply naive sorting to obtain the top k largest elements.
@@ -104,6 +104,22 @@ class KthLargestSortAndBinarySearch(object):
         return self.topk[-1]
 
 
+class KthLargestMinHeap(object):
+    def __init__(self, k, nums):
+        """
+        :type k: int
+        :type nums: List[int]
+        """
+        pass
+        
+    def add(self, val):
+        """
+        :type val: int
+        :rtype: int
+        """
+        pass
+
+
 def main():
     import time
     # Your KthLargest object will be instantiated and called as such:
@@ -113,7 +129,7 @@ def main():
     nums = [4, 5, 8, 2]
 
     start_time = time.time()
-    obj = KthLargestNaiveSort(k, nums)
+    obj = KthLargestSort(k, nums)
     # Adding 3 returns 4
     print obj.add(3)
     # Adding 5 returns 5
