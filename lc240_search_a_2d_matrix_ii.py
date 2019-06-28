@@ -38,7 +38,7 @@ class Solution(object):
         if not len(matrix) or not len(matrix[0]):
             return False
 
-        # Starting from the bottom-left.
+        # Search starting from the bottom-left, moving to top/right.
         i, j = len(matrix) - 1, 0
 
         while i >= 0 and j < len(matrix[0]):
