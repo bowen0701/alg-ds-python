@@ -23,6 +23,7 @@ class MaxHeap(object):
     Application: Heapsort Algorithm.
     """
     def __init__(self):
+        # Add extra before real root for left/right node computation.
         self.A = [0]
         self.size = 0
 
@@ -33,24 +34,32 @@ class MaxHeap(object):
         return self.A[1]
 
     def heapify_up(self, i):
-        """Max heapify up.
+        """Max heapify up by iteration.
 
-        Complexity: O(log(n)).
+        Time complexity: O(log(n)).
+        Space complexity: O(1).
         """
+        # For node i, check if it's "bigger" than parent. If yes, swap them.
         while i > 1 and self.A[parent(i)] < self.A[i]:
-            # Swap node i and node parent(i).
             self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
 
     def add(self, new_key):
-        self.size += 1
+        """Add new key to heap.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        # Append new key to the end of the list, then heapify up.
         self.A.append(new_key)
+        self.size += 1
         self.heapify_up(self.size)
 
     def heapify_down(self, i):
-        """Max heapify down.
+        """Max heapify down by recursion.
 
-        Complexity: O(log(n)).
+        Time complexity: O(log(n)).
+        Space complexity: O(1).
         """
         l = left(i)
         r = right(i)
@@ -63,23 +72,32 @@ class MaxHeap(object):
         if r <= self.size and self.A[r] > self.A[max_i]:
             max_i = r
 
+        # If node i is not max, swap node i and node max_i.
         if max_i != i:
-            # Swap node i and node max_i.
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
             self.heapify_down(max_i)
 
     def extract_max(self):
+        """Extract max.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
         if self.size < 1:
             raise ValueError('Heap underflow.')
+
         maximum = self.A[1]
         last = self.A.pop()
         self.size -= 1
+
         if self.size < 1:
             # The last element is maximum.
             pass
         else:
+            # Insert the last to root, then heapify down.
             self.A[1] = last
-        self.heapify_down(1)
+            self.heapify_down(1)
+
         return maximum
 
     def build(self, arr):
@@ -87,9 +105,10 @@ class MaxHeap(object):
 
         Start from the level-1 nodes from leaves back to level-log(n) node.
         Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
-        n is the number of nodes including the root one.
+        n is the number of nodes including the root one, heapify down them.
 
-        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
+        Time cmplexity: O(n*log(n)) via simple analysis. Actually O(n).
+        Space complexity: O(1).
         """
         self.A.extend(arr)
         self.size = len(arr)
