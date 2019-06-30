@@ -31,9 +31,6 @@ class KthLargestSort(object):
     """Kth Largest Element in a Stream
 
     Apply naive sorting to obtain the top k largest elements.
-
-    Time complexity: O(n*logn), where n is the length of the original nums.
-    Space complexity: O(k).
     """
     def __init__(self, k, nums):
         """
@@ -49,6 +46,9 @@ class KthLargestSort(object):
         """
         :type val: int
         :rtype: int
+
+        Time complexity: O(n*logn), where n is the length of the original nums.
+        Space complexity: O(k).
         """
         self.topk.append(val)
         self.topk.sort(reverse=True)
@@ -64,9 +64,6 @@ class KthLargestSortAndBinarySearch(object):
 
     Apply sorting to obtain the top k largest elements, with
     inserting new element by binary search in sorted list.
-
-    Time complexity: O(n*logn), where n is the length of the original nums.
-    Space complexity: O(k).
     """
     def __init__(self, k, nums):
         """
@@ -81,6 +78,9 @@ class KthLargestSortAndBinarySearch(object):
         """
         :type val: int
         :rtype: int
+
+        Time complexity: O(n*logn), where n is the length of the original nums.
+        Space complexity: O(k).
         """
         if len(self.topk) == self.k and val < self.topk[-1]:
             return self.topk[-1]
