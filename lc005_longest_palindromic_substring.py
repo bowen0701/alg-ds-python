@@ -122,7 +122,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionIter().longestPalindrome(s)))
+    print('By iter: {}'.format(SolutionIter().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     s = 'cbbd'     # Ans: bb.
@@ -136,7 +136,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionIter().longestPalindrome(s)))
+    print('By iter: {}'.format(SolutionIter().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     s = 'abcba'    # Ans: abcba
@@ -150,7 +150,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionIter().longestPalindrome(s)))
+    print('By iter: {}'.format(SolutionIter().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
 
