@@ -106,10 +106,21 @@ class SolutionBinarySearch(object):
 
 
 def main():
+    import time
+
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
+
+    start_time = time.time()
     print SolutionRecur().lengthOfLIS(nums)
+    print 'By recur: {}'.format(time.time() - start_time)
+
+    start_time = time.time()   
     print SolutionDp().lengthOfLIS(nums)
+    print 'By DP: {}'.format(time.time() - start_time)
+
+    start_time = time.time()   
     print SolutionBinarySearch().lengthOfLIS(nums)
+    print 'By binary search: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
