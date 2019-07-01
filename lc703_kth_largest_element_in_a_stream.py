@@ -27,6 +27,9 @@ Note:
 You may assume that nums' length >= k-1 and k >= 1.
 """
 
+import heapq
+
+
 class KthLargestSort(object):
     """Kth Largest Element in a Stream
 
@@ -180,6 +183,38 @@ class KthLargestMinHeap(object):
         return self.heap[1]
 
 
+class KthLargestHeapq(object):
+    def __init__(self, k, nums):
+        """
+        :type k: int
+        :type nums: List[int]
+        """
+        self.heap = nums
+        self.k = k
+
+        # Heapify the original nums, and pop min until the len equals to k.
+        heapq.heapify(self.heap)
+        while len(self.heap) > self.k:
+            heapq.heappop(self.heap)
+
+    def add(self, val):
+        """
+        :type val: int
+        :rtype: int
+
+        Time complexity: O(logn).
+        Space complexity: O(1). 
+        """
+        if len(self.heap) < self.k:
+            # If heap size < k, push val to heap and heapify it.
+            heapq.heappush(self.heap, val)
+        elif self.heap[0] < val:
+            # If heap size = k and min < val, replace (pop & push) min by val.
+            heapq.heapreplace(self.heap, val)
+
+        return self.heap[0]
+
+
 def main():
     import time
     # Your KthLargest object will be instantiated and called as such:
@@ -232,11 +267,42 @@ def main():
     print 'Time by min heap: {}'.format(
         time.time() - start_time)
 
+    start_time = time.time()
+    obj = KthLargestHeapq(k, nums)
+    # Adding 3 returns 4
+    print obj.add(3)
+    # Adding 5 returns 5
+    print obj.add(5)
+    # Adding 10 returns 5
+    print obj.add(10)
+    # Adding 9 returns 8
+    print obj.add(9)
+    # Adding 4 returns 8
+    print obj.add(4)
+    print 'Time by heapq: {}'.format(
+        time.time() - start_time)
+
+
     k = 1
     nums = []
     
     start_time = time.time()
     obj = KthLargestMinHeap(k, nums)
+    # Adding -3 returns -3
+    print obj.add(-3)
+    # Adding -2 returns -2
+    print obj.add(-2)
+    # Adding -4 returns -2
+    print obj.add(-4)
+    # Adding 0 returns 0
+    print obj.add(0)
+    # Adding 4 returns 4
+    print obj.add(4)
+    print 'Time by min heap: {}'.format(
+        time.time() - start_time)
+
+    start_time = time.time()
+    obj = KthLargestHeapq(k, nums)
     # Adding -3 returns -3
     print obj.add(-3)
     # Adding -2 returns -2
