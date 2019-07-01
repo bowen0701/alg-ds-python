@@ -53,17 +53,21 @@ class SolutionDP(object):
         n = len(s)
         T = [[False] * n for _ in range(n)]
 
+        # Set each char as palindrom.
         for i in range(n):
             T[i][i] = True
             start = i
             max_len = 1
             
+        # Check each consecutive char pairs are palindrom.
         for i in range(n - 1):
             if s[i] == s[i + 1]:
                 T[i][i + 1] = True
                 start = i
                 max_len = 2
 
+        # Use two pointer method with start i & end j to
+        # check they are equal and substring from i+1 to j-1 is palindrome. 
         for j in range(2, n):
             for i in range(0, j):
                 if s[i] == s[j] and T[i + 1][j - 1]:
@@ -94,16 +98,16 @@ class SolutionIter(object):
 
         # If we increase s by 1 character, we could only increase LPS by 2 or 1.
         for i in range(1, len(s)):
+            # Increase LPS by 2: check start's left and end's right.
             if (i - max_len >= 1 and 
                 s[(i - max_len - 1):(i + 1)] == s[(i - max_len - 1):(i + 1)][::-1]):
-                # Increase LPS by 2: check start's left and end's right.
                 start = i - max_len - 1
                 max_len += 2
                 continue
 
+            # Increase LPS by 1: check end's right only.
             if (i - max_len >= 0 and 
                 s[(i - max_len):(i + 1)] == s[(i - max_len):(i + 1)][::-1]):
-                # Increase LPS by 1: check end's right only.
                 start = i - max_len
                 max_len += 1
 
