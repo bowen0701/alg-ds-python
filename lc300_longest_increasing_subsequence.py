@@ -29,11 +29,12 @@ class SolutionRecur(object):
         lis = self._LIS_bigger(prev, nums, start + 1, end)
 
         # Or the LIS is 1 + a LIS of nums[1:n], with nums[0],
-        # if nums[0] is bigger than the previous. Update the LIS if suitable.
+        # if nums[0] is bigger than the previous.
         if nums[start] > prev:
-            lis_with = 1 + self._LIS_bigger(nums[start], nums, start + 1, end)
-            if lis_with > lis:
-                lis = lis_with
+            lis_with_prev = 1 + self._LIS_bigger(nums[start], nums, start + 1, end)
+            if lis_with_prev > lis:
+                # Update the LIS if suitable.
+                lis = lis_with_prev
         return lis
 
     def lengthOfLIS(self, nums):
@@ -42,6 +43,7 @@ class SolutionRecur(object):
         Time complexity: O(2^n).
         Space complexity: O(1).
         """
+        # Starting from the two sides.
         start, end = 0, len(nums) - 1
         return self._LIS_bigger(-float('inf'), nums, start, end)
 
@@ -62,12 +64,13 @@ class SolutionDp(object):
         # because the LIS of each element is at least 1.
         T = [1] * len(nums)
 
-        # Apply two pointer method: if element j is smaller than element i,
-        # update T[i] = max(T[i], T[j] + 1).
-        for i in range(1, len(nums)):
-            for j in range(0, i):
-                if nums[j] < nums[i]:
-                    T[i] = max(T[i], T[j] + 1)
+        # Apply two pointer method: for each right element j,
+        # check all elements i left to j; 
+        # if element i is smaller than j, update T[j] = max(T[j], T[i] + 1).
+        for j in range(1, len(nums)):
+            for i in range(0, j):
+                if nums[i] < nums[j]:
+                    T[j] = max(T[j], T[i] + 1)
 
         # Return max elements of table as LIS. 
         return max(T)
@@ -102,6 +105,7 @@ class SolutionBinarySearch(object):
 
             tails[left] = n
             lis = max(left + 1, lis)
+
         return lis
 
 
