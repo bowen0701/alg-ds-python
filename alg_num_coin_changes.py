@@ -13,7 +13,7 @@ Assume that you have an infinite number of each kind of coin.
 def num_coin_changes_recur(amount, coins, n):
     """Number of coin changes by recursion.
 
-    Time complexity: O(2^n).
+    Time complexity: O(2^n), where n is number of coins.
     Space complexity: O(1).
     """
     if amount < 0:
@@ -25,15 +25,15 @@ def num_coin_changes_recur(amount, coins, n):
     if n < 0 and amount >= 1:
         return 0
 
-    # Compute ways with coin n included plus that with coin excluded.
+    # Sum num of ways with coin n included & excluded.
     n_changes_in = num_coin_changes_recur(amount - coins[n], coins, n)
-    n_changes_out = num_coin_changes_recur(amount, coins, n - 1)
-    n_changes = n_changes_in + n_changes_out
+    n_changes_ex = num_coin_changes_recur(amount, coins, n - 1)
+    n_changes = n_changes_in + n_changes_ex
     return n_changes
 
 
 def _num_coin_changes_memo(amount, coins, T, n):
-    """Helper function for count_changes_memo()."""
+    """Helper function for num_coin_changes_memo()."""
     if amount == 0:
         return 1
     if amount < 0:
@@ -42,26 +42,29 @@ def _num_coin_changes_memo(amount, coins, T, n):
     if n < 0 and amount >= 1:
         return 0
 
+    # Apply memoization.
     if T[n][amount]:
         return T[n][amount]
 
-    n_changes_in = _num_coin_changes_memo(amount - coins[n - 1], coins, T, n)
-    n_changes_out = _num_coin_changes_memo(amount, coins, T, n - 1)
-    T[n][amount] = n_changes_in + n_changes_out
+    # Sum num of ways with coin n included & excluded.
+    n_changes_in = _num_coin_changes_memo(amount - coins[n], coins, T, n)
+    n_changes_ex = _num_coin_changes_memo(amount, coins, T, n - 1)
+    T[n][amount] = n_changes_in + n_changes_ex
 
     return T[n][amount]
 
 
 def num_coin_changes_memo(amount, coins):
-    """Count changes by top-bottom dynamic programming: 
+    """Number of coin changes by top-bottom dynamic programming:
     recursion + memoization.
 
-    Time complexity: O(a * c), where a is amount, and c is number of coins.
-    Space complexity: O(a * c).
+    Time complexity: O(a*n), where a is amount, and n is number of coins.
+    Space complexity: O(a*n).
     """
     n = len(coins) - 1
     T = [[0] * (amount + 1) for c in range(n + 1)]
 
+    # For amount 0, set num equal 1.
     for c in range(n + 1):
         T[c][0] = 1
 
@@ -69,23 +72,26 @@ def num_coin_changes_memo(amount, coins):
 
 
 def num_coin_changes_dp(amount, coins):
-    """Count changes by bottom-up dynamic programming.
+    """Number of coin changes by bottom-up dynamic programming.
 
-    Time complexity: O(a * c), where a is amount, and c is number of coins.
-    Space complexity: O(a * c).
+    Time complexity: O(a*n), where a is amount, and n is number of coins.
+    Space complexity: O(a*n).
     """
     n = len(coins) - 1
     T = [[0] * (amount + 1) for c in range(n + 1)]
 
+    # For amount 0, set num equal 1.
     for c in range(n):
         T[c][0] = 1
 
     for c in range(n + 1):
         for a in range(1, amount + 1):
             if a < coins[c]:
+                # Cannot make a change by coin c.
                 T[c][a] = T[c - 1][a]
             else:
-                T[c][a] = T[c - 1][a] + T[c][a - coins[c]]
+                # Sum num of ways with coin n included & excluded.
+                T[c][a] = T[c][a - coins[c]] + T[c - 1][a]
 
     return T[-1][-1]
 
