@@ -104,17 +104,17 @@ def main():
     n = len(coins) - 1
 
     start_time = time.time()
-    print('Make change by recursion: {}'
+    print('By recursion: {}'
           .format(num_coin_changes_recur(amount, coins, n)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('Make change by memo: {}'
+    print('By memo: {}'
           .format(num_coin_changes_memo(amount, coins)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('Make change by DP: {}'
+    print('By DP: {}'
           .format(num_coin_changes_dp(amount, coins)))
     print('Time: {}'.format(time.time() - start_time))
 
