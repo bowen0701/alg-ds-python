@@ -24,7 +24,7 @@ You may assume that you have an infinite number of each kind of coin.
 
 class SolutionRecur(object):
     def coinChange(self, coins, amount):
-        """Change minimum coins by naive recursion.
+        """Change fewest  #coins by recursion.
 
         Time complexity: O(c^a), where c is number of coins, and a is amount.
         Space complexity: O(1).
@@ -55,9 +55,11 @@ class SolutionMemo(object):
         if amount == 0:
             return 0
 
+        # Apply memoization.
         if T[amount] > 0:
             return T[amount]
 
+        # Get fewest num with iterating coins by recursion.
         min_coins = float('inf')
 
         for c in coins:
@@ -74,10 +76,10 @@ class SolutionMemo(object):
 
 
     def coinChange(self, coins, amount):
-        """Change minimum coins by top-down dynamic programming: 
+        """Change fewest  #coins by top-down dynamic programming:
         recursion + memoization.
 
-        Time complexity: O(c * a), where c is number of coins, and a is amount.
+        Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a).
         """
         T = [0] * (amount + 1)
@@ -86,38 +88,33 @@ class SolutionMemo(object):
 
 class SolutionDp(object):
     def coinChange(self, coins, amount):
-        """
-        :type coins: List[int]
-        :type amount: int
-        :rtype: int
+        """Change fewest  #coins by bottom-up dynamic programming.
 
-        Time complexity: O(c * a), where c is number of coins, and a is amount.
-        Space complexity: O(c * a).
+        Time complexity: O(a*n), where a is amount, and n is number of coins.
+        Space complexity: O(a*n).
         """
-        # Why sorted coin list? Since we want to start from smaller coins.
+        # We want to start from smaller coins.
         coins = sorted(coins)
 
         n_coins = len(coins)
-        T = [[float('inf')]*(amount + 1) for _ in range(n_coins)]
+        T = [[float('inf')] * (amount + 1) for _ in range(n_coins)]
 
-        # Base case for amount 0.
+        # For amount 0, set num equal 1.
         for c in range(n_coins):
             T[c][0] = 0
 
-        # Start from smallest coin to change from amount 0 to total amount.
         for c in range(n_coins):
             for a in range(1, amount + 1):
                 if a == coins[c]:
                     # Directly use coin c to change total amount.
                     T[c][a] = 1
-                elif a >= coins[c]:
+                elif a > coins[c]:
                     # If coin c can be included, decide which uses less coins:
-                    # 1. previous coins without coin c to make a.
-                    # 2. previous coins without coin c to make a - coins[c]
-                    #    plus this 1 extra coin c.
-                    T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c]])
-                else:
-                    # If coin c cannot be included, use previous coins.
+                    #   1. 1 + #coins with coin c to make a - coins[c]
+                    #   2. #coins without coin c to make a
+                    T[c][a] = min(1 + T[c][a - coins[c]], T[c - 1][a])
+                elif a < coins[c]:
+                    # If coin c cannot be included, use previous #coins.
                     T[c][a] = T[c - 1][a]
 
         if T[-1][-1] != float('inf'):
@@ -127,17 +124,37 @@ class SolutionDp(object):
 
 
 def main():
+    import time
+
     coins = [1, 2, 5]
-    amount = 11
+    amount = 11       # Should be 3.
+
+    start_time = time.time()
     print SolutionRecur().coinChange(coins, amount)
+    print 'By recur: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print SolutionMemo().coinChange(coins, amount)
+    print 'By memo: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print SolutionDp().coinChange(coins, amount)
+    print 'By DP: {}'.format(time.time() - start_time)
 
     coins = [2]
-    amount = 3
+    amount = 3  # Should be -1.
+
+    start_time = time.time()
     print SolutionRecur().coinChange(coins, amount)
+    print 'By recur: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print SolutionMemo().coinChange(coins, amount)
+    print 'By memo: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print SolutionDp().coinChange(coins, amount)
+    print 'By DP: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
