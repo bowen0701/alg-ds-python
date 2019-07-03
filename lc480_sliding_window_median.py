@@ -1,8 +1,7 @@
 """Leetcode 480. Sliding Window Median
+Hard
 
 URL: https://leetcode.com/problems/sliding-window-median/
-
-Hard
 
 Median is the middle value in an ordered integer list. 
 If the size of the list is even, there is no middle value. 
