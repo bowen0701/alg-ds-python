@@ -39,7 +39,7 @@ k is always smaller than input array's size for non-empty array.
 import random
 
 
-class Solution(object):
+class SolutionSelect(object):
     def _select_mth_smallest_sub_nums(self, sub_nums, mth):
         # Randomly select a num in sub array as pivot.
         pivot_idx = random.choice(range(len(sub_nums)))
@@ -71,6 +71,9 @@ class Solution(object):
         :type nums: List[int]
         :type k: int
         :rtype: List[float]
+
+        Time complexity: O((n - k)*k), where n is the length of nums.
+        Space complexity: O(k).
         """
         n = len(nums)
         med_nums = []
@@ -100,7 +103,7 @@ def main():
     nums = [1, 3, -1, -3, 5, 3, 6, 7]
     k = 3
     print 'For {0} with k = {1}, the median is:'.format(nums, k)
-    print Solution().medianSlidingWindow(nums, k)
+    print SolutionSelect().medianSlidingWindow(nums, k)
 
 
 if __name__ == '__main__':
