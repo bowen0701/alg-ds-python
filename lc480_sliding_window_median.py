@@ -36,14 +36,35 @@ You may assume k is always valid, ie:
 k is always smaller than input array's size for non-empty array.
 """
 
+import random
+
+
 class Solution(object):
+    def _select_mth_smallest_sub_nums(self, nums, start, end, mth):
+        pass
+
     def medianSlidingWindow(self, nums, k):
         """
         :type nums: List[int]
         :type k: int
         :rtype: List[float]
         """
-        pass
+        n = len(nums)
+        med_nums = []
+
+        for i in range(n - k):
+            if k % 2 == 1:
+                m = k // 2 + 1
+                med = self._select_mth_smallest_sub_nums(nums, i, i + k - 1, m)
+            elif k % 2 == 0:
+                m1 = k // 2
+                m2 = k // 2 + 1
+                med1 = self._select_mth_smallest_sub_nums(nums, i, i + k - 1, m1)
+                med2 = self._select_mth_smallest_sub_nums(nums, i, i + k - 1, m2)
+                med = (med1 + med2) / 2.0
+            med_nums.append(med)
+
+        return med_nums
 
 
 def main():
