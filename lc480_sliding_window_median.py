@@ -40,8 +40,31 @@ import random
 
 
 class Solution(object):
-    def _select_mth_smallest_sub_nums(self, nums, start, end, mth):
-        pass
+    def _select_mth_smallest_sub_nums(self, sub_nums, mth):
+        # Randomly select a num in sub array as pivot.
+        pivot_idx = random.choice(range(len(sub_nums)))
+        pivot = sub_nums[pivot_idx]
+
+        # Collect idx with num smaller than, equal to, and larger than pivot.
+        small_idx = [idx for idx, n in enumerate(sub_nums) if n < pivot]
+        mid_idx = [idx for idx, n in enumerate(sub_nums) if n == pivot]
+        large_idx = [idx for idx, n in enumerate(sub_nums) if n > pivot]
+
+        n_small = len(small_idx)
+        n_mid = len(mid_idx)
+
+        if mth <= n_small:
+            # Select the mth from small nums.
+            small_nums = [sub_nums[idx] for idx in small_idx]
+            return self._select_mth_smallest_sub_nums(small_nums, mth)
+        elif n_small < mth <= n_small + n_mid:
+            # Select pivot as the mth.
+            return pivot
+        elif mth > n_small + n_mid:
+            # Select the mth from large nums.
+            large_nums = [sub_nums[idx] for idx in large_idx]
+            return self._select_mth_smallest_sub_nums(
+                large_nums, mth - n_small - n_mid)
 
     def medianSlidingWindow(self, nums, k):
         """
@@ -52,15 +75,21 @@ class Solution(object):
         n = len(nums)
         med_nums = []
 
-        for i in range(n - k):
+        for i in range(n - k + 1):
+            # Create a sub nums.
+            sub_nums = nums[i:(i + k)]
+
             if k % 2 == 1:
+                # If k is odd, select the (k // 2 + 1)th as median.
                 m = k // 2 + 1
-                med = self._select_mth_smallest_sub_nums(nums, i, i + k - 1, m)
+                med = self._select_mth_smallest_sub_nums(sub_nums, m)
             elif k % 2 == 0:
+                # If k is even, select the (k // 2)th and (k // 2 + 1)th nums,
+                # and take mean of them as median.
                 m1 = k // 2
                 m2 = k // 2 + 1
-                med1 = self._select_mth_smallest_sub_nums(nums, i, i + k - 1, m1)
-                med2 = self._select_mth_smallest_sub_nums(nums, i, i + k - 1, m2)
+                med1 = self._select_mth_smallest_sub_nums(sub_nums, m1)
+                med2 = self._select_mth_smallest_sub_nums(sub_nums, m2)
                 med = (med1 + med2) / 2.0
             med_nums.append(med)
 
@@ -68,7 +97,10 @@ class Solution(object):
 
 
 def main():
-    pass
+    nums = [1, 3, -1, -3, 5, 3, 6, 7]
+    k = 3
+    print 'For {0} with k = {1}, the median is:'.format(nums, k)
+    print Solution().medianSlidingWindow(nums, k)
 
 
 if __name__ == '__main__':
