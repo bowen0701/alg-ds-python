@@ -99,6 +99,16 @@ class SolutionSelect(object):
         return med_nums
 
 
+class SolutionSort(object):
+    def medianSlidingWindow(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[float]
+        """
+        pass
+
+
 def main():
     nums = [1, 3, -1, -3, 5, 3, 6, 7]
     k = 3
