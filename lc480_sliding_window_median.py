@@ -99,7 +99,7 @@ class SolutionSelect(object):
         return med_nums
 
 
-class SolutionSort(object):
+class SolutionSortAndBinarySearch(object):
     def medianSlidingWindow(self, nums, k):
         """
         :type nums: List[int]
