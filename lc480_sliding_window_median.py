@@ -72,11 +72,11 @@ class SolutionSelect(object):
         :type k: int
         :rtype: List[float]
 
-        Time complexity: O((n - k)*k), where n is the length of nums.
+        Time complexity: O(n*k), where n is the length of nums.
         Space complexity: O(k).
         """
         n = len(nums)
-        med_nums = []
+        medians = []
 
         for i in range(n - k + 1):
             # Create a sub nums.
@@ -94,9 +94,9 @@ class SolutionSelect(object):
                 med1 = self._select_mth_smallest_sub_nums(sub_nums, m1)
                 med2 = self._select_mth_smallest_sub_nums(sub_nums, m2)
                 med = (med1 + med2) / 2.0
-            med_nums.append(med)
+            medians.append(med)
 
-        return med_nums
+        return medians
 
 
 class SolutionSortAndBinarySearch(object):
@@ -105,15 +105,50 @@ class SolutionSortAndBinarySearch(object):
         :type nums: List[int]
         :type k: int
         :rtype: List[float]
+
+        Time complexity: O(k*logk + n*(k+logk)) = O(nk).
+        Space complexity: O(k).
         """
-        pass
+        medians = []
+
+        # Keep the window as sorted list.
+        window = sorted(nums[:k])
+        
+        # Apply two pointers method with to-be-removed & to-be-added elements.
+        for old, new in zip(nums, nums[k:] + [None]):
+            # The last zippped pair is to add the last median only.
+            medians.append((window[k // 2] + window[~(k // 2)]) / 2.0)
+            window.remove(old)
+
+            # Apply binary search to insert new element into sorted window.
+            left = 0
+            right = k - 1
+            while left < right:
+                mid = left + (right - left) // 2
+                if window[mid] < new:
+                    left = mid + 1
+                else:
+                    right = mid
+            window.insert(left, new)
+
+        return medians
 
 
 def main():
+    import time
+
     nums = [1, 3, -1, -3, 5, 3, 6, 7]
-    k = 3
-    print 'For {0} with k = {1}, the median is:'.format(nums, k)
+    k = 3  # Should be  [1, -1, -1, 3, 5, 6].
+
+    start_time = time.time()
+    print 'By kth smallest selection method:'
     print SolutionSelect().medianSlidingWindow(nums, k)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By sorted window with binary search:'
+    print SolutionSortAndBinarySearch().medianSlidingWindow(nums, k)
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
