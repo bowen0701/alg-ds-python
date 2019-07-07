@@ -101,7 +101,7 @@ class SolutionSelect(object):
 
 class SolutionSortAndBinarySearch(object):
     def _binary_search(self, window, k, element):
-        # Apply binary search to 
+        # Apply binary search to
         # - remove old element from sorted window.
         # - insert new element into sorted window.
         left = 0
