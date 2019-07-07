@@ -100,36 +100,49 @@ class SolutionSelect(object):
 
 
 class SolutionSortAndBinarySearch(object):
+    def _binary_search(self, window, k, element):
+        # Apply binary search to 
+        # - remove old element from sorted window.
+        # - insert new element into sorted window.
+        left = 0
+        right = k - 1
+        while left < right:
+            mid = left + (right - left) // 2
+            if window[mid] == element:
+                return mid
+            elif window[mid] < element:
+                left = mid + 1
+            else:
+                right = mid
+        return left
+
     def medianSlidingWindow(self, nums, k):
         """
         :type nums: List[int]
         :type k: int
         :rtype: List[float]
 
-        Time complexity: O(k*logk + n*(k+logk)) = O(nk).
+        Time complexity: O(k*logk + n*logk) = O(n*logk).
         Space complexity: O(k).
         """
         medians = []
 
         # Keep the window as sorted list.
         window = sorted(nums[:k])
-        
+
         # Apply two pointers method with to-be-removed & to-be-added elements.
         for old, new in zip(nums, nums[k:] + [None]):
             # The last zippped pair is to add the last median only.
             medians.append((window[k // 2] + window[~(k // 2)]) / 2.0)
-            window.remove(old)
 
-            # Apply binary search to insert new element into sorted window.
-            left = 0
-            right = k - 1
-            while left < right:
-                mid = left + (right - left) // 2
-                if window[mid] < new:
-                    left = mid + 1
-                else:
-                    right = mid
-            window.insert(left, new)
+            # Apply binary search to remove old element from sorted window.
+            # window.remove(old)
+            old_pos = self._binary_search(window, k, old)
+            window.pop(old_pos)
+            
+            # Apply binary search to add new element to sorted window.
+            left_pos = self._binary_search(window, k, new)
+            window.insert(left_pos, new)
 
         return medians
 
