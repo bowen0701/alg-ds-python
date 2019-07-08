@@ -30,6 +30,9 @@ class SolutionRecur(object):
         """
         :type s: str
         :rtype: int
+
+        Time complexity: O(2^n).
+        Space complexity: O(n).
         """
         if len(s) == 0:
             return 1
