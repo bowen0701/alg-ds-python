@@ -25,7 +25,7 @@ Output: 3
 Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 """
 
-class SolutionRecur(object):
+class SolutionRecurNaive(object):
     def numDecodings(self, s):
         """
         :type s: str
@@ -54,7 +54,7 @@ class SolutionRecur(object):
             return 0
 
 
-class SolutionRecurOptimizedSpace(object):
+class SolutionRecur(object):
     def numDecodings(self, s, n):
         """
         :type s: str
@@ -87,20 +87,20 @@ class SolutionRecurOptimizedSpace(object):
 
 def main():
     s = '12' # Should be 2 = #{1,2; 12}.
-    print SolutionRecur().numDecodings(s)
-    print SolutionRecurOptimizedSpace().numDecodings(s, len(s))
+    print SolutionRecurNaive().numDecodings(s)
+    print SolutionRecur().numDecodings(s, len(s))
 
     s = '226' # Should be 3 = #{2,2,6; 22,6; 2,26}
-    print SolutionRecur().numDecodings(s)
-    print SolutionRecurOptimizedSpace().numDecodings(s, len(s))
+    print SolutionRecurNaive().numDecodings(s)
+    print SolutionRecur().numDecodings(s, len(s))
 
     s = '27' # Should be 1 = #{2,7}
-    print SolutionRecur().numDecodings(s)
-    print SolutionRecurOptimizedSpace().numDecodings(s, len(s))
+    print SolutionRecurNaive().numDecodings(s)
+    print SolutionRecur().numDecodings(s, len(s))
 
     s = '1111' # Should be 5 = #{1,1,1,1; 1,11,1; 1,1,11; 11,1,1; 11,11}
-    print SolutionRecur().numDecodings(s)
-    print SolutionRecurOptimizedSpace().numDecodings(s, len(s))
+    print SolutionRecurNaive().numDecodings(s)
+    print SolutionRecur().numDecodings(s, len(s))
 
 
 if __name__ == '__main__':
