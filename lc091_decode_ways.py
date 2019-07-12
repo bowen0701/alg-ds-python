@@ -131,6 +131,9 @@ class SolutionDP(object):
         if not s:
             return 1
 
+        if s[0] == '0':
+            return 0
+
         n = len(s)
         T = [0] * (n + 1)
         T[0] = 1
@@ -138,7 +141,7 @@ class SolutionDP(object):
         for i in range(1, n + 1):
             if s[i - 1] != '0':
                 T[i] += T[i - 1]
-            if i >= 2 and '10' <= s[(i - 2):i] <= "26":
+            if i >= 2 and '10' <= s[(i - 2):i] <= '26':
                 T[i] += T[i - 2]
         
         return T[-1]
@@ -165,6 +168,7 @@ def main():
     print 'By DP: {}'.format(SolutionDP().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
+    print '==='
     s = '12' # Should be 2 = #{1,2; 12}.
 
     start_time = time.time()
@@ -183,25 +187,8 @@ def main():
     print 'By DP: {}'.format(SolutionDP().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
+    print '==='
     s = '226' # Should be 3 = #{2,2,6; 22,6; 2,26}
-
-    start_time = time.time()
-    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    start_time = time.time()
-    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    s = '1111' # Should be 5 = #{1,1,1,1; 1,11,1; 1,1,11; 11,1,1; 11,11}
 
     start_time = time.time()
     print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
