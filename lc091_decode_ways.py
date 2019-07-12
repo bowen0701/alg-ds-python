@@ -51,25 +51,18 @@ class SolutionRecurNaive(object):
 class SolutionRecur(object):
     def numDecodingsUtil(self, s, k):
         """Helper function for numDecodings."""
+        # k is the number of last k letters.
         if k == 0:
             return 1
 
-        if k == 1:
-            if s[len(s) - 1] == '0':
-                return 0
-            else:
-                return 1
-
-        left = len(s) - k
-
-        if s[left] > '0':
-            if '10' <= s[left:(left + 2)] <= '26':
-                return (self.numDecodingsUtil(s, k - 1) + 
-                        self.numDecodingsUtil(s, k - 2))
-            else:
-                return self.numDecodingsUtil(s, k - 1)
-        else:
+        start = len(s) - k
+        if s[start] == '0':
             return 0
+
+        if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
+            return self.numDecodingsUtil(s, k - 1) + self.numDecodingsUtil(s, k - 2)
+        else:
+            return self.numDecodingsUtil(s, k - 1)
 
     def numDecodings(self, s):
         """
