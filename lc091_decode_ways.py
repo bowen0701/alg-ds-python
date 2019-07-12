@@ -55,21 +55,13 @@ class SolutionRecurNaive(object):
 
 
 class SolutionRecur(object):
-    def numDecodings(self, s, n):
-        """
-        :type s: str
-        :rtype: int
-
-        Apply pointer method to optimize space without copying lists.
-
-        Time complexity: O(2^n).
-        Space complexity: O(1).
-        """
-        if n == 0:
+    def numDecodingsUtil(self, s, k):
+        """Helper function for numDecodings."""
+        if k == 0:
             return 1
 
-        left = len(s) - n
-        if n == 1:
+        left = len(s) - k
+        if k == 1:
             if s[left] == '0':
                 return 0
             else:
@@ -78,29 +70,57 @@ class SolutionRecur(object):
         # For string with length >= 2, mimic Fibonacci series.
         if s[left] > '0':
             if '10' <= s[left:(left + 2)] <= '26':
-                return self.numDecodings(s, n - 1) + self.numDecodings(s, n - 2)
+                return self.numDecodingsUtil(s, k - 1) + self.numDecodingsUtil(s, k - 2)
             else:
-                return self.numDecodings(s, n - 1)
+                return self.numDecodingsUtil(s, k - 1)
         else:
             return 0
 
+    def numDecodings(self, s):
+        """
+        :type s: str
+        :rtype: int
+
+        Apply pointer method to optimize space without copying lists.
+
+        Time complexity: O(2^n).
+        Space complexity: O(1).
+        """ 
+        return self.numDecodingsUtil(s, len(s))
+
 
 def main():
+    import time
+
     s = '12' # Should be 2 = #{1,2; 12}.
-    print SolutionRecurNaive().numDecodings(s)
-    print SolutionRecur().numDecodings(s, len(s))
+
+    start_time = time.time()
+    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
 
     s = '226' # Should be 3 = #{2,2,6; 22,6; 2,26}
-    print SolutionRecurNaive().numDecodings(s)
-    print SolutionRecur().numDecodings(s, len(s))
 
-    s = '27' # Should be 1 = #{2,7}
-    print SolutionRecurNaive().numDecodings(s)
-    print SolutionRecur().numDecodings(s, len(s))
+    start_time = time.time()
+    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
 
     s = '1111' # Should be 5 = #{1,1,1,1; 1,11,1; 1,1,11; 11,1,1; 11,11}
-    print SolutionRecurNaive().numDecodings(s)
-    print SolutionRecur().numDecodings(s, len(s))
+
+    start_time = time.time()
+    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
