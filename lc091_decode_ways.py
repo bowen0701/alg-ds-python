@@ -60,7 +60,7 @@ class SolutionRecur(object):
         :type s: str
         :rtype: int
 
-        Apply pointer method to optimize space.
+        Apply pointer method to optimize space without copying lists.
 
         Time complexity: O(2^n).
         Space complexity: O(1).
