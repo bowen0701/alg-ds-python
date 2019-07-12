@@ -36,22 +36,16 @@ class SolutionRecurNaive(object):
         Time complexity: O(2^n).
         Space complexity: O(n).
         """
-        if len(s) == 0:
+        if not s:
             return 1
-        if len(s) == 1:
-            if s[0] == '0':
-                return 0
-            else:
-                return 1
 
-        # For string with length >= 2, mimic Fibonacci series.
-        if s[0] > '0':
-            if '10' <= s[:2] <= '26':
-                return self.numDecodings(s[1:]) + self.numDecodings(s[2:])
-            else:
-                return self.numDecodings(s[1:])
-        else:
+        if s[0] == '0':
             return 0
+
+        if len(s) >= 2 and '10' <= s[:2] <= '26':
+            return self.numDecodings(s[1:]) + self.numDecodings(s[2:])
+        else:
+            return self.numDecodings(s[1:])
 
 
 class SolutionRecur(object):
@@ -60,17 +54,18 @@ class SolutionRecur(object):
         if k == 0:
             return 1
 
-        left = len(s) - k
         if k == 1:
-            if s[left] == '0':
+            if s[len(s) - 1] == '0':
                 return 0
             else:
                 return 1
 
-        # For string with length >= 2, mimic Fibonacci series.
+        left = len(s) - k
+
         if s[left] > '0':
             if '10' <= s[left:(left + 2)] <= '26':
-                return self.numDecodingsUtil(s, k - 1) + self.numDecodingsUtil(s, k - 2)
+                return (self.numDecodingsUtil(s, k - 1) + 
+                        self.numDecodingsUtil(s, k - 2))
             else:
                 return self.numDecodingsUtil(s, k - 1)
         else:
@@ -81,12 +76,79 @@ class SolutionRecur(object):
         :type s: str
         :rtype: int
 
-        Apply pointer method to optimize space without copying lists.
+        Apply recursion with pointer method without copying lists.
 
         Time complexity: O(2^n).
         Space complexity: O(1).
         """ 
         return self.numDecodingsUtil(s, len(s))
+
+
+class SolutionMemo(object):
+    def numDecodingsUtil(self, s, k, T):
+        if T[k]:
+            return T[k]
+
+        if k == 0:
+            result = 1
+            T[k] = result
+            return result
+
+        if k == 1:
+            if s[len(s) - 1] == '0':
+                result = 0
+            else:
+                result = 1
+            T[k] = result
+            return result
+
+
+        left = len(s) - k
+
+        if s[left] > '0':
+            if '10' <= s[left:(left + 2)] <= '26':
+                result = (self.numDecodingsUtil(s, k - 1, T) + 
+                          self.numDecodingsUtil(s, k - 2, T))
+            else:
+                result = self.numDecodingsUtil(s, k - 1, T)
+        else:
+            result = 0
+
+        T[k] = result
+        return result
+
+    def numDecodings(self, s):
+        """
+        :type s: str
+        :rtype: int
+
+        Apply top-down dynamic progromming by memoization.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        n = len(s)
+        T = [None] * (n + 1)
+        return self.numDecodingsUtil(s, n, T)
+
+
+class SolutionDP(object):
+    def numDecodings(self, s):
+        """
+        :type s: str
+        :rtype: int
+
+        Apply bottom-up dynamic progromming.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        n = len(s)
+
+        T = [None] * (n + 1)
+        T[0] = 1
+
+
 
 
 def main():
@@ -102,6 +164,10 @@ def main():
     print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
     s = '226' # Should be 3 = #{2,2,6; 22,6; 2,26}
 
     start_time = time.time()
@@ -112,6 +178,10 @@ def main():
     print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
     s = '1111' # Should be 5 = #{1,1,1,1; 1,11,1; 1,1,11; 11,1,1; 11,11}
 
     start_time = time.time()
@@ -120,6 +190,10 @@ def main():
 
     start_time = time.time()
     print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
 
