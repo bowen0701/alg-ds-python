@@ -79,6 +79,7 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def numDecodingsUtil(self, s, k, T):
+        # k is the number of last k letters.
         if T[k]:
             return T[k]
 
@@ -87,26 +88,17 @@ class SolutionMemo(object):
             T[k] = result
             return result
 
-        if k == 1:
-            if s[len(s) - 1] == '0':
-                result = 0
-            else:
-                result = 1
+        start = len(s) - k
+        if s[start] == '0':
+            result = 0
             T[k] = result
             return result
 
-
-        left = len(s) - k
-
-        if s[left] > '0':
-            if '10' <= s[left:(left + 2)] <= '26':
-                result = (self.numDecodingsUtil(s, k - 1, T) + 
-                          self.numDecodingsUtil(s, k - 2, T))
-            else:
-                result = self.numDecodingsUtil(s, k - 1, T)
+        if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
+            result = (self.numDecodingsUtil(s, k - 1, T) + 
+                      self.numDecodingsUtil(s, k - 2, T))
         else:
-            result = 0
-
+            result = self.numDecodingsUtil(s, k - 1, T)
         T[k] = result
         return result
 
@@ -136,16 +128,42 @@ class SolutionDP(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        if not s:
+            return 1
+
         n = len(s)
-
-        T = [None] * (n + 1)
+        T = [0] * (n + 1)
         T[0] = 1
-
-
+        
+        for i in range(1, n + 1):
+            if s[i - 1] != '0':
+                T[i] += T[i - 1]
+            if i >= 2 and '10' <= s[(i - 2):i] <= "26":
+                T[i] += T[i - 2]
+        
+        return T[-1]
 
 
 def main():
     import time
+
+    s = '10' # Should be 1 = #{10}.
+
+    start_time = time.time()
+    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
 
     s = '12' # Should be 2 = #{1,2; 12}.
 
@@ -159,6 +177,10 @@ def main():
 
     start_time = time.time()
     print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
     s = '226' # Should be 3 = #{2,2,6; 22,6; 2,26}
@@ -175,6 +197,10 @@ def main():
     print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
     s = '1111' # Should be 5 = #{1,1,1,1; 1,11,1; 1,1,11; 11,1,1; 11,11}
 
     start_time = time.time()
@@ -187,6 +213,10 @@ def main():
 
     start_time = time.time()
     print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
 
