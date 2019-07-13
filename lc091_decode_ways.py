@@ -42,26 +42,39 @@ class SolutionRecurNaive(object):
         if s[0] == '0':
             return 0
 
+        # Since s[0] is valid, decode s by decoding s[1:].
         n_ways = self.numDecodings(s[1:])
+
+        # If len of s is larger than 2 and the first 2 chars are valid,
+        # further decode s by s[2:].
         if len(s) >= 2 and '10' <= s[:2] <= '26':
             n_ways += self.numDecodings(s[2:])
+
         return n_ways
 
 
 class SolutionRecur(object):
     def numDecodingsUtil(self, s, k):
         """Helper function for numDecodings."""
-        # k is the number of last k letters.
+        # Check the last k chars.
         if k == 0:
             return 1
 
+        # Check the start of the last k chars is valid.
         start = len(s) - k
         if s[start] == '0':
             return 0
 
+        # Since start of the last k chars is valid, 
+        # decode s by decoding the last (k - 1) chars.
         n_ways = self.numDecodingsUtil(s, k - 1)
+
+        # If the len of the last k chars is larger than 2, 
+        # and the first 2 chars are valid, 
+        # further decode the last (k - 2) chars.
         if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
             n_ways += self.numDecodingsUtil(s, k - 2)
+
         return n_ways
 
     def numDecodings(self, s):
@@ -79,22 +92,25 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def numDecodingsUtil(self, s, k, T):
-        # k is the number of last k letters.
+        # Check the last k chars.
         if T[k]:
             return T[k]
 
         if k == 0:
-            result = 1
-            T[k] = result
-            return result
+            return 1
 
+        # Check the start of the last k chars is valid.
         start = len(s) - k
         if s[start] == '0':
-            result = 0
-            T[k] = result
-            return result
+            return 0
 
+        # Since start of the last k chars is valid, 
+        # decode s by decoding the last (k - 1) chars.
         result = self.numDecodingsUtil(s, k - 1, T)
+
+        # If the len of the last k chars is larger than 2, 
+        # and the first 2 chars are valid, 
+        # further decode the last (k - 2) chars.
         if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
             result += self.numDecodingsUtil(s, k - 2, T)
 
@@ -127,22 +143,28 @@ class SolutionDP(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # If empty string, decode in 1 way.
         if not s:
             return 1
 
+        # Check s[0] is valid.
         if s[0] == '0':
             return 0
 
         n = len(s)
 
+        # Apply bottom-up dynamic programming.
         T = [0] * (n + 1)
+        # For (1) empty string and (2) the 1st char is valid, decode in 1 way.
         T[0] = 1
         T[1] = 1
         
         for i in range(2, n + 1):
             if s[i - 1] != '0':
+                # If the previous 1 char is valid, add its decode ways.
                 T[i] += T[i - 1]
             if '10' <= s[(i - 2):i] <= '26':
+                # If the previous 2 chars are valid, further add its decode ways.
                 T[i] += T[i - 2]
         
         return T[-1]
@@ -159,20 +181,25 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        # If empty string, decode in 1 way.
         if not s:
             return 1
 
+        # Check s[0] is valid.
         if s[0] == '0':
             return 0
 
         n = len(s)
+        # For (a) empty string and (b) the 1st char is valid, decode in 1 way.
         a, b = 1, 1
 
         for i in range(2, n + 1):
             c = 0
             if s[i - 1] != '0':
+                # If the previous 1 char is valid, add its decode ways.
                 c += b
             if '10' <= s[(i - 2):i] <= '26':
+                # If the previous 2 chars are valid, further add its decode ways.
                 c += a
 
             a, b = b, c
