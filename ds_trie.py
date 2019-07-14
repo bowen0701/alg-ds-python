@@ -17,7 +17,7 @@ class Node(object):
 class Trie(object):
     """Trie class.
 
-    Operations:
+    Methods:
       - insert()
       - search_prefix()
       - search_word()
