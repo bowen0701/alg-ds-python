@@ -49,24 +49,33 @@ class Solution(object):
             spiral.extend([matrix[i][left] for i in range(down, up, -1)])
 
             # Decrement up, down, left and down.
-            up, down, left, right = up - 1, down + 1, left + 1, right - 1
+            up, down, left, right = up + 1, down - 1, left + 1, right - 1
+
 
         if left == right:
-            print 'left == right: ({}, {})'.format(left, right)
+            # When n_rows > n_cols, left = right.
             spiral.extend([matrix[i][right] for i in range(up, down + 1)])
-
-        if up == down:
-            print 'up == down: ({}, {})'.format(up, down)
+        elif up == down:
+            # When n_rows < n_cols, up = down.
             spiral.extend([matrix[down][j] for j in range(left, right + 1)])
 
         return spiral
 
 
 def main():
+    # Should be: [1,2,3,6,9,8,7,4,5].
     matrix = [
-        [ 1, 2, 3 ],
-        [ 4, 5, 6 ],
-        [ 7, 8, 9 ]
+      [ 1, 2, 3 ],
+      [ 4, 5, 6 ],
+      [ 7, 8, 9 ]
+    ]
+    print Solution().spiralOrder(matrix)
+
+    # Should be: [1,2,3,4,8,12,11,10,9,5,6,7].
+    matrix = [
+      [1, 2, 3, 4],
+      [5, 6, 7, 8],
+      [9,10,11,12]
     ]
     print Solution().spiralOrder(matrix)
 
