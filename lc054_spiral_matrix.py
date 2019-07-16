@@ -30,6 +30,9 @@ class Solution(object):
         """
         :type matrix: List[List[int]]
         :rtype: List[int]
+
+        Time complexity: O(m*n), where m is n_rows and n is n_cols.
+        Space complexity: O(m*n).
         """
         if not matrix or not matrix[0]:
             return []
