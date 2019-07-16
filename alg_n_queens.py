@@ -12,6 +12,7 @@ def _is_valid(board):
         diff = abs(current_col - col)
         if diff == 0 or diff == current_row - row:
             return False
+
     return True
 
 
