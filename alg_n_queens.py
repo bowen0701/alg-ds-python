@@ -9,8 +9,9 @@ def _is_valid(board):
 
     # Check any queens can attack the current queen.
     for row, col in enumerate(board[:-1]):
-        diff = abs(current_col - col)
-        if diff == 0 or diff == current_row - row:
+        col_diff = abs(current_col - col)
+        row_diff = abs(current_row - row)
+        if col_diff == 0 or col_diff == row_diff:
             return False
 
     return True
@@ -21,7 +22,10 @@ def n_queens(n, board=[]):
 
     On an N by N board, get the number of possible arrangements of the board 
     where N queens can be placed on the board without attacking each other, 
-    i.e. no two queens share the same row, column, or diagonal. 
+    i.e. no two queens share the same row, column, or diagonal.
+
+    Time complexity: O(n!).
+    Space complexity: O(n).
     """
     # board is an 1-d array to store the column ids of queens.
     if n == len(board):
