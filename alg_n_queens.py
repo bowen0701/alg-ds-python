@@ -3,12 +3,12 @@ from __future__ import division
 from __future__ import print_function
 
 
-def _is_valid(board):
+def _is_valid(queens):
     """Check current queen position is valid."""
-    current_row, current_col = len(board) - 1, board[-1]
+    current_row, current_col = len(queens) - 1, queens[-1]
 
     # Check any queens can attack the current queen.
-    for row, col in enumerate(board[:-1]):
+    for row, col in enumerate(queens[:-1]):
         col_diff = abs(current_col - col)
         row_diff = abs(current_row - row)
         if col_diff == 0 or col_diff == row_diff:
@@ -17,7 +17,7 @@ def _is_valid(board):
     return True
 
 
-def n_queens(n, board=[]):
+def n_queens(n, queens=[]):
     """The number of N Queens.
 
     On an N by N board, get the number of possible arrangements of the board 
@@ -27,22 +27,22 @@ def n_queens(n, board=[]):
     Time complexity: O(n!).
     Space complexity: O(n).
     """
-    # board is an 1-d array to store the column ids of queens.
-    if n == len(board):
+    # queens is an 1-d array to store the column ids of queens.
+    if n == len(queens):
         return 1
 
     count = 0
 
     for col in range(n):
         # Append current queen's column id. 
-        board.append(col)
+        queens.append(col)
 
-        if _is_valid(board):
+        if _is_valid(queens):
             # If current queen's position is valid, add numbers.
-            count += n_queens(n, board)
+            count += n_queens(n, queens)
 
         # Backtrack by poping out current queens.
-        board.pop()
+        queens.pop()
     
     return count
 
