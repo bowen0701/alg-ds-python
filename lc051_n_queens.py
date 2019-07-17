@@ -42,16 +42,15 @@ class Solution(object):
 
         return True
 
-    def solveNQueens(self, n, res, queens=[]):
+    def solveNQueens(self, n, res, queens):
         """
         :type n: int
         :rtype: List[List[str]]
         """
         # queens is an 1-d array to store the column ids of queens.
         if n == len(queens):
-            print queens
-            res.append(queens)
-            return None
+            res.append(queens[:])
+            return res
 
         for col in range(n):
             # Append current queen's column id. 
@@ -70,7 +69,7 @@ class Solution(object):
 
 def main():
     n = 4
-    print Solution().solveNQueens(n, [])
+    print Solution().solveNQueens(n, [], [])
 
 
 if __name__ == '__main__':
