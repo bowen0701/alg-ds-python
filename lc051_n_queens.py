@@ -66,7 +66,6 @@ class Solution(object):
         return res
 
 
-
 def main():
     n = 4
     print Solution().solveNQueens(n, [], [])
