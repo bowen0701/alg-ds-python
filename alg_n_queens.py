@@ -38,10 +38,10 @@ def n_queens(n, queens=[]):
         queens.append(col)
 
         if _is_valid(queens):
-            # If current queen's position is valid, add numbers.
+            # If current queen's position is valid, increment count by 1.
             count += n_queens(n, queens)
 
-        # Backtrack by poping out current queens.
+        # Backtrack by poping out current queen.
         queens.pop()
     
     return count
