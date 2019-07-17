@@ -30,7 +30,7 @@ as shown above.
 
 class Solution(object):
     def _is_valid(self, queens):
-        """Check current queen position is valid."""
+        """Check current queen position is valid among previous queens."""
         current_row, current_col = len(queens) - 1, queens[-1]
 
         # Check any queens can attack the current queen.
@@ -42,15 +42,11 @@ class Solution(object):
 
         return True
 
-    def solveNQueens(self, n, res, queens):
-        """
-        :type n: int
-        :rtype: List[List[str]]
-        """
-        # queens is an 1-d array to store the column ids of queens.
+    def _dfs(self, n, res=[], queens=[]):
+        """DFS for putting queens in suitable position."""
         if n == len(queens):
             res.append(queens[:])
-            return res
+            return None
 
         for col in range(n):
             # Append current queen's column id. 
@@ -58,17 +54,35 @@ class Solution(object):
 
             if self._is_valid(queens):
                 # If current queen's position is valid, search the next level.
-                self.solveNQueens(n, res, queens)
+                self._dfs(n, res, queens)
 
-            # Backtrack by poping out current queens.
+            # Backtrack by poping out current queen.
             queens.pop()
-        
-        return res
+
+    def solveNQueens(self, n):
+        """
+        :type n: int
+        :rtype: List[List[str]]
+
+        Time complexity: O(n!).
+        Space complexity: O(n).
+        """
+        # res to collect multiple solutions for n_queens.
+        res = []
+        # queens is an 1-d array to store the column ids of queens.
+        queens = []
+
+        self._dfs(n, res, queens)
+
+        # Make solution configs.
+        sol = [['.'*j + 'Q' + '.'*(n - j - 1) for j in queens] 
+               for queens in res]
+        return sol
 
 
 def main():
     n = 4
-    print Solution().solveNQueens(n, [], [])
+    print Solution().solveNQueens(n)
 
 
 if __name__ == '__main__':
