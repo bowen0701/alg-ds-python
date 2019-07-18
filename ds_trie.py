@@ -7,11 +7,10 @@ import numpy as np
 
 class Node(object):
     """Node class for Trie class."""
-    def __init__(self, key=None, data=None):
-        self.key = key
-        self.data = data
-        self.word = None
+    def __init__(self, data=None):
         self.children = {}
+        self.word = None
+        self.data = data
 
 
 class Trie(object):
@@ -189,15 +188,15 @@ def main():
     trie = Trie()
 
     # Trie example: https://www.youtube.com/watch?v=AXjmTQ8LEoI
-    trie.insert('abc', 1)
+    trie.insert('abc')
     print('{}'.format(trie.root
         .children['a'].children['b']
         .children['c'].word))
 
-    trie.insert('abgl', 2)
-    trie.insert('cdf', 3)
-    trie.insert('abcd', 4)
-    trie.insert('lmn', 5)
+    trie.insert('abgl')
+    trie.insert('cdf')
+    trie.insert('abcd')
+    trie.insert('lmn')
     trie.insert('lmnz')
 
     print('Prefix "ab": {}'.format(trie.root
@@ -209,13 +208,8 @@ def main():
     print('Search word "abcd" (True): {}'.format(trie.search_word('abcd')))
     print('Search word "lmn" (True): {}'.format(trie.search_word('lmn')))
 
-    print('Get data for "abgl" (2): {}'.format(trie.get_data('abgl')))
-    print('Get data for "lmn" (5): {}'.format(trie.get_data('lmn')))
-    print('Get data for non-existed "abk"'.format(trie.get_data('abk')))
-    print('Get data for "lmnz" without data'.format(trie.get_data('lmnz')))
-
     print('Search prefix "ab" (True): {}'.format(trie.search_prefix('ab')))
-    print('Search prefix "lo" (False)'.format(trie.search_prefix('lo')))
+    print('Search prefix "lo" (False): {}'.format(trie.search_prefix('lo')))
 
     print('Start with prefix "ab": (abc, abgl, abcd): {}'
           .format(trie.have_prefix('ab')))
@@ -244,7 +238,7 @@ def main():
         trie.root
         .children['a'].children['b']
         .children.keys()))
-    print('Show children with prefix "ab": {}'.format(
+    print('Show children with prefix "abc": {}'.format(
         trie.root
         .children['a'].children['b']
         .children['c'].children.keys()))
