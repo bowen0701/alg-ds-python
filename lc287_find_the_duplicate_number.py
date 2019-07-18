@@ -44,14 +44,35 @@ class SolutionNaive(object):
                     return nums[j]
 
 
+class SolutionDict(object):
+    def findDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        # Iterate through each numbers, 
+        # if visit it first time store in dict; if not, get duplicate numbder.
+        num_d = {}
+        for n in nums:
+            if n not in num_d:
+                num_d[n] = True
+            else:
+                return n
+
+
 def main():
     # Should be 2.
     nums = [1, 3, 4, 2, 2]
     print SolutionNaive().findDuplicate(nums)
+    print SolutionDict().findDuplicate(nums)
 
     # Should be 3.
     nums = [3, 1, 3, 4, 2]
     print SolutionNaive().findDuplicate(nums)
+    print SolutionDict().findDuplicate(nums)
 
 
 if __name__ == '__main__':
