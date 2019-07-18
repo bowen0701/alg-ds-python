@@ -24,17 +24,34 @@ Note:
   repeated more than once.
 """
 
-class Solution(object):
+class SolutionNaive(object):
     def findDuplicate(self, nums):
         """
         :type nums: List[int]
         :rtype: int
+
+        Note: Time Limit Exceeded.
+
+        Time complexity: O(n^2).
+        Space complexity: O(1).
         """
-        pass
+        # For each number, iterate through the following numbers 
+        # to check duplication.
+        n = len(nums)
+        for i in range(n - 1):
+            for j in range(i + 1, n):
+                if nums[i] == nums[j]:
+                    return nums[j]
 
 
 def main():
-    pass
+    # Should be 2.
+    nums = [1, 3, 4, 2, 2]
+    print SolutionNaive().findDuplicate(nums)
+
+    # Should be 3.
+    nums = [3, 1, 3, 4, 2]
+    print SolutionNaive().findDuplicate(nums)
 
 
 if __name__ == '__main__':
