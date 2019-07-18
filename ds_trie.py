@@ -18,9 +18,9 @@ class Trie(object):
 
     Methods:
       - insert()
-      - search_prefix()
-      - search_word()
+      - search()
       - delete()
+      - search_prefix()
       - have_prefix()
       - get_data()
     """
@@ -30,7 +30,7 @@ class Trie(object):
     def insert(self, word, data=None):
         """Insert a word.
 
-        Time complexity: O(k), where k is the word key length.
+        Time complexity: O(k), where k is the word length.
         Space complexity: O(k).
         """
         current = self.root
@@ -45,36 +45,18 @@ class Trie(object):
                 current.children[c] = new
                 current = new
 
-        current.data = data
         current.word = word
+        current.data = data
 
-    def search_prefix(self, prefix):
-        """Search a prefix.
-
-        Time complexity: O(k), where k is the prefix key length.
-        Space complexity: O(1).
-        """
-        current = self.root
-
-        # Go through each char in prefix and check it exists or not in children.
-        # Finally arrive at the prefix node.
-        for c in prefix:
-            if c in current.children:
-                current = current.children[c]
-            else:
-                return False
-
-        return True
-
-    def search_word(self, word):
+    def search(self, word):
         """Search a word.
 
-        Time complexity: O(k), where k is the word key length.
+        Time complexity: O(k), where k is the word length.
         Space complexity: O(1).
         """
         current = self.root
 
-        # Go through each char in word and check it exists or not in children.
+        # Go through each char in word and check its existence in children.
         # Finally arrive at the word node.
         for c in word:
             if c in current.children:
@@ -91,7 +73,7 @@ class Trie(object):
     def delete(self, word):
         """Delete a word.
 
-        Time complexity: O(k), where k is the word key length.       
+        Time complexity: O(k), where k is the word length.       
         Space complexity: O(k).
         """
         current = self.root
@@ -100,7 +82,7 @@ class Trie(object):
         visit_stack = []
         visit_stack.append(current)
 
-        # Go through each char in word and check it exists or not in children.
+        # Go through each char in word and check its existence in children.
         # Finally arrive at the word node.
         for c in word:
             if c in current.children:
@@ -111,23 +93,41 @@ class Trie(object):
                 return None
 
         if current.children:
-            # If word node has any child, just remove its payload.
-            current.data = None
+            # If word node has any children, just remove its payload.
             current.word = None
+            current.data = None
             return None
         else:
-            # If no child, check char in reversed order.
-            # Further, if char has no child, pop it from children dict.
+            # If no children, check char in reversed order.
+            # Further, if char has no children, pop it from children dict.
             visit_stack.pop()
 
             for c in word[::-1]:
                 if not current.children:
+                    # Backtrack to the previous char.
                     current = visit_stack.pop()
-                    # pop_node = current.children.pop(c)
                     current.children.pop(c)
                 else:
                     break
-     
+
+    def search_prefix(self, prefix):
+        """Search a prefix.
+
+        Time complexity: O(k), where k is the prefix length.
+        Space complexity: O(1).
+        """
+        current = self.root
+
+        # Go through each char in prefix and check its existence in children.
+        # Finally arrive at the prefix node.
+        for c in prefix:
+            if c in current.children:
+                current = current.children[c]
+            else:
+                return False
+
+        return True
+
     def have_prefix(self, prefix):
         """Get words starting with prefix.
 
@@ -136,10 +136,10 @@ class Trie(object):
           - m is the average number of connected words for each word.
         Space complexity: O(l*m).
         """
-        words_ls = []
+        words = []
         current = self.root
 
-        # Go through each char in prefix and check it exists or not in children.
+        # Go through each char in prefix and check its existence in children.
         # Finally arrive at the prefix node.
         for c in prefix:
             if c in current.children:
@@ -148,9 +148,9 @@ class Trie(object):
                 # The prefix does not exits.
                 return None
         
-        # Check whether prefix is a word, if yes, add it first.
+        # Check whether prefix is a word, if yes, append it first.
         if current.word:
-            words_ls.append(current.word)
+            words.append(current.word)
 
         # Run BFS with queue to collect the following words with prefix.
         visit_queue = []
@@ -161,15 +161,15 @@ class Trie(object):
             for c, child_node in node.children.items():
                 visit_queue.insert(0, child_node)
                 if child_node.word:
-                    words_ls.append(child_node.word)
+                    words.append(child_node.word)
 
-        return words_ls
+        return words
 
     def get_data(self, word):
         """Get word's data."""
         current = self.root
 
-        # Go through each char in word and check it exists or not in children.
+        # Go through each char in word and check its existence in children.
         # Finally arrive at the word node.
         for c in word:
             if c in current.children:
@@ -203,10 +203,10 @@ def main():
         .children['a'].children['b']
         .children.keys()))
 
-    print('Search word "abgl" (True): {}'.format(trie.search_word('abgl')))
-    print('Search word "cdf" (True): {}'.format(trie.search_word('cdf')))
-    print('Search word "abcd" (True): {}'.format(trie.search_word('abcd')))
-    print('Search word "lmn" (True): {}'.format(trie.search_word('lmn')))
+    print('Search word "abgl" (True): {}'.format(trie.search('abgl')))
+    print('Search word "cdf" (True): {}'.format(trie.search('cdf')))
+    print('Search word "abcd" (True): {}'.format(trie.search('abcd')))
+    print('Search word "lmn" (True): {}'.format(trie.search('lmn')))
 
     print('Search prefix "ab" (True): {}'.format(trie.search_prefix('ab')))
     print('Search prefix "lo" (False): {}'.format(trie.search_prefix('lo')))
@@ -218,14 +218,14 @@ def main():
     print('Start with prefix "cd": (cdf): {}'
           .format(trie.have_prefix('cd')))
 
-    print('Search word "lmn" (True): {}'.format(trie.search_word('lmn')))
-    print('Search word "ab" (False): {}'.format(trie.search_word('ab')))
-    print('Search word "cdf" (True): {}'.format(trie.search_word('cdf')))
-    print('Search word "ghi" (False): {}'.format(trie.search_word('ghi')))
+    print('Search word "lmn" (True): {}'.format(trie.search('lmn')))
+    print('Search word "ab" (False): {}'.format(trie.search('ab')))
+    print('Search word "cdf" (True): {}'.format(trie.search('cdf')))
+    print('Search word "ghi" (False): {}'.format(trie.search('ghi')))
 
     print('Delete word "abc":')
     trie.delete('abc')
-    print('Search word "abc" (False): {}'.format(trie.search_word('abc')))
+    print('Search word "abc" (False): {}'.format(trie.search('abc')))
     print('Show keys with prefix "ab": {}'.format(
         trie.root
         .children['a'].children['b']
@@ -233,7 +233,7 @@ def main():
 
     print('Delete word "abgl":')
     trie.delete('abgl')
-    print('Search word "abgl" (False): {}'.format(trie.search_word('abgl')))
+    print('Search word "abgl" (False): {}'.format(trie.search('abgl')))
     print('Show children with prefix "ab": {}'.format(
         trie.root
         .children['a'].children['b']
@@ -245,7 +245,7 @@ def main():
 
     print('Delete word "abcd":')
     trie.delete('abcd')
-    print('Search word "abcd" (False): {}'.format(trie.search_word('abcd')))
+    print('Search word "abcd" (False): {}'.format(trie.search('abcd')))
     print('Show root\'s children: {}'.format(trie.root.children.keys()))
 
 
