@@ -54,13 +54,26 @@ class SolutionDict(object):
         Space complexity: O(n).
         """
         # Iterate through each numbers, 
-        # if visit it first time store in dict; if not, get duplicate numbder.
+        # - if the number is visited first time, store it in dict; 
+        # - if not, get duplicate numbder.
         num_d = {}
         for n in nums:
             if n not in num_d:
                 num_d[n] = True
             else:
                 return n
+
+
+class Solution(object):
+    def findDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n*log).
+        Space complexity: O(1).
+        """
+        pass
 
 
 def main():
