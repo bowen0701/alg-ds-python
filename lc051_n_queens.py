@@ -69,7 +69,7 @@ class Solution(object):
         """
         # res to collect multiple solutions for n_queens.
         res = []
-        # queens is an 1-d array to store the column ids of queens.
+        # queens is an 1-D array to store the column ids of queens.
         queens = []
 
         self._dfs(n, res, queens)

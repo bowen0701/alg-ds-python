@@ -27,7 +27,7 @@ def n_queens(n, queens=[]):
     Time complexity: O(n!).
     Space complexity: O(n).
     """
-    # queens is an 1-d array to store the column ids of queens.
+    # queens is an 1-D array to store the column ids of queens.
     if n == len(queens):
         return 1
 
