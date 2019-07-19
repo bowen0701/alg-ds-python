@@ -64,7 +64,7 @@ class SolutionDict(object):
                 return n
 
 
-class Solution(object):
+class SolutionBinarySearch(object):
     def findDuplicate(self, nums):
         """
         :type nums: List[int]
@@ -73,7 +73,25 @@ class Solution(object):
         Time complexity: O(n*log).
         Space complexity: O(1).
         """
-        pass
+        first, last = 0, len(nums) - 1
+        
+        while first < last:
+            # Count how many numbers fall in the 2nd half.
+            mid = first + (last - first) // 2
+
+            count = 0
+            for n in nums:
+                if mid < n <= last:
+                    count += 1
+
+            # Check count is larger than the capacity, right - mid, or not,
+            # then update first or last correspondingly.
+            if count > last - mid:
+                first = mid + 1
+            else:
+                last = mid
+
+        return first
 
 
 def main():
@@ -81,11 +99,13 @@ def main():
     nums = [1, 3, 4, 2, 2]
     print SolutionNaive().findDuplicate(nums)
     print SolutionDict().findDuplicate(nums)
+    print SolutionBinarySearch().findDuplicate(nums)
 
     # Should be 3.
     nums = [3, 1, 3, 4, 2]
     print SolutionNaive().findDuplicate(nums)
     print SolutionDict().findDuplicate(nums)
+    print SolutionBinarySearch().findDuplicate(nums)
 
 
 if __name__ == '__main__':
