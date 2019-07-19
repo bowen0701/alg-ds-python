@@ -84,7 +84,7 @@ class SolutionBinarySearch(object):
                 if mid < n <= last:
                     count += 1
 
-            # Check count is larger than the capacity, right - mid, or not,
+            # Check count is larger than the capacity, last - mid, or not,
             # then update first or last correspondingly.
             if count > last - mid:
                 first = mid + 1
