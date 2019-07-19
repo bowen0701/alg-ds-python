@@ -31,6 +31,9 @@ class SolutionNaive(object):
         :rtype: float
 
         Note: Underflow or Overflow.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         if n < 0:
             x = 1 / x
@@ -51,6 +54,9 @@ class Solution(object):
         :type x: float
         :type n: int
         :rtype: float
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
         """
         if n < 0:
             x = 1 / x
