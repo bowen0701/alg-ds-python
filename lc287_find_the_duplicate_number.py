@@ -95,17 +95,37 @@ class SolutionBinarySearch(object):
 
 
 def main():
+    import time
+
     # Should be 2.
     nums = [1, 3, 4, 2, 2]
-    print SolutionNaive().findDuplicate(nums)
-    print SolutionDict().findDuplicate(nums)
-    print SolutionBinarySearch().findDuplicate(nums)
+
+    start_time = time.time()
+    print 'By naive: {}'.format(SolutionNaive().findDuplicate(nums))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By dict: {}'.format(SolutionDict().findDuplicate(nums))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By binary search: {}'.format(SolutionBinarySearch().findDuplicate(nums))
+    print 'Time: {}'.format(time.time() - start_time)
 
     # Should be 3.
     nums = [3, 1, 3, 4, 2]
-    print SolutionNaive().findDuplicate(nums)
-    print SolutionDict().findDuplicate(nums)
-    print SolutionBinarySearch().findDuplicate(nums)
+
+    start_time = time.time()
+    print 'By naive: {}'.format(SolutionNaive().findDuplicate(nums))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By dict: {}'.format(SolutionDict().findDuplicate(nums))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By binary search: {}'.format(SolutionBinarySearch().findDuplicate(nums))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
