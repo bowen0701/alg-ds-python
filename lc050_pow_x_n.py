@@ -20,21 +20,43 @@ Explanation: 2^-2 = 1/2^2 = 1/4 = 0.25
 
 Note:
 - -100.0 < x < 100.0
-- n is a 32-bit signed integer, within the range [−2^31, 2^31 − 1]
+- n is a 32-bit signed integer, within the range [-2^31, 2^31 - 1].
 """
 
-class Solution(object):
+class SolutionNaive(object):
     def myPow(self, x, n):
         """
         :type x: float
         :type n: int
         :rtype: float
+
+        Note: Underflow or Overflow.
         """
-        pass
+        if n < 0:
+            x = 1 / x
+            n = -n
+        elif n == 0:
+            return 1
+
+        # Iteratively product x for n times. 
+        res = 1
+        for i in range(n):
+            res *= x
+        return res
 
 
 def main():
-    pass
+    # Should be 1024.
+    x, n = 2.00000, 10
+    print SolutionNaive().myPow(x, n)
+
+    # Should be 9.26100.
+    x, n = 2.10000, 3
+    print SolutionNaive().myPow(x, n)
+
+    # Should be 0.25.
+    x, n = 2.00000, -2
+    print SolutionNaive().myPow(x, n)
 
 
 if __name__ == '__main__':
