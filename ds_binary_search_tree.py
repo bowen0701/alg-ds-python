@@ -41,28 +41,26 @@ class BinarySearchTree(object):
         """
         new = Node(new_key, data=new_data)
 
-        if not self.root:
-            self.root = new
-            return None
-
         parent = None
         current = self.root
 
+        # Go down to the bottom node whose parent will be new node's parent.
         while current:
+            parent = current
             if new_key < current.key:
-                if current.left:
-                    current = current.left
-                else:
-                    new.parent = current
-                    current.left = new
-                    break
+                current = current.left
             else:
-                if current.right:
-                    current = current.right
-                else:
-                    new.parent = current
-                    current.right = new
-                    break
+                current = current.right
+
+        new.parent = parent
+
+        if not parent:
+            # If the tree is empty.
+            self.root = new
+        elif new_key < parent.key:
+            parent.left = new
+        else:
+            parent.right = new
 
     def search(self, node, key):
         """Search node with key.
@@ -254,10 +252,10 @@ def main():
     bst.postorder_walk(bst.root)
 
     # Search existing key 6.
-    print('Search node with key 6:')
+    print('Search existing node with key 6:')
     print(bst.search(bst.root, 6).key)
     # Search nonexisting key 10.
-    print('Search node with key 10:')
+    print('Search nonexisting node with key 10:')
     print(bst.search(bst.root, 10))
 
     # Find min of root: 2.
