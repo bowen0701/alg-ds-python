@@ -17,8 +17,10 @@ class BinarySearchTree(object):
     """Binary search tree class.
 
     Property:
-    On any subtree, the left nodes are less than the root node,
-    which is less than all of the right nods.
+    - The left subtree of a node contains only nodes with keys lesser than 
+      the node's key.
+    - The right subtree of a node contains only nodes with keys greater than 
+      the node's key.
 
     Travesal:
     - Inorder (typical): left -> root -> right
@@ -27,6 +29,40 @@ class BinarySearchTree(object):
     """
     def __init__(self):
         self.root = None
+
+    def insert(self, new_key, new_data=None):
+        """Insert a new node with key.
+
+        Use current and parent to track new node's insertion postion
+        and its parent.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        new = Node(new_key, data=new_data)
+
+        if not self.root:
+            self.root = new
+            return None
+
+        parent = None
+        current = self.root
+
+        while current:
+            if new_key < current.key:
+                if current.left:
+                    current = current.left
+                else:
+                    new.parent = current
+                    current.left = new
+                    break
+            else:
+                if current.right:
+                    current = current.right
+                else:
+                    new.parent = current
+                    current.right = new
+                    break
 
     def search(self, node, key):
         """Search node with key.
@@ -65,18 +101,18 @@ class BinarySearchTree(object):
         return current
 
     def find_successor(self, node):
-        """Find succesor of node (next biggest node).
-
-        If node's right existed, find its minimum,
-        if not, find the 1st node whose left is one of the ancestors.
+        """Find succesor of node, i.e. next biggest node.
 
         Time complexity: O(logn).
         Space complexity: O(1).
         """
         current = node
+
+        # If node's right child existed, find its minimum.
         if current.right:
             return self.find_minimum(current.right)
 
+        # If not, find the 1st parent node whose "left" is one of the ancestors.
         parent = current.parent
         while parent and current == parent.right:
             current = parent
@@ -84,60 +120,26 @@ class BinarySearchTree(object):
         return parent
 
     def find_predecessor(self, node):
-        """Find predecessor of node (previous biggest node).
-
-        If node's left existed, find its maximum,
-        if not, find the 1st node whose right is one of the ancestors.
+        """Find predecessor of node, i.e. previous biggest node.
 
         Time complexity: O(logn).
         Space complexity: O(1).
         """
         current = node
+
+        # If node's left child existed, find its maximum.
         if current.left:
             return self.find_maximum(current.left)
 
+        # If not, find the 1st parent node whose "right" is one of the ancestors.
         parent = current.parent
         while parent and current == parent.left:
             current = parent
             parent = parent.parent
         return parent
 
-    def insert(self, new_key, new_data=None):
-        """Insert a new node with key.
-
-        Use current and parent to track new node's insertion postion
-        and its parent.
-
-        Time complexity: O(logn).
-        Space complexity: O(1).
-        """
-        new = Node(new_key, data=new_data)
-
-        if not self.root:
-            self.root = new
-            return None
-
-        parent = None
-        current = self.root
-
-        while current:
-            if new_key < current.key:
-                if current.left:
-                    current = current.left
-                else:
-                    new.parent = current
-                    current.left = new
-                    break
-            else:
-                if current.right:
-                    current = current.right
-                else:
-                    new.parent = current
-                    current.right = new
-                    break
-
-    def _transplant(self, to_node, from_node):
-        """Transplant helper function for delete().
+    def _transplant(self, from_node, to_node):
+        """Helper function for delete(): Transplant a subtree.
         
         Time complexity: O(1).
         Space complexity: O(1).
@@ -150,6 +152,7 @@ class BinarySearchTree(object):
         else:
             # If to_node is its parent's right node.
             to_node.parent.right = from_node
+
         if not from_node:
             from_node.parent = to_node.parent
 
@@ -160,11 +163,11 @@ class BinarySearchTree(object):
         Space complexity: O(1).
         """
         if not del_node.left:
-            # Node has only left child.
-            self._transplant(del_node, del_node.right)
+            # If node has no left child, transplant right subtree to it.
+            self._transplant(del_node.right, del_node)
         elif not del_node.right:
-            # Node has only right child.
-            self._transplant(del_node, del_node.left)
+            # If node has no right child, transplant left subtree to it.
+            self._transplant(del_node.left, del_node)
         else:
             # Node has both left & right children.
             # Find its minimum which has no left child.
@@ -174,15 +177,14 @@ class BinarySearchTree(object):
             # transplant its right node to it, and 
             # take over del_node's right. 
             if trans_node.parent != del_node:
-                self._transplant(trans_node, trans_node.right)
+                self._transplant(trans_node.right, trans_node)
                 trans_node.right = del_node.right
                 trans_node.right.parent = trans_node
 
             # Finally, transplant trans_node to del_node.
-            self._transplant(del_node, trans_node)
+            self._transplant(trans_node, del_node)
             trans_node.left = del_node.left
             trans_node.left.parent = trans_node
-
 
     def inorder_walk(self, node):
         """Inorder walk: left -> root -> right.
@@ -250,6 +252,13 @@ def main():
     # Postorder walk: 2, 5, 5, 8, 7, 6.
     print('Postorder walk:')
     bst.postorder_walk(bst.root)
+
+    # Search existing key 6.
+    print('Search node with key 6:')
+    print(bst.search(bst.root, 6).key)
+    # Search nonexisting key 10.
+    print('Search node with key 10:')
+    print(bst.search(bst.root, 10))
 
     # Find min of root: 2.
     print('Find min: {}'.format(bst.find_minimum(bst.root).key))
