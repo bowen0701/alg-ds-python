@@ -39,7 +39,7 @@ class MaxHeap(object):
         Time complexity: O(log(n)).
         Space complexity: O(1).
         """
-        # For node i, check if it's "bigger" than parent. If yes, swap them.
+        # For node i, check if it's bigger than parent. If yes, swap them.
         while i > 1 and self.A[parent(i)] < self.A[i]:
             self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
