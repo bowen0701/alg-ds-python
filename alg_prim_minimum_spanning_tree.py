@@ -9,9 +9,10 @@ from ds_min_binary_heap_attribute import MinBinaryHeapAttribute
 
 def prim(w_graph_d):
     """Prim's algorithm for minimum spanning tree 
-    in undirected weighted graph.
+    in "undirected weighted" graph, G(V, E).
 
-    Time complexity for graph G(V, E): O((|V|+|E|)log(|V|)).
+    Time complexity for : O((|V|+|E|)log(|V|)).
+    Space complexity: O(|V|).
     """
     min_pq = MinBinaryHeapAttribute()
 
