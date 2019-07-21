@@ -62,9 +62,9 @@ class BinarySearchTree(object):
             parent.right = new
 
     def search(self, node, key):
-        """Search node with key.
+        """Search key starting from node.
 
-        Time complexity: O(logn).
+        Time complexity: O(logh), where h is the height of node.
         Space complexity: O(1).
         """
         current = node
@@ -78,7 +78,7 @@ class BinarySearchTree(object):
     def find_minimum(self, node):
         """Find minimum starting from node.
 
-        Time complexity: O(logn).
+        Time complexity: O(logh).
         Space complexity: O(1).
         """
         current = node
@@ -100,16 +100,17 @@ class BinarySearchTree(object):
     def find_successor(self, node):
         """Find succesor of node, i.e. next biggest node.
 
-        Time complexity: O(logn).
+        Time complexity: O(logh).
         Space complexity: O(1).
         """
         current = node
 
-        # If node's right child existed, find its minimum.
+        # If node's right existed, find leftmost node in node's right subtree.
         if current.right:
             return self.find_minimum(current.right)
 
-        # If not, find the 1st parent node whose "left" is one of the ancestors.
+        # If not, go up the tree to the lowest ancestor of node, 
+        # whose "left" child is also an ancestor of node.
         parent = current.parent
         while parent and current == parent.right:
             current = parent
@@ -119,16 +120,17 @@ class BinarySearchTree(object):
     def find_predecessor(self, node):
         """Find predecessor of node, i.e. previous biggest node.
 
-        Time complexity: O(logn).
+        Time complexity: O(logh).
         Space complexity: O(1).
         """
         current = node
 
-        # If node's left child existed, find its maximum.
+        # If node's left existed, find rightmost node in node's left subtree.
         if current.left:
             return self.find_maximum(current.left)
 
-        # If not, find the 1st parent node whose "right" is one of the ancestors.
+        # If not, go up the tree to the lowest ancestor of node, 
+        # whose "right" child is also an ancestor of node.
         parent = current.parent
         while parent and current == parent.left:
             current = parent
