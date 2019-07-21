@@ -26,15 +26,15 @@ class MinHeap(object):
         self.size = 0
 
     def show(self):
-        print(self.A)
+        print(self.A[1:])
 
     def get_min(self):
         return self.A[1]
 
-    def heapify_up(self, i):
+    def _heapify_up(self, i):
         """Min heapify up by iteration.
 
-        Time complexity: O(log(n)).
+        Time complexity: O(log(i)).
         Space complexity: O(1).
         """
         # For node i, check if it's smaller than parent. If yes, swap them.
@@ -42,8 +42,8 @@ class MinHeap(object):
             self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
 
-    def add(self, new_key):
-        """Add new key to heap.
+    def insert(self, new_key):
+        """insert new key to heap.
 
         Time complexity: O(logn).
         Space complexity: O(1).
@@ -51,12 +51,12 @@ class MinHeap(object):
         # Append new key to the end of the list, then heapify up.
         self.A.append(new_key)
         self.size += 1
-        self.heapify_up(self.size)
+        self._heapify_up(self.size)
 
-    def heapify_down(self, i):
+    def _heapify_down(self, i):
         """Min heapify down by recursion.
 
-        Time complexity: O(log(n)).
+        Time complexity: O(log(i)).
         Space complexity: O(1).
         """
         l = left(i)
@@ -73,7 +73,7 @@ class MinHeap(object):
         # If node i is not min, swap node i and node min_i.
         if min_i != i:
             self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
-            self.heapify_down(min_i)
+            self._heapify_down(min_i)
 
     def extract_min(self):
         """Extract min.
@@ -85,6 +85,8 @@ class MinHeap(object):
             raise ValueError('Heap underflow.')
 
         minimum = self.A[1]
+
+        # Pop the last node and insert to min, then perform heapify down. 
         last = self.A.pop()
         self.size -= 1
 
@@ -94,7 +96,7 @@ class MinHeap(object):
         else:
             # Insert the last to root, then heapify down.
             self.A[1] = last
-            self.heapify_down(1)
+            self._heapify_down(1)
 
         return minimum
 
@@ -111,16 +113,16 @@ class MinHeap(object):
         self.A.extend(arr)
         self.size = len(arr)
         for i in reversed(range(1, (self.size + 1) // 2 + 1)):
-            self.heapify_down(i)
+            self._heapify_down(i)
 
 
 def main():
     print('Min heap by inserting 7, 5, 3, 1:')
     min_pq = MinHeap()
-    min_pq.add(7)
-    min_pq.add(5)
-    min_pq.add(3)
-    min_pq.add(1)
+    min_pq.insert(7)
+    min_pq.insert(5)
+    min_pq.insert(3)
+    min_pq.insert(1)
     min_pq.show()
 
     print('Get min key:')

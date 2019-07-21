@@ -28,15 +28,15 @@ class MaxHeap(object):
         self.size = 0
 
     def show(self):
-        print(self.A)
+        print(self.A[1:])
 
     def get_max(self):
         return self.A[1]
 
-    def heapify_up(self, i):
+    def _heapify_up(self, i):
         """Max heapify up by iteration.
 
-        Time complexity: O(log(n)).
+        Time complexity: O(log(i)).
         Space complexity: O(1).
         """
         # For node i, check if it's bigger than parent. If yes, swap them.
@@ -44,8 +44,8 @@ class MaxHeap(object):
             self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
             i = parent(i)
 
-    def add(self, new_key):
-        """Add new key to heap.
+    def insert(self, new_key):
+        """insert new key to heap.
 
         Time complexity: O(logn).
         Space complexity: O(1).
@@ -53,12 +53,12 @@ class MaxHeap(object):
         # Append new key to the end of the list, then heapify up.
         self.A.append(new_key)
         self.size += 1
-        self.heapify_up(self.size)
+        self._heapify_up(self.size)
 
-    def heapify_down(self, i):
+    def _heapify_down(self, i):
         """Max heapify down by recursion.
 
-        Time complexity: O(log(n)).
+        Time complexity: O(log(i)).
         Space complexity: O(1).
         """
         l = left(i)
@@ -75,7 +75,7 @@ class MaxHeap(object):
         # If node i is not max, swap node i and node max_i.
         if max_i != i:
             self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
-            self.heapify_down(max_i)
+            self._heapify_down(max_i)
 
     def extract_max(self):
         """Extract max.
@@ -87,6 +87,8 @@ class MaxHeap(object):
             raise ValueError('Heap underflow.')
 
         maximum = self.A[1]
+
+        # Pop the last node and insert to max, then perform heapify down. 
         last = self.A.pop()
         self.size -= 1
 
@@ -96,7 +98,7 @@ class MaxHeap(object):
         else:
             # Insert the last to root, then heapify down.
             self.A[1] = last
-            self.heapify_down(1)
+            self._heapify_down(1)
 
         return maximum
 
@@ -113,16 +115,16 @@ class MaxHeap(object):
         self.A.extend(arr)
         self.size = len(arr)
         for i in reversed(range(1, (self.size + 1) // 2 + 1)):
-            self.heapify_down(i)
+            self._heapify_down(i)
 
 
 def main():
     print('Max Heap by inserting 1, 3, 5, 7:')
     max_pq = MaxHeap()
-    max_pq.add(1)
-    max_pq.add(3)
-    max_pq.add(5)
-    max_pq.add(7)
+    max_pq.insert(1)
+    max_pq.insert(3)
+    max_pq.insert(5)
+    max_pq.insert(7)
     max_pq.show() 
 
     print('Get max:')
