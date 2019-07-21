@@ -190,11 +190,9 @@ class BinarySearchTree(object):
         Space complexity: O(1).
         """
         if node:
-            if node.left:
-                self.inorder_walk(node.left)
+            self.inorder_walk(node.left)
             print(node.key)
-            if node.right:
-                self.inorder_walk(node.right)
+            self.inorder_walk(node.right)
 
     def preorder_walk(self, node):
         """Preorder walk: root -> left -> right.
