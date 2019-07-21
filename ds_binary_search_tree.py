@@ -51,7 +51,6 @@ class BinarySearchTree(object):
                 current = current.left
             else:
                 current = current.right
-
         new.parent = parent
 
         if not parent:
