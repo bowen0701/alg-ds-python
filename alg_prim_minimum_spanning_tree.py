@@ -2,8 +2,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
-
 from ds_min_binary_heap_attribute import MinBinaryHeapAttribute
 
 
@@ -16,7 +14,7 @@ def prim(w_graph_d):
     """
     min_pq = MinBinaryHeapAttribute()
 
-    key_d = {v: np.inf for v in w_graph_d.keys()}
+    key_d = {v: float('inf') for v in w_graph_d.keys()}
     previous_d = {v: None for v in w_graph_d.keys()}
     visited_d = {v: False for v in w_graph_d.keys()}
 
