@@ -52,7 +52,7 @@ def bellman_ford(w_graph_d, start_vertex):
                 distance_d, previous_d = _update_distance(
                     v, v_neighbor, w_graph_d, distance_d, previous_d)
     
-    # Check negative cycle if any.
+    # Check negative cycle.
     _check_negative_cycle(distance_d, previous_d, w_graph_d)
 
     return distance_d, previous_d
