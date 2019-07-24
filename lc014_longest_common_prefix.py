@@ -20,17 +20,46 @@ Note:
 All given inputs are in lowercase letters a-z.
 """
 
-class Solution(object):
+class SolutionNaive(object):
     def longestCommonPrefix(self, strs):
         """
         :type strs: List[str]
         :rtype: str
         """
-        pass
+        if not strs:
+            return ''
+
+        # Pop the shortest string as baseline.
+        lens = [len(s) for s in strs]
+        min_len = min(lens)
+        for i, s in enumerate(strs):
+            if len(s) == min_len:
+                base_str = strs.pop(i)
+                break
+
+        # Iterate through baseline string's char to check common prefix.
+        prefix = ''
+        for i, char in enumerate(base_str):
+            common_bool = True
+            for s in strs:
+                if char != s[i]:
+                    common_bool = False
+                    break
+            
+            if common_bool:
+                prefix = ''.join([prefix, char])
+            else:
+                break
+
+        return prefix
 
 
 def main():
-    pass
+    strs = ["flower", "flow", "flight"]
+    print SolutionNaive().longestCommonPrefix(strs)
+
+    strs = ["dog", "racecar", "car"]
+    print SolutionNaive().longestCommonPrefix(strs)
 
 
 if __name__ == '__main__':
