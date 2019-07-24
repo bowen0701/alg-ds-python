@@ -25,13 +25,17 @@ class SolutionNaive(object):
         """
         :type strs: List[str]
         :rtype: str
+
+        Time complexity: O(kn), where
+          - k is the numbers of strs, and
+          - n is the length of "shortest" string.
+        Space complexity: O(k).
         """
         if not strs:
             return ''
 
         # Pop the shortest string as baseline.
-        lens = [len(s) for s in strs]
-        min_len = min(lens)
+        min_len = min([len(s) for s in strs])
         for i, s in enumerate(strs):
             if len(s) == min_len:
                 base_str = strs.pop(i)
