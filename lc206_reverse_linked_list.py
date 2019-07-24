@@ -35,7 +35,7 @@ class SolutionRecur(object):
             return previous
 
         # Two pointers method: head + previous.
-        # Create new current and current.next by reversing previous.
+        # Create new current->current.next by reversing previous->head.
         current = ListNode(head.val)
         current.next = previous
 
@@ -58,7 +58,7 @@ class SolutionIter(object):
         previous = None
 
         while head:
-            # Create new current and current.next by reversing previous.
+            # Create new current->current.next by reversing previous->head.
             current = ListNode(head.val)
             current.next = previous
 
