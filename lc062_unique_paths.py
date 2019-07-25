@@ -46,7 +46,7 @@ class SolutionMemo(object):
         return path[m][n]
 
     def uniquePaths(self, m, n):
-        path = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+        path = [[0] * (n + 1) for _ in range(m + 1)]
         return self._uniquePaths(m, n, path)
 
 
@@ -107,7 +107,7 @@ def main():
 
     start_time = time.time()
     print SolutionDp2().uniquePaths(m, n)
-    print 'By DP 2: {}'.format(time.time() - start_time)
+    print 'By DP2: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
