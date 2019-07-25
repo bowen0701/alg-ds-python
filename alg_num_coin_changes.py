@@ -32,7 +32,7 @@ def num_coin_changes_recur(amount, coins, n):
     return n_changes
 
 
-def _num_coin_changes_memo(amount, coins, T, n):
+def _num_coin_changes_memo_util(amount, coins, T, n):
     """Helper function for num_coin_changes_memo()."""
     if amount == 0:
         return 1
@@ -47,8 +47,8 @@ def _num_coin_changes_memo(amount, coins, T, n):
         return T[n][amount]
 
     # Sum num of ways with coin n included & excluded.
-    n_changes_in = _num_coin_changes_memo(amount - coins[n], coins, T, n)
-    n_changes_ex = _num_coin_changes_memo(amount, coins, T, n - 1)
+    n_changes_in = _num_coin_changes_memo_util(amount - coins[n], coins, T, n)
+    n_changes_ex = _num_coin_changes_memo_util(amount, coins, T, n - 1)
     T[n][amount] = n_changes_in + n_changes_ex
 
     return T[n][amount]
@@ -68,7 +68,7 @@ def num_coin_changes_memo(amount, coins):
     for c in range(n + 1):
         T[c][0] = 1
 
-    return _num_coin_changes_memo(amount, coins, T, n)
+    return _num_coin_changes_memo_util(amount, coins, T, n)
 
 
 def num_coin_changes_dp(amount, coins):
