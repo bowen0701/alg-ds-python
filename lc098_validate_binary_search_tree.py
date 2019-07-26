@@ -56,7 +56,7 @@ class SolutionMinMaxRecur(object):
         :rtype: bool
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         min_val, max_val = float('-inf'), float('inf')
         return self.isValidBSTUtil(root, min_val, max_val)
@@ -91,7 +91,7 @@ class SolutionInorderRecur(object):
         :rtype: bool
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         self.previous = None
         return self.isValidBSTUtil(root)
