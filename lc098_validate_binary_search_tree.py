@@ -40,15 +40,15 @@ class TreeNode(object):
 
 
 class SolutionMinMaxRecur(object):
-    def isValidBSTUtil(self, node, min_val, max_val):
-        if not node:
+    def isValidBSTUtil(self, current, min_val, max_val):
+        if not current:
             return True
         
-        if node.val <= min_val or node.val >= max_val:
+        if current.val <= min_val or current.val >= max_val:
             return False
 
-        return (self.isValidBSTUtil(node.left, min_val, node.val) and
-                self.isValidBSTUtil(node.right, node.val, max_val))
+        return (self.isValidBSTUtil(current.left, min_val, current.val) and
+                self.isValidBSTUtil(current.right, current.val, max_val))
 
     def isValidBST(self, root):
         """
@@ -79,39 +79,39 @@ class SolutionMinMaxIter(object):
         stack = [(root, min_val, max_val)]
 
         while stack:
-            node, min_val, max_val = stack.pop()
+            current, min_val, max_val = stack.pop()
 
-            if not node:
+            if not current:
                 continue
 
-            if node.val <= min_val or node.val >= max_val:
+            if current.val <= min_val or current.val >= max_val:
                 return False
 
-            stack.append([node.left, min_val, node.val])
-            stack.append([node.right, node.val, max_val])
+            stack.append([current.left, min_val, current.val])
+            stack.append([current.right, current.val, max_val])
 
         return True
 
 
 class SolutionInorderRecur(object):
-    def isValidBSTUtil(self, node):
-        if not node:
+    def isValidBSTUtil(self, current):
+        if not current:
             return True
  
         # Start inorder traversal in an increasing fashion.
         # Traverse left tree.
-        if not self.isValidBSTUtil(node.left):
+        if not self.isValidBSTUtil(current.left):
             return False
 
         # Compare root with its previous.
-        if self.previous and self.previous.val >= node.val:
+        if self.previous and self.previous.val >= current.val:
             return False
         else:
             # Keep updating previous by current node.
-            self.previous = node
+            self.previous = current
 
         # Traverse right tree.
-        if not self.isValidBSTUtil(node.right):
+        if not self.isValidBSTUtil(current.right):
             return False
 
         return True
@@ -141,26 +141,27 @@ class SolutionInorderIter(object):
             return True
 
         previous = None
-        node = root
+        current = root
 
         # Start inorder traversal in an increasing fashion.
         stack = []
 
-        while stack or node:
-            # Move to the leftmost node.
-            while node:
-                stack.append(node)
-                node = node.left
+        while current or stack:
+            if current:
+                # If current exists, push to stack and visit left node.
+                stack.append(current)
+                current = current.left
+            else:
+                # If current does not exist, pop stack as current.
+                current = stack.pop()
 
-            node = stack.pop()
+                # Check whether previous->node is increasing.
+                if previous and previous.val >= current.val:
+                    return False
 
-            # Check whether previous->node is increasing.
-            if previous and previous.val >= node.val:
-                return False
-
-            # Update node and previous by inorder traversal.
-            previous = node
-            node = node.right
+                # Update node and previous by inorder traversal.
+                previous = current
+                current = current.right
 
         return True
 
