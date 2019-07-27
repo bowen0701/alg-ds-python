@@ -68,13 +68,13 @@ class SolutionIter(object):
         # Apply BFS w/ queue to iteratively visit and invert tree.
         queue = [root]
         while queue:
-            visit = queue.pop()
+            current = queue.pop()
             # Invert tree by interchanging left and right trees.
-            visit.left, visit.right = visit.right, visit.left
-            if visit.left:
-                queue.insert(0, visit.left)
-            if visit.right:
-                queue.insert(0, visit.right)
+            current.left, current.right = current.right, current.left
+            if current.left:
+                queue.insert(0, current.left)
+            if current.right:
+                queue.insert(0, current.right)
 
         return root
 
