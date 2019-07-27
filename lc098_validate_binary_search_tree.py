@@ -58,8 +58,36 @@ class SolutionMinMaxRecur(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        min_val, max_val = float('-inf'), float('inf')
+        min_val, max_val = -float('inf'), float('inf')
         return self.isValidBSTUtil(root, min_val, max_val)
+
+
+class SolutionMinMaxIter(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        # Use stack for DFS.
+        min_val, max_val = -float('inf'), float('inf')
+        stack = [(root, min_val, max_val)]
+
+        while stack:
+            node, min_val, max_val = stack.pop()
+
+            if not node:
+                continue
+
+            if node.val <= min_val or node.val >= max_val:
+                return False
+
+            stack.append([node.left, min_val, node.val])
+            stack.append([node.right, node.val, max_val])
+
+        return True
 
 
 class SolutionInorderRecur(object):
@@ -114,6 +142,10 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
+    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
@@ -135,6 +167,10 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
+    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
@@ -153,6 +189,10 @@ def main():
 
     start_time = time.time()
     print 'By MinMaxRecur: {}'.format(SolutionMinMaxRecur().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
@@ -178,6 +218,10 @@ def main():
 
     start_time = time.time()
     print 'By MinMaxRecur: {}'.format(SolutionMinMaxRecur().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
