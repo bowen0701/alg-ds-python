@@ -184,18 +184,18 @@ class BinarySearchTree(object):
             trans_node.left = del_node.left
             trans_node.left.parent = trans_node
 
-    def inorder_walk(self, node):
+    def inorder_traverse(self, node):
         """Inorder walk: left -> root -> right.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
         if node:
-            self.inorder_walk(node.left)
+            self.inorder_traverse(node.left)
             print(node.key)
-            self.inorder_walk(node.right)
+            self.inorder_traverse(node.right)
 
-    def preorder_walk(self, node):
+    def preorder_traverse(self, node):
         """Preorder walk: root -> left -> right.
 
         Time complexity: O(n).
@@ -203,18 +203,18 @@ class BinarySearchTree(object):
         """
         if node:
             print(node.key)
-            self.preorder_walk(node.left)
-            self.preorder_walk(node.right)
+            self.preorder_traverse(node.left)
+            self.preorder_traverse(node.right)
 
-    def postorder_walk(self, node):
+    def postorder_traverse(self, node):
         """Postorder walk: left -> right -> root.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
         if node:
-            self.postorder_walk(node.left)
-            self.postorder_walk(node.right)
+            self.postorder_traverse(node.left)
+            self.postorder_traverse(node.right)
             print(node.key)
 
 
@@ -276,13 +276,13 @@ def main():
 
     # Delete root's left: 5, the run inorder walk: 2, 5, 6, 7, 8.
     bst.delete(bst.root.left)
-    print('Inorder walk:')
-    bst.inorder_walk(bst.root)
+    print('Inorder traversal:')
+    bst.inorder_traverse(bst.root)
 
     # Further delete root: 6, the run inorder walk: 2, 5, 7, 8.
     bst.delete(bst.root)
     print('Inorder walk:')
-    bst.inorder_walk(bst.root)
+    bst.inorder_traverse(bst.root)
 
 
 if __name__ == '__main__':

@@ -71,6 +71,9 @@ class SolutionMinMaxIter(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        if not root:
+            return True
+
         # Use stack for DFS.
         min_val, max_val = -float('inf'), float('inf')
         stack = [(root, min_val, max_val)]
@@ -125,6 +128,43 @@ class SolutionInorderRecur(object):
         return self.isValidBSTUtil(root)
 
 
+class SolutionInorderIter(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        if not root:
+            return True
+
+        previous = None
+        node = root
+
+        # Start inorder traversal in an increasing fashion.
+        stack = []
+
+        while stack or node:
+            # Move to the leftmost node.
+            while node:
+                stack.append(node)
+                node = node.left
+
+            node = stack.pop()
+
+            # Check whether previous->node is increasing.
+            if previous and previous.val >= node.val:
+                return False
+
+            # Update node and previous by inorder traversal.
+            previous = node
+            node = node.right
+
+        return True
+
+
 def main():
     import time
 
@@ -148,6 +188,11 @@ def main():
     start_time = time.time()
     print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
 
     # Input: [5,1,4,null,null,3,6]
     #    5
@@ -174,6 +219,10 @@ def main():
     print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
     # Input: [10,5,15,null,null,6,20]
     #      10
     #     /  \
@@ -197,6 +246,10 @@ def main():
 
     start_time = time.time()
     print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     # Input:
@@ -226,6 +279,10 @@ def main():
 
     start_time = time.time()
     print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
 
