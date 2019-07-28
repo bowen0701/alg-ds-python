@@ -184,38 +184,38 @@ class BinarySearchTree(object):
             trans_node.left = del_node.left
             trans_node.left.parent = trans_node
 
-    def inorder_traverse_recur(self, node):
-        """Inorder walk: left -> root -> right.
+    def inorder_traverse_recur(self, root):
+        """Inorder traversal: left -> root -> right, by recursion.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if node:
-            self.inorder_traverse_recur(node.left)
-            print(node.key)
-            self.inorder_traverse_recur(node.right)
+        if root:
+            self.inorder_traverse_recur(root.left)
+            print(root.key)
+            self.inorder_traverse_recur(root.right)
 
-    def preorder_traverse_recur(self, node):
-        """Preorder walk: root -> left -> right.
-
-        Time complexity: O(n).
-        Space complexity: O(1).
-        """
-        if node:
-            print(node.key)
-            self.preorder_traverse_recur(node.left)
-            self.preorder_traverse_recur(node.right)
-
-    def postorder_traverse_recur(self, node):
-        """Postorder walk: left -> right -> root.
+    def preorder_traverse_recur(self, root):
+        """Preorder traversal: root -> left -> right, by recursion.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if node:
-            self.postorder_traverse_recur(node.left)
-            self.postorder_traverse_recur(node.right)
-            print(node.key)
+        if root:
+            print(root.key)
+            self.preorder_traverse_recur(root.left)
+            self.preorder_traverse_recur(root.right)
+
+    def postorder_traverse_recur(self, root):
+        """Postorder traversal: left -> right -> root, by recursion.
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if root:
+            self.postorder_traverse_recur(root.left)
+            self.postorder_traverse_recur(root.right)
+            print(root.key)
 
 
 def main():
