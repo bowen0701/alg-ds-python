@@ -184,18 +184,18 @@ class BinarySearchTree(object):
             trans_node.left = del_node.left
             trans_node.left.parent = trans_node
 
-    def inorder_traverse(self, node):
+    def inorder_traverse_recur(self, node):
         """Inorder walk: left -> root -> right.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
         if node:
-            self.inorder_traverse(node.left)
+            self.inorder_traverse_recur(node.left)
             print(node.key)
-            self.inorder_traverse(node.right)
+            self.inorder_traverse_recur(node.right)
 
-    def preorder_traverse(self, node):
+    def preorder_traverse_recur(self, node):
         """Preorder walk: root -> left -> right.
 
         Time complexity: O(n).
@@ -203,18 +203,18 @@ class BinarySearchTree(object):
         """
         if node:
             print(node.key)
-            self.preorder_traverse(node.left)
-            self.preorder_traverse(node.right)
+            self.preorder_traverse_recur(node.left)
+            self.preorder_traverse_recur(node.right)
 
-    def postorder_traverse(self, node):
+    def postorder_traverse_recur(self, node):
         """Postorder walk: left -> right -> root.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
         if node:
-            self.postorder_traverse(node.left)
-            self.postorder_traverse(node.right)
+            self.postorder_traverse_recur(node.left)
+            self.postorder_traverse_recur(node.right)
             print(node.key)
 
 
@@ -237,13 +237,13 @@ def main():
 
     # Inorder walk: 2, 5, 5, 6, 7, 8.
     print('Inorder walk:')
-    bst.inorder_walk(bst.root)
+    bst.inorder_traverse_recur(bst.root)
     # Preorder walk: 6, 5, 2, 5, 7, 8.
     print('Preorder walk:')
-    bst.preorder_walk(bst.root)
+    bst.preorder_traverse_recur(bst.root)
     # Postorder walk: 2, 5, 5, 8, 7, 6.
     print('Postorder walk:')
-    bst.postorder_walk(bst.root)
+    bst.postorder_traverse_recur(bst.root)
 
     # Search existing key 6.
     print('Search existing node with key 6:')
@@ -277,12 +277,12 @@ def main():
     # Delete root's left: 5, the run inorder walk: 2, 5, 6, 7, 8.
     bst.delete(bst.root.left)
     print('Inorder traversal:')
-    bst.inorder_traverse(bst.root)
+    bst.inorder_traverse_recur(bst.root)
 
     # Further delete root: 6, the run inorder walk: 2, 5, 7, 8.
     bst.delete(bst.root)
     print('Inorder walk:')
-    bst.inorder_traverse(bst.root)
+    bst.inorder_traverse_recur(bst.root)
 
 
 if __name__ == '__main__':
