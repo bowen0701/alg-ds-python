@@ -5,9 +5,8 @@ from __future__ import print_function
 
 class Node(object):
     """Node class collects helper functions for BinarySearchTree."""
-    def __init__(self, key, data=None, left=None, right=None, parent=None):
-        self.key = key
-        self.data = data
+    def __init__(self, val, left=None, right=None, parent=None):
+        self.val = val
         self.left = left
         self.right = right
         self.parent = parent
@@ -17,10 +16,10 @@ class BinarySearchTree(object):
     """Binary search tree class.
 
     Property:
-    - The left subtree of a node contains only nodes with keys lesser than 
-      the node's key.
-    - The right subtree of a node contains only nodes with keys greater than 
-      the node's key.
+    - The left subtree of a node contains only nodes with vals lesser than 
+      the node's val.
+    - The right subtree of a node contains only nodes with vals greater than 
+      the node's val.
 
     Travesal:
     - Inorder (typical): left -> root -> right
@@ -30,15 +29,15 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
-    def search(self, node, key):
-        """Search key starting from node.
+    def search(self, node, val):
+        """Search val starting from node.
 
         Time complexity: O(logh), where h is the height of node.
         Space complexity: O(1).
         """
         current = node
-        while current and key != current.key:
-            if key < current.key:
+        while current and val != current.val:
+            if val < current.val:
                 current = current.left
             else:
                 current = current.right
@@ -106,8 +105,8 @@ class BinarySearchTree(object):
             parent = parent.parent
         return parent
 
-    def insert(self, new_key, new_data=None):
-        """Insert a new node with key.
+    def insert(self, new_val):
+        """Insert a new node with val.
 
         Use current and parent to track new node's insertion postion
         and its parent.
@@ -115,7 +114,7 @@ class BinarySearchTree(object):
         Time complexity: O(logn).
         Space complexity: O(1).
         """
-        new = Node(new_key, data=new_data)
+        new = Node(new_val)
 
         parent = None
         current = self.root
@@ -123,7 +122,7 @@ class BinarySearchTree(object):
         # Go down to the bottom node whose parent will be new node's parent.
         while current:
             parent = current
-            if new_key < current.key:
+            if new_val < current.val:
                 current = current.left
             else:
                 current = current.right
@@ -132,7 +131,7 @@ class BinarySearchTree(object):
         if not parent:
             # If the tree is empty.
             self.root = new
-        elif new_key < parent.key:
+        elif new_val < parent.val:
             parent.left = new
         else:
             parent.right = new
@@ -192,8 +191,40 @@ class BinarySearchTree(object):
         """
         if root:
             self.inorder_traverse_recur(root.left)
-            print(root.key)
+            print(root.val)
             self.inorder_traverse_recur(root.right)
+
+    def inorder_traverse_iter(self, root):
+        """Inorder traversal: left -> root -> right, by iteration.
+
+        Time complexity:
+        Space complexity:
+        """
+        if not root:
+            return None
+
+        current = root
+        previous = None
+
+        # Use stack for DFS for inorder traversal.
+        stack = []
+
+        while current or stack:
+            if current:
+                # If current exists, push to stack and visit left node.
+                stack.append(current)
+                current = current.left
+            else:
+                # If current does not exist, pop stack as current.
+                current = stack.pop()
+                if current:
+                    print(current.val)
+
+                # Update current and previous by inorder traversal.
+                current = current.right
+                previous = current
+
+        return None
 
     def preorder_traverse_recur(self, root):
         """Preorder traversal: root -> left -> right, by recursion.
@@ -202,7 +233,7 @@ class BinarySearchTree(object):
         Space complexity: O(1).
         """
         if root:
-            print(root.key)
+            print(root.val)
             self.preorder_traverse_recur(root.left)
             self.preorder_traverse_recur(root.right)
 
@@ -215,7 +246,7 @@ class BinarySearchTree(object):
         if root:
             self.postorder_traverse_recur(root.left)
             self.postorder_traverse_recur(root.right)
-            print(root.key)
+            print(root.val)
 
 
 def main():
@@ -245,39 +276,41 @@ def main():
     print('Postorder walk:')
     bst.postorder_traverse_recur(bst.root)
 
-    # Search existing key 6.
-    print('Search existing node with key 6:')
-    print(bst.search(bst.root, 6).key)
-    # Search nonexisting key 10.
-    print('Search nonexisting node with key 10:')
+    # Search existing val 6.
+    print('Search existing node with val 6:')
+    print(bst.search(bst.root, 6).val)
+    # Search nonexisting val 10.
+    print('Search nonexisting node with val 10:')
     print(bst.search(bst.root, 10))
 
     # Find min of root: 2.
-    print('Find min: {}'.format(bst.find_minimum(bst.root).key))
+    print('Find min: {}'.format(bst.find_minimum(bst.root).val))
     # Find min of root's right: 7.
-    print('Find min from 7: {}'.format(bst.find_minimum(bst.root.right).key))
+    print('Find min from 7: {}'.format(bst.find_minimum(bst.root.right).val))
 
     # Find max of root: 2.
-    print('Find max: {}'.format(bst.find_maximum(bst.root).key))
+    print('Find max: {}'.format(bst.find_maximum(bst.root).val))
     # Find max of root's right: 8.
-    print('Find max from 7: {}'.format(bst.find_maximum(bst.root.right).key))
+    print('Find max from 7: {}'.format(bst.find_maximum(bst.root.right).val))
 
     # Find successor of root: 7.
-    print('Find successor: {}'.format(bst.find_successor(bst.root).key))
+    print('Find successor: {}'.format(bst.find_successor(bst.root).val))
     # Find successor of root's left's right: 6.
     print('Find successor from second 5: {}'
-          .format(bst.find_successor(bst.root.left.right).key))
+          .format(bst.find_successor(bst.root.left.right).val))
 
     # Find predecessor of root: 6.
-    print('Find predecessor: {}'.format(bst.find_predecessor(bst.root).key))
+    print('Find predecessor: {}'.format(bst.find_predecessor(bst.root).val))
     # Find successor of root's left's right: 5.
     print('Find predecessor from 5: {}'
-          .format(bst.find_predecessor(bst.root.left).key))
+          .format(bst.find_predecessor(bst.root.left).val))
 
     # Delete root's left: 5, the run inorder walk: 2, 5, 6, 7, 8.
     bst.delete(bst.root.left)
-    print('Inorder traversal:')
+    print('Inorder traversal by recursion:')
     bst.inorder_traverse_recur(bst.root)
+    print('Inorder traversal by iteration:')
+    bst.inorder_traverse_iter(bst.root)
 
     # Further delete root: 6, the run inorder walk: 2, 5, 7, 8.
     bst.delete(bst.root)
