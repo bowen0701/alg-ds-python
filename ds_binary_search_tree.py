@@ -197,8 +197,8 @@ class BinarySearchTree(object):
     def inorder_traverse_iter(self, root):
         """Inorder traversal: left -> root -> right, by iteration.
 
-        Time complexity:
-        Space complexity:
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         if not root:
             return None
@@ -237,6 +237,32 @@ class BinarySearchTree(object):
             self.preorder_traverse_recur(root.left)
             self.preorder_traverse_recur(root.right)
 
+    def preorder_traverse_iter(self, root):
+        """Preorder traversal: root -> left -> right, by iteration.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        if not root:
+            return None
+
+        stack = [root]
+
+        while stack:
+            current = stack.pop()
+            if current:
+                print(current.val)
+
+            # Push right before left since we use stack with FILO.
+            if current.right:
+                stack.append(current.right)
+
+            if current.left:
+                stack.append(current.left)
+
+        return None
+
+
     def postorder_traverse_recur(self, root):
         """Postorder traversal: left -> right -> root, by recursion.
 
@@ -267,13 +293,19 @@ def main():
     bst.insert(8)
 
     # Inorder walk: 2, 5, 5, 6, 7, 8.
-    print('Inorder walk:')
+    print('Inorder traversal by recursion:')
     bst.inorder_traverse_recur(bst.root)
+    print('Inorder traversal by iteration:')
+    bst.inorder_traverse_iter(bst.root)
+
     # Preorder walk: 6, 5, 2, 5, 7, 8.
-    print('Preorder walk:')
+    print('Preorder traversal by recursion:')
     bst.preorder_traverse_recur(bst.root)
+    print('Preorder traversal by iteration:')
+    bst.preorder_traverse_iter(bst.root)
+
     # Postorder walk: 2, 5, 5, 8, 7, 6.
-    print('Postorder walk:')
+    print('Postorder traversal by recursion:')
     bst.postorder_traverse_recur(bst.root)
 
     # Search existing val 6.
@@ -309,8 +341,6 @@ def main():
     bst.delete(bst.root.left)
     print('Inorder traversal by recursion:')
     bst.inorder_traverse_recur(bst.root)
-    print('Inorder traversal by iteration:')
-    bst.inorder_traverse_iter(bst.root)
 
     # Further delete root: 6, the run inorder walk: 2, 5, 7, 8.
     bst.delete(bst.root)
