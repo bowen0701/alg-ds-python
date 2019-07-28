@@ -69,8 +69,11 @@ class SolutionIter(object):
         queue = [root]
         while queue:
             current = queue.pop()
-            # Invert tree by interchanging left and right trees.
+            
+            # Invert tree by swapping left and right trees.
             current.left, current.right = current.right, current.left
+ 
+            # Insert left/right child into queue if exists.
             if current.left:
                 queue.insert(0, current.left)
             if current.right:
