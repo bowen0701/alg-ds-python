@@ -140,8 +140,8 @@ class SolutionInorderIter(object):
         if not root:
             return True
 
-        current = root
         previous = None
+        current = root
 
         # Start inorder traversal in an increasing fashion.
         stack = []
@@ -160,8 +160,8 @@ class SolutionInorderIter(object):
                     return False
 
                 # Update current and previous by inorder traversal.
-                current = current.right
                 previous = current
+                current = current.right
 
         return True
 
