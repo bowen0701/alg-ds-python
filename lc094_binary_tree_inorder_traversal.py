@@ -59,15 +59,22 @@ class SolutionIter(object):
         previous = None
         current = root
 
+        # Use stack for inorder traversal.
         stack = []
+
         while current or stack:
             if current:
+                # If current exists, push to stack and visit left node.
                 stack.append(current)
                 current = current.left
             else:
+                # If current does not exist, pop stack as current.
                 current = stack.pop()
+
+                # Append current node's value to nodes.
                 nodes.append(current.val)
 
+                # Update previous & current by current & right.
                 previous = current
                 current = current.right
 
