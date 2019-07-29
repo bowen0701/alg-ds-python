@@ -45,6 +45,35 @@ class SolutionRecur(object):
         return nodes
 
 
+class SolutionIter(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        nodes = []
+
+        previous = None
+        current = root
+
+        stack = []
+        while current or stack:
+            if current:
+                stack.append(current)
+                current = current.left
+            else:
+                current = stack.pop()
+                nodes.append(current.val)
+
+                previous = current
+                current = current.right
+
+        return nodes
+
+
 def main():
     # Input: [1,null,2,3]
     # 1
@@ -56,8 +85,10 @@ def main():
     root = TreeNode(1)
     root.right = TreeNode(2)
     root.right.left = TreeNode(3)
-    print SolutionRecur().inorderTraversal(root)  
 
+    print 'By recur: {}'.format(SolutionRecur().inorderTraversal(root))
+    print 'By iter: {}'.format(SolutionIter().inorderTraversal(root))
+    
 
 if __name__ == '__main__':
     main()
