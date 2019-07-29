@@ -67,6 +67,7 @@ class SolutionIter(object):
 
         # Apply BFS w/ queue to iteratively visit and invert tree.
         queue = [root]
+
         while queue:
             current = queue.pop()
             
