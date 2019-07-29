@@ -25,17 +25,35 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def inorder_util(self, root, nodes):
+        if root:
+            self.inorder_util(root.left, nodes)
+            nodes.append(root.val)
+            self.inorder_util(root.right, nodes)
+
     def inorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
         """
-        pass
+        nodes = []
+        self.inorder_util(root, nodes)
+        return nodes
 
 
 def main():
-    pass
+    # Input: [1,null,2,3]
+    # 1
+    #  \
+    #   2
+    #  /
+    # 3
+    # Output: [1,3,2]
+    root = TreeNode(1)
+    root.right = TreeNode(2)
+    root.right.left = TreeNode(3)
+    print SolutionRecur().inorderTraversal(root)  
 
 
 if __name__ == '__main__':
