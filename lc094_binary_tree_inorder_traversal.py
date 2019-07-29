@@ -36,6 +36,9 @@ class SolutionRecur(object):
         """
         :type root: TreeNode
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         nodes = []
         self.inorder_util(root, nodes)
