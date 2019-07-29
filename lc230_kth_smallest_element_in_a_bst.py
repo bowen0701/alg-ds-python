@@ -43,18 +43,39 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def _kth_smallest_util(self, root):
+        if root:
+            self.kth_smallest_util(root.left)
+            if k == 0:
+                print root.val
+            k -= 1
+            self.kth_smallest_util(root.right)
+
     def kthSmallest(self, root, k):
         """
         :type root: TreeNode
         :type k: int
         :rtype: int
         """
-        pass
-        
+        self.k = k
+        self.kth_smallest_util(root)
+        return root.val
 
+        
 def main():
-    pass
+    # Input: root = [3,1,4,null,2], k = 1
+    #    3
+    #   / \
+    #  1   4
+    #   \
+    #    2
+    # Output: 1
+    root = TreeNode(3)
+    root.left = TreeNode(1)
+    root.right = TreeNode(4)
+    root.left.right = TreeNode(2)
+
 
 
 if __name__ == '__main__':

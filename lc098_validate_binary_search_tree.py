@@ -40,15 +40,15 @@ class TreeNode(object):
 
 
 class SolutionMinMaxRecur(object):
-    def isValidBSTUtil(self, current, min_val, max_val):
+    def _isValidBSTUtil(self, current, min_val, max_val):
         if not current:
             return True
         
         if current.val <= min_val or current.val >= max_val:
             return False
 
-        return (self.isValidBSTUtil(current.left, min_val, current.val) and
-                self.isValidBSTUtil(current.right, current.val, max_val))
+        return (self._isValidBSTUtil(current.left, min_val, current.val) and
+                self._isValidBSTUtil(current.right, current.val, max_val))
 
     def isValidBST(self, root):
         """
@@ -59,7 +59,7 @@ class SolutionMinMaxRecur(object):
         Space complexity: O(n).
         """
         min_val, max_val = -float('inf'), float('inf')
-        return self.isValidBSTUtil(root, min_val, max_val)
+        return self._isValidBSTUtil(root, min_val, max_val)
 
 
 class SolutionMinMaxIter(object):
@@ -94,13 +94,13 @@ class SolutionMinMaxIter(object):
 
 
 class SolutionInorderRecur(object):
-    def isValidBSTUtil(self, current):
+    def _isValidBSTUtil(self, current):
         if not current:
             return True
  
         # Start inorder traversal in an increasing fashion.
         # Traverse left tree.
-        if not self.isValidBSTUtil(current.left):
+        if not self._isValidBSTUtil(current.left):
             return False
 
         # Compare root with its previous.
@@ -111,7 +111,7 @@ class SolutionInorderRecur(object):
             self.previous = current
 
         # Traverse right tree.
-        if not self.isValidBSTUtil(current.right):
+        if not self._isValidBSTUtil(current.right):
             return False
 
         return True
@@ -125,7 +125,7 @@ class SolutionInorderRecur(object):
         Space complexity: O(n).
         """
         self.previous = None
-        return self.isValidBSTUtil(root)
+        return self._isValidBSTUtil(root)
 
 
 class SolutionInorderIter(object):

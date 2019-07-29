@@ -26,11 +26,11 @@ class TreeNode(object):
 
 
 class SolutionRecur(object):
-    def inorder_util(self, root, nodes):
+    def _inorderUtil(self, root, nodes):
         if root:
-            self.inorder_util(root.left, nodes)
+            self._inorderUtil(root.left, nodes)
             nodes.append(root.val)
-            self.inorder_util(root.right, nodes)
+            self._inorderUtil(root.right, nodes)
 
     def inorderTraversal(self, root):
         """
@@ -41,7 +41,7 @@ class SolutionRecur(object):
         Space complexity: O(1).
         """
         nodes = []
-        self.inorder_util(root, nodes)
+        self._inorderUtil(root, nodes)
         return nodes
 
 
