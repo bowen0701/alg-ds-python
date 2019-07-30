@@ -40,10 +40,10 @@ class SolutionRecur(object):
 
         return graph
 
-    def _dfs(self, start, graph, post_visits):
+    def _dfs_recur(self, start, graph, post_visits):
         # Keep DFS after popping out next airport.
         while graph.get(start):
-            self._dfs(graph[start].pop(), graph, post_visits)
+            self._dfs_recur(graph[start].pop(), graph, post_visits)
 
         post_visits.append(start)
 
@@ -58,25 +58,89 @@ class SolutionRecur(object):
         # Vist airports by DFS on graph and track post_visits.
         post_visits = []
         start = 'JFK'
-        self._dfs(start, graph, post_visits)
+        self._dfs_recur(start, graph, post_visits)
 
         # Get itinerary by reverting the post_visits.
         itinerary = post_visits[::-1]
         return itinerary
 
 
-def main():    
+class SolutionIter(object):
+    def _makeGraph(self, tickets):
+        graph = {}
+        
+        for (start, end) in sorted(tickets)[::-1]:
+            # Append airport in lexical order.
+            if start not in graph:
+                graph[start] = [end]
+            else:
+                graph[start] += [end]
+
+        return graph
+
+    def _dfs_iter(self, start, graph, post_visits):
+        stack = [start]
+
+        # Keep DFS after popping out next airport.
+        while stack:
+            while graph.get(stack[-1]):
+                stack.append(graph[stack[-1]].pop())
+
+            post_visits.append(stack.pop())
+
+    def findItinerary(self, tickets):
+        """
+        :type tickets: List[List[str]]
+        :rtype: List[str]
+        """
+        # Make a graph for post_visits's adjacency lists in lexical order.
+        graph = self._makeGraph(tickets)
+
+        # Vist airports by DFS on graph and track post_visits.
+        post_visits = []
+        start = 'JFK'
+        self._dfs_iter(start, graph, post_visits)
+
+        # Get itinerary by reverting the post_visits.
+        itinerary = post_visits[::-1]
+        return itinerary
+
+
+def main():
+    import time
+
     # Answer: ["JFK", "MUC", "LHR", "SFO", "SJC"]
     tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
-    print SolutionRecur().findItinerary(tickets)
+
+    start_time = time.time()
+    print 'By recur: {}'.format(SolutionRecur().findItinerary(tickets))
+    print 'Time: {}'.format(time.time() - start_time)
+    
+    start_time = time.time()
+    print 'By iter: {}'.format(SolutionIter().findItinerary(tickets))
+    print 'Time: {}'.format(time.time() - start_time)
 
     # Answer: ["JFK", "ATL", "JFK", "SFO", "ATL", "SFO"]
     tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
-    print SolutionRecur().findItinerary(tickets)
+
+    start_time = time.time()
+    print 'By recur: {}'.format(SolutionRecur().findItinerary(tickets))
+    print 'Time: {}'.format(time.time() - start_time)
+    
+    start_time = time.time()
+    print 'By iter: {}'.format(SolutionIter().findItinerary(tickets))
+    print 'Time: {}'.format(time.time() - start_time)
 
     # Answer: ["JFK","NRT","JFK","KUL"]
     tickets = [["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]
-    print SolutionRecur().findItinerary(tickets)
+
+    start_time = time.time()
+    print 'By recur: {}'.format(SolutionRecur().findItinerary(tickets))
+    print 'Time: {}'.format(time.time() - start_time)
+    
+    start_time = time.time()
+    print 'By iter: {}'.format(SolutionIter().findItinerary(tickets))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
