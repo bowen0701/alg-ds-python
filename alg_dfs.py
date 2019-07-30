@@ -53,24 +53,24 @@ def _dfs_iter_visit(v, graph_adj_d, visited_d,
     _previsit(v, previsit_d, clock)
     visited_d[v] = True
 
-    visit_stack = []
-    visit_stack.append(v)
+    stack = []
+    stack.append(v)
 
-    while visit_stack:
+    while stack:
         visited_set = {v for v in visited_d if visited_d[v] is True}
-        if set(graph_adj_d[visit_stack[-1]]) - visited_set:
+        if set(graph_adj_d[stack[-1]]) - visited_set:
             # Travel stack last node's neighbor, if not visited, 
             # add the neighbor to visited and directly go to next traverse.
-            for v_neighbor in graph_adj_d[visit_stack[-1]]:
+            for v_neighbor in graph_adj_d[stack[-1]]:
                 if not visited_d[v_neighbor]:
                     _previsit(v_neighbor, previsit_d, clock)
                     visited_d[v_neighbor] = True
-                    visit_stack.append(v_neighbor)
+                    stack.append(v_neighbor)
                     break
         else:
             # When there is no neighbor to travel, pop out stack last node,
             # and step back for further traverse.
-            v_pop = visit_stack.pop()
+            v_pop = stack.pop()
             _postvisit(v_pop, postvisit_d, clock)
     return previsit_d, postvisit_d
 
