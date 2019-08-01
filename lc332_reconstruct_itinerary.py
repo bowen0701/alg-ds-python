@@ -51,6 +51,10 @@ class SolutionRecur(object):
         """
         :type tickets: List[List[str]]
         :rtype: List[str]
+
+        Time complexity: O(|E|log|E|), where 
+          |E| is the number of tickets, due to sorting.
+        Space complexity: O(|E|).
         """
         # Make a graph for post_visits's adjacency lists in lexical order.
         graph = self._makeGraph(tickets)
@@ -92,6 +96,10 @@ class SolutionIter(object):
         """
         :type tickets: List[List[str]]
         :rtype: List[str]
+        
+        Time complexity: O(|E|log|E|), where 
+          |E| is the number of tickets, due to sorting.
+        Space complexity: O(|E|).
         """
         # Make a graph for post_visits's adjacency lists in lexical order.
         graph = self._makeGraph(tickets)
