@@ -28,11 +28,37 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        pass
+        stack = [['', 1]]
+        num = ''
+
+        for c in s:
+            if c.isdigit():
+                num += c
+            elif c == '[':
+                stack.append(['', int(num)])
+                num = ''
+            elif c == ']':
+                # Concat the characters with repeated times to the previous chars.
+                chars, times = stack.pop()
+                stack[-1][0] += (chars * times)
+            else:
+                stack[-1][0] += c
+
+        return stack[0][0]
 
 
 def main():
-    pass
+    # s = "3[a]2[bc]", return "aaabcbc".
+    s = "3[a]2[bc]"
+    print Solution().decodeString(s)
+
+    # s = "3[a2[c]]", return "accaccacc".
+    s = "3[a2[c]]"
+    print Solution().decodeString(s)
+
+    # s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
+    s = "2[abc]3[cd]ef"
+    print Solution().decodeString(s)
 
 
 if __name__ == '__main__':
