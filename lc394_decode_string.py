@@ -27,6 +27,11 @@ class Solution(object):
         """
         :type s: str
         :rtype: str
+
+        Time complexity: O(m*n), where 
+          - m is the length of string, and
+          - n is maximun number.
+        Space complexity: O(m).
         """
         stack = [['', 1]]
         num = ''
