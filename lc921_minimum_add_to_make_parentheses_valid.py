@@ -40,18 +40,25 @@ class Solution(object):
         """
         :type S: str
         :rtype: int
+
+        Time complexity: O(n), where n is the length of S.
+        Space complexity: O(n).
         """
         count = 0
         stack = []
 
         for c in S:
             if c == '(':
+                # Append left parenthesis to stack.
                 stack.append(c)
             elif stack:
+                # If right parenthesis and not empty stack, pop stack.
                 stack.pop()
             else:
+                # If right parenthesis and empty stack. Count extra right ones.
                 count += 1
 
+        # Count the remaining left stack.
         count += len(stack)
 
         return count
