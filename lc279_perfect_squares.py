@@ -20,6 +20,9 @@ class Solution(object):
         """
         :type n: int
         :rtype: int
+
+        Time complexity: O(n*m), where m is squared root of n.
+        Space complexity: O(n*m).
         """
         # Compute the max number.
         m = int(pow(n, 0.5))
