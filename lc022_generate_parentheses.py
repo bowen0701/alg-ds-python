@@ -1,0 +1,33 @@
+"""Leetcode 22. Generate Parentheses
+Medium
+
+URL: https://leetcode.com/problems/generate-parentheses/
+
+Given n pairs of parentheses, write a function to generate 
+all combinations of well-formed parentheses.
+
+For example, given n = 3, a solution set is:
+[
+  "((()))",
+  "(()())",
+  "(())()",
+  "()(())",
+  "()()()"
+]
+"""
+
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        pass
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
