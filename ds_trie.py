@@ -5,10 +5,9 @@ from __future__ import print_function
 
 class Node(object):
     """Node class for Trie class."""
-    def __init__(self, data=None):
+    def __init__(self):
         self.children = {}
         self.word = None
-        self.data = data
 
 
 class Trie(object):
@@ -20,12 +19,11 @@ class Trie(object):
       - delete()
       - search_prefix()
       - have_prefix()
-      - get_data()
     """
     def __init__(self):
         self.root = Node()
 
-    def insert(self, word, data=None):
+    def insert(self, word):
         """Insert a word.
 
         Time complexity: O(k), where k is the word length.
@@ -39,12 +37,11 @@ class Trie(object):
             if c in current.children:
                 current = current.children[c]
             else:
-                new = Node(c)
+                new = Node()
                 current.children[c] = new
                 current = new
 
         current.word = word
-        current.data = data
 
     def search(self, word):
         """Search a word.
@@ -77,15 +74,14 @@ class Trie(object):
         current = self.root
 
         # Use stack to track all visiting chars.
-        visit_stack = []
-        visit_stack.append(current)
+        stack = [current]
 
         # Go through each char in word and check its existence in children.
         # Finally arrive at the word node.
         for c in word:
             if c in current.children:
                 current = current.children[c]
-                visit_stack.append(current)
+                stack.append(current)
             else:
                 # The word does not exist.
                 return None
@@ -93,17 +89,16 @@ class Trie(object):
         if current.children:
             # If word node has any children, just remove its payload.
             current.word = None
-            current.data = None
             return None
         else:
             # If no children, check char in reversed order.
             # Further, if char has no children, pop it from children dict.
-            visit_stack.pop()
+            stack.pop()
 
             for c in word[::-1]:
                 if not current.children:
                     # Backtrack to the previous char.
-                    current = visit_stack.pop()
+                    current = stack.pop()
                     current.children.pop(c)
                 else:
                     break
@@ -151,8 +146,7 @@ class Trie(object):
             words.append(current.word)
 
         # Run BFS with queue to collect the following words with prefix.
-        visit_queue = []
-        visit_queue.insert(0, current)
+        visit_queue = [current]
 
         while visit_queue:
             node = visit_queue.pop()
@@ -162,24 +156,6 @@ class Trie(object):
                     words.append(child_node.word)
 
         return words
-
-    def get_data(self, word):
-        """Get word's data."""
-        current = self.root
-
-        # Go through each char in word and check its existence in children.
-        # Finally arrive at the word node.
-        for c in word:
-            if c in current.children:
-                current = current.children[c]
-            else:
-                # The word does not exist.
-                return None
-
-        if not current.data:
-            # No data is stored for word.
-            return None
-        return current.data
 
 
 def main():
