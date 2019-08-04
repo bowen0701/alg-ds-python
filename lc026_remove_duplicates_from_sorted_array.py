@@ -44,11 +44,23 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        pass
+        # Two pointer method: tail for updated array & i.
+        tail = 0
+        for i in range(1, len(nums)):
+            if nums[i] != nums[tail]:
+                # Increment tail and replace new tail by element i.
+                tail += 1
+                nums[tail] = nums[i]
+
+        return tail + 1
 
 
 def main():
-    pass
+    nums = [1, 1, 2]
+    print Solution().removeDuplicates(nums)
+
+    nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+    print Solution().removeDuplicates(nums)
 
 
 if __name__ == '__main__':
