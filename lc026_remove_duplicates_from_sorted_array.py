@@ -43,6 +43,9 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: int
+
+        Time complexity: O(n), where n is the lenght of nums.
+        Space complexity: O(1).
         """
         # Two pointer method: tail for updated array & i.
         tail = 0
