@@ -29,6 +29,11 @@ class Solution(object):
         :type haystack: str
         :type needle: str
         :rtype: int
+
+        Time complexity: O(n*m), where 
+          - n is the length of haystack,
+          - m is the length of needle.
+        Space complexity: O(m).
         """
         if not needle:
             return 0
