@@ -29,6 +29,9 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: int
+
+        Time complexity: O(logn), where n is the lenght of nums.
+        Space complexity: O(1).
         """
         if not nums:
             return -1
