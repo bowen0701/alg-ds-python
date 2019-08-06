@@ -22,8 +22,8 @@ Note:
 Both dividend and divisor will be 32-bit signed integers.
 The divisor will never be 0.
 Assume we are dealing with an environment which could only store integers within
-the 32-bit signed integer range: [−2^31,  2^31 − 1]. 
-For the purpose of this problem, assume that your function returns 2^31 − 1 
+the 32-bit signed integer range: [-2^31,  2^31 - 1]. 
+For the purpose of this problem, assume that your function returns 2^31 - 1 
 when the division result overflows.
 """
 
@@ -34,11 +34,46 @@ class Solution(object):
         :type divisor: int
         :rtype: int
         """
-        pass
+        if dividend == 0:
+            return 0
+
+        if dividend == -(2**31) and divisor == -1:
+            return 2**31 - 1
+
+        quotient = 0
+        sign = 1
+
+        if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
+            sign = -1
+        
+        abs_dividend, abs_divisor = abs(dividend), abs(divisor)
+
+        while abs_dividend >= abs_divisor:
+            abs_divisor_tmp, quotient_tmp = abs_divisor, 1
+
+            while abs_dividend >= abs_divisor_tmp:
+                abs_dividend -= abs_divisor_tmp
+                quotient += quotient_tmp
+
+                abs_divisor_tmp += abs_divisor_tmp
+                quotient_tmp += quotient_tmp
+
+        if sign > 0:
+            return quotient
+        else:
+            return -quotient
 
 
 def main():
-    pass
+    # Ans: 3
+    dividend = 10
+    divisor = 3
+    print Solution().divide(dividend, divisor)
+
+    # Ans: -2
+    dividend = 7
+    divisor = -3
+    print Solution().divide(dividend, divisor)
 
 
 if __name__ == '__main__':
