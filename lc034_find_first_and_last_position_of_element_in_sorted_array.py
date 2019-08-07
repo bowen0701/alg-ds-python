@@ -24,11 +24,51 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        pass
+        # Apply to 2 binary searches to update result [-1, -1].
+        res = [-1, -1]
+
+        if not nums:
+            return res
+
+        # Apply the 1st binary search to search target's left position.
+        first, last = 0, len(nums) - 1
+
+        while first < last:
+            mid = first + (last - first) // 2
+            if nums[mid] < target:
+                first = mid + 1
+            else:
+                last = mid
+
+        if nums[first] != target:
+            return res
+        else:
+            res[0] = first
+
+        # Apply the 2nd binary search to search target's right position.
+        last = len(nums) - 1
+        while first < last:
+            # Make mid biased to the right.
+            mid = first + (last - first) // 2 + 1
+            if nums[mid] > target:
+                last = mid - 1
+            else:
+                first = mid
+
+        res[1] = last
+        return res
 
 
 def main():
-    pass
+    # Ans: [3,4]
+    nums = [5,7,7,8,8,10]
+    target = 8
+    print Solution().searchRange(nums, target)
+
+    # Ans: [-1,-1]
+    nums = [5,7,7,8,8,10]
+    target = 6
+    print Solution().searchRange(nums, target)
 
 
 if __name__ == '__main__':
