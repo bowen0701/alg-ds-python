@@ -23,6 +23,9 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
+
+        Time complexity: O(logn), where n is the length of nums.
+        Space complexity: O(1).
         """
         # Apply to 2 binary searches to update result [-1, -1].
         res = [-1, -1]
