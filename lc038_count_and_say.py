@@ -28,11 +28,39 @@ class Solution(object):
         :type n: int
         :rtype: str
         """
-        pass
+        if n == 0:
+            return ''
+
+        res = '1'
+
+        for _ in range(n - 1):
+            # Start from the 1st digit.
+            digit = res[0]
+            temp = ''
+            count = 0
+
+            # Iterate through all digits.
+            for d in res:
+                if digit == d:
+                    # If current digit is equal to digit, increment count.
+                    count += 1
+                else:
+                    # If not, append count+digit string.
+                    temp += str(count) + digit
+                    # Update digit to current digit with new count = 1.
+                    digit = d
+                    count = 1
+            
+            # Append the last count+digit string to res.
+            temp += str(count) + digit
+            res = temp
+
+        return res
 
 
 def main():
-    pass
+    n = 5
+    print Solution().countAndSay(n)
 
 
 if __name__ == '__main__':
