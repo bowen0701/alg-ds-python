@@ -27,6 +27,9 @@ class Solution(object):
         """
         :type n: int
         :rtype: str
+
+        Time complexity: O(nm), where m is the length of the nth integer.
+        Space complexity: O(1).
         """
         if n == 0:
             return ''
