@@ -5,10 +5,9 @@ URL: https://leetcode.com/problems/valid-sudoku/
 
 Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be 
 validated according to the following rules:
-
-Each row must contain the digits 1-9 without repetition.
-Each column must contain the digits 1-9 without repetition.
-Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without 
+- Each row must contain the digits 1-9 without repetition.
+- Each column must contain the digits 1-9 without repetition.
+- Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without 
 repetition.
 
 A partially filled sudoku which is valid.
@@ -62,12 +61,62 @@ class Solution(object):
         :type board: List[List[str]]
         :rtype: bool
         """
-        pass
+        if not board:
+            return False
+
+        # Create matrices for checking numbers in rows, column and boxes.
+        check_row = [[False] * 9 for _ in range(9)]
+        check_col = [[False] * 9 for _ in range(9)]
+        check_box = [[False] * 9 for _ in range(9)]
+
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != '.':
+                    # Map number 1~9 to number id 0~8. 
+                    num = int(board[i][j]) - 1
+
+                    # Get box id.
+                    b = i // 3 * 3 + j // 3
+
+                    if check_row[i][num] or check_col[j][num] or check_box[b][num]:
+                        # If the number in one of matrices is visited.
+                        return False
+
+                    # Set the number in the 3 matrices are visited.
+                    check_row[i][num] = check_col[j][num] = check_box[b][num] = True
+
+        return True
 
 
 def main():
-	pass
+    # Ans: True.
+    board = [
+              ["5","3",".",".","7",".",".",".","."],
+              ["6",".",".","1","9","5",".",".","."],
+              [".","9","8",".",".",".",".","6","."],
+              ["8",".",".",".","6",".",".",".","3"],
+              ["4",".",".","8",".","3",".",".","1"],
+              ["7",".",".",".","2",".",".",".","6"],
+              [".","6",".",".",".",".","2","8","."],
+              [".",".",".","4","1","9",".",".","5"],
+              [".",".",".",".","8",".",".","7","9"]
+            ]
+    print Solution().isValidSudoku(board)    
+
+    # Ans: False.
+    board = [
+              ["8","3",".",".","7",".",".",".","."],
+              ["6",".",".","1","9","5",".",".","."],
+              [".","9","8",".",".",".",".","6","."],
+              ["8",".",".",".","6",".",".",".","3"],
+              ["4",".",".","8",".","3",".",".","1"],
+              ["7",".",".",".","2",".",".",".","6"],
+              [".","6",".",".",".",".","2","8","."],
+              [".",".",".","4","1","9",".",".","5"],
+              [".",".",".",".","8",".",".","7","9"]
+            ]
+    print Solution().isValidSudoku(board)    
 
 
 if __name__ == '__main__':
-	main()
+    main()
