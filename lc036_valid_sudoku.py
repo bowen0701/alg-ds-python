@@ -60,6 +60,9 @@ class Solution(object):
         """
         :type board: List[List[str]]
         :rtype: bool
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
         if not board:
             return False
