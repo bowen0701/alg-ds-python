@@ -28,12 +28,45 @@ class Solution(object):
         """
         :type digits: List[int]
         :rtype: List[int]
+
+        Time complexity: O(n), where n is the length of digits.
+        Space complexity: O(n), for worse case of total overflow.
         """
-        pass
+        overflow = False
+
+        # Start from the last digit and reverse back to the 1st one.
+        for i in reversed(range(len(digits))):
+            # Plus one only for the last digit or when overflow.
+            if overflow or i == len(digits) - 1: 
+                if digits[i] + 1 < 10:
+                    digits[i] += 1
+                    return digits
+                else:
+                    overflow = True
+                    digits[i] = 0
+
+        # If there is total overflow, plus to the head of digits.
+        if overflow:
+            digits.insert(0, 1)
+        return digits
 
 
 def main():
-    pass
+    # Ans: [1,2,4]
+    digits = [1,2,3]
+    print Solution().plusOne(digits)
+
+    # Ans: [4,3,2,2] 
+    digits = [4,3,2,1]
+    print Solution().plusOne(digits)
+
+    # Ans: [3, 0]
+    digits = [2, 9]
+    print Solution().plusOne(digits)
+
+    # Ans: [1, 0, 0]
+    digits = [9, 9]
+    print Solution().plusOne(digits)
 
 
 if __name__ == '__main__':
