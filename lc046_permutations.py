@@ -38,6 +38,9 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
+
+        Time complexity: O(n!).
+        Space complexity: O(n).
         """
         permutations = []
         self._backtrack(permutations, [], nums)
