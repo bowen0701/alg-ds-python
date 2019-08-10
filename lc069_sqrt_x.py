@@ -27,6 +27,9 @@ class Solution(object):
         """
         :type x: int
         :rtype: int
+
+        Time complexity: O(logx).
+        Space complexity: O(1).
         """
         if not x:
         	return 0
