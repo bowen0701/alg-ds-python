@@ -28,11 +28,43 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        pass
+        if not x:
+        	return 0
+
+        # Apply binary search with last = x // 2 for smaller search space.
+        first = 1
+        last = x // 2
+
+        while first < last:
+        	mid = first + (last - first) // 2
+        	mid_squared = mid ** 2
+
+        	if mid_squared == x:
+        		return mid
+        	elif mid_squared > x:
+        		last = mid - 1
+        	else:
+        		first = mid + 1
+        
+        # Final check for first: if too big, minus 1.
+        if first ** 2 > x:
+        	return first - 1
+
+        return first
 
 
 def main():
-	pass
+	x = 4
+	print Solution().mySqrt(x)
+
+	x = 8
+	print Solution().mySqrt(x)
+
+	x = 100
+	print Solution().mySqrt(x)
+
+	x = 102
+	print Solution().mySqrt(x)
 
 
 if __name__ == '__main__':
