@@ -19,16 +19,34 @@ Output:
 """
 
 class Solution(object):
+    def _backtrack(self, permutations, temps, nums):
+        if len(temps) == len(nums):
+            # One of permutations is completed.
+            permutations.append(temps[:])
+        else:
+            for i in range(len(nums)):
+                # If num i was used, skip it; otherwise add it to temps.
+                if nums[i] in temps:
+                    continue
+                temps.append(nums[i])
+
+                # Apply DFS by recursion with backtracking.
+                self._backtrack(permutations, temps, nums)
+                temps.pop()
+
     def permute(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        pass
+        permutations = []
+        self._backtrack(permutations, [], nums)
+        return permutations
 
 
 def main():
-    pass
+    nums = [1, 2, 3]
+    print Solution().permute(nums)
 
 
 if __name__ == '__main__':
