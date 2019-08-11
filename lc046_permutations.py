@@ -26,7 +26,7 @@ class Solution(object):
             return None
 
         for i in range(len(nums)):
-            # Constraint: If num i was used, skip it; otherwise add it to temps.
+            # If num i was used, skip it; otherwise add it to temps.
             if nums[i] in temps:
                 continue
             temps.append(nums[i])
@@ -40,7 +40,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
 
-        Time complexity: O(n!).
+        Time complexity: O(n * n!), where
+          - the 1st component, n, is for copying temps,
+          - the 2nd component, n!, is for permutation.
         Space complexity: O(n).
         """
         permutations = []
