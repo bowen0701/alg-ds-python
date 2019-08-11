@@ -67,12 +67,12 @@ def binary_search_recur_fast(sorted_nums, target, first, last):
 
 def main():
     import time
-    import random
 
     sorted_nums = range(10000)
 
     # Ans: True
     target = 9999
+
     start_time = time.time()
     print('By iteration: {}'.format(binary_search_iter(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
@@ -86,6 +86,7 @@ def main():
 
     # Ans: False
     target = -1
+
     start_time = time.time()
     print('By iteration: {}'.format(binary_search_iter(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
