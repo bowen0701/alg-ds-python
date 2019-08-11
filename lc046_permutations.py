@@ -23,16 +23,17 @@ class Solution(object):
         if len(temps) == len(nums):
             # One of permutations is completed.
             permutations.append(temps[:])
-        else:
-            for i in range(len(nums)):
-                # If num i was used, skip it; otherwise add it to temps.
-                if nums[i] in temps:
-                    continue
-                temps.append(nums[i])
+            return None
 
-                # Apply DFS by recursion with backtracking.
-                self._backtrack(permutations, temps, nums)
-                temps.pop()
+        for i in range(len(nums)):
+            # Constraint: If num i was used, skip it; otherwise add it to temps.
+            if nums[i] in temps:
+                continue
+            temps.append(nums[i])
+
+            # Apply DFS by recursion with backtracking.
+            self._backtrack(permutations, temps, nums)
+            temps.pop()
 
     def permute(self, nums):
         """
