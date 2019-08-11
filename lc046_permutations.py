@@ -19,10 +19,10 @@ Output:
 """
 
 class Solution(object):
-    def _backtrack(self, permutations, temps, nums):
+    def _backtrack(self, result, temps, nums):
         if len(temps) == len(nums):
             # One of permutations is completed.
-            permutations.append(temps[:])
+            result.append(temps[:])
             return None
 
         for i in range(len(nums)):
@@ -32,7 +32,7 @@ class Solution(object):
             temps.append(nums[i])
 
             # Apply DFS by recursion with backtracking.
-            self._backtrack(permutations, temps, nums)
+            self._backtrack(result, temps, nums)
             temps.pop()
 
     def permute(self, nums):
@@ -45,9 +45,9 @@ class Solution(object):
           - the 2nd component, n!, is for permutation.
         Space complexity: O(n * n!).
         """
-        permutations = []
-        self._backtrack(permutations, [], nums)
-        return permutations
+        result = []
+        self._backtrack(result, [], nums)
+        return result
 
 
 def main():
