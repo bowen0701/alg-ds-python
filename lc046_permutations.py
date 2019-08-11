@@ -43,7 +43,7 @@ class Solution(object):
         Time complexity: O(n * n!), where
           - the 1st component, n, is for copying temps,
           - the 2nd component, n!, is for permutation.
-        Space complexity: O(n).
+        Space complexity: O(n * n!).
         """
         permutations = []
         self._backtrack(permutations, [], nums)
