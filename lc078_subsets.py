@@ -37,16 +37,42 @@ class SolutionBackTrack(object):
         :rtype: List[List[int]]
 
         Time complexity: O(n * 2^n).
-        Space complexity: O(n * 2^n).
+        Space complexity: O(2^n).
         """
         result = []
         self._backtrack(result, [], nums, 0)
         return result
 
 
+class SolutionBFS(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+
+        Time complexity: O(n * 2^n).
+        Space complexity: O(2^n).
+        """
+        result = [[]]
+        
+        for n in nums:
+            result += [res + [n] for res in result]
+
+        return result
+
+
 def main():
+    import time
+
     nums = [1, 2, 3]
-    print Solution().subsets(nums)
+    
+    start_time = time.time()
+    print 'Backtracking:', SolutionBackTrack().subsets(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'BFS:', SolutionBFS().subsets(nums)
+    print 'Time:', time.time() - start_time
 
 
 if __name__ == '__main__':
