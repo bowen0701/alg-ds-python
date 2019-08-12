@@ -41,12 +41,14 @@ class Solution(object):
         :rtype: List[List[int]]
 
         Time complexity: O(n * n!), where
-          - the 1st component, n, is for copying temps,
-          - the 2nd component, n!, is for permutation.
+          - n is the length of nums and for copying temps,
+          - n! is for permutation.
         Space complexity: O(n * n!).
         """
+        # Apply backtracking.
         result = []
-        self._backtrack(result, [], nums)
+        temps = []
+        self._backtrack(result, temps, nums)
         return result
 
 

@@ -58,8 +58,11 @@ class Solution(object):
           - k is target.
         Space complexity: O(k).
         """
+        # Apply backtracking.
         result = []
-        self._backtrack(result, [], target, 0, candidates)
+        temps = []
+        start = 0
+        self._backtrack(result, temps, target, start, candidates)
         return result
 
 

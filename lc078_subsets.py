@@ -39,8 +39,11 @@ class SolutionBackTrack(object):
         Time complexity: O(n * 2^n).
         Space complexity: O(2^n).
         """
+        # Apply backtracking.
         result = []
-        self._backtrack(result, [], nums, 0)
+        temps = []
+        start = 0
+        self._backtrack(result, temps, nums, start)
         return result
 
 
@@ -53,11 +56,10 @@ class SolutionBFS(object):
         Time complexity: O(n * 2^n).
         Space complexity: O(2^n).
         """
-        result = [[]]
-        
+        # Apply DFS.
+        result = [[]]        
         for n in nums:
             result += [res + [n] for res in result]
-
         return result
 
 
