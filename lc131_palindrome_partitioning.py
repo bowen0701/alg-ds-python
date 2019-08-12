@@ -25,7 +25,8 @@ class Solution(object):
 
         for i in range(start, len(s)):
             # Check if palindrome.
-            if s[start:i+1] == s[start:i+1][::-1]:
+            partial = s[start:i+1]
+            if partial == partial[::-1]:
                 temps.append(s[start:i+1])
                 self._backtrack(result, temps, s, i + 1)
                 temps.pop()
@@ -34,6 +35,9 @@ class Solution(object):
         """
         :type s: str
         :rtype: List[List[str]]
+
+        Time complexity: O(n * 2^n), where n is the length of s.
+        Space complexity: O(n).
         """
         # Apply backtracking.
         result = []
