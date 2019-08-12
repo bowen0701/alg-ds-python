@@ -18,17 +18,35 @@ Output:
 
 
 class Solution(object):
+    def _backtrack(self, result, temps, s, start):
+        if start == len(s):
+            result.append(temps[:])
+            return None
+
+        for i in range(start, len(s)):
+            # Check if palindrome.
+            if s[start:i+1] == s[start:i+1][::-1]:
+                temps.append(s[start:i+1])
+                self._backtrack(result, temps, s, i + 1)
+                temps.pop()
+
     def partition(self, s):
         """
         :type s: str
         :rtype: List[List[str]]
         """
-        pass
+        # Apply backtracking.
+        result = []
+        temps = []
+        start = 0
+        self._backtrack(result, temps, s, start)
+        return result
 
 
 def main():
-	pass
+    s = "aab"
+    print Solution().partition(s)
 
 
 if __name__ == '__main__':
-	main()
+    main()

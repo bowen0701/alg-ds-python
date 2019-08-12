@@ -57,7 +57,7 @@ class SolutionBFS(object):
         Space complexity: O(2^n).
         """
         # Apply DFS.
-        result = [[]]        
+        result = [[]]
         for n in nums:
             result += [res + [n] for res in result]
         return result
