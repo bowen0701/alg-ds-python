@@ -33,17 +33,39 @@ A solution set is:
 
 
 class Solution(object):
+    def _backtrack(self, result, temps, target, start, candidates):
+        if target < 0:
+            return None
+
+        if target == 0:
+            result.append(temps[:])
+            return None
+
+        for i in range(start, len(candidates)):
+            if candidates[i] <= target:
+                temps.append(candidates[i])
+                self._backtrack(result, temps, target - candidates[i], i, candidates)
+                temps.pop()
+
     def combinationSum(self, candidates, target):
         """
         :type candidates: List[int]
         :type target: int
         :rtype: List[List[int]]
         """
-        pass
+        result = []
+        self._backtrack(result, [], target, 0, candidates)
+        return result
 
 
 def main():
-    pass
+    candidates = [2,3,6,7]
+    target = 7
+    print Solution().combinationSum(candidates, target)
+
+    candidates = [2,3,5]
+    target = 8
+    print Solution().combinationSum(candidates, target)
 
 
 if __name__ == '__main__':
