@@ -52,6 +52,11 @@ class Solution(object):
         :type candidates: List[int]
         :type target: int
         :rtype: List[List[int]]
+
+        Time complexity: O(n^k), where
+          - n is the length of candidates,
+          - k is target.
+        Space complexity: O(k).
         """
         result = []
         self._backtrack(result, [], target, 0, candidates)
