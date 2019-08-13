@@ -9,8 +9,10 @@ def _lcs_recur(s1, s2, n1, n2):
         return 0
     
     if s1[n1 - 1] == s2[n2 - 1]:
+        # If the current chars are the same, LCS is the last LCS plus 1.
         lcs = _lcs_recur(s1, s2, n1 - 1, n2 - 1) + 1
     else:
+        # If not, LCS is the max of LCS's w/o current char of text1 or text2.
         lcs1 = _lcs_recur(s1, s2, n1 - 1, n2)
         lcs2 = _lcs_recur(s1, s2, n1, n2 - 1)
         lcs = max(lcs1, lcs2)
@@ -37,8 +39,10 @@ def _lcs_memo(s1, s2, n1, n2, M):
         return M[n1][n2]
 
     if s1[n1 - 1] == s2[n2 - 1]:
+        # If the current chars are the same, LCS is the last LCS plus 1.
         lcs = _lcs_memo(s1, s2, n1 - 1, n2 - 1, M) + 1
     else:
+        # If not, LCS is the max of LCS's w/o current char of text1 or text2.
         lcs1 = _lcs_memo(s1, s2, n1 - 1, n2 - 1, M)
         lcs2 = _lcs_memo(s1, s2, n1, n2 - 1, M)
         lcs = max(lcs1, lcs2)
@@ -71,8 +75,10 @@ def longest_common_subsequence_dp(s1, s2):
     for r in range(1, n1 + 1):
         for c in range(1, n2 + 1):
             if s1[r - 1] == s2[c - 1]:
+                # If the current chars are the same, LCS is the last LCS plus 1.
                 M[r][c] = M[r - 1][c - 1] + 1
             else:
+                # If not, LCS is the max of LCS's w/o current char of text1 or text2.
                 M[r][c] = max(M[r - 1][c], M[r][c - 1])
 
     return M[-1][-1]
