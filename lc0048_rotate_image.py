@@ -49,11 +49,34 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: None Do not return anything, modify matrix in-place instead.
         """
-        pass
+        n = len(matrix)
+
+        # For clockwise rotation, first reverse up to down.
+        matrix.reverse()
+
+        # Then swap along the diagonal for the left-bottom elements.
+        for i in range(n):
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        return matrix
 
 
 def main():
-    pass
+    matrix = [
+               [1,2,3],
+               [4,5,6],
+               [7,8,9]
+             ]
+    print Solution().rotate(matrix)
+
+    matrix = [
+               [ 5, 1, 9,11],
+               [ 2, 4, 8,10],
+               [13, 3, 6, 7],
+               [15,14,12,16]
+             ]
+    print Solution().rotate(matrix)
 
 
 if __name__ == '__main__':
