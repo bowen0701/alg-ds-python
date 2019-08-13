@@ -34,6 +34,7 @@ class SolutionRecur(object):
             # If visit water or already visisted before.
             return None
 
+        # Mark (r, c) as visited.
         visited_d[(r, c)] = True
 
         for r_neighbor in [r - 1, r + 1]:  # Up & down.
@@ -76,7 +77,9 @@ class SolutionRecur2(object):
             # If visit water or already visisted before.
             return 0
 
+        # Mark (r, c) as visited.
         visited_d[(r, c)] = True
+
         n_connects = 1
 
         for r_neighbor in [r - 1, r + 1]:  # Up & down.
@@ -88,7 +91,7 @@ class SolutionRecur2(object):
         return n_connects
 
     def numIslands(self, grid):
-        """Number of islands by recursion w/ return.
+        """Number of islands by recursion w/ return num of connects.
         :type grid: List[List[str]]
         :rtype: int
 
@@ -144,11 +147,13 @@ class SolutionIter(object):
             if set(tovisit_ls) - set(visited_ls):
                 for v_neighbor in tovisit_ls:
                     if v_neighbor not in visited_ls:
+                        # Mark (r_neighbor, c_neighbor) as visited.
                         (r_neighbor, c_neighbor) = v_neighbor
                         visited_d[(r_neighbor, c_neighbor)] = True
                         stack.append((r_neighbor, c_neighbor))
                         break  # break for continuing DFS.
             else:
+                # Backtrack by popping stack.
                 stack.pop()
 
     def numIslands(self, grid):
