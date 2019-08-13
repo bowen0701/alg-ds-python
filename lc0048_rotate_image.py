@@ -48,6 +48,9 @@ class Solution(object):
         """
         :type matrix: List[List[int]]
         :rtype: None Do not return anything, modify matrix in-place instead.
+
+        Time complexity: O(n^2).
+        Space complexity: O(1), since in-place.
         """
         n = len(matrix)
 
@@ -57,6 +60,7 @@ class Solution(object):
         # Then swap along the diagonal for the left-bottom elements.
         for i in range(n):
             for j in range(i):
+                print i, j
                 matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 
         return matrix
