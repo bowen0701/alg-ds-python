@@ -40,6 +40,9 @@ class Solution(object):
         :type text1: str
         :type text2: str
         :rtype: int
+
+        Time complexity: O(n1*n2), where ni is the length of texti.
+        Space complexity: O(n1*n2).
         """
         # By bottom-up dynamic programming.
         n1, n2 = len(text1), len(text2)
