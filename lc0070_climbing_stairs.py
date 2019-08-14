@@ -32,11 +32,24 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        pass
+        # Exactly the same as Fibonacci numbers: F[n] = F[n - 1] + F[n - 2]. 
+        if n == 1 or n == 2:
+            return n
+
+        a, b = 1, 2
+
+        for i in range(3, n + 1):
+            a, b = b, a + b
+
+        return b
 
 
 def main():
-    pass
+    n = 2
+    print Solution().climbStairs(n)
+
+    n = 3
+    print Solution().climbStairs(n)
 
 
 if __name__ == '__main__':
