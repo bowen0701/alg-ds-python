@@ -24,13 +24,32 @@ class Solution(object):
         """
         :type strs: List[str]
         :rtype: List[List[str]]
+
+        Output Limit Exceede.
+
+        Time complexity: O(n*klogk), where
+          - n is the length of strs,
+          - k is the lenght of the longest string.
+        Space complexity: O(n).
         """
-        pass
+        # Store in a dict with sorted string as key and string array as value.  
+        anagrams_d = {}
+
+        for s in strs:
+            # Get sorted string as key.
+            k = ''.join(sorted(s))
+            if anagrams_d.get(k):
+                anagrams_d[k].append(s)
+            else:
+                anagrams_d[k] = [s]
+
+        return anagrams_d.values()
 
 
 def main():
-	pass
+    strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    print Solution().groupAnagrams(strs)
 
 
 if __name__ == '__main__':
-	main()
+    main()
