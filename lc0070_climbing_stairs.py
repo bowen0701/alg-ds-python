@@ -31,6 +31,9 @@ class Solution(object):
         """
         :type n: int
         :rtype: int
+
+        Time complexity: O(n).
+        Sapce complexity: O(1).
         """
         # Exactly the same as Fibonacci numbers: F[n] = F[n - 1] + F[n - 2]. 
         if n == 1 or n == 2:
