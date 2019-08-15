@@ -27,6 +27,9 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # Memorize max reachable index.
         reachable = 0
