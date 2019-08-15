@@ -56,10 +56,10 @@ class Solution(object):
 
 
         if left == right:
-            # When n_rows > n_cols, left = right.
+            # When left = right, then n_rows > n_cols
             spiral.extend([matrix[i][right] for i in range(up, down + 1)])
         elif up == down:
-            # When n_rows < n_cols, up = down.
+            # When up = down, then n_rows < n_cols.
             spiral.extend([matrix[down][j] for j in range(left, right + 1)])
 
         return spiral
