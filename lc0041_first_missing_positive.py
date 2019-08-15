@@ -26,13 +26,16 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         n = len(nums)
 
         for i in range(n):
-            # Keep swapping old & new nums[i] to their correct positions.
+            # Keep swapping old & new nums[i]'s to their correct positions.
             while nums[i] > 0 and nums[i] <= n and nums[i] != nums[nums[i] - 1]:
-                # If nums[i] = k, swap it and nums[k - 1], with correct position k - 1.
+                # If nums[i] = k, swap it and nums[k - 1] at correct position k - 1.
                 nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
 
         # Check each updated elements in nums with true positive integer.
