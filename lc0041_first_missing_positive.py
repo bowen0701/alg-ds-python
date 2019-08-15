@@ -27,11 +27,47 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        pass
+        n = len(nums)
+
+        for i in range(n):
+            # Keep swapping old & new nums[i] to their correct positions.
+            while nums[i] > 0 and nums[i] <= n and nums[i] != nums[nums[i] - 1]:
+                # If nums[i] = k, swap it and nums[k - 1], with correct position k - 1.
+                nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
+
+        # Check each updated elements in nums with true positive integer.
+        for i in range(n):
+            if i + 1 != nums[i]:
+                return i + 1
+
+        # If all elements in nums are correct, return the last one plus one.
+        return n + 1
 
 
 def main():
-    pass
+    # Ans: 3
+    nums = [1,2,0]
+    print Solution().firstMissingPositive(nums)
+
+    # Ans: 2
+    nums = [3,4,-1,1]
+    print Solution().firstMissingPositive(nums)
+
+    # Ans: 1
+    nums = [7,8,9,11,12]
+    print Solution().firstMissingPositive(nums)
+
+    # Ans: 1
+    nums = []
+    print Solution().firstMissingPositive(nums)
+
+    # Ans: 2
+    nums = [1]
+    print Solution().firstMissingPositive(nums)
+
+    # Ans: 3
+    nums = [-1,4,2,1,9,10]
+    print Solution().firstMissingPositive(nums)
 
 
 if __name__ == '__main__':
