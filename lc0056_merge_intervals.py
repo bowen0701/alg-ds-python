@@ -28,6 +28,7 @@ class SolutionNaive(object):
         if not intervals:
             return []
 
+        # Sort by interval's left.
         intervals = sorted(intervals, key=lambda x: x[0])
 
         result = [intervals[0]]
@@ -66,6 +67,33 @@ class SolutionNaive(object):
         return result
 
 
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+
+        Time complexity: O(n*logn).
+        Space complexity: O(1).
+        """
+        if not intervals:
+            return []
+
+        # Sort by interval's left.
+        intervals = sorted(intervals, key=lambda x: x[0])
+
+        result = [intervals[0]]
+        
+        for i in range(1, len(intervals)):
+            if intervals[i][0] > result[-1][1]:
+                # If interval is not overlapped with the last.
+                result.append(intervals[i])
+            else:
+                result[-1][1] = max(intervals[i][1], result[-1][1])
+
+        return result
+
+
 def main():
     import time
 
@@ -93,6 +121,32 @@ def main():
     print SolutionNaive().merge(intervals)
 
     print 'Time: {}'.format(time.time() - start_time)
+
+    print 'By checking the last:'
+    start_time = time.time()
+
+    # Ans: [[1,6],[8,10],[15,18]]
+    intervals = [[1,3], [2,6], [8,10], [15,18]]
+    print Solution().merge(intervals)
+
+    # Ans: [[1,5]]
+    intervals = [[1,4], [4,5]]
+    print Solution().merge(intervals)
+
+    # Ans: [[0, 4]]
+    intervals = [[1,4], [0,4]]
+    print Solution().merge(intervals)
+
+    # Ans: [[0,5]]
+    intervals = [[1,4], [0,5]]
+    print Solution().merge(intervals)
+
+    # Ans: [[1, 10]]
+    intervals = [[2,3], [4,5], [6,7], [8,9], [1,10]]
+    print Solution().merge(intervals)
+
+    print 'Time: {}'.format(time.time() - start_time)
+
 
 
 if __name__ == '__main__':
