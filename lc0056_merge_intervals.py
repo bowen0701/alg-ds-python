@@ -21,6 +21,9 @@ class SolutionNaive(object):
         """
         :type intervals: List[List[int]]
         :rtype: List[List[int]]
+
+        Time complexity: O(n^2).
+        Space complexity: O(1).
         """
         if not intervals:
             return []
@@ -31,23 +34,28 @@ class SolutionNaive(object):
 
         for i in range(1, len(intervals)):
             is_merged = False
+            # Iterative check all merged intervals. If updated, breack for loop.
             for j in range(len(result)):
                 if (result[j][0] <= intervals[i][0] <= result[j][1] and 
                     intervals[i][1] > result[j][1]):
+                    # interval's left is in merged i, but its right is not.
                     result[j][1] = intervals[i][1]
                     is_merged = True
                     break
                 elif (intervals[i][0] < result[j][0] and
                       result[j][0] <= intervals[i][1] <= result[j][1]):
+                    # interval's right is in merged i, but its left is not.
                     result[j][0] = intervals[i][0]
                     is_merged = True
                     break
                 elif (result[j][0] <= intervals[i][0] <= result[j][1] and
                       result[j][0] <= intervals[i][1] <= result[j][1]):
+                    # interval is in merged.
                     is_merged = True
                     break
                 elif (intervals[i][0] < result[j][0] and
                       intervals[i][1] > result[j][1]):
+                    # interval contains merged.
                     result[j] = intervals[i]
                     is_merged = True
                     break
