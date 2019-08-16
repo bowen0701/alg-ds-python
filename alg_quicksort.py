@@ -27,7 +27,7 @@ def quicksort(nums):
 
 
 def _partition(nums, left, right, mid):
-    """Get partition point."""
+    """Helper function for quicksort_raw() to get partition point."""
     pivot = nums[mid]
 
     while left <= right:
@@ -50,7 +50,7 @@ def _partition(nums, left, right, mid):
 
 
 def _quicksort_recur(nums, left, right):
-    """Quick sort by recursion."""
+    """Helper function for quicksort_raw() by recursion."""
     if left < right:
         mid = left + (right - left) // 2
         partition = _partition(nums, left, right, mid)
