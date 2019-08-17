@@ -37,11 +37,43 @@ class Solution(object):
         :type word2: str
         :rtype: int
         """
-        pass
+        # Apply dynamic programming with table T.
+        n1, n2 = len(word1), len(word2)
+
+        T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
+
+        for j in range(n2 + 1):
+            T[0][j] = j
+
+        for i in range(n1 + 1):
+            T[i][0] = i
+
+        for i in range(1, n1 + 1):
+            for j in range(1, n2 + 1):
+                # Compare current chars's diff for replace.
+                if word1[i - 1] == word2[j - 1]:
+                    diff = 0
+                else:
+                    diff = 1
+
+                # Compute min of delete, insert and replace.
+                T[i][j] = min(T[i - 1][j] + 1, 
+                              T[i][j - 1] + 1, 
+                              T[i - 1][j - 1] + diff)
+
+        return T[-1][-1]
 
 
 def main():
-    pass
+    # Ans: 3.
+    word1 = "horse"
+    word2 = "ros"
+    print Solution().minDistance(word1, word2)
+
+    # Ans: 5.
+    word1 = "intention"
+    word2 = "execution"
+    print Solution().minDistance(word1, word2)
 
 
 if __name__ == '__main__':
