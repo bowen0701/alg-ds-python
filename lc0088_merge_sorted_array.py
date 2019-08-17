@@ -32,7 +32,10 @@ class Solution(object):
         """
         i = m - 1
         j = n - 1
+
+        # Start from the last element of nums1 to replace.
         for k in reversed(range(len(nums1))):
+            # Compare the last elements of nums1 and nums2.
             if i >= 0 and j >= 0:
                 if nums1[i] > nums2[j]:
                     nums1[k] = nums1[i]
