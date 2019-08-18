@@ -64,13 +64,47 @@ class SolutionCopy(object):
                         matrix[i][c] = 0
 
 
+class SolutionRowCol(object):
+    def setZeroes(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: None Do not return anything, modify matrix in-place instead.
+
+        Time complexity: O(m * n).
+        Space complexity: O(m + n).
+        """
+        m, n = len(matrix), len(matrix[0])
+
+        # Create rows and cols for 0's positions.
+        rows = [0] * m
+        cols = [0] * n
+        
+        # Update its row and col by checking matrix[i][j] == 0.
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 0:
+                    rows[i] = 1
+                    cols[j] = 1
+
+        for r in range(len(rows)):
+            if rows[r] == 1:
+                for j in range(n):
+                    matrix[r][j] = 0
+
+        for c in range(len(cols)):
+            if cols[c] == 1:
+                for i in range(m):
+                    matrix[i][c] = 0
+
+
 def main():
     matrix = [
                [1,1,1],
                [1,0,1],
                [1,1,1]
              ]
-    SolutionCopy().setZeroes(matrix)
+    # SolutionCopy().setZeroes(matrix)
+    SolutionRowCol().setZeroes(matrix)
     print matrix
 
 
@@ -79,7 +113,8 @@ def main():
                [3,4,5,2],
                [1,3,1,5]
              ]
-    SolutionCopy().setZeroes(matrix)
+    # SolutionCopy().setZeroes(matrix)
+    SolutionRowCol().setZeroes(matrix)
     print matrix
 
 
