@@ -36,6 +36,9 @@ class Solution(object):
         :type word1: str
         :type word2: str
         :rtype: int
+
+        Time complexity: O(n1*n2).
+        Space complexity: O(n1*n2).
         """
         # Apply dynamic programming with table T.
         n1, n2 = len(word1), len(word2)
