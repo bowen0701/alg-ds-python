@@ -97,6 +97,47 @@ class SolutionRowCol(object):
                     matrix[i][c] = 0
 
 
+class SolutionOptimSpace(object):
+    def setZeroes(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: None Do not return anything, modify matrix in-place instead.
+
+        Time complexity: O().
+        Space complexity: O(1).
+        """
+        m, n = len(matrix), len(matrix[0])
+
+        # Record any zeros are in the first row/col. 
+        is_zero_row0, is_zero_col0 = False, False
+
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 0:
+                    if i == 0:
+                        is_zero_row0 = True
+                    if j == 0:
+                        is_zero_col0 = True
+
+                    # Use 1st element in the row/col to record zero.
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+
+        # For each element, update it to zero by checking its 1st row/col elements. 
+        for i in range(1, m):
+            for j in range(1, n):
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                        matrix[i][j] = 0
+
+        # For 1st row/col, update to zero if needed.
+        if is_zero_row0:
+            for j in range(n):
+                matrix[0][j] = 0
+        if is_zero_col0:
+            for i in range(m):
+                matrix[i][0] = 0
+
+
 def main():
     matrix = [
                [1,1,1],
@@ -105,6 +146,7 @@ def main():
              ]
     # SolutionCopy().setZeroes(matrix)
     SolutionRowCol().setZeroes(matrix)
+    # SolutionOptimSpace().setZeroes(matrix)
     print matrix
 
 
@@ -115,6 +157,7 @@ def main():
              ]
     # SolutionCopy().setZeroes(matrix)
     SolutionRowCol().setZeroes(matrix)
+    # SolutionOptimSpace().setZeroes(matrix)
     print matrix
 
 
