@@ -29,17 +29,55 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionBFS(object):
     def maxDepth(self, root):
         """
         :type root: TreeNode
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        if not root:
+            return 0
+
+        result = 0
+
+        # Use queue for BFS.
+        queue = [root]
+
+        while queue:
+            # Increment result for each level.
+            result += 1
+
+            # Vist all nodes in the same level.
+            for i in range(len(queue)):
+                current = queue.pop()
+                if current.left:
+                    queue.insert(0, current.left)
+                if current.right:
+                    queue.insert(0, current.right)
+
+        return result
 
 
 def main():
-    pass
+    # Binary tree: [3,9,20,null,null,15,7], ans: 3.
+    #     3
+    #    / \
+    #   9  20
+    #  /  /  \
+    # 6  15   7
+    #      \
+    #      10
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.left.left = TreeNode(6)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
+    root.right.left.left = TreeNode(15)
+    print SolutionBFS().maxDepth(root)
 
 
 if __name__ == '__main__':
