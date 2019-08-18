@@ -61,6 +61,22 @@ class SolutionBFS(object):
         return result
 
 
+class SolutionDFS(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        if not root:
+            return 0
+
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+         
+
+
 def main():
     # Binary tree: [3,9,20,null,null,15,7], ans: 3.
     #     3
@@ -77,7 +93,9 @@ def main():
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
     root.right.left.left = TreeNode(15)
+    
     print SolutionBFS().maxDepth(root)
+    print SolutionDFS().maxDepth(root)
 
 
 if __name__ == '__main__':
