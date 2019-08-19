@@ -22,6 +22,7 @@ class SolutionRecur(object):
     Space complexity: O(mn).
     """
     def uniquePaths(self, m, n):
+        # Recursively backbrack paths from (m - 1, n) and (m, n - 1). 
         if m == 1 or n == 1:
             return 1
         return self.uniquePaths(m - 1, n) + self.uniquePaths(m, n - 1)
@@ -38,14 +39,16 @@ class SolutionMemo(object):
             return path[m][n]
 
         if m == 1 or n == 1:
+            # Set the 1st row or col to 1.
             path[m][n] = 1
         else:
-            path[m][n] = (
-                self._uniquePaths(m - 1, n, path) + 
-                self._uniquePaths(m, n - 1, path))
+            # For other rows/cols, backtrack from (m - 1, n) and (m, n - 1).
+            path[m][n] = (self._uniquePaths(m - 1, n, path) + 
+                          self._uniquePaths(m, n - 1, path))
         return path[m][n]
 
     def uniquePaths(self, m, n):
+        # Use path for memoization.
         path = [[0] * (n + 1) for _ in range(m + 1)]
         return self._uniquePaths(m, n, path)
 
@@ -57,14 +60,18 @@ class SolutionDp(object):
     Space complexity: O(mn).
     """
     def uniquePaths(self, m, n):
+        # Use path for memoization.
         path = [[0] * n for _ in range(m)]
 
+        # Set the 1st row to 1.
         for j in range(n):
             path[0][j] = 1
 
+        # Set the 1st col to 1.
         for i in range(m):
             path[i][0] = 1
 
+        # For other rows/cols, backtrack from (i - 1, j) and (i, j - 1).
         for i in range(1, m):
             for j in range(1, n):
                 path[i][j] = path[i - 1][j] + path[i][j - 1]
