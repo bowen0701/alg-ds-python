@@ -28,6 +28,9 @@ class SolutionCount(object):
         """
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
+
+        Time complexity: O(n), where n is the number of nums.
+        Space complexity: O(n).
         """
         d = {}
         for n in nums:
