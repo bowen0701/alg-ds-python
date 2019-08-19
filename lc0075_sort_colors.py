@@ -55,10 +55,41 @@ class SolutionCount(object):
                 nums[i] = 2
 
 
+class SolutionUpdateAll(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+
+        Time complexity:
+        Space complexity:
+        """
+        # Keep the end of each color.
+        r, w, b = 0, 0, 0
+
+        for i, n in enumerate(nums):
+            # Update elements for all colors.
+            if n == 0:
+                nums[b] = 2
+                nums[w] = 1
+                nums[r] = 0
+                b += 1
+                w += 1
+                r += 1
+            elif n == 1:
+                nums[b] = 2
+                nums[w] = 1
+                b += 1
+                w += 1
+            elif n == 2:
+                b += 1
+
+
 def main():
     # Ans: [0,0,1,1,2,2].
     nums = [2,0,2,1,1,0]
-    SolutionCount().sortColors(nums)
+    # SolutionCount().sortColors(nums)
+    SolutionUpdateAll().sortColors(nums)
     print nums
 
 
