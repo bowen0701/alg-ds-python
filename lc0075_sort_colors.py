@@ -61,8 +61,8 @@ class SolutionUpdateAll(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
 
-        Time complexity:
-        Space complexity:
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # Keep the end of each color.
         r, w, b = 0, 0, 0
