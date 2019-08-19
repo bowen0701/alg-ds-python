@@ -55,6 +55,12 @@ class Solution(object):
         :type board: List[List[str]]
         :type word: str
         :rtype: bool
+
+        Time complexity: O(m * n * 4^s), where
+          - m is the number of rows,
+          - n is the number of cols,
+          - s is the length of word.
+        Space complexity: O(m * n).
         """
         if not board:
             return False
