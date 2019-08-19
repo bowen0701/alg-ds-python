@@ -26,21 +26,21 @@ Answer: 3
 
 class SolutionRecur(object):
     def _dfs(self, r, c, grid, visited_d):
+        # If visit outside of the grid boundary.
         if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
-            # If visit outside of the grid boundary.
             return None
 
+        # If visit water or already visisted before.
         if grid[r][c] == '0' or visited_d.get((r, c)):
-            # If visit water or already visisted before.
             return None
 
         # Mark (r, c) as visited.
         visited_d[(r, c)] = True
 
-        for r_neighbor in [r - 1, r + 1]:  # Up & down.
+        # Vist up & down and left & right.
+        for r_neighbor in [r - 1, r + 1]:
             self._dfs(r_neighbor, c, grid, visited_d)
-
-        for c_neighbor in [c - 1, c + 1]:  # Left & right.
+        for c_neighbor in [c - 1, c + 1]:
             self._dfs(r, c_neighbor, grid, visited_d)
 
 
@@ -60,6 +60,7 @@ class SolutionRecur(object):
 
         for r in range(len(grid)):
             for c in range(len(grid[0])):
+                # If a "new" land is 1, start DFS visiting.
                 if grid[r][c] == '1' and not visited_d.get((r, c)):
                     n_islands += 1
                     self._dfs(r, c, grid, visited_d)
@@ -69,12 +70,12 @@ class SolutionRecur(object):
 
 class SolutionRecur2(object):
     def _dfs(self, r, c, grid, visited_d):
+        # If visit outside of the grid boundary.
         if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
-            # If visit outside of the grid boundary.
             return 0
 
+        # If visit water or already visisted before.
         if grid[r][c] == '0' or visited_d.get((r, c)):
-            # If visit water or already visisted before.
             return 0
 
         # Mark (r, c) as visited.
@@ -82,10 +83,10 @@ class SolutionRecur2(object):
 
         n_connects = 1
 
-        for r_neighbor in [r - 1, r + 1]:  # Up & down.
+        # Count connects by visiting up & down and left & right.
+        for r_neighbor in [r - 1, r + 1]:
             n_connects += self._dfs(r_neighbor, c, grid, visited_d)
-
-        for c_neighbor in [c - 1, c + 1]:  # Left & right.
+        for c_neighbor in [c - 1, c + 1]:
             n_connects += self._dfs(r, c_neighbor, grid, visited_d)
 
         return n_connects
@@ -106,6 +107,7 @@ class SolutionRecur2(object):
 
         for r in range(len(grid)):
             for c in range(len(grid[0])):
+                # If a "new" land is 1, start DFS visiting.
                 if grid[r][c] == '1' and not visited_d.get((r, c)):
                     n_connects = self._dfs(r, c, grid, visited_d)
                     if n_connects > 0:
@@ -119,13 +121,14 @@ class SolutionIter(object):
         (r, c) = v_start
         tovisit_ls = []
 
-        if r - 1 >= 0 and grid[r - 1][c] == '1':            # Up.
+        # Visit up & down and left * right.
+        if r - 1 >= 0 and grid[r - 1][c] == '1':
             tovisit_ls.append((r - 1, c))
-        if r + 1 < len(grid) and grid[r + 1][c] == '1':     # Down.
+        if r + 1 < len(grid) and grid[r + 1][c] == '1':
             tovisit_ls.append((r + 1, c))
-        if c - 1 >= 0 and grid[r][c - 1] == '1':            # Left.
+        if c - 1 >= 0 and grid[r][c - 1] == '1':
             tovisit_ls.append((r, c - 1))
-        if c + 1 < len(grid[0]) and grid[r][c + 1] == '1':  # Right.
+        if c + 1 < len(grid[0]) and grid[r][c + 1] == '1':
             tovisit_ls.append((r, c + 1))
 
         return tovisit_ls
@@ -151,7 +154,8 @@ class SolutionIter(object):
                         (r_neighbor, c_neighbor) = v_neighbor
                         visited_d[(r_neighbor, c_neighbor)] = True
                         stack.append((r_neighbor, c_neighbor))
-                        break  # break for continuing DFS.
+                        # break for continuing DFS.
+                        break
             else:
                 # Backtrack by popping stack.
                 stack.pop()
@@ -170,6 +174,7 @@ class SolutionIter(object):
 
         for r in range(len(grid)):
             for c in range(len(grid[0])):
+                # If a "new" land is 1, start DFS visiting.
                 if grid[r][c] == '1' and not visited_d.get((r, c)):
                     n_islands += 1
                     self._dfs(r, c, grid, visited_d)
