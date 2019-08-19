@@ -23,17 +23,40 @@ Follow up:
 - Could you come up with a one-pass algorithm using only constant space?
 """
 
-class Solution(object):
+class SolutionCount(object):
     def sortColors(self, nums):
         """
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        pass
+        d = {}
+        for n in nums:
+            if n in d:
+                d[n] += 1
+            else:
+                d[n] = 1
+
+        if 0 not in d:
+            d[0] = 0
+        if 1 not in d:
+            d[1] = 0
+        if 2 not in d:
+            d[2] = 0
+
+        for i, _ in enumerate(nums):
+            if i < d[0]:
+                nums[i] = 0
+            elif d[0] <= i < d[0] + d[1]:
+                nums[i] = 1
+            else:
+                nums[i] = 2
 
 
 def main():
-    pass
+    # Ans: [0,0,1,1,2,2].
+    nums = [2,0,2,1,1,0]
+    SolutionCount().sortColors(nums)
+    print nums
 
 
 if __name__ == '__main__':
