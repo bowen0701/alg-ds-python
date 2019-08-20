@@ -76,9 +76,9 @@ class SolutionBinarySearch(object):
         first, last = 0, len(nums) - 1
         
         while first < last:
-            # Count how many numbers fall in the 2nd half.
             mid = first + (last - first) // 2
 
+            # Count how many numbers fall in the 2nd half.
             count = 0
             for n in nums:
                 if mid < n <= last:
