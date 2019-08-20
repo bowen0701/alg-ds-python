@@ -34,6 +34,9 @@ class SolutionBFS(object):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
+
+        Time complexity: O(n), where n is the number of nodes.
+        Space complexity: O(m), where m is the max number of nodes in one level.
         """
         if not root:
             return []
