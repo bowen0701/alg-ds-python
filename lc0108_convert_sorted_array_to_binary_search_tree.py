@@ -33,6 +33,9 @@ class SolutionRecur(object):
         """
         :type nums: List[int]
         :rtype: TreeNode
+
+        Time complexity: O(n), where n is the length of nums.
+        Space complexity: O(h), where h is the height of BST.
         """
         if not nums:
             return None
