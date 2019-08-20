@@ -29,17 +29,56 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionBFS(object):
     def levelOrder(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        pass
+        if not root:
+            return []
+
+        result = []
+
+        # Use queue for BFS.
+        queue = [root]
+
+        while queue:
+            level = []
+            
+            # Iterate through all nodes in each level.
+            for i in range(len(queue)):
+                # Get the last node in queue and append its value.
+                current = queue.pop()
+                level.append(current.val)
+
+                # Insert the nodes in next level into queue.
+                if current.left:
+                    queue.insert(0, current.left)
+                if current.right:
+                    queue.insert(0, current.right)
+            
+            # Append nodes in the level to result.
+            result.append(level)
+
+        return result
 
 
 def main():
-    pass
+    # Given binary tree:
+    #     3
+    #    / \
+    #   9   20
+    #  /   /  \
+    # 6   15   7
+    # Ans: [[3], [9,20], [6, 15,7]]
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.left.left = TreeNode(6)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
+    print SolutionBFS().levelOrder(root)
 
 
 if __name__ == '__main__':
