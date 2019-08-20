@@ -29,8 +29,16 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
-    def search(self, node, val):
-        """Search val starting from node.
+    def search_recur(self, node, val):
+        """Search val starting from node by recursion.
+
+        Time complexity: O(logh), where h is the height of node.
+        Space complexity: O(1).
+        """
+        pass
+
+    def search_iter(self, node, val):
+        """Search val starting from node by iteration.
 
         Time complexity: O(logh), where h is the height of node.
         Space complexity: O(1).
@@ -105,8 +113,39 @@ class BinarySearchTree(object):
             parent = parent.parent
         return parent
 
-    def insert(self, new_val):
-        """Insert a new node with val.
+    def _insert_recur_util(self, current, new_val):
+        """Helper function for insert_recur()"""
+        new_node = Node(new_val)
+
+        if new_val < current.val:
+            if not current.left:
+                current.left = new_node
+                new_node.parent = current
+                return None
+            else:
+                self._insert_recur_util(current.left, new_val)
+        else:
+            if not current.right:
+                current.right = new_node
+                new_node.parent = current
+                return None
+            else:
+                self._insert_recur_util(current.right, new_val)
+
+    def insert_recur(self, new_val):
+        """Insert a new node with val by recursion.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        if not self.root:
+            self.root = Node(new_val)
+            return None
+
+        self._insert_recur_util(self.root, new_val)
+
+    def insert_iter(self, new_val):
+        """Insert a new node with val by iteration.
 
         Use current and parent to track new node's insertion postion
         and its parent.
@@ -280,17 +319,17 @@ def main():
     Tree:
         6
        / \
-      5   7
+      4   7
      / \   \
     2   5   8
     """
     bst = BinarySearchTree()
-    bst.insert(6)
-    bst.insert(5)
-    bst.insert(7)
-    bst.insert(2)
-    bst.insert(5)
-    bst.insert(8)
+    bst.insert_recur(6)
+    bst.insert_recur(4)
+    bst.insert_recur(7)
+    bst.insert_iter(2)
+    bst.insert_iter(5)
+    bst.insert_iter(8)
 
     # Inorder walk: 2, 5, 5, 6, 7, 8.
     print('Inorder traversal by recursion:')
@@ -310,10 +349,10 @@ def main():
 
     # Search existing val 6.
     print('Search existing node with val 6:')
-    print(bst.search(bst.root, 6).val)
+    print(bst.search_iter(bst.root, 6).val)
     # Search nonexisting val 10.
     print('Search nonexisting node with val 10:')
-    print(bst.search(bst.root, 10))
+    print(bst.search_iter(bst.root, 10))
 
     # Find min of root: 2.
     print('Find min: {}'.format(bst.find_minimum(bst.root).val))
