@@ -34,6 +34,9 @@ class Solution(object):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
+
+        Time complexity: O(n), where n is the number of nodes.
+        Space complexity: O(m), where m is the biggest number of nodes in levels.
         """
         if not root:
             return []
