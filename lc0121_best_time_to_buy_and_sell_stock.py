@@ -28,12 +28,30 @@ class SolutionNaive(object):
         """
         :type prices: List[int]
         :rtype: int
+
+        Time complexity: O(n^2), where n is the number of prices.
+        Space complexity: O(1).
         """
-        pass
+        max_profit = 0
+
+        n = len(prices)
+
+        for i in range(n - 1):
+            for j in range(i + 1, n):
+                if prices[j] - prices[i] > max_profit:
+                    max_profit = prices[j] - prices[i]
         
+        return max_profit
+
 
 def main():
-    pass
+    # Ans: 5
+    prices = [7,1,5,3,6,4]
+    print SolutionNaive().maxProfit(prices)
+
+    # Ans: 0
+    prices = [7,6,4,3,1]
+    print SolutionNaive().maxProfit(prices)
 
 
 if __name__ == '__main__':
