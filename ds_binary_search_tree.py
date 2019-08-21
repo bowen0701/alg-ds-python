@@ -35,7 +35,15 @@ class BinarySearchTree(object):
         Time complexity: O(logh), where h is the height of node.
         Space complexity: O(1).
         """
-        pass
+        if not node:
+            return None
+
+        if val == node.val:
+            return node
+        elif val < node.val:
+            return self.search_recur(node.left, val)
+        else:
+            return self.search_recur(node.right, val)
 
     def search_iter(self, node, val):
         """Search val starting from node by iteration.
@@ -44,74 +52,14 @@ class BinarySearchTree(object):
         Space complexity: O(1).
         """
         current = node
-        while current and val != current.val:
-            if val < current.val:
+        while current:
+            if val == current.val:
+                return current
+            elif val < current.val:
                 current = current.left
             else:
                 current = current.right
         return current
-
-    def find_minimum(self, node):
-        """Find minimum starting from node.
-
-        Time complexity: O(logh).
-        Space complexity: O(1).
-        """
-        current = node
-        while current.left:
-            current = current.left
-        return current
-
-    def find_maximum(self, node):
-        """Find maximum starting from node.
-
-        Time complexity: O(logn).
-        Space complexity: O(1).
-        """
-        current = node
-        while current.right:
-            current = current.right
-        return current
-
-    def find_successor(self, node):
-        """Find succesor of node, i.e. next biggest node.
-
-        Time complexity: O(logh).
-        Space complexity: O(1).
-        """
-        current = node
-
-        # If node's right existed, find leftmost node in node's right subtree.
-        if current.right:
-            return self.find_minimum(current.right)
-
-        # If not, go up the tree to the lowest ancestor of node, 
-        # whose "left" child is also an ancestor of node.
-        parent = current.parent
-        while parent and current == parent.right:
-            current = parent
-            parent = parent.parent
-        return parent
-
-    def find_predecessor(self, node):
-        """Find predecessor of node, i.e. previous biggest node.
-
-        Time complexity: O(logh).
-        Space complexity: O(1).
-        """
-        current = node
-
-        # If node's left existed, find rightmost node in node's left subtree.
-        if current.left:
-            return self.find_maximum(current.left)
-
-        # If not, go up the tree to the lowest ancestor of node, 
-        # whose "right" child is also an ancestor of node.
-        parent = current.parent
-        while parent and current == parent.left:
-            current = parent
-            parent = parent.parent
-        return parent
 
     def _insert_recur_util(self, current, new_val):
         """Helper function for insert_recur()"""
@@ -174,6 +122,68 @@ class BinarySearchTree(object):
             parent.left = new
         else:
             parent.right = new
+
+    def find_minimum(self, node):
+        """Find minimum starting from node.
+
+        Time complexity: O(logh).
+        Space complexity: O(1).
+        """
+        current = node
+        while current.left:
+            current = current.left
+        return current
+
+    def find_maximum(self, node):
+        """Find maximum starting from node.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        current = node
+        while current.right:
+            current = current.right
+        return current
+
+    def find_successor(self, node):
+        """Find succesor of node, i.e. next biggest node.
+
+        Time complexity: O(logh).
+        Space complexity: O(1).
+        """
+        current = node
+
+        # If node's right existed, find leftmost node in node's right subtree.
+        if current.right:
+            return self.find_minimum(current.right)
+
+        # If not, go up the tree to the lowest ancestor of node, 
+        # whose "left" child is also an ancestor of node.
+        parent = current.parent
+        while parent and current == parent.right:
+            current = parent
+            parent = parent.parent
+        return parent
+
+    def find_predecessor(self, node):
+        """Find predecessor of node, i.e. previous biggest node.
+
+        Time complexity: O(logh).
+        Space complexity: O(1).
+        """
+        current = node
+
+        # If node's left existed, find rightmost node in node's left subtree.
+        if current.left:
+            return self.find_maximum(current.left)
+
+        # If not, go up the tree to the lowest ancestor of node, 
+        # whose "right" child is also an ancestor of node.
+        parent = current.parent
+        while parent and current == parent.left:
+            current = parent
+            parent = parent.parent
+        return parent
 
     def _transplant(self, from_node, to_node):
         """Helper function for delete(): Transplant a subtree.
@@ -349,8 +359,12 @@ def main():
 
     # Search existing val 6.
     print('Search existing node with val 6:')
+    print(bst.search_recur(bst.root, 6).val)
+    print('Search existing node with val 6:')
     print(bst.search_iter(bst.root, 6).val)
     # Search nonexisting val 10.
+    print('Search nonexisting node with val 10:')
+    print(bst.search_recur(bst.root, 10))
     print('Search nonexisting node with val 10:')
     print(bst.search_iter(bst.root, 10))
 
@@ -367,14 +381,15 @@ def main():
     # Find successor of root: 7.
     print('Find successor: {}'.format(bst.find_successor(bst.root).val))
     # Find successor of root's left's right: 6.
-    print('Find successor from second 5: {}'
+    print('Find successor from left\'s right: {}'
           .format(bst.find_successor(bst.root.left.right).val))
 
-    # Find predecessor of root: 6.
-    print('Find predecessor: {}'.format(bst.find_predecessor(bst.root).val))
-    # Find successor of root's left's right: 5.
-    print('Find predecessor from 5: {}'
-          .format(bst.find_predecessor(bst.root.left).val))
+    # Find predecessor of root: 5.
+    print('Find predecessor of root: {}'
+          .format(bst.find_predecessor(bst.root).val))
+    # Find predecessor of root's left's right: 4.
+    print('Find predecessor from root\'s left: {}'
+          .format(bst.find_predecessor(bst.root.left.right).val))
 
     # Delete root's left: 5, the run inorder walk: 2, 5, 6, 7, 8.
     bst.delete(bst.root.left)
