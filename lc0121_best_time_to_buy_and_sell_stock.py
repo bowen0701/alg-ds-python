@@ -91,6 +91,34 @@ class SolutionDivideAndConquer(object):
         return self._divideAndConquer(prices, left, right)
 
 
+class SolutionIter(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+
+        Time complexity: O(n), where n is the number of prices.
+        Space complexity: O(1).
+        """
+        if not prices:
+            return 0
+
+        minimun = prices[0]
+        profit = 0
+
+        for i in range(1, len(prices)):
+            current = prices[i]
+
+            # Update the latest max profit.
+            cur_profit = current - minimun
+            profit = max(cur_profit, profit)
+            
+            # Update the latest minimum.
+            minimun = min(current, minimun)
+
+        return profit
+
+
 def main():
     import time
     # Ans: 5
@@ -104,6 +132,10 @@ def main():
     print 'By divide-and-conquer:', SolutionDivideAndConquer().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
+    start_time = time.time()
+    print 'By iter:', SolutionIter().maxProfit(prices)
+    print 'Time:', time.time() - start_time
+
     # Ans: 6
     prices = [6,1,3,2,4,7]
 
@@ -113,6 +145,10 @@ def main():
 
     start_time = time.time()
     print 'By divide-and-conquer:', SolutionDivideAndConquer().maxProfit(prices)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By iter:', SolutionIter().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
 
