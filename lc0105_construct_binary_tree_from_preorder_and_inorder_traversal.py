@@ -57,6 +57,9 @@ class SolutionRecur(object):
         :type preorder: List[int]
         :type inorder: List[int]
         :rtype: TreeNode
+
+        Time complexity: O(n), where n is the number of nodes.
+        Space complexity: O(n).
         """
         # Create dict for inorder value->index.
         inorder_d = {v: i for (i, v) in enumerate(inorder)}
