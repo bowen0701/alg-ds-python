@@ -13,7 +13,6 @@ Note: You may not engage in multiple transactions at the same time
 (i.e., you must sell the stock before you buy again).
 
 Example 1:
-
 Input: [7,1,5,3,6,4]
 Output: 7
 Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
@@ -38,11 +37,25 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        pass
+        profit = 0
+        # Iterate each day and compare it with yesterday to get profit.
+        for i in range(1, len(prices)):
+            profit += max(prices[i] - prices[i - 1], 0)
+        return profit
 
 
 def main():
-    pass
+    # Ans: 7.
+    prices = [7,1,5,3,6,4]
+    print Solution().maxProfit(prices)
+
+    # Ans: 4.
+    prices = [1,2,3,4,5]
+    print Solution().maxProfit(prices)
+
+    # Ans: 0.
+    prices = [7,6,4,3,1]
+    print Solution().maxProfit(prices)
 
 
 if __name__ == '__main__':
