@@ -102,7 +102,8 @@ class SolutionIter(object):
         """
         if not prices:
             return 0
-
+    
+        # Continue tracking minimum price and profit.
         minimun = prices[0]
         profit = 0
 
