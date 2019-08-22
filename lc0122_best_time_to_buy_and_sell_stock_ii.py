@@ -36,6 +36,9 @@ class Solution(object):
         """
         :type prices: List[int]
         :rtype: int
+
+        Time complexity: O(n), where n is the number of prices.
+        Space complexity: O(1).
         """
         profit = 0
         # Iterate each day and compare it with yesterday to get profit.
