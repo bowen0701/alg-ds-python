@@ -8,31 +8,48 @@ from __future__ import division
 from __future__ import print_function
 
 
-def palindrome(a_str):
-    """Check palindrom by front & rear match."""
+def palindrome_iter(a_str):
+    """Check palindrom by left & right match.
+
+    Time complexity: O(n).
+    Space complexity: O(1).
+    """
     ls = list(a_str)
 
-    is_match = True
+    # Apply two pointer method.
+    left = 0
+    right = len(ls) - 1
 
-    while len(ls) > 1 and is_match:
-        first = ls.pop(0)
-        last = ls.pop()
-        if first != last:
-            is_match = False
-    
-    return is_match
+    while right - left >= 2:
+        l = ls[left]
+        r = ls[right]
+        if l != r:
+            return False
+
+        left += 1
+        right -= 1
+
+    return True
 
 
 def palindrom_recur(a_str):
-    """Check palindrome by recursion."""
+    """Check palindrome by recursion.
+
+    Time complexity: O(n^2).
+    Space complexity: O(n).
+    """
     if len(a_str) <= 1:
         return True
     else: 
         return a_str[0] == a_str[-1] and palindrom_recur(a_str[1:-1])
 
 
-def palindrom(a_str):
-    """Check palindrome by inverse slicing."""
+def palindrom_reverse(a_str):
+    """Check palindrome by inverse slicing.
+
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
     return a_str == a_str[::-1]
 
 
@@ -41,12 +58,12 @@ def main():
 
     start_time = time.time()
     a_str = 'madam'
-    print('{0}: {1}'.format(a_str, palindrome(a_str))) 
+    print('{0}: {1}'.format(a_str, palindrome_iter(a_str))) 
     a_str = 'Bowen'
-    print('{0}: {1}'.format(a_str, palindrome(a_str)))
+    print('{0}: {1}'.format(a_str, palindrome_iter(a_str)))
     a_str = 'toot'
-    print('{0}: {1}'.format(a_str, palindrome(a_str)))
-    print('Time for palindrome(): {}'
+    print('{0}: {1}'.format(a_str, palindrome_iter(a_str)))
+    print('Time for palindrome_iter(): {}'
           .format(time.time() - start_time))
 
     start_time = time.time()
@@ -61,12 +78,12 @@ def main():
 
     start_time = time.time()
     a_str = 'madam'
-    print('{0}: {1}'.format(a_str, palindrom(a_str)))    
+    print('{0}: {1}'.format(a_str, palindrom_reverse(a_str)))    
     a_str = 'Bowen'
-    print('{0}: {1}'.format(a_str, palindrom(a_str)))
+    print('{0}: {1}'.format(a_str, palindrom_reverse(a_str)))
     a_str = 'toot'
-    print('{0}: {1}'.format(a_str, palindrom(a_str)))
-    print('Time for palindrom(): {}'
+    print('{0}: {1}'.format(a_str, palindrom_reverse(a_str)))
+    print('Time for palindrom_reverse(): {}'
           .format(time.time() - start_time))
 
 
