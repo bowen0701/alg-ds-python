@@ -22,6 +22,9 @@ class SolutionReverse(object):
         """
         :type s: str
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         # Take lower, convert to list, and keep alphanumetic chars.
         s_ls = [c for c in list(s.lower()) 
