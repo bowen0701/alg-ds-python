@@ -17,17 +17,28 @@ Input: "race a car"
 Output: false
 """
 
-class Solution(object):
+class SolutionReverse(object):
     def isPalindrome(self, s):
         """
         :type s: str
         :rtype: bool
         """
-        pass
+        # Take lower, convert to list, and keep alphanumetic chars.
+        s_ls = [c for c in list(s.lower()) 
+                if 0 <= ord(c) - ord('a') <= 25 or 0 <= ord(c) - ord('0') <= 9]
+
+        # Compare list with its reverse.
+        return s_ls == s_ls[::-1]
 
 
 def main():
-    pass
+    # Ans: True
+    s = "A man, a plan, a canal: Panama"
+    print SolutionReverse().isPalindrome(s)
+
+    # Ans: False
+    s = "0P"
+    print SolutionReverse().isPalindrome(s)
 
 
 if __name__ == '__main__':
