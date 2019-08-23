@@ -39,17 +39,45 @@ class Node(object):
         self.next = next
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def _preorder(self, node):
+        if node and node.left and node.right:
+            node.left.next = node.right
+            
+            if node.next:
+                node.right.next = node.next.left
+        
+            self.connect(node.left)
+            self.connect(node.right)
+
     def connect(self, root):
         """
         :type root: Node
         :rtype: Node
         """
-        pass
+        # Apply preorder traversal: root->left->right.
+        self._preorder(root)
+        return root
 
 
 def main():
-    pass
+    root = Node(1, None, None, None)
+    root.left = Node(2, None, None, None)
+    root.right = Node(3, None, None, None)
+    root.left.left = Node(4, None, None, None)
+    root.left.right = Node(5, None, None, None)
+    root.right.left = Node(6, None, None, None)
+    root.right.right = Node(7, None, None, None)
+    
+    SolutionRecur().connect(root)
+
+    print root.next                 # Ans: None
+    print root.left.next.val        # Ans: 3
+    print root.right.next           # Ans: None
+    print root.left.left.next.val   # Ans: 5
+    print root.left.right.next.val  # Ans: 6
+    print root.right.left.next.val  # Ans: 7
+    print root.right.right.next     # Ans: None  
 
 
 if __name__ == '__main__':
