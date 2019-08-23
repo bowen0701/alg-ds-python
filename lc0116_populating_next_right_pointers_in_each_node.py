@@ -41,7 +41,7 @@ class Node(object):
 
 class SolutionRecur(object):
     def _preorder(self, node):
-        if node and node.left and node.right:
+        if node and node.left:
             node.left.next = node.right
             
             if node.next:
@@ -54,6 +54,9 @@ class SolutionRecur(object):
         """
         :type root: Node
         :rtype: Node
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # Apply preorder traversal: root->left->right.
         self._preorder(root)
