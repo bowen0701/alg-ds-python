@@ -37,14 +37,45 @@ class ListNode(object):
         self.next = None
 
 
-class Solution(object):
+class SolutionDict(object):
     def hasCycle(self, head):
         """
         :type head: ListNode
         :rtype: bool
         """
-        pass
+        visited_d = {}
+        visited_d[head] = True
+
+        current = head
+        while current.next:
+            if visited_d.get(current.next):
+                return True
+            else:
+                visited_d[current.next] = True
+            current = current.next
+
+        return False
 
 
 def main():
-    pass
+    # Input: head = [3,2,0,-4], pos = 1. Output: true
+    head = ListNode(3)
+    head.next = ListNode(2)
+    head.next.next = ListNode(0)
+    head.next.next.next = ListNode(-4)
+    head.next.next.next.next = head.next
+    print SolutionDict().hasCycle(head)
+
+    # Input: head = [1,2], pos = 0. Output: true
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = head
+    print SolutionDict().hasCycle(head)
+
+    # Input: head = [1], pos = -1. Output: false
+    head = ListNode(1)
+    print SolutionDict().hasCycle(head)    
+
+
+if __name__ == '__main__':
+    main()
