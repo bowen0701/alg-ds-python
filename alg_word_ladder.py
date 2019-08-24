@@ -19,9 +19,9 @@ def _build_word_ladder_graph(words):
 
     # Add vertices and edges for words in the same buckets.
     for bucket, w_neighbors in w_neighbors_d.items():
-        w_pairs = (((w1, w2) 
+        w_pairs = ((w1, w2) 
                    for w1, w2 in product(w_neighbors, repeat=2) 
-                   if w1 != w2))
+                   if w1 != w2)
 
         for w1, w2 in w_pairs:
             graph_d[w1].add(w2)
