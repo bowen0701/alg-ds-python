@@ -16,7 +16,7 @@ def bfs(graph_adj_d, v_start):
     Time complexity: O(|V|+|E|).
     Space complexity: O(|V|).
     """
-    distance_d = {v: float('inf') for v in graph_adj_d.keys()}
+    distance_d = {v: float('inf') for v in graph_adj_d}
     distance_d[v_start] = 0
 
     queue = [v_start]
