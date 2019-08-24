@@ -70,6 +70,9 @@ class Solution(object):
         :type endWord: str
         :type wordList: List[str]
         :rtype: int
+
+        Time complexity: O(WLW^2) + O(W+W^2)= O(W^3L) + O(W^2).
+        Space complexity: O(W^2).
         """
         # If endWord is not in wordList, not possible to transform.
         if endWord not in wordList:

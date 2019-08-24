@@ -31,6 +31,11 @@ def _build_word_ladder_graph(words):
 
 
 def word_ladder(words, start_word, end_word):
+    """Word ladder by BFS.
+
+    Time complexity: O(WLW^2) + O(W+W^2)= O(W^3L) + O(W^2).
+    Space complexity: O(W^2).
+    """
     # Create graph with words connected to others which .
     words_graph = _build_word_ladder_graph(words)
 
