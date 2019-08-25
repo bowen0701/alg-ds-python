@@ -31,7 +31,7 @@ Two cells are connected if they are adjacent cells connected
 horizontally or vertically.
 """
 
-class Solution(object):
+class SolutionDFS(object):
     def _dfs(self, r, c, board):
         # Skip the boards and land 'X'.
         if (r <= 0 or r >= len(board) - 1 or
@@ -56,6 +56,9 @@ class Solution(object):
         """
         :type board: List[List[str]]
         :rtype: None Do not return anything, modify board in-place instead.
+
+        Time complexity: O((m+n)*m*n), where m and n is the number of rows and columns.
+        Space complxity: O(m*n).
         """
         if not board or not board[0]:
             return None
@@ -92,7 +95,7 @@ def main():
       ['X','X','O','X'],
       ['X','O','X','X']
     ]
-    Solution().solve(board)
+    SolutionDFS().solve(board)
     print board
 
 
