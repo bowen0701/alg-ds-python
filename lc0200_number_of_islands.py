@@ -38,11 +38,9 @@ class SolutionRecur(object):
         visited_d[(r, c)] = True
 
         # Vist up & down and left & right.
-        for r_neighbor in [r - 1, r + 1]:
-            self._dfs(r_neighbor, c, grid, visited_d)
-        for c_neighbor in [c - 1, c + 1]:
-            self._dfs(r, c_neighbor, grid, visited_d)
-
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_neighbor, c_neighbor in dirs:
+            self._dfs(r_neighbor, c_neighbor, grid, visited_d)
 
     def numIslands(self, grid):
         """Number of islands by recursion.
@@ -83,11 +81,10 @@ class SolutionRecur2(object):
 
         n_connects = 1
 
-        # Count connects by visiting up & down and left & right.
-        for r_neighbor in [r - 1, r + 1]:
-            n_connects += self._dfs(r_neighbor, c, grid, visited_d)
-        for c_neighbor in [c - 1, c + 1]:
-            n_connects += self._dfs(r, c_neighbor, grid, visited_d)
+        # Count connects by visiting up, down, left & right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_neighbor, c_neighbor in dirs:
+            n_connects += self._dfs(r_neighbor, c_neighbor, grid, visited_d)
 
         return n_connects
 
@@ -121,15 +118,12 @@ class SolutionIter(object):
         (r, c) = v_start
         tovisit_ls = []
 
-        # Visit up & down and left * right.
-        if r - 1 >= 0 and grid[r - 1][c] == '1':
-            tovisit_ls.append((r - 1, c))
-        if r + 1 < len(grid) and grid[r + 1][c] == '1':
-            tovisit_ls.append((r + 1, c))
-        if c - 1 >= 0 and grid[r][c - 1] == '1':
-            tovisit_ls.append((r, c - 1))
-        if c + 1 < len(grid[0]) and grid[r][c + 1] == '1':
-            tovisit_ls.append((r, c + 1))
+        # Visit up, down, left and right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_neighbor, c_neighbor in dirs:
+            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
+                grid[r_neighbor][c_neighbor] == '1'):
+                tovisit_ls.append((r_neighbor, c_neighbor))
 
         return tovisit_ls
 
@@ -140,8 +134,7 @@ class SolutionIter(object):
         visited_d[(r, c)] = True
 
         # Use stack for iterative DFS.
-        stack = []
-        stack.append((r, c))
+        stack = [(r, c)]
 
         while stack:
             tovisit_ls = self._get_tovisit_ls(stack[-1], grid)
