@@ -37,9 +37,14 @@ class SolutionRecur(object):
         min_coins = float('inf')
 
         for c in coins:
+            if amount - c < 0:
+                continue
+
             extra_coins = self.coinChange(coins, amount - c)
-            if extra_coins >= 0 and extra_coins < min_coins:
-                min_coins = 1 + extra_coins
+            if extra_coins < 0:
+                continue
+
+            min_coins = min(min_coins, 1 + extra_coins)
 
         if min_coins != float('inf'):
             return min_coins
@@ -63,9 +68,14 @@ class SolutionMemo(object):
         min_coins = float('inf')
 
         for c in coins:
+            if amount - c < 0:
+                continue
+
             extra_coins = self._coin_change_memo(coins, amount - c, T)
-            if extra_coins >= 0 and extra_coins < min_coins:
-                min_coins = 1 + extra_coins
+            if extra_coins < 0:
+                continue
+
+            min_coins = min(min_coins, 1 + extra_coins)
 
         if min_coins != float('inf'):
             T[amount] = min_coins
@@ -112,7 +122,7 @@ class SolutionDp(object):
                     # If coin c can be included, decide which uses less coins:
                     # 1. 1 + #coins with coin c to make a - coins[c]
                     # 2. #coins without coin c to make a
-                    T[c][a] = min(1 + T[c][a - coins[c - 1]], T[c - 1][a])
+                    T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c - 1]])
                 elif a < coins[c - 1]:
                     # If coin c cannot be included, use previous #coins.
                     T[c][a] = T[c - 1][a]
@@ -131,32 +141,32 @@ def main():
     amount = 11
 
     start_time = time.time()
-    print SolutionRecur().coinChange(coins, amount)
-    print 'By recur: {}'.format(time.time() - start_time)
+    print 'By recur: {}'.format(SolutionRecur().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionMemo().coinChange(coins, amount)
-    print 'By memo: {}'.format(time.time() - start_time)
+    print 'By memo: {}'.format(SolutionMemo().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionDp().coinChange(coins, amount)
-    print 'By DP: {}'.format(time.time() - start_time)
+    print 'By DP: {}'.format(SolutionDp().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
 
     # Ans: -1.
     coins = [2]
     amount = 3
 
     start_time = time.time()
-    print SolutionRecur().coinChange(coins, amount)
-    print 'By recur: {}'.format(time.time() - start_time)
+    print 'By recur: {}'.format(SolutionRecur().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionMemo().coinChange(coins, amount)
-    print 'By memo: {}'.format(time.time() - start_time)
+    print 'By memo: {}'.format(SolutionMemo().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionDp().coinChange(coins, amount)
-    print 'By DP: {}'.format(time.time() - start_time)
+    print 'By DP: {}'.format(SolutionDp().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
