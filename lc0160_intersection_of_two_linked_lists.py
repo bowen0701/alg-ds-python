@@ -58,6 +58,9 @@ class SolutionTwoPointers(object):
         """
         :type head1, head1: ListNode
         :rtype: ListNode
+
+        Time complexity: O(max(a, b)), where a and b is the lenght of lists A and B.
+        Space complexity: O(1).
         """
         if not headA or not headB:
             return None
