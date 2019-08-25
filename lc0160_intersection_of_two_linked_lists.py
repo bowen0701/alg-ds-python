@@ -53,17 +53,55 @@ class ListNode(object):
         self.val = val
         self.next = None
 
-class Solution(object):
+class SolutionTwoPointers(object):
     def getIntersectionNode(self, headA, headB):
         """
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        pass
+        if not headA or not headB:
+            return None
+
+        # Two pointer method: Check current nodes are the same or not.
+        currentA = headA
+        currentB = headB
+
+        while currentA != currentB:
+            if currentA:
+                # If not, visit next nodes.
+                currentA = currentA.next
+            else:
+                # When arrive at the end, visit the head of another list.
+                currentA = headB
+
+            if currentB:
+                currentB = currentB.next
+            else:
+                currentB = headA
+
+        return currentA
 
 
 def main():
-    pass
+    # Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5],
+    # Output: Reference of the node with value = 8
+    headA = ListNode(4)
+    headA.next = ListNode(1)
+    headB = ListNode(5)
+    headB.next = ListNode(0)
+    headB.next.next = ListNode(1)
+    intersectNode1 = ListNode(8)
+    intersectNode2 = ListNode(4)
+    intersectNode3 = ListNode(5)
+
+    headA.next.next = intersectNode1
+    headA.next.next.next = intersectNode2
+    headA.next.next.next.next = intersectNode3
+    headB.next.next = intersectNode1
+    headB.next.next.next = intersectNode2
+    headB.next.next.next.next = intersectNode3  
+
+    print SolutionTwoPointers().getIntersectionNode(headA, headB).val
 
 
 if __name__ == '__main__':
