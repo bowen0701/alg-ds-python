@@ -26,7 +26,11 @@ class Solution(object):
         :type nums: List[int]
         :type k: int
         :rtype: List[int]
+
+        Time complexity: O(n*logn), where n is the number of nums.
+        Space complexity: O(n).
         """
+        # Make num->freq dict.
         num_freq_d = {}
 
         for n in nums:
@@ -34,10 +38,13 @@ class Solution(object):
                 num_freq_d[n] += 1
             else:
                 num_freq_d[n] = 1
-                
+
+        # Sort num->freq dict by freq. 
         sorted_num_freq_ls = sorted(num_freq_d.items(),
                                     key=lambda x: x[1],
                                     reverse=True)
+
+        # Take the top k num.
         topk_nums = [num for (num, freq) in sorted_num_freq_ls[:k]]
         return topk_nums
 
