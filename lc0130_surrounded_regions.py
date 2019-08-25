@@ -39,6 +39,7 @@ class SolutionDFS(object):
             board[r][c] == 'X'):
             return None
 
+        # Skip land '*'.
         if board[r][c] == '*':
             return None
 
@@ -46,7 +47,7 @@ class SolutionDFS(object):
         if board[r][c] == 'O':
             board[r][c] = '*'
 
-        # Visit its left, right, up and down.
+        # Visit its up, down, left and right.
         self._dfs(r - 1, c, board)
         self._dfs(r + 1, c, board)
         self._dfs(r, c - 1, board)
