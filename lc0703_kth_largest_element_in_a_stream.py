@@ -39,6 +39,9 @@ class KthLargestSort(object):
         """
         :type k: int
         :type nums: List[int]
+
+        Time complexity: O(n*logn), where n is the length of the original nums.
+        Space complexity: O(k).
         """
         # Sort nums in descending order.
         nums.sort(reverse=True)
@@ -50,7 +53,7 @@ class KthLargestSort(object):
         :type val: int
         :rtype: int
 
-        Time complexity: O(n*logn), where n is the length of the original nums.
+        Time complexity: O(k*logk).
         Space complexity: O(k).
         """
         self.topk.append(val)
@@ -72,6 +75,9 @@ class KthLargestSortAndBinarySearch(object):
         """
         :type k: int
         :type nums: List[int]
+
+        Time complexity: O(n*logn), where n is the length of the original nums.
+        Space complexity: O(k).
         """
         nums.sort(reverse=True)
         self.k = k
@@ -82,7 +88,7 @@ class KthLargestSortAndBinarySearch(object):
         :type val: int
         :rtype: int
 
-        Time complexity: O(logn), where n is the length of the original nums.
+        Time complexity: O(logk).
         Space complexity: O(k).
         """
         if len(self.topk) == self.k and val < self.topk[-1]:
@@ -112,6 +118,9 @@ class KthLargestMinHeap(object):
         """
         :type k: int
         :type nums: List[int]
+
+        Time complexity: O(n*logn), where n is the length of the original nums.
+        Space complexity: O(k).
         """
         nums.sort()
         self.k = k
@@ -144,7 +153,7 @@ class KthLargestMinHeap(object):
     def heapify_down(self, i):
         """Min heapify down by recursion.
 
-        Time complexity: O(log(n)).
+        Time complexity: O(log(k)).
         Space complexity: O(1).
         """
         # Get min index from node i and its two child nodes.
@@ -166,7 +175,7 @@ class KthLargestMinHeap(object):
         :type val: int
         :rtype: int
 
-        Time complexity: O(logn).
+        Time complexity: O(logk).
         Space complexity: O(1). 
         """
         if self.size < self.k:
@@ -188,6 +197,9 @@ class KthLargestHeapq(object):
         """
         :type k: int
         :type nums: List[int]
+
+        Time complexity: O(logk).
+        Space complexity: O(k).
         """
         self.heap = nums
         self.k = k
@@ -202,7 +214,7 @@ class KthLargestHeapq(object):
         :type val: int
         :rtype: int
 
-        Time complexity: O(logn).
+        Time complexity: O(logk).
         Space complexity: O(1). 
         """
         if len(self.heap) < self.k:
