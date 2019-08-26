@@ -18,17 +18,32 @@ Input: [2,2,1,1,1,2,2]
 Output: 2
 """
 
-class Solution(object):
+class SolutionDict(object):
     def majorityElement(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        pass
+        num_d = {}
+
+        for n in nums:
+            if n in num_d:
+                num_d[n] += 1
+            else:
+                num_d[n] = 1
+
+            if num_d[n] > len(nums) // 2:
+                return n
 
 
 def main():
-    pass
+    # Output: 3
+    nums = [3,2,3]
+    print SolutionDict().majorityElement(nums)
+
+    # Output: 2
+    nums = [2,2,1,1,1,2,2]
+    print SolutionDict().majorityElement(nums)
 
 
 if __name__ == '__main__':
