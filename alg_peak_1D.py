@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 """
-Find a peak in 1D array.
+Find a peak position in 1D array.
 
 Support a is an array of length n.
 If a is an array of length 1, a[0] is a peak.
@@ -18,10 +18,11 @@ def peak_1d_iter(arr):
     Time complexity: O(n).
     Space complexity: O(1).
     """
+    # Iterate to check element is greater than its left & right neighbors.
     for i in range(len(arr)):
-        if ((i == 0 or arr[i - 1] < arr[i]) and 
-            (i == len(arr) - 1 or arr[i] > arr[i + 1])):
-            return arr[i]
+        if ((i == 0 or arr[i - 1] <= arr[i]) and 
+            (i == len(arr) - 1 or arr[i] >= arr[i + 1])):
+            return i
 
 
 def peak_1d_binary_search_iter(arr):
@@ -33,30 +34,32 @@ def peak_1d_binary_search_iter(arr):
     first, last = 0, len(arr) - 1
 
     while first < last:
-        mid = first + (last - first) // 2
+        mid = (first + last + 1) // 2
 
         if arr[mid - 1] > arr[mid]:
+            # If mid's left > mid, search left part.
             last = mid - 1
-        elif arr[mid] < arr[mid + 1]:
-            first = mid + 1
         else:
-            return arr[mid]
+            # Otherwise, search right part.
+            first = mid
 
-    return arr[first]
+    # For first = last.
+    return first
 
 
-def _binary_search_recur_helper(arr, start, end):
+def _binary_search_recur_helper(arr, first, last):
     """Helper function for peak_1d_binary_search_recur()."""
-    if end - start == 0:
-        return arr[start]
+    if last - first == 0:
+        return first
     else:
-        mid = start + (end - start) // 2
+        mid = (first + last + 1) // 2
+
         if arr[mid - 1] > arr[mid]:
-            return _binary_search_recur_helper(arr, start, mid - 1)
-        elif arr[mid] < arr[mid + 1]:
-            return _binary_search_recur(arr, mid + 1, end)
+            # If mid's left > mid, search left part.
+            return _binary_search_recur_helper(arr, first, mid - 1)
         else:
-            return arr[mid]
+            # Otherwise, search right part.
+            return _binary_search_recur_helper(arr, mid, last)
 
 
 def peak_1d_binary_search_recur(arr):
@@ -72,8 +75,9 @@ def main():
     import time
     import numpy as np
 
-    # Array of length 5 with peak 4.
-    arr = [0, 1, 4, 3, 2]
+    # Array of length 5 with peak at 3.
+    # arr = [0, 1, 2, 4, 3]
+    arr = [0, 1]
     
     start_time = time.time()
     print('By peak_1d_iter(): {}'.format(peak_1d_iter(arr)))
@@ -90,7 +94,8 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     np.random.seed(71)
-    arr = np.random.permutation(1000000)
+    arr = np.random.permutation(10)
+    print('arr', arr)
 
     start_time = time.time()
     print('By peak_1d_iter(): {}'.format(peak_1d_iter(arr)))
