@@ -19,33 +19,32 @@ def peak_1d_iter(arr):
     Space complexity: O(1).
     """
     for i in range(len(arr)):
-        if i == 0:
-            if arr[i] >= arr[i + 1]:
-                return arr[i]
-        elif i == (len(arr) - 1):
-            if arr[i] >= arr[i - 1]:
-                return arr[i]
-        else:
-            if arr[i] >= arr[i - 1] and arr[i] >= arr[i + 1]:
-                return arr[i]
+        if ((i == 0 or arr[i - 1] <= arr[i]) and 
+            (i == len(arr) - 1 or arr[i] >= arr[i + 1])):
+            return arr[i]
 
 
-def peak_1d(arr, start, end):
-    """Find peak by divide-and-conquer algorithm.
-
-    Time complexity: O(logn).
-    Space complexity: O(1).
-    """
+def _binary_search_recur_helper(arr, start, end):
+    """Helper function for peak_1d_binary_search_recur()."""
     if end - start == 0:
         return arr[start]
     else:
         mid = start + (end - start) // 2
         if arr[mid - 1] >= arr[mid]:
-            return peak_1d(arr, start, mid - 1)
+            return _binary_search_recur_helper(arr, start, mid - 1)
         elif arr[mid] <= arr[mid + 1]:
-            return peak_1d(arr, mid + 1, end)
+            return _binary_search_recur(arr, mid + 1, end)
         else:
             return arr[mid]
+
+
+def peak_1d_binary_search_recur(arr):
+    """Find peak by recursive binary search algorithm
+
+    Time complexity: O(logn).
+    Space complexity: O(1).
+    """
+    return _binary_search_recur_helper(arr, 0, len(arr) - 1)
 
 
 def main():
@@ -56,26 +55,26 @@ def main():
     arr = [0, 1, 4, 3, 2]
     
     start_time = time.time()
-    print('Peak: {}'.format(peak_1d_iter(arr)))
-    print('Time for peak_1d_iter(): {}'.format(time.time() - start_time))
+    print('By peak_1d_iter(): {}'.format(peak_1d_iter(arr)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    start, end = 0, len(arr) - 1
-    print('Peak: {}'.format(peak_1d(arr, start, end)))
-    print('Time for peak_1d(): {}'.format(time.time() - start_time))
+    print('By peak_1d_binary_search_recur(): {}'
+          .format(peak_1d_binary_search_recur(arr)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Array of long length.
     np.random.seed(71)
     arr = np.random.permutation(1000000)
 
     start_time = time.time()
-    print('Peak: {}'.format(peak_1d_iter(arr)))
-    print('Time for peak_1d_iter(): {}'.format(time.time() - start_time))
+    print('By peak_1d_iter(): {}'.format(peak_1d_iter(arr)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    start, end = 0, len(arr) - 1
-    print('Peak: {}'.format(peak_1d(arr, start, end)))
-    print('Time for peak_1d(): {}'.format(time.time() - start_time))
+    print('By peak_1d_binary_search_recur(): {}'
+          .format(peak_1d_binary_search_recur(arr)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
