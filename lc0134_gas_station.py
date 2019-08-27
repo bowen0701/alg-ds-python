@@ -98,7 +98,7 @@ class SolutionIter(object):
         Space complexity: O(1).
         """
         if sum(gas) < sum(cost):
-            # Starting from anywhere, we cannot travel around.
+            # If we don't have more fuel than costed in total.
             return -1
 
         position = 0
@@ -109,11 +109,12 @@ class SolutionIter(object):
             current_bank += gas[i] - cost[i]
 
             if current_bank < 0:
-                # Then the current station is not a start.
+                # If we don't have more gas, the current station is not a start.
                 current_bank = 0
                 position = i + 1
             else:
-                # Otherwise, it is a good start, and don't need to check previous.
+                # If we have more gas, then the current station is a start.
+                # No need for re-run the loop again.
                 continue
 
         return position
