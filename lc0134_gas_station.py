@@ -87,16 +87,50 @@ class SolutionNaiveIter(object):
         return -1
 
 
+class SolutionIter(object):
+    def canCompleteCircuit(self, gas, cost):
+        """
+        :type gas: List[int]
+        :type cost: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if sum(gas) < sum(cost):
+            # Starting from anywhere, we cannot travel around.
+            return -1
+
+        position = 0
+        current_bank = 0
+
+        for i in range(len(gas)):
+            # For each station, check current bank.
+            current_bank += gas[i] - cost[i]
+
+            if current_bank < 0:
+                # Then the current station is not a start.
+                current_bank = 0
+                position = i + 1
+            else:
+                # Otherwise, it is a good start, and don't need to check previous.
+                continue
+
+        return position
+
+
 def main():
     # Ans: 3
     gas  = [1,2,3,4,5]
     cost = [3,4,5,1,2]
     print SolutionNaiveIter().canCompleteCircuit(gas, cost)
+    print SolutionIter().canCompleteCircuit(gas, cost)
 
     # Ans: -1
     gas  = [2,3,4]
     cost = [3,4,3]
     print SolutionNaiveIter().canCompleteCircuit(gas, cost)
+    print SolutionIter().canCompleteCircuit(gas, cost)
 
 
 if __name__ == '__main__':
