@@ -47,19 +47,57 @@ You cannot travel back to station 2, as it requires 4 unit of gas but you only h
 Therefore, you can't travel around the circuit once no matter where you start.
 """
 
-class Solution(object):
+class SolutionNaiveIter(object):
     def canCompleteCircuit(self, gas, cost):
         """
         :type gas: List[int]
         :type cost: List[int]
         :rtype: int
+
+        Time complexity: O(n^2).
+        Space complexity: O(1).
         """
-        pass
+        n = len(gas)
+
+        for i in range(n):
+            is_travel = True
+            visits = list(range(i, n)) + list(range(i)) + [i]
+
+            # Memoize tank with initialized value = 0.
+            tank = 0
+            for j in range(len(visits)):
+                if j == 0:
+                    # First station with adding gas only.
+                    tank += gas[visits[0]]
+                else:
+                    # For travel to station j, check tank with station j - 1.
+                    if tank >= cost[visits[j - 1]]:
+                        tank = tank - cost[visits[j - 1]] + gas[visits[j]]
+                    else:
+                        is_travel = False
+                        break
+
+            if is_travel and visits[j] == i:
+                # If still travel and visit i again.
+                return i
+            else:
+                # If not, start from next i.
+                continue
+        
+        return -1
 
 
 def main():
-	pass
+    # Ans: 3
+    gas  = [1,2,3,4,5]
+    cost = [3,4,5,1,2]
+    print SolutionNaiveIter().canCompleteCircuit(gas, cost)
+
+    # Ans: -1
+    gas  = [2,3,4]
+    cost = [3,4,3]
+    print SolutionNaiveIter().canCompleteCircuit(gas, cost)
 
 
 if __name__ == '__main__':
-	main()
+    main()
