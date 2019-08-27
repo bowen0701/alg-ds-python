@@ -49,8 +49,8 @@ class SolutionNaive(object):
         return profit
 
 
-class SolutionDivideAndConquer(object):
-    def _divideAndConquer(self, prices, i, j):
+class SolutionBinarySearch(object):
+    def _binarySearch(self, prices, i, j):
         if i == j:
             # Only one date, thus we cannot buy and then sell.
             return 0
@@ -58,8 +58,8 @@ class SolutionDivideAndConquer(object):
         mid = i + (j - i) // 2
 
         # Compute profits in left and right subarrays.
-        left_profit = self._divideAndConquer(prices, i, mid)
-        right_profit = self._divideAndConquer(prices, mid + 1, j)
+        left_profit = self._binarySearch(prices, i, mid)
+        right_profit = self._binarySearch(prices, mid + 1, j)
 
         # Compute crossmax for buying in left and selling in right.
         left_min = prices[i]
@@ -88,7 +88,7 @@ class SolutionDivideAndConquer(object):
             return 0
 
         left, right = 0, len(prices) - 1
-        return self._divideAndConquer(prices, left, right)
+        return self._binarySearch(prices, left, right)
 
 
 class SolutionIter(object):
@@ -130,7 +130,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By divide-and-conquer:', SolutionDivideAndConquer().maxProfit(prices)
+    print 'By divide-and-conquer:', SolutionBinarySearch().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
@@ -145,7 +145,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By divide-and-conquer:', SolutionDivideAndConquer().maxProfit(prices)
+    print 'By divide-and-conquer:', SolutionBinarySearch().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
