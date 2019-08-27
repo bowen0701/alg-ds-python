@@ -34,6 +34,9 @@ class Solution(object):
         """
         :type s: str
         :rtype: int
+
+        Time complexity: O(n), where n is the lenght of s.
+        Space complexity: O(1).
         """
         base = 26
         num = 0
