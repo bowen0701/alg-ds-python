@@ -35,11 +35,25 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        pass
+        base = 26
+        num = 0
+
+        for i, c in enumerate(reversed(s)):
+            current_num = ord(c) - ord('A') + 1
+            num += pow(base, i) * current_num
+
+        return num
 
 
 def main():
-    pass
+    s = 'A'
+    print Solution().titleToNumber(s)
+
+    s = 'AB'
+    print Solution().titleToNumber(s)
+
+    s = 'ZY'
+    print Solution().titleToNumber(s)
 
 
 if __name__ == '__main__':
