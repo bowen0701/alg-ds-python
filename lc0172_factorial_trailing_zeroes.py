@@ -23,6 +23,9 @@ class Solution(object):
         """
         :type n: int
         :rtype: int
+
+        Time complexity: O(log_5 n).
+        Space complexity: O(1).
         """
         zeros = 0
         temp = n
