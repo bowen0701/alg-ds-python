@@ -35,11 +35,59 @@ class Solution(object):
         :type head: Node
         :rtype: Node
         """
-        pass
+        if not head:
+            return None
+
+        # Insert node's copy to its next: current->current_cp->current.next.
+        # Why not directly copy? due to linked list's memoryless and random pointer.
+        current = head
+        while current:
+            current_cp = Node(current.val, None, None)
+
+            current_cp.next = current.next
+            current.next = current_cp
+
+            current = current_cp.next
+
+        # Point copy's random to original's random's next, i.e. a copy node.
+        current = head
+        while current:
+            if current.random:
+                current.next.random = current.random.next
+            
+            # Iterate through original nodes.
+            current = current.next.next
+
+
+        # Break linked list into two: one for original, the other for copy.
+        head_cp = head.next
+
+        current = head
+        current_cp = head_cp
+        while current_cp.next:
+            current.next = current_cp.next
+            current_cp.next = current_cp.next.next
+
+            current = current.next
+            current_cp = current_cp.next
+        current.next = None
+
+        return head_cp
 
 
 def main():
-    pass
+    head = Node(1, None, None)
+    head.next = Node(2, None, None)
+    head.random = head.next
+    head.next.next = None
+    head.next.random = head.next
+
+    head_cp = Solution().copyRandomList(head)
+    print head_cp.val              # 1
+    print head_cp.next.val         # 2
+    print head_cp.random.val       # 2
+    print head_cp.next.next        # None
+    print head_cp.next.random.val  # 2
 
 
 if __name__ == '__main__':
