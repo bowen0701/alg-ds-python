@@ -29,11 +29,14 @@ class Node(object):
         self.random = random
 
 
-class Solution(object):
+class SolutionInsert(object):
     def copyRandomList(self, head):
         """
         :type head: Node
         :rtype: Node
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         if not head:
             return None
@@ -82,7 +85,7 @@ def main():
     head.next.next = None
     head.next.random = head.next
 
-    head_cp = Solution().copyRandomList(head)
+    head_cp = SolutionInsert().copyRandomList(head)
     print head_cp.val              # 1
     print head_cp.next.val         # 2
     print head_cp.random.val       # 2
