@@ -14,6 +14,7 @@ Example 2:
 Input: 5
 Output: 1
 Explanation: 5! = 120, one trailing zero.
+
 Note: Your solution should be in logarithmic time complexity.
 """
 
@@ -23,11 +24,25 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        pass
+        zeros = 0
+        temp = n
+
+        while temp // 5 > 0:
+            temp = temp // 5
+            zeros += temp
+
+        return zeros
 
 
 def main():
-    pass
+    # Ans: 0
+    n = 3
+    print Solution().trailingZeroes(n)
+
+    # Ans: 1
+    n = 5
+    print Solution().trailingZeroes(n)
+
 
 
 if __name__ == '__main__':
