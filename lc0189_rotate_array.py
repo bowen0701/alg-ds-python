@@ -32,6 +32,9 @@ class SolutionCopy(object):
         :type nums: List[int]
         :type k: int
         :rtype: None Do not return anything, modify nums in-place instead.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         # If k >= n, truncate k by n.
         n = len(nums)
