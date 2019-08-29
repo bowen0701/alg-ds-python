@@ -33,6 +33,12 @@ class SolutionDp(object):
         :type s: str
         :type wordDict: List[str]
         :rtype: bool
+
+        Time complexity: O(n*m*k), where 
+          - n is the length of s,
+          - m is the number of words in wordDict,
+          - k is the max length of words.
+        Space complexity: O(max(n, k)).
         """
         # Apply DP with tabular T.
         n = len(s)        
