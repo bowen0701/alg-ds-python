@@ -27,18 +27,50 @@ Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
 Output: false
 """
 
-class Solution(object):
+class SolutionDp(object):
     def wordBreak(self, s, wordDict):
         """
         :type s: str
         :type wordDict: List[str]
         :rtype: bool
         """
-        pass
+        # Apply DP with tabular T.
+        n = len(s)        
+        T = [False] * (n + 1)
+
+        # Empty string is breakable.
+        T[0] = True
+
+        for i in range(1, n + 1):
+            for w in wordDict:
+                # Check index is valid, the left & right parts are matched. 
+                if i - len(w) >= 0 and T[i - len(w)] and s[(i - len(w)):i] == w:
+                    T[i] = True
+                    break
+
+        return T[-1]
 
 
 def main():
-    pass
+    # Ans: True
+    s = "leetcode"
+    wordDict = ["leet", "code"]
+    print SolutionDp().wordBreak(s, wordDict)
+
+    # Ans: True
+    s = "applepenapple"
+    wordDict = ["apple", "pen"]
+    print SolutionDp().wordBreak(s, wordDict)
+
+    # Ans: False
+    s = "catsandog"
+    wordDict = ["cats", "dog", "sand", "and", "cat"]
+    print SolutionDp().wordBreak(s, wordDict)
+
+    # Ans: True
+    s = "aaaaaaa"
+    wordDict = ["aaaa","aaa"]
+    print SolutionDp().wordBreak(s, wordDict)
 
 
 if __name__ == '__main__':
