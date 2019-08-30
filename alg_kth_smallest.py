@@ -19,12 +19,11 @@ def kth_smallest_maxheap(nums, k):
     for i in range(k):
         heapq.heappush(maxheap, neg_nums[i])
 
-    # Push the remaining nums into maxheap.
+    # Push the remaining nums into maxheap if > maxheap's root.
+    # Then keep maxheap with k elements.
     for j in range(k + 1, len(neg_nums)):
         if neg_nums[j] > maxheap[0]:
-            # If new nums > min, push into maxheap.
             heapq.heappush(maxheap, neg_nums[j])
-            # Keep maxheap with k elements.
             heapq.heappop(maxheap)
 
     return -maxheap[0]
