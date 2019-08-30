@@ -52,58 +52,63 @@ class SolutionIter(object):
         :rtype: None Do not return anything, modify nums in-place instead.
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(1).
         """
         # If k >= n, truncate k by n.
         n = len(nums)
         k = k % n
 
+        # Start from the 0th.
+        s = 0
         count = 0
-        start_pos, cur_pos = 0, 0
 
+        # Iterate through nums to rotate them until all is updated.
         while count < n:
-            next_pos = (cur_pos + k) % n
-            temp_num = nums[next_pos]
-            # TODO: 2019/08/30
-            nums[new] = rotate_num
-            rotate_num = temp_num
+            # Backup current, and update current by the ith.
+            cur_pos = (s + k) % n
+            cur_num = nums[cur_pos]
+            nums[cur_pos] = nums[s]
+            
+            count += 1
+            j = cur_pos
 
-            while current != start:
-
+            # If there is no cycle, keep rotating starting from next current.
+            while j != s and count < n:
+                cur_pos = (j + k) % n
+                # Swap current and next current.
+                nums[cur_pos], cur_num = cur_num, nums[cur_pos]
 
                 count += 1
-                print nums
+                j = cur_pos
 
-            start += 1
-            current = s
-
-        nums[new_id] = old_num
+            # Increment start.
+            s += 1
 
 
 def main():
     # Ans: [5,6,7,1,2,3,4]
     nums = [1,2,3,4,5,6,7]
     k = 3
-    print nums
+    print 'Raw:', nums
     # SolutionCopy().rotate(nums, k)
     SolutionIter().rotate(nums, k)
-    print nums
+    print 'Rotated', nums
 
     # Ans: [3,99,-1,-100]
     nums = [-1,-100,3,99]
     k = 2
-    print nums
+    print 'Raw:', nums
     # SolutionCopy().rotate(nums, k)
     SolutionIter().rotate(nums, k)
-    print nums
+    print 'Rotated', nums
 
     # Ans: [2,1]
     nums = [1,2]
     k = 3
-    print nums
+    print 'Raw:', nums
     # SolutionCopy().rotate(nums, k)
     SolutionIter().rotate(nums, k)
-    print nums
+    print 'Rotated', nums
 
 
 if __name__ == '__main__':
