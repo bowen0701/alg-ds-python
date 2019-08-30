@@ -26,49 +26,24 @@ class SolutionSelectionSort(object):
         :type k: int
         :rtype: int
 
-        Apply selection sort.
-
         Time complexity: O(nk).
         Space complexity: O(1).
         """
-        for i in range(len(nums) - 1, len(nums) - k - 1, -1):
-            s = 0
+        n = len(nums)
+
+        # Selection sort to put the biggest, 2nd biggest,... from tail to head.
+        for i in range(n - 1, n - k - 1, -1):
+            cur = 0
             for j in range(1, i + 1):
-                if nums[s] < nums[j]:
-                    s = j
-            nums[s], nums[i] = nums[i], nums[s]
+                if nums[cur] < nums[j]:
+                    cur = j
+            nums[cur], nums[i] = nums[i], nums[cur]
 
         return nums[-k]
 
 
-class SolutionIter(object):
-    def findKthLargest(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-
-        Apply iteration to insert element.
-
-        Time complexity: O(nk).
-        Space complexity: O(k).
-        """
-        # Create a base list of length k with value -inf.
-        k_nums = [-float('inf')] * k
-
-        # Iterate over nums, and insert it to suitable position w/ pop.
-        for x in nums:
-            for j in range(k - 1, -1, -1):
-                if x > k_nums[j]:
-                    k_nums.insert(j + 1, x)
-                    k_nums.pop(0)
-                    break
-
-        return k_nums[0]
-
-
 class SolutionQuickSort(object):
-    def quicksort(self, nums):
+    def _quicksort(self, nums):
         if len(nums) <= 1:
             return nums
 
@@ -78,9 +53,9 @@ class SolutionQuickSort(object):
         mid_nums = [x for x in nums if x == pivot]
         large_nums = [x for x in nums if x > pivot]
 
-        return (self.quicksort(small_nums)
-                + mid_nums
-                + self.quicksort(large_nums))
+        return (self._quicksort(small_nums) +
+                mid_nums +
+                self._quicksort(large_nums))
 
     def findKthLargest(self, nums, k):
         """
@@ -88,12 +63,11 @@ class SolutionQuickSort(object):
         :type k: int
         :rtype: int
 
-        Apply quick sort algorithm.
-
         Time complexity: O(n*logn), where n is the length of nums.
         Space complexity: O(n).
         """
-        sorted_nums = self.quicksort(nums)
+        # Apply quick sort and get the element directly.
+        sorted_nums = self._quicksort(nums)
         return sorted_nums[-k]
 
 
@@ -104,11 +78,10 @@ class SolutionSelect(object):
         :type k: int
         :rtype: int
 
-        Select w/o consider the relative order of other elements.
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Select w/o consider the relative order of other elements.
         pivot = nums[len(nums) // 2]
 
         large_pos = [pos for pos, x in enumerate(nums) if x > pivot]
@@ -141,10 +114,6 @@ def main():
     print 'Time by selection sort:', time.time() - start_time
 
     start_time = time.time()
-    print SolutionIter().findKthLargest(nums, k)
-    print 'Time by iteration:', time.time() - start_time
-
-    start_time = time.time()
     print SolutionQuickSort().findKthLargest(nums, k)
     print 'Time by quick sort:', time.time() - start_time
 
@@ -160,10 +129,6 @@ def main():
     start_time = time.time()
     print SolutionSelectionSort().findKthLargest(nums, k)
     print 'Time by selection sort:', time.time() - start_time
-
-    start_time = time.time()
-    print SolutionIter().findKthLargest(nums, k)
-    print 'Time by iteration:', time.time() - start_time
 
     start_time = time.time()
     print SolutionQuickSort().findKthLargest(nums, k)
