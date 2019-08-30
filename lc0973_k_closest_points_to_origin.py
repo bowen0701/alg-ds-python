@@ -38,6 +38,9 @@ class SolutionMaxHeap(object):
         :type points: List[List[int]]
         :type K: int
         :rtype: List[List[int]]
+
+        Time complexity: O(n*logk).
+        Space complexity: O(k).
         """
         import heapq
 
