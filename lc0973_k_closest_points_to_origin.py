@@ -32,18 +32,45 @@ Note:
 - -10000 < points[i][1] < 10000
 """
 
-class Solution(object):
+class SolutionMaxHeap(object):
     def kClosest(self, points, K):
         """
         :type points: List[List[int]]
         :type K: int
         :rtype: List[List[int]]
         """
-        pass
+        import heapq
+
+        # Use maxheap by heapq with "negative" distances.
+        maxheap = []
+
+        negdistances = [-(p[0] ** 2 + p[1] ** 2) for p in points]
+        negdistances_points = zip(negdistances, points)
+
+        # Push the first K points into maxheap and keep the length.
+        # Then push the remaining points if negative distance > maxheap's root.
+        for i, (nd, p) in enumerate(negdistances_points):
+            if i < K:
+                heapq.heappush(maxheap, (nd, p))
+            elif i >= K:
+                if nd > maxheap[0][0]:
+                    heapq.heappush(maxheap, (nd, p))
+                    heapq.heappop(maxheap)
+
+        k_points = [p for (nd, p) in maxheap]
+        return k_points
 
 
 def main():
-    pass
+    # Ans: [[-2,2]]
+    points = [[1,3],[-2,2]]
+    K = 1
+    print SolutionMaxHeap().kClosest(points, K)
+
+    # Ans: [[3,3],[-2,4]]
+    points = [[3,3],[5,-1],[-2,4]]
+    K = 2
+    print SolutionMaxHeap().kClosest(points, K)
 
 
 if __name__ == '__main__':
