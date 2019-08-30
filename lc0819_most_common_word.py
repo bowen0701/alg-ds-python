@@ -41,6 +41,9 @@ class SolutionDict(object):
         :type paragraph: str
         :type banned: List[str]
         :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         # Iteratively use dict to aggregate word count.
         from collections import defaultdict
