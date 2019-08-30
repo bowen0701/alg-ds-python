@@ -35,18 +35,52 @@ Note:
 - Words only consist of letters, never apostrophes or other punctuation symbols.
 """
 
-class Solution(object):
+class SolutionDict(object):
     def mostCommonWord(self, paragraph, banned):
         """
         :type paragraph: str
         :type banned: List[str]
         :rtype: str
         """
-        pass
+        # Iteratively use dict to aggregate word count.
+        from collections import defaultdict
+
+        # Convert all punctuations to space and lower case.
+        punctuations = set(list('!?\',;.'))
+        bans = set(banned)
+        
+        for c in paragraph:
+            if c in punctuations:
+                paragraph = paragraph.replace(c, ' ')
+
+        paragraph = paragraph.lower()
+
+        # Use dict for word count.
+        d = defaultdict(int)
+
+        words = paragraph.split()
+
+        for w in words:
+            if w not in bans:
+                d[w] += 1
+
+        # Get most common word.
+        result = ''
+        count = 0
+
+        for w, c in d.items():
+            if c > count:
+                result = w
+                count = c
+
+        return result
 
 
 def main():
-    pass
+    # Output: "ball"
+    paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
+    banned = ["hit"]
+    print SolutionDict().mostCommonWord(paragraph, banned)
 
 
 if __name__ == '__main__':
