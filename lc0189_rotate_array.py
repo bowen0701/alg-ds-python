@@ -38,30 +38,71 @@ class SolutionCopy(object):
         """
         # If k >= n, truncate k by n.
         n = len(nums)
-        if k >= n:
-            k -= n
+        k = k % n
 
         # Append right with left.
         nums[:] = nums[-k:] + nums[:-k]
+
+
+class SolutionIter(object):
+    def rotate(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: None Do not return anything, modify nums in-place instead.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        # If k >= n, truncate k by n.
+        n = len(nums)
+        k = k % n
+
+        count = 0
+        start_pos, cur_pos = 0, 0
+
+        while count < n:
+            next_pos = (cur_pos + k) % n
+            temp_num = nums[next_pos]
+            # TODO: 2019/08/30
+            nums[new] = rotate_num
+            rotate_num = temp_num
+
+            while current != start:
+
+
+                count += 1
+                print nums
+
+            start += 1
+            current = s
+
+        nums[new_id] = old_num
 
 
 def main():
     # Ans: [5,6,7,1,2,3,4]
     nums = [1,2,3,4,5,6,7]
     k = 3
-    SolutionCopy().rotate(nums, k)
+    print nums
+    # SolutionCopy().rotate(nums, k)
+    SolutionIter().rotate(nums, k)
     print nums
 
     # Ans: [3,99,-1,-100]
     nums = [-1,-100,3,99]
     k = 2
-    SolutionCopy().rotate(nums, k)
+    print nums
+    # SolutionCopy().rotate(nums, k)
+    SolutionIter().rotate(nums, k)
     print nums
 
     # Ans: [2,1]
     nums = [1,2]
     k = 3
-    SolutionCopy().rotate(nums, k)
+    print nums
+    # SolutionCopy().rotate(nums, k)
+    SolutionIter().rotate(nums, k)
     print nums
 
 
