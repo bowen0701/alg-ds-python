@@ -17,6 +17,7 @@ class ListNode(object):
         self.val = val
         self.next = None
 
+
 def show_linked_list(ll):
     ls = []
     current = ll
@@ -73,61 +74,16 @@ class Solution(object):
 
 
 def main():
-    # # Input: 1->2->4, 1->3->4
-    # # Output: 1->1->2->3->4->4
-    # l1 = ListNode(1)
-    # l1.next = ListNode(2)
-    # l1.next.next = ListNode(4)
-    # show_linked_list(l1)
-
-    # l2 = ListNode(1)
-    # l2.next = ListNode(3)
-    # l2.next.next = ListNode(4)
-    # show_linked_list(l2)
-
-    # ls = Solution().mergeTwoLists(l1, l2)
-    # show_linked_list(ls)
-
-    # # Input: 1->2->4, None
-    # # Output: 1->2->4
-    # l1 = ListNode(1)
-    # l1.next = ListNode(2)
-    # l1.next.next = ListNode(4)
-    # show_linked_list(l1)
-
-    # l2 = None
-
-    # ls = Solution().mergeTwoLists(l1, l2)
-    # show_linked_list(ls)
-
-    # # Input: None, 1->3->4
-    # # Output: 1->3->4
-    # l1 = None
-
-    # l2 = ListNode(1)
-    # l2.next = ListNode(3)
-    # l2.next.next = ListNode(4)
-    # show_linked_list(l2)
-
-    # ls = Solution().mergeTwoLists(l1, l2)
-    # show_linked_list(ls)
-
-    # # Input: None, None
-    # # Output: None
-    # l1 = None
-    # l2 = None
-
-    # ls = Solution().mergeTwoLists(l1, l2)
-    # show_linked_list(ls)
-
-    # Input: [-9,3], [5,7]
-    # Output: [-9,3, 5,7]
-    l1 = ListNode(-9)
-    l1.next = ListNode(3)
+    # Input: 1->2->4, 1->3->4
+    # Output: 1->1->2->3->4->4
+    l1 = ListNode(1)
+    l1.next = ListNode(2)
+    l1.next.next = ListNode(4)
     show_linked_list(l1)
 
-    l2 = ListNode(5)
-    l2.next = ListNode(7)
+    l2 = ListNode(1)
+    l2.next = ListNode(3)
+    l2.next.next = ListNode(4)
     show_linked_list(l2)
 
     ls = Solution().mergeTwoLists(l1, l2)
