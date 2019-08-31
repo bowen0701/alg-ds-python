@@ -18,15 +18,41 @@ class ListNode(object):
         self.next = None
 
 
-def show_linked_list(ll):
-    ls = []
-    current = ll
-    while current:
-        ls.append(current.val)
-        current = current.next
-    print ls
+class SolutionSort(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
 
- 
+        Time complexity: O((n1+n2)*log(n1+n2)), where ni is the length of list i.
+        Space complexity: O((n1+n2)).
+        """
+        if not l1 or not l2:
+            return l1 or l2
+
+        # Collect all nodes.
+        nodes = []
+        for head in [l1, l2]:
+            current = head
+            while current:
+                nodes.append(current)
+                current = current.next
+
+        # Sort nodes by their values.
+        sorted_nodes = sorted(nodes, key=lambda x: x.val)
+
+        # Link nodes.
+        pre_head = ListNode(None)
+        current = pre_head
+
+        for node in sorted_nodes:
+            current.next = node
+            current = current.next
+
+        return pre_head.next
+
+
 class SolutionRecur(object):
     def mergeTwoLists(self, l1, l2):
         """
@@ -81,9 +107,32 @@ class SolutionIter(object):
         return pre_head.next
 
 
+def show(head):
+    ls = []
+
+    current = head
+    while current:
+        ls.append(current.val)
+        current = current.next
+    
+    print ls
+
+
 def main():
     # Input: 1->2->4, 1->3->4
     # Output: 1->1->2->3->4->4
+    print 'By sort:'
+    l1 = ListNode(1)
+    l1.next = ListNode(2)
+    l1.next.next = ListNode(4)
+
+    l2 = ListNode(1)
+    l2.next = ListNode(3)
+    l2.next.next = ListNode(4)
+
+    ls = SolutionSort().mergeTwoLists(l1, l2)
+    show(ls)
+
     print 'By recur:'
     l1 = ListNode(1)
     l1.next = ListNode(2)
@@ -94,7 +143,7 @@ def main():
     l2.next.next = ListNode(4)
 
     ls = SolutionRecur().mergeTwoLists(l1, l2)
-    show_linked_list(ls)
+    show(ls)
 
     print 'By iter:'
     l1 = ListNode(1)
@@ -106,7 +155,7 @@ def main():
     l2.next.next = ListNode(4)
 
     ls = SolutionIter().mergeTwoLists(l1, l2)
-    show_linked_list(ls)
+    show(ls)
 
 
 if __name__ == '__main__':
