@@ -19,17 +19,45 @@ Note:
 - S will consist of lowercase letters ('a' to 'z') only.
 """
 
-class Solution(object):
+class SolutionDict(object):
     def partitionLabels(self, S):
         """
         :type S: str
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        from collections import defaultdict
+
+        partition_lens = []
+
+        # Use dict to record last index.
+        last_idx = defaultdict(int)
+
+        for i, c in enumerate(S):
+            last_idx[c] = i
+
+        # Iterate from index 0 to check end indeces and partion.
+        i = 0
+        while i < len(S):
+            end_idx = last_idx[S[i]]
+
+            # Start from index i to update their end indeces.
+            j = i
+            while j < end_idx:
+                end_idx = max(end_idx, last_idx[S[j]])
+                j += 1
+
+            partition_lens.append(j - i + 1)
+            i = j + 1
+
+        return partition_lens
 
 
 def main():
-    pass
+    S = "ababcbacadefegdehijhklij"
+    print SolutionDict().partitionLabels(S)
 
 
 if __name__ == '__main__':
