@@ -26,8 +26,21 @@ def show_linked_list(ll):
         current = current.next
     print ls
 
+ 
+class SolutionRecur(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
 
-class Solution(object):
+        Time complexity: O(n1 + n2), where n is the lengths of two lists.
+        Space complexity: O(n1 + n2).
+        """
+        pass
+
+
+class SolutionIter(object):
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
@@ -39,12 +52,20 @@ class Solution(object):
         """
         if not l1 and not l2:
             return None
-        elif l1 and not l2:
+        
+        if l1 and not l2:
             return l1
         elif not l1 and l2:
             return l2
 
-        head = None
+        # Set head by comparing lists's heads.
+        if l1.val < l2.val:
+            head = ListNode(l1.val)
+            l1 = l1.next
+        else:
+            head = ListNode(l2.val)
+            l2 = l2.next
+
         current = head
 
         while l1 or l2:
@@ -55,21 +76,18 @@ class Solution(object):
                 else:
                     ll = l2
                     l2 = l2.next
-
-                if not head:
-                    head = ListNode(ll.val)
-                    current = head
-                else:
-                    current.next = ListNode(ll.val)
-                    current = current.next                
+                current.next = ListNode(ll.val)
+                current = current.next
             elif l1 and not l2:
-                current.next = ListNode(l1.val)
-                current = current.next
-                l1 = l1.next
+                while l1:
+                    current.next = ListNode(l1.val)
+                    current = current.next
+                    l1 = l1.next
             elif not l1 and l2:
-                current.next = ListNode(l2.val)
-                current = current.next
-                l2 = l2.next
+                while l2:
+                    current.next = ListNode(l2.val)
+                    current = current.next
+                    l2 = l2.next
         return head
 
 
@@ -86,7 +104,7 @@ def main():
     l2.next.next = ListNode(4)
     show_linked_list(l2)
 
-    ls = Solution().mergeTwoLists(l1, l2)
+    ls = SolutionIter().mergeTwoLists(l1, l2)
     show_linked_list(ls)
 
 
