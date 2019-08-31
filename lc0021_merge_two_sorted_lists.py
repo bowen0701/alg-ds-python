@@ -104,6 +104,7 @@ class SolutionIter(object):
             current = current.next
 
         current.next = l1 or l2
+
         return pre_head.next
 
 
