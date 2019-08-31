@@ -97,6 +97,94 @@ class SolutionMergeTwoRecur(object):
         return lists[0]
 
 
+class SolutionMergeTwoIter(object):
+    def _merge2Lists(self, l1, l2):
+        if l1 and not l2:
+            return l1
+        elif not l1 and l2:
+            return l2
+
+        pre_head = ListNode(None)
+        current = pre_head
+
+        while l1 and l2:
+            if l1.val <= l2.val:
+                current.next = l1
+                l1 = l1.next
+            else:
+                current.next = l2
+                l2 = l2.next
+
+            current = current.next
+
+        current.next = l1 or l2
+
+        return pre_head.next
+
+
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+
+        Time complexity: O(kn*logk), where
+          - n is the number of nodes,
+          - k is the length of lists.
+        Space complexity: O(1).
+        """
+        if not lists:
+            return None
+
+        length = len(lists)
+
+        # When there are at least two lists, merge them.
+        while length > 1:
+            # Merge each pair of leftmost and rightmost lists.
+            for i in range(length // 2):
+                lists[i] = self._merge2Lists(lists[i], lists[length - 1 - i])
+
+            # Decrement length.
+            length = (length + 1) // 2
+
+        return lists[0]
+
+
+class SolutionMinHeap(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+
+        Time complexity: O(kn*logk), where
+          - n is the number of nodes,
+          - k is the length of lists.
+        Space complexity: O(1).
+        """
+        # Use min heap to collect sorted nodes.
+        import heapq
+
+        if not lists:
+            return None
+
+        minheap = [(head.val, head) for head in lists if head]
+        heapq.heapify(minheap)
+
+        pre_head = ListNode(None)
+        current = pre_head
+
+        # Pop head of min heap and link it to the linked list.
+        while minheap:
+            _, node = heapq.heappop(minheap)
+            current.next = node
+            current = current.next
+
+            # If head of min heap has a next node, push to min heap.
+            if current.next:
+                heapq.heappush(minheap, (current.next.val, current.next))
+
+        return pre_head.next
+
+
 def show(head):
     ls = []
 
@@ -149,6 +237,40 @@ def main():
     lists = [head1, head2, head3]
 
     head = SolutionMergeTwoRecur().mergeKLists(lists)
+    show(head)
+
+    print 'By merge two with iteration:'
+    head1 = ListNode(1)
+    head1.next = ListNode(4)
+    head1.next.next = ListNode(5)
+
+    head2 = ListNode(1)
+    head2.next = ListNode(3)
+    head2.next.next = ListNode(4)
+
+    head3 = ListNode(2)
+    head3.next = ListNode(6)
+
+    lists = [head1, head2, head3]
+
+    head = SolutionMergeTwoIter().mergeKLists(lists)
+    show(head)
+
+    print 'By min heap:'
+    head1 = ListNode(1)
+    head1.next = ListNode(4)
+    head1.next.next = ListNode(5)
+
+    head2 = ListNode(1)
+    head2.next = ListNode(3)
+    head2.next.next = ListNode(4)
+
+    head3 = ListNode(2)
+    head3.next = ListNode(6)
+
+    lists = [head1, head2, head3]
+
+    head = SolutionMinHeap().mergeKLists(lists)
     show(head)
 
 
