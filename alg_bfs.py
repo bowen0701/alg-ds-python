@@ -49,8 +49,8 @@ def main():
     v_start = 'A'
     print('Start vertex: {}'.format(v_start))
     distance_d = bfs(graph_adj_d, v_start)
-    print('BFS with distance dict:\n{}'
-          .format(distance_d))
+    print('BFS with distances:\n{}'
+          .format(sorted(distance_d.items(), key=lambda x: x[1])))
 
 
 if __name__ == '__main__':
