@@ -35,12 +35,30 @@ class Solution(object):
         """
         :type logs: List[str]
         :rtype: List[str]
+
+        Time complexity: O(n*logn), where n is the number of logs.
+        Space complexity: O(n).
         """
-        pass
+        # Store letters and digits separately.
+        letters = []
+        digits = []
+
+        for l in logs:
+            if l.split()[1].isdigit():
+                digits.append(l)
+            else:
+                letters.append(l)
+
+        # Sort letters by identifier and in lexicographical order.
+        letters.sort(key=lambda x: x.split()[0])
+        letters.sort(key=lambda x: x.split()[1:])
+
+        return letters + digits
 
 
 def main():
-    pass
+    logs =  ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
+    print Solution().reorderLogFiles(logs)
 
 
 if __name__ == '__main__':
