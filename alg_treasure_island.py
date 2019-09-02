@@ -80,6 +80,59 @@ class SolutionSteps(object):
         return -1
 
 
+class SolutionDistances(object):
+    def treasureIsland(self, grid):
+        """
+        :type logs: List[list[str]]
+        :rtype: int
+        """
+        from collections import defaultdict
+
+        if not grid or not grid[0]:
+            return -1
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Apply BFS using queue for shortest route.
+        queue = [(0, 0)]
+
+        # Update grid to mark (0, 0) as visited.
+        grid[0][0] = 'D'
+
+        steps_d = defaultdict(int)
+        steps_d[(0, 0)] = 0
+
+        while queue:
+            size = len(queue)
+
+            for _ in range(size):
+                r, c = queue.pop()
+
+                dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+
+                for r_neighbor, c_neighbor in dirs:
+                    if (r_neighbor < 0 or r_neighbor >= n_rows or 
+                        c_neighbor < 0 or c_neighbor >= n_cols or
+                        grid[r_neighbor][c_neighbor] == 'D'):
+                        continue
+
+                    if grid[r_neighbor][c_neighbor] == 'X':
+                        steps_d[(r_neighbor, c_neighbor)] =  steps_d[(r, c)] + 1
+                        break
+                    
+                    if grid[r_neighbor][c_neighbor] == 'O':
+                        # Update grid to mark as visited.
+                        grid[r_neighbor][c_neighbor] = 'D'
+
+                        steps_d[(r_neighbor, c_neighbor)] =  steps_d[(r, c)] + 1
+                        queue.insert(0, (r_neighbor, c_neighbor))
+
+        if steps_d.get((n_rows - 1, 0)):
+            return steps_d[(n_rows - 1, 0)]
+        else:
+            return -1
+
+
 def main():
     # Ans: 5.
     grid = [['O', 'O', 'O', 'O'],
@@ -87,6 +140,12 @@ def main():
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
     print SolutionSteps().treasureIsland(grid)
+
+    grid = [['O', 'O', 'O', 'O'],
+            ['D', 'D', 'D', 'O'],
+            ['O', 'O', 'O', 'O'],
+            ['X', 'D', 'D', 'O']]
+    print SolutionDistances().treasureIsland(grid)
 
 
 if __name__ == '__main__':
