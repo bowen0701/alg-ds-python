@@ -32,38 +32,6 @@ class TreeNode(object):
         self.right = None
 
 
-class BinaryTree(object):
-    def __init__(self):
-        self.root = None
-
-    def insert(self, a_list):
-        self.root = TreeNode(a_list[0])
-
-        # Use queue to track current node.
-        queue = []
-        queue.insert(0, self.root)
-
-        for i in range(1, len(a_list)):
-            # Update the current node after inserting left and right nodes.
-            if i % 2 == 1:
-                current = queue.pop()
-
-            # Insert to left node.
-            if i % 2 == 1:
-                if a_list[i]:
-                    current.left = TreeNode(a_list[i])
-                    queue.insert(0, current.left)
-                else:
-                    current.left = None
-            # Insert to right node.
-            elif i % 2 == 0:
-                if a_list[i]:
-                    current.right = TreeNode(a_list[i])
-                    queue.insert(0, current.right)
-                else:
-                    current.right = None
-
-
 class SolutionRecur(object):
     def isMirror(self, left, right):
         # Check left & right nodes' existence.
@@ -75,11 +43,11 @@ class SolutionRecur(object):
         # Check left & right nodes' values.
         if left.val != right.val:
             return False
-        else:
-            # Check outside & inside pairs.
-            out_pair = self.isMirror(left.left, right.right)
-            in_pair = self.isMirror(left.right, right.left)
-            return out_pair and in_pair
+
+        # Check outside & inside pairs.
+        out_pair = self.isMirror(left.left, right.right)
+        in_pair = self.isMirror(left.right, right.left)
+        return out_pair and in_pair
 
     def isSymmetric(self, root):
         """
@@ -120,32 +88,46 @@ class SolutionIter(object):
             # Check left & right nodes' values.
             if left.val != right.val:
                 return False
-            else:
-                # Check outside & inside pairs.
-                queue.insert(0, (left.left, right.right))
-                queue.insert(0, (left.right, right.left))
+
+            # Check outside & inside pairs.
+            queue.insert(0, (left.left, right.right))
+            queue.insert(0, (left.right, right.left))
 
         return True
 
 
 def main():
-    a_list = [1, 2, 2, 3, 4, 4, 3]
     # Output: True.
-    bt = BinaryTree()
-    bt.insert(a_list)
-    print (bt.root.val, bt.root.left.val, bt.root.right.val,
-           bt.root.left.left.val, bt.root.left.right.val,
-           bt.root.right.left.val, bt.root.right.right.val)
-    print SolutionRecur().isSymmetric(bt.root)
+    #     1
+    #    / \
+    #   2   2
+    #  / \ / \
+    # 3  4 4  3
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(2)
+    root.left.left = TreeNode(3)
+    root.left.right = TreeNode(4)
+    root.right.left = TreeNode(4)
+    root.right.right = TreeNode(3)
 
-    a_list = [1, 2, 2, None, 3, None, 3]
+    print SolutionRecur().isSymmetric(root)
+    print SolutionIter().isSymmetric(root)
+
     # Output: False.
-    bt = BinaryTree()
-    bt.insert(a_list)
-    print (bt.root.val, bt.root.left.val, bt.root.right.val,
-           None, bt.root.left.right.val,
-           None, bt.root.right.right.val)
-    print SolutionRecur().isSymmetric(bt.root)
+    #     1
+    #    / \
+    #   2   2
+    #    \   \
+    #     3   3
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(2)
+    root.left.right = TreeNode(3)
+    root.right.right = TreeNode(3)
+    
+    print SolutionRecur().isSymmetric(root)
+    print SolutionIter().isSymmetric(root)
 
 
 if __name__ == '__main__':
