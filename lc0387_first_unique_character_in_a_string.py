@@ -15,17 +15,52 @@ return 2.
 Note: You may assume the string contain only lowercase letters.
 """
 
-class Solution(object):
+class SolutionDict(object):
     def firstUniqChar(self, s):
         """
         :type s: str
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        # Create a dict for char->index i. If repeated, char -> -1.
+        from collections import defaultdict
+
+        char_idx_d = defaultdict(int)
+
+        for i, c in enumerate(s):
+            if c not in char_idx_d:
+                char_idx_d[c] = i
+            else:
+                char_idx_d[c] = -1
+
+        # Iterate through items. If idx is valid (not - 1), update min_idx.
+        min_idx = float('inf')
+
+        for char, idx in char_idx_d.items():
+            if idx != -1:
+                min_idx = min(min_idx, idx)
+
+        # Check mix_id is valid or not.
+        if min_idx != float('inf'):
+            return min_idx
+        else:
+            return -1
 
 
 def main():
-    pass
+    # Ans: 0
+    s = 'leetcode'
+    print SolutionDict().firstUniqChar(s)
+
+    # Ans: 2
+    s = 'loveleetcode'
+    print SolutionDict().firstUniqChar(s)
+
+    # Ans: -1
+    s = 'aabbccdd'
+    print SolutionDict().firstUniqChar(s)
 
 
 if __name__ == '__main__':
