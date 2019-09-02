@@ -39,6 +39,9 @@ class SolutionSteps(object):
         """
         :type logs: List[list[str]]
         :rtype: int
+
+        Time complexity: O(r*c).
+        Space complexity: O(r*c).
         """
         if not grid or not grid[0]:
             return -1
@@ -85,6 +88,9 @@ class SolutionDistances(object):
         """
         :type logs: List[list[str]]
         :rtype: int
+
+        Time complexity: O(r*c).
+        Space complexity: O(r*c).
         """
         from collections import defaultdict
 
