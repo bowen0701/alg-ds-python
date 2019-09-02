@@ -65,46 +65,6 @@ class SolutionRecurVisit(object):
 
         return n_islands
 
-class SolutionRecurUpdate(object):
-    def _dfs(self, r, c, grid):
-        # If visit outside of the grid boundary.
-        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
-            return None
-
-        # If visit water or already visisted before.
-        if grid[r][c] == '0':
-            return None
-
-        # Mark (r, c) as visited.
-        grid[r][c] = '0'
-
-        # Vist up & down and left & right.
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            self._dfs(r_neighbor, c_neighbor, grid)
-
-    def numIslands(self, grid):
-        """Number of islands by recursion.
-        :type grid: List[List[str]]
-        :rtype: int
-
-        Time complexity: O(m * n).
-        Space complexity: O(m * n).
-        """
-        if not grid:
-            return 0
-
-        n_islands = 0
-
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                # If a land is 1, start DFS visiting.
-                if grid[r][c] == '1':
-                    n_islands += 1
-                    self._dfs(r, c, grid)
-
-        return n_islands
-
 
 class SolutionRecurVisit2(object):
     def _dfs(self, r, c, grid, visited_d):
@@ -149,6 +109,47 @@ class SolutionRecurVisit2(object):
                     n_connects = self._dfs(r, c, grid, visited_d)
                     if n_connects > 0:
                         n_islands += 1
+
+        return n_islands
+
+
+class SolutionRecurUpdate(object):
+    def _dfs(self, r, c, grid):
+        # If visit outside of the grid boundary.
+        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
+            return None
+
+        # If visit water or already visisted before.
+        if grid[r][c] == '0':
+            return None
+
+        # Mark (r, c) as visited.
+        grid[r][c] = '0'
+
+        # Vist up & down and left & right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_neighbor, c_neighbor in dirs:
+            self._dfs(r_neighbor, c_neighbor, grid)
+
+    def numIslands(self, grid):
+        """Number of islands by recursion.
+        :type grid: List[List[str]]
+        :rtype: int
+
+        Time complexity: O(m * n).
+        Space complexity: O(m * n).
+        """
+        if not grid:
+            return 0
+
+        n_islands = 0
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                # If a land is 1, start DFS visiting.
+                if grid[r][c] == '1':
+                    n_islands += 1
+                    self._dfs(r, c, grid)
 
         return n_islands
 
@@ -272,18 +273,10 @@ def main():
 
     start_time = time.time()
     print 'By recur with visits:', SolutionRecurVisit().numIslands(grid1)
-    # print 'By recur with visits:', SolutionRecurVisit2().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
-
-
-    grid1 = [['1', '1', '1', '1', '0'],
-             ['1', '1', '0', '1', '0'], 
-             ['1', '1', '0', '0', '0'],
-             ['0', '0', '0', '0', '0']]
 
     start_time = time.time()
     print 'By recur with updates:', SolutionRecurUpdate().numIslands(grid1)
-    # print 'By recur with updates:', SolutionRecurUpdate2().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     grid1 = [['1', '1', '1', '1', '0'],
@@ -302,18 +295,11 @@ def main():
              ['0', '0', '0', '1', '1']]
 
     start_time = time.time()
-    print 'By recur with visits:', SolutionRecurVisit().numIslands(grid2)
-    # print 'By recur with visits:', SolutionRecurVisit2().numIslands(grid2)
+    print 'By recur with visits:', SolutionRecurVisit().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
-    grid2 = [['1', '1', '0', '0', '0'],
-             ['1', '1', '0', '0', '0'], 
-             ['0', '0', '1', '0', '0'],
-             ['0', '0', '0', '1', '1']]
-
     start_time = time.time()
-    print 'By recur with updates:', SolutionRecurUpdate().numIslands(grid2)
-    # print 'By recur with updates:', SolutionRecurUpdate2().numIslands(grid2)
+    print 'By recur with updates:', SolutionRecurUpdate().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     grid2 = [['1', '1', '0', '0', '0'],
