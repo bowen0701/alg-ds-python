@@ -238,10 +238,12 @@ class BinarySearchTree(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if root:
-            self.inorder_traverse_recur(root.left)
-            print(root.val)
-            self.inorder_traverse_recur(root.right)
+        if not root:
+            return None
+
+        self.inorder_traverse_recur(root.left)
+        print(root.val)
+        self.inorder_traverse_recur(root.right)
 
     def inorder_traverse_iter(self, root):
         """Inorder traversal: left -> root -> right, by iteration.
@@ -259,19 +261,18 @@ class BinarySearchTree(object):
         stack = []
 
         while current or stack:
-            if current:
-                # If current exists, push to stack and visit left node.
+            # If current exists, push to stack and visit leftmost node.
+            while current:
                 stack.append(current)
                 current = current.left
-            else:
-                # If current does not exist, pop stack as current.
-                current = stack.pop()
-                if current:
-                    print(current.val)
 
-                # Update current and previous by inorder traversal.
-                current = current.right
-                previous = current
+            # Pop stack as current and print its value.
+            current = stack.pop()
+            print(current.val)
+
+            # Update current and previous by inorder traversal.
+            current = current.right
+            previous = current
 
         return None
 
@@ -281,10 +282,12 @@ class BinarySearchTree(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if root:
-            print(root.val)
-            self.preorder_traverse_recur(root.left)
-            self.preorder_traverse_recur(root.right)
+        if not root:
+            return None
+
+        print(root.val)
+        self.preorder_traverse_recur(root.left)
+        self.preorder_traverse_recur(root.right)
 
     def preorder_traverse_iter(self, root):
         """Preorder traversal: root -> left -> right, by iteration.
@@ -311,17 +314,43 @@ class BinarySearchTree(object):
 
         return None
 
-
     def postorder_traverse_recur(self, root):
         """Postorder traversal: left -> right -> root, by recursion.
 
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if root:
-            self.postorder_traverse_recur(root.left)
-            self.postorder_traverse_recur(root.right)
-            print(root.val)
+        if not root:
+            return None
+
+        self.postorder_traverse_recur(root.left)
+        self.postorder_traverse_recur(root.right)
+        print(root.val)
+
+    # def postorder_traverse_iter(self, root):
+    #     """Postorder traversal: left -> right -> root, by iteration.
+
+    #     Time complexity: O(n).
+    #     Space complexity: O(1).
+    #     """
+    #     if not root:
+    #         return None
+
+    #     stack = [root.left, root.right]
+
+    #     while stack:
+    #         current = stack.pop()
+    #         if current:
+    #             print(current.val)
+
+    #         # Push right before left since we use stack with FILO.
+    #         if current.right:
+    #             stack.append(current.right)
+
+    #         if current.left:
+    #             stack.append(current.left)
+
+    #     return None
 
 
 def main():
