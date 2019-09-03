@@ -35,18 +35,64 @@ Input: ropes = [2, 2, 3, 3]
 Output: 20
 """
 
-class Solution(object):
-	def connectSticks(self, ropes):
-		"""
+class SolutionMinHeap(object):
+    def connectSticks(self, ropes):
+        """
         :type self: List[int]
         :rtype: int
         """
-        pass
+        # Every time add the two ropes with shortest lengths.
+        # Apply min heap to store ropes.
+        import heapq
+
+        if not ropes:
+            return 0
+
+        if len(ropes) <= 2:
+            return sum(ropes)
+
+        min_cost = 0
+
+        min_h = ropes
+        heapq.heapify(min_h)
+
+        while len(min_h) > 1:
+            # Add the first 2 shortest ropes for additional cost.
+            min_rope1 = heapq.heappop(min_h)
+            
+            if min_h:
+                min_rope2 = heapq.heappop(min_h)
+            else:
+                min_repe2 = 0
+            
+            add_cost = min_rope1 + min_rope2
+
+            # Accumulate min cost with additional cost.
+            min_cost += add_cost
+
+            # Push the additional cost to min heap.
+            heapq.heappush(min_h, add_cost)
+
+        return min_cost
 
 
 def main():
-	pass
+    # Ans: 58
+    ropes = [8, 4, 6, 12]
+    print Solution().connectSticks(ropes)
+
+    # Ans: 54
+    ropes = [20, 4, 8, 2]
+    print Solution().connectSticks(ropes)
+
+    # Ans: 224
+    ropes = [1, 2, 5, 10, 35, 89]
+    print Solution().connectSticks(ropes)
+
+    # AnsL 20
+    ropes = [2, 2, 3, 3]
+    print Solution().connectSticks(ropes)
 
 
 if __name__ == '__main__':
-	main()
+    main()
