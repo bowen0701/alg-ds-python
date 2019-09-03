@@ -56,6 +56,35 @@ class SolutionPreorderRecur(object):
                 self.isSameTree(p.right, q.right))
 
 
+class SolutionPreorderIter(object):
+    def isSameTree(self, p, q):
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: bool
+        """
+        if not p or not q:
+            return p is q
+        
+        stack = [(p, q)]
+
+        while stack:
+            cur_p, cur_q = stack.pop()
+
+            if not cur_p and not cur_q:
+                continue
+
+            if not cur_p or not cur_q:
+                return cur_p is cur_q
+
+            if cur_p.val != cur_q.val:
+                return False
+            stack.append((cur_p.right, cur_q.right))
+            stack.append((cur_p.left, cur_q.left))
+
+        return True
+
+
 def main():
     # Input:     1         1
     #           / \       / \
@@ -69,6 +98,7 @@ def main():
     q.left = TreeNode(2)
     q.right = TreeNode(3)
     print SolutionPreorderRecur().isSameTree(p, q)
+    print SolutionPreorderIter().isSameTree(p, q)
 
     # Input:     1         1
     #           /           \
@@ -80,6 +110,7 @@ def main():
     q = TreeNode(1)
     q.right = TreeNode(2)
     print SolutionPreorderRecur().isSameTree(p, q)    
+    print SolutionPreorderIter().isSameTree(p, q)
 
     # Input:     1         1
     #           / \       / \
@@ -93,6 +124,7 @@ def main():
     q.left = TreeNode(1)
     q.right = TreeNode(2)
     print SolutionPreorderRecur().isSameTree(p, q)
+    print SolutionPreorderIter().isSameTree(p, q)
 
 
 if __name__ == '__main__':
