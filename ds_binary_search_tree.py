@@ -302,8 +302,7 @@ class BinarySearchTree(object):
 
         while stack:
             current = stack.pop()
-            if current:
-                print(current.val)
+            print(current.val)
 
             # Push right before left since we use stack with FILO.
             if current.right:
