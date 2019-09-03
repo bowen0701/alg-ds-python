@@ -46,19 +46,85 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionPreorder(object):
+    def _isMatch(self, s, t):
+        if not s or not t:
+            return s is t
+            
+        return (s.val == t.val and 
+                self._isMatch(s.left, t.left) and 
+                self._isMatch(s.right, t.right))
+
     def isSubtree(self, s, t):
         """
         :type s: TreeNode
         :type t: TreeNode
         :rtype: bool
+
+        Time complexity: O(|s|*|t|), where 
+          - |s| is the number of nodes in s.
+        Space complexity: O(h(s)), where h(s) is the height of s.
         """
-        pass
+        # Apply preorder traversal to check match.
+        if not s:
+            return False
+
+        return (self._isMatch(s, t) or
+                self.isSubtree(s.left, t) or 
+                self.isSubtree(s.right, t))
 
 
 def main():
-    pass
+    # Ans: True
+    # Given tree s:
+    #      3
+    #     / \
+    #    4   5
+    #   / \
+    #  1   2
+    # Given tree t:
+    #    4 
+    #   / \
+    #  1   2
+    s = TreeNode(3)
+    s.left = TreeNode(4)
+    s.right = TreeNode(5)
+    s.left.left = TreeNode(1)
+    s.left.right = TreeNode(2)
+    t = TreeNode(4)
+    t.left = TreeNode(1)
+    t.right = TreeNode(2)
+    print SolutionPreorder().isSubtree(s, t)
 
+    # Ans: False
+    # Given tree s:
+    #      3
+    #     / \
+    #    4   5
+    #   / \
+    #  1   2
+    #     /
+    #    0
+    # Given tree t:
+    #    4
+    #   / \
+    #  1   2
+    s = TreeNode(3)
+    s.left = TreeNode(4)
+    s.right = TreeNode(5)
+    s.left.left = TreeNode(1)
+    s.left.right = TreeNode(2)
+    s.left.right.left = TreeNode(0)
+    t = TreeNode(4)
+    t.left = TreeNode(1)
+    t.right = TreeNode(2)
+    print SolutionPreorder().isSubtree(s, t)
+
+    # Ans: True
+    # t = [1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,2]
+    # s = [1,null,1,null,1,null,1,null,1,null,1,2]
+    t = TreeNode(1)
+    t.right = TreeNode(1)
 
 if __name__ == '__main__':
     main()
