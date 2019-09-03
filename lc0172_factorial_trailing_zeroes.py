@@ -28,11 +28,11 @@ class Solution(object):
         Space complexity: O(1).
         """
         zeros = 0
-        temp = n
+        current = n
 
-        while temp // 5 > 0:
-            temp = temp // 5
-            zeros += temp
+        while current // 5 > 0:
+            current = current // 5
+            zeros += current
 
         return zeros
 
@@ -42,8 +42,8 @@ def main():
     n = 3
     print Solution().trailingZeroes(n)
 
-    # Ans: 1
-    n = 5
+    # Ans: 6
+    n = 25
     print Solution().trailingZeroes(n)
 
 
