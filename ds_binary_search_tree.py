@@ -274,8 +274,6 @@ class BinarySearchTree(object):
             current = current.right
             previous = current
 
-        return None
-
     def preorder_traverse_recur(self, root):
         """Preorder traversal: root -> left -> right, by recursion.
 
@@ -311,8 +309,6 @@ class BinarySearchTree(object):
             if current.left:
                 stack.append(current.left)
 
-        return None
-
     def postorder_traverse_recur(self, root):
         """Postorder traversal: left -> right -> root, by recursion.
 
@@ -326,30 +322,31 @@ class BinarySearchTree(object):
         self.postorder_traverse_recur(root.right)
         print(root.val)
 
-    # def postorder_traverse_iter(self, root):
-    #     """Postorder traversal: left -> right -> root, by iteration.
+    def postorder_traverse_iter(self, root):
+        """Postorder traversal: left -> right -> root, by iteration.
 
-    #     Time complexity: O(n).
-    #     Space complexity: O(1).
-    #     """
-    #     if not root:
-    #         return None
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if not root:
+            return None
 
-    #     stack = [root.left, root.right]
+        stack = [root]
+        rev_traverses = []
 
-    #     while stack:
-    #         current = stack.pop()
-    #         if current:
-    #             print(current.val)
+        while stack:
+            current = stack.pop()
+            rev_traverses.insert(0, current.val)
 
-    #         # Push right before left since we use stack with FILO.
-    #         if current.right:
-    #             stack.append(current.right)
+            # Push left before right since we use stack with FILO.
+            if current.left:
+                stack.append(current.left)
 
-    #         if current.left:
-    #             stack.append(current.left)
+            if current.right:
+                stack.append(current.right)
 
-    #     return None
+        for val in rev_traverses:
+            print(val)
 
 
 def main():
@@ -384,6 +381,8 @@ def main():
     # Postorder walk: 2, 5, 5, 8, 7, 6.
     print('Postorder traversal by recursion:')
     bst.postorder_traverse_recur(bst.root)
+    print('Postorder traversal by iteration:')
+    bst.postorder_traverse_iter(bst.root)
 
     # Search existing val 6.
     print('Search existing node with val 6:')
