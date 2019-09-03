@@ -36,13 +36,15 @@ Output: 20
 """
 
 class SolutionMinHeap(object):
-    def connectSticks(self, ropes):
+    def minCost(self, ropes):
         """
         :type self: List[int]
         :rtype: int
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
         """
-        # Every time add the two ropes with shortest lengths.
-        # Apply min heap to store ropes.
+        # Every time add the two shortest ropes by min heap.
         import heapq
 
         if not ropes:
@@ -79,19 +81,19 @@ class SolutionMinHeap(object):
 def main():
     # Ans: 58
     ropes = [8, 4, 6, 12]
-    print Solution().connectSticks(ropes)
+    print Solution().minCost(ropes)
 
     # Ans: 54
     ropes = [20, 4, 8, 2]
-    print Solution().connectSticks(ropes)
+    print Solution().minCost(ropes)
 
     # Ans: 224
     ropes = [1, 2, 5, 10, 35, 89]
-    print Solution().connectSticks(ropes)
+    print Solution().minCost(ropes)
 
     # AnsL 20
     ropes = [2, 2, 3, 3]
-    print Solution().connectSticks(ropes)
+    print Solution().minCost(ropes)
 
 
 if __name__ == '__main__':
