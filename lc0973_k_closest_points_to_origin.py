@@ -101,6 +101,7 @@ class SolutionSelection(object):
         k_points = []
         for (d, p) in zip(distances, points):
             if d <= pivot:
+                # For fast list append.
                 k_points += p,
         
         return k_points
