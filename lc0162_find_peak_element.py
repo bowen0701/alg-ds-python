@@ -36,6 +36,7 @@ class SolutionBinarySearchIter(object):
         Time complexity: O(logn), where n is the length of nums.
         Space complexity: O(1).
         """
+        # Apply variant of binary search.
         first, last = 0, len(nums) - 1
 
         while first < last:
