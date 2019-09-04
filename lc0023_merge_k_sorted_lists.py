@@ -99,10 +99,8 @@ class SolutionMergeTwoRecur(object):
 
 class SolutionMergeTwoIter(object):
     def _merge2Lists(self, l1, l2):
-        if l1 and not l2:
-            return l1
-        elif not l1 and l2:
-            return l2
+        if not l1 or not l2:
+            return l1 or l2
 
         pre_head = ListNode(None)
         current = pre_head
