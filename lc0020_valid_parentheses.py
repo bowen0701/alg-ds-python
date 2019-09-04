@@ -49,7 +49,9 @@ class Solution(object):
             '{': '}'
         }
 
+        # Use stack to check valid parentheses.
         stack = []
+
         for c in s:
             # If c is open bracket, push to stack.
             if c in '([{':
@@ -60,6 +62,7 @@ class Solution(object):
                 # If no open bracket in stack, we have non-matched close one.
                 if not stack:
                     return False
+
                 open_c = stack.pop()
                 if open_close_d.get(open_c) != c:
                     return False
