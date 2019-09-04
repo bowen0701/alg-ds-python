@@ -53,6 +53,7 @@ class ListNode(object):
         self.val = val
         self.next = None
 
+
 class SolutionTwoPointers(object):
     def getIntersectionNode(self, headA, headB):
         """
@@ -93,16 +94,16 @@ def main():
     headB = ListNode(5)
     headB.next = ListNode(0)
     headB.next.next = ListNode(1)
-    intersectNode1 = ListNode(8)
-    intersectNode2 = ListNode(4)
-    intersectNode3 = ListNode(5)
+    # intersectNode1 = ListNode(8)
+    # intersectNode2 = ListNode(4)
+    # intersectNode3 = ListNode(5)
 
-    headA.next.next = intersectNode1
-    headA.next.next.next = intersectNode2
-    headA.next.next.next.next = intersectNode3
-    headB.next.next = intersectNode1
-    headB.next.next.next = intersectNode2
-    headB.next.next.next.next = intersectNode3  
+    # headA.next.next = intersectNode1
+    # headA.next.next.next = intersectNode2
+    # headA.next.next.next.next = intersectNode3
+    # headB.next.next = intersectNode1
+    # headB.next.next.next = intersectNode2
+    # headB.next.next.next.next = intersectNode3  
 
     print SolutionTwoPointers().getIntersectionNode(headA, headB).val
 
