@@ -40,15 +40,15 @@ class Solution(object):
         visited[(i, j)] = True
 
         # Start DFS visiting, one of DFSs is true, then return True.
-        result = (self._dfs(i - 1, j, board, word, pos + 1, visited) or
-                  self._dfs(i + 1, j, board, word, pos + 1, visited) or
-                  self._dfs(i, j - 1, board, word, pos + 1, visited) or
-                  self._dfs(i, j + 1, board, word, pos + 1, visited))
+        is_exist = False
+        dirs = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
+        for r, c in dirs:
+            is_exist = is_exist or self._dfs(r, c, board, word, pos + 1, visited)
 
         # Backtrack.
         visited[(i, j)] = False
 
-        return result
+        return is_exist
 
     def exist(self, board, word):
         """
