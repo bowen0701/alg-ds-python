@@ -15,7 +15,7 @@ Output: 2
 Explanation: 13 = 4 + 9.
 """
 
-class Solution(object):
+class SolutionDp(object):
     def numSquares(self, n):
         """
         :type n: int
@@ -24,7 +24,8 @@ class Solution(object):
         Time complexity: O(n*m), where m is squared root of n.
         Space complexity: O(n*m).
         """
-        # Compute the max number.
+        # Apply dynamic programming: e.g. n is amount, squared nums are coins.
+        # Compute the max squared number.
         m = int(pow(n, 0.5))
         sq_nums = [pow(s, 2) for s in range(1, m + 1)]
 
@@ -44,6 +45,7 @@ class Solution(object):
                     T[s][i] = T[s - 1][i]
 
         return T[-1][-1]
+
 
 def main():
     import time
