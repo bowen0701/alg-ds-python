@@ -24,30 +24,6 @@ class ListNode(object):
         self.next = None
 
 
-class LinkedList(object):
-    def __init__(self):
-        self.head = None
-
-    def append(self, val):
-        if not self.head:
-            self.head = ListNode(val)
-            return None
-
-        current = self.head
-        while current.next:
-            current = current.next
-        current.next = ListNode(val)
-        return None
-
-    def show(self):
-        ls = []
-        current = self.head
-        while current:
-            ls.append(current.val)
-            current = current.next
-        print(ls)
-
-
 class SolutionTwoPasses(object):
     def removeNthFromEnd(self, head, n):
         """
@@ -68,7 +44,6 @@ class SolutionTwoPasses(object):
         while current:
             size += 1
             current = current.next
-        print 'size:', size
 
         # If the head is removed.
         if n == size:
@@ -87,6 +62,7 @@ class SolutionTwoPasses(object):
         # and return head.
         if current:
             previous.next = previous.next.next
+
         return head
 
 
@@ -108,13 +84,16 @@ class SolutionOnePass(object):
         # Move iteratively both nodes to the end.
         current_pos = 0
         previous_pos = current_pos - n
-        current = head
+
         previous = None
+        current = head
 
         while current.next:
             current_pos += 1
             previous_pos += 1
+
             current = current.next
+
             if previous_pos == 0:
                 previous = head
             elif previous_pos > 0:
@@ -130,45 +109,33 @@ class SolutionOnePass(object):
 
 
 def main():
-    import time
-
-    start_time = time.time()
-
     # Solution = SolutionTwoPasses
     Solution = SolutionOnePass
 
-    # Given linked list: 1->2->3->4->5, and n = 2.
-    # After removing the 2nd node from the end: 1->2->3->5.
-    ll = LinkedList()
-    ll.append(1)
-    ll.append(2)
-    ll.append(3)
-    ll.append(4)
-    ll.append(5)
-    ll.show()
-    print Solution().removeNthFromEnd(ll.head, 2).next.next.next.val
+    # Given linked list: 1->2->3->4->5, and n = 2. Ans: 5.
+    # Remove the 2nd node from the end: 1->2->3->5.
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+    print Solution().removeNthFromEnd(head, 2).next.next.next.val
 
-    # After removing the 5th node from the end: 2->3->4->5.
-    ll = LinkedList()
-    ll.append(1)
-    ll.append(2)
-    ll.append(3)
-    ll.append(4)
-    ll.append(5)
-    ll.show()
-    Solution().removeNthFromEnd(ll.head, 5).val
+    # Remove the 5th node from the end: 2->3->4->5. Ans: 2.
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+    print Solution().removeNthFromEnd(head, 5).val
 
-    # After removing the 0th node from the end: 1->2->3->4->5.
-    ll = LinkedList()
-    ll.append(1)
-    ll.append(2)
-    ll.append(3)
-    ll.append(4)
-    ll.append(5)
-    ll.show()
-    print Solution().removeNthFromEnd(ll.head, 0).val
-
-    print 'Time: {}'.format(time.time() - start_time)
+    # Remove the 0th node from the end: 1->2->3->4->5. Ans: 1.
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+    print Solution().removeNthFromEnd(head, 0).val
 
 
 if __name__ == '__main__':
