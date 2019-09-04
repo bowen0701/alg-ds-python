@@ -34,7 +34,7 @@ class Solution(object):
         nums.sort()
 
         for i in range(len(nums) - 2):
-            # In sorted nums, if entry i > 0, no more triplets satisfy 3 sum.
+            # In sorted nums, if entry i > 0, no triplets can satisfy 3 sum.
             if nums[i] > 0:
                 break
             
@@ -47,13 +47,7 @@ class Solution(object):
             while l < r:
                 total = nums[i] + nums[l] + nums[r]
 
-                if total < 0:
-                    # The 3 sum is too small, increase it by moving left to right. 
-                    l += 1
-                elif total > 0:
-                    # The 3 sum is too big, decrease it by moving right to left. 
-                    r -= 1
-                elif total == 0:
+                if total == 0:
                     three_sum_ls.append([nums[i], nums[l], nums[r]])
                     # If left's right is right's left is the same as 
                     # left and right, respectively, increment it. 
@@ -63,6 +57,12 @@ class Solution(object):
                         r -= 1
                     # Checkout another triplet by incrementing left and right.
                     l += 1
+                    r -= 1
+                elif total < 0:
+                    # The 3 sum is too small, increase it by moving left to right. 
+                    l += 1
+                elif total > 0:
+                    # The 3 sum is too big, decrease it by moving right to left. 
                     r -= 1
 
         return three_sum_ls
