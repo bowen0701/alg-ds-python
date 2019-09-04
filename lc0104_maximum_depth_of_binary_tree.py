@@ -41,14 +41,14 @@ class SolutionBFS(object):
         if not root:
             return 0
 
-        result = 0
+        depth = 0
 
         # Use queue for BFS.
         queue = [root]
 
         while queue:
-            # Increment result for each level.
-            result += 1
+            # Increment depth for each level.
+            depth += 1
 
             # Vist all nodes in the same level.
             for i in range(len(queue)):
@@ -58,7 +58,7 @@ class SolutionBFS(object):
                 if current.right:
                     queue.insert(0, current.right)
 
-        return result
+        return depth
 
 
 class SolutionDFS(object):
