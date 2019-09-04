@@ -52,10 +52,6 @@ class Solution(object):
 
 
 def main():
-    import time
-
-    start_time = time.time()
-
     # Example 1: "abcabcbb" -> 3 ("abc")
     s = "abcabcbb"
     print('For {0}: {1}'.format(s, Solution().lengthOfLongestSubstring(s)))
@@ -67,8 +63,6 @@ def main():
     # Example 3: "pwwkew" -> 3 ("wke")
     s = "pwwkew"
     print('For {0}: {1}'.format(s, Solution().lengthOfLongestSubstring(s)))
-
-    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
