@@ -58,9 +58,9 @@ class Solution(object):
         Time complexity: O(log(m + n)).
         Space complexity: O(m + n).
         """
+        # Apply selection method.
         l = len(nums1) + len(nums2)
         if l % 2 == 1:
-            # l // 2 + 1 - 1 => median index of even numbers
             return self._findKth(nums1, nums2, l // 2)
         else:
             return (
@@ -69,10 +69,6 @@ class Solution(object):
 
 
 def main():
-    import time
-    
-    start_time = time.time()
-
     # Ans: 2.
     nums1 = [1, 3]
     nums2 = [2]
@@ -82,8 +78,6 @@ def main():
     nums1 = [1, 2]
     nums2 = [3, 4]
     print(Solution().findMedianSortedArrays(nums1, nums2))
-
-    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
