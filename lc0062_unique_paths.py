@@ -45,6 +45,7 @@ class SolutionMemo(object):
             # For other rows/cols, backtrack from (m - 1, n) and (m, n - 1).
             path[m][n] = (self._uniquePaths(m - 1, n, path) + 
                           self._uniquePaths(m, n - 1, path))
+
         return path[m][n]
 
     def uniquePaths(self, m, n):
@@ -101,20 +102,20 @@ def main():
     m, n = 3, 2
 
     start_time = time.time()
-    print SolutionRecur().uniquePaths(m, n)
-    print 'Recursion: {}'.format(time.time() - start_time)
+    print 'By Recur:', SolutionRecur().uniquePaths(m, n)
+    print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionMemo().uniquePaths(m, n)
-    print 'Memo: {}'.format(time.time() - start_time)
+    print 'By Memo:', SolutionMemo().uniquePaths(m, n)
+    print 'Time: {}'.format(time.time() - start_time)
     
     start_time = time.time()
-    print SolutionDp().uniquePaths(m, n)
-    print 'By DP: {}'.format(time.time() - start_time)
+    print 'By DP:', SolutionDp().uniquePaths(m, n)
+    print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionDp2().uniquePaths(m, n)
-    print 'By DP2: {}'.format(time.time() - start_time)
+    print 'By DP2:', SolutionDp2().uniquePaths(m, n)
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
