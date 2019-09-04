@@ -27,10 +27,12 @@ class TreeNode(object):
 
 class SolutionRecur(object):
     def _inorderUtil(self, root, nodes):
-        if root:
-            self._inorderUtil(root.left, nodes)
-            nodes.append(root.val)
-            self._inorderUtil(root.right, nodes)
+        if not root:
+            return None
+
+        self._inorderUtil(root.left, nodes)
+        nodes.append(root.val)
+        self._inorderUtil(root.right, nodes)
 
     def inorderTraversal(self, root):
         """
@@ -63,20 +65,18 @@ class SolutionIter(object):
         stack = []
 
         while current or stack:
-            if current:
-                # If current exists, push to stack and visit left node.
+            while current:
+                # If current exists, push to stack and visit leftmost node.
                 stack.append(current)
                 current = current.left
-            else:
-                # If current does not exist, pop stack as current.
-                current = stack.pop()
 
-                # Append current node's value to nodes.
-                nodes.append(current.val)
+            # Pop stack as current and print its value.
+            current = stack.pop()
+            nodes.append(current.val)
 
-                # Update previous & current by current & right.
-                previous = current
-                current = current.right
+            # Update previous & current by current & right.
+            current = current.right
+            previous = current
 
         return nodes
 
