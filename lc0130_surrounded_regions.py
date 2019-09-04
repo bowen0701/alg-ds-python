@@ -48,10 +48,9 @@ class SolutionDFS(object):
             board[r][c] = '*'
 
         # Visit its up, down, left and right.
-        self._dfs(r - 1, c, board)
-        self._dfs(r + 1, c, board)
-        self._dfs(r, c - 1, board)
-        self._dfs(r, c + 1, board)
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for i, j in dirs:
+            self._dfs(i, j, board)
 
     def solve(self, board):
         """
@@ -80,7 +79,7 @@ class SolutionDFS(object):
             if board[n_rows - 1][c] == 'O':
                 self._dfs(n_rows - 2, c, board)
 
-        # Then, skip boards to modify all the 'O' to 'X' or all '*' back to 'O'.
+        # Then, scan boards to modify all the 'O' to 'X' or all '*' back to 'O'.
         for r in range(1, n_rows - 1):
             for c in range(1, n_cols - 1):
                 if board[r][c] == '*':
