@@ -47,7 +47,7 @@ class Solution(object):
         Time complexity: O(n), where n is the lenght of nums.
         Space complexity: O(1).
         """
-        # Two pointer method: tail for updated array & i.
+        # Two pointer method: tail to store the distinct elements.
         tail = 0
         for i in range(1, len(nums)):
             if nums[i] != nums[tail]:
