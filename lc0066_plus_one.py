@@ -30,23 +30,23 @@ class Solution(object):
         :rtype: List[int]
 
         Time complexity: O(n), where n is the length of digits.
-        Space complexity: O(n), for worse case of total overflow.
+        Space complexity: O(n), for worse case of total carry.
         """
-        overflow = False
+        is_carry = False
 
         # Start from the last digit and reverse back to the 1st one.
         for i in reversed(range(len(digits))):
-            # Plus one only for the last digit or when overflow.
-            if overflow or i == len(digits) - 1: 
+            # Plus one only for the last digit or when carry.
+            if is_carry or i == len(digits) - 1:
                 if digits[i] + 1 < 10:
                     digits[i] += 1
                     return digits
                 else:
-                    overflow = True
+                    is_carry = True
                     digits[i] = 0
 
-        # If there is total overflow, plus to the head of digits.
-        if overflow:
+        # If there is total carry, plus to the head of digits.
+        if is_carry:
             digits.insert(0, 1)
         return digits
 
