@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Leetcode 8. String to Integer (atoi)
 Medium
 
@@ -13,7 +11,7 @@ takes an optional initial plus or minus sign followed by as many numerical
 digits as possible, and interprets them as a numerical value.
 
 The string can contain additional characters after those that form the integral 
-umber, which are ignored and have no effect on the behavior of this function.
+number, which are ignored and have no effect on the behavior of this function.
 
 If the first sequence of non-whitespace characters in str is not a valid 
 integral number, or if no such sequence exists because either str is empty or 
@@ -22,12 +20,11 @@ it contains only whitespace characters, no conversion is performed.
 If no valid conversion could be performed, a zero value is returned.
 
 Note:
-
 Only the space character ' ' is considered as whitespace character.
 Assume we are dealing with an environment which could only store integers 
-within the 32-bit signed integer range: [−231,  231 − 1]. 
-If the numerical value is out of the range of representable values, 
-INT_MAX (2^31 − 1) or INT_MIN (−2^31) is returned.
+within the 32-bit signed integer range: [-231, 231 - 1].
+If the numerical value is out of the range of representable values,
+INT_MAX (2^31 - 1) or INT_MIN (-2^31) is returned.
 
 Example 1:
 Input: "42"
@@ -55,7 +52,7 @@ Example 5:
 Input: "-91283472332"
 Output: -2147483648
 Explanation: The number "-91283472332" is out of the range of a 32-bit signed 
-integer. Thefore INT_MIN (−2^31) is returned.
+integer. Thefore INT_MIN (-2^31) is returned.
 """
 
 class Solution(object):
@@ -80,6 +77,7 @@ class Solution(object):
         while i < len(ls) and ls[i].isdigit():
             uatoi = uatoi * 10 + int(ls[i])
             i += 1
+
         atoi = sign * uatoi
 
         return max(-pow(2,31), (min(atoi, pow(2, 31) - 1)))
