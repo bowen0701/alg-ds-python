@@ -42,22 +42,24 @@ class Solution(object):
         Time complexity: O(logn).
         Space complexity: O(1).
         """
-        start = 1
-        final = n
+        # Apply variant of binary search.
+        start, end = 1, n
 
-        while final - start > 0:
-            middle = start + (final - start) // 2
-            if isBadVersion(middle):
+        while start < end:
+            mid = start + (end - start) // 2
+
+            if isBadVersion(mid):
                 # Since middle is bad, use it as next final.
-                final = middle
+                end = mid
             else:
                 # Since middle is good, use its next as next start.
-                start = middle + 1
+                start = mid + 1
 
-        return final
+        return end
 
 
 def main():
+    # Ans: 1001.
     global VERSION_FAILURES
     VERSION_FAILURES = [False] * 1000 + [True] * 100
     n = len(VERSION_FAILURES)
