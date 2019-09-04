@@ -84,13 +84,10 @@ class SolutionIter(object):
         Time complexity: O(n1 + n2), where ni is the length of list i.
         Space complexity: O(1).
         """
-        if l1 and not l2:
-            return l1
-        elif not l1 and l2:
-            return l2
+        if not l1 or not l2:
+            return l1 or l2
 
         pre_head = ListNode(None)
-
         current = pre_head
 
         while l1 and l2:
