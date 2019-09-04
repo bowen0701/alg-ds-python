@@ -46,7 +46,6 @@ class SolutionRecur(object):
             
             if node.next:
                 node.right.next = node.next.left
-        
             self.connect(node.left)
             self.connect(node.right)
 
