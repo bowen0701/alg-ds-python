@@ -50,6 +50,37 @@ class SolutionRecur(object):
         return vals
 
 
+class SolutionIter(object):
+    def postorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        if not root:
+            return []
+
+        # Collect revsersed values.
+        rev_vals = []
+
+        stack = [root]
+
+        while stack:
+            current = stack.pop()
+            rev_vals.append(current.val)
+
+            # Push left before right since we use stack with FILO.
+            if current.left:
+                stack.append(current.left)
+
+            if current.right:
+                stack.append(current.right)
+
+        return rev_vals[::-1]
+
+
 def main():
     # Input: [1,null,2,3]
     #    1
@@ -61,7 +92,9 @@ def main():
     root = TreeNode(1)
     root.right = TreeNode(2)
     root.right.left = TreeNode(3)
+
     print SolutionRecur().postorderTraversal(root)
+    print SolutionIter().postorderTraversal(root)
 
 
 if __name__ == '__main__':
