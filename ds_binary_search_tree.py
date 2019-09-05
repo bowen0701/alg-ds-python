@@ -366,19 +366,19 @@ def main():
     bst.insert_iter(5)
     bst.insert_iter(8)
 
-    # Inorder walk: 2, 5, 5, 6, 7, 8.
+    # Inorder walk: 2, 4, 5, 6, 7, 8.
     print('Inorder traversal by recursion:')
     bst.inorder_traverse_recur(bst.root)
     print('Inorder traversal by iteration:')
     bst.inorder_traverse_iter(bst.root)
 
-    # Preorder walk: 6, 5, 2, 5, 7, 8.
+    # Preorder walk: 6, 4, 2, 5, 7, 8.
     print('Preorder traversal by recursion:')
     bst.preorder_traverse_recur(bst.root)
     print('Preorder traversal by iteration:')
     bst.preorder_traverse_iter(bst.root)
 
-    # Postorder walk: 2, 5, 5, 8, 7, 6.
+    # Postorder walk: 2, 5, 4, 8, 7, 6.
     print('Postorder traversal by recursion:')
     bst.postorder_traverse_recur(bst.root)
     print('Postorder traversal by iteration:')
