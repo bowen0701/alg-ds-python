@@ -13,7 +13,6 @@ Input: [1,null,2,3]
      2
     /
    3
-
 Output: [3,2,1]
 Follow up: Recursive solution is trivial, could you do it iteratively?
 """
@@ -26,17 +25,43 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def _postorderRecur(self, root, vals):
+        if not root:
+            return None
+
+        self._postorderRecur(root.left, vals)
+        self._postorderRecur(root.right, vals)
+        vals.append(root.val)
+
     def postorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        if not root:
+            return []
+
+        vals = []
+        self._postorderRecur(root, vals)
+        return vals
 
 
 def main():
-    pass
+    # Input: [1,null,2,3]
+    #    1
+    #     \
+    #      2
+    #     /
+    #    3
+    # Output: [3,2,1]
+    root = TreeNode(1)
+    root.right = TreeNode(2)
+    root.right.left = TreeNode(3)
+    print SolutionRecur().postorderTraversal(root)
 
 
 if __name__ == '__main__':
