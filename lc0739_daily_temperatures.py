@@ -1,6 +1,8 @@
 """Leetcode 739. Daily Temperatures
 Medium
 
+URL: https://leetcode.com/problems/daily-temperatures
+
 Given a list of daily temperatures T, return a list such that, for each day 
 in the input, tells you how many days you would have to wait until a warmer 
 temperature. If there is no future day for which this is possible, put 0 
@@ -22,16 +24,18 @@ class SolutionNaive(object):
         Time complexity: O(n^2).
         Space complexity: O(n).
         """
-        D = [0] * len(T)
+        days = [0] * len(T)
+
         for i, t in enumerate(T):
             for j in range(i + 1, len(T)):
                 if T[j] > t:
-                    D[i] = j - i
+                    days[i] = j - i
                     break
-        return D
+
+        return days
 
 
-class Solution(object):
+class SolutionStack(object):
     def dailyTemperatures(self, T):
         """
         :type T: List[int]
@@ -40,14 +44,21 @@ class Solution(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        D = [0] * len(T)
-        stack = []
-        for i, t in enumerate(T):
-            while stack and T[stack[-1]] < t:
-                current = stack.pop()
-                D[current] = i - current
-            stack.append(i)
-        return D
+        days = [0] * len(T)
+
+        # Create a stack to track posisions to be filled.
+        fill_pos_stack = []
+
+        for pos, t in enumerate(T):
+            # Everytime a higher temperature is found, 
+            # update days by position stack' peak.
+            while fill_pos_stack and T[fill_pos_stack[-1]] < t:
+                prev_pos = fill_pos_stack.pop()
+                days[prev_pos] = pos - prev_pos
+
+            fill_pos_stack.append(pos)
+
+        return days
 
 
 def main():
@@ -57,11 +68,11 @@ def main():
     # Ans: [1, 1, 4, 2, 1, 1, 0, 0]
   
     start_time = time.time()
-    print 'Naive: {}'.format(SolutionNaive().dailyTemperatures(T))
+    print 'By naive: {}'.format(SolutionNaive().dailyTemperatures(T))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Stack: {}'.format(Solution().dailyTemperatures(T))
+    print 'By stack: {}'.format(SolutionStack().dailyTemperatures(T))
     print 'Time: {}'.format(time.time() - start_time)
 
 
