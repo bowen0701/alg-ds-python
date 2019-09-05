@@ -35,7 +35,7 @@ class SolutionNaive(object):
         return lps
 
 
-class SolutionDP(object):
+class SolutionDp(object):
     def longestPalindrome(self, s):
         """
         :type s: str
@@ -66,10 +66,10 @@ class SolutionDP(object):
                 start = i
                 max_len = 2
 
-        # Use two pointer method with start i & end j to
+        # Use two pointer method with start i & end j in gaps >= 2 to
         # check they are equal and substring from i+1 to j-1 is palindrome. 
         for j in range(2, n):
-            for i in range(0, j):
+            for i in range(0, j - 1):
                 if s[i] == s[j] and T[i + 1][j - 1]:
                     T[i][j] = True
                     if j - i + 1 > max_len:
@@ -124,7 +124,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
+    print('By DP: {}'.format(SolutionDp().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
@@ -138,7 +138,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
+    print('By DP: {}'.format(SolutionDp().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
@@ -152,7 +152,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
+    print('By DP: {}'.format(SolutionDp().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
