@@ -331,8 +331,10 @@ class BinarySearchTree(object):
         if not root:
             return None
 
-        stack = [root]
+        # Collect revsersed traverses.
         rev_traverses = []
+
+        stack = [root]
 
         while stack:
             current = stack.pop()
