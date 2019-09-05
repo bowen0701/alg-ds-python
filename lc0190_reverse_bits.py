@@ -32,12 +32,40 @@ Note:
 class SolutionIter:
     # @param n, an integer
     # @return an integer
+    # Time complexity: O(1).
+    # Space complexity: O(1)
     def reverseBits(self, n):
-        pass
+        bits = [0] * 32
+        i = 0
+
+        while n:
+            bits[i] = n % 2
+            n /= 2
+            i += 1
+
+        res = 0
+        for i in range(32):
+            res = res * 2 + bits[i]
+
+        return res
+
+
+class SolutionBin:
+    # @param n, an integer
+    # @return an integer
+    # Time complexity: O(1).
+    # Space complexity: O(1)
+    def reverseBits(self, n):
+        # Pad zeros before bin_n to 32 bits, reverse it, and convert to int.
+        bin_n = bin(n)[2:]
+        return int(('0' * (32 - len(bin_n)) + bin_n)[::-1], 2)
 
 
 def main():
-    pass
+    # Ans: 964176192
+    n = 43261596
+    print SolutionIter().reverseBits(n)
+
 
 
 if __name__ == '__main__':
