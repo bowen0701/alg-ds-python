@@ -336,7 +336,7 @@ class BinarySearchTree(object):
 
         while stack:
             current = stack.pop()
-            rev_traverses.insert(0, current.val)
+            rev_traverses.append(current.val)
 
             # Push left before right since we use stack with FILO.
             if current.left:
@@ -345,7 +345,7 @@ class BinarySearchTree(object):
             if current.right:
                 stack.append(current.right)
 
-        for val in rev_traverses:
+        for val in rev_traverses[::-1]:
             print(val)
 
 
