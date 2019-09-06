@@ -36,17 +36,25 @@ Follow up:
 If this function is called many times, how would you optimize it?
 """
 
-class Solution(object):
+class SolutionIter(object):
     def hammingWeight(self, n):
         """
         :type n: int
         :rtype: int
         """
-        pass
+        bits = [0] * 32
+        pos = 31
+        while n:
+            bits[pos] = n % 2
+            n = n // 2
+            pos -= 1
+
+        return sum(bits)
 
 
 def main():
-    pass
+    n = 11
+    print SolutionIter().hammingWeight(n)
 
 
 if __name__ == '__main__':
