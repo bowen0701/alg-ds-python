@@ -41,6 +41,9 @@ class SolutionIter(object):
         """
         :type n: int
         :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
         bits = [0] * 32
         pos = 31
@@ -52,9 +55,22 @@ class SolutionIter(object):
         return sum(bits)
 
 
+class SolutionBin(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(1).
+        """
+        return bin(n).count('1')
+
+
 def main():
     n = 11
     print SolutionIter().hammingWeight(n)
+    print SolutionBin().hammingWeight(n)
 
 
 if __name__ == '__main__':
