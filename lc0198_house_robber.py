@@ -28,17 +28,40 @@ Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and
              Total amount you can rob = 2 + 9 + 1 = 12.
 """
 
-class Solution(object):
+class SolutionRecur(object):
+    def _recur(self, nums, n):
+        if n < 0:
+            return 0
+
+        # To rob or not to rob house n:
+        # T[n] = max(nums[n] + T[n-2], T[n-1]).
+        amount_in_n = nums[n] + self._recur(nums, n - 2)
+        amount_ex_n = self._recur(nums, n - 1)
+        return max(amount_in_n, amount_ex_n)
+
     def rob(self, nums):
         """
         :type nums: List[int]
         :rtype: int
+
+        Time complexity: O(2^n).
+        Space complexity: O(n).
         """
-        pass
+        # Apply top-down recursion.
+        if not nums:
+            return 0
+
+        return self._recur(nums, len(nums) - 1)
 
 
 def main():
-    pass
+    # Output: 4.
+    nums = [1,2,3,1]
+    print SolutionRecur().rob(nums)
+
+    # Outpyt: 12.
+    nums = [2,7,9,3,1]
+    print SolutionRecur().rob(nums) 
 
 
 if __name__ == '__main__':
