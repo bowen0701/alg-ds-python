@@ -54,14 +54,48 @@ class SolutionRecur(object):
         return self._recur(nums, len(nums) - 1)
 
 
+class SolutionMemo(object):
+    def _recurMemo(self, nums, n, T):
+        if n < 0:
+            return 0
+
+        if T[n]:
+            return T[n]
+
+        # To rob or not to rob house n:
+        # T[n] = max(nums[n] + T[n-2], T[n-1]).
+        amount_in_n = nums[n] + self._recurMemo(nums, n - 2, T)
+        amount_ex_n = self._recurMemo(nums, n - 1, T)
+        T[n] = max(amount_in_n, amount_ex_n)
+        return T[n]
+
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        # Apply top-down recursion with memoization.
+        if not nums:
+            return 0
+
+        T = [None] * len(nums)
+
+        return self._recurMemo(nums, len(nums) - 1, T)
+
+
 def main():
     # Output: 4.
     nums = [1,2,3,1]
     print SolutionRecur().rob(nums)
+    print SolutionMemo().rob(nums)
 
     # Outpyt: 12.
     nums = [2,7,9,3,1]
     print SolutionRecur().rob(nums) 
+    print SolutionMemo().rob(nums)
 
 
 if __name__ == '__main__':
