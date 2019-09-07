@@ -114,18 +114,46 @@ class SolutionDp(object):
         return T[-1]
 
 
+class SolutionIter(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        # Apply bottom-up dynamic programming w/ iteration.
+        if not nums:
+            return 0
+
+        if len(nums) == 1:
+            return nums[0]
+
+        # If only 1 or 2 houses, get the max amount.
+        a = nums[0]
+        b = max(nums[0], nums[1])
+
+        for i in range(2, len(nums)):
+            a, b = b, max(nums[i] + a, b)
+
+        return b
+
+
 def main():
     # Output: 4.
     nums = [1,2,3,1]
     print SolutionRecur().rob(nums)
     print SolutionMemo().rob(nums)
     print SolutionDp().rob(nums)
+    print SolutionIter().rob(nums)
 
     # Outpyt: 12.
     nums = [2,7,9,3,1]
     print SolutionRecur().rob(nums) 
     print SolutionMemo().rob(nums)
     print SolutionDp().rob(nums)
+    print SolutionIter().rob(nums)
 
 
 if __name__ == '__main__':
