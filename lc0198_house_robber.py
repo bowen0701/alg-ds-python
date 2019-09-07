@@ -86,16 +86,46 @@ class SolutionMemo(object):
         return self._recurMemo(nums, len(nums) - 1, T)
 
 
+class SolutionDp(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        # Apply bottom-up dynamic programming.
+        if not nums:
+            return 0
+
+        if len(nums) == 1:
+            return nums[0]
+
+        T = [0] * len(nums)
+
+        # If only 1 or 2 houses, get the max amount.
+        T[0] = nums[0]
+        T[1] = max(nums[0], nums[1])
+
+        for i in range(2, len(nums)):
+            T[i] = max(nums[i] + T[i-2], T[i-1])
+
+        return T[-1]
+
+
 def main():
     # Output: 4.
     nums = [1,2,3,1]
     print SolutionRecur().rob(nums)
     print SolutionMemo().rob(nums)
+    print SolutionDp().rob(nums)
 
     # Outpyt: 12.
     nums = [2,7,9,3,1]
     print SolutionRecur().rob(nums) 
     print SolutionMemo().rob(nums)
+    print SolutionDp().rob(nums)
 
 
 if __name__ == '__main__':
