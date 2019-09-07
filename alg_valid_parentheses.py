@@ -19,7 +19,8 @@ def valid_parentheses(s):
             # If c is open parenthesis, push to stack.
             stack.append(c)
             continue
-        elif c in ')]}':
+        
+        if c in ')]}':
             # Check if there is still open parenthesis.
             if not stack:
                 return False
