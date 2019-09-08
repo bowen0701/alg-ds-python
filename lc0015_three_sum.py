@@ -38,7 +38,7 @@ class Solution(object):
             if nums[i] > 0:
                 break
             
-            # To avoid duplicate triplets.
+            # Check the previous num to avoid duplicates.
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
 
@@ -49,8 +49,8 @@ class Solution(object):
 
                 if total == 0:
                     three_sum_ls.append([nums[i], nums[l], nums[r]])
-                    # If left's right is right's left is the same as 
-                    # left and right, respectively, increment it. 
+                    # If left's right and right's left is the same as left and 
+                    # right, respectively, increment it to avoid duplicates.
                     while l < r and nums[l] == nums[l + 1]:
                         l += 1
                     while l < r and nums[r] == nums[r - 1]:
