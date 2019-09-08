@@ -21,6 +21,9 @@ class SolutionTwoPointers(object):
         """
         :type c: int
         :rtype: bool
+
+        Time complexity: O(sqrt(c)).
+        Space complexity: O(1).
         """
         # Apply binary search in [0, c^0.5].
         l, r = 0, int(c ** 0.5)
