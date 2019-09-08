@@ -16,17 +16,34 @@ Input: 3
 Output: False
 """
 
-class Solution(object):
+class SolutionTwoPointers(object):
     def judgeSquareSum(self, c):
         """
         :type c: int
         :rtype: bool
         """
-        pass
+        # Apply binary search in [0, c^0.5].
+        l, r = 0, int(c ** 0.5)
+        while l <= r:
+            ss = l ** 2 + r ** 2
+            if ss == c:
+                return True
+            elif ss < c:
+                l += 1
+            else:
+                r -= 1
+
+        return False
 
 
 def main():
-    pass
+    # Output: True.
+    c = 5
+    print SolutionTwoPointers().judgeSquareSum(c)
+
+    # Output: False.
+    c = 3
+    print SolutionTwoPointers().judgeSquareSum(c)    
 
 
 if __name__ == '__main__':
