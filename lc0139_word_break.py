@@ -49,7 +49,8 @@ class SolutionDp(object):
 
         for i in range(1, n + 1):
             for w in wordDict:
-                # Check index is valid, the left & right parts are matched. 
+                # Check index is valid, the previous word is breakable, and
+                # the partial word is in word dict. 
                 if i - len(w) >= 0 and T[i - len(w)] and s[(i - len(w)):i] == w:
                     T[i] = True
                     break
