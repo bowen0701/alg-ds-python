@@ -28,11 +28,34 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        pass
+        sum_squares = set()
+
+        while True:
+            # Compute sum of squares.
+            ss = 0
+            while n:
+                n, d = n // 10, n % 10
+                ss += d ** 2
+
+            if ss == 1:
+                return True
+            elif ss in sum_squares:
+                # If sum of squares occurred before.
+                return False
+            else:
+                # If new sum of squares, add it to set and update n.
+                sum_squares.add(ss)
+                n = ss
 
 
 def main():
-    pass
+    # Output: True.
+    n = 19
+    print Solution().isHappy(n)
+
+    # Output: False.
+    n = 14
+    print Solution().isHappy(n)
 
 
 if __name__ == '__main__':
