@@ -3,7 +3,8 @@ Medium
 
 URL: https://leetcode.com/problems/palindrome-partitioning/
 
-Given a string s, partition s such that every substring of the partition is a palindrome.
+Given a string s, partition s such that 
+every substring of the partition is a palindrome.
 
 Return all possible palindrome partitioning of s.
 
@@ -16,34 +17,42 @@ Output:
 ]
 """
 
-
 class Solution(object):
-    def _backtrack(self, result, temps, s, start):
+    def _backtrack(self, result, tmps, s, start):
         if start == len(s):
-            result.append(temps[:])
+            # Check partial string with start len(s): empty string ''.
+            # Palindrom partition is completed.
+            result.append(tmps[:])
             return None
 
         for i in range(start, len(s)):
-            # Check if palindrome.
+            # Check partial string s[start:i+1] is palindrome.
             partial = s[start:i+1]
             if partial == partial[::-1]:
-                temps.append(s[start:i+1])
-                self._backtrack(result, temps, s, i + 1)
-                temps.pop()
+                # If yes, append it to tmps.
+                tmps.append(partial)
+
+                # Further check the remaining string is also a palinfrome.
+                self._backtrack(result, tmps, s, i + 1)
+
+                # Backtrack by popping out the top tmps.
+                tmps.pop()
 
     def partition(self, s):
         """
         :type s: str
         :rtype: List[List[str]]
 
-        Time complexity: O(n * 2^n), where n is the length of s.
+        Time complexity: O(n*2^n), where n is the length of s.
         Space complexity: O(n).
         """
         # Apply backtracking.
         result = []
-        temps = []
+        tmps = []
+
         start = 0
-        self._backtrack(result, temps, s, start)
+        self._backtrack(result, tmps, s, start)
+
         return result
 
 
