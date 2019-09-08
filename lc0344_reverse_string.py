@@ -20,19 +20,30 @@ Input: ["H","a","n","n","a","h"]
 Output: ["h","a","n","n","a","H"]
 """
 
-class Solution(object):
+class SolutionTwoPointer(object):
     def reverseString(self, s):
         """
         :type s: List[str]
         :rtype: None Do not return anything, modify s in-place instead.
         """
-        pass
-
+        # Apply two pointer method.
+        left, right = 0, len(s) - 1
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
 
 
 def main():
-    pass
+    # Output: ["o","l","l","e","h"]
+    s = ["h","e","l","l","o"]
+    SolutionTwoPointer().reverseString(s)
+    print s
 
+    # Output: ["h","a","n","n","a","H"]
+    s = ["H","a","n","n","a","h"]
+    SolutionTwoPointer().reverseString(s)
+    print s
 
 if __name__ == '__main__':
     main()
