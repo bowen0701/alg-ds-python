@@ -32,36 +32,16 @@ class Solution(object):
         x_str = str(x)
         return x_str == x_str[::-1]
 
-class Solution2(object):
-    def isPalindrome(self, x):
-        """
-        :type x: int
-        :rtype: bool
-        """
-        if x < 0:
-            return False
-
-        ls = []
-        while x > 0:
-            div, mod = divmod(x, 10)
-            x = div
-            ls.append(mod)
-
-        return ls == ls[::-1]
-
 
 def main():
     x = 121  # Ans: True.
     print(Solution().isPalindrome(x))
-    print(Solution2().isPalindrome(x))
 
     x = -121  # Ans: False.
     print(Solution().isPalindrome(x))
-    print(Solution2().isPalindrome(x))
 
     x = 10  # Ans: False.
     print(Solution().isPalindrome(x))
-    print(Solution2().isPalindrome(x))
 
 
 if __name__ == '__main__':
