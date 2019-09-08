@@ -28,26 +28,32 @@ class SolutionLeftRight(object):
         """
         size = len(nums)
 
-        # Compute left_prods as product of numbers left to and including nums[i].
+        # Compute left_prods as product of left numbers and nums[i].
         left_prods = [1] * size
         left_prods[0] = nums[0]
+
         for i in range(1, size):
             left_prods[i] = left_prods[i - 1] * nums[i]
 
-        # Compute right_prods as product of numbers right to and including nums[i].
+        # Compute right_prods as product of right numbers and nums[i].
         right_prods = [1] * size
         right_prods[size - 1] = nums[size - 1]
+
         for i in range(size - 2, -1, -1):
             right_prods[i] = right_prods[i + 1] * nums[i]
 
-        # Multiply left_prods and right_prods excludong nums[i].
+        # Multiply left_prods and right_prods excluding nums[i].
         prods = [1] * size
+
         for i, n in enumerate(nums):
             if i - 1 < 0:
+                # Leftmost = neighbor's right product.
                 prods[i] = right_prods[i + 1]
             elif i + 1 >= size:
+                # Rightmost = neighbor's left product.
                 prods[i] = left_prods[i - 1]
             if i - 1 >= 0 and i + 1 < size:
+                # Middles = product of neighbors's left & right products.
                 prods[i] = left_prods[i - 1] * right_prods[i + 1]
 
         return prods
@@ -66,10 +72,12 @@ class Solution(object):
         prods = [1] * size
 
         # Compute prods as product of numbers left to nums[i].
+        # Say nums: [a, b, c, d] => prods: [1, a, ab, abc].
         for i in range(1, size):
             prods[i] = prods[i - 1] * nums[i - 1]
 
-        # Multiply prods and product of numbers right to nums[i].
+        # Product prods and product of numbers right to nums[i],
+        # by right_prods: bcd <- cd <- d <- 1.
         right_prods = 1
         for i in range(size - 1, -1, -1):
             prods[i] *= right_prods
