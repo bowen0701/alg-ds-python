@@ -46,9 +46,11 @@ class Solution(object):
         T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
 
         for j in range(n2 + 1):
+            # If word1 = ''.
             T[0][j] = j
 
         for i in range(n1 + 1):
+            # If word2 = ''.
             T[i][0] = i
 
         for i in range(1, n1 + 1):
