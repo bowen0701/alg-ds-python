@@ -26,17 +26,18 @@ class SolutionDp(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        sums = [0] * len(nums)
-        sums[0] = nums[0]
-        max_sum = sums[0]
+        cur_max_sums = [0] * len(nums)
+        cur_max_sums[0] = nums[0]
+        global_max_sum = cur_max_sums[0]
 
-        for i in range(1, len(sums)):
-        	# Compute current max subarray sum before pos i.  
-        	sums[i] = max(sums[i - 1] + nums[i], nums[i])
+        for i in range(1, len(nums)):
+        	# Compute current max subarray sum before pos i.
+            # T[i] = max(T[i-1] + nums[i], nums[i])
+        	cur_max_sums[i] = max(cur_max_sums[i - 1] + nums[i], nums[i])
         	# Update global max sum before pos i.
-        	max_sum = max(max_sum, sums[i])
+        	global_max_sum = max(global_max_sum, cur_max_sums[i])
 
-        return max_sum
+        return global_max_sum
 
 
 class SolutionIter(object):
@@ -50,13 +51,13 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """        
-        current_max_sum = global_max_sum = nums[0]
+        cur_max_sum = global_max_sum = nums[0]
 
         for i in range(1, len(nums)):
         	# Track current max subarray sum before pos i.
-        	current_max_sum = max(current_max_sum + nums[i], nums[i])
+        	cur_max_sum = max(cur_max_sum + nums[i], nums[i])
         	# Update global max sum before pos i.
-        	global_max_sum = max(global_max_sum, current_max_sum)
+        	global_max_sum = max(global_max_sum, cur_max_sum)
 
         return global_max_sum
 
