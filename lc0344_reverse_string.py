@@ -20,7 +20,7 @@ Input: ["H","a","n","n","a","h"]
 Output: ["h","a","n","n","a","H"]
 """
 
-class SolutionTwoPointer(object):
+class SolutionTwoPointers(object):
     def reverseString(self, s):
         """
         :type s: List[str]
@@ -40,12 +40,12 @@ class SolutionTwoPointer(object):
 def main():
     # Output: ["o","l","l","e","h"]
     s = ["h","e","l","l","o"]
-    SolutionTwoPointer().reverseString(s)
+    SolutionTwoPointers().reverseString(s)
     print s
 
     # Output: ["h","a","n","n","a","H"]
     s = ["H","a","n","n","a","h"]
-    SolutionTwoPointer().reverseString(s)
+    SolutionTwoPointers().reverseString(s)
     print s
 
 if __name__ == '__main__':
