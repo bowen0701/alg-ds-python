@@ -36,7 +36,7 @@ class Solution(object):
         if not nums:
             return -1
 
-        # Note that pivot is nums[0].
+        # Fixed pivot is nums[0].
         pivot = nums[0]
 
         first, last = 0, len(nums) - 1
@@ -53,18 +53,18 @@ class Solution(object):
             else:
                 split_bool = True
 
-            if split_bool:
-                # If splitted, apply binary search based on pivot.
-                if target < pivot:
-                    first = mid + 1
-                else:
-                    last = mid - 1
-            else:
+            if not split_bool:
                 # If not splitted, apply normal binary search.
                 if target < nums[mid]:
                     last = mid - 1
                 else:
                     first = mid + 1
+            else:
+                # If splitted, apply binary search based on pivot.
+                if target < pivot:
+                    first = mid + 1
+                else:
+                    last = mid - 1
 
         if nums[first] == target:
             return first
