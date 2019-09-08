@@ -40,7 +40,7 @@ import random
 
 
 class SolutionSelect(object):
-    def _select_mth_smallest_sub_nums(self, sub_nums, mth):
+    def _select_mth_smallest_sub_nums(self, sub_nums, m):
         # Randomly select a num in sub array as pivot.
         pivot_idx = random.choice(range(len(sub_nums)))
         pivot = sub_nums[pivot_idx]
@@ -53,18 +53,18 @@ class SolutionSelect(object):
         n_small = len(small_idx)
         n_mid = len(mid_idx)
 
-        if mth <= n_small:
-            # Select the mth from small nums.
+        if m <= n_small:
+            # Select the m from small nums.
             small_nums = [sub_nums[idx] for idx in small_idx]
-            return self._select_mth_smallest_sub_nums(small_nums, mth)
-        elif n_small < mth <= n_small + n_mid:
-            # Select pivot as the mth.
+            return self._select_mth_smallest_sub_nums(small_nums, m)
+        elif n_small < m <= n_small + n_mid:
+            # Select pivot as the m.
             return pivot
-        elif mth > n_small + n_mid:
-            # Select the mth from large nums.
+        elif m > n_small + n_mid:
+            # Select the m from large nums.
             large_nums = [sub_nums[idx] for idx in large_idx]
             return self._select_mth_smallest_sub_nums(
-                large_nums, mth - n_small - n_mid)
+                large_nums, m - n_small - n_mid)
 
     def medianSlidingWindow(self, nums, k):
         """
@@ -131,12 +131,11 @@ class SolutionSortAndBinarySearch(object):
         window = sorted(nums[:k])
 
         # Apply two pointers method with to-be-removed & to-be-added elements.
+        # The last zippped pair is to add the last median only.
         for old, new in zip(nums, nums[k:] + [None]):
-            # The last zippped pair is to add the last median only.
             medians.append((window[k // 2] + window[~(k // 2)]) / 2.0)
 
             # Apply binary search to remove old element from sorted window.
-            # window.remove(old)
             old_pos = self._binary_search(window, k, old)
             window.pop(old_pos)
             
