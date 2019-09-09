@@ -34,17 +34,65 @@ Note:
 - The cells are adjacent in only four directions: up, down, left and right.
 """
 
-class Solution(object):
+class SolutionBFS(object):
     def updateMatrix(self, matrix):
         """
         :type matrix: List[List[int]]
         :rtype: List[List[int]]
         """
-        pass
+        n_rows, n_cols = len(matrix), len(matrix[0])
+
+        # Use queue for BFS.
+        queue = []
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if matrix[r][c] == 0:
+                    # Just explore from cells with value 0.
+                    queue.append((r, c))
+                else:
+                    # For cell with value != 0, update its distance to inf.
+                    matrix[r][c] = float('inf')
+
+        # Visiting directions.
+        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+        # BFS explore from cells with value 0.
+        while queue:
+            r, c = queue.pop()
+            for r_dir, c_dir in dirs:
+                r_visit, c_visit = r + r_dir, c + c_dir
+
+                # If visiting is out of boundary or does not shorten distance.
+                if (r_visit < 0 or r_visit >= n_rows or
+                    c_visit < 0 or c_visit >= n_cols or
+                    matrix[r_visit][c_visit] < matrix[r][c] + 1):
+                    continue
+
+                matrix[r_visit][c_visit] = matrix[r][c] + 1
+                queue.insert(0, (r_visit, c_visit))
+
+        return matrix
 
 
 def main():
-    pass
+    # Output:
+    # [[0,0,0],
+    #  [0,1,0],
+    #  [0,0,0]]
+    matrix = [[0,0,0],
+              [0,1,0],
+              [0,0,0]]
+    print SolutionBFS().updateMatrix(matrix)
+
+    # Output:
+    # [[0,0,0],
+    #  [0,1,0],
+    #  [1,2,1]]
+    matrix = [[0,0,0],
+              [0,1,0],
+              [1,1,1]]
+    print SolutionBFS().updateMatrix(matrix)    
 
 
 if __name__ == '__main__':
