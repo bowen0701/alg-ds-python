@@ -57,14 +57,14 @@ class SolutionSteps(object):
         steps = 0
 
         while queue:
-            size = len(queue)
-
-            for _ in range(size):
+            for _ in range(len(queue)):
                 r, c = queue.pop()
 
+                # Visiting directions.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
 
                 for r_neighbor, c_neighbor in dirs:
+                    # If is out of boundary or visited, skip visiting.
                     if (r_neighbor < 0 or r_neighbor >= n_rows or 
                         c_neighbor < 0 or c_neighbor >= n_cols or
                         grid[r_neighbor][c_neighbor] == 'D'):
@@ -109,20 +109,21 @@ class SolutionDistances(object):
         steps_d[(0, 0)] = 0
 
         while queue:
-            size = len(queue)
-
-            for _ in range(size):
+            for _ in range(len(queue)):
                 r, c = queue.pop()
 
+                # Visiting directions.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
 
                 for r_neighbor, c_neighbor in dirs:
+                    # If is out of boundary or visited, skip visiting.
                     if (r_neighbor < 0 or r_neighbor >= n_rows or 
                         c_neighbor < 0 or c_neighbor >= n_cols or
                         grid[r_neighbor][c_neighbor] == 'D'):
                         continue
 
                     if grid[r_neighbor][c_neighbor] == 'X':
+                        # Update the desitination's distance.
                         steps_d[(r_neighbor, c_neighbor)] =  steps_d[(r, c)] + 1
                         break
                     
@@ -130,6 +131,7 @@ class SolutionDistances(object):
                         # Update grid to mark as visited.
                         grid[r_neighbor][c_neighbor] = 'D'
 
+                        # Update the neighbor's distance.
                         steps_d[(r_neighbor, c_neighbor)] =  steps_d[(r, c)] + 1
                         queue.insert(0, (r_neighbor, c_neighbor))
 
@@ -140,7 +142,7 @@ class SolutionDistances(object):
 
 
 def main():
-    # Ans: 5.
+    # Output: 5.
     grid = [['O', 'O', 'O', 'O'],
             ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
@@ -148,7 +150,7 @@ def main():
     print SolutionSteps().treasureIsland(grid)
 
     grid = [['O', 'O', 'O', 'O'],
-            ['D', 'D', 'D', 'O'],
+            ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
     print SolutionDistances().treasureIsland(grid)
