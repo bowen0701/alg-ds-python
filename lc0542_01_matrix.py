@@ -88,6 +88,11 @@ class SolutionDP(object):
         """
         :type matrix: List[List[int]]
         :rtype: List[List[int]]
+
+        Time complexity: O(mn), where
+          - m: number of rows
+          - n: number of columns
+        Space complexity: O(1).
         """
         if not matrix or not matrix[0]:
             return matrix
