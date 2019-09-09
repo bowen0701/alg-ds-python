@@ -26,6 +26,7 @@ class SolutionBackTrack(object):
     def _backtrack(self, result, temps, nums, start):
         result.append(temps[:])
 
+        # For start, add nums[i] and DFS i+1, and then pop for backtrack.
         for i in range(start, len(nums)):
             temps.append(nums[i])
             self._backtrack(result, temps, nums, i + 1)
@@ -42,8 +43,10 @@ class SolutionBackTrack(object):
         # Apply backtracking.
         result = []
         temps = []
+
         start = 0
         self._backtrack(result, temps, nums, start)
+        
         return result
 
 
@@ -59,6 +62,7 @@ class SolutionBFS(object):
         # Apply DFS.
         result = [[]]
         for n in nums:
+            # Accumulate result: [[], [1], [2], [1, 2], [3], [1, 3], [1, 2, 3]].
             result += [res + [n] for res in result]
         return result
 
