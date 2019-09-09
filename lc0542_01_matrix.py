@@ -39,6 +39,11 @@ class SolutionBFS(object):
         """
         :type matrix: List[List[int]]
         :rtype: List[List[int]]
+
+        Time complexity: O(mn), where
+          - m: number of rows
+          - n: number of columns
+        Space complexity: O(1).
         """
         n_rows, n_cols = len(matrix), len(matrix[0])
 
