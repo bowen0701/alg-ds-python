@@ -50,8 +50,9 @@ class SolutionBit(object):
         Space complexity: O(1).
         """
         num = nums[0]
-        for n in nums[1:]:
-            num ^= n
+        for i, n in enumerate(nums):
+            if i > 0:
+                num ^= n
         return num
 
 
