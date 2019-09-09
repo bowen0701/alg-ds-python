@@ -61,13 +61,7 @@ class SolutionSieve(object):
             for j in range(i * i, n, i):
                 primes[j] = 0
 
-        count = 0
-        for i in range(2, n):
-            if primes[i]:
-                count += 1
-
-        return count
-        
+        return sum(primes)
 
 
 def main():
