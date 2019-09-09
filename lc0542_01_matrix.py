@@ -45,6 +45,9 @@ class SolutionBFS(object):
           - n: number of columns
         Space complexity: O(1).
         """
+        if not matrix or not matrix[0]:
+            return matrix
+    
         n_rows, n_cols = len(matrix), len(matrix[0])
 
         # Use queue for BFS.
@@ -80,6 +83,60 @@ class SolutionBFS(object):
         return matrix
 
 
+class SolutionDP(object):
+    def updateMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        if not matrix or not matrix[0]:
+            return matrix
+
+        n_rows, n_cols = len(matrix), len(matrix[0])
+
+        # Iterate through all cells from upper left.
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if matrix[r][c] == 0:
+                    continue
+
+                # Check its up & left.
+                if r > 0:
+                    up = matrix[r - 1][c]
+                else:
+                    up = float('inf')
+
+                if c > 0:
+                    left = matrix[r][c - 1]
+                else:
+                    left = float('inf')
+
+                # Update cell by min(up & left).
+                matrix[r][c] = min(up, left) + 1
+
+        # Iterate through all cells from bottom right, check its down & right.
+        for r in range(n_rows - 1, -1, -1):
+            for c in range(n_cols -1, -1, -1):
+                if matrix[r][c] == 0:
+                    continue
+
+                # Check its down & right.
+                if r < n_rows - 1:
+                    down = matrix[r + 1][c]
+                else:
+                    down = float('inf')
+
+                if c < n_cols - 1:
+                    right = matrix[r][c + 1]
+                else:
+                    right = float('inf')
+
+                # Update cell by min(previous result, min(down & right)).
+                matrix[r][c] = min(matrix[r][c], min(down, right) + 1)
+
+        return matrix
+
+
 def main():
     # Output:
     # [[0,0,0],
@@ -90,6 +147,11 @@ def main():
               [0,0,0]]
     print SolutionBFS().updateMatrix(matrix)
 
+    matrix = [[0,0,0],
+              [0,1,0],
+              [0,0,0]]
+    print SolutionDP().updateMatrix(matrix)
+
     # Output:
     # [[0,0,0],
     #  [0,1,0],
@@ -98,6 +160,11 @@ def main():
               [0,1,0],
               [1,1,1]]
     print SolutionBFS().updateMatrix(matrix)    
+
+    matrix = [[0,0,0],
+              [0,1,0],
+              [1,1,1]]
+    print SolutionDP().updateMatrix(matrix)
 
 
 if __name__ == '__main__':
