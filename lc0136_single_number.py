@@ -18,32 +18,6 @@ Input: [4,1,2,1,2]
 Output: 4
 """
 
-class SolutionSumSquares(object):
-    def sum_squares(self, nums):
-        ss = 0
-        for n in nums:
-            ss += pow(n, 2)
-        return ss
-
-    def singleNumber(self, nums):
-        """Lonely integer by iteration.
-
-        :type nums: List[int]
-        :rtype: int
-
-        Time complexity: O(n^2).
-        Space complexity: O(n).
-        """
-        ss_all = self.sum_squares(nums)
-
-        for i, n in enumerate(nums):
-            ss_excluded = ss_all - pow(n, 2)
-            set_excluded = set(nums[:i] + nums[(i + 1):])
-            ss_set_excluded = self.sum_squares(list(set_excluded))
-            if ss_excluded == 2 * ss_set_excluded:
-                return n
-
-
 class SolutionDict(object):
     def singleNumber(self, nums):
         """Lonely integer by naive dictionary.
@@ -55,11 +29,11 @@ class SolutionDict(object):
         """
         num_count_d = {}
     
-        for x in nums:
-            if x in num_count_d:
-                num_count_d[x] += 1
+        for n in nums:
+            if n in num_count_d:
+                num_count_d[n] += 1
             else:
-                num_count_d[x] = 1
+                num_count_d[n] = 1
 
         for num, count in num_count_d.items():
             if count == 1:
@@ -87,11 +61,6 @@ def main():
     # nums = [9, 1, 2, 3, 2, 9, 1, 7, 7]    # Single number = 3.
     # nums = [1, 3, 1, -1, 3]               # Single number = -1.
     nums = range(1000) + range(1000) + [1000]
-
-    start_time = time.time()
-    print('By sum of square: {}'
-          .format(SolutionSumSquares().singleNumber(nums)))
-    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     print('By extra dictionary: {}'
