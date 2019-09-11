@@ -26,6 +26,9 @@ class SolutionThreePointers(object):
         """
         :type nums: List[int]
         :rtype: int
+
+        Time complexity: O(n*logn + n^2) = O(n^2).
+        Space complexity: O(1).
         """
         # Apply three pointer method.
         n = len(nums)
