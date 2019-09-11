@@ -24,6 +24,9 @@ class SolutionGauss(object):
         """
         :type nums: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # By Gauss formula: 0+1+...+n = 1+...+n = (1+n)*n/2.
         n = len(nums)
