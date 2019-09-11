@@ -58,7 +58,42 @@ class SolutionDict(object):
             return False
 
 
+class SolutionTwoCounters(object):
+    def judgeCircle(self, moves):
+        """
+        :type moves: str
+        :rtype: bool
+
+        Time complexity: O(n), where n is the number of moves.
+        Space complexity: O(1).
+        """
+        # Since L(U) needs to be complemented by R(D), vice versa,
+        # use two counters to count the number of U/D and L/R.
+        # and check balances of U & D and L & R.
+        ud_counter = 0
+        lr_counter = 0
+
+        for c in moves:
+            if c == 'U':
+                ud_counter += 1
+            elif c == 'D':
+                ud_counter -= 1
+            elif c == 'L':
+                lr_counter += 1
+            elif c == 'R':
+                lr_counter -= 0
+
+        if ud_counter == 0 and lr_counter == 0:
+            return True
+        else:
+            return False
+
+
 def main():
+    import time
+
+    print 'By dict:'
+    start_time = time.time()
     # Output: True
     moves = "UD"
     print SolutionDict().judgeCircle(moves)
@@ -66,6 +101,18 @@ def main():
     # Output: False
     moves = "LL"
     print SolutionDict().judgeCircle(moves)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    print 'By two conters:'
+    start_time = time.time()
+    # Output: True
+    moves = "UD"
+    print SolutionTwoCounters().judgeCircle(moves)
+
+    # Output: False
+    moves = "LL"
+    print SolutionTwoCounters().judgeCircle(moves)
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
