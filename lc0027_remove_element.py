@@ -40,18 +40,38 @@ for (int i = 0; i < len; i++) {
 }
 """
 
-class Solution(object):
+class SolutionPointer(object):
     def removeElement(self, nums, val):
         """
         :type nums: List[int]
         :type val: int
         :rtype: int
         """
-        pass
+        # One pointer method: Track new nums's pos, starting from 0.
+        pos = 0
+        for n in nums:
+            if n != val:
+                # If this number is not val, put it in pos. Increment pos.
+                nums[pos] = n
+                pos += 1
+        return pos
 
 
 def main():
-    pass
+    # Output: 2.
+    nums = [3,2,2,3]
+    val = 3
+    print SolutionPointer().removeElement(nums, val)
+
+    # Output: 5.
+    nums = [0,1,2,2,3,0,4,2]
+    val = 2
+    print SolutionPointer().removeElement(nums, val)
+
+    # Output: 4
+    nums = [0,4,4,0,4,4,4,0,2]
+    val = 4
+    print SolutionPointer().removeElement(nums, val)
 
 
 if __name__ == '__main__':
