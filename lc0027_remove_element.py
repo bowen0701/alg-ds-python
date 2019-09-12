@@ -46,6 +46,9 @@ class SolutionPointer(object):
         :type nums: List[int]
         :type val: int
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # One pointer method: Track new nums's pos, starting from 0.
         pos = 0
