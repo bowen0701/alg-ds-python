@@ -34,6 +34,9 @@ class SolutionRecur(object):
         :type root: TreeNode
         :type sum: int
         :rtype: bool
+
+        Time complexity: O(n), where n is the number of nodes.
+        Space complexity: O(h), where h is the height of tree.
         """
         if not root:
             return False
