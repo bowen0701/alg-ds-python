@@ -28,18 +28,44 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
     def hasPathSum(self, root, sum):
         """
         :type root: TreeNode
         :type sum: int
         :rtype: bool
         """
-        pass
+        if not root:
+            return False
+
+        if not root.left and not root.right and root.val == sum:
+            return True
+
+        return (self.hasPathSum(root.left, sum - root.val) or
+                self.hasPathSum(root.right, sum - root.val))
 
 
 def main():
-    pass
+    # Given the below binary tree and sum = 22,
+    #       5
+    #      / \
+    #     4   8
+    #    /   / \
+    #   11  13  4
+    #  /  \      \
+    # 7    2      1
+    # return true, 
+    root = TreeNode(5)
+    root.left = TreeNode(4)
+    root.right = TreeNode(8)
+    root.left.left = TreeNode(11)
+    root.right.left = TreeNode(13)
+    root.right.right = TreeNode(4)
+    root.left.left.left = TreeNode(7)
+    root.left.left.right = TreeNode(2)
+    root.right.right.right = TreeNode(1)
+    sum = 22
+    print SolutionRecur().hasPathSum(root, sum)
 
 
 if __name__ == '__main__':
