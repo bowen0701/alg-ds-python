@@ -48,6 +48,37 @@ class SolutionRecur(object):
                 self.hasPathSum(root.right, sum - root.val))
 
 
+class SolutionIter(object):
+    def hasPathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: bool
+
+        Time complexity: O(n), where n is the number of nodes.
+        Space complexity: O(h), where h is the height of tree.
+        """
+        if not root:
+            return False
+
+        # Apply DFS with stack.
+        stack = [(root, sum)]
+
+        while stack:
+            cur, _sum = stack.pop()
+
+            if not cur.left and not cur.right and cur.val == _sum:
+                return True
+
+            if cur.right:
+                stack.append((cur.right, _sum - cur.val))
+
+            if cur.left:
+                stack.append((cur.left, _sum - cur.val))
+
+        return False
+
+
 def main():
     # Given the below binary tree and sum = 22,
     #       5
@@ -69,6 +100,7 @@ def main():
     root.right.right.right = TreeNode(1)
     sum = 22
     print SolutionRecur().hasPathSum(root, sum)
+    print SolutionIter().hasPathSum(root, sum)
 
 
 if __name__ == '__main__':
