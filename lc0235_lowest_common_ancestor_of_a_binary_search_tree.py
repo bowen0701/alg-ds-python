@@ -66,6 +66,32 @@ class SolutionRecur(object):
             return root
 
 
+class SolutionIter(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+
+        Time complexity: O(h), where h is the feight of tree,
+          - for balanced tree, h = logn, where n is the number of nodes.
+          - for linked list, h = n.
+        Space complexity: O(1).
+        """
+        # Check both p & q are in the node's left or right subtree. 
+        # If not, the node splits p and q, so returh the node.
+        while root:
+            if p.val < root.val and q.val < root.val:
+                root = root.left
+            elif p.val > root.val and q.val > root.val:
+                root = root.right
+            else:
+                break
+
+        return root
+
+
 def main():
     #      6
     #    /   \
@@ -89,12 +115,14 @@ def main():
     p = root.left
     q = root.right
     print SolutionRecur().lowestCommonAncestor(root, p, q).val
+    print SolutionIter().lowestCommonAncestor(root, p, q).val
 
     # Input: p = 2, q = 4
     # Output: 2
     p = root.left
     q = root.left.right
     print SolutionRecur().lowestCommonAncestor(root, p, q).val
+    print SolutionIter().lowestCommonAncestor(root, p, q).val
 
 
 if __name__ == '__main__':
