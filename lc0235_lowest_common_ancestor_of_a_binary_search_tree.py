@@ -50,6 +50,11 @@ class SolutionRecur(object):
         :type p: TreeNode
         :type q: TreeNode
         :rtype: TreeNode
+
+        Time complexity: O(h), where h is the feight of tree,
+          - for balanced tree, h = logn, where n is the number of nodes.
+          - for linked list, h = n.
+        Space complexity: O(h).
         """
         # Check both p & q are in the node's left or right subtree. 
         # If not, the node splits p and q, so returh the node.
