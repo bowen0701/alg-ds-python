@@ -24,18 +24,34 @@ Note:
 - The characters in J are distinct.
 """
 
-class Solution(object):
+class SolutionSet(object):
     def numJewelsInStones(self, J, S):
         """
         :type J: str
         :type S: str
         :rtype: int
         """
-        pass
+        # Use set to collect jewels for fast lookup.
+        j_set = set(J)
+
+        # Iterate over S to check if it's jewel.
+        count = 0
+        for s in S:
+            if s in j_set:
+                count += 1
+        return count
 
 
 def main():
-    pass
+    # Output: 3
+    J = "aA"
+    S = "aAAbbbb"
+    print SolutionSet().numJewelsInStones(J, S)
+
+    # Output: 0
+    J = "z"
+    S = "ZZ"
+    print SolutionSet().numJewelsInStones(J, S)
 
 
 if __name__ == '__main__':
