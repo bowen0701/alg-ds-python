@@ -43,7 +43,7 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
     def lowestCommonAncestor(self, root, p, q):
         """
         :type root: TreeNode
@@ -51,11 +51,45 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
-        pass
+        # Check both p & q are in the node's left or right subtree. 
+        # If not, the node splits p and q, so returh the node.
+        if p.val < root.val and q.val < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif p.val > root.val and q.val > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
 
 
 def main():
-    pass
+    #      6
+    #    /   \
+    #   2     8
+    #  / \   / \
+    # 0   4 7   9
+    #    / \
+    #   3   5
+    root = TreeNode(6)
+    root.left = TreeNode(2)
+    root.right = TreeNode(8)
+    root.left.left = TreeNode(0)
+    root.left.right = TreeNode(4)
+    root.right.left = TreeNode(7)
+    root.right.right = TreeNode(9)
+    root.left.right.left = TreeNode(3)
+    root.left.right.right = TreeNode(5)
+
+    # Input: p = 2, q = 8
+    # Output: 6
+    p = root.left
+    q = root.right
+    print SolutionRecur().lowestCommonAncestor(root, p, q).val
+
+    # Input: p = 2, q = 4
+    # Output: 2
+    p = root.left
+    q = root.left.right
+    print SolutionRecur().lowestCommonAncestor(root, p, q).val
 
 
 if __name__ == '__main__':
