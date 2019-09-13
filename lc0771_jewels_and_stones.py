@@ -30,6 +30,11 @@ class SolutionSet(object):
         :type J: str
         :type S: str
         :rtype: int
+
+        Time complexity: O(max(|J|, |S|)), where
+          - |J|: lenght of J,
+          - |S|: lenght of S.
+        Space complexity: o(|J|).
         """
         # Use set to collect jewels for fast lookup.
         j_set = set(J)
