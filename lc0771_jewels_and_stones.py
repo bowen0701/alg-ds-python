@@ -37,12 +37,12 @@ class SolutionSet(object):
         Space complexity: o(|J|).
         """
         # Use set to collect jewels for fast lookup.
-        j_set = set(J)
+        jewels = set(J)
 
         # Iterate over S to check if it's jewel.
         count = 0
         for s in S:
-            if s in j_set:
+            if s in jewels:
                 count += 1
         return count
 
