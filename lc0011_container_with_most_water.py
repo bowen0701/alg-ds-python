@@ -11,36 +11,34 @@ Note: You may not slant the container and n is at least 2.
 
 Example:
 Input: [1,8,6,2,5,4,8,3,7]
-Output: 49
+Output: 49 (= 7 * (8 - 1))
 """
 
-class Solution(object):
+class SolutionTwoPointers(object):
     def maxArea(self, height):
         """
         :type height: List[int]
         :rtype: int
 
-        Two pointer method:
-        - Start from the widest container, its area = shorter height * wide.
-        - Since all of the remaining containers are less wide, 
-          to get bigger area, they must be higher. 
-          Thus skip those containers which are not higher.
-
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        # Two pointer method:
+        # - Start from the widest container.
+        # - Since all of the remaining containers are less wide,
+        #   to get bigger area, they must be higher.
         max_area = 0
         l, r = 0, len(height) - 1
 
         while l < r:
-            hl, hr = height[l], height[r]
-            hm = min(hl, hr)
+            h_left, h_right = height[l], height[r]
+            h_min = min(h_left, h_right)
 
-            max_area = max(max_area, (r - l) * hm)
+            max_area = max(max_area, (r - l) * h_min)
 
-            while height[l] <= hm and l < r:
+            if height[l] < height[r]:
                 l += 1
-            while height[r] <= hm and l < r:
+            else:
                 r -= 1
 
         return max_area
@@ -49,7 +47,7 @@ class Solution(object):
 def main():
     height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
     # Ans: 49 = (8 - 1) * 7
-    print Solution().maxArea(height)
+    print SolutionTwoPointers().maxArea(height)
 
 
 if __name__ == '__main__':
