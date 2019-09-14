@@ -44,6 +44,11 @@ class Solution(object):
         """
         :type emails: List[str]
         :rtype: int
+
+        Time complexity: O(m*n), where 
+          - m is the number of emails,
+          - n is the length of email address.
+        Space complexity: O(m*n).
         """
         unique_emails = set()
 
