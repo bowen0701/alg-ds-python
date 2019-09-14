@@ -43,11 +43,14 @@ class SolutionDFS(object):
         :type newColor: int
         :rtype: List[List[int]]
         """
+        # Check starting color and new color.
+        if image[sr][sc] == newColor:
+            return image
+
         n_rows, n_cols = len(image), len(image[0])
 
         # Apply DFS with stack to modify image.
         old_color = image[sr][sc]
-        visited_set = set((sr, sc))
 
         stack = [(sr, sc)]
 
@@ -62,11 +65,9 @@ class SolutionDFS(object):
                 # If visit is out of boundary or does not match old color.
                 if (r_neighbor < 0 or r_neighbor >= n_rows or
                     c_neighbor < 0 or c_neighbor >= n_cols or
-                    (r_neighbor, c_neighbor) in visited_set or 
                     image[r_neighbor][c_neighbor] != old_color):
                     continue
 
-                visited_set.add((r_neighbor, c_neighbor))
                 image[r_neighbor][c_neighbor] = newColor
                 stack.append((r_neighbor, c_neighbor))
 
