@@ -45,11 +45,32 @@ class Solution(object):
         :type emails: List[str]
         :rtype: int
         """
-        pass
+        unique_emails = set()
+
+        for email in emails:
+            # Split email by '@' into local and domain.
+            local, domain = email.split('@')
+
+            # Remove local's '.'.
+            local = local.replace('.', '')
+
+            # Truncate local's chars after '+'.
+            trunc_local = local.split('+')[0]
+
+            # Concat modified local and domain.
+            modified_email = '@'.join([trunc_local, domain])
+
+            unique_emails.add(modified_email)
+
+        return len(unique_emails)
 
 
 def main():
-    pass
+    # Output: 2
+    emails = ["test.email+alex@leetcode.com",
+              "test.e.mail+bob.cathy@leetcode.com",
+              "testemail+david@lee.tcode.com"]
+    print Solution().numUniqueEmails(emails)
 
 
 if __name__ == '__main__':
