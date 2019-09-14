@@ -50,13 +50,15 @@ class SolutionDict(object):
 
         # Convert all punctuations to space and lower case.
         punctuations = set(list('!?\',;.'))
-        bans = set(banned)
         
         for c in paragraph:
             if c in punctuations:
                 paragraph = paragraph.replace(c, ' ')
 
         paragraph = paragraph.lower()
+
+        # Store banned words in set for fast loopup.
+        bans = set(banned)
 
         # Use dict for word count.
         word_count_d = defaultdict(int)
