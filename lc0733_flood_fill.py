@@ -42,6 +42,11 @@ class SolutionDFS(object):
         :type sc: int
         :type newColor: int
         :rtype: List[List[int]]
+
+        Time complexity: O(m*n), where
+          - m is the number of rows,
+          - n is the number of columns.
+        Space complexity: O(m*n).
         """
         # Check starting color and new color.
         if image[sr][sc] == newColor:
