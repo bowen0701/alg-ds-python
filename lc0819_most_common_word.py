@@ -59,22 +59,22 @@ class SolutionDict(object):
         paragraph = paragraph.lower()
 
         # Use dict for word count.
-        d = defaultdict(int)
+        word_count_d = defaultdict(int)
 
         words = paragraph.split()
 
         for w in words:
             if w not in bans:
-                d[w] += 1
+                word_count_d[w] += 1
 
         # Get most common word.
         result = ''
         count = 0
 
-        for w, c in d.items():
-            if c > count:
+        for w, n in word_count_d.items():
+            if n > count:
                 result = w
-                count = c
+                count = n
 
         return result
 
