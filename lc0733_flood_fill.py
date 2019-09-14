@@ -34,7 +34,7 @@ Note:
 - The value of each color in image[i][j] and newColor will be an integer in [0, 65535].
 """
 
-class Solution(object):
+class SolutionDFS(object):
     def floodFill(self, image, sr, sc, newColor):
         """
         :type image: List[List[int]]
@@ -43,11 +43,51 @@ class Solution(object):
         :type newColor: int
         :rtype: List[List[int]]
         """
-        pass
+        n_rows, n_cols = len(image), len(image[0])
+
+        # Apply DFS with stack to modify image.
+        old_color = image[sr][sc]
+        visited_set = set((sr, sc))
+
+        stack = [(sr, sc)]
+
+        while stack:
+            r, c = stack.pop()
+            image[r][c] = newColor
+
+            # Make 4 directions: up, down, left, right.
+            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+
+            for r_neighbor, c_neighbor in dirs:
+                # If visit is out of boundary or does not match old color.
+                if (r_neighbor < 0 or r_neighbor >= n_rows or
+                    c_neighbor < 0 or c_neighbor >= n_cols or
+                    (r_neighbor, c_neighbor) in visited_set or 
+                    image[r_neighbor][c_neighbor] != old_color):
+                    continue
+
+                visited_set.add((r_neighbor, c_neighbor))
+                image[r_neighbor][c_neighbor] = newColor
+                stack.append((r_neighbor, c_neighbor))
+
+        return image
 
 
 def main():
-    pass
+    # Output: [[2,2,2],[2,2,0],[2,0,1]]
+    image = [[1,1,1],
+             [1,1,0],
+             [1,0,1]]
+    sr, sc = 1, 1
+    newColor = 2
+    print SolutionDFS().floodFill(image, sr, sc, newColor)
+
+    # Output: [[0,0,0],[0,1,1]]
+    image = [[0,0,0],
+             [0,1,1]]
+    sr, sc = 1, 1
+    newColor = 1
+    print SolutionDFS().floodFill(image, sr, sc, newColor)
 
 
 if __name__ == '__main__':
