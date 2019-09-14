@@ -23,14 +23,7 @@ class ListNode(object):
 
 
 class SolutionRecur(object):
-    def reverseList(self, head, previous=None):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-
-        Time complexity: O(n).
-        Space complexity: O(1).
-        """
+    def _reverse(self, head, previous):
         if not head:
             return previous
 
@@ -39,10 +32,21 @@ class SolutionRecur(object):
         current = ListNode(head.val)
         current.next = previous
 
-        # Increment head + previous and apply recursion.
-        head = head.next
+        # Increment current + previous and apply recursion.
         previous = current
-        return self.reverseList(head, previous)
+        head = head.next
+        return self._reverse(head, previous)
+
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        previous = None
+        return self._reverse(head, previous)
 
 
 class SolutionIter(object):
