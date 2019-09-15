@@ -9,8 +9,8 @@ find the minimum number of conference rooms required.
 """
 
 class Solution2(object):
-    # @param {Interval[]} intervals
-    # @return {integer}
+    # :type intervals: List[List[int, int]]
+    # :rtype: int
     def minMeetingRooms(self, intervals):
         pass
 
