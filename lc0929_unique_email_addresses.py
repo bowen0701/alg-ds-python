@@ -39,7 +39,7 @@ Note:
 - Local names do not start with a '+' character.
 """
 
-class Solution(object):
+class SolutionSplitReplace(object):
     def numUniqueEmails(self, emails):
         """
         :type emails: List[str]
@@ -75,7 +75,7 @@ def main():
     emails = ["test.email+alex@leetcode.com",
               "test.e.mail+bob.cathy@leetcode.com",
               "testemail+david@lee.tcode.com"]
-    print Solution().numUniqueEmails(emails)
+    print SolutionSplitReplace().numUniqueEmails(emails)
 
 
 if __name__ == '__main__':
