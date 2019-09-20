@@ -21,17 +21,35 @@ Input: [1,1,1,3,3,4,3,2,4,2]
 Output: true
 """
 
-class Solution(object):
+class SolutionDict(object):
     def containsDuplicate(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
         """
-        pass
+        num_counts = {}
+
+        for n in nums:
+            if n in num_counts:
+                return True
+            else:
+                num_counts[n] = 1
+
+        return False
 
 
 def main():
-    pass
+    # Output: True
+    nums = [1,2,3,1]
+    print SolutionDict().containsDuplicate(nums)
+
+    # Output: False
+    nums = [1,2,3,4]
+    print SolutionDict().containsDuplicate(nums)
+
+    # Output: True
+    nums = [1,1,1,3,3,4,3,2,4,2]
+    print SolutionDict().containsDuplicate(nums)
 
 
 if __name__ == '__main__':
