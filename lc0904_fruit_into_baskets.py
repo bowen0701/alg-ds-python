@@ -49,17 +49,48 @@ Note:
 - 0 <= tree[i] < tree.length
 """
 
-class Solution(object):
+class SolutionDictTwoPointers(object):
     def totalFruit(self, tree):
         """
         :type tree: List[int]
         :rtype: int
         """
-        pass
+        max_len = 0
+        fruit_counts = {}
+
+        l = 0
+        for r, f in enumerate(tree):
+            fruit_counts[f] = fruit_counts.get(f, 0) + 1
+
+            while len(fruit_counts) > 2:
+                # If more than 2 types, remove one fruit of the first type. 
+                fruit_counts[tree[l]] -= 1
+                if fruit_counts[tree[l]] == 0:
+                    del fruit_counts[tree[l]]
+
+                l += 1
+
+            max_len = max(max_len, r - l + 1)
+
+        return max_len
 
 
 def main():
-    pass
+    # Output: 3
+    tree = [1,2,1]
+    print SolutionDictTwoPointers().totalFruit(tree)
+
+    # Output: 3
+    tree = [0,1,2,2]
+    print SolutionDictTwoPointers().totalFruit(tree)
+
+    # Output: 4
+    tree = [1,2,3,2,2]
+    print SolutionDictTwoPointers().totalFruit(tree)
+
+    # Output: 5.
+    tree = [3,3,3,1,2,1,1,2,3,3,4]
+    print SolutionDictTwoPointers().totalFruit(tree)    
 
 
 if __name__ == '__main__':
