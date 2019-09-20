@@ -36,6 +36,9 @@ class Solution(object):
         """
         :type n: int
         :rtype: List[str]
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         fizzbuzz = [None] * n
 
