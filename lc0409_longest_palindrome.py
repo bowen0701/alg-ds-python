@@ -44,10 +44,12 @@ class Solution(object):
         for letter in letter_d:
             div, mod = divmod(letter_d[letter], 2)
             lp_len += div * 2
+
             # If there is any letter remaining modulus is 1,
             # set remainder to 1, which is a valid palindrome char.
             if mod == 1:
                 rem = 1
+
         lp_len += rem
         return lp_len
 
