@@ -26,6 +26,9 @@ class SolutionMinHeap(object):
     """
     @param intervals: an array of meeting time intervals
     @return: the minimum number of conference rooms required
+
+    Time complexity: O(n*logn).
+    Space complexity: O(n).
     """
     def minMeetingRooms(self, intervals):
         import heapq
