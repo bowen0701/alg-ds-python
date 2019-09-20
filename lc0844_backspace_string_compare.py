@@ -35,18 +35,62 @@ Follow up:
 Can you solve it in O(N) time and O(1) space?
 """
 
-class Solution(object):
+class SolutionStack(object):
     def backspaceCompare(self, S, T):
         """
         :type S: str
         :type T: str
         :rtype: bool
         """
-        pass
+        # Use stack to store chars and pop by backspace.
+        S_stack = []
+        T_stack = []
+
+        for i in range(len(S)):
+            if S[i] != '#':
+                S_stack.append(S[i])
+            else:
+                if S_stack:
+                    S_stack.pop()
+
+        for i in range(len(T)):
+            if T[i] != '#':
+                T_stack.append(T[i])
+            else:
+                if T_stack:
+                    T_stack.pop()
+
+        # Compare the remaining stack.
+        if len(S_stack) != len(T_stack):
+            return False
+
+        for i in range(len(S_stack)):
+            if S_stack[i] != T_stack[i]:
+                return False
+
+        return True
 
 
 def main():
-    pass
+    # Output: True
+    S = "ab#c"
+    T = "ad#c"
+    print SolutionStack().backspaceCompare(S, T)
+
+    # Output: True
+    S = "ab##"
+    T = "c#d#"
+    print SolutionStack().backspaceCompare(S, T)
+
+    # Output: True
+    S = "a##c"
+    T = "#a#c"
+    print SolutionStack().backspaceCompare(S, T)
+
+    # Output: False
+    S = "a#c"
+    T = "b"
+    print SolutionStack().backspaceCompare(S, T)
 
 
 if __name__ == '__main__':
