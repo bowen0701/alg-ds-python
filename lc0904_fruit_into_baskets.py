@@ -54,6 +54,9 @@ class SolutionDictTwoPointers(object):
         """
         :type tree: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         max_len = 0
         fruit_counts = {}
