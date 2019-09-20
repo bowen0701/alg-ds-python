@@ -44,6 +44,7 @@ class Solution(object):
 
         for i in range(1, n + 1):
             if i % 15 == 0:
+                # Since 15 = 3 * 5, check 15 first.
                 fizzbuzz[i - 1] = "FizzBuzz"
             elif i % 3 == 0:
                 fizzbuzz[i - 1] = "Fizz"
