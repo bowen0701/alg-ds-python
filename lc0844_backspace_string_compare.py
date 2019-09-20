@@ -41,6 +41,11 @@ class SolutionStack(object):
         :type S: str
         :type T: str
         :rtype: bool
+
+        Time complexity: O(max(m, n)), where
+          - m: length of S
+          - n: length of T.
+        Space complexity: O(max(m, n)).
         """
         # Use stack to store chars and pop by backspace.
         S_stack = []
