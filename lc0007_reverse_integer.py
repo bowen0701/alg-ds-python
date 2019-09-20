@@ -29,8 +29,11 @@ class Solution(object):
             x_rev = int(str(x)[::-1][-1] + str(x)[::-1][:-1])
         else:
             x_rev = int(str(x)[::-1])
+
+        # If reversed integer is overflow.
         if abs(x_rev) > 0x7FFFFFFF:
             x_rev = 0
+
         return x_rev
 
 
