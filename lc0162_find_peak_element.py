@@ -37,20 +37,20 @@ class SolutionBinarySearchIter(object):
         Space complexity: O(1).
         """
         # Apply variant of binary search.
-        first, last = 0, len(nums) - 1
+        left, right = 0, len(nums) - 1
 
-        while first < last:
-            mid = (first + last + 1) // 2
+        while left < right:
+            mid = (left + right + 1) // 2
 
             if nums[mid - 1] > nums[mid]:
                 # If mid's left > mid, search left part.
-                last = mid - 1
+                right = mid - 1
             else:
                 # Otherwise, search right part.
-                first = mid
+                left = mid
 
-        # For first = last.
-        return first
+        # For left = right.
+        return left
 
 
 
