@@ -26,6 +26,9 @@ class SolutionDict(object):
         """
         :type nums: List[int]
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         num_counts = {}
 
