@@ -45,22 +45,22 @@ class SolutionMaxHeap(object):
         import heapq
 
         # Use maxheap by heapq with "negative" distances.
-        maxheap = []
+        negdist_point_maxpq = []
 
-        negdistances = [-(p[0] ** 2 + p[1] ** 2) for p in points]
-        negdistances_points = zip(negdistances, points)
+        negdists = [-(p[0] ** 2 + p[1] ** 2) for p in points]
+        negdists_points = zip(negdists, points)
 
-        # Push the first K points into maxheap and keep the length.
-        # Then push the remaining points if negative distance > maxheap's root.
-        for i, (nd, p) in enumerate(negdistances_points):
+        # Push the first K points into max heap and keep the length.
+        # Then push the remaining points if negative distance > max heap's root.
+        for i, (nd, p) in enumerate(negdists_points):
             if i < K:
-                heapq.heappush(maxheap, (nd, p))
+                heapq.heappush(negdist_point_maxpq, (nd, p))
             elif i >= K:
-                if nd > maxheap[0][0]:
-                    heapq.heappush(maxheap, (nd, p))
-                    heapq.heappop(maxheap)
+                if nd > negdist_point_maxpq[0][0]:
+                    heapq.heappush(negdist_point_maxpq, (nd, p))
+                    heapq.heappop(negdist_point_maxpq)
 
-        k_points = [p for (nd, p) in maxheap]
+        k_points = [p for (nd, p) in negdist_point_maxpq]
         return k_points
 
 
@@ -111,14 +111,14 @@ def main():
     # Ans: [[-2,2]]
     points = [[1,3],[-2,2]]
     K = 1
-    # print SolutionMaxHeap().kClosest(points, K)
-    print SolutionSelection().kClosest(points, K)
+    print SolutionMaxHeap().kClosest(points, K)
+    # print SolutionSelection().kClosest(points, K)
 
     # Ans: [[3,3],[-2,4]]
     points = [[3,3],[5,-1],[-2,4]]
     K = 2
-    # print SolutionMaxHeap().kClosest(points, K)
-    print SolutionSelection().kClosest(points, K)
+    print SolutionMaxHeap().kClosest(points, K)
+    # print SolutionSelection().kClosest(points, K)
 
 
 if __name__ == '__main__':
