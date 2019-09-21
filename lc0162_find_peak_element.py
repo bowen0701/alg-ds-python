@@ -53,7 +53,6 @@ class SolutionBinarySearchIter(object):
         return left
 
 
-
 def main():
     # Ans: 2
     nums = [1,2,3,1]
