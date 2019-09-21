@@ -262,6 +262,62 @@ class SolutionIterVisit(object):
         return n_islands
 
 
+class SolutionIterUpdate(object):
+    def _get_tovisit_ls(self, v_start, grid):
+        (r, c) = v_start
+        tovisit_ls = []
+
+        # Visit up, down, left and right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_neighbor, c_neighbor in dirs:
+            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
+                grid[r_neighbor][c_neighbor] == '1'):
+                tovisit_ls.append((r_neighbor, c_neighbor))
+
+        return tovisit_ls
+
+    def _dfs(self, r, c, grid):
+        grid[r][c] = '0'
+
+        # Use stack for iterative DFS.
+        stack = [(r, c)]
+
+        while stack:
+            tovisit_ls = self._get_tovisit_ls(stack[-1], grid)
+
+            if tovisit_ls:
+                for v_neighbor in tovisit_ls:
+                    # Mark (r_neighbor, c_neighbor) as visited.
+                    (r_neighbor, c_neighbor) = v_neighbor
+                    grid[r_neighbor][c_neighbor] = '0'
+                    stack.append((r_neighbor, c_neighbor))
+                    # break for continuing DFS.
+                    break
+            else:
+                # Backtrack by popping stack.
+                stack.pop()
+
+    def numIslands(self, grid):
+        """Number of islands by iteration using stack.
+
+        Time complexity: O(m * n).
+        Space complexity: O(m * n).
+        """
+        if not grid or not grid[0]:
+            return 0
+
+        n_islands = 0
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                # If a "new" land is 1, start DFS visiting.
+                if grid[r][c] == '1':
+                    n_islands += 1
+                    self._dfs(r, c, grid)
+
+        return n_islands
+
+
 def main():
     import time
 
@@ -288,6 +344,10 @@ def main():
     print 'By iter+visit:', SolutionIterVisit().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'By iter+visit:', SolutionIterUpdate().numIslands(grid1)
+    print 'Time: {}'.format(time.time() - start_time)
+
     # Num of islands = 3.
     grid2 = [['1', '1', '0', '0', '0'],
              ['1', '1', '0', '0', '0'], 
@@ -309,6 +369,10 @@ def main():
 
     start_time = time.time()
     print 'By iter+visit:', SolutionIterVisit().numIslands(grid2)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By iter+visit:', SolutionIterUpdate().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
 
