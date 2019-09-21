@@ -50,7 +50,7 @@ class SolutionRecurVisit(object):
         Time complexity: O(m * n).
         Space complexity: O(m * n).
         """
-        if not grid:
+        if not grid or not grid[0]:
             return 0
 
         visited_d = {}
@@ -96,7 +96,7 @@ class SolutionRecurVisit2(object):
         Time complexity: O(m * n).
         Space complexity: O(m * n).
         """
-        if not grid:
+        if not grid or not grid[0]:
             return 0
 
         visited_d = {}
@@ -139,7 +139,7 @@ class SolutionRecurUpdate(object):
         Time complexity: O(m * n).
         Space complexity: O(m * n).
         """
-        if not grid:
+        if not grid or not grid[0]:
             return 0
 
         n_islands = 0
@@ -184,7 +184,7 @@ class SolutionRecurUpdate2(object):
         Time complexity: O(m * n).
         Space complexity: O(m * n).
         """
-        if not grid:
+        if not grid or not grid[0]:
             return 0
 
         n_islands = 0
@@ -200,7 +200,7 @@ class SolutionRecurUpdate2(object):
         return n_islands
 
 
-class SolutionIter(object):
+class SolutionIterVisit(object):
     def _get_tovisit_ls(self, v_start, grid):
         (r, c) = v_start
         tovisit_ls = []
@@ -246,7 +246,7 @@ class SolutionIter(object):
         Time complexity: O(m * n).
         Space complexity: O(m * n).
         """
-        if not grid:
+        if not grid or not grid[0]:
             return 0
 
         visited_d = {}
@@ -272,11 +272,11 @@ def main():
              ['0', '0', '0', '0', '0']]
 
     start_time = time.time()
-    print 'By recur with visits:', SolutionRecurVisit().numIslands(grid1)
+    print 'By recur+visit:', SolutionRecurVisit().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By recur with updates:', SolutionRecurUpdate().numIslands(grid1)
+    print 'By recur+update:', SolutionRecurUpdate().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     grid1 = [['1', '1', '1', '1', '0'],
@@ -285,7 +285,7 @@ def main():
              ['0', '0', '0', '0', '0']]
 
     start_time = time.time()
-    print 'By iter:', SolutionIter().numIslands(grid1)
+    print 'By iter+visit:', SolutionIterVisit().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     # Num of islands = 3.
@@ -295,11 +295,11 @@ def main():
              ['0', '0', '0', '1', '1']]
 
     start_time = time.time()
-    print 'By recur with visits:', SolutionRecurVisit().numIslands(grid1)
+    print 'By recur+visit:', SolutionRecurVisit().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By recur with updates:', SolutionRecurUpdate().numIslands(grid1)
+    print 'By recur+update:', SolutionRecurUpdate().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
     grid2 = [['1', '1', '0', '0', '0'],
@@ -308,7 +308,7 @@ def main():
              ['0', '0', '0', '1', '1']]
 
     start_time = time.time()
-    print 'By iter:', SolutionIter().numIslands(grid2)
+    print 'By iter+visit:', SolutionIterVisit().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
 
