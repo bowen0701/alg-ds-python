@@ -67,26 +67,100 @@ class SolutionStack(object):
         return S_stack == T_stack
 
 
+class SolutionIterCharBackwards(object):
+    def _getChar(self, s, pos):
+        char = ''
+        bs_count = 0
+
+        while pos >= 0 and not char:
+            if s[pos] == '#':
+                # If char is #, increment counter.
+                bs_count += 1
+            elif bs_count == 0:
+                # If char != # and backspace counter = 0, get char.
+                char = s[pos]
+            else:
+                # If else, skip char and decrement counter.
+                bs_count -= 1
+
+            pos -= 1
+
+        return char, pos
+
+    def backspaceCompare(self, S, T):
+        """
+        :type S: str
+        :type T: str
+        :rtype: bool
+        """
+        # Visit backwards.
+        S_pos, T_pos = len(S) - 1, len(T) - 1
+
+        while S_pos >= 0 or T_pos >= 0:
+            S_char, T_char = '', ''
+
+            # Get non-backspace char.
+            if S_pos >= 0:
+                S_char, S_pos = self._getChar(S, S_pos)
+            if T_pos >= 0:
+                T_char, T_pos = self._getChar(T, T_pos)
+
+            if S_char != T_char:
+                return False
+
+        return True
+
+
 def main():
+    import time
+
     # Output: True
     S = "ab#c"
     T = "ad#c"
-    print SolutionStack().backspaceCompare(S, T)
+
+    start_time = time.time()
+    print 'By stack:', SolutionStack().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
 
     # Output: True
     S = "ab##"
     T = "c#d#"
-    print SolutionStack().backspaceCompare(S, T)
+
+    start_time = time.time()
+    print 'By stack:', SolutionStack().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
 
     # Output: True
     S = "a##c"
     T = "#a#c"
-    print SolutionStack().backspaceCompare(S, T)
+
+    start_time = time.time()
+    print 'By stack:', SolutionStack().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
 
     # Output: False
-    S = "a#c"
-    T = "b"
-    print SolutionStack().backspaceCompare(S, T)
+    S = "bbbextm"
+    T = "bbb#extm"
+
+    start_time = time.time()
+    print 'By stack:', SolutionStack().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'Time:', time.time() - start_time
 
 
 if __name__ == '__main__':
