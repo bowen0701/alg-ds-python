@@ -92,6 +92,9 @@ class SolutionIterCharBackwards(object):
         :type S: str
         :type T: str
         :rtype: bool
+
+        Time complexity: O(m + n).
+        Space complexity: O(1).
         """
         # Visit backwards.
         S_pos, T_pos = len(S) - 1, len(T) - 1
