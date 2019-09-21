@@ -36,6 +36,18 @@ Can you solve it in O(N) time and O(1) space?
 """
 
 class SolutionStack(object):
+    def _add_stack(self, s):
+        s_stack = []
+
+        for i in range(len(s)):
+            if s[i] != '#':
+                s_stack.append(s[i])
+            else:
+                if s_stack:
+                    s_stack.pop()
+
+        return s_stack
+
     def backspaceCompare(self, S, T):
         """
         :type S: str
@@ -48,32 +60,11 @@ class SolutionStack(object):
         Space complexity: O(m + n).
         """
         # Use stack to store chars and pop by backspace.
-        S_stack = []
-        T_stack = []
+        S_stack = self._add_stack(S)
+        T_stack = self._add_stack(T)
 
-        for i in range(len(S)):
-            if S[i] != '#':
-                S_stack.append(S[i])
-            else:
-                if S_stack:
-                    S_stack.pop()
-
-        for i in range(len(T)):
-            if T[i] != '#':
-                T_stack.append(T[i])
-            else:
-                if T_stack:
-                    T_stack.pop()
-
-        # Compare the remaining stack.
-        if len(S_stack) != len(T_stack):
-            return False
-
-        for i in range(len(S_stack)):
-            if S_stack[i] != T_stack[i]:
-                return False
-
-        return True
+        # Compare the remaining stacks.
+        return S_stack == T_stack
 
 
 def main():
