@@ -40,18 +40,18 @@ class SolutionMinHeap(object):
         intervals.sort()
 
         # Use min heap to store end times.
-        min_endtimes = []
-        heapq.heappush(min_endtimes, intervals[0][1])
+        endtimes_minpq = []
+        heapq.heappush(endtimes_minpq, intervals[0][1])
 
         for i in range(1, len(intervals)):
             # If start time is after min end time, remove the min end time.
-            if min_endtimes[0] <= intervals[i][0]:
-                heapq.heappop(min_endtimes)
+            if endtimes_minpq[0] <= intervals[i][0]:
+                heapq.heappop(endtimes_minpq)
 
             # Add end time to min heap.
-            heapq.heappush(min_endtimes, intervals[i][1])
+            heapq.heappush(endtimes_minpq, intervals[i][1])
 
-        return len(min_endtimes)
+        return len(endtimes_minpq)
 
 
 def main():
