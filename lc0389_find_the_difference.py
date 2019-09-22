@@ -66,6 +66,29 @@ class SolutionDict(object):
                 return c
             else:
                 char_nums[c] -= 1
+
+
+class SolutionOrdDiff(object):
+    def findTheDifference(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        ord_diff = 0
+
+        # Decrement by s's char ord.
+        for c in s:
+            ord_diff -= ord(c)
+
+        # Increment by t's char ord.
+        for c in t:
+            ord_diff += ord(c)
+
+        return chr(ord_diff)
         
 
 def main():
@@ -74,12 +97,14 @@ def main():
     t = "abcde"
     print SolutionSortIter().findTheDifference(s, t)
     print SolutionDict().findTheDifference(s, t)
+    print SolutionOrdDiff().findTheDifference(s, t)
 
-    # Output: e
+    # Output: a
     s = ""
-    t = "e"
+    t = "a"
     print SolutionSortIter().findTheDifference(s, t)
     print SolutionDict().findTheDifference(s, t)
+    print SolutionOrdDiff().findTheDifference(s, t)
 
 
 if __name__ == '__main__':
