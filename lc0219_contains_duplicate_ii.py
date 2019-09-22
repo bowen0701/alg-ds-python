@@ -26,6 +26,9 @@ class SolutionDict(object):
         :type nums: List[int]
         :type k: int
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
