@@ -41,7 +41,9 @@ class Solution(object):
                 digits[i] = 0
 
         # If there is still a carry (no return yet), plus 1 to the head.
-        digits.insert(0, 1)
+        digits = [0] * (len(digits) + 1)
+        digits[0] = 1
+
         return digits
 
 
