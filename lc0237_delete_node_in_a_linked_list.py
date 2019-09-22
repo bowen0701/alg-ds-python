@@ -58,6 +58,20 @@ class SolutionTwoPointers(object):
         previous.next = None
 
 
+class SolutionChangeValNext(object):
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+
+        Time complexity: O(1).
+        Space complexity: O(1).
+        """
+        # Directly change node's val & next by next's (i.e. skip next).
+        node.val = node.next.val
+        node.next = node.next.next
+
+
 def main():
     # Input: head = [4,5,1,9], node = 5
     # Output: [4,1,9]
@@ -66,7 +80,8 @@ def main():
     head.next.next = ListNode(1)
     head.next.next.next = ListNode(9)
     node = head.next
-    SolutionTwoPointers().deleteNode(node)
+    # SolutionTwoPointers().deleteNode(node)
+    SolutionChangeValNext().deleteNode(node)
     print head.val, head.next.val, head.next.next.val, head.next.next.next
 
     # Input: head = [4,5,1,9], node = 1
@@ -76,7 +91,8 @@ def main():
     head.next.next = ListNode(1)
     head.next.next.next = ListNode(9)
     node = head.next.next
-    SolutionTwoPointers().deleteNode(node)
+    # SolutionTwoPointers().deleteNode(node)
+    SolutionChangeValNext().deleteNode(node)
     print head.val, head.next.val, head.next.next.val, head.next.next.next
 
 
