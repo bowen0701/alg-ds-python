@@ -31,15 +31,11 @@ Note: The length of each dimension in the given grid does not exceed 50.
 
 class SolutionDFSRecurUpdate(object):
     def _dfs(self, r, c, grid):
-        # Check if visit out of boundary. 
-        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or 
+            grid[r][c] == 0):
             return 0
 
-        # Check if the cell is 0 or visited.
-        if grid[r][c] == 0:
-            return 0
-
-        # Update grid to mark visit.
+        # Mark as visited.
         grid[r][c] = 0
 
         area = 1
