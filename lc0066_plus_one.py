@@ -32,22 +32,16 @@ class Solution(object):
         Time complexity: O(n), where n is the length of digits.
         Space complexity: O(n), for worse case of total carry.
         """
-        is_carry = False
-
         # Start from the last digit and reverse back to the 1st one.
         for i in reversed(range(len(digits))):
-            # Plus one only for the last digit or when carry.
-            if is_carry or i == len(digits) - 1:
-                if digits[i] + 1 < 10:
-                    digits[i] += 1
-                    return digits
-                else:
-                    is_carry = True
-                    digits[i] = 0
+            if digits[i] + 1 < 10:
+                digits[i] += 1
+                return digits
+            else:
+                digits[i] = 0
 
-        # If there is total carry, plus to the head of digits.
-        if is_carry:
-            digits.insert(0, 1)
+        # If there is still a carry (no return yet), plus 1 to the head.
+        digits.insert(0, 1)
         return digits
 
 
