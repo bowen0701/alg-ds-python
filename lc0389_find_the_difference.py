@@ -89,6 +89,29 @@ class SolutionOrdDiff(object):
             ord_diff += ord(c)
 
         return chr(ord_diff)
+
+
+class SolutionXOR(object):
+    def findTheDifference(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        xor = 0
+
+        # XOR by s's char ord.
+        for c in s:
+            xor ^= ord(c)
+
+        # XOR by t's char ord.
+        for c in t:
+            xor ^= ord(c)
+
+        return chr(xor)
         
 
 def main():
@@ -98,6 +121,7 @@ def main():
     print SolutionSortIter().findTheDifference(s, t)
     print SolutionDict().findTheDifference(s, t)
     print SolutionOrdDiff().findTheDifference(s, t)
+    print SolutionXOR().findTheDifference(s, t)
 
     # Output: a
     s = ""
@@ -105,6 +129,7 @@ def main():
     print SolutionSortIter().findTheDifference(s, t)
     print SolutionDict().findTheDifference(s, t)
     print SolutionOrdDiff().findTheDifference(s, t)
+    print SolutionXOR().findTheDifference(s, t)
 
 
 if __name__ == '__main__':
