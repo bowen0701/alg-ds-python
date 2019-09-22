@@ -24,7 +24,7 @@ Example 2:
 Answer: 3
 """
 
-class SolutionRecurVisit(object):
+class SolutionDFSRecurVisit(object):
     def _dfs(self, r, c, grid, visited_d):
         # If visit outside of the grid boundary.
         if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
@@ -66,7 +66,7 @@ class SolutionRecurVisit(object):
         return n_islands
 
 
-class SolutionRecurVisit2(object):
+class SolutionDFSRecurVisit2(object):
     def _dfs(self, r, c, grid, visited_d):
         # If visit outside of the grid boundary.
         if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
@@ -113,7 +113,7 @@ class SolutionRecurVisit2(object):
         return n_islands
 
 
-class SolutionRecurUpdate(object):
+class SolutionDFSRecurUpdate(object):
     def _dfs(self, r, c, grid):
         # If visit outside of the grid boundary.
         if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
@@ -154,7 +154,7 @@ class SolutionRecurUpdate(object):
         return n_islands
 
 
-class SolutionRecurUpdate2(object):
+class SolutionDFSRecurUpdate2(object):
     def _dfs(self, r, c, grid):
         # If visit outside of the grid boundary.
         if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
@@ -200,7 +200,7 @@ class SolutionRecurUpdate2(object):
         return n_islands
 
 
-class SolutionIterVisit(object):
+class SolutionDFSIterVisit(object):
     def _get_tovisit_ls(self, v_start, grid):
         (r, c) = v_start
         tovisit_ls = []
@@ -262,7 +262,7 @@ class SolutionIterVisit(object):
         return n_islands
 
 
-class SolutionIterUpdate(object):
+class SolutionDFSIterUpdate(object):
     def _get_tovisit_ls(self, v_start, grid):
         (r, c) = v_start
         tovisit_ls = []
@@ -328,11 +328,11 @@ def main():
              ['0', '0', '0', '0', '0']]
 
     start_time = time.time()
-    print 'By recur+visit:', SolutionRecurVisit().numIslands(grid1)
+    print 'By recur+visit:', SolutionDFSRecurVisit().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By recur+update:', SolutionRecurUpdate().numIslands(grid1)
+    print 'By recur+update:', SolutionDFSRecurUpdate().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     grid1 = [['1', '1', '1', '1', '0'],
@@ -341,11 +341,11 @@ def main():
              ['0', '0', '0', '0', '0']]
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionIterVisit().numIslands(grid1)
+    print 'By iter+visit:', SolutionDFSIterVisit().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionIterUpdate().numIslands(grid1)
+    print 'By iter+visit:', SolutionDFSIterUpdate().numIslands(grid1)
     print 'Time: {}'.format(time.time() - start_time)
 
     # Num of islands = 3.
@@ -355,11 +355,11 @@ def main():
              ['0', '0', '0', '1', '1']]
 
     start_time = time.time()
-    print 'By recur+visit:', SolutionRecurVisit().numIslands(grid2)
+    print 'By recur+visit:', SolutionDFSRecurVisit().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By recur+update:', SolutionRecurUpdate().numIslands(grid2)
+    print 'By recur+update:', SolutionDFSRecurUpdate().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
     grid2 = [['1', '1', '0', '0', '0'],
@@ -368,11 +368,11 @@ def main():
              ['0', '0', '0', '1', '1']]
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionIterVisit().numIslands(grid2)
+    print 'By iter+visit:', SolutionDFSIterVisit().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionIterUpdate().numIslands(grid2)
+    print 'By iter+visit:', SolutionDFSIterUpdate().numIslands(grid2)
     print 'Time: {}'.format(time.time() - start_time)
 
 

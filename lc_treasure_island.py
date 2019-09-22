@@ -34,7 +34,7 @@ Explanation: Route is (0, 0), (0, 1), (1, 1), (2, 1), (2, 0), (3, 0)
 The minimum route takes 5 steps.
 """
 
-class SolutionSteps(object):
+class SolutionBFSSteps(object):
     def treasureIsland(self, grid):
         """
         :type logs: List[list[str]]
@@ -83,7 +83,7 @@ class SolutionSteps(object):
         return -1
 
 
-class SolutionDistances(object):
+class SolutionBFSDistances(object):
     def treasureIsland(self, grid):
         """
         :type logs: List[list[str]]
@@ -147,13 +147,13 @@ def main():
             ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
-    print SolutionSteps().treasureIsland(grid)
+    print SolutionBFSSteps().treasureIsland(grid)
 
     grid = [['O', 'O', 'O', 'O'],
             ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
-    print SolutionDistances().treasureIsland(grid)
+    print SolutionBFSDistances().treasureIsland(grid)
 
 
 if __name__ == '__main__':
