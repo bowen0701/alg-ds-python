@@ -65,26 +65,26 @@ class SolutionMaxHeap(object):
 
 
 class SolutionSelection(object):
-    def _selectKClosest(self, distances, K):
-        # Select smaller & larger nums by pivot.
-        n = len(distances)
-        pivot = distances[n // 2]
+    def _selectKClosest(self, dists, K):
+        # Select smaller & larger distances by pivot distance.
+        n = len(dists)
+        pivot_dist = dists[n // 2]
 
-        smaller_pos = [pos for (pos, d) in enumerate(distances) if d < pivot]
-        pivot_pos = [pos for (pos, d) in enumerate(distances) if d == pivot]
-        larger_pos = [pos for (pos, d) in enumerate(distances) if d > pivot]
+        smaller_pos = [pos for (pos, d) in enumerate(dists) if d < pivot_dist]
+        pivot_pos = [pos for (pos, d) in enumerate(dists) if d == pivot_dist]
+        larger_pos = [pos for (pos, d) in enumerate(dists) if d > pivot_dist]
 
         n_smaller = len(smaller_pos)
         n_pivot = len(pivot_pos)
 
         if K <= n_smaller:
-            smaller_distance = [distances[pos] for pos in smaller_pos]
-            return self._selectKClosest(smaller_distance, K)
+            smaller_dists = [dists[pos] for pos in smaller_pos]
+            return self._selectKClosest(smaller_dists, K)
         elif n_smaller < K <= n_smaller + n_pivot:
-            return pivot
+            return pivot_dist
         else:
-            larger_distances = [distances[pos] for pos in larger_pos]
-            return self._selectKClosest(larger_distances, K - n_smaller - n_pivot)
+            larger_dists = [dists[pos] for pos in larger_pos]
+            return self._selectKClosest(larger_dists, K - n_smaller - n_pivot)
 
     def kClosest(self, points, K):
         """
@@ -95,12 +95,12 @@ class SolutionSelection(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        distances = [p[0] ** 2 + p[1] ** 2 for p in points]
-        pivot = self._selectKClosest(distances, K)
+        dists = [p[0] ** 2 + p[1] ** 2 for p in points]
+        k_dist = self._selectKClosest(dists, K)
 
         k_points = []
-        for (d, p) in zip(distances, points):
-            if d <= pivot:
+        for (d, p) in zip(dists, points):
+            if d <= k_dist:
                 # For fast list append.
                 k_points += p,
         
@@ -112,13 +112,13 @@ def main():
     points = [[1,3],[-2,2]]
     K = 1
     print SolutionMaxHeap().kClosest(points, K)
-    # print SolutionSelection().kClosest(points, K)
+    print SolutionSelection().kClosest(points, K)
 
     # Ans: [[3,3],[-2,4]]
     points = [[3,3],[5,-1],[-2,4]]
     K = 2
     print SolutionMaxHeap().kClosest(points, K)
-    # print SolutionSelection().kClosest(points, K)
+    print SolutionSelection().kClosest(points, K)
 
 
 if __name__ == '__main__':
