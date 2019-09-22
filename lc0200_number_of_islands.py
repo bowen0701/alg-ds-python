@@ -208,7 +208,8 @@ class SolutionDFSIterVisit(object):
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_neighbor, c_neighbor in dirs:
-            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
+            if (0 <= r_neighbor < len(grid) and 
+                0 <= c_neighbor < len(grid[0]) and
                 grid[r_neighbor][c_neighbor] == '1'):
                 tovisit_ls.append((r_neighbor, c_neighbor))
 
@@ -270,7 +271,8 @@ class SolutionDFSIterUpdate(object):
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_neighbor, c_neighbor in dirs:
-            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
+            if (0 <= r_neighbor < len(grid) and 
+                0 <= c_neighbor < len(grid[0]) and
                 grid[r_neighbor][c_neighbor] == '1'):
                 tovisit_ls.append((r_neighbor, c_neighbor))
 
