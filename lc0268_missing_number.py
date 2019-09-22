@@ -35,10 +35,6 @@ class SolutionGauss(object):
 
 
 def main():
-    import time
-
-    start_time = time.time()
-
     # Output: 2.
     nums = [3,0,1]
     print SolutionGauss().missingNumber(nums)
@@ -46,9 +42,6 @@ def main():
     # Output: 8.
     nums = [9,6,4,2,3,5,7,0,1]
     print SolutionGauss().missingNumber(nums)
-
-    print 'Time: {}'.format(time.time() - start_time)
-
 
 if __name__ == '__main__':
     main()
