@@ -29,17 +29,65 @@ Given the above grid, return 0.
 Note: The length of each dimension in the given grid does not exceed 50.
 """
 
-class Solution(object):
+class SolutionDFSRecurUpdate(object):
+    def _dfs(self, r, c, grid):
+        # Check if visit out of boundary. 
+        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
+            return 0
+
+        # Check if the cell is 0 or visited.
+        if grid[r][c] == 0:
+            return 0
+
+        # Update grid to mark visit.
+        grid[r][c] = 0
+
+        area = 1
+
+        # Visit 4 directions to accumulate area.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_neighbor, c_neighbor in dirs:
+            area += self._dfs(r_neighbor, c_neighbor, grid)
+
+        return area
+
     def maxAreaOfIsland(self, grid):
         """
         :type grid: List[List[int]]
         :rtype: int
+
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
-        pass
+        if not grid or not grid[0]:
+            return 0
+
+        max_area = 0
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == 1:
+                    area = self._dfs(r, c, grid)
+                    max_area = max(max_area, area)
+
+        return max_area
 
 
 def main():
-    pass
+    # Output: 6
+    grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,1,1,0,0,0],
+            [0,1,1,0,1,0,0,0,0,0,0,0,0],
+            [0,1,0,0,1,1,0,0,1,0,1,0,0],
+            [0,1,0,0,1,1,0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0,0,0,0,1,0,0],
+            [0,0,0,0,0,0,0,1,1,1,0,0,0],
+            [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+    print SolutionDFSRecurUpdate().maxAreaOfIsland(grid)
+
+    # Output: 0.
+    grid = [[0,0,0,0,0,0,0,0]]
+    print SolutionDFSRecurUpdate().maxAreaOfIsland(grid)
 
 
 if __name__ == '__main__':
