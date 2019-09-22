@@ -33,14 +33,10 @@ class SolutionDict(object):
         num_idx_d = defaultdict()
 
         for i, n in enumerate(nums):
-            if n not in num_idx_d:
-                num_idx_d[n] = [i]
-            else:
-                # If same number's indices are nearby.  
-                if i - num_idx_d[n][-1] <= k:
-                    return True
+            if n in num_idx_d and i - num_idx_d[n] <= k:
+                return True
 
-                num_idx_d[n].append(i)
+            num_idx_d[n] = i
 
         return False
 
