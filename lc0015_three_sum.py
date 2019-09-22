@@ -19,7 +19,7 @@ A solution set is:
 ]
 """
 
-class Solution(object):
+class SolutionSortBinarySearch(object):
     def threeSum(self, nums):
         """
         :type nums: List[int]
@@ -71,7 +71,7 @@ class Solution(object):
 def main():
     nums = [-1, 0, 1, 2, -1, -4]
     # Output: [[-1, 0, 1], [-1, -1, 2]]
-    print Solution().threeSum(nums)
+    print SolutionSortBinarySearch().threeSum(nums)
 
 
 if __name__ == '__main__':
