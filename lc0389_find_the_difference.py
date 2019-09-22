@@ -20,21 +20,66 @@ Explanation:
 'e' is the letter that was added.
 """
 
-class SolutionSortPointer(object):
+class SolutionSortIter(object):
     def findTheDifference(self, s, t):
         """
         :type s: str
         :type t: str
         :rtype: str
-        """
-        pass
 
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
+        """
+        s_ls = list(s)
+        t_ls = list(t)
+        s_ls.sort()
+        t_ls.sort()
+
+        for i, c in enumerate(s_ls):
+            if c != t_ls[i]:
+                return t_ls[i]
+
+        return t_ls[-1]
+
+
+class SolutionDict(object):
+    def findTheDifference(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        from collections import defaultdict
+        char_nums = defaultdict(int)
+
+        # Iterate char in s and increment its counter.
+        for c in s:
+            char_nums[c] += 1
+
+        # Iterate char in t and decrement its counter.
+        for c in t:
+            # If new char in t or its counter = 0, obtain the difference.
+            if char_nums.get(c, 0) == 0:
+                return c
+            else:
+                char_nums[c] -= 1
+        
 
 def main():
     # Output: e
     s = "abcd"
     t = "abcde"
-    print SolutionSortPointer().findTheDifference(s, t)
+    print SolutionSortIter().findTheDifference(s, t)
+    print SolutionDict().findTheDifference(s, t)
+
+    # Output: e
+    s = ""
+    t = "e"
+    print SolutionSortIter().findTheDifference(s, t)
+    print SolutionDict().findTheDifference(s, t)
 
 
 if __name__ == '__main__':
