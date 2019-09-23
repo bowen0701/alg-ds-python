@@ -35,17 +35,57 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionConvert2Array(object):
+    def _convert(self, arr, left, right):
+        if left > right:
+            return None
+
+        mid = left + (right - left) // 2
+
+        root = TreeNode(arr[mid])
+        root.left = self._convert(arr, left, mid - 1)
+        root.right = self._convert(arr, mid + 1, right)
+
+        return root
+
     def sortedListToBST(self, head):
         """
         :type head: ListNode
         :rtype: TreeNode
         """
-        pass
+        if not head:
+            return None
+
+        # Convert linked list to arry first.
+        arr = []
+        current = head
+        while current:
+            arr.append(current.val)
+            current = current.next
+
+        # Apply recur with two pointer method.
+        left, right = 0, len(arr) - 1
+        return self._convert(arr, left, right)
 
 
 def main():
-    pass
+    # Input: [-10,-3,0,5,9].
+    # Output:
+    #   0
+    #  / \
+    # -3   9
+    # /   /
+    # -10  5
+    head = ListNode(-10)
+    head.next = ListNode(-3)
+    head.next.next = ListNode(0)
+    head.next.next.next = ListNode(5)
+    head.next.next.next.next = ListNode(9)
+
+    root = SolutionConvert2Array().sortedListToBST(head)
+    print (root.val,
+           root.left.val, root.right.val,
+           root.left.right.val, root.right.right.val)
 
 
 if __name__ == '__main__':
