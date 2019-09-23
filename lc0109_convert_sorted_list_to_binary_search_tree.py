@@ -71,6 +71,38 @@ class SolutionConvert2Array(object):
         return self._convert(arr, left, right)
 
 
+class SolutionSlowFast(object):
+    def runSlowFast(self, left, right):
+        if not left or left == right:
+            return None
+
+        # Run to middle node.
+        fast, slow = left, left
+        while fast.next != right and fast.next.next != right:
+            fast = fast.next.next
+            slow = slow.next
+
+        root = TreeNode(slow.val)
+        root.left = self.runSlowFast(left, slow)
+        root.right = self.runSlowFast(slow.next, right)
+
+        return root
+
+    def sortedListToBST(self, head):
+        """
+        :type head: ListNode
+        :rtype: TreeNode
+
+        Time complexity: O(n).
+        Space complexity: O(logn).
+        """
+        if not head:
+            return None
+
+        left, right = head, None
+        return self.runSlowFast(left, right)
+
+
 def main():
     # Input: [-10,-3,0,5,9].
     # Output:
@@ -86,6 +118,11 @@ def main():
     head.next.next.next.next = ListNode(9)
 
     root = SolutionConvert2Array().sortedListToBST(head)
+    print (root.val,
+           root.left.val, root.right.val,
+           root.left.right.val, root.right.right.val)
+
+    root = SolutionSlowFast().sortedListToBST(head)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
