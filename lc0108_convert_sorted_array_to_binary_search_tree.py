@@ -78,6 +78,35 @@ class SolutionRecurTwoPointers(object):
         return self._convert(nums, left, right)
 
 
+class SolutionInorderRecur(object):
+    def _inorder(self, nums, left, right):
+        if left > right:
+            return None
+
+        mid = left + (right - left) // 2
+
+        left = self._inorder(nums, left, mid - 1)
+        root = TreeNode(nums[mid])
+        root.left = left
+        root.right = self._inorder(nums, mid + 1, right)
+
+        return root
+
+    def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+
+        Time complexity: O(n), where n is the length of nums.
+        Space complexity: O(logn).
+        """
+        if not nums:
+            return None
+
+        left, right = 0, len(nums) - 1
+        return self._inorder(nums, left, right)
+
+
 def main():
     nums = [-10, -3, 0, 5, 9]
 
@@ -87,6 +116,11 @@ def main():
            root.left.right.val, root.right.right.val)
 
     root = SolutionRecurTwoPointers().sortedArrayToBST(nums)
+    print (root.val,
+           root.left.val, root.right.val,
+           root.left.right.val, root.right.right.val)
+
+    root = SolutionInorderRecur().sortedArrayToBST(nums)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
