@@ -25,17 +25,41 @@ Follow up:
 Could you do it without using any loop / recursion?
 """
 
-class Solution(object):
+class SolutionWhile(object):
     def isPowerOfThree(self, n):
         """
         :type n: int
         :rtype: bool
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
         """
-        pass
+        while n > 1:
+            n /= 3.0
+
+        if n == 1:
+            return True
+        else:
+            return False
 
 
 def main():
-    pass
+    # Output: True
+    n = 27
+    print SolutionWhile().isPowerOfThree(n)
+
+    # Output: False
+    n = 0
+    print SolutionWhile().isPowerOfThree(n)
+
+    # Output: True
+    n = 9
+    print SolutionWhile().isPowerOfThree(n)
+
+    # Output: False
+    n = 45
+    print SolutionLoop().isPowerOfThree(n)
+
 
 
 if __name__ == '__main__':
