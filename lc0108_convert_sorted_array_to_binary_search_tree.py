@@ -57,11 +57,11 @@ class SolutionRecurTwoPointers(object):
 
         mid = left + (right - left) // 2
 
-        current = TreeNode(nums[mid])
-        current.left = self._convert(nums, left, mid - 1)
-        current.right = self._convert(nums, mid + 1, right)
+        root = TreeNode(nums[mid])
+        root.left = self._convert(nums, left, mid - 1)
+        root.right = self._convert(nums, mid + 1, right)
 
-        return current
+        return root
 
     def sortedArrayToBST(self, nums):
         """
