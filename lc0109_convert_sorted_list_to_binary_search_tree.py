@@ -52,6 +52,9 @@ class SolutionConvert2Array(object):
         """
         :type head: ListNode
         :rtype: TreeNode
+
+        Time complexity: O(n).
+        Space complexity: O(logn).
         """
         if not head:
             return None
