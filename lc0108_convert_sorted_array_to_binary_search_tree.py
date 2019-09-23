@@ -28,14 +28,14 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionRecurCopy(object):
     def sortedArrayToBST(self, nums):
         """
         :type nums: List[int]
         :rtype: TreeNode
 
-        Time complexity: O(n), where n is the length of nums.
-        Space complexity: O(h), where h is the height of BST.
+        Time complexity: O(n*logn), where n is the length of nums.
+        Space complexity: O(n).
         """
         if not nums:
             return None
@@ -50,9 +50,46 @@ class SolutionRecur(object):
         return root
 
 
+class SolutionRecurTwoPointers(object):
+    def _convert(self, nums, left, right):
+        if left > right:
+            return None
+
+        mid = left + (right - left) // 2
+
+        current = TreeNode(nums[mid])
+        current.left = self._convert(nums, left, mid - 1)
+        current.right = self._convert(nums, mid + 1, right)
+
+        return current
+
+    def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+
+        Time complexity: O(n), where n is the length of nums.
+        Space complexity: O(logn).
+        """
+        if not nums:
+            return None
+
+        left, right = 0, len(nums) - 1
+        return self._convert(nums, left, right)
+
+
 def main():
     nums = [-10, -3, 0, 5, 9]
-    root = SolutionRecur().sortedArrayToBST(nums)
+
+    root = SolutionRecurCopy().sortedArrayToBST(nums)
+    print (root.val,
+           root.left.val, root.right.val,
+           root.left.right.val, root.right.right.val)
+
+    root = SolutionRecurTwoPointers().sortedArrayToBST(nums)
+    print (root.val,
+           root.left.val, root.right.val,
+           root.left.right.val, root.right.right.val)
 
 
 if __name__ == '__main__':
