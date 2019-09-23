@@ -93,7 +93,7 @@ class SolutionSlowFast(object):
         :type head: ListNode
         :rtype: TreeNode
 
-        Time complexity: O(n).
+        Time complexity: O(nlogn).
         Space complexity: O(logn).
         """
         if not head:
@@ -101,6 +101,47 @@ class SolutionSlowFast(object):
 
         left, right = head, None
         return self.runSlowFast(left, right)
+
+
+class SolutionInorder(object):
+    def _inorder(self, left, right):
+        if left > right:
+            return None
+
+        mid = left + (right - left) // 2
+
+        root_left = self._inorder(left, mid - 1)
+
+        root = TreeNode(self.node.val)
+        root.left = root_left
+        self.node = self.node.next
+
+        root.right = self._inorder(mid + 1, right)
+
+        return root
+
+    def sortedListToBST(self, head):
+        """
+        :type head: ListNode
+        :rtype: TreeNode
+
+        Time complexity: O(n).
+        Space complexity: O(logn).
+        """
+        if not head:
+            return None
+
+        # Get the size of linked list.
+        current = head
+        size = 0
+        while current:
+            size += 1
+            current = current.next
+
+        # Attach head to self for memorizing its update.
+        self.node = head
+
+        return self._inorder(0, size - 1)
 
 
 def main():
@@ -123,6 +164,11 @@ def main():
            root.left.right.val, root.right.right.val)
 
     root = SolutionSlowFast().sortedListToBST(head)
+    print (root.val,
+           root.left.val, root.right.val,
+           root.left.right.val, root.right.right.val)
+
+    root = SolutionInorder().sortedListToBST(head)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
