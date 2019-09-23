@@ -35,7 +35,7 @@ class SolutionRecur(object):
         # Preorder's first is root.
         root = TreeNode(preorder[pre_start])
 
-        # Get root's pos in inorder.
+        # Get root's pos in inorder for left and right.
         in_root_pos = inorder_d[root.val]
 
         # Compute the number of left from root.
@@ -80,11 +80,9 @@ def main():
     inorder = [9, 3, 15, 20, 7]
     root = SolutionRecur().buildTree(preorder, inorder)
     
-    print root.val
-    print root.left.val
-    print root.right.val
-    print root.right.left.val
-    print root.right.right.val
+    print (root.val,
+           root.left.val, root.right.val,
+           root.right.left.val, root.right.right.val)
 
 
 if __name__ == '__main__':
