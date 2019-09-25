@@ -21,18 +21,45 @@ Follow up:
 What if the inputs contain unicode characters? How would you adapt your solution to such case?
 """
 
-class Solution(object):
+class SolutionCharCount(object):
     def isAnagram(self, s, t):
         """
         :type s: str
         :type t: str
         :rtype: bool
         """
-        pass
+        if len(s) != len(t):
+            return False
+
+        # Create lists to collect char a~z's counts.
+        s_char_counts = [0] * 26
+        t_char_counts = [0] * 26
+
+        for c in s:
+            idx = ord(c) - ord('a')
+            s_char_counts[idx] += 1
+
+        for c in t:
+            idx = ord(c) - ord('a')
+            t_char_counts[idx] += 1
+
+        for i in range(26):
+            if s_char_counts[i] != t_char_counts[i]:
+                return False
+
+        return True
 
 
 def main():
-    pass
+    # Output: True
+    s = "anagram"
+    t = "nagaram"
+    print SolutionCharCount().isAnagram(s, t)
+
+    # Output: False
+    s = "rat"
+    t = "car"
+    print SolutionCharCount().isAnagram(s, t)
 
 
 if __name__ == '__main__':
