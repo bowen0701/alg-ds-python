@@ -47,12 +47,9 @@ class SolutionRowSearch(object):
 
         # Search the last number of each row j, j = 0, 1,...
         for r in range(n_rows):
-            if target == matrix[r][-1]:
-                return True
-            elif target < matrix[r][-1]:
-                # If target is smaller than the last number of the jth row,
-                # search numbers in the jth row, which is the only possible place.
-                for c in range(n_cols - 2, -1, -1):
+            if target <= matrix[r][-1]:
+                # Search numbers in the jth row, which is the only possible place.
+                for c in range(n_cols - 1, -1, -1):
                     if target == matrix[r][c]:
                         return True
                     elif target > matrix[r][c]:
@@ -80,20 +77,24 @@ class SolutionBinarySearch(object):
 
         # Perform binary search in 2D matrix.
         n_rows, n_cols = len(matrix), len(matrix[0])
-        first, last = 0, n_rows * n_cols - 1
-        is_found = False
+        left, right = 0, n_rows * n_cols - 1
 
-        while first <= last and not is_found:
-            mid = first + (last - first) // 2
+        while left < right:
+            mid = left + (right - left) // 2
             i, j = mid // n_cols, mid % n_cols
-            if matrix[i][j] == target:
-                is_found = True
-            elif matrix[i][j] < target:
-                first = mid + 1
-            elif matrix[i][j] > target:
-                last = mid - 1
 
-        return is_found
+            if matrix[i][j] == target:
+                return True
+            elif matrix[i][j] < target:
+                left = mid + 1
+            elif matrix[i][j] > target:
+                right = mid - 1
+
+        i, j = left // n_cols, left % n_cols
+        if matrix[i][j] == target:
+            return True
+        else:
+            return False
 
 
 def main():
