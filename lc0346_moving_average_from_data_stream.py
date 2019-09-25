@@ -24,6 +24,9 @@ class MovingAverageQueue(object):
         """
         :type val: int
         :rtype: float
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
         # Apply queue to collect stream of specific length.
         self.queue.append(val)
