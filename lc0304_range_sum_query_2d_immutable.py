@@ -46,6 +46,9 @@ class NumMatrixNaive(object):
         :type row2: int
         :type col2: int
         :rtype: int
+
+        Time complexity: O((row2-row1+1)*(col2-col1+1)).
+        Space complexity: O(1).
         """
         if not self.matrix or not self.matrix[0]:
             return 0
@@ -63,6 +66,11 @@ class NumMatrixDP(object):
     def __init__(self, matrix):
         """
         :type matrix: List[List[int]]
+
+        Time complexity: O(m*n), where
+          - m: number of rows.
+          - n: number of columns.
+        Space complexity: O(m*n).
         """
         self.matrix = matrix
 
@@ -90,6 +98,9 @@ class NumMatrixDP(object):
         :type row2: int
         :type col2: int
         :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(m*n).
         """
         if not self.matrix or not self.matrix[0]:
             return 0
