@@ -15,7 +15,6 @@ m.next(5) = (10 + 3 + 5) / 3
 class MovingAverageQueue(object):
     def __init__(self, size):
         from collections import deque
-
         self.size = size
         self.sum = 0
         self.queue = deque()
@@ -29,13 +28,12 @@ class MovingAverageQueue(object):
         Space complexity: O(1).
         """
         # Apply queue to collect stream of specific length.
-        self.queue.append(val)
+        # First check the queue is full or not.
+        if len(self.queue) == self.size:
+            self.sum -= self.queue.popleft()
 
-        if len(self.queue) <= self.size:
-            self.sum += val
-        else:
-            # If queue is overflow, pop the 1st element and add new one.
-            self.sum += val - self.queue.popleft()
+        self.queue.append(val)
+        self.sum += val
 
         # Note queue len is dynamic for the first elements.
         return self.sum / float(len(self.queue))
