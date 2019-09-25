@@ -29,17 +29,49 @@ Could you do it in one-pass, using only O(1) extra memory and
 without modifying the value of the board?
 """
 
-class Solution(object):
+class SolutionDFSRecur(object):
+    def _dfsRecur(self, board, r, c):
+        if (r < 0 or r >= len(board) or c < 0 or c >= len(board[0])
+            or board[r][c] == '.'):
+            return None
+
+        # Update board as visited.
+        board[r][c] = '.'
+
+        # Recursively visit 4 dirs: up, down, left, and right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_, c_ in dirs:
+            self._dfsRecur(board, r_, c_)
+
     def countBattleships(self, board):
         """
         :type board: List[List[str]]
         :rtype: int
         """
-        pass
+        if not board or not board[0]:
+            return 0
+
+        num_battleships = 0
+
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                if board[r][c] == 'X':
+                    num_battleships += 1
+                    self._dfsRecur(board, r, c)
+
+        return num_battleships
 
 
 def main():
-    pass
+    import time
+
+    print 'By DFS recur:'
+    start_time = time.time()
+    board = [['X','.','.','X'],
+             ['.','.','.','X'],
+             ['.','.','.','X']]
+    print SolutionDFSRecur().countBattleships(board)
+    print 'Time:', time.time() - start_time
 
 
 if __name__ == '__main__':
