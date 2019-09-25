@@ -25,19 +25,19 @@ sumRegion(1, 2, 2, 4) -> 12
 Note:
 - You may assume that the matrix does not change.
 - There are many calls to sumRegion function.
-- You may assume that row1 ≤ row2 and col1 ≤ col2.
+- You may assume that row1 <= row2 and col1 <= col2.
 
 Your NumMatrix object will be instantiated and called as such:
 obj = NumMatrix(matrix)
 param_1 = obj.sumRegion(row1,col1,row2,col2)
 """
 
-class NumMatrix(object):
+class NumMatrixNaive(object):
     def __init__(self, matrix):
         """
         :type matrix: List[List[int]]
         """
-        pass
+        self.matrix = matrix
 
     def sumRegion(self, row1, col1, row2, col2):
         """
@@ -47,11 +47,107 @@ class NumMatrix(object):
         :type col2: int
         :rtype: int
         """
-        pass
+        if not self.matrix or not self.matrix[0]:
+            return 0
+
+        sum_region = 0
+
+        for r in range(row1, row2 + 1):
+            for c in range(col1, col2 + 1):
+                sum_region += self.matrix[r][c]
+
+        return sum_region
+
+
+class NumMatrixDP(object):
+    def __init__(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        """
+        self.matrix = matrix
+
+        nrows = len(matrix)
+        if nrows > 0:
+            ncols = len(matrix[0])
+        else:
+            ncols = 0
+
+        # Create T for memoization of region sum from (0, 0) to (r, c).
+        T = [[0] * (ncols + 1) for _ in range(nrows + 1)]
+
+        # T[r][c] = T[r-1][c] + T[r][c-1] + matrix[r][c] - T[r-1][c-1].
+        for r in range(1, nrows + 1):
+            for c in range(1, ncols + 1):
+                T[r][c] = (T[r - 1][c] + T[r][c - 1]
+                           + matrix[r - 1][c - 1] - T[r - 1][c - 1])
+
+        self.T = T
+
+    def sumRegion(self, row1, col1, row2, col2):
+        """
+        :type row1: int
+        :type col1: int
+        :type row2: int
+        :type col2: int
+        :rtype: int
+        """
+        if not self.matrix or not self.matrix[0]:
+            return 0
+
+        row1 += 1
+        col1 += 1
+        row2 += 1
+        col2 += 1
+
+        # sumRegion(row1, col1, row2, col2) 
+        # = T[row2][col2] T[row1-1][col2] - T[row2][col1-1] + T[row1-1][col1-1].
+        return (self.T[row2][col2]
+                - self.T[row1 - 1][col2] - self.T[row2][col1 - 1]
+                + self.T[row1 - 1][col1 - 1])
 
 
 def main():
-    pass
+    import time
+
+    # Edge cases.
+    # matrix = []
+    # matrix = [[]]
+
+    matrix = [
+               [3, 0, 1, 4, 2],
+               [5, 6, 3, 2, 1],
+               [1, 2, 0, 1, 5],
+               [4, 1, 0, 1, 7],
+               [1, 0, 3, 0, 5]
+             ]
+
+    print 'By naive:'
+    start_time = time.time()
+    num_matrix = NumMatrixNaive(matrix)
+
+    # sumRegion(2, 1, 4, 3) -> 8
+    print num_matrix.sumRegion(2, 1, 4, 3)
+
+    # sumRegion(1, 1, 2, 2) -> 11
+    print num_matrix.sumRegion(1, 1, 2, 2)
+
+    # sumRegion(1, 2, 2, 4) -> 12
+    print num_matrix.sumRegion(1, 2, 2, 4)
+    print 'Time:', time.time() - start_time
+
+    print 'By DP:'
+    start_time = time.time()
+    num_matrix = NumMatrixDP(matrix)
+
+    # sumRegion(2, 1, 4, 3) -> 8
+    print num_matrix.sumRegion(2, 1, 4, 3)
+
+    # sumRegion(1, 1, 2, 2) -> 11
+    print num_matrix.sumRegion(1, 1, 2, 2)
+
+    # sumRegion(1, 2, 2, 4) -> 12
+    print num_matrix.sumRegion(1, 2, 2, 4)
+    print 'Time:', time.time() - start_time
 
 
 if __name__ == '__main__':
