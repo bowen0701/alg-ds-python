@@ -47,6 +47,11 @@ class SolutionDFSRecur(object):
         """
         :type board: List[List[str]]
         :rtype: int
+
+        Time complexity: O(m*n), where
+          - m: number of rows.
+          - n: number of columns.
+        Space complexity: O(m*n).
         """
         if not board or not board[0]:
             return 0
@@ -62,6 +67,39 @@ class SolutionDFSRecur(object):
         return num_battleships
 
 
+class SolutionIterCheckFirstEntries(object):
+    def countBattleships(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: int
+
+        Time complexity: O(m*n).
+        Space complexity: O(1).
+        """
+        if not board or not board[0]:
+            return 0
+
+        num_battleships = 0
+
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                # Skip if empty.
+                if board[r][c] == '.':
+                    continue
+
+                # Skip if it's up is 'X' already.
+                if r > 0 and board[r - 1][c] == 'X':
+                    continue
+
+                # Skip if it's left is 'X' already.
+                if c > 0 and board[r][c - 1] == 'X':
+                    continue
+
+                num_battleships += 1
+
+        return num_battleships
+
+
 def main():
     import time
 
@@ -71,6 +109,14 @@ def main():
              ['.','.','.','X'],
              ['.','.','.','X']]
     print SolutionDFSRecur().countBattleships(board)
+    print 'Time:', time.time() - start_time
+
+    print 'By DFS recur:'
+    start_time = time.time()
+    board = [['X','.','.','X'],
+             ['.','.','.','X'],
+             ['.','.','.','X']]
+    print SolutionIterCheckFirstEntries().countBattleships(board)
     print 'Time:', time.time() - start_time
 
 
