@@ -22,7 +22,7 @@ If no valid conversion could be performed, a zero value is returned.
 Note:
 Only the space character ' ' is considered as whitespace character.
 Assume we are dealing with an environment which could only store integers 
-within the 32-bit signed integer range: [-231, 231 - 1].
+within the 32-bit signed integer range: [-2^31, 2^31 - 1].
 If the numerical value is out of the range of representable values,
 INT_MAX (2^31 - 1) or INT_MIN (-2^31) is returned.
 
@@ -61,10 +61,13 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
+        # Remove front & back spaces. 
         ls = list(s.strip())
+
         if len(ls) == 0:
             return 0
 
+        # Check if the first char is negative sign.
         if ls[0] == '-':
             sign = -1
         else:
@@ -73,13 +76,17 @@ class Solution(object):
         if ls[0] in ['-', '+']:
             del ls[0]
 
-        uatoi, i = 0, 0
+        # Iteratively get unsigned atoi if char is digit.
+        i = 0
+        unsigned_atoi = 0
+
         while i < len(ls) and ls[i].isdigit():
-            uatoi = uatoi * 10 + int(ls[i])
+            unsigned_atoi = unsigned_atoi * 10 + int(ls[i])
             i += 1
 
-        atoi = sign * uatoi
+        atoi = sign * unsigned_atoi
 
+        # Convert atoi if it is out of integer range.
         return max(-pow(2,31), (min(atoi, pow(2, 31) - 1)))
 
 
