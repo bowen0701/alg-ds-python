@@ -13,6 +13,10 @@ m.next(5) = (10 + 3 + 5) / 3
 """
 
 class MovingAverage(object):
+    def __init__(self, size):
+        self.size = size
+        self.sum = 0
+
     def next(self, val):
         """
         :type val: int
