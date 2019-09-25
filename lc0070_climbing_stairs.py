@@ -26,7 +26,7 @@ Explanation: There are three ways to climb to the top.
 - 3. 2 steps + 1 step
 """
 
-class Solution(object):
+class SolutionIter(object):
     def climbStairs(self, n):
         """
         :type n: int
@@ -35,7 +35,8 @@ class Solution(object):
         Time complexity: O(n).
         Sapce complexity: O(1).
         """
-        # Exactly the same as Fibonacci numbers: F[n] = F[n - 1] + F[n - 2]. 
+        # Exactly the same as Fibonacci numbers: F[n] = F[n-1] + F[n-2].
+        # Apply bottom-up dynamic programming by iteration.  
         if n == 1 or n == 2:
             return n
 
@@ -49,10 +50,10 @@ class Solution(object):
 
 def main():
     n = 2
-    print Solution().climbStairs(n)
+    print SolutionIter().climbStairs(n)
 
     n = 3
-    print Solution().climbStairs(n)
+    print SolutionIter().climbStairs(n)
 
 
 if __name__ == '__main__':
