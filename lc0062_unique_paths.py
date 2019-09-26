@@ -34,7 +34,7 @@ class SolutionMemo(object):
     Time complexity: O(mn.
     Space complexity: O(mn).
     """  
-    def _uniquePaths(self, m, n, path):
+    def _uniquePathsHelper(self, m, n, path):
         if path[m][n]:
             return path[m][n]
 
@@ -43,15 +43,15 @@ class SolutionMemo(object):
             path[m][n] = 1
         else:
             # For other rows/cols, backtrack from (m - 1, n) and (m, n - 1).
-            path[m][n] = (self._uniquePaths(m - 1, n, path) + 
-                          self._uniquePaths(m, n - 1, path))
+            path[m][n] = (self._uniquePathsHelper(m - 1, n, path) + 
+                          self._uniquePathsHelper(m, n - 1, path))
 
         return path[m][n]
 
     def uniquePaths(self, m, n):
         # Use path for memoization.
         path = [[0] * (n + 1) for _ in range(m + 1)]
-        return self._uniquePaths(m, n, path)
+        return self._uniquePathsHelper(m, n, path)
 
 
 class SolutionDp(object):
@@ -84,7 +84,7 @@ class SolutionDp2(object):
     """Unique paths by extended Dynamic Programming."
 
     Time complexity: O(mn).
-    Space complexity: O(m).
+    Space complexity: O(n).
     """
     def uniquePaths(self, m, n):
         path = [1] * n
