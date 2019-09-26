@@ -34,7 +34,7 @@ Note:
 - The value of each color in image[i][j] and newColor will be an integer in [0, 65535].
 """
 
-class SolutionDFS(object):
+class SolutionDFSIter(object):
     def floodFill(self, image, sr, sc, newColor):
         """
         :type image: List[List[int]]
@@ -86,14 +86,14 @@ def main():
              [1,0,1]]
     sr, sc = 1, 1
     newColor = 2
-    print SolutionDFS().floodFill(image, sr, sc, newColor)
+    print SolutionDFSIter().floodFill(image, sr, sc, newColor)
 
     # Output: [[0,0,0],[0,1,1]]
     image = [[0,0,0],
              [0,1,1]]
     sr, sc = 1, 1
     newColor = 1
-    print SolutionDFS().floodFill(image, sr, sc, newColor)
+    print SolutionDFSIter().floodFill(image, sr, sc, newColor)
 
 
 if __name__ == '__main__':
