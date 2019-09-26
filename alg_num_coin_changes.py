@@ -39,10 +39,10 @@ def num_coin_changes_recur(amount, coins):
 
 def _num_coin_changes_memo_util(amount, coins, T, n):
     """Helper function for num_coin_changes_memo()."""
-    if amount == 0:
-        return 1
     if amount < 0:
         return 0
+    if amount == 0:
+        return 1
 
     if n <= 0 and amount > 0:
         return 0
