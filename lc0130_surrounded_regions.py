@@ -25,14 +25,14 @@ X O X X
 Explanation:
 Surrounded regions shouldn't be on the border,
 which means that any 'O' on the border of the board are not flipped to 'X'.
-Any 'O' that is not on the border and it is not connected to an 'O'
-on theborder will be flipped to 'X'. 
+Any 'O' that is not on the border and it is not connected to an 'O' on the border
+will be flipped to 'X'. 
 Two cells are connected if they are adjacent cells connected
 horizontally or vertically.
 """
 
-class SolutionDFS(object):
-    def _dfs(self, r, c, board):
+class SolutionDFSRecur(object):
+    def _dfsRecur(self, r, c, board):
         # Skip the boards and land 'X'.
         if (r <= 0 or r >= len(board) - 1 or
             c <= 0 or c >= len(board[0]) - 1 or
@@ -50,7 +50,7 @@ class SolutionDFS(object):
         # Visit its up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for i, j in dirs:
-            self._dfs(i, j, board)
+            self._dfsRecur(i, j, board)
 
     def solve(self, board):
         """
@@ -66,18 +66,18 @@ class SolutionDFS(object):
         n_rows, n_cols = len(board), len(board[0])
 
         # First, check the four borders. If there is a element is 'O', 
-        # modify it and all its neighbor 'O' elements to '*'.
+        # modify it and all its neighbor 'O' elements to '*', as not flippable.
         for r in range(n_rows):
             if board[r][0] == 'O':
-                self._dfs(r, 1, board)
+                self._dfsRecur(r, 1, board)
             if board[r][n_cols - 1] == 'O':
-                self._dfs(r, n_cols - 2, board)
+                self._dfsRecur(r, n_cols - 2, board)
 
         for c in range(n_cols):
             if board[0][c] == 'O':
-                self._dfs(1, c, board)
+                self._dfsRecur(1, c, board)
             if board[n_rows - 1][c] == 'O':
-                self._dfs(n_rows - 2, c, board)
+                self._dfsRecur(n_rows - 2, c, board)
 
         # Then, scan boards to modify all the 'O' to 'X' or all '*' back to 'O'.
         for r in range(1, n_rows - 1):
@@ -95,7 +95,7 @@ def main():
       ['X','X','O','X'],
       ['X','O','X','X']
     ]
-    SolutionDFS().solve(board)
+    SolutionDFSRecur().solve(board)
     print board
 
 
