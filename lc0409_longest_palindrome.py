@@ -31,17 +31,17 @@ class SolutionDict(object):
             return len(s)
 
         # Get letter->count dictionary.
-        letter_d = {}
+        letter_counts = {}
         for l in s:
-            if l in letter_d:
-                letter_d[l] += 1
+            if l in letter_counts:
+                letter_counts[l] += 1
             else:
-                letter_d[l] = 1
+                letter_counts[l] = 1
 
         # Compute how many letters occur in even times.
         lp_len, rem = 0, 0
-        for letter in letter_d:
-            div, mod = divmod(letter_d[letter], 2)
+        for letter in letter_counts:
+            div, mod = divmod(letter_counts[letter], 2)
             lp_len += div * 2
 
             # If there is any letter remaining modulus is 1,
