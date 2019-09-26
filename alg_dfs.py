@@ -19,9 +19,9 @@ def _dfs_recur_visit(v, graph_adj_d, visited_d,
     visited_d[v] = True
     _previsit(v, previsit_d, clock)
 
-    for v_neighbor in graph_adj_d[v]:
-        if not visited_d[v_neighbor]:
-            _dfs_recur_visit(v_neighbor, graph_adj_d, visited_d, 
+    for v_ in graph_adj_d[v]:
+        if not visited_d[v_]:
+            _dfs_recur_visit(v_, graph_adj_d, visited_d, 
                              previsit_d, postvisit_d, clock)
     
     _postvisit(v, postvisit_d, clock)
@@ -41,7 +41,7 @@ def dfs_recur(graph_adj_d):
     for v in graph_adj_d.keys():
         if not visited_d[v]:
             # If vertex is not visited, re-start the DFS visit.
-            _dfs_recur_visit(v, graph_adj_d, visited_d, 
+            _dfs_recur_visit(v, graph_adj_d, visited_d,
                              previsit_d, postvisit_d, clock)
 
     return previsit_d, postvisit_d
@@ -53,25 +53,25 @@ def _dfs_iter_visit(v, graph_adj_d, visited_d,
     _previsit(v, previsit_d, clock)
     visited_d[v] = True
 
-    stack = []
-    stack.append(v)
+    stack = [v]
 
     while stack:
         visited_set = {v for v in visited_d if visited_d[v] is True}
         if set(graph_adj_d[stack[-1]]) - visited_set:
             # Travel stack last node's neighbor, if not visited, 
             # add the neighbor to visited and directly go to next traverse.
-            for v_neighbor in graph_adj_d[stack[-1]]:
-                if not visited_d[v_neighbor]:
-                    _previsit(v_neighbor, previsit_d, clock)
-                    visited_d[v_neighbor] = True
-                    stack.append(v_neighbor)
+            for v_ in graph_adj_d[stack[-1]]:
+                if not visited_d[v_]:
+                    _previsit(v_, previsit_d, clock)
+                    visited_d[v_] = True
+                    stack.append(v_)
                     break
         else:
             # When there is no neighbor to travel, pop out stack last node,
             # and step back for further traverse.
             v_pop = stack.pop()
             _postvisit(v_pop, postvisit_d, clock)
+
     return previsit_d, postvisit_d
 
 
