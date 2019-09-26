@@ -43,7 +43,7 @@ class SolutionBFS(object):
         Time complexity: O(mn), where
           - m: number of rows
           - n: number of columns
-        Space complexity: O(1).
+        Space complexity: O(mn).
         """
         if not matrix or not matrix[0]:
             return matrix
@@ -68,8 +68,8 @@ class SolutionBFS(object):
         # BFS explore from cells with value 0.
         while queue:
             r, c = queue.pop()
-            for r_dir, c_dir in dirs:
-                r_visit, c_visit = r + r_dir, c + c_dir
+            for r_, c_ in dirs:
+                r_visit, c_visit = r + r_, c + c_
 
                 # If visiting is out of boundary or does not shorten distance.
                 if (r_visit < 0 or r_visit >= n_rows or
