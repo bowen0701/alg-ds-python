@@ -17,7 +17,7 @@ Output:
 ]
 """
 
-class Solution(object):
+class SolutionBacktrack(object):
     def _backtrack(self, result, tmps, s, start):
         if start == len(s):
             # Check partial string with start len(s): empty string ''.
@@ -58,7 +58,7 @@ class Solution(object):
 
 def main():
     s = "aab"
-    print Solution().partition(s)
+    print SolutionBacktrack().partition(s)
 
 
 if __name__ == '__main__':
