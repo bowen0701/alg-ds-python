@@ -24,21 +24,7 @@ class ListNode(object):
         self.next = None
 
 
-class LinkedList(object):
-    def __init__(self):
-        self.head = None
-
-    def append(self, val):
-        if not self.head:
-            self.head = ListNode(val)
-            return None
-        current = self.head
-        while current.next:
-            current = current.next
-        current.next = ListNode(val)
-
-
-class Solution1(object):
+class SolutionStack(object):
     def isPalindrome(self, head):
         """
         :type head: ListNode
@@ -47,9 +33,10 @@ class Solution1(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Use stack to collect values.
         stack = []
-        current = head
 
+        current = head
         while current:
             stack.append(current.val)
             current = current.next
@@ -69,7 +56,7 @@ class Solution2(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """        
-        # Find the middle node: slow
+        # Find the middle node: slow + fast.
         slow = fast = head
         while fast and fast.next:
             slow = slow.next
@@ -79,8 +66,10 @@ class Solution2(object):
         reverse = None
         while slow:
             nxt = slow.next
+
             slow.next = reverse
             reverse = slow
+
             slow = nxt
         
         # Traverse the 1st half and reversed 2nd half at the same time
@@ -99,43 +88,31 @@ def main():
     import time
 
     # 1->2->2->1: Yes.
-    a_list = LinkedList()
-    a_list.append(1)
-    a_list.append(2)
-    a_list.append(2)
-    a_list.append(1)
-    
-    print a_list.head.val
-    print a_list.head.next.val
-    print a_list.head.next.next.val
-    print a_list.head.next.next.next.val
+    head.ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(2)
+    head.next.next.next = ListNode(1)
 
     start_time = time.time()
-    print 'Naive: {}'.format(Solution1().isPalindrome(a_list.head))
+    print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Optimized: {}'.format(Solution2().isPalindrome(a_list.head))
+    print 'Optimized: {}'.format(Solution2().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
     # 1->2->3->1: No.
-    a_list = LinkedList()
-    a_list.append(1)
-    a_list.append(2)
-    a_list.append(3)
-    a_list.append(1)
-    
-    print a_list.head.val
-    print a_list.head.next.val
-    print a_list.head.next.next.val
-    print a_list.head.next.next.next.val
+    head.ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(1)
 
     start_time = time.time()
-    print 'Naive: {}'.format(Solution1().isPalindrome(a_list.head))
+    print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Optimized: {}'.format(Solution2().isPalindrome(a_list.head))
+    print 'Optimized: {}'.format(Solution2().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
 
