@@ -38,6 +38,7 @@ class SolutionThreePointers(object):
 
         n_triplets = 0
 
+        # Start reversely from the biggest length, then we just need to check one triplet.
         for i in range(n - 1, 1, -1):
             # For each i, it suffices to apply two pointer method on the left of i.
             # Since if num l + r > i, triangle number condition is satisfied.
