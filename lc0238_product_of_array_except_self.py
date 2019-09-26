@@ -17,7 +17,7 @@ Could you solve it with constant space complexity?
 space complexity analysis.)
 """
 
-class SolutionLeftRight(object):
+class SolutionLeftRightProducts(object):
     def productExceptSelf(self, nums):
         """
         :type nums: List[int]
@@ -46,20 +46,20 @@ class SolutionLeftRight(object):
         prods = [1] * size
 
         for i, n in enumerate(nums):
-            if i - 1 < 0:
+            if i == 0:
                 # Leftmost = neighbor's right product.
                 prods[i] = right_prods[i + 1]
-            elif i + 1 >= size:
+            elif i == size - 1:
                 # Rightmost = neighbor's left product.
                 prods[i] = left_prods[i - 1]
-            if i - 1 >= 0 and i + 1 < size:
+            if 1 <= i <= size - 2:
                 # Middles = product of neighbors's left & right products.
                 prods[i] = left_prods[i - 1] * right_prods[i + 1]
 
         return prods
 
 
-class Solution(object):
+class SolutionLeftRightProducts2(object):
     def productExceptSelf(self, nums):
         """
         :type nums: List[int]
@@ -91,8 +91,8 @@ def main():
     # Output: [60, 40, 30, 24]
     nums = [2, 3, 4, 5]
 
-    print SolutionLeftRight().productExceptSelf(nums)
-    print Solution().productExceptSelf(nums)
+    print SolutionLeftRightProducts().productExceptSelf(nums)
+    print SolutionLeftRightProducts2().productExceptSelf(nums)
 
 
 if __name__ == '__main__':
