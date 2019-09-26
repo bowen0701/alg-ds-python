@@ -94,7 +94,7 @@ class Solution(object):
 
         while queue:
             visit_word = queue.pop()
-            # if words_graph.get(visit_word):
+
             for neighbor_word in words_graph[visit_word]:
                 # If neighbor word is not visited yet.
                 if length_d[neighbor_word] == float('inf'):
