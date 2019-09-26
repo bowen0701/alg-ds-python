@@ -123,7 +123,7 @@ class SolutionDFSRecurUpdate(object):
         if grid[r][c] == '0':
             return None
 
-        # Mark (r, c) as visited.
+        # Update (r, c) as visited.
         grid[r][c] = '0'
 
         # Vist up & down and left & right.
@@ -164,7 +164,7 @@ class SolutionDFSRecurUpdate2(object):
         if grid[r][c] == '0':
             return 0
 
-        # Mark (r, c) as visited.
+        # Update (r, c) as visited.
         grid[r][c] = '0'
 
         n_connects = 1
@@ -279,6 +279,7 @@ class SolutionDFSIterUpdate(object):
         return tovisit_ls
 
     def _dfs(self, r, c, grid):
+        # Update (r, c) as visited.
         grid[r][c] = '0'
 
         # Use stack for iterative DFS.
