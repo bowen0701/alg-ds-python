@@ -28,7 +28,7 @@ class SolutionNaive(object):
         lps = ''
 
         for i in range(len(s)):
-            for j in range(1, len(s) + 1):
+            for j in range(i + 1, len(s) + 1):
                 if s[i:j] == s[i:j][::-1] and j - i > len(lps):
                     lps = s[i:j]
 
