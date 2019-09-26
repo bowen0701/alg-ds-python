@@ -22,7 +22,7 @@ Output:
 ]
 """
 
-class SolutionBackTrack(object):
+class SolutionBacktrack(object):
     def _backtrack(self, result, temps, nums, start):
         result.append(temps[:])
 
@@ -37,7 +37,7 @@ class SolutionBackTrack(object):
         :type nums: List[int]
         :rtype: List[List[int]]
 
-        Time complexity: O(n * 2^n).
+        Time complexity: O(n*2^n).
         Space complexity: O(2^n).
         """
         # Apply backtracking.
@@ -73,7 +73,7 @@ def main():
     nums = [1, 2, 3]
     
     start_time = time.time()
-    print 'Backtracking:', SolutionBackTrack().subsets(nums)
+    print 'Backtracking:', SolutionBacktrack().subsets(nums)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
