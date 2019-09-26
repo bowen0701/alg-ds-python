@@ -24,12 +24,12 @@ def bfs(graph_adj_d, v_start):
     queue = [v_start]
     
     while queue:
-        v_visit = queue.pop()
-        for v_neighbor in graph_adj_d[v_visit]:
+        v = queue.pop()
+        for v_neighbor in graph_adj_d[v]:
             # If v_neighbor is not visited.
             if distance_d[v_neighbor] == float('inf'):
                 queue.insert(0, v_neighbor)
-                distance_d[v_neighbor] = distance_d[v_visit] + 1
+                distance_d[v_neighbor] = distance_d[v] + 1
     return distance_d
 
 

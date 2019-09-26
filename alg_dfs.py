@@ -19,9 +19,9 @@ def _dfs_recur_visit(v, graph_adj_d, visited_d,
     visited_d[v] = True
     _previsit(v, previsit_d, clock)
 
-    for v_ in graph_adj_d[v]:
-        if not visited_d[v_]:
-            _dfs_recur_visit(v_, graph_adj_d, visited_d, 
+    for v_neighbor in graph_adj_d[v]:
+        if not visited_d[v_neighbor]:
+            _dfs_recur_visit(v_neighbor, graph_adj_d, visited_d, 
                              previsit_d, postvisit_d, clock)
     
     _postvisit(v, postvisit_d, clock)
@@ -60,11 +60,11 @@ def _dfs_iter_visit(v, graph_adj_d, visited_d,
         if set(graph_adj_d[stack[-1]]) - visited_set:
             # Travel stack last node's neighbor, if not visited, 
             # add the neighbor to visited and directly go to next traverse.
-            for v_ in graph_adj_d[stack[-1]]:
-                if not visited_d[v_]:
-                    _previsit(v_, previsit_d, clock)
-                    visited_d[v_] = True
-                    stack.append(v_)
+            for v_neighbor in graph_adj_d[stack[-1]]:
+                if not visited_d[v_neighbor]:
+                    _previsit(v_neighbor, previsit_d, clock)
+                    visited_d[v_neighbor] = True
+                    stack.append(v_neighbor)
                     break
         else:
             # When there is no neighbor to travel, pop out stack last node,
