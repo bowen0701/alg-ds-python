@@ -109,9 +109,9 @@ class SolutionDp(object):
         n_coins = len(coins)
         T = [[float('inf')] * (amount + 1) for _ in range(n_coins + 1)]
 
-        # For amount 0, set num equal 1.
+        # For amount 0, set num equal 0.
         for c in range(1, n_coins + 1):
-            T[c][0] = 1
+            T[c][0] = 0
 
         for c in range(1, n_coins + 1):
             for a in range(1, amount + 1):
