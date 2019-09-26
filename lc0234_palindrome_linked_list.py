@@ -47,7 +47,7 @@ class SolutionStack(object):
         return True
 
 
-class Solution2(object):
+class SolutionSlowFast(object):
     def isPalindrome(self, head):
         """
         :type head: ListNode
@@ -98,7 +98,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Optimized: {}'.format(Solution2().isPalindrome(head))
+    print 'Optimized: {}'.format(SolutionSlowFast().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
     # 1->2->3->1: No.
@@ -112,7 +112,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Optimized: {}'.format(Solution2().isPalindrome(head))
+    print 'Optimized: {}'.format(SolutionSlowFast().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
 

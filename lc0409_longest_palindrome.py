@@ -14,12 +14,11 @@ Input:
 "abccccdd"
 Output:
 7
-
 Explanation:
 One longest palindrome that can be built is "dccaccd", whose length is 7.
 """
 
-class Solution(object):
+class SolutionDict(object):
     def longestPalindrome(self, s):
         """
         :type s: str
@@ -56,10 +55,10 @@ class Solution(object):
 
 def main():
     s = 'abccccdd'  # Ans: 7, since 'dccaccd'.
-    print Solution().longestPalindrome(s)
+    print SolutionDict().longestPalindrome(s)
 
     s = 'Aa'  # Ans: 1, since 'A'.
-    print Solution().longestPalindrome(s)
+    print SolutionDict().longestPalindrome(s)
 
 
 if __name__ == '__main__':
