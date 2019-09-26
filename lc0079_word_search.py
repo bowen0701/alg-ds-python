@@ -22,15 +22,13 @@ Given word = "SEE", return true.
 Given word = "ABCB", return false.
 """
 
-class Solution(object):
-    def _dfs(self, i, j, board, word, pos, visited):
+class SolutionDFSRecurBacktrack(object):
+    def _dfsRecur(self, i, j, board, word, pos, visited):
         # If there are no letters, return True.
         if pos == len(word):
             return True
 
-        # If visit is out of boundaries, 
-        # (i, j) is not the 1st letter of word,
-        # or (i, j) was visited.
+        # If visit is out of boundaries, (i, j) is not the letter of word or visited.
         if (i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or 
             board[i][j] != word[pos] or
             visited.get((i, j))):
@@ -43,7 +41,7 @@ class Solution(object):
         is_exist = False
         dirs = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
         for r, c in dirs:
-            is_exist = is_exist or self._dfs(r, c, board, word, pos + 1, visited)
+            is_exist = is_exist or self._dfsRecur(r, c, board, word, pos + 1, visited)
 
         # Backtrack.
         visited[(i, j)] = False
@@ -62,7 +60,7 @@ class Solution(object):
           - s is the length of word.
         Space complexity: O(m * n).
         """
-        if not board:
+        if not board or not board[0]:
             return False
 
         m, n = len(board), len(board[0])
@@ -70,7 +68,8 @@ class Solution(object):
         for i in range(m):
             for j in range(n):
                 visited = {}
-                if self._dfs(i, j, board, word, 0, visited):
+                pos = 0
+                if self._dfsRecur(i, j, board, word, pos, visited):
                     return True
 
         return False
@@ -85,15 +84,15 @@ def main():
 
     # Given word = "ABCCED", return true.
     word = 'ABCCED'
-    print Solution().exist(board, word)
+    print SolutionDFSRecurBacktrack().exist(board, word)
 
     # Given word = "SEE", return true.
     word = 'SEE'
-    print Solution().exist(board, word)
+    print SolutionDFSRecurBacktrack().exist(board, word)
 
     # Given word = "ABCB", return false.
     word = 'ABCB'
-    print Solution().exist(board, word)
+    print SolutionDFSRecurBacktrack().exist(board, word)
 
     # Given word = "ABCESEEEFS", return true.
     board = [
@@ -102,7 +101,7 @@ def main():
               ["A","D","E","E"]
             ]
     word = "ABCESEEEFS"
-    print Solution().exist(board, word)
+    print SolutionDFSRecurBacktrack().exist(board, word)
 
 
 if __name__ == '__main__':
