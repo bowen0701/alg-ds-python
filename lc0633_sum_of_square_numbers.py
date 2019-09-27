@@ -4,7 +4,7 @@ Easy
 URL: https://leetcode.com/problems/sum-of-square-numbers/
 
 Given a non-negative integer c, your task is to decide whether
-there're two integers a and b such that a2 + b2 = c.
+there're two integers a and b such that a^2 + b^2 = c.
 
 Example 1:
 Input: 5
@@ -25,9 +25,9 @@ class SolutionTwoPointers(object):
         Time complexity: O(sqrt(c)).
         Space complexity: O(1).
         """
-        # Apply binary search in [0, c^0.5].
+        # Apply binary search in the 1st half [0, c^0.5].
         l, r = 0, int(c ** 0.5)
-        while l <= r:
+        while l < r:
             ss = l ** 2 + r ** 2
             if ss == c:
                 return True
