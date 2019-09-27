@@ -23,8 +23,8 @@ def kth_smallest_maxheap(nums, k):
     # Then keep maxheap with k elements.
     for j in range(k + 1, len(neg_nums)):
         if neg_nums[j] > maxheap[0]:
-            heapq.heappush(maxheap, neg_nums[j])
             heapq.heappop(maxheap)
+            heapq.heappush(maxheap, neg_nums[j])
 
     return -maxheap[0]
 
