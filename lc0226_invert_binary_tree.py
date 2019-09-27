@@ -53,7 +53,7 @@ class SolutionRecur(object):
         return root
 
 
-class SolutionIter(object):
+class SolutionBFS(object):
     def invertTree(self, root):
         """
         :type root: TreeNode
@@ -93,7 +93,7 @@ def main():
     root.right.right = TreeNode(9)
 
     # root = SolutionRecur().invertTree(root)
-    root = SolutionIter().invertTree(root)
+    root = SolutionBFS().invertTree(root)
     print root.val              # Should be 4.
     print root.left.val         # Should be 7.
     print root.right.val        # Should be 2.

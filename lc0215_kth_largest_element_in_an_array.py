@@ -93,8 +93,8 @@ class SolutionMinHeap(object):
         # Then keep maxheap with k elements.
         for j in range(k + 1, len(nums)):
             if nums[j] > minheap[0]:
-                heapq.heappush(minheap, nums[j])
                 heapq.heappop(minheap)
+                heapq.heappush(minheap, nums[j])
 
         return minheap[0]
 

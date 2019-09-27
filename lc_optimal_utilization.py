@@ -43,7 +43,7 @@ class SolutionTwoPointers(object):
         :type returns: List[Int, Int] 
         :rtype: List[List[Int]]
 
-        Time complexity: O(m*logm + n*logn + m + n) = O(max(m*logm, n*logn)), where
+        Time complexity: O(m*logm+n*logn+m+n) = O(m*logm+n*logn), where
           - m is the number of forwards,
           - n is the number of returns.
         Space complexity: O(m*n), in "worst" case, all pairs contribute the result.
@@ -58,8 +58,6 @@ class SolutionTwoPointers(object):
         # First sort two routes by value.
         forwards.sort(key=lambda x: x[1])
         returns.sort(key=lambda x: x[1])
-        # a = [[1, 3], [2, 5], [3, 7], [4, 10]]
-        # b = [[1, 2], [2, 3], [3, 4], [4, 5]]
 
         # Use a dict to store distance sums and the corresponding elements.
         sums_d = defaultdict(list)

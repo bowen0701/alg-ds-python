@@ -19,7 +19,7 @@ Note:
 - The order of your output does not matter.
 """
 
-class Solution(object):
+class SolutionDict(object):
     def groupAnagrams(self, strs):
         """
         :type strs: List[str]
@@ -48,7 +48,7 @@ class Solution(object):
 
 def main():
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-    print Solution().groupAnagrams(strs)
+    print SolutionDict().groupAnagrams(strs)
 
 
 if __name__ == '__main__':

@@ -57,8 +57,8 @@ class SolutionMaxHeap(object):
                 heapq.heappush(negdist_point_maxpq, (nd, p))
             elif i >= K:
                 if nd > negdist_point_maxpq[0][0]:
-                    heapq.heappush(negdist_point_maxpq, (nd, p))
                     heapq.heappop(negdist_point_maxpq)
+                    heapq.heappush(negdist_point_maxpq, (nd, p))
 
         k_points = [p for (nd, p) in negdist_point_maxpq]
         return k_points

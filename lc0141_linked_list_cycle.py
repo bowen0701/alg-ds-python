@@ -63,7 +63,7 @@ class SolutionDict(object):
         return False
 
 
-class SolutionTwoPointers(object):
+class SolutionFastSlow(object):
     def hasCycle(self, head):
         """
         :type head: ListNode
@@ -98,19 +98,19 @@ def main():
     head.next.next.next = ListNode(-4)
     head.next.next.next.next = head.next
     print SolutionDict().hasCycle(head)
-    print SolutionTwoPointers().hasCycle(head)
+    print SolutionFastSlow().hasCycle(head)
 
     # Input: head = [1,2], pos = 0. Output: true
     head = ListNode(1)
     head.next = ListNode(2)
     head.next.next = head
     print SolutionDict().hasCycle(head)
-    print SolutionTwoPointers().hasCycle(head)
+    print SolutionFastSlow().hasCycle(head)
 
     # Input: head = [1], pos = -1. Output: false
     head = ListNode(1)
     print SolutionDict().hasCycle(head)    
-    print SolutionTwoPointers().hasCycle(head)
+    print SolutionFastSlow().hasCycle(head)
 
 
 if __name__ == '__main__':

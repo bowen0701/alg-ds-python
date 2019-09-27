@@ -111,7 +111,7 @@ class NumMatrixDP(object):
         col2 += 1
 
         # sumRegion(row1, col1, row2, col2) 
-        # = T[row2][col2] T[row1-1][col2] - T[row2][col1-1] + T[row1-1][col1-1].
+        # = T[row2][col2] - T[row1-1][col2] - T[row2][col1-1] + T[row1-1][col1-1].
         return (self.T[row2][col2]
                 - self.T[row1 - 1][col2] - self.T[row2][col1 - 1]
                 + self.T[row1 - 1][col1 - 1])
