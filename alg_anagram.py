@@ -31,9 +31,7 @@ def anagram_iter(s1, s2):
                 break
 
         # Confirm c1 is found in any char of s2.
-        if is_found:
-            continue
-        else:
+        if not is_found:
             return False
 
     return True
@@ -55,9 +53,7 @@ def anagram_sort(s1, s2):
     l2.sort()
     
     for i in range(len(l1)):
-        if l1[i] == l2[i]:
-            continue
-        else:
+        if l1[i] != l2[i]:
             return False
 
     return True
@@ -85,9 +81,7 @@ def anagram_count(s1, s2):
         c2[pos] += 1
     
     for i in range(26):
-        if c1[i] == c2[i]:
-            continue
-        else:
+        if c1[i] != c2[i]:
             return False
 
     return True
