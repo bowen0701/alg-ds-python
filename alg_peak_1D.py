@@ -31,35 +31,35 @@ def peak_1d_binary_search_iter(arr):
     Time complexity: O(logn).
     Space complexity: O(1).
     """
-    first, last = 0, len(arr) - 1
+    left, right = 0, len(arr) - 1
 
-    while first < last:
-        mid = (first + last + 1) // 2
+    while left < right:
+        mid = (left + right + 1) // 2
 
         if arr[mid - 1] > arr[mid]:
             # If mid's left > mid, search left part.
-            last = mid - 1
+            right = mid - 1
         else:
             # Otherwise, search right part.
-            first = mid
+            left = mid
 
-    # For first = last.
-    return first
+    # For left = right.
+    return left
 
 
-def _binary_search_recur_helper(arr, first, last):
+def _binary_search_recur_helper(arr, left, right):
     """Helper function for peak_1d_binary_search_recur()."""
-    if last - first == 0:
-        return first
+    if right - left == 0:
+        return left
     else:
-        mid = (first + last + 1) // 2
+        mid = (left + right + 1) // 2
 
         if arr[mid - 1] > arr[mid]:
             # If mid's left > mid, search left part.
-            return _binary_search_recur_helper(arr, first, mid - 1)
+            return _binary_search_recur_helper(arr, left, mid - 1)
         else:
             # Otherwise, search right part.
-            return _binary_search_recur_helper(arr, mid, last)
+            return _binary_search_recur_helper(arr, mid, right)
 
 
 def peak_1d_binary_search_recur(arr):
@@ -78,6 +78,7 @@ def main():
     # Array of length 5 with peak at 3.
     # arr = [0, 1, 2, 4, 3]
     arr = [0, 1]
+    print('arr', arr)
     
     start_time = time.time()
     print('By peak_1d_iter(): {}'.format(peak_1d_iter(arr)))

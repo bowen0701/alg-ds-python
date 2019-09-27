@@ -43,19 +43,19 @@ class Solution(object):
         Space complexity: O(1).
         """
         # Apply variant of binary search.
-        start, end = 1, n
+        left, right = 1, n
 
-        while start < end:
-            mid = start + (end - start) // 2
+        while left < right:
+            mid = left + (right - left) // 2
 
             if isBadVersion(mid):
-                # Since middle is bad, use it as next final.
-                end = mid
+                # Since middle is bad, use it as next right.
+                right = mid
             else:
-                # Since middle is good, use its next as next start.
-                start = mid + 1
+                # Since middle is good, use its next as next left.
+                left = mid + 1
 
-        return end
+        return right
 
 
 def main():

@@ -23,7 +23,7 @@ Input: nums = [4,5,6,7,0,1,2], target = 3
 Output: -1
 """
 
-class Solution(object):
+class SolutionTwoPointers(object):
     def search(self, nums, target):
         """
         :type nums: List[int]
@@ -39,10 +39,10 @@ class Solution(object):
         # Fixed pivot is nums[0].
         pivot = nums[0]
 
-        first, last = 0, len(nums) - 1
+        left, right = 0, len(nums) - 1
 
-        while first < last:
-            mid = first + (last - first) // 2
+        while left < right:
+            mid = left + (right - left) // 2
 
             if nums[mid] == target:
                 return mid
@@ -54,20 +54,20 @@ class Solution(object):
                 split_bool = True
 
             if not split_bool:
-                # If not splitted, apply normal binary search.
+                # If not splitted, apply binary search based on mid element.
                 if target < nums[mid]:
-                    last = mid - 1
+                    right = mid - 1
                 else:
-                    first = mid + 1
+                    left = mid + 1
             else:
-                # If splitted, apply binary search based on pivot.
+                # If splitted, apply "reversed" binary search based on pivot.
                 if target < pivot:
-                    first = mid + 1
+                    left = mid + 1
                 else:
-                    last = mid - 1
+                    right = mid - 1
 
-        if nums[first] == target:
-            return first
+        if nums[left] == target:
+            return left
         else:
             return -1
 
@@ -76,17 +76,17 @@ def main():
     # Ans: 4
     nums = [4,5,6,7,0,1,2]
     target = 0
-    print Solution().search(nums, target)
+    print SolutionTwoPointers().search(nums, target)
 
     # Ans: -1
     nums = [4,5,6,7,0,1,2]
     target = 3
-    print Solution().search(nums, target)
+    print SolutionTwoPointers().search(nums, target)
 
     # Ans: 1
     nums = [1,3]
     target = 3
-    print Solution().search(nums, target)
+    print SolutionTwoPointers().search(nums, target)
 
 
 if __name__ == '__main__':
