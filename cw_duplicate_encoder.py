@@ -17,11 +17,46 @@ Examples
 """
 
 def duplicate_encode(word):
-    pass
+    from collections import defaultdict
+
+    # Convert word to lower case.
+    word_lower = word.lower()
+
+    # Create a dict to accumulate char numbers.
+    char_nums = defaultdict(int)
+
+    for c in word_lower:
+        char_nums[c] += 1
+
+    # Create a duplicate encoder based on char number dict.
+    encoder = [''] * len(word)
+
+    for i, c in enumerate(word_lower):
+        # There are duplicates in char c.
+        if char_nums[c] > 1:
+            encoder[i] = ')'
+        else:
+            encoder[i] = '('
+
+    return ''.join(encoder)
 
 
 def main():
-    pass
+    # "din"      =>  "((("
+    word = "din"
+    print duplicate_encode(word)
+
+    # "recede"   =>  "()()()"
+    word = "recede"
+    print duplicate_encode(word)
+
+    # "Success"  =>  ")())())"
+    word = "Success"
+    print duplicate_encode(word)
+
+    # "(( @"     =>  "))((" 
+    word = "(( @"
+    print duplicate_encode(word)
 
 
 if __name__ == '__main__':
