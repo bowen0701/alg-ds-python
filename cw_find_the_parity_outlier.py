@@ -36,7 +36,12 @@ def find_outlier_naive(integers):
 
 
 def find_outlier(integers):
-    # Collect evens and odds.
+    """
+    Collect evens and odds.
+
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
     evens = [i for i in integers if i % 2 == 0]
     odds = list(set(integers) - set(evens))
 

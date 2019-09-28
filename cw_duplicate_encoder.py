@@ -17,6 +17,12 @@ Examples
 """
 
 def duplicate_encode(word):
+    """
+    Apply dict.
+
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
     from collections import defaultdict
 
     # Convert word to lower case.
