@@ -8,7 +8,6 @@ We need a function that counts the number of sheep present in the array
 (true means present).
 
 For example,
-
 [True,  True,  True,  False,
  True,  True,  True,  True ,
  True,  False, True,  False,
@@ -21,12 +20,26 @@ Hint: Don't forget to check for bad values like null/undefined
 """
 
 def count_sheeps(arrayOfSheeps):
-    # TODO May the force be with you
-    pass
+    """
+    Iterate with a counter.
+    """
+    count = 0
+    for sheep in arrayOfSheeps:
+        if sheep is True:
+            count += 1
+
+    return count
 
 
 def main():
-    pass
+    # Output: 17.
+    arrayOfSheeps = [True,  True,  True,  False,
+                     True,  True,  True,  True ,
+                     True,  False, True,  False,
+                     True,  False, False, True ,
+                     True,  True,  True,  True ,
+                     False, False, True,  True]
+    print count_sheeps(arrayOfSheeps)
 
 
 if __name__ == '__main__':
