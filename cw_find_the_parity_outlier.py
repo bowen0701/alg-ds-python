@@ -43,7 +43,7 @@ def find_outlier(integers):
     Space complexity: O(n).
     """
     evens = [i for i in integers if i % 2 == 0]
-    odds = list(set(integers) - set(evens))
+    odds = [i for i in integers if i % 2 == 1]
 
     # If the number of events is one or not, then we get outlier.
     if len(evens) == 1:
