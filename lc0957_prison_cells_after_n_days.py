@@ -50,6 +50,9 @@ class SolutionPattern(object):
         :type cells: List[int]
         :type N: int
         :rtype: List[int]
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
         # Since the cells transformation will cycle after 14 days.
         N %= 14
