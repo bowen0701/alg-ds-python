@@ -37,13 +37,18 @@ def find_outlier_naive(integers):
 
 def find_outlier(integers):
     """
-    Collect evens and odds.
+    Collect evens and odds in one pass.
 
     Time complexity: O(n).
     Space complexity: O(n).
     """
-    evens = [i for i in integers if i % 2 == 0]
-    odds = [i for i in integers if i % 2 == 1]
+    evens = []
+    odds = []
+    for i in integers:
+        if i % 2 == 0:
+            evens.append(i)
+        else:
+            odds.append(i)
 
     # If the number of events is one or not, then we get outlier.
     if len(evens) == 1:
