@@ -24,18 +24,39 @@ Follow up:
   you cannot load all elements into the memory at once?
 """
 
-class Solution(object):
+class SolutionNaiveIter(object):
     def intersect(self, nums1, nums2):
         """
         :type nums1: List[int]
         :type nums2: List[int]
         :rtype: List[int]
-        """
-        pass
 
+        Time complexity: O(n1*n2), where ni is the length of numsi.
+        Space complexity: O(1).
+        """
+        if len(nums1) > len(nums2):
+            nums1, nums2 = nums2, nums1
+
+        intersect = []
+        for n1 in nums1:
+            for i2, n2 in enumerate(nums2):
+                if n1 == n2:
+                    intersect.append(n1)
+                    nums2[i2] = None
+                    break
+
+        return intersect
 
 def main():
-    pass
+    # Output: [2,2]
+    nums1 = [1,2,2,1]
+    nums2 = [2,2]
+    print SolutionNaiveIter().intersect(nums1, nums2)
+
+    # Output: [4,9]
+    nums1 = [4,9,5]
+    nums2 = [9,4,9,8,4]
+    print SolutionNaiveIter().intersect(nums1, nums2)
 
 
 if __name__ == '__main__':
