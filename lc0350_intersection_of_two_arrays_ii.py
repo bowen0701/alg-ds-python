@@ -47,16 +47,65 @@ class SolutionNaiveIter(object):
 
         return intersect
 
+
+class SolutionDict(object):
+    def intersect(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+
+        Time complexity: O(n1+n2), where ni is the length of numsi.
+        Space complexity: O(n1+n2).
+        """
+        # Use dict to collect number counts.
+        from collections import defaultdict
+
+        if not nums1 or not nums2:
+            return []
+
+        nums1_counts = defaultdict(int)
+        nums2_counts = defaultdict(int)
+
+        for n1 in nums1:
+            nums1_counts[n1] += 1
+        for n2 in nums2:
+            nums2_counts[n2] += 1
+
+        # Obtain intersection set of number count keys.
+        unique_nums1 = set(nums1_counts.keys())
+        unique_nums2 = set(nums2_counts.keys())
+        intersect_nums = unique_nums1.intersection(unique_nums2)
+
+        # Collect smaller number counts.
+        intersect = []
+        for n in intersect_nums:
+            if nums1_counts[n] < nums2_counts[n]:
+                intersect_times = nums1_counts[n]
+            else:
+                intersect_times = nums2_counts[n]
+
+            intersect.extend([n] * intersect_times)
+
+        return intersect
+
+
 def main():
     # Output: [2,2]
     nums1 = [1,2,2,1]
     nums2 = [2,2]
-    print SolutionNaiveIter().intersect(nums1, nums2)
+    # print SolutionNaiveIter().intersect(nums1, nums2)
 
     # Output: [4,9]
     nums1 = [4,9,5]
     nums2 = [9,4,9,8,4]
-    print SolutionNaiveIter().intersect(nums1, nums2)
+    # print SolutionNaiveIter().intersect(nums1, nums2)
+
+    # Output: [2]
+    nums1 = [1,2,2,1]
+    nums2 = [2]
+    # print SolutionNaiveIter().intersect(nums1, nums2)
+    print SolutionDict().intersect(nums1, nums2)
 
 
 if __name__ == '__main__':
