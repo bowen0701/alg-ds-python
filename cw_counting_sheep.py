@@ -22,6 +22,9 @@ Hint: Don't forget to check for bad values like null/undefined
 def count_sheeps(arrayOfSheeps):
     """
     Iterate with a counter.
+
+    Time complexity: O(n).
+    Space complexity: O(1).
     """
     count = 0
     for sheep in arrayOfSheeps:
