@@ -65,12 +65,14 @@ class SolutionRecur(object):
         inorder_d = {v: i for (i, v) in enumerate(inorder)}
 
         # Build binary tree by recursion.
-        return self._build(0, len(preorder) - 1, 0, len(inorder) - 1, 
+        pre_start, pre_end = 0, len(preorder) - 1
+        in_start, in_end = 0, len(inorder) - 1
+        return self._build(pre_start, pre_end, in_start, in_end,
                            inorder_d, preorder, inorder)
 
 
 def main():
-    # Ans:
+    # Output: [3, 9, 20, 15, 7]
     #   3
     #  / \
     # 9  20
