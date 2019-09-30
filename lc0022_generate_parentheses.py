@@ -17,22 +17,22 @@ For example, given n = 3, a solution set is:
 """
 
 class SolutionRecur(object):
-    def _parenthesisRecur(self, n_lefts, n_rights, 
-                          acc_string, parentheses):
-        if n_lefts == 0 and n_rights == 0:
-            # If there are no left/right parentheses, append acc_string.
-            parentheses.append(acc_string)
+    def _parenthesisRecur(self, n_opens, n_closes, 
+                          cur_string, parentheses):
+        if n_opens == 0 and n_closes == 0:
+            # If there are no left/right parentheses, append cur_string.
+            parentheses.append(cur_string)
             return
 
-        if n_lefts > 0:
+        if n_opens > 0:
             # If there is left parentheses, use one left.
-            self._parenthesisRecur(n_lefts - 1, n_rights, 
-                                   acc_string + '(', parentheses)
+            self._parenthesisRecur(n_opens - 1, n_closes, 
+                                   cur_string + '(', parentheses)
 
-        if n_lefts < n_rights:
+        if n_opens < n_closes:
             # If number of left parentheses is less than of right, use one right.
-            self._parenthesisRecur(n_lefts, n_rights - 1, 
-                                   acc_string + ')', parentheses)
+            self._parenthesisRecur(n_opens, n_closes - 1, 
+                                   cur_string + ')', parentheses)
 
     def generateParenthesis(self, n):
         """
@@ -43,7 +43,9 @@ class SolutionRecur(object):
         Space complexity: O(n).
         """
         parentheses = []
-        self._parenthesisRecur(n, n, '', parentheses)
+        n_opens, n_closes = n, n
+        cur_string = ''
+        self._parenthesisRecur(n_opens, n_closes, cur_string, parentheses)
         return parentheses
 
 
