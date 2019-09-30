@@ -30,17 +30,43 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionPreorderRecur(object):
+    def _preorder(self, root):
+        if not root:
+            return None
+        
+        self.n_nodes += 1
+        self._preorder(root.left)
+        self._preorder(root.right)
+
     def countNodes(self, root):
         """
         :type root: TreeNode
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        self.n_nodes = 0
+        self._preorder(root)
+        return self.n_nodes
 
 
 def main():
-    pass
+    # Input: 
+    #     1
+    #    / \
+    #   2   3
+    #  / \  /
+    # 4  5 6
+    # Output: 6
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.left = TreeNode(6)
+    print SolutionPreorderRecur().countNodes(root)
 
 
 if __name__ == '__main__':
