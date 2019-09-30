@@ -41,6 +41,9 @@ class SolutionLevelBFS(object):
         """
         :type root: TreeNode
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         # Track current max sum and level id.
         max_sum = -float('inf')
