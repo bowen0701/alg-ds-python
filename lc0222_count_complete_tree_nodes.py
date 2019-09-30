@@ -45,11 +45,39 @@ class SolutionPreorderRecur(object):
         :rtype: int
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         self.n_nodes = 0
         self._preorder(root)
         return self.n_nodes
+
+
+class SolutionPreorderIter(object):
+    def countNodes(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        if not root:
+            return 0
+
+        n_nodes = 0
+
+        stack = [root]
+
+        while stack:
+            current = stack.pop()
+            n_nodes += 1
+
+            if current.left:
+                stack.append(current.left)
+            if current.right:
+                stack.append(current.right)
+
+        return n_nodes
 
 
 def main():
@@ -66,7 +94,9 @@ def main():
     root.left.left = TreeNode(4)
     root.left.right = TreeNode(5)
     root.right.left = TreeNode(6)
+
     print SolutionPreorderRecur().countNodes(root)
+    print SolutionPreorderIter().countNodes(root)
 
 
 if __name__ == '__main__':
