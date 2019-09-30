@@ -42,6 +42,9 @@ class SolutionReverseIter(object):
         :type S: str
         :type K: int
         :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(|S|/K).
         """
         # Upper case and drop dash.
         S_nodashes = S.upper().replace('-','')
@@ -65,33 +68,36 @@ class SolutionReverseIter(object):
         return '-'.join(res_ls)
 
 
-class SolutionIterK(object):
+class SolutionForwardIterK(object):
     def licenseKeyFormatting(self, S, K):
         """
         :type S: str
         :type K: int
         :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(|S|/K).
         """
         # Upper case and drop dash.
-        S_nodashes = S.upper().replace('-','')
+        S_nodashes = S.upper().replace('-', '')
         size_nodashes = len(S_nodashes)
 
         # Get the end index for the 1st part.
-        reminder = size_nodashes % K
-        if reminder:
-            end_idx = reminder
+        remainder = size_nodashes % K
+        if remainder:
+            end_idx = remainder
         else:
             end_idx = K
 
         # Get the 1st part.
-        res = S_nodashes[:end_idx]
+        res_ls = [S_nodashes[:end_idx]]
 
-        # Iteratively concat K chars at a time.
+        # Iteratively append K chars at a time.
         while end_idx < size_nodashes:
-            res += '-' + S_nodashes[end_idx:end_idx+K]
+            res_ls.append(S_nodashes[end_idx:end_idx+K])
             end_idx += K
 
-        return res
+        return '-'.join(res_ls)
 
 
 def main():
@@ -99,13 +105,13 @@ def main():
     S = "5F3Z-2e-9-w"
     K = 4
     print SolutionReverseIter().licenseKeyFormatting(S, K)
-    print SolutionIterK().licenseKeyFormatting(S, K)
+    print SolutionForwardIterK().licenseKeyFormatting(S, K)
 
     # Output: "5F3Z-2E9W"
     S = "2-5g-3-J"
     K = 2
     print SolutionReverseIter().licenseKeyFormatting(S, K)
-    print SolutionIterK().licenseKeyFormatting(S, K)
+    print SolutionForwardIterK().licenseKeyFormatting(S, K)
 
 
 if __name__ == '__main__':
