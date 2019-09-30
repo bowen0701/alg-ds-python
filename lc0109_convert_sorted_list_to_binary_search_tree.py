@@ -79,8 +79,8 @@ class SolutionSlowFast(object):
         # Run to middle node.
         fast, slow = left, left
         while fast.next != right and fast.next.next != right:
-            fast = fast.next.next
             slow = slow.next
+            fast = fast.next.next
 
         root = TreeNode(slow.val)
         root.left = self.runSlowFast(left, slow)
@@ -140,8 +140,8 @@ class SolutionInorder(object):
 
         # Attach head to self for memorizing its update.
         self.node = head
-
-        return self._inorder(0, size - 1)
+        left, right = 0, size - 1
+        return self._inorder(left, right)
 
 
 def main():
