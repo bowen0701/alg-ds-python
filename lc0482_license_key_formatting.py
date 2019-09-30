@@ -65,16 +65,47 @@ class SolutionReverseIter(object):
         return '-'.join(res_ls)
 
 
+class SolutionIterK(object):
+    def licenseKeyFormatting(self, S, K):
+        """
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        # Upper case and drop dash.
+        S_nodashes = S.upper().replace('-','')
+        size_nodashes = len(S_nodashes)
+
+        # Get the end index for the 1st part.
+        reminder = size_nodashes % K
+        if reminder:
+            end_idx = reminder
+        else:
+            end_idx = K
+
+        # Get the 1st part.
+        res = S_nodashes[:end_idx]
+
+        # Iteratively concat K chars at a time.
+        while end_idx < size_nodashes:
+            res += '-' + S_nodashes[end_idx:end_idx+K]
+            end_idx += K
+
+        return res
+
+
 def main():
     # Output: "5F3Z-2E9W"
     S = "5F3Z-2e-9-w"
     K = 4
     print SolutionReverseIter().licenseKeyFormatting(S, K)
+    print SolutionIterK().licenseKeyFormatting(S, K)
 
     # Output: "5F3Z-2E9W"
     S = "2-5g-3-J"
     K = 2
     print SolutionReverseIter().licenseKeyFormatting(S, K)
+    print SolutionIterK().licenseKeyFormatting(S, K)
 
 
 if __name__ == '__main__':
