@@ -80,6 +80,35 @@ class SolutionPreorderIter(object):
         return n_nodes
 
 
+class SolutionLeftRightDepths(object):
+    def _countDepth(self, root):
+        if not root:
+            return 0
+        return 1 + self._countDepth(root.left)
+
+    def countNodes(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+
+        Time complexity: O(logn*logn).
+        Space complexity: O(logn).
+        """
+        if not root:
+            return 0
+
+        # Compare left & right subtrees's depths.
+        depth_left = self._countDepth(root.left)
+        depth_right = self._countDepth(root.right)
+
+        if depth_left == depth_right:
+            # If left & right depths are equal, the left subtree is full.
+            return pow(2, depth_left) + self.countNodes(root.right)
+        else:
+            # If not, the right subtree is full, and the left depth is bigger.
+            return self.countNodes(root.left) + pow(2, depth_right)
+
+
 def main():
     # Input: 
     #     1
@@ -97,6 +126,7 @@ def main():
 
     print SolutionPreorderRecur().countNodes(root)
     print SolutionPreorderIter().countNodes(root)
+    print SolutionLeftRightDepths().countNodes(root)
 
 
 if __name__ == '__main__':
