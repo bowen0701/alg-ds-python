@@ -36,18 +36,45 @@ Note:
 - String S is non-empty.
 """
 
-class Solution(object):
+class SolutionReverseIter(object):
     def licenseKeyFormatting(self, S, K):
         """
         :type S: str
         :type K: int
         :rtype: str
         """
-        pass
+        # Upper case and drop dash.
+        S_nodashes = S.upper().replace('-','')
+        size_nodashes = len(S_nodashes)
+
+        # Reversely iterate through no-dashed list, concat to string until K chars.
+        res_ls = [''] * (size_nodashes // K + (size_nodashes % K > 0))
+
+        cur_idx = len(res_ls) - 1
+        cur_counter = 0
+
+        for i in range(size_nodashes - 1, -1, -1):
+            if cur_counter < K:
+                res_ls[cur_idx] = S_nodashes[i] + res_ls[cur_idx]
+                cur_counter += 1
+            else:
+                cur_idx -= 1
+                res_ls[cur_idx] = S_nodashes[i] + res_ls[cur_idx]
+                cur_counter = 1
+
+        return '-'.join(res_ls)
 
 
 def main():
-    pass
+    # Output: "5F3Z-2E9W"
+    S = "5F3Z-2e-9-w"
+    K = 4
+    print SolutionReverseIter().licenseKeyFormatting(S, K)
+
+    # Output: "5F3Z-2E9W"
+    S = "2-5g-3-J"
+    K = 2
+    print SolutionReverseIter().licenseKeyFormatting(S, K)
 
 
 if __name__ == '__main__':
