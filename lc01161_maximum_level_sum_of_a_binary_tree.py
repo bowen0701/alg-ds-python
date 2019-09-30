@@ -36,17 +36,57 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionLevelBFS(object):
     def maxLevelSum(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        pass
+        # Track current max sum and level id.
+        max_sum = -float('inf')
+        max_level = 0
+
+        # Use queue for level BFS.
+        queue = [root]
+        cur_level = 0
+
+        while queue:
+            # Accumulate level sum.
+            cur_level += 1
+            level_sum = 0
+            for i in range(len(queue)):
+                current = queue.pop()
+                level_sum += current.val
+
+                # Insert left/right for further level BFS.
+                if current.left:
+                    queue.insert(0, current.left)
+                if current.right:
+                    queue.insert(0, current.right)  
+
+            # Compare level sum and max sum, update the latter if needed.
+            if level_sum > max_sum:
+                max_sum = level_sum
+                max_level = cur_level             
+
+        return max_level
 
 
 def main():
-    pass
+    # Input: [1,7,0,7,-8,null,null]
+    #      1
+    #     / \
+    #    7   0
+    #   / \
+    #  7  -8
+    # Output: 2
+    root = TreeNode(1)
+    root.left = TreeNode(7)
+    root.right = TreeNode(0)
+    root.left.left = TreeNode(7)
+    root.left.right = TreeNode(-8)
+
+    print SolutionLevelBFS().maxLevelSum(root)
 
 
 if __name__ == '__main__':
