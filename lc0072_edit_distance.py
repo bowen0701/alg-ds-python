@@ -30,6 +30,39 @@ exention -> exection (replace 'n' with 'c')
 exection -> execution (insert 'u')
 """
 
+class SolutionRecurNaive(object):
+    def _recur(self, word1, word2):
+        # If word1 and word2 are empty strings.
+        if not word1 and not word2:
+            return 0
+
+        # If one of word1 and word2 is empty string.
+        if not word1 or not word2:
+            return len(word1) or len(word2)
+
+        if word1[0] == word2[0]:
+            # If 1st chars are equal, edit the remaining words. 
+            return self._recur(word1[1:], word2[1:])
+        else:
+            # If not, recursively get min of insert, delete, and replace.
+            insert = 1 + self._recur(word1, word2[1:])
+            delete = 1 + self._recur(word1[1:], word2)
+            replace = 1 + self._recur(word1[1:], word2[1:])
+            return min(insert, delete, replace)
+
+
+    def minDistance(self, word1, word2):
+        """
+        :type word1: str
+        :type word2: str
+        :rtype: int
+
+        Time complexity: O(2^(n1+n2)).
+        Space complexity: O(n1*n2).
+        """
+        return self._recur(word1, word2)
+
+
 class SolutionDp(object):
     def minDistance(self, word1, word2):
         """
@@ -59,8 +92,8 @@ class SolutionDp(object):
                     # If chars i & j are equal, set to the previous T[i-1][j-1]. 
                     T[i][j] = T[i - 1][j - 1]
                 else:
-                    # If not, set to 1 + min of insert, delete and replace.
-                    T[i][j] = 1 + min(T[i][j - 1], T[i - 1][j], T[i - 1][j - 1])
+                    # If not, set to min of insert, delete and replace.
+                    T[i][j] = min(1 + T[i][j - 1], 1 + T[i - 1][j], 1 + T[i - 1][j - 1])
 
         return T[-1][-1]
 
@@ -69,11 +102,13 @@ def main():
     # Ans: 3.
     word1 = "horse"
     word2 = "ros"
+    print SolutionRecurNaive().minDistance(word1, word2)
     print SolutionDp().minDistance(word1, word2)
 
     # Ans: 5.
     word1 = "intention"
     word2 = "execution"
+    print SolutionRecurNaive().minDistance(word1, word2)
     print SolutionDp().minDistance(word1, word2)
 
 
