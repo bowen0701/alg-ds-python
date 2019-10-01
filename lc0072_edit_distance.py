@@ -60,6 +60,7 @@ class SolutionRecurNaive(object):
         Time complexity: O(n1*n2*2^(n1+n2)).
         Space complexity: O((n1*n2)^2).
         """
+        # Apply top-down simple recursion.
         return self._recur(word1, word2)
 
 
@@ -93,9 +94,50 @@ class SolutionRecurPointer(object):
         Time complexity: O(2^(n1+n2)).
         Space complexity: O(n1*n2).
         """
-        i1 = 0
-        i2 = 0
+        # Apply top-down recursion with two pointers.
+        i1, i2 = 0, 0
         return self._recur(word1, word2, i1, i2)
+
+
+class SolutionMemo(object):
+    def _recur(self, word1, word2, i1, i2, T):
+        # If word1 and word2 are empty strings.
+        if i1 == len(word1) and i2 == len(word2):
+            return 0
+
+        # If one of word1 and word2 is empty string.
+        if i1 == len(word1) or i2 == len(word2):
+            return len(word1) - i1 or len(word2) - i2
+
+        # Check memo table.
+        if T.get((i1, i2)):
+            return T[(i1, i2)]
+
+        if word1[i1] == word2[i2]:
+            # If 1st chars are equal, edit the remaining words.
+            T[(i1, i2)] = self._recur(word1, word2, i1 + 1, i2 + 1, T)
+        else:
+            # If not, recursively get min of insert, delete, and replace.
+            insert = 1 + self._recur(word1, word2, i1, i2 + 1, T)
+            delete = 1 + self._recur(word1, word2, i1 + 1, i2, T)
+            replace = 1 + self._recur(word1, word2, i1 + 1, i2 + 1, T)
+            T[(i1, i2)] = min(insert, delete, replace)
+
+        return T[(i1, i2)]
+
+    def minDistance(self, word1, word2):
+        """
+        :type word1: str
+        :type word2: str
+        :rtype: int
+
+        Time complexity: O(2^(n1+n2)).
+        Space complexity: O(n1*n2).
+        """
+        # Apply top-down recursion with two pointers by memoization.
+        i1, i2 = 0, 0
+        T = {}
+        return self._recur(word1, word2, i1, i2, T)
 
 
 class SolutionDp(object):
@@ -134,19 +176,47 @@ class SolutionDp(object):
 
 
 def main():
+    import time
+
     # Ans: 3.
     word1 = "horse"
     word2 = "ros"
-    print SolutionRecurNaive().minDistance(word1, word2)
-    print SolutionRecurPointer().minDistance(word1, word2)
-    print SolutionDp().minDistance(word1, word2)
+
+    start_time = time.time()
+    print 'By naive recur:', SolutionRecurNaive().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By recur w/ pointer:', SolutionRecurPointer().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By memo:', SolutionMemo().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By DP: ', SolutionDp().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
 
     # Ans: 5.
     word1 = "intention"
     word2 = "execution"
-    print SolutionRecurNaive().minDistance(word1, word2)
-    print SolutionRecurPointer().minDistance(word1, word2)
-    print SolutionDp().minDistance(word1, word2)
+
+    start_time = time.time()
+    print 'By naive recur:', SolutionRecurNaive().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By recur w/ pointer:', SolutionRecurPointer().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By memo:', SolutionMemo().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'By DP: ', SolutionDp().minDistance(word1, word2)
+    print 'Time:', time.time() - start_time
 
 
 if __name__ == '__main__':
