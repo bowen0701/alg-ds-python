@@ -49,11 +49,11 @@ class SolutionTwoPointers(object):
 
             # Check target and middle are in the same side or splitted.
             if (target >= pivot) == (nums[mid] >= pivot):
-                split_bool = False
+                is_split = False
             else:
-                split_bool = True
+                is_split = True
 
-            if not split_bool:
+            if not is_split:
                 # If not splitted, apply binary search based on mid element.
                 if target < nums[mid]:
                     right = mid - 1
