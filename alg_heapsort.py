@@ -42,15 +42,15 @@ class MaxHeap(object):
     def build(self, arr):
         """Build max heap from unordered array.
 
-        Start from the level-1 nodes from leaves back to level-log(n) node.
-        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
-        n is the number of nodes including the root one.
-
-        Complexity: O(n*log(n)) via simple analysis. Actually O(n).
+        Time complexity: O(n*logn) via simple analysis. Actually O(n) where
+           n is the number of nodes.
+        Space complexity: O(logn).
         """
+        # Heapify from the level-log(n) nodes from leaves back to level-1 node.
         self.A.extend(arr)
         self.size = len(arr)
         for i in reversed(range(1, (self.size + 1) // 2 + 1)):
+            # Specifically, node (n/2), node (n/2 - 1), ..., node 1.
             self.heapify_down(i)
 
 
@@ -70,21 +70,21 @@ def heapsort(arr):
       - and every iteration involves a swap and a heapify_down(),
         this takes O(log(n)) time.
     """
-    max_pq = MaxHeap()
-    max_pq.build(arr)
+    max_hq = MaxHeap()
+    max_hq.build(arr)
 
-    while max_pq.size > 0:
+    while max_hq.size > 0:
         # Swap node 1 (max) and node n (last).
-        max_pq.A[max_pq.size], max_pq.A[1] = (
-            max_pq.A[1], max_pq.A[max_pq.size])
+        max_hq.A[max_hq.size], max_hq.A[1] = max_hq.A[1], max_hq.A[max_hq.size]
 
         # Discard node n from heap by decrementing heap_size
-        max_pq.size -= 1
+        max_hq.size -= 1
         
-        max_pq.heapify_down(1)
+        # Heapify starting from node 1.
+        max_hq.heapify_down(1)
 
-    heapsort_arr = max_pq.A[1:]
-    return heapsort_arr
+    sorted_arr = max_hq.A[1:]
+    return sorted_arr
 
 
 def main():
