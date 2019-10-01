@@ -30,7 +30,7 @@ exention -> exection (replace 'n' with 'c')
 exection -> execution (insert 'u')
 """
 
-class Solution(object):
+class SolutionDp(object):
     def minDistance(self, word1, word2):
         """
         :type word1: str
@@ -73,12 +73,12 @@ def main():
     # Ans: 3.
     word1 = "horse"
     word2 = "ros"
-    print Solution().minDistance(word1, word2)
+    print SolutionDp().minDistance(word1, word2)
 
     # Ans: 5.
     word1 = "intention"
     word2 = "execution"
-    print Solution().minDistance(word1, word2)
+    print SolutionDp().minDistance(word1, word2)
 
 
 if __name__ == '__main__':
