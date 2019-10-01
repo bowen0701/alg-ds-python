@@ -57,10 +57,45 @@ class SolutionRecurNaive(object):
         :type word2: str
         :rtype: int
 
+        Time complexity: O(n1*n2*2^(n1+n2)).
+        Space complexity: O((n1*n2)^2).
+        """
+        return self._recur(word1, word2)
+
+
+class SolutionRecurPointer(object):
+    def _recur(self, word1, word2, i1, i2):
+        # If word1 and word2 are empty strings.
+        if i1 == len(word1) and i2 == len(word2):
+            return 0
+
+        # If one of word1 and word2 is empty string.
+        if i1 == len(word1) or i2 == len(word2):
+            return len(word1) - i1 or len(word2) - i2
+
+        if word1[i1] == word2[i2]:
+            # If 1st chars are equal, edit the remaining words. 
+            return self._recur(word1, word2, i1 + 1, i2 + 1)
+        else:
+            # If not, recursively get min of insert, delete, and replace.
+            insert = 1 + self._recur(word1, word2, i1, i2 + 1)
+            delete = 1 + self._recur(word1, word2, i1 + 1, i2)
+            replace = 1 + self._recur(word1, word2, i1 + 1, i2 + 1)
+            return min(insert, delete, replace)
+
+
+    def minDistance(self, word1, word2):
+        """
+        :type word1: str
+        :type word2: str
+        :rtype: int
+
         Time complexity: O(2^(n1+n2)).
         Space complexity: O(n1*n2).
         """
-        return self._recur(word1, word2)
+        i1 = 0
+        i2 = 0
+        return self._recur(word1, word2, i1, i2)
 
 
 class SolutionDp(object):
@@ -103,12 +138,14 @@ def main():
     word1 = "horse"
     word2 = "ros"
     print SolutionRecurNaive().minDistance(word1, word2)
+    print SolutionRecurPointer().minDistance(word1, word2)
     print SolutionDp().minDistance(word1, word2)
 
     # Ans: 5.
     word1 = "intention"
     word2 = "execution"
     print SolutionRecurNaive().minDistance(word1, word2)
+    print SolutionRecurPointer().minDistance(word1, word2)
     print SolutionDp().minDistance(word1, word2)
 
 
