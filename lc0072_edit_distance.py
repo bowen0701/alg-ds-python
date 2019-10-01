@@ -7,9 +7,9 @@ Given two words word1 and word2, find the minimum number of operations
 required to convert word1 to word2.
 
 You have the following 3 operations permitted on a word:
-- Insert a character
-- Delete a character
-- Replace a character
+- Insert a character (to word1)
+- Delete a character (of word1)
+- Replace a character (of word1 & word2)
 
 Example 1:
 Input: word1 = "horse", word2 = "ros"
@@ -61,9 +61,9 @@ class SolutionDp(object):
                 else:
                     diff = 1
 
-                # Compute min of delete, insert and replace.
-                T[i][j] = min(T[i - 1][j] + 1, 
-                              T[i][j - 1] + 1, 
+                # Compute min of insert, delete and replace.
+                T[i][j] = min(T[i][j - 1] + 1,
+                              T[i - 1][j] + 1, 
                               T[i - 1][j - 1] + diff)
 
         return T[-1][-1]
