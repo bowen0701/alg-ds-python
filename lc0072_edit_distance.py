@@ -55,16 +55,12 @@ class SolutionDp(object):
 
         for i in range(1, n1 + 1):
             for j in range(1, n2 + 1):
-                # Compare current chars's diff for replace.
                 if word1[i - 1] == word2[j - 1]:
-                    diff = 0
+                    # If chars i & j are equal, set to the previous T[i-1][j-1]. 
+                    T[i][j] = T[i - 1][j - 1]
                 else:
-                    diff = 1
-
-                # Compute min of insert, delete and replace.
-                T[i][j] = min(T[i][j - 1] + 1,
-                              T[i - 1][j] + 1, 
-                              T[i - 1][j - 1] + diff)
+                    # If not, set to 1 + min of insert, delete and replace.
+                    T[i][j] = 1 + min(T[i][j - 1], T[i - 1][j], T[i - 1][j - 1])
 
         return T[-1][-1]
 
