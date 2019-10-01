@@ -55,7 +55,6 @@ def merge_sort(arr, merge):
 
     left = merge_sort(arr[:mid], merge)
     right = merge_sort(arr[mid:], merge)
-
     return merge(left, right)
 
 
@@ -67,12 +66,12 @@ def main():
     random.shuffle(arr)
 
     start_time = time.time()
-    print(merge_sort(arr, merge_sorted_lists_recur))
-    print('By recusion: {}'.format(time.time() - start_time))
+    print('By recur: {}'.format(merge_sort(arr, merge_sorted_lists_recur)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print(merge_sort(arr, merge_sorted_lists_iter))
-    print('By iteration: {}'.format(time.time() - start_time))
+    print('By iter: {}'.format(merge_sort(arr, merge_sorted_lists_iter)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
