@@ -3,46 +3,46 @@ from __future__ import print_function
 from __future__ import division
 
 
-def merge_sorted_lists_recur(x, y):
+def merge_sorted_lists_recur(left, right):
     """Merge two sorted lists by recusions."""
-    if len(x) == 0:
-        return y
-    if len(y) == 0:
-        return x
+    if len(left) == 0:
+        return right
+    if len(right) == 0:
+        return left
 
-    if x[0] <= y[0]:
-        return [x[0]] + merge_sorted_lists_recur(x[1:], y)
+    if left[0] <= right[0]:
+        return [left[0]] + merge_sorted_lists_recur(left[1:], right)
     else:
-        return [y[0]] + merge_sorted_lists_recur(x, y[1:])
+        return [right[0]] + merge_sorted_lists_recur(left, right[1:])
 
 
-def merge_sorted_lists_iter(x, y):
+def merge_sorted_lists_iter(left, right):
     """Merge two sorted lists by iteration."""
     # Apply two pointer method.
-    x_pos, y_pos = 0, 0
+    i, j = 0, 0
 
-    z = []
+    merged = []
 
-    for _ in range(len(x) + len(y)):
-        if x_pos < len(x) and y_pos < len(y):
-            if x[x_pos] <= y[y_pos]:
-                z.append(x[x_pos])
-                x_pos += 1
+    for _ in range(len(left) + len(right)):
+        if i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                merged.append(left[i])
+                i += 1
             else:
-                z.append(y[y_pos])
-                y_pos += 1      
-        elif x_pos < len(x) and y_pos >= len(y):
-            z.extend(x[x_pos:])
+                merged.append(right[j])
+                j += 1      
+        elif i < len(left) and j >= len(right):
+            merged.extend(left[i:])
             break
-        elif x_pos >= len(x) and y_pos < len(y):
-            z.extend(y[y_pos:])
+        elif i >= len(left) and j < len(right):
+            merged.extend(right[j:])
             break
 
-    return z
+    return merged
 
 
 def merge_sort(arr, merge):
-    """Merge sort algorithm by divide and conquer with recursion.
+    """Merge sort algorithm by divide and conquer.
 
     Time complexity: O(n*logn).
     Space complexity: O(n).
