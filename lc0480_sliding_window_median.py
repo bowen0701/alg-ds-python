@@ -122,7 +122,7 @@ class SolutionSortAndBinarySearch(object):
         :type k: int
         :rtype: List[float]
 
-        Time complexity: O(k*logk + n*logk) = O(n*logk).
+        Time complexity: O(k*logk + n*(logk+k)) = O(n*k).
         Space complexity: O(k).
         """
         medians = []
