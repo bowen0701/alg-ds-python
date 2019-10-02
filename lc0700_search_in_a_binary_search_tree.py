@@ -57,6 +57,32 @@ class SolutionRecur(object):
             return self.searchBST(root.right, val)
 
 
+class SolutionIter(object):
+    def searchBST(self, root, val):
+        """
+        :type root: TreeNode
+        :type val: int
+        :rtype: TreeNode
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        if not root:
+            return None
+
+        current = root
+        while current:
+            if current.val == val:
+                return current
+
+            if val < current.val:
+                current = current.left
+            else:
+                current = current.right
+
+        return None
+
+
 def main():
     # Given the tree:
     #         4
@@ -73,10 +99,12 @@ def main():
     # Output: 2
     val = 2
     print SolutionRecur().searchBST(root, val).val
+    print SolutionIter().searchBST(root, val).val
 
     # Output: None
     val = 5
     print SolutionRecur().searchBST(root, val)
+    print SolutionIter().searchBST(root, val)
 
 
 if __name__ == '__main__':
