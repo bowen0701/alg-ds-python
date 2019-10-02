@@ -68,7 +68,7 @@ class SolutionUpdateAll(object):
         r, w, b = 0, 0, 0
 
         for i, n in enumerate(nums):
-            # Update elements for all colors.
+            # Update elements for all colors in the reversed orders.
             if n == 0:
                 nums[b] = 2
                 nums[w] = 1
