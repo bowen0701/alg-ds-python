@@ -35,18 +35,48 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
     def searchBST(self, root, val):
         """
         :type root: TreeNode
         :type val: int
         :rtype: TreeNode
+
+        Time complexity: O(logn).
+        Space complexity: O(logn), since stack calls.
         """
-        pass
+        if not root:
+            return None
+
+        if root.val == val:
+            return root
+
+        if val < root.val:
+            return self.searchBST(root.left, val)
+        else:
+            return self.searchBST(root.right, val)
 
 
 def main():
-    pass
+    # Given the tree:
+    #         4
+    #        / \
+    #       2   7
+    #      / \
+    #     1   3
+    root = TreeNode(4)
+    root.left = TreeNode(2)
+    root.right = TreeNode(7)
+    root.left.left = TreeNode(1)
+    root.left.right = TreeNode(3)
+
+    # Output: 2
+    val = 2
+    print SolutionRecur().searchBST(root, val).val
+
+    # Output: None
+    val = 5
+    print SolutionRecur().searchBST(root, val)
 
 
 if __name__ == '__main__':
