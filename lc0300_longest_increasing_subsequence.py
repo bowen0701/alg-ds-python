@@ -21,18 +21,19 @@ Follow up: Could you improve it to O(n log n) time complexity?
 
 
 class SolutionRecur(object):
-    def _LIS(self, prev, nums, start, end):
-        if start == end:
+    def _LIS(self, nums, cur_max, start, end):
+        # Base case.
+        if start > end:
             return 0
 
-        # The LIS of nums[0:n] is either a LIS of nums[1:n], excluding nums[0],
-        # or the LIS is 1 + a LIS of nums[1:n], including nums[0],
-        # if nums[0] is bigger than the previous.
-        lis_ex = self._LIS(prev, nums, start + 1, end)
+        # LIS of nums[1:n], excluding nums[0].
+        lis_ex = self._LIS(nums, cur_max, start + 1, end)
 
+        # LIS is 1 + a LIS of nums[1:n], including nums[0],
+        # if nums[0] is bigger than the current max.
         lis_in = -float('inf')
-        if nums[start] > prev:
-            lis_in = 1 + self._LIS(nums[start], nums, start + 1, end)
+        if nums[start] > cur_max:
+            lis_in = 1 + self._LIS(nums, nums[start], start + 1, end)
 
         lis = max(lis_ex, lis_in)
         return lis
@@ -45,7 +46,8 @@ class SolutionRecur(object):
         """
         # Apply top-down recursion with two pointers, starting from the two sides.
         start, end = 0, len(nums) - 1
-        return self._LIS(-float('inf'), nums, start, end)
+        cur_max = -float('inf')
+        return self._LIS(nums, cur_max, start, end)
 
 
 class SolutionDp(object):
@@ -86,6 +88,7 @@ class SolutionBinarySearch(object):
         Time complexity: O(n*logn), where n is the length of the nums.
         Space complexity: O(n).
         """
+        # Apply binary search with memoization.
         if not nums:
             return 0
 
