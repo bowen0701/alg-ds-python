@@ -43,12 +43,39 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
     def insertIntoBST(self, root, val):
         """
         :type root: TreeNode
         :type val: int
         :rtype: TreeNode
+
+        Time complexity: O(logn), where n is the number of nodes.
+        Space complexity: O(log).
+        """
+        # Apply recursion to find the position to insert new node.
+        new = TreeNode(val)
+
+        if not root:
+            return new
+
+        if val < root.val:
+            root.left = self.insertIntoBST(root.left, val)
+        else:
+            root.right = self.insertIntoBST(root.right, val)
+
+        return root
+
+
+class SolutionIter(object):
+    def insertIntoBST(self, root, val):
+        """
+        :type root: TreeNode
+        :type val: int
+        :rtype: TreeNode
+
+        Time complexity: O(logn), where n is the number of nodes.
+        Space complexity: O(1).
         """
         new = TreeNode(val)
         current = root
@@ -79,17 +106,23 @@ def main():
      / \
     1   3
     """
-    bst = TreeNode(4)
-    bst = Solution().insertIntoBST(bst, 2)
-    bst = Solution().insertIntoBST(bst, 7)
-    bst = Solution().insertIntoBST(bst, 1)
-    bst = Solution().insertIntoBST(bst, 3)
+    bst_recur = TreeNode(4)
+    bst_recur = SolutionRecur().insertIntoBST(bst_recur, 2)
+    bst_recur = SolutionRecur().insertIntoBST(bst_recur, 7)
+    bst_recur = SolutionRecur().insertIntoBST(bst_recur, 1)
+    bst_recur = SolutionRecur().insertIntoBST(bst_recur, 3)
+    print (bst_recur.val,
+           bst_recur.left.val, bst_recur.right.val,
+           bst_recur.left.left.val, bst_recur.left.right.val)
 
-    print bst.val
-    print bst.left.val
-    print bst.right.val
-    print bst.left.left.val
-    print bst.left.right.val
+    bst_iter = TreeNode(4)
+    bst_iter = SolutionIter().insertIntoBST(bst_iter, 2)
+    bst_iter = SolutionIter().insertIntoBST(bst_iter, 7)
+    bst_iter = SolutionIter().insertIntoBST(bst_iter, 1)
+    bst_iter = SolutionIter().insertIntoBST(bst_iter, 3)
+    print (bst_iter.val,
+           bst_iter.left.val, bst_iter.right.val,
+           bst_iter.left.left.val, bst_iter.left.right.val)
 
     """
     Insert: 5
@@ -99,8 +132,11 @@ def main():
      / \   /
     1   3 5
     """
-    bst = Solution().insertIntoBST(bst, 5)
-    print bst.right.left.val
+    bst_recur = SolutionIter().insertIntoBST(bst_recur, 5)
+    print bst_recur.right.left.val
+
+    bst_iter = SolutionIter().insertIntoBST(bst_iter, 5)
+    print bst_iter.right.left.val
 
 
 if __name__ == '__main__':
