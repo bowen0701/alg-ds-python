@@ -47,6 +47,8 @@ class SolutionMinMaxRecur(object):
         if current.val <= min_val or current.val >= max_val:
             return False
 
+        # Validate left subtree with min and max=current and
+        # also validate right subtree with min=current and max.
         return (self._isValidBSTUtil(current.left, min_val, current.val) and
                 self._isValidBSTUtil(current.right, current.val, max_val))
 
@@ -95,10 +97,10 @@ class SolutionMinMaxIter(object):
 
 class SolutionInorderRecur(object):
     def _isValidBSTUtil(self, current):
+        # Apply inorder traversal to check values in an increasing fashion.
         if not current:
             return True
  
-        # Start inorder traversal in an increasing fashion.
         # Traverse left tree.
         if not self._isValidBSTUtil(current.left):
             return False
