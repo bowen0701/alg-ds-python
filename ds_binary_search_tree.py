@@ -29,37 +29,37 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
-    def search_recur(self, node, val):
-        """Search val starting from node by recursion.
+    def search_recur(self, root, val):
+        """Search val starting from root by recursion.
 
-        Time complexity: O(logh), where h is the height of node.
+        Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
-        if not node:
-            return None
+        if not root:
+            return False
 
-        if val == node.val:
-            return node
-        elif val < node.val:
-            return self.search_recur(node.left, val)
+        if val == root.val:
+            return True
+        elif val < root.val:
+            return self.search_recur(root.left, val)
         else:
-            return self.search_recur(node.right, val)
+            return self.search_recur(root.right, val)
 
-    def search_iter(self, node, val):
-        """Search val starting from node by iteration.
+    def search_iter(self, root, val):
+        """Search val starting from root by iteration.
 
-        Time complexity: O(logh), where h is the height of node.
+        Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
-        current = node
+        current = root
         while current:
             if val == current.val:
-                return current
+                return True
             elif val < current.val:
                 current = current.left
             else:
                 current = current.right
-        return current
+        return False
 
     def _insert_recur_util(self, current, new_val):
         """Helper function for insert_recur()"""
@@ -126,7 +126,7 @@ class BinarySearchTree(object):
     def find_minimum(self, node):
         """Find minimum starting from node.
 
-        Time complexity: O(logh).
+        Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
         current = node
@@ -148,7 +148,7 @@ class BinarySearchTree(object):
     def find_successor(self, node):
         """Find succesor of node, i.e. next biggest node.
 
-        Time complexity: O(logh).
+        Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
         current = node
@@ -168,7 +168,7 @@ class BinarySearchTree(object):
     def find_predecessor(self, node):
         """Find predecessor of node, i.e. previous biggest node.
 
-        Time complexity: O(logh).
+        Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
         current = node
@@ -388,9 +388,9 @@ def main():
 
     # Search existing val 6.
     print('Search existing node with val 6:')
-    print(bst.search_recur(bst.root, 6).val)
+    print(bst.search_recur(bst.root, 6))
     print('Search existing node with val 6:')
-    print(bst.search_iter(bst.root, 6).val)
+    print(bst.search_iter(bst.root, 6))
     # Search nonexisting val 10.
     print('Search nonexisting node with val 10:')
     print(bst.search_recur(bst.root, 10))
