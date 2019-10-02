@@ -48,11 +48,17 @@ class SolutionPreorderRecur(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Apply recursive preorder traversal to check same tree.
+        if not p and not q:
+            return True
+
         if not p or not q:
-            return p is q
-        
-        return (p.val == q.val and
-                self.isSameTree(p.left, q.left) and
+            return False
+
+        if p.val != q.val:
+            return False
+
+        return (self.isSameTree(p.left, q.left) and
                 self.isSameTree(p.right, q.right))
 
 
@@ -62,23 +68,26 @@ class SolutionPreorderIter(object):
         :type p: TreeNode
         :type q: TreeNode
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        if not p or not q:
-            return p is q
-        
+        # Apply iterative preorder traversal to check same tree.
         stack = [(p, q)]
 
         while stack:
             cur_p, cur_q = stack.pop()
 
             if not cur_p and not cur_q:
+                # Since there may be other node pairs to check.
                 continue
 
             if not cur_p or not cur_q:
-                return cur_p is cur_q
+                return False
 
             if cur_p.val != cur_q.val:
                 return False
+
             stack.append((cur_p.right, cur_q.right))
             stack.append((cur_p.left, cur_q.left))
 
@@ -123,6 +132,16 @@ def main():
     q = TreeNode(1)
     q.left = TreeNode(1)
     q.right = TreeNode(2)
+    print SolutionPreorderRecur().isSameTree(p, q)
+    print SolutionPreorderIter().isSameTree(p, q)
+
+    # Input: [10,5,15], [10,5,null,null,15]
+    p = TreeNode(10)
+    p.left = TreeNode(5)
+    p.right = TreeNode(15)
+    q = TreeNode(10)
+    q.left = TreeNode(5)
+    q.left.right = TreeNode(15)
     print SolutionPreorderRecur().isSameTree(p, q)
     print SolutionPreorderIter().isSameTree(p, q)
 
