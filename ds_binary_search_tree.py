@@ -61,24 +61,24 @@ class BinarySearchTree(object):
                 current = current.right
         return False
 
-    def _insert_recur_util(self, current, new_val):
+    def _insert_recur_util(self, root, new_val):
         """Helper function for insert_recur()"""
         new_node = Node(new_val)
 
-        if new_val < current.val:
-            if not current.left:
-                current.left = new_node
-                new_node.parent = current
+        if new_val < root.val:
+            if not root.left:
+                root.left = new_node
+                new_node.parent = root
                 return None
             else:
-                self._insert_recur_util(current.left, new_val)
+                self._insert_recur_util(root.left, new_val)
         else:
-            if not current.right:
-                current.right = new_node
-                new_node.parent = current
+            if not root.right:
+                root.right = new_node
+                new_node.parent = root
                 return None
             else:
-                self._insert_recur_util(current.right, new_val)
+                self._insert_recur_util(root.right, new_val)
 
     def insert_recur(self, new_val):
         """Insert a new node with val by recursion.
@@ -123,37 +123,37 @@ class BinarySearchTree(object):
         else:
             parent.right = new
 
-    def find_minimum(self, node):
-        """Find minimum starting from node.
+    def find_minimum(self, root):
+        """Find minimum starting from root.
 
         Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
-        current = node
+        current = root
         while current.left:
             current = current.left
         return current
 
-    def find_maximum(self, node):
-        """Find maximum starting from node.
+    def find_maximum(self, root):
+        """Find maximum starting from root.
 
         Time complexity: O(logn).
         Space complexity: O(1).
         """
-        current = node
+        current = root
         while current.right:
             current = current.right
         return current
 
-    def find_successor(self, node):
-        """Find succesor of node, i.e. next biggest node.
+    def find_successor(self, root):
+        """Find succesor of root, i.e. next biggest node.
 
         Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
-        current = node
+        current = root
 
-        # If node's right existed, find leftmost node in node's right subtree.
+        # If root's right existed, find leftmost node in root's right subtree.
         if current.right:
             return self.find_minimum(current.right)
 
@@ -165,20 +165,20 @@ class BinarySearchTree(object):
             parent = parent.parent
         return parent
 
-    def find_predecessor(self, node):
-        """Find predecessor of node, i.e. previous biggest node.
+    def find_predecessor(self, root):
+        """Find predecessor of root, i.e. previous biggest node.
 
         Time complexity: O(logn), where n is the node number.
         Space complexity: O(1).
         """
-        current = node
+        current = root
 
-        # If node's left existed, find rightmost node in node's left subtree.
+        # If root's left existed, find rightmost node in root's left subtree.
         if current.left:
             return self.find_maximum(current.left)
 
         # If not, go up the tree to the lowest ancestor of node, 
-        # whose "right" child is also an ancestor of node.
+        # whose "right" child is also an ancestor of root.
         parent = current.parent
         while parent and current == parent.left:
             current = parent
@@ -427,7 +427,7 @@ def main():
 
     # Further delete root: 6, the run inorder walk: 2, 5, 7, 8.
     bst.delete(bst.root)
-    print('Inorder walk:')
+    print('Inorder traversal after deleting 6:')
     bst.inorder_traverse_recur(bst.root)
 
 
