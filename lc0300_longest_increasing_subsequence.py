@@ -70,8 +70,8 @@ class SolutionDp(object):
         # Apply two pointer method: for each right element j,
         # check all elements i left to j; 
         # if element i is smaller than j, update T[j] = max(T[j], T[i] + 1).
-        for i in range(len(nums) - 1):
-            for j in range(i + 1, len(nums)):
+        for j in range(1, len(nums)):
+            for i in range(j):
                 if nums[i] < nums[j]:
                     T[j] = max(T[j], T[i] + 1)
 
