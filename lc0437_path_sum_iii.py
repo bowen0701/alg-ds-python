@@ -36,23 +36,22 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecur(object):
-    def _countPathSum(self, root, sum):
+class SolutionLeadRecur(object):
+    def _leadPathSum(self, root, sum):
         if not root:
             return 0
 
         # Single root val is sum.
         if root.val == sum:
-            root_path_sum = 1
+            is_lead_sum = 1
         else:
-            root_path_sum = 0
+            is_lead_sum = 0
 
         # With root val, count path sum leading by left/right node. 
-        root_left_path_sum = self._countPathSum(root.left, sum - root.val)
-        root_right_path_sum = self._countPathSum(root.right, sum - root.val)
+        lead_left_path_sum = self._leadPathSum(root.left, sum - root.val)
+        lead_right_path_sum = self._leadPathSum(root.right, sum - root.val)
 
-        return root_path_sum + root_left_path_sum + root_right_path_sum
-
+        return is_lead_sum + lead_left_path_sum + lead_right_path_sum
 
     def pathSum(self, root, sum):
         """
@@ -63,17 +62,71 @@ class SolutionRecur(object):
         Time complexity: O(n*logn), if balanced tree; O(n^2) if single sided.
         Space complexity: O(logn).
         """
+        # Sum lead path sum (with root) and path sums for left/right. 
         if not root:
             return 0
 
         # Count path sum leading by root.
-        lead_path_sum = self._countPathSum(root, sum)
+        lead_path_sum = self._leadPathSum(root, sum)
 
         # Recursively get path sum starting from left/right node.
         left_path_sum = self.pathSum(root.left, sum)
         right_path_sum = self.pathSum(root.right, sum)
         
         return lead_path_sum + left_path_sum + right_path_sum
+
+
+class SolutionSumFreqMemo(object):
+    def _dfs(self, root, sum, sum_freqs, cur_path_sum):
+        # Apply DFS in a preorder traversal fashion.
+        if not root:
+            return None
+
+        # Accumulate current sum.
+        cur_path_sum += root.val
+
+        # Compute complemented path sum.
+        comp_path_sum = cur_path_sum - sum
+
+        # Update n_path_sums if complemented path sum exists.
+        self.n_path_sums += sum_freqs[comp_path_sum]
+
+        # Update current path sum frequency.
+        sum_freqs[cur_path_sum] += 1
+
+        # DFS for left/right nodes.
+        self._dfs(root.left, sum, sum_freqs, cur_path_sum)
+        self._dfs(root.right, sum, sum_freqs, cur_path_sum)
+
+        # When switch to another branch, backtrack.
+        sum_freqs[cur_path_sum] -= 1
+
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: int
+
+        Time complexity: O(n) if single sided.
+        Space complexity: O(logn).
+        """
+        from collections import defaultdict
+
+        # Apply memoization to cache sum frequences.
+        self.n_path_sums = 0
+
+        # Memoization for sum frequences, initialized for sum=0->freq=1.
+        # This technique is similar with the one for two sum problem.
+        sum_freqs = defaultdict(int)
+        sum_freqs[0] = 1
+
+        # Initialize current sum.
+        cur_path_sum = 0
+
+        # Apply DFS with 
+        self._dfs(root, sum, sum_freqs, cur_path_sum)
+
+        return self.n_path_sums
 
 
 def main():
@@ -96,7 +149,8 @@ def main():
     root.left.right.right = TreeNode(1)
     sum = 8
 
-    print SolutionRecur().pathSum(root, sum)
+    print SolutionLeadRecur().pathSum(root, sum)
+    print SolutionSumFreqMemo().pathSum(root, sum)
 
 
 if __name__ == '__main__':
