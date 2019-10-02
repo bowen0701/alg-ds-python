@@ -108,7 +108,7 @@ class SolutionSumFreqMemo(object):
         :rtype: int
 
         Time complexity: O(n) if single sided.
-        Space complexity: O(logn).
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
