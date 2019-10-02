@@ -92,6 +92,8 @@ class SolutionBinarySearch(object):
         if not nums:
             return 0
 
+        # tails stores the smallest tail of all increasing subsequences
+        # with length i+1 in tails[i].
         tails = [0] * len(nums)
         lis = 0
  
@@ -100,7 +102,7 @@ class SolutionBinarySearch(object):
         for n in nums:
             # Use binary search to find the correct tail for new item.
             left, right = 0, lis
-            while left != right:
+            while left < right:
                 mid = (left + right) // 2
                 if tails[mid] < n:
                     left = mid + 1
