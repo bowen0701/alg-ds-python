@@ -15,7 +15,6 @@ The tree has no more than 1,000 nodes and the values are in the range
 
 Example:
 root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8
-
       10
      /  \
     5   -3
@@ -37,18 +36,67 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def _countPathSum(self, root, sum):
+        if not root:
+            return 0
+
+        # Single root val is sum.
+        if root.val == sum:
+            root_path_sum = 1
+        else:
+            root_path_sum = 0
+
+        # With root val, count path sum leading by left/right node. 
+        root_left_path_sum = self._countPathSum(root.left, sum - root.val)
+        root_right_path_sum = self._countPathSum(root.right, sum - root.val)
+
+        return root_path_sum + root_left_path_sum + root_right_path_sum
+
+
     def pathSum(self, root, sum):
         """
         :type root: TreeNode
         :type sum: int
         :rtype: int
+
+        Time complexity: O(n*logn), if balanced tree; O(n^2) if single sided.
+        Space complexity: O(logn).
         """
-        pass
+        if not root:
+            return 0
+
+        # Count path sum leading by root.
+        lead_path_sum = self._countPathSum(root, sum)
+
+        # Recursively get path sum starting from left/right node.
+        left_path_sum = self.pathSum(root.left, sum)
+        right_path_sum = self.pathSum(root.right, sum)
+        
+        return lead_path_sum + left_path_sum + right_path_sum
 
 
 def main():
-    pass
+    #       10
+    #      /  \
+    #     5   -3
+    #    / \    \
+    #   3   2   11
+    #  / \   \
+    # 3  -2   1
+    # Output: 3
+    root = TreeNode(10)
+    root.left = TreeNode(5)
+    root.right = TreeNode(-3)
+    root.left.left = TreeNode(3)
+    root.left.right = TreeNode(2)
+    root.right.right = TreeNode(11)
+    root.left.left.left = TreeNode(3)
+    root.left.left.right = TreeNode(-2)
+    root.left.right.right = TreeNode(1)
+    sum = 8
+
+    print SolutionRecur().pathSum(root, sum)
 
 
 if __name__ == '__main__':
