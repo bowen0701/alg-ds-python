@@ -25,11 +25,11 @@ class SolutionRecur(object):
         if start == end:
             return 0
 
-        # The LIS of nums[0:n] is either a LIS of nums[1:n], excluding nums[0].
+        # The LIS of nums[0:n] is either a LIS of nums[1:n], excluding nums[0],
+        # or the LIS is 1 + a LIS of nums[1:n], including nums[0],
+        # if nums[0] is bigger than the previous.
         lis_ex = self._LIS(prev, nums, start + 1, end)
 
-        # Or the LIS is 1 + a LIS of nums[1:n], including nums[0],
-        # if nums[0] is bigger than the previous.
         lis_in = -float('inf')
         if nums[start] > prev:
             lis_in = 1 + self._LIS(nums[start], nums, start + 1, end)
@@ -43,7 +43,7 @@ class SolutionRecur(object):
         Time complexity: O(2^n).
         Space complexity: O(1).
         """
-        # Starting from the two sides.
+        # Apply top-down recursion with two pointers, starting from the two sides.
         start, end = 0, len(nums) - 1
         return self._LIS(-float('inf'), nums, start, end)
 
@@ -57,6 +57,7 @@ class SolutionDp(object):
         Time complexity: O(n^2), where n is the length of the nums.
         Space complexity: O(n).
         """
+        # Apply bottom-up DP.
         if not nums:
             return 0
 
@@ -67,8 +68,8 @@ class SolutionDp(object):
         # Apply two pointer method: for each right element j,
         # check all elements i left to j; 
         # if element i is smaller than j, update T[j] = max(T[j], T[i] + 1).
-        for j in range(1, len(nums)):
-            for i in range(0, j):
+        for i in range(len(nums) - 1):
+            for j in range(i + 1, len(nums)):
                 if nums[i] < nums[j]:
                     T[j] = max(T[j], T[i] + 1)
 
