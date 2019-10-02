@@ -89,6 +89,8 @@ class SolutionMinMaxIter(object):
             if current.val <= min_val or current.val >= max_val:
                 return False
 
+            # Validate left subtree with min and max=current and
+            # also validate right subtree with min=current and max.
             stack.append([current.left, min_val, current.val])
             stack.append([current.right, current.val, max_val])
 
