@@ -25,15 +25,15 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRrecur(object):
-    def preorderRecur(self, root, vals):
+class SolutionRecur(object):
+    def _preorderRecur(self, root, vals):
         if not root:
             return None
 
         current = root
         vals.append(current.val)
-        self.preorderRecur(current.left, vals)
-        self.preorderRecur(current.right, vals)
+        self._preorderRecur(current.left, vals)
+        self._preorderRecur(current.right, vals)
 
     def preorderTraversal(self, root):
         """
@@ -43,8 +43,9 @@ class SolutionRrecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
+        # Apply recursive preorder traversal.
         vals = []
-        self.preorderRecur(root, vals)
+        self._preorderRecur(root, vals)
         return vals
 
 
@@ -60,7 +61,7 @@ def main():
     root.right = TreeNode(2)
     root.right.left = TreeNode(3)
 
-    print SolutionRrecur().preorderTraversal(root)
+    print SolutionRecur().preorderTraversal(root)
 
 
 if __name__ == '__main__':
