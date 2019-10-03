@@ -49,6 +49,36 @@ class SolutionRecur(object):
         return vals
 
 
+class SolutionIter(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
+        """
+        if not root:
+            return None
+
+        # Apply iterative preorder traversal with stack.
+        vals = []
+
+        stack = [root]
+
+        while stack:
+            current = stack.pop()
+            vals.append(current.val)
+
+            # Append right and then left since we use stack with LIFO.
+            if current.right:
+                stack.append(current.right)
+            if current.left:
+                stack.append(current.left)
+
+        return vals
+
+
 def main():
     # Input: [1,null,2,3]
     #    1
@@ -62,6 +92,7 @@ def main():
     root.right.left = TreeNode(3)
 
     print SolutionRecur().preorderTraversal(root)
+    print SolutionIter().preorderTraversal(root)
 
 
 if __name__ == '__main__':
