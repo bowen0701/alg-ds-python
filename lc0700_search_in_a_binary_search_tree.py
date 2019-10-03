@@ -42,8 +42,8 @@ class SolutionRecur(object):
         :type val: int
         :rtype: TreeNode
 
-        Time complexity: O(logn).
-        Space complexity: O(logn), since stack calls.
+        Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return None
@@ -64,7 +64,7 @@ class SolutionIter(object):
         :type val: int
         :rtype: TreeNode
 
-        Time complexity: O(logn).
+        Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(1).
         """
         if not root:

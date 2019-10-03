@@ -40,7 +40,7 @@ class SolutionRecur(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         nodes = []
         self._inorderUtil(root, nodes)
@@ -54,7 +54,7 @@ class SolutionIter(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         nodes = []
 

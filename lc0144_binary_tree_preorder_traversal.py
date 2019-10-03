@@ -25,17 +25,42 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRrecur(object):
+    def preorderRecur(self, root, vals):
+        if not root:
+            return None
+
+        current = root
+        vals.append(current.val)
+        self.preorderRecur(current.left, vals)
+        self.preorderRecur(current.right, vals)
+
     def preorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        pass
+        vals = []
+        self.preorderRecur(root, vals)
+        return vals
 
 
 def main():
-    pass
+    # Input: [1,null,2,3]
+    #    1
+    #     \
+    #      2
+    #     /
+    #    3
+    # Output: [1,2,3]
+    root = TreeNode(1)
+    root.right = TreeNode(2)
+    root.right.left = TreeNode(3)
+
+    print SolutionRrecur().preorderTraversal(root)
 
 
 if __name__ == '__main__':

@@ -50,8 +50,8 @@ class SolutionRecur(object):
         :type val: int
         :rtype: TreeNode
 
-        Time complexity: O(logn), where n is the number of nodes.
-        Space complexity: O(log).
+        Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
+        Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         # Apply recursion to find the position to insert new node.
         new = TreeNode(val)
@@ -74,7 +74,7 @@ class SolutionIter(object):
         :type val: int
         :rtype: TreeNode
 
-        Time complexity: O(logn), where n is the number of nodes.
+        Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(1).
         """
         new = TreeNode(val)

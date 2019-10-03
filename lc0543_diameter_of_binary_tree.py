@@ -28,7 +28,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecurDepthsSum(object):
+class SolutionDepthsSumRecur(object):
     def _depth(self, root):
         if not root:
             return 0
@@ -44,8 +44,11 @@ class SolutionRecurDepthsSum(object):
         """
         :type root: TreeNode
         :rtype: int
+
+        Time complexity: O(logn) for balanced tree; O(n) for single sided.
+        Space complexity: O(logn) or O(n).
         """
-        # Traverse the tree to get sum of left & right subtree depths.
+        # Apply postorder traversal to get sum of left & right subtree depths.
         self.diameter = 0
         self._depth(root)
         return self.diameter
@@ -64,7 +67,7 @@ def main():
     root.right = TreeNode(3)
     root.left.left = TreeNode(4)
     root.left.right = TreeNode(5)
-    print SolutionRecurDepthsSum().diameterOfBinaryTree(root)
+    print SolutionDepthsSumRecur().diameterOfBinaryTree(root)
 
 
 if __name__ == '__main__':

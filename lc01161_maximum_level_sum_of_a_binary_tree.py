@@ -43,7 +43,7 @@ class SolutionLevelBFS(object):
         :rtype: int
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         # Track current max sum and level id.
         max_sum = -float('inf')

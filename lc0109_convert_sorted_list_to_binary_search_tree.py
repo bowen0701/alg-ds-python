@@ -36,15 +36,15 @@ class TreeNode(object):
 
 
 class SolutionConvert2Array(object):
-    def _convert(self, arr, left, right):
+    def _preorderConvert(self, arr, left, right):
         if left > right:
             return None
 
         mid = left + (right - left) // 2
 
         root = TreeNode(arr[mid])
-        root.left = self._convert(arr, left, mid - 1)
-        root.right = self._convert(arr, mid + 1, right)
+        root.left = self._preorderConvert(arr, left, mid - 1)
+        root.right = self._preorderConvert(arr, mid + 1, right)
 
         return root
 
@@ -66,13 +66,13 @@ class SolutionConvert2Array(object):
             arr.append(current.val)
             current = current.next
 
-        # Apply recur with two pointer method.
+        # Apply recursive preorder traversal with two pointer method.
         left, right = 0, len(arr) - 1
-        return self._convert(arr, left, right)
+        return self._preorderConvert(arr, left, right)
 
 
-class SolutionSlowFast(object):
-    def runSlowFast(self, left, right):
+class SolutionpreorderSlowFastRecur(object):
+    def preorderSlowFast(self, left, right):
         if not left or left == right:
             return None
 
@@ -83,8 +83,8 @@ class SolutionSlowFast(object):
             fast = fast.next.next
 
         root = TreeNode(slow.val)
-        root.left = self.runSlowFast(left, slow)
-        root.right = self.runSlowFast(slow.next, right)
+        root.left = self.preorderSlowFast(left, slow)
+        root.right = self.preorderSlowFast(slow.next, right)
 
         return root
 
@@ -93,17 +93,18 @@ class SolutionSlowFast(object):
         :type head: ListNode
         :rtype: TreeNode
 
-        Time complexity: O(nlogn).
+        Time complexity: O(nlogn), as for each node, traverse half nodes.
         Space complexity: O(logn).
         """
+        # Apply recursive preorder traversal by slow/fast two pointers.
         if not head:
             return None
 
         left, right = head, None
-        return self.runSlowFast(left, right)
+        return self.preorderSlowFast(left, right)
 
 
-class SolutionInorder(object):
+class SolutionInorderRecur(object):
     def _inorder(self, left, right):
         if left > right:
             return None
@@ -128,6 +129,7 @@ class SolutionInorder(object):
         Time complexity: O(n).
         Space complexity: O(logn).
         """
+        # Apply recursive inorder traversal.
         if not head:
             return None
 
@@ -163,12 +165,12 @@ def main():
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
 
-    root = SolutionSlowFast().sortedListToBST(head)
+    root = SolutionpreorderSlowFastRecur().sortedListToBST(head)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
 
-    root = SolutionInorder().sortedListToBST(head)
+    root = SolutionInorderRecur().sortedListToBST(head)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)

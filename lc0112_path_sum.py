@@ -28,16 +28,17 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionPreorderRecur(object):
     def hasPathSum(self, root, sum):
         """
         :type root: TreeNode
         :type sum: int
         :rtype: bool
 
-        Time complexity: O(n), where n is the number of nodes.
-        Space complexity: O(h), where h is the height of tree.
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Apply recursive preorder traversal.
         if not root:
             return False
 
@@ -48,16 +49,17 @@ class SolutionRecur(object):
                 self.hasPathSum(root.right, sum - root.val))
 
 
-class SolutionIter(object):
+class SolutionPreorderIter(object):
     def hasPathSum(self, root, sum):
         """
         :type root: TreeNode
         :type sum: int
         :rtype: bool
 
-        Time complexity: O(n), where n is the number of nodes.
-        Space complexity: O(h), where h is the height of tree.
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Apply iterative preorder traversal with queue.
         if not root:
             return False
 
@@ -99,8 +101,8 @@ def main():
     root.left.left.right = TreeNode(2)
     root.right.right.right = TreeNode(1)
     sum = 22
-    print SolutionRecur().hasPathSum(root, sum)
-    print SolutionIter().hasPathSum(root, sum)
+    print SolutionPreorderRecur().hasPathSum(root, sum)
+    print SolutionPreorderIter().hasPathSum(root, sum)
 
 
 if __name__ == '__main__':

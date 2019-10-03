@@ -236,7 +236,7 @@ class BinarySearchTree(object):
         """Inorder traversal: left -> root -> right, by recursion.
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return None
@@ -249,7 +249,7 @@ class BinarySearchTree(object):
         """Inorder traversal: left -> root -> right, by iteration.
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return None
@@ -278,7 +278,7 @@ class BinarySearchTree(object):
         """Preorder traversal: root -> left -> right, by recursion.
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return None
@@ -291,7 +291,7 @@ class BinarySearchTree(object):
         """Preorder traversal: root -> left -> right, by iteration.
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return None
@@ -313,7 +313,7 @@ class BinarySearchTree(object):
         """Postorder traversal: left -> right -> root, by recursion.
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return None
@@ -326,7 +326,7 @@ class BinarySearchTree(object):
         """Postorder traversal: left -> right -> root, by iteration.
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return None

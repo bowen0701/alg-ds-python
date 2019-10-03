@@ -45,16 +45,18 @@ class TreeNode(object):
 
 class SolutionRecur(object):
     def _kthSmallestUtil(self, root):
-        if root:
-            self._kthSmallestUtil(root.left)
+        if not root:
+            return None
+        
+        self._kthSmallestUtil(root.left)
 
-            # Decrement k and check if k is 0, 
-            # then current node's val is the kth smallest value.
-            self.k -= 1
-            if self.k == 0:
-                 self.k_smallest = root.val
+        # Decrement k and check if k is 0, 
+        # then current node's val is the kth smallest value.
+        self.k -= 1
+        if self.k == 0:
+             self.k_smallest = root.val
 
-            self._kthSmallestUtil(root.right)
+        self._kthSmallestUtil(root.right)
 
     def kthSmallest(self, root, k):
         """
@@ -62,9 +64,10 @@ class SolutionRecur(object):
         :type k: int
         :rtype: int
 
-        Time complexity: O(n).
-        Space complexity: O(1).
+        Time complexity: O(k).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Apply recursive inorder traversal.
         self.k = k
         self.k_smallest = None
 
@@ -80,7 +83,7 @@ class SolutionIter(object):
         :rtype: int
 
         Time complexity: O(k).
-        Space complexity: O(1).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         previous = None
         current = root

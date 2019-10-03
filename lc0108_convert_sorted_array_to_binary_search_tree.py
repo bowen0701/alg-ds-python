@@ -28,15 +28,16 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecurCopy(object):
+class SolutionPreorderRecur(object):
     def sortedArrayToBST(self, nums):
         """
         :type nums: List[int]
         :rtype: TreeNode
 
-        Time complexity: O(n*logn), where n is the length of nums.
-        Space complexity: O(n).
+        Time complexity: O(n).
+        Space complexity: O(logn).
         """
+        # Apply recursive preorder traversal.
         if not nums:
             return None
 
@@ -50,7 +51,7 @@ class SolutionRecurCopy(object):
         return root
 
 
-class SolutionRecurTwoPointers(object):
+class SolutionPreorderRecurTwoPointers(object):
     def _convert(self, nums, left, right):
         if left > right:
             return None
@@ -68,9 +69,10 @@ class SolutionRecurTwoPointers(object):
         :type nums: List[int]
         :rtype: TreeNode
 
-        Time complexity: O(n), where n is the length of nums.
+        Time complexity: O(n).
         Space complexity: O(logn).
         """
+        # Apply recursive preorder traversal with two pointers.
         if not nums:
             return None
 
@@ -78,13 +80,14 @@ class SolutionRecurTwoPointers(object):
         return self._convert(nums, left, right)
 
 
-class SolutionInorderRecur(object):
+class SolutionInorderRecurTwoPointers(object):
     def _inorder(self, nums, left, right):
         if left > right:
             return None
 
         mid = left + (right - left) // 2
 
+        # Inorder traversal: left->root->right.
         left = self._inorder(nums, left, mid - 1)
         root = TreeNode(nums[mid])
         root.left = left
@@ -97,9 +100,10 @@ class SolutionInorderRecur(object):
         :type nums: List[int]
         :rtype: TreeNode
 
-        Time complexity: O(n), where n is the length of nums.
+        Time complexity: O(n).
         Space complexity: O(logn).
         """
+        # Apply recursive inorder traversal.
         if not nums:
             return None
 
@@ -110,17 +114,17 @@ class SolutionInorderRecur(object):
 def main():
     nums = [-10, -3, 0, 5, 9]
 
-    root = SolutionRecurCopy().sortedArrayToBST(nums)
+    root = SolutionPreorderRecur().sortedArrayToBST(nums)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
 
-    root = SolutionRecurTwoPointers().sortedArrayToBST(nums)
+    root = SolutionPreorderRecurTwoPointers().sortedArrayToBST(nums)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
 
-    root = SolutionInorderRecur().sortedArrayToBST(nums)
+    root = SolutionInorderRecurTwoPointers().sortedArrayToBST(nums)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)

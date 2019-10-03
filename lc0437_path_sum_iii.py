@@ -59,8 +59,8 @@ class SolutionLeadRecur(object):
         :type sum: int
         :rtype: int
 
-        Time complexity: O(n*logn), if balanced tree; O(n^2) if single sided.
-        Space complexity: O(logn).
+        Time complexity: O(n*logn), for balanced tree; O(n^2) for single sided.
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         # Sum lead path sum (with root) and path sums for left/right. 
         if not root:
@@ -107,8 +107,8 @@ class SolutionSumFreqMemo(object):
         :type sum: int
         :rtype: int
 
-        Time complexity: O(n) if single sided.
-        Space complexity: O(n).
+        Time complexity: O(n), as traverse once.
+        Space complexity: O(n), as extra space for memoization.
         """
         from collections import defaultdict
 

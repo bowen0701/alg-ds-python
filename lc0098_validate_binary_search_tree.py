@@ -58,7 +58,7 @@ class SolutionMinMaxRecur(object):
         :rtype: bool
 
         Time complexity: O(n).
-        Space complexity: O(logn).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         min_val, max_val = -float('inf'), float('inf')
         return self._isValidBSTUtil(root, min_val, max_val)
@@ -71,7 +71,7 @@ class SolutionMinMaxIter(object):
         :rtype: bool
 
         Time complexity: O(n).
-        Space complexity: O(logn).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return True
@@ -126,7 +126,7 @@ class SolutionInorderRecur(object):
         :rtype: bool
 
         Time complexity: O(n).
-        Space complexity: O(logn).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         self.previous = None
         return self._isValidBSTUtil(root)
@@ -139,7 +139,7 @@ class SolutionInorderIter(object):
         :rtype: bool
 
         Time complexity: O(n).
-        Space complexity: O(logn).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return True

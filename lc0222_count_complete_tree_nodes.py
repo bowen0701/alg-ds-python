@@ -45,8 +45,9 @@ class SolutionPreorderRecur(object):
         :rtype: int
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Apply recursive preorder traversal.
         self.n_nodes = 0
         self._preorder(root)
         return self.n_nodes
@@ -59,7 +60,7 @@ class SolutionPreorderIter(object):
         :rtype: int
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         if not root:
             return 0
@@ -91,8 +92,8 @@ class SolutionLeftRightDepths(object):
         :type root: TreeNode
         :rtype: int
 
-        Time complexity: O(logn*logn).
-        Space complexity: O(logn).
+        Time complexity: O((logn)^2) for balanced tree; O(n^2) for single sided.
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         if not root:
             return 0

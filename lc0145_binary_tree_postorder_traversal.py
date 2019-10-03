@@ -40,7 +40,7 @@ class SolutionRecur(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return []
@@ -57,7 +57,7 @@ class SolutionIter(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         if not root:
             return []

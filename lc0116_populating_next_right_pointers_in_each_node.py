@@ -5,7 +5,6 @@ URL: https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
 
 You are given a perfect binary tree where all leaves are on the same level,
 and every parent has two children. The binary tree has the following definition:
-
 struct Node {
   int val;
   Node *left;
@@ -39,13 +38,14 @@ class Node(object):
         self.next = next
 
 
-class SolutionRecur(object):
+class SolutionPreorderRecur(object):
     def _preorder(self, node):
         if node and node.left:
             node.left.next = node.right
             
             if node.next:
                 node.right.next = node.next.left
+
             self.connect(node.left)
             self.connect(node.right)
 
@@ -71,7 +71,7 @@ def main():
     root.right.left = Node(6, None, None, None)
     root.right.right = Node(7, None, None, None)
     
-    SolutionRecur().connect(root)
+    SolutionPreorderRecur().connect(root)
 
     print root.next                 # Ans: None
     print root.left.next.val        # Ans: 3

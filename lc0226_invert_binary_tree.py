@@ -38,8 +38,9 @@ class SolutionRecur(object):
         :rtype: TreeNode
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Apply postorder traversal to invert tree.
         if not root:
             return None
 
@@ -60,7 +61,7 @@ class SolutionBFS(object):
         :rtype: TreeNode
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         if not root:
             return root

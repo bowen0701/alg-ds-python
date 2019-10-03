@@ -36,7 +36,7 @@ class SolutionBFS(object):
         :rtype: List[List[int]]
 
         Time complexity: O(n), where n is the number of nodes.
-        Space complexity: O(m), where m is the max number of nodes in one level.
+        Space complexity: O(2^logn)=O(n), as the number of nodes in the bottom.
         """
         if not root:
             return []

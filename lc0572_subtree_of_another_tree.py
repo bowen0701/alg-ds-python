@@ -46,7 +46,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionPreorder(object):
+class SolutionPreorderRecur(object):
     def _isMatch(self, s, t):
         if not s or not t:
             return s is t
@@ -61,9 +61,9 @@ class SolutionPreorder(object):
         :type t: TreeNode
         :rtype: bool
 
-        Time complexity: O(|s|*|t|), where 
-          - |s| is the number of nodes in s.
-        Space complexity: O(h(s)), where h(s) is the height of s.
+        Time complexity: O(|s|*|t|), where |s| is the number of nodes in s.
+        Space complexity: O(log|s|+log|t|), for balanced tree; 
+          O(|s|+|t|) for single sided tree.
         """
         # Apply preorder traversal to check match.
         if not s:
@@ -75,7 +75,6 @@ class SolutionPreorder(object):
 
 
 def main():
-    # Ans: True
     # Given tree s:
     #      3
     #     / \
@@ -86,6 +85,7 @@ def main():
     #    4 
     #   / \
     #  1   2
+    # Output: True
     s = TreeNode(3)
     s.left = TreeNode(4)
     s.right = TreeNode(5)
@@ -94,9 +94,8 @@ def main():
     t = TreeNode(4)
     t.left = TreeNode(1)
     t.right = TreeNode(2)
-    print SolutionPreorder().isSubtree(s, t)
+    print SolutionPreorderRecur().isSubtree(s, t)
 
-    # Ans: False
     # Given tree s:
     #      3
     #     / \
@@ -109,6 +108,7 @@ def main():
     #    4
     #   / \
     #  1   2
+    # Output: False
     s = TreeNode(3)
     s.left = TreeNode(4)
     s.right = TreeNode(5)
@@ -118,13 +118,8 @@ def main():
     t = TreeNode(4)
     t.left = TreeNode(1)
     t.right = TreeNode(2)
-    print SolutionPreorder().isSubtree(s, t)
+    print SolutionPreorderRecur().isSubtree(s, t)
 
-    # Ans: True
-    # t = [1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,2]
-    # s = [1,null,1,null,1,null,1,null,1,null,1,2]
-    t = TreeNode(1)
-    t.right = TreeNode(1)
 
 if __name__ == '__main__':
     main()
