@@ -40,7 +40,7 @@ class SolutionDFSRecur(object):
         :rtype: int
 
         Time complexity: O(n).
-        Space complexity: O(h), where h is the height of tree.
+        Space complexity: O(h), where h is the height of tree; O(n) for single sided.
         """
         # Apply recursive DFS in preorder traversal fashion.
         if not root:
@@ -55,6 +55,36 @@ class SolutionDFSRecur(object):
         return 1 + child_depth
 
 
+class SolutionBFS(object):
+    def maxDepth(self, root):
+        """
+        :type root: Node
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(m), where m is the number of nodes on the bottom.
+        """
+        # Apply (iterative) BFS to visit level in preorder traversal fashion.
+        if not root:
+            return 0
+
+        depth = 0
+        queue = [root]
+
+        while queue:
+            # Increment depth due to there is node in this level.
+            depth += 1
+
+            # Visit all nodes in the same level.
+            for i in range(len(queue)):
+                current = queue.pop()
+
+                for child in current.children:
+                    queue.insert(0, child)
+
+        return depth
+
+
 def main():
     # Output: 3
     root = Node(1, [])
@@ -63,6 +93,8 @@ def main():
     root.children.append(Node(4, []))
     root.children[0].children.append(Node(5, []))
     root.children[0].children.append(Node(6, []))
+
+    print SolutionDFSRecur().maxDepth(root)
     print SolutionDFSRecur().maxDepth(root)
 
 
