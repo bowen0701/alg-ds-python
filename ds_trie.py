@@ -146,14 +146,14 @@ class Trie(object):
             words.append(current.word)
 
         # Run BFS with queue to collect the following words with prefix.
-        visit_queue = [current]
+        queue = [current]
 
-        while visit_queue:
-            node = visit_queue.pop()
-            for c, child_node in node.children.items():
-                visit_queue.insert(0, child_node)
-                if child_node.word:
-                    words.append(child_node.word)
+        while queue:
+            node = queue.pop()
+            for c, c_node in node.children.items():
+                queue.insert(0, c_node)
+                if c_node.word:
+                    words.append(c_node.word)
 
         return words
 
