@@ -19,7 +19,7 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5
 """
 
-class Solution(object):
+class SolutionSelect(object):
     def _findKth(self, nums1, nums2, k):
         # Base cases for the divide-and-conquer method.
         if not nums1:
@@ -72,12 +72,12 @@ def main():
     # Ans: 2.
     nums1 = [1, 3]
     nums2 = [2]
-    print(Solution().findMedianSortedArrays(nums1, nums2))
+    print(SolutionSelect().findMedianSortedArrays(nums1, nums2))
 
     # Ans: 2.5.
     nums1 = [1, 2]
     nums2 = [3, 4]
-    print(Solution().findMedianSortedArrays(nums1, nums2))
+    print(SolutionSelect().findMedianSortedArrays(nums1, nums2))
 
 
 if __name__ == '__main__':
