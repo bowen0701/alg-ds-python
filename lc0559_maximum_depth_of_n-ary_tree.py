@@ -33,14 +33,38 @@ class Node(object):
         self.children = children
 
 
-class Solution(object):
+class SolutionDFSRecur(object):
     def maxDepth(self, root):
         """
         :type root: Node
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(h), where h is the height of tree.
         """
-        pass
+        # Apply recursive DFS in preorder traversal fashion.
+        if not root:
+            return 0
+
+        # Update child_depth for all children nodes.
+        child_depth = 0
+        for child in root.children:
+            child_depth = max(child_depth, self.maxDepth(child))
+
+        # Return single node depth (1) + child depth.
+        return 1 + child_depth
 
 
 def main():
-    pass
+    # Output: 3
+    root = Node(1, [])
+    root.children.append(Node(3, []))
+    root.children.append(Node(2, []))
+    root.children.append(Node(4, []))
+    root.children[0].children.append(Node(5, []))
+    root.children[0].children.append(Node(6, []))
+    print SolutionDFSRecur().maxDepth(root)
+
+
+if __name__ == '__main__':
+    main()
