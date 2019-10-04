@@ -24,17 +24,41 @@ class Node(object):
         self.children = children
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def _preorderRecur(self, root, vals):
+        if not root:
+            return None
+        
+        vals.append(root.val)
+        for child in root.children:
+            self._preorderRecur(child, vals)
+
     def preorder(self, root):
         """
         :type root: Node
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(h), where h is the height of tree.
         """
-        pass
+        # Apply recursive preorder traversal.
+        if not root:
+            return []
+
+        vals = []
+        self._preorderRecur(root, vals)
+        return vals
 
   
 def main():
-    pass
+    root = Node(1, [])
+    root.children.append(Node(3, []))
+    root.children.append(Node(2, []))
+    root.children.append(Node(4, []))
+    root.children[0].children.append(Node(5, []))
+    root.children[0].children.append(Node(6, []))
+
+    print SolutionRecur().preorder(root)
 
 
 if __name__ == '__main__':
