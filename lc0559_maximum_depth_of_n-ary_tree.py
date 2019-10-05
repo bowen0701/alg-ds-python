@@ -40,7 +40,7 @@ class SolutionDFSRecur(object):
         :rtype: int
 
         Time complexity: O(n).
-        Space complexity: O(h), where h is the height of tree; O(n) for single sided.
+        Space complexity: O(n) for the worst case.
         """
         # Apply recursive DFS in preorder traversal fashion.
         if not root:
@@ -62,7 +62,7 @@ class SolutionBFS(object):
         :rtype: int
 
         Time complexity: O(n).
-        Space complexity: O(m), where m is the number of nodes on the bottom.
+        Space complexity: O(n) for the worst case.
         """
         # Apply (iterative) BFS to visit level in preorder traversal fashion.
         if not root:

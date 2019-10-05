@@ -39,7 +39,7 @@ class SolutionRecur(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(h), where h is the height of tree.
+        Space complexity: O(n) for the worst case.
         """
         # Apply recursive preorder traversal.
         if not root:
@@ -47,6 +47,34 @@ class SolutionRecur(object):
 
         vals = []
         self._preorderRecur(root, vals)
+        return vals
+
+
+class SolutionIter(object):
+    def preorder(self, root):
+        """
+        :type root: Node
+        :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n) for the worst case.
+        """
+        # Apply Iterative preorder traversal.
+        if not root:
+            return []
+
+        vals = []
+        stack = [root]
+
+        while stack:
+            # Add root's val.
+            current = stack.pop()
+            vals.append(current.val)
+
+            # Reversely add children's vals one by one due to stack.
+            for child in reversed(current.children):
+                stack.append(child)
+
         return vals
 
   
@@ -59,6 +87,7 @@ def main():
     root.children[0].children.append(Node(6, []))
 
     print SolutionRecur().preorder(root)
+    print SolutionIter().preorder(root)
 
 
 if __name__ == '__main__':
