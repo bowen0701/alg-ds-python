@@ -53,6 +53,35 @@ class SolutionRecur(object):
         return vals
 
 
+class SolutionIter(object):
+    def postorder(self, root):
+        """
+        :type root: Node
+        :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        # Apply iterative postorder traversal.
+        if not root:
+            return []
+
+        # Collect reversed values by "preorder" traversal with stack.
+        rev_vals = []
+
+        stack = [root] 
+
+        while stack:
+            current = stack.pop()
+
+            rev_vals.append(current.val)
+
+            for child in current.children:
+                # Iteratively append nodes to stack due to its FILO.
+                stack.append(child)
+
+        return rev_vals[::-1]
+
 
 def main():
     # For example, given a 3-ary tree:
@@ -68,7 +97,9 @@ def main():
     root.children.append(Node(4, []))
     root.children[0].children.append(Node(5, []))
     root.children[0].children.append(Node(6, []))
+
     print SolutionRecur().postorder(root)
+    print SolutionIter().postorder(root)
 
 
 if __name__ == '__main__':
