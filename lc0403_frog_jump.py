@@ -54,20 +54,20 @@ class SolutionDP(object):
         n = len(stones)
 
         # Cache stone's steps by dict, with 1st jump in 1 unit.
-        stone_steps = {stone: set() for stone in stones}
-        stone_steps[1].add(1)
+        stone_jumps = {stone: set() for stone in stones}
+        stone_jumps[1].add(1)
 
         for i, stone in enumerate(stones):
             # Skip last stone since it's destination.
             if i <= n - 2:
-                for s in stone_steps[stone]:
-                    for step in [s - 1, s, s + 1]:
-                        # Check if next step is on a stone.
-                        if step > 0 and stone + step in stone_steps:
-                            stone_steps[stone + step].add(step)
+                for j in stone_jumps[stone]:
+                    for jump in [j - 1, j, j + 1]:
+                        # Check if next jump is on a stone.
+                        if jump > 0 and stone + jump in stone_jumps:
+                            stone_jumps[stone + jump].add(jump)
 
-        # Return if there are steps on the last stone.
-        return bool(stone_steps[stones[-1]])
+        # Return if there are jumps on the last stone.
+        return bool(stone_jumps[stones[-1]])
 
 
 def main():
