@@ -36,17 +36,48 @@ Return false. There is no way to jump to the last stone as
 the gap between the 5th and 6th stone is too large.
 """
 
-class Solution(object):
+class SolutionDP(object):
     def canCross(self, stones):
         """
         :type stones: List[int]
         :rtype: bool
+
+        Apply DP with cache for stone->set(steps).
+
+        Time complexity: O(n^2).
+        Space complexity: O(n^2).
         """
-        pass
+        # Since 1st jump must be 1 unit.
+        if stones[1] != 1:
+            return False
+
+        n = len(stones)
+
+        # Cache stone's steps by dict, with 1st jump in 1 unit.
+        stone_steps = {stone: set() for stone in stones}
+        stone_steps[1].add(1)
+
+        for i, stone in enumerate(stones):
+            # Skip last stone since it's destination.
+            if i <= n - 2:
+                for s in stone_steps[stone]:
+                    for step in [s - 1, s, s + 1]:
+                        # Check if next step is on a stone.
+                        if step > 0 and stone + step in stone_steps:
+                            stone_steps[stone + step].add(step)
+
+        # Return if there are steps on the last stone.
+        return bool(stone_steps[stones[-1]])
 
 
 def main():
-    pass
+    # Output: True
+    stones = [0,1,3,5,6,8,12,17]
+    print SolutionDP().canCross(stones)
+
+    # Output: False
+    stones = [0,1,2,3,4,8,9,11]
+    print SolutionDP().canCross(stones)
 
 
 if __name__ == '__main__':
