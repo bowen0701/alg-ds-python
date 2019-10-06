@@ -35,31 +35,111 @@ param_1 = obj.get(key)
 obj.put(key, value)
 """
 
+class Node(object):
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.prev = None
+        self.next = None
+
+
 class LRUCache(object):
     def __init__(self, capacity):
         """Least recently used cache.
+
+        Apply dict with a doubly linked list (old->new) for LRU cache.
+
         :type capacity: int
         """
-        pass
+        self.capacity = capacity
+
+        # Use a dict to store key and its node with val.
+        self.dict = dict()
+
+        # Initialize doubly linked list with head and tail.
+        self.head = Node(None, None)
+        self.tail = Node(None, None)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def _remove(self, node):
+        node_prev = node.prev
+        node_next = node.next
+
+        # Link node's prev and next together.
+        node.prev.next = node_next
+        node.next.prev = node_prev
+
+    def _add_tail(self, node):
+        tail_prev = self.tail.prev
+
+        # Link tail's prev and node together.
+        tail_prev.next = node
+        node.prev = tail_prev
+
+        # Link node and tail together.
+        node.next = self.tail
+        self.tail.prev = node
 
     def get(self, key):
         """
         :type key: int
         :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
-        pass
+        # Check if key exists in dict, if yes, adjust key's pos.
+        if key in self.dict:
+            node = self.dict[key]
+
+            # Remove node from doubly linked list, and then add it back to tail.
+            self._remove(node)
+            self._add_tail(node)
+
+            return node.value
+
+        return -1
 
     def put(self, key, value):
         """
         :type key: int
         :type value: int
         :rtype: None
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
-        pass
+        node = Node(key, value)
+
+        # Check if the node with key exists, if yes, remove it.
+        if key in self.dict:
+            self._remove(self.dict[key])
+
+        # Add new node to tail and update dict.
+        self._add_tail(node)
+        self.dict[key] = node
+
+        # Check if larger than capacity, if yes, remove head's next node.
+        if len(self.dict) > self.capacity:
+            head_next = self.head.next
+            self._remove(head_next)
+            del self.dict[head_next.key]
 
 
 def main():
-    pass
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    print 'Returns 1:', cache.get(1)
+    cache.put(3, 3)
+    print 'Returns no 2:', cache.dict
+    print 'Returns -1:', cache.get(2)
+    cache.put(4, 4)
+    print 'Returns no 1: ', cache.dict
+    print 'Returns -1:', cache.get(1)
+    print 'Returns 3:', cache.get(3)
+    print 'Returns 4:', cache.get(4)
 
 
 if __name__ == '__main__':
