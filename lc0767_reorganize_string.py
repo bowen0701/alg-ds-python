@@ -20,17 +20,59 @@ Note:
 S will consist of lowercase letters and have length in range [1, 500].
 """
 
-class Solution(object):
+class SolutionMaxHeap(object):
     def reorganizeString(self, S):
         """
         :type S: str
         :rtype: str
+
+        Time complexity: O(n*log26) = O(n).
+        Space complexity: O(1).
         """
-        pass
+        from collections import defaultdict
+        import heapq
+
+        # Create char counts in S.
+        char_counts = defaultdict(int)
+        for char in S:
+            char_counts[char] += 1
+
+        # To get the most frequent char, push (count, char) into max heap.
+        max_hq = []
+        for char, count in char_counts.items():
+            # Specifically, push (-count, char) into min heap.
+            heapq.heappush(max_hq, (-count, char))
+
+        # Create previous char and its negative count.
+        prev_neg_count, prev_char = 0, ''
+        res = ''
+
+        while max_hq:
+            neg_count, char = heapq.heappop(max_hq)
+            res += char
+
+            # If there remains previous char, push back to max heap.
+            if prev_neg_count < 0:
+                heapq.heappush(max_hq, (prev_neg_count, prev_char))
+
+            # Increment negative count, and update previous char and its count.
+            neg_count += 1
+            prev_neg_count, prev_char = neg_count, char
+
+        if len(res) != len(S):
+            return ''
+
+        return res
 
 
 def main():
-    pass
+    # Output: "aba"
+    S = "aab"
+    print SolutionMaxHeap().reorganizeString(S)
+
+    # Output: ""
+    S = "aaab"
+    print SolutionMaxHeap().reorganizeString(S)
 
 
 if __name__ == '__main__':
