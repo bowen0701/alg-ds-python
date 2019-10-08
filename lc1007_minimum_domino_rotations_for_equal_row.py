@@ -36,6 +36,35 @@ Note:
 - 2 <= A.length == B.length <= 20000
 """
 
+class SolutionNumCover(object):
+    def minDominoRotations(self, A, B):
+        """
+        :type A: List[int]
+        :type B: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        n = len(A)
+
+        # Create 1~6 number counts for A and B. 
+        A_num_counts = [0] * 7
+        B_num_counts = [0] * 7
+
+        for i in range(n):
+            A_num_counts[A[i]] += 1
+            B_num_counts[B[i]] += 1
+
+        for num in range(1, 7):
+            # Check if number covers the whole list; 
+            # if yes, return min diff between length and number counts in A & B.
+            if all([num == a or num == b for a, b in zip(A, B)]):
+                return min(n - A_num_counts[num], n - B_num_counts[num])
+
+        return -1
+
+
 class SolutionNumCounts(object):
     def minDominoRotations(self, A, B):
         """
@@ -66,22 +95,25 @@ class SolutionNumCounts(object):
                 return min(n - A_num_counts[j], n - B_num_counts[j])
 
         return -1
-        
+
 
 def main():
     # Output: 2
     A = [2,1,2,4,2,2]
     B = [5,2,6,2,3,2]
+    print SolutionNumCover().minDominoRotations(A, B)
     print SolutionNumCounts().minDominoRotations(A, B)
 
     # Output: -1
     A = [3,5,1,2,3]
     B = [3,6,3,3,4]
+    print SolutionNumCover().minDominoRotations(A, B)
     print SolutionNumCounts().minDominoRotations(A, B)
 
     # Output: 2
     A = [1,5,1,2,3]
     B = [3,3,3,3,4]
+    print SolutionNumCover().minDominoRotations(A, B)
     print SolutionNumCounts().minDominoRotations(A, B)
 
 
