@@ -45,7 +45,7 @@ class Node(object):
 
 class LRUCache(object):
     def __init__(self, capacity):
-        """Least recently used cache.
+        """Least Recently Used (LRU) cache.
 
         Apply dict with a doubly linked list (old->new) for LRU cache.
 
