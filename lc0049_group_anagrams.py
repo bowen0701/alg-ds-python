@@ -32,12 +32,13 @@ class SolutionDict(object):
           - k is the lenght of the longest string.
         Space complexity: O(n).
         """
-        # Store in a dict with sorted string as key and string array as value.  
+        # Store in a dict with sorted string->string array.  
         anagrams_d = {}
 
         for s in strs:
             # Get sorted string as key.
             k = ''.join(sorted(s))
+
             if anagrams_d.get(k):
                 anagrams_d[k].append(s)
             else:
