@@ -64,11 +64,11 @@ class SolutionDp(object):
         # Use path for memoization.
         path = [[0] * n for _ in range(m)]
 
-        # Set the 1st row to 1.
+        # Set the 0th row to 1.
         for j in range(n):
             path[0][j] = 1
 
-        # Set the 1st col to 1.
+        # Set the 0th col to 1.
         for i in range(m):
             path[i][0] = 1
 
