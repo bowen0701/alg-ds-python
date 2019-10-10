@@ -72,9 +72,9 @@ class SolutionPreorderIter(object):
             if not cur.left and not cur.right and cur.val == _sum:
                 return True
 
+            # If exist, append right before left, since we use stack.
             if cur.right:
                 stack.append((cur.right, _sum - cur.val))
-
             if cur.left:
                 stack.append((cur.left, _sum - cur.val))
 

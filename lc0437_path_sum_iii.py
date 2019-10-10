@@ -115,8 +115,8 @@ class SolutionSumFreqMemo(object):
         # Apply memoization to cache sum frequences.
         self.n_path_sums = 0
 
-        # Memoization for sum frequences, initialized for sum=0->freq=1.
-        # This technique is similar with the one for two sum problem.
+        # Memoization for sum frequences, initialized by sum=0->freq=1.
+        # This technique is similar with that for two-sum problem.
         sum_freqs = defaultdict(int)
         sum_freqs[0] = 1
 
