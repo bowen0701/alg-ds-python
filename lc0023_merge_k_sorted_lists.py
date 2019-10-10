@@ -164,6 +164,7 @@ class SolutionMinHeap(object):
         if not lists:
             return None
 
+        # Just add the head nodes in lists to min heap.
         minheap = [(head.val, head) for head in lists if head]
         heapq.heapify(minheap)
 
