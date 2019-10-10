@@ -87,7 +87,7 @@ class SolutionMergeTwoRecur(object):
 
         # When there are at least two lists, merge them.
         while length > 1:
-            # Merge each pair of leftmost and rightmost lists.
+            # Merge each pair of leftmost & rightmost lists, and put back to the former.
             for i in range(length // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[length - 1 - i])
 
@@ -137,7 +137,7 @@ class SolutionMergeTwoIter(object):
 
         # When there are at least two lists, merge them.
         while length > 1:
-            # Merge each pair of leftmost and rightmost lists.
+            # Merge each pair of leftmost & rightmost lists, and put back to the former.
             for i in range(length // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[length - 1 - i])
 
@@ -192,7 +192,6 @@ def show(head):
         current = current.next
 
     print ls
-
 
 
 def main():
