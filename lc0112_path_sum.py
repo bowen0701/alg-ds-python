@@ -42,7 +42,7 @@ class SolutionPreorderRecur(object):
         if not root:
             return False
 
-        if not root.left and not root.right and root.val == sum:
+        if root.val == sum and not root.left and not root.right:
             return True
 
         return (self.hasPathSum(root.left, sum - root.val) or
@@ -69,7 +69,7 @@ class SolutionPreorderIter(object):
         while stack:
             cur, _sum = stack.pop()
 
-            if not cur.left and not cur.right and cur.val == _sum:
+            if cur.val == _sum and not cur.left and not cur.right:
                 return True
 
             # If exist, append right before left, since we use stack.
