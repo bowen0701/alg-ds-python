@@ -109,7 +109,7 @@ class SolutionDp(object):
         T[1] = max(nums[0], nums[1])
 
         for i in range(2, len(nums)):
-            T[i] = max(nums[i] + T[i-2], T[i-1])
+            T[i] = max(nums[i] + T[i - 2], T[i - 1])
 
         return T[-1]
 
