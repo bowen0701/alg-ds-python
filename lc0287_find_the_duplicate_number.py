@@ -35,8 +35,7 @@ class SolutionNaive(object):
         Time complexity: O(n^2).
         Space complexity: O(1).
         """
-        # For each number, iterate through the following numbers 
-        # to check duplication.
+        # For each number, iterate through the following numbers.
         n = len(nums)
         for i in range(n - 1):
             for j in range(i + 1, n):
@@ -53,13 +52,12 @@ class SolutionDict(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Iterate through each numbers, 
-        # - if the number is visited first time, store it in dict; 
-        # - if not, get duplicate numbder.
-        num_d = {}
+        # Iterate through each numbers, if the number is visited left time, 
+        # store it in set; if not, get duplicate numbder.
+        num_set = set()
         for n in nums:
-            if n not in num_d:
-                num_d[n] = True
+            if n not in num_set:
+                num_set.add(n)
             else:
                 return n
 
@@ -70,28 +68,28 @@ class SolutionBinarySearch(object):
         :type nums: List[int]
         :rtype: int
 
-        Time complexity: O(n*log).
+        Time complexity: O(n*logn).
         Space complexity: O(1).
         """
-        first, last = 0, len(nums) - 1
+        left, right = 0, len(nums) - 1
         
-        while first < last:
-            mid = first + (last - first) // 2
+        while left < right:
+            mid = left + (right - left) // 2
 
             # Count how many numbers fall in the 2nd half.
-            count = 0
+            n_nums_second_half = 0
             for n in nums:
-                if mid < n <= last:
-                    count += 1
+                if mid < n <= right:
+                    n_nums_second_half += 1
 
-            # Check count is larger than the capacity, last - mid, or not,
-            # then update first or last correspondingly.
-            if count > last - mid:
-                first = mid + 1
+            # Check if n_nums_second_half is larger than the capacity, right - mid,
+            # update left or right correspondingly.
+            if n_nums_second_half > right - mid:
+                left = mid + 1
             else:
-                last = mid
+                right = mid
 
-        return first
+        return left
 
 
 def main():
