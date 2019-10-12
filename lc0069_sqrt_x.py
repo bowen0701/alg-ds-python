@@ -22,7 +22,7 @@ Explanation: The square root of 8 is 2.82842..., and since
              the decimal part is truncated, 2 is returned.
 """
 
-class Solution(object):
+class SolutionBinarySearch(object):
     def mySqrt(self, x):
         """
         :type x: int
@@ -34,40 +34,40 @@ class Solution(object):
         if not x:
         	return 0
 
-        # Apply binary search with last = x // 2 for smaller search space.
-        first = 1
-        last = x // 2
+        # Apply binary search with right = x // 2 for smaller search space.
+        left = 1
+        right = x // 2
 
-        while first < last:
-        	mid = first + (last - first) // 2
+        while left < right:
+        	mid = left + (right - left) // 2
         	mid_squared = mid ** 2
 
         	if mid_squared == x:
         		return mid
         	elif mid_squared > x:
-        		last = mid - 1
+        		right = mid - 1
         	else:
-        		first = mid + 1
+        		left = mid + 1
         
-        # Final check for first: if too big, minus 1.
-        if first ** 2 > x:
-        	return first - 1
+        # Final check for left: if too big, minus 1.
+        if left * left > x:
+        	return left - 1
 
-        return first
+        return left
 
 
 def main():
 	x = 4
-	print Solution().mySqrt(x)
+	print SolutionBinarySearch().mySqrt(x)
 
 	x = 8
-	print Solution().mySqrt(x)
+	print SolutionBinarySearch().mySqrt(x)
 
 	x = 100
-	print Solution().mySqrt(x)
+	print SolutionBinarySearch().mySqrt(x)
 
 	x = 102
-	print Solution().mySqrt(x)
+	print SolutionBinarySearch().mySqrt(x)
 
 
 if __name__ == '__main__':
