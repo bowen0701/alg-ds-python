@@ -15,8 +15,8 @@ therefore the length is 4.
 Note:
 There may be more than one LIS combination, 
 it is only necessary for you to return the length.
-Your algorithm should run in O(n2) complexity.
-Follow up: Could you improve it to O(n log n) time complexity?
+Your algorithm should run in O(n^2) complexity.
+Follow up: Could you improve it to O(n*logn) time complexity?
 """
 
 
@@ -63,13 +63,12 @@ class SolutionDp(object):
         if not nums:
             return 0
 
-        # Create a table and set all elements to 1,
-        # because the LIS of each element is at least 1.
+        # Create a LIS table with each element denoting LIS up to i.
+        # Init all elements to 1, since LIS of each element is at least 1.
         T = [1] * len(nums)
 
-        # Apply two pointer method: for each right element j,
-        # check all elements i left to j; 
-        # if element i is smaller than j, update T[j] = max(T[j], T[i] + 1).
+        # Apply two pointer method: for each j, check all i left to j; 
+        # if element i is smaller than element j, set T[j] = max(T[j], T[i] + 1).
         for j in range(1, len(nums)):
             for i in range(j):
                 if nums[i] < nums[j]:
@@ -103,7 +102,7 @@ class SolutionBinarySearch(object):
             # Use binary search to find the correct tail for new item.
             left, right = 0, lis
             while left < right:
-                mid = (left + right) // 2
+                mid = left + (right - left) // 2
                 if tails[mid] < n:
                     left = mid + 1
                 else:
