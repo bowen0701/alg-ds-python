@@ -32,11 +32,44 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        pass
+        left, right = 0, len(nums) - 1
+
+        while left < right:
+            mid = left + (right - left) // 2
+
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        if nums[left] >= target:
+            return left
+        else:
+            return left + 1
 
 
 def main():
-    pass
+    # Output: 2
+    nums = [1,3,5,6]
+    target = 5
+    print Solution().searchInsert(nums, target)
+
+    # Output: 1
+    nums = [1,3,5,6]
+    target = 2
+    print Solution().searchInsert(nums, target)
+
+    # Output: 4
+    nums = [1,3,5,6]
+    target = 7
+    print Solution().searchInsert(nums, target)
+
+    # Output: 0
+    nums = [1,3,5,6]
+    target = 0
+    print Solution().searchInsert(nums, target)
 
 
 if __name__ == '__main__':
