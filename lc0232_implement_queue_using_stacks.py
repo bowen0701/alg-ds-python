@@ -46,7 +46,6 @@ class MyQueueByTwoStacks(object):
         """
         # Always push to stack_newest_on_top.
         self.stack_newest_on_top.append(x)
-        return None
 
     def _shift_stacks(self):
         """
@@ -56,7 +55,6 @@ class MyQueueByTwoStacks(object):
         if not self.stack_oldest_on_top:
             while self.stack_newest_on_top:
                 self.stack_oldest_on_top.append(self.stack_newest_on_top.pop())
-        return None
 
     def pop(self):
         """
@@ -86,9 +84,9 @@ def main():
     queue = MyQueueByTwoStacks()
     queue.push(1)
     queue.push(2)
-    print queue.peek()   # returns 1
-    print queue.pop()    # returns 1
-    print queue.empty()  # returns False
+    print 'peek:', queue.peek()     # returns 1
+    print 'pop:', queue.pop()       # returns 1
+    print queue.empty()             # returns False
 
 
 if __name__ == '__main__':
