@@ -27,12 +27,15 @@ Notes:
   operations will be called on an empty queue).
 """
 
-class MyQueue(object):
+class MyQueueByTwoStacks(object):
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        pass
+        # Create two stacks: stacks with the newest/oldest on top.
+        from collections import deque
+        self.stack_newest_on_top = deque([])
+        self.stack_oldest_on_top = deque([])
 
     def push(self, x):
         """
@@ -40,38 +43,50 @@ class MyQueue(object):
         :type x: int
         :rtype: None
         """
-        pass
+        # Always push to stack_newest_on_top.
+        self.stack_newest_on_top.append(x)
+
+    def shift_stacks(self):
+        """
+        Shift elements from stack_newest_on_top to stack_oldest_on_top,
+        if stack_oldest_on_top is empty.
+        """
+        if not self.stack_oldest_on_top:
+            while self.stack_newest_on_top:
+                self.stack_oldest_on_top.append(self.stack_newest_on_top.pop())
+        return None
 
     def pop(self):
         """
         Removes the element from in front of queue and returns that element.
         :rtype: int
         """
-        pass
+        self.shift_stacks()
+        return self.stack_oldest_on_top.pop()
 
     def peek(self):
         """
         Get the front element.
         :rtype: int
         """
-        pass
+        self.shift_stacks()
+        return self.stack_oldest_on_top[-1]
 
     def empty(self):
         """
         Returns whether the queue is empty.
         :rtype: bool
         """
-        pass
+        return not self.stack_newest_on_top and not self.stack_oldest_on_top
 
 
 def main():
-    # Your MyQueue object will be instantiated and called as such:
-    # obj = MyQueue()
-    # obj.push(x)
-    # param_2 = obj.pop()
-    # param_3 = obj.peek()
-    # param_4 = obj.empty()
-    pass
+    queue = MyQueueByTwoStacks()
+    queue.push(1)
+    queue.push(2)
+    print queue.peek()   # returns 1
+    print queue.pop()    # returns 1
+    print queue.empty()  # returns False
 
 
 if __name__ == '__main__':
