@@ -32,8 +32,9 @@ class MyQueueByTwoStacks(object):
         """
         Initialize your data structure here.
         """
-        # Create two stacks: stacks with the newest/oldest on top.
+        # Create two stacks with the newest/oldest on top.
         from collections import deque
+
         self.stack_newest_on_top = deque([])
         self.stack_oldest_on_top = deque([])
 
@@ -45,8 +46,9 @@ class MyQueueByTwoStacks(object):
         """
         # Always push to stack_newest_on_top.
         self.stack_newest_on_top.append(x)
+        return None
 
-    def shift_stacks(self):
+    def _shift_stacks(self):
         """
         Shift elements from stack_newest_on_top to stack_oldest_on_top,
         if stack_oldest_on_top is empty.
@@ -61,7 +63,7 @@ class MyQueueByTwoStacks(object):
         Removes the element from in front of queue and returns that element.
         :rtype: int
         """
-        self.shift_stacks()
+        self._shift_stacks()
         return self.stack_oldest_on_top.pop()
 
     def peek(self):
@@ -69,7 +71,7 @@ class MyQueueByTwoStacks(object):
         Get the front element.
         :rtype: int
         """
-        self.shift_stacks()
+        self._shift_stacks()
         return self.stack_oldest_on_top[-1]
 
     def empty(self):
