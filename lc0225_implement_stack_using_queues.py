@@ -27,12 +27,16 @@ Notes:
   operations will be called on an empty stack).
 """
 
-class MyStack(object):
+class MyStackByTwoQueues(object):
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        pass
+        # Create two queues with old/new halves.
+        from collections import deque
+
+        self.queue_new = deque([])
+        self.queue_old = deque([])
 
     def push(self, x):
         """
@@ -40,37 +44,56 @@ class MyStack(object):
         :type x: int
         :rtype: None
         """
-        pass
+        # Always push to queue_new's back.
+        self.queue_new.appendleft(x)
+
+    def _shift_new_to_old_queues(self):
+        # If #queue_new > 1, shift from queue_new to queue_old until #queue_new = 1.
+        while len(self.queue_new) > 1:
+            self.queue_old.appendleft(self.queue_new.pop())
+
+    def _shift_old_to_new_queues(self):
+        # Shift the whole queue_old to queue_new.
+        while self.queue_old:
+            self.queue_new.appendleft(self.queue_old.pop())
 
     def pop(self):
         """
         Removes the element on top of the stack and returns that element.
         :rtype: int
         """
-        pass
+        self._shift_new_to_old_queues()
+        popped_element = self.queue_new.pop()
+        self._shift_old_to_new_queues()
+        return popped_element
 
     def top(self):
         """
         Get the top element.
         :rtype: int
         """
-        pass
+        self._shift_new_to_old_queues()
+        top_element = self.queue_new[-1]
+        return top_element
 
     def empty(self):
         """
         Returns whether the stack is empty.
         :rtype: bool
         """
-        pass
+        return not self.queue_new and not self.queue_old
 
 
 def main():
-    # obj = MyStack()
-    # obj.push(x)
-    # param_2 = obj.pop()
-    # param_3 = obj.top()
-    # param_4 = obj.empty()
-    pass
+    stack = MyStackByTwoQueues()
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    print 'top:', stack.top()   # returns 3
+    print 'pop:', stack.pop()   # returns 3
+    stack.push(4)
+    print 'pop:', stack.pop()   # return 4
+    print stack.empty()         # returns False
 
 
 if __name__ == '__main__':
