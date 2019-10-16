@@ -47,19 +47,57 @@ class SolutionPreorderRecur(object):
         Time complexity: O(n1+n2).
         Space complexity: O(logn1+logn2) for balanced tree; O(n1+n2) for single-sided.
         """
-        # Apply recursive preorder traversal.
-        if not t1 and not t2:
-            return None
+        # Apply recursive preorder traversal to merge to t1.
+        if not t1:
+            return t2
 
-        if t1 and t2:
-            root = TreeNode(t1.val + t2.val)
+        if t2:
+            t1.val += t2.val
+            t1.left = self.mergeTrees(t1.left, t2.left)
+            t1.right = self.mergeTrees(t1.right, t2.right)
 
-            root.left = self.mergeTrees(t1.left, t2.left)
-            root.right = self.mergeTrees(t1.right, t2.right)
+        return t1
 
-            return root
-        else:
-            return t1 or t2
+
+class SolutionPreorderIter(object):
+    def mergeTrees(self, t1, t2):
+        """
+        :type t1: TreeNode
+        :type t2: TreeNode
+        :rtype: TreeNode
+
+        Time complexity: O(n1+n2).
+        Space complexity: O(logn1+logn2) for balanced tree; O(n1+n2) for single-sided.
+        """
+        # Apply iterative preorder traversal w/ stack to merge to t1.
+        if not t1:
+            return t2
+
+        stack = [(t1, t2)]
+
+        while stack:
+            _t1, _t2 = stack.pop()
+
+            # If not t2, skip this iteration.
+            if not _t2:
+                continue
+
+            # Traverse root.
+            _t1.val += _t2.val
+
+            # Traverse left node.
+            if not _t1.left:
+                _t1.left = _t2.left
+            else:
+                stack.append((_t1.left, _t2.left))
+
+            # Traverse right node.
+            if not _t1.right:
+                _t1.right = _t2.right
+            else:
+                stack.append((_t1.right, _t2.right))
+
+        return t1
 
 
 def main():
@@ -88,7 +126,8 @@ def main():
     t2.left.right = TreeNode(4)
     t2.right.right = TreeNode(7)
 
-    t = SolutionPreorderRecur().mergeTrees(t1, t2)
+    # t = SolutionPreorderRecur().mergeTrees(t1, t2)
+    t = SolutionPreorderIter().mergeTrees(t1, t2)
     print t.val              # Should be 3
     print t.left.val         # Should be 4
     print t.right.val        # Should be 5
