@@ -88,8 +88,8 @@ class SolutionSumFreqMemo(object):
         # Compute complemented path sum.
         comp_sum = cur_sum - sum
 
-        # Update paths if complemented path sum exists.
-        self.paths += sum_freqs[comp_sum]
+        # Update num of paths if complemented path sum exists.
+        self.n_paths += sum_freqs[comp_sum]
 
         # Update current path sum frequency.
         sum_freqs[cur_sum] += 1
@@ -113,7 +113,7 @@ class SolutionSumFreqMemo(object):
         # Apply memoization to cache sum frequences.
         from collections import defaultdict
 
-        self.paths = 0
+        self.n_paths = 0
 
         # Memoization for sum frequences, initialized by sum=0->freq=1.
         # This technique is similar with that for two-sum problem.
@@ -126,7 +126,7 @@ class SolutionSumFreqMemo(object):
         # Apply DFS.
         self._dfs(root, sum, sum_freqs, cur_sum)
 
-        return self.paths
+        return self.n_paths
 
 
 def main():
