@@ -67,16 +67,16 @@ class SolutionPreorderIter(object):
         stack = [(root, sum)]
 
         while stack:
-            cur, _sum = stack.pop()
+            current, _sum = stack.pop()
 
-            if cur.val == _sum and not cur.left and not cur.right:
+            if current.val == _sum and not current.left and not current.right:
                 return True
 
             # If exist, append right before left, since we use stack.
-            if cur.right:
-                stack.append((cur.right, _sum - cur.val))
-            if cur.left:
-                stack.append((cur.left, _sum - cur.val))
+            if current.right:
+                stack.append((current.right, _sum - current.val))
+            if current.left:
+                stack.append((current.left, _sum - current.val))
 
         return False
 
