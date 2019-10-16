@@ -60,10 +60,47 @@ class SolutionPreorderRecur(object):
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         # Apply recursive preorder traversal.
+        # Collect paths and trace current path.
         paths = []
-
         cur_path = []
+
         self._find_paths(root, sum, cur_path, paths)
+
+        return paths
+
+
+class SolutionPreorderIter(object):
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: List[List[int]]
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
+        """
+        # Apply iterative preorder traversal with stack.
+        if not root:
+            return []
+
+        # Collect paths and trace current path.
+        paths = []
+        cur_path = []
+
+        stack = [(root, cur_path, sum)]
+
+        while stack:
+            current, _cur_path, _sum = stack.pop()
+
+            _cur_path.append(current.val)
+
+            if current.val == _sum and not current.left and not current.right:
+                paths.append(_cur_path)
+
+            if current.right:
+                stack.append((current.right, _cur_path[:], _sum - current.val))
+            if current.left:
+                stack.append((current.left, _cur_path[:], _sum - current.val))
 
         return paths
 
@@ -95,6 +132,7 @@ def main():
     root.right.right.right = TreeNode(1)
     sum = 22
     print SolutionPreorderRecur().pathSum(root, sum)
+    print SolutionPreorderIter().pathSum(root, sum)
 
 
 if __name__ == '__main__':
