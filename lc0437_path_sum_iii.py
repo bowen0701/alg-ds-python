@@ -43,15 +43,15 @@ class SolutionLeadRecur(object):
 
         # Single root val is sum.
         if root.val == sum:
-            is_lead_sum = 1
+            is_sum = 1
         else:
-            is_lead_sum = 0
+            is_sum = 0
 
         # With root val, count path sum leading by left/right node. 
-        lead_left_path_sum = self._leadPathSum(root.left, sum - root.val)
-        lead_right_path_sum = self._leadPathSum(root.right, sum - root.val)
+        left_lead_paths = self._leadPathSum(root.left, sum - root.val)
+        right_lead_paths = self._leadPathSum(root.right, sum - root.val)
 
-        return is_lead_sum + lead_left_path_sum + lead_right_path_sum
+        return is_sum + left_lead_paths + right_lead_paths
 
     def pathSum(self, root, sum):
         """
@@ -67,39 +67,39 @@ class SolutionLeadRecur(object):
             return 0
 
         # Count path sum leading by root.
-        lead_path_sum = self._leadPathSum(root, sum)
+        lead_paths = self._leadPathSum(root, sum)
 
         # Recursively get path sum starting from left/right node.
-        left_path_sum = self.pathSum(root.left, sum)
-        right_path_sum = self.pathSum(root.right, sum)
+        left_paths = self.pathSum(root.left, sum)
+        right_paths = self.pathSum(root.right, sum)
         
-        return lead_path_sum + left_path_sum + right_path_sum
+        return lead_paths + left_paths + right_paths
 
 
 class SolutionSumFreqMemo(object):
-    def _dfs(self, root, sum, sum_freqs, cur_path_sum):
+    def _dfs(self, root, sum, sum_freqs, cur_sum):
         # Apply DFS in a preorder traversal fashion.
         if not root:
             return None
 
         # Accumulate current sum.
-        cur_path_sum += root.val
+        cur_sum += root.val
 
         # Compute complemented path sum.
-        comp_path_sum = cur_path_sum - sum
+        comp_sum = cur_sum - sum
 
-        # Update n_path_sums if complemented path sum exists.
-        self.n_path_sums += sum_freqs[comp_path_sum]
+        # Update paths if complemented path sum exists.
+        self.paths += sum_freqs[comp_sum]
 
         # Update current path sum frequency.
-        sum_freqs[cur_path_sum] += 1
+        sum_freqs[cur_sum] += 1
 
         # DFS for left/right nodes.
-        self._dfs(root.left, sum, sum_freqs, cur_path_sum)
-        self._dfs(root.right, sum, sum_freqs, cur_path_sum)
+        self._dfs(root.left, sum, sum_freqs, cur_sum)
+        self._dfs(root.right, sum, sum_freqs, cur_sum)
 
         # When switch to another branch, backtrack.
-        sum_freqs[cur_path_sum] -= 1
+        sum_freqs[cur_sum] -= 1
 
     def pathSum(self, root, sum):
         """
@@ -110,10 +110,10 @@ class SolutionSumFreqMemo(object):
         Time complexity: O(n), as traverse once.
         Space complexity: O(n), as extra space for memoization.
         """
+        # Apply memoization to cache sum frequences.
         from collections import defaultdict
 
-        # Apply memoization to cache sum frequences.
-        self.n_path_sums = 0
+        self.paths = 0
 
         # Memoization for sum frequences, initialized by sum=0->freq=1.
         # This technique is similar with that for two-sum problem.
@@ -121,12 +121,12 @@ class SolutionSumFreqMemo(object):
         sum_freqs[0] = 1
 
         # Initialize current sum.
-        cur_path_sum = 0
+        cur_sum = 0
 
-        # Apply DFS with 
-        self._dfs(root, sum, sum_freqs, cur_path_sum)
+        # Apply DFS.
+        self._dfs(root, sum, sum_freqs, cur_sum)
 
-        return self.n_path_sums
+        return self.paths
 
 
 def main():
