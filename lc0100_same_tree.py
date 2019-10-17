@@ -45,19 +45,24 @@ class SolutionPreorderRecur(object):
         :type q: TreeNode
         :rtype: bool
 
+        Apply recursive preorder traversal to check same tree.
+
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Apply recursive preorder traversal to check same tree.
+        # Check if both root don't exist.
         if not p and not q:
             return True
 
+        # Check if just one of roots exits.
         if not p or not q:
             return False
 
+        # If both exist, check their values are the same. 
         if p.val != q.val:
             return False
 
+        # Recursively check left/right subtrees.
         return (self.isSameTree(p.left, q.left) and
                 self.isSameTree(p.right, q.right))
 
@@ -69,25 +74,30 @@ class SolutionPreorderIter(object):
         :type q: TreeNode
         :rtype: bool
 
+        Apply iterative preorder traversal to check same tree.
+
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Apply iterative preorder traversal to check same tree.
         stack = [(p, q)]
 
         while stack:
             cur_p, cur_q = stack.pop()
 
+            # Check if both root don't exist, continue, 
+            # since there may be other node pairs to check.
             if not cur_p and not cur_q:
-                # Since there may be other node pairs to check.
                 continue
 
+            # Check if just one of roots exits.
             if not cur_p or not cur_q:
                 return False
 
+            # If both exist, check their values are the same. 
             if cur_p.val != cur_q.val:
                 return False
 
+            # Add root's right and then left to stack, since stack is FILO.
             stack.append((cur_p.right, cur_q.right))
             stack.append((cur_p.left, cur_q.left))
 
