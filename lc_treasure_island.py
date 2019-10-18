@@ -83,7 +83,7 @@ class SolutionBFSSteps(object):
         return -1
 
 
-class SolutionBFSDistances(object):
+class SolutionBFSAllSteps(object):
     def treasureIsland(self, grid):
         """
         :type logs: List[list[str]]
@@ -153,7 +153,7 @@ def main():
             ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
-    print SolutionBFSDistances().treasureIsland(grid)
+    print SolutionBFSAllSteps().treasureIsland(grid)
 
 
 if __name__ == '__main__':
