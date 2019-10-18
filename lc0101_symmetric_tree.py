@@ -37,7 +37,7 @@ class SolutionRecur(object):
         # Check left & right nodes' existence.
         if not left and not right:
             return True
-        elif not left or not right:
+        if not left or not right:
             return False
 
         # Check left & right nodes' values.
@@ -82,7 +82,7 @@ class SolutionIter(object):
 
             if not left and not right:
                 continue
-            elif not left or not right:
+            if not left or not right:
                 return False
 
             # Check left & right nodes' values.
