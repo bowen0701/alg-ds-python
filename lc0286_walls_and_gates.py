@@ -42,11 +42,8 @@ class SolutionBFS(object):
         nrows, ncols = len(rooms), len(rooms[0])
 
         # Collect all gates in queue.
-        gates = []
-        for i in range(nrows):
-            for j in range(ncols):
-                if rooms[i][j] == 0:
-                    gates.append((i, j))
+        gates = [(r, c) for r in range(nrows) for c in range(ncols)
+                 if rooms[r][c] == 0]
 
         # For each gate, start BFS to update neighbors's shorter distances.
         while gates:
@@ -55,12 +52,52 @@ class SolutionBFS(object):
             while queue:
                 r, c = queue.pop()
 
+                # Visit neighbors: up, down, left & right.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
                 for r_next, c_next in dirs:
                     if (0 <= r_next < nrows and 0 <= c_next < ncols and
                         rooms[r_next][c_next] > rooms[r][c] + 1):
                         rooms[r_next][c_next] = rooms[r][c] + 1
                         queue.insert(0, (r_next, c_next))
+
+
+class SolutionDFSRecur(object):
+    def dfs(self, r, c, distance, rooms):
+        if (r < 0 or r >= len(rooms) or c < 0 or c >= len(rooms[0]) or
+            rooms[r][c] < distance):
+            return None
+
+        # Update the shortest distance.
+        rooms[r][c] = distance
+
+        # Visit neighbors: up, down, left & right.
+        self.dfs(r - 1, c, distance + 1, rooms)
+        self.dfs(r + 1, c, distance + 1, rooms)
+        self.dfs(r, c - 1, distance + 1, rooms)
+        self.dfs(r, c + 1, distance + 1, rooms)
+
+    def wallsAndGates(self, rooms):
+        """
+        :type rooms: List[List[int]]
+        :rtype: void Do not return anything, modify rooms in-place instead.
+
+        Apply BFS starting from all gates.
+
+        Time complexity: O(kmn), where
+          - k: number of gates
+          - m: number of rows
+          - n: number of columns
+        Space complexity: O(mn).
+        """
+        nrows, ncols = len(rooms), len(rooms[0])
+
+        gates = [(r, c) for r in range(nrows) for c in range(ncols)
+                 if rooms[r][c] == 0]
+
+        while gates:
+            r, c = gates.pop()
+            distance = 0
+            self.dfs(r, c, distance, rooms)
 
 
 def main():
@@ -76,6 +113,15 @@ def main():
         [0, -1, float('inf'), float('inf')]
     ]
     SolutionBFS().wallsAndGates(rooms)
+    print rooms
+
+    rooms = [
+        [float('inf'), -1, 0, float('inf')],
+        [float('inf'), float('inf'), float('inf'), -1],
+        [float('inf'), -1, float('inf'), -1],
+        [0, -1, float('inf'), float('inf')]
+    ]
+    SolutionDFSRecur().wallsAndGates(rooms)
     print rooms
 
 
