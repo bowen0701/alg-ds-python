@@ -1,6 +1,5 @@
-"""Leetcode 1167 Minimum Cost to Connect Sticks
+"""Leetcode 1167 Minimum Cost to Connect Sticks (Premium)
 Medium
-(Premium)
 
 URL: https://leetcode.com/problems/minimum-cost-to-connect-sticks
 
