@@ -66,13 +66,13 @@ class SolutionMinHeap(object):
             else:
                 min_repe2 = 0
             
-            add_cost = min_rope1 + min_rope2
+            connected_rope = min_rope1 + min_rope2
 
             # Accumulate min cost with additional cost.
-            min_cost += add_cost
+            min_cost += connected_rope
 
             # Push the additional cost to min heap.
-            heapq.heappush(min_h, add_cost)
+            heapq.heappush(min_h, connected_rope)
 
         return min_cost
 
@@ -80,19 +80,19 @@ class SolutionMinHeap(object):
 def main():
     # Ans: 58
     ropes = [8, 4, 6, 12]
-    print Solution().minCost(ropes)
+    print SolutionMinHeap().minCost(ropes)
 
     # Ans: 54
     ropes = [20, 4, 8, 2]
-    print Solution().minCost(ropes)
+    print SolutionMinHeap().minCost(ropes)
 
     # Ans: 224
     ropes = [1, 2, 5, 10, 35, 89]
-    print Solution().minCost(ropes)
+    print SolutionMinHeap().minCost(ropes)
 
     # AnsL 20
     ropes = [2, 2, 3, 3]
-    print Solution().minCost(ropes)
+    print SolutionMinHeap().minCost(ropes)
 
 
 if __name__ == '__main__':
