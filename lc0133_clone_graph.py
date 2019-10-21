@@ -8,6 +8,9 @@ Given a reference of a node in a connected undirected graph, return a deep copy
 (List[Node]) of its neighbors.
  
 Example:
+  1 -- 2
+  |    |
+  4 -- 3
 Input:
 {"$id":"1","neighbors":[{"$id":"2","neighbors":[{"$ref":"1"},
 {"$id":"3","neighbors":[{"$ref":"2"},{"$id":"4","neighbors":[{"$ref":"3"},
@@ -34,17 +37,82 @@ class Node(object):
         self.neighbors = neighbors
 
 
-class Solution(object):
+class SolutionBFS(object):
     def cloneGraph(self, node):
         """
         :type node: Node
         :rtype: Node
+
+        Apply BFS travdersal on the graph.
+
+        Time complexity: O(|V|+|E|), where
+          - |V|: number of nodes.
+          - |E|: number of edges.
+        Space complexity: O(|V|).
         """
-        pass
+        from collections import defaultdict
+        from collections import deque
+
+        if not node:
+            return None
+
+        node_copy = Node(node.val, [])
+
+        # Create dict to map node->copied node.        
+        nodes_to_copies = defaultdict()
+        nodes_to_copies[node] = node_copy
+
+        # Apply BFS with queue.
+        queue = deque([node])
+
+        while queue:
+            current = queue.pop()
+
+            for neighbor in current.neighbors:
+                if neighbor not in nodes_to_copies:
+                    # If current's neighbor is not visited, create a current copy.
+                    neighbor_copy = Node(neighbor.val, [])
+                    nodes_to_copies[neighbor] = neighbor_copy
+
+                    # Add neighbor_copy to current copy's neighbor.
+                    nodes_to_copies[current].neighbors.append(neighbor_copy)
+
+                    queue.appendleft(neighbor)
+                else:
+                    # If neighbor was visited before, add it to current neighbors.
+                    neighbor_copy = nodes_to_copies[neighbor]
+                    nodes_to_copies[current].neighbors.append(neighbor_copy)
+
+        return node_copy
 
 
 def main():
-    pass
+    # Given a graph:
+    # 1 -- 2
+    # |    |
+    # 4 -- 3
+    node1 = Node(1, [])
+    node2 = Node(2, [])
+    node3 = Node(3, [])
+    node4 = Node(4, [])
+    node1.neighbors.append(node2)
+    node1.neighbors.append(node4)
+    node2.neighbors.append(node1)
+    node2.neighbors.append(node3)
+    node3.neighbors.append(node2)
+    node3.neighbors.append(node4)
+    node4.neighbors.append(node1)
+    node4.neighbors.append(node3)
+
+    node1_copy = SolutionBFS().cloneGraph(node1)
+    print node1_copy.neighbors[0].val  # Should be 2.
+    print node1_copy.neighbors[1].val  # Should be 4.
+    print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
+    print node1_copy.neighbors[0].neighbors[1].val  # Should be 3.
+    print node1_copy.neighbors[1].neighbors[0].val  # Should be 1.
+    print node1_copy.neighbors[1].neighbors[1].val  # Should be 3.
+    print node1_copy.neighbors[0].neighbors[1].neighbors[0].val  # Should be 2.
+    print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
 
 
 if __name__ == '__main__':
