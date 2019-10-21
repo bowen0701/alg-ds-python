@@ -43,7 +43,7 @@ class SolutionBFS(object):
         :type node: Node
         :rtype: Node
 
-        Apply BFS travdersal on the graph.
+        Apply BFS travdersal with a queue on the graph.
 
         Time complexity: O(|V|+|E|), where
           - |V|: number of nodes.
@@ -56,11 +56,11 @@ class SolutionBFS(object):
         if not node:
             return None
 
-        node_copy = Node(node.val, [])
+        copy = Node(node.val, [])
 
-        # Create dict to map node->copied node.        
-        nodes_to_copies = defaultdict()
-        nodes_to_copies[node] = node_copy
+        # Create dict to map node->copied node, to avoid copying duplicated node.
+        nodes_copies = defaultdict()
+        nodes_copies[node] = copy
 
         # Apply BFS with queue.
         queue = deque([node])
@@ -69,21 +69,58 @@ class SolutionBFS(object):
             current = queue.pop()
 
             for neighbor in current.neighbors:
-                if neighbor not in nodes_to_copies:
+                if neighbor not in nodes_copies:
                     # If current's neighbor is not visited, create a current copy.
                     neighbor_copy = Node(neighbor.val, [])
-                    nodes_to_copies[neighbor] = neighbor_copy
-
-                    # Add neighbor_copy to current copy's neighbor.
-                    nodes_to_copies[current].neighbors.append(neighbor_copy)
+                    nodes_copies[neighbor] = neighbor_copy
 
                     queue.appendleft(neighbor)
-                else:
-                    # If neighbor was visited before, add it to current neighbors.
-                    neighbor_copy = nodes_to_copies[neighbor]
-                    nodes_to_copies[current].neighbors.append(neighbor_copy)
 
-        return node_copy
+                # Add neighbor's copy to current copy's neighbor.
+                nodes_copies[current].neighbors.append(nodes_copies[neighbor])
+
+        return copy
+
+
+class SolutionDFSRecur(object):
+    def _dfs(self, node, nodes_copies):
+        for neighbor in node.neighbors:
+            if neighbor not in nodes_copies:
+                # If neighbor is not visited, create neighbor's copy.
+                neighbor_copy = Node(neighbor.val, [])
+                nodes_copies[neighbor] = neighbor_copy
+
+                # Apply DFS.
+                self._dfs(neighbor, nodes_copies)
+
+            # Add neighbor's copy to node copy's neighbor.
+            nodes_copies[node].neighbors.append(nodes_copies[neighbor])
+
+    def cloneGraph(self, node):
+        """
+        :type node: Node
+        :rtype: Node
+
+        Apply DFS travdersal on the graph.
+
+        Time complexity: O(|V|+|E|), where
+          - |V|: number of nodes.
+          - |E|: number of edges.
+        Space complexity: O(|V|).
+        """
+        from collections import defaultdict
+
+        if not node:
+            return None
+
+        copy = Node(node.val, [])
+        nodes_copies = defaultdict()
+        nodes_copies[node] = copy
+
+        # Apply recursive DFS.
+        self._dfs(node, nodes_copies)
+
+        return copy
 
 
 def main():
@@ -104,7 +141,19 @@ def main():
     node4.neighbors.append(node1)
     node4.neighbors.append(node3)
 
+    print 'Apply BFS with queue:'
     node1_copy = SolutionBFS().cloneGraph(node1)
+    print node1_copy.neighbors[0].val  # Should be 2.
+    print node1_copy.neighbors[1].val  # Should be 4.
+    print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
+    print node1_copy.neighbors[0].neighbors[1].val  # Should be 3.
+    print node1_copy.neighbors[1].neighbors[0].val  # Should be 1.
+    print node1_copy.neighbors[1].neighbors[1].val  # Should be 3.
+    print node1_copy.neighbors[0].neighbors[1].neighbors[0].val  # Should be 2.
+    print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
+
+    print 'Apply iterative DFS:'
+    node1_copy = SolutionDFSRecur().cloneGraph(node1)
     print node1_copy.neighbors[0].val  # Should be 2.
     print node1_copy.neighbors[1].val  # Should be 4.
     print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
