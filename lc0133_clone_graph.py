@@ -101,7 +101,7 @@ class SolutionDFSRecur(object):
         :type node: Node
         :rtype: Node
 
-        Apply DFS travdersal on the graph.
+        Apply recursive DFS travdersal on the graph.
 
         Time complexity: O(|V|+|E|), where
           - |V|: number of nodes.
@@ -119,6 +119,47 @@ class SolutionDFSRecur(object):
 
         # Apply recursive DFS.
         self._dfs(node, nodes_copies)
+
+        return copy
+
+
+class SolutionDFSIter(object):
+    def cloneGraph(self, node):
+        """
+        :type node: Node
+        :rtype: Node
+
+        Apply iterative DFS travdersal on the graph.
+
+        Time complexity: O(|V|+|E|), where
+          - |V|: number of nodes.
+          - |E|: number of edges.
+        Space complexity: O(|V|).
+        """
+        from collections import defaultdict
+        from collections import deque
+
+        if not node:
+            return None
+
+        copy = Node(node.val, [])
+        nodes_copies = defaultdict()
+        nodes_copies[node] = copy
+
+        stack = deque([node])
+
+        while stack:
+            current = stack.pop()
+
+            for neighbor in current.neighbors:
+                if neighbor not in nodes_copies:
+                    neighbor_copy = Node(neighbor.val, [])
+                    nodes_copies[neighbor] = neighbor_copy
+
+                    # Append neighbor to stack and break for DFS.
+                    stack.append(neighbor)
+
+                nodes_copies[current].neighbors.append(nodes_copies[neighbor])
 
         return copy
 
@@ -152,8 +193,19 @@ def main():
     print node1_copy.neighbors[0].neighbors[1].neighbors[0].val  # Should be 2.
     print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
 
-    print 'Apply iterative DFS:'
+    print 'Apply recursive DFS:'
     node1_copy = SolutionDFSRecur().cloneGraph(node1)
+    print node1_copy.neighbors[0].val  # Should be 2.
+    print node1_copy.neighbors[1].val  # Should be 4.
+    print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
+    print node1_copy.neighbors[0].neighbors[1].val  # Should be 3.
+    print node1_copy.neighbors[1].neighbors[0].val  # Should be 1.
+    print node1_copy.neighbors[1].neighbors[1].val  # Should be 3.
+    print node1_copy.neighbors[0].neighbors[1].neighbors[0].val  # Should be 2.
+    print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
+
+    print 'Apply iterative DFS:'
+    node1_copy = SolutionDFSIter().cloneGraph(node1)
     print node1_copy.neighbors[0].val  # Should be 2.
     print node1_copy.neighbors[1].val  # Should be 4.
     print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
