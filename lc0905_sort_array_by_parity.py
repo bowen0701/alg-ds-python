@@ -18,17 +18,33 @@ Note:
 - 0 <= A[i] <= 5000
 """
 
-class Solution(object):
+class SolutionTwoArrays(object):
     def sortArrayByParity(self, A):
         """
+        Collect even and odd numbers in two arrays, and then concat them.
+
         :type A: List[int]
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        evens, odds = [], []
+
+        for n in A:
+            if n % 2 == 0:
+                evens.append(n)
+            else:
+                odds.append(n)
+
+        evens.extend(odds)
+        return evens
 
 
 def main():
-    pass
+    # Output:  [2,4,3,1]
+    A =  [3,1,2,4]
+    print SolutionTwoArrays().sortArrayByParity(A)
 
 
 if __name__ == '__main__':
