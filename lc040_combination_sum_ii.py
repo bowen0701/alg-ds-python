@@ -9,11 +9,10 @@ find all unique combinations in candidates where the candidate numbers sums to t
 Each number in candidates may only be used once in the combination.
 
 Note:
+- All numbers (including target) will be positive integers.
+- The solution set must not contain duplicate combinations.
 
-All numbers (including target) will be positive integers.
-The solution set must not contain duplicate combinations.
 Example 1:
-
 Input: candidates = [10,1,2,7,6,1,5], target = 8,
 A solution set is:
 [
@@ -32,18 +31,52 @@ A solution set is:
 ]
 """
 
-class Solution(object):
+class SolutionBacktrack(object):
+    def _backtrack(self, result, temp, start, target, candidates):
+        if target < 0:
+            return None
+
+        if target == 0:
+            result.append(temp[:])
+            return None
+
+        for i in range(start, len(candidates)):
+            if i == start or candidates[i] != candidates[i - 1]:
+                temp.append(candidates[i])
+                self._backtrack(result, temp, i + 1, target - candidates[i], candidates)
+                temp.pop()
+
     def combinationSum2(self, candidates, target):
         """
         :type candidates: List[int]
         :type target: int
         :rtype: List[List[int]]
+
+        Apply backtracking with sorting to avoid duplicates.
+
+        Time complexity: O(2^n).
+        Space complexity: O(k).
         """
-        pass
+        # Sort candidates to avoid duplicates.
+        candidates.sort()
+
+        result = []
+        temp = []
+        start = 0
+        self._backtrack(result, temp, start, target, candidates)
+        return result
 
 
 def main():
-    pass
+    # Output: [[1, 7],[1, 2, 5],[2, 6],[1, 1, 6]]
+    # candidates = [10,1,2,7,6,1,5]
+    # target = 8
+    # print SolutionBacktrack().combinationSum2(candidates, target)
+
+    # Output: [[1, 2, 2],[5]]
+    candidates = [2,5,2,1,2]
+    target = 5
+    print SolutionBacktrack().combinationSum2(candidates, target)
 
 
 if __name__ == '__main__':
