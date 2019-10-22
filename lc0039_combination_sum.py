@@ -32,12 +32,14 @@ A solution set is:
 """
 
 
-class Solution(object):
+class SolutionBacktrack(object):
     def _backtrack(self, result, temps, target, start, candidates):
         if target < 0:
+            # No way to further combine numbers.
             return None
 
         if target == 0:
+            # Achieven combination sum so add "copied" temps to results.
             result.append(temps[:])
             return None
 
@@ -45,6 +47,8 @@ class Solution(object):
             if candidates[i] <= target:
                 temps.append(candidates[i])
                 self._backtrack(result, temps, target - candidates[i], i, candidates)
+
+                # Pop for backtracking.
                 temps.pop()
 
     def combinationSum(self, candidates, target):
@@ -53,12 +57,13 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
 
+        Apply backtracking.
+
         Time complexity: O(n^k), where
           - n is the length of candidates,
           - k is target.
         Space complexity: O(k).
         """
-        # Apply backtracking.
         result = []
         temps = []
         start = 0
@@ -67,13 +72,15 @@ class Solution(object):
 
 
 def main():
+    # Output: [[7],[2,2,3]]
     candidates = [2,3,6,7]
     target = 7
-    print Solution().combinationSum(candidates, target)
+    print SolutionBacktrack().combinationSum(candidates, target)
 
+    # Output: [[2,2,2,2],[2,3,3],[3,5]]
     candidates = [2,3,5]
     target = 8
-    print Solution().combinationSum(candidates, target)
+    print SolutionBacktrack().combinationSum(candidates, target)
 
 
 if __name__ == '__main__':
