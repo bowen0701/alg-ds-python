@@ -33,23 +33,23 @@ A solution set is:
 
 
 class SolutionBacktrack(object):
-    def _backtrack(self, result, temps, start, target, candidates):
+    def _backtrack(self, result, temp, start, target, candidates):
         if target < 0:
             # No way to further combine numbers.
             return None
 
         if target == 0:
-            # Achieven combination sum so add "copied" temps to results.
-            result.append(temps[:])
+            # Achieven combination sum so add "copied" temp to results.
+            result.append(temp[:])
             return None
 
         for i in range(start, len(candidates)):
             if candidates[i] <= target:
-                temps.append(candidates[i])
-                self._backtrack(result, temps, i, target - candidates[i], candidates)
+                temp.append(candidates[i])
+                self._backtrack(result, temp, i, target - candidates[i], candidates)
 
                 # Pop for backtracking.
-                temps.pop()
+                temp.pop()
 
     def combinationSum(self, candidates, target):
         """
@@ -65,9 +65,9 @@ class SolutionBacktrack(object):
         Space complexity: O(k).
         """
         result = []
-        temps = []
+        temp = []
         start = 0
-        self._backtrack(result, temps, start, target, candidates)
+        self._backtrack(result, temp, start, target, candidates)
         return result
 
 
