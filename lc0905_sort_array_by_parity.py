@@ -41,10 +41,32 @@ class SolutionTwoArrays(object):
         return evens
 
 
+class SolutionEvenPointer(object):
+    def sortArrayByParity(self, A):
+        """
+        Use even index to switch even and odd numbers.
+
+        :type A: List[int]
+        :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        even_i = 0
+
+        for i, n in enumerate(A):
+            if n % 2 == 0:
+                A[even_i], A[i] = A[i], A[even_i]
+                even_i += 1
+
+        return A
+
+
 def main():
     # Output:  [2,4,3,1]
     A =  [3,1,2,4]
     print SolutionTwoArrays().sortArrayByParity(A)
+    print SolutionEvenPointer().sortArrayByParity(A)
 
 
 if __name__ == '__main__':
