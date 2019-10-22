@@ -33,7 +33,7 @@ A solution set is:
 
 
 class SolutionBacktrack(object):
-    def _backtrack(self, result, temps, target, start, candidates):
+    def _backtrack(self, result, temps, start, target, candidates):
         if target < 0:
             # No way to further combine numbers.
             return None
@@ -46,7 +46,7 @@ class SolutionBacktrack(object):
         for i in range(start, len(candidates)):
             if candidates[i] <= target:
                 temps.append(candidates[i])
-                self._backtrack(result, temps, target - candidates[i], i, candidates)
+                self._backtrack(result, temps, i, target - candidates[i], candidates)
 
                 # Pop for backtracking.
                 temps.pop()
@@ -67,7 +67,7 @@ class SolutionBacktrack(object):
         result = []
         temps = []
         start = 0
-        self._backtrack(result, temps, target, start, candidates)
+        self._backtrack(result, temps, start, target, candidates)
         return result
 
 
