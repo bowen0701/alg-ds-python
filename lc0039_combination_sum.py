@@ -44,12 +44,10 @@ class SolutionBacktrack(object):
             return None
 
         for i in range(start, len(candidates)):
-            if candidates[i] <= target:
-                temp.append(candidates[i])
-                self._backtrack(result, temp, i, target - candidates[i], candidates)
-
-                # Pop for backtracking.
-                temp.pop()
+            temp.append(candidates[i])
+            # Keep using i because we can reuse the same number.
+            self._backtrack(result, temp, i, target - candidates[i], candidates)
+            temp.pop()
 
     def combinationSum(self, candidates, target):
         """
