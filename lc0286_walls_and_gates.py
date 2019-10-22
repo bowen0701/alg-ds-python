@@ -94,8 +94,7 @@ class SolutionDFSRecur(object):
         gates = [(r, c) for r in range(nrows) for c in range(ncols)
                  if rooms[r][c] == 0]
 
-        while gates:
-            r, c = gates.pop()
+        for (r, c) in gates:
             distance = 0
             self.dfs(r, c, distance, rooms)
 
