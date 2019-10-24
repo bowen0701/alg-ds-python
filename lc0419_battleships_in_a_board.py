@@ -31,8 +31,8 @@ without modifying the value of the board?
 
 class SolutionDFSRecur(object):
     def _dfsRecur(self, board, r, c):
-        if (r < 0 or r >= len(board) or c < 0 or c >= len(board[0])
-            or board[r][c] == '.'):
+        if (r < 0 or r >= len(board) or c < 0 or c >= len(board[0]) or
+            board[r][c] == '.'):
             return None
 
         # Update board as visited.
@@ -40,8 +40,8 @@ class SolutionDFSRecur(object):
 
         # Recursively visit 4 dirs: up, down, left, and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_, c_ in dirs:
-            self._dfsRecur(board, r_, c_)
+        for r_next, c_next in dirs:
+            self._dfsRecur(board, r_next, c_next)
 
     def countBattleships(self, board):
         """
@@ -56,15 +56,15 @@ class SolutionDFSRecur(object):
         if not board or not board[0]:
             return 0
 
-        num_battleships = 0
+        count = 0
 
         for r in range(len(board)):
             for c in range(len(board[0])):
                 if board[r][c] == 'X':
-                    num_battleships += 1
+                    count += 1
                     self._dfsRecur(board, r, c)
 
-        return num_battleships
+        return count
 
 
 class SolutionIterCheckFirstEntries(object):
@@ -79,7 +79,7 @@ class SolutionIterCheckFirstEntries(object):
         if not board or not board[0]:
             return 0
 
-        num_battleships = 0
+        count = 0
 
         for r in range(len(board)):
             for c in range(len(board[0])):
@@ -95,9 +95,9 @@ class SolutionIterCheckFirstEntries(object):
                 if c > 0 and board[r][c - 1] == 'X':
                     continue
 
-                num_battleships += 1
+                count += 1
 
-        return num_battleships
+        return count
 
 
 def main():
