@@ -67,7 +67,7 @@ class SolutionDFSRecur(object):
         return count
 
 
-class SolutionIterCheckFirstEntries(object):
+class SolutionCheckFirstIter(object):
     def countBattleships(self, board):
         """
         :type board: List[List[str]]
@@ -116,7 +116,7 @@ def main():
     board = [['X','.','.','X'],
              ['.','.','.','X'],
              ['.','.','.','X']]
-    print SolutionIterCheckFirstEntries().countBattleships(board)
+    print SolutionCheckFirstIter().countBattleships(board)
     print 'Time:', time.time() - start_time
 
 
