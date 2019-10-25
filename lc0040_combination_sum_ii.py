@@ -44,7 +44,8 @@ class SolutionBacktrack(object):
         for i in range(start, len(candidates)):
             if i == start or candidates[i] != candidates[i - 1]:
                 temp.append(candidates[i])
-                self._backtrack(result, temp, i + 1, target - candidates[i], candidates)
+                self._backtrack(result, temp, i + 1,
+                                target - candidates[i], candidates)
                 temp.pop()
 
     def combinationSum2(self, candidates, target):
