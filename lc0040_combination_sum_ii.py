@@ -70,9 +70,9 @@ class SolutionBacktrack(object):
 
 def main():
     # Output: [[1, 7],[1, 2, 5],[2, 6],[1, 1, 6]]
-    # candidates = [10,1,2,7,6,1,5]
-    # target = 8
-    # print SolutionBacktrack().combinationSum2(candidates, target)
+    candidates = [10,1,2,7,6,1,5]
+    target = 8
+    print SolutionBacktrack().combinationSum2(candidates, target)
 
     # Output: [[1, 2, 2],[5]]
     candidates = [2,5,2,1,2]
