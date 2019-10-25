@@ -20,17 +20,37 @@ Note:
 - The input array may contain duplicates, so ascending order here means <=.
 """
 
-class Solution(object):
+class SolutionSort(object):
     def findUnsortedSubarray(self, nums):
         """
         :type nums: List[int]
         :rtype: int
+
+        Sort the nums and check element match from left and from right.
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
         """
-        pass
+        # Store sorted nums in a new list.
+        sorted_nums = sorted(nums)
+
+        # Iterate from left/right to check element match of nums and sorted nums.
+        n = len(nums)
+        i, j = 0, n - 1
+
+        while i < n and nums[i] == sorted_nums[i]:
+            i += 1
+
+        while j > i and nums[j] == sorted_nums[j]:
+            j -= 1
+
+        return j - (i - 1)
 
 
 def main():
-    pass
+    # Output: 5
+    nums = [2, 6, 4, 8, 10, 9, 15]
+    print SolutionSort().findUnsortedSubarray(nums)
 
 
 if __name__ == '__main__':
