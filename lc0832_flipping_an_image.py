@@ -35,11 +35,29 @@ class Solution(object):
         :type A: List[List[int]]
         :rtype: List[List[int]]
         """
-        pass
+        for r in range(len(A)):
+            # Flip the image horizontally.
+            j, k = 0, len(A[r]) - 1
+            while j < k:
+                A[r][j], A[r][k] = A[r][k], A[r][j]
+                j += 1
+                k -= 1
+
+            # Invert the value.
+            for c in range(len(A[r])):
+                A[r][c] = 1 ^ A[r][c]
+
+        return A
 
 
 def main():
-    pass
+    # Output: [[1,0,0],[0,1,0],[1,1,1]]
+    A = [[1,1,0],[1,0,1],[0,0,0]]
+    print Solution().flipAndInvertImage(A)
+
+    # Output: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+    A = [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
+    print Solution().flipAndInvertImage(A)
 
 
 if __name__ == '__main__':
