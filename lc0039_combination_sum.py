@@ -39,14 +39,17 @@ class SolutionBacktrack(object):
             return None
 
         if target == 0:
-            # Achieven combination sum so add "copied" temp to results.
+            # Use shallow copy.
             result.append(temp[:])
             return None
 
         for i in range(start, len(candidates)):
             temp.append(candidates[i])
-            # Keep using i because we can reuse the same number.
+
+            # Keep using i because can reuse the same number, and decrement target.
             self._backtrack(result, temp, i, target - candidates[i], candidates)
+            
+            # Pop for backtracking.
             temp.pop()
 
     def combinationSum(self, candidates, target):

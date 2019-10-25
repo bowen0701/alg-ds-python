@@ -34,6 +34,7 @@ A solution set is:
 class SolutionBacktrack(object):
     def _backtrack(self, result, temp, start, target, candidates):
         if target < 0:
+            # No way to further combine numbers.
             return None
 
         if target == 0:
@@ -44,8 +45,12 @@ class SolutionBacktrack(object):
         for i in range(start, len(candidates)):
             if i == start or candidates[i] != candidates[i - 1]:
                 temp.append(candidates[i])
+
+                # Use next index i+1 since we cannot use same element.
                 self._backtrack(result, temp, i + 1,
                                 target - candidates[i], candidates)
+
+                # Pop for backtracking.
                 temp.pop()
 
     def combinationSum2(self, candidates, target):
