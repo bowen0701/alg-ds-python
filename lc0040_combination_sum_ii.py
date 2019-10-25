@@ -37,6 +37,7 @@ class SolutionBacktrack(object):
             return None
 
         if target == 0:
+            # Use shallow copy.
             result.append(temp[:])
             return None
 
