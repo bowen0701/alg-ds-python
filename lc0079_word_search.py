@@ -28,7 +28,7 @@ class SolutionDFSRecurBacktrack(object):
         if pos == len(word):
             return True
 
-        # If visit is out of boundaries, (i, j) is not the letter of word or visited.
+        # If (i, j) is out of boundaries, does not match word letter or is visited.
         if (i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or 
             board[i][j] != word[pos] or
             visited.get((i, j))):
@@ -38,15 +38,15 @@ class SolutionDFSRecurBacktrack(object):
         visited[(i, j)] = True
 
         # Start DFS visiting, one of DFSs is true, then return True.
-        is_exist = False
+        is_found = False
         dirs = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
         for r, c in dirs:
-            is_exist = is_exist or self._dfsRecur(r, c, board, word, pos + 1, visited)
+            is_found = is_found or self._dfsRecur(r, c, board, word, pos + 1, visited)
 
         # Backtrack.
         visited[(i, j)] = False
 
-        return is_exist
+        return is_found
 
     def exist(self, board, word):
         """
@@ -67,8 +67,8 @@ class SolutionDFSRecurBacktrack(object):
 
         for i in range(m):
             for j in range(n):
-                visited = {}
                 pos = 0
+                visited = {}
                 if self._dfsRecur(i, j, board, word, pos, visited):
                     return True
 
@@ -92,15 +92,6 @@ def main():
 
     # Given word = "ABCB", return false.
     word = 'ABCB'
-    print SolutionDFSRecurBacktrack().exist(board, word)
-
-    # Given word = "ABCESEEEFS", return true.
-    board = [
-              ["A","B","C","E"],
-              ["S","F","E","S"],
-              ["A","D","E","E"]
-            ]
-    word = "ABCESEEEFS"
     print SolutionDFSRecurBacktrack().exist(board, word)
 
 
