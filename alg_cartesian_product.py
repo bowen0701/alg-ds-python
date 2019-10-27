@@ -1,4 +1,4 @@
-"""Cartesian product of same numbers with repeated times."""
+"""Cartesian product."""
 
 class CartesianProduct(object):
     def _product_two(self, nums1, nums2):
@@ -25,11 +25,20 @@ class CartesianProduct(object):
             result = self._product_two(result, repeated_nums[r])
         return result
 
+    def product(self, nums_ls):
+        result = nums_ls[0]
+        for r in range(1, len(nums_ls)):
+            result = self._product_two(result, nums_ls[r])
+            return result
+
 
 def main():
     nums = [1, 2, 3]
     repeat = 2
     print CartesianProduct().repeated_product(nums, repeat)
+
+    nums_ls = [[1, 2, 3], [4, 5]]
+    print CartesianProduct().product(nums_ls)
 
 
 if __name__ == '__main__':
