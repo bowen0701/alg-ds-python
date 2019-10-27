@@ -43,10 +43,11 @@ class SolutionBacktrack(object):
             result.append(temp[:])
             return None
 
+        # From start to the end of nums.
         for i in range(start, len(candidates)):
             temp.append(candidates[i])
 
-            # Keep using i because can reuse the same number, and decrement target.
+            # Keep using i because can reuse the same number.
             self._backtrack(result, temp, i, target - candidates[i], candidates)
             
             # Pop for backtracking.

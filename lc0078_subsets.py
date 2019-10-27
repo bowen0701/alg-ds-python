@@ -23,14 +23,17 @@ Output:
 """
 
 class SolutionBacktrack(object):
-    def _backtrack(self, result, temps, nums, start):
-        result.append(temps[:])
+    def _backtrack(self, result, temp, start, nums):
+        # Use shallow copy.
+        result.append(temp[:])
 
-        # For start, add nums[i] and DFS i+1, and then pop for backtrack.
+        # From start to the end of nums.
         for i in range(start, len(nums)):
-            temps.append(nums[i])
-            self._backtrack(result, temps, nums, i + 1)
-            temps.pop()
+            temp.append(nums[i])
+            self._backtrack(result, temp, i + 1, nums)
+
+            # Pop for backtracking.
+            temp.pop()
 
     def subsets(self, nums):
         """
@@ -42,10 +45,9 @@ class SolutionBacktrack(object):
         """
         # Apply backtracking.
         result = []
-        temps = []
-
+        temp = []
         start = 0
-        self._backtrack(result, temps, nums, start)
+        self._backtrack(result, temp, start, nums)
         
         return result
 

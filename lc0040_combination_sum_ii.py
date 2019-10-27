@@ -42,6 +42,7 @@ class SolutionBacktrack(object):
             result.append(temp[:])
             return None
 
+        # From start to the end of candidates.
         for i in range(start, len(candidates)):
             if i == start or candidates[i] != candidates[i - 1]:
                 temp.append(candidates[i])
