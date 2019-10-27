@@ -28,17 +28,22 @@ class SolutionBacktrack(object):
 
         for i in range(start, len(nums)):
             # Avoid duplicate by checking the previous num.
-            if i == start or nums[i] != nums[i - 1]:
-                temp.append(nums[i])
-                self._backtrack(result, temp, i + 1, nums)
+            if i > start or nums[i] == nums[i - 1]:
+                continue
 
-                # Pop for backtracking.
-                temp.pop()
+            temp.append(nums[i])
+            self._backtrack(result, temp, i + 1, nums)
+
+            # Pop for backtracking.
+            temp.pop()
 
     def subsetsWithDup(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
+
+        Time complexity: O(n*2^n).
+        Space complexity: O(2^n).
         """
         # Sort nums to avoid duplicates.
         nums.sort()

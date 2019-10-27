@@ -19,36 +19,37 @@ Output:
 """
 
 class Solution(object):
-    def _backtrack(self, result, temps, nums):
-        if len(temps) == len(nums):
-            # One of permutations is completed.
-            result.append(temps[:])
+    def _backtrack(self, result, temp, nums):
+        if len(temp) == len(nums):
+            # Once a permutation is completed, shallow copy it to result.
+            result.append(temp[:])
             return None
 
         for i in range(len(nums)):
-            # If num i was used, skip it; otherwise add it to temps.
-            if nums[i] in temps:
+            # If num[i] was used, skip it.
+            if nums[i] in temp:
                 continue
-            temps.append(nums[i])
+            
+            temp.append(nums[i])
+            self._backtrack(result, temp, nums)
 
-            # Apply DFS by recursion with backtracking.
-            self._backtrack(result, temps, nums)
-            temps.pop()
+            # Pop for backtracking.
+            temp.pop()
 
     def permute(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
 
-        Time complexity: O(n * n!), where
-          - n is the length of nums and for copying temps,
+        Time complexity: O(n*n!), where
+          - n is the length of nums for copying temp,
           - n! is for permutation.
-        Space complexity: O(n * n!).
+        Space complexity: O(n*n!).
         """
         # Apply backtracking.
         result = []
-        temps = []
-        self._backtrack(result, temps, nums)
+        temp = []
+        self._backtrack(result, temp, nums)
         return result
 
 

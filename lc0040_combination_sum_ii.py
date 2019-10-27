@@ -45,15 +45,17 @@ class SolutionBacktrack(object):
         # From start to the end of candidates.
         for i in range(start, len(candidates)):
             # Avoid duplicate by checking the previous cadidate.
-            if i == start or candidates[i] != candidates[i - 1]:
-                temp.append(candidates[i])
+            if i > start and candidates[i] == candidates[i - 1]:
+                continue
 
-                # Use next index i+1 since we cannot use same element.
-                self._backtrack(result, temp, i + 1,
-                                target - candidates[i], candidates)
+            temp.append(candidates[i])
 
-                # Pop for backtracking.
-                temp.pop()
+            # Use next index i+1 since we cannot use same element.
+            self._backtrack(result, temp, i + 1,
+                            target - candidates[i], candidates)
+
+            # Pop for backtracking.
+            temp.pop()
 
     def combinationSum2(self, candidates, target):
         """
