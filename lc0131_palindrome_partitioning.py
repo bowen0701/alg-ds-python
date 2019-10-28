@@ -18,25 +18,24 @@ Output:
 """
 
 class SolutionBacktrack(object):
-    def _backtrack(self, result, tmps, s, start):
+    def _backtrack(self, result, temp, s, start):
         if start == len(s):
-            # Check partial string with start len(s): empty string ''.
-            # Palindrom partition is completed.
-            result.append(tmps[:])
+            # Use shallow copy.
+            result.append(temp[:])
             return None
 
+        # Iterate starting from start.
         for i in range(start, len(s)):
             # Check partial string s[start:i+1] is palindrome.
             partial = s[start:i+1]
             if partial == partial[::-1]:
-                # If yes, append it to tmps.
-                tmps.append(partial)
+                temp.append(partial)
 
                 # Further check the remaining string is also a palinfrome.
-                self._backtrack(result, tmps, s, i + 1)
+                self._backtrack(result, temp, s, i + 1)
 
-                # Backtrack by popping out the top tmps.
-                tmps.pop()
+                # Pop for backtracking.
+                temp.pop()
 
     def partition(self, s):
         """
@@ -48,11 +47,9 @@ class SolutionBacktrack(object):
         """
         # Apply backtracking.
         result = []
-        tmps = []
-
+        temp = []
         start = 0
-        self._backtrack(result, tmps, s, start)
-
+        self._backtrack(result, temp, s, start)
         return result
 
 
