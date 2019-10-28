@@ -48,7 +48,6 @@ class SolutionBacktrack(object):
         temp = []
         start = 0
         self._backtrack(result, temp, start, nums)
-        
         return result
 
 
