@@ -32,29 +32,30 @@ class SolutionDict(object):
         """
         from collections import defaultdict
 
-        partition_lens = []
+        part_lens = []
 
-        # Use dict to record last index.
-        last_idx = defaultdict(int)
-
+        # Use dict to record last pos for each letter.
+        last_poses = defaultdict(int)
         for i, c in enumerate(S):
-            last_idx[c] = i
+            last_poses[c] = i
 
-        # Iterate from index 0 to check end indeces and partion.
         i = 0
         while i < len(S):
-            end_idx = last_idx[S[i]]
+            # For each letter, get its last position.
+            end_pos = last_poses[S[i]]
 
-            # Start from index i to update their end indeces.
             j = i
-            while j < end_idx:
-                end_idx = max(end_idx, last_idx[S[j]])
+            while j < end_pos:
+                # Interate through each letter following S[i], update last position.
+                # If j is out of last position, we get one partition.
+                end_pos = max(end_pos, last_poses[S[j]])
                 j += 1
 
-            partition_lens.append(j - i + 1)
+            part_lens.append(j - i + 1)
+            # Start from the next of the previous partition end.
             i = j + 1
 
-        return partition_lens
+        return part_lens
 
 
 def main():
