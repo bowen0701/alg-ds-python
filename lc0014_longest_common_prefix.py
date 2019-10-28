@@ -26,42 +26,34 @@ class SolutionNaive(object):
         :type strs: List[str]
         :rtype: str
 
-        Time complexity: O(kn), where
-          - k is the numbers of strs, and
-          - n is the length of "shortest" string.
-        Space complexity: O(k).
+        Time complexity: O(m*n), where
+          - m is the maximum length of strs, and
+          - n is the length of "minimum" string.
+        Space complexity: O(m).
         """
         if not strs:
             return ''
 
-        # Pop the shortest string as baseline.
-        min_len = min([len(s) for s in strs])
-        for i, s in enumerate(strs):
-            if len(s) == min_len:
-                base_str = strs.pop(i)
-                break
-
-        # Iterate through baseline string's char to check common prefix.
+        # Choose str 0 as the baseline to compare with others.
         prefix = ''
-        for i, char in enumerate(base_str):
-            common_bool = True
-            for s in strs:
-                if char != s[i]:
-                    common_bool = False
-                    break
-            
-            if common_bool:
-                prefix = ''.join([prefix, char])
-            else:
-                break
+
+        for pos, c in enumerate(strs[0]):
+            for j in range(1, len(strs)):
+                # Check if position is out of boundary or not matched. 
+                if pos >= len(strs[j]) or c != strs[j][pos]:
+                    return prefix
+
+            prefix += c
 
         return prefix
 
 
 def main():
+    # Output: "fl"
     strs = ["flower", "flow", "flight"]
     print SolutionNaive().longestCommonPrefix(strs)
 
+    # Output: ""
     strs = ["dog", "racecar", "car"]
     print SolutionNaive().longestCommonPrefix(strs)
 
