@@ -43,7 +43,7 @@ class SolutionBacktrack(object):
             result.append(temp[:])
             return None
 
-        # From start to the end of nums.
+        # Iterate starting from start.
         for i in range(start, len(candidates)):
             temp.append(candidates[i])
 

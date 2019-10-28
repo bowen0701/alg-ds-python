@@ -27,7 +27,7 @@ class SolutionBacktrack(object):
         # Use shallow copy.
         result.append(temp[:])
 
-        # From start to the end of nums.
+        # Iterate starting from start.
         for i in range(start, len(nums)):
             temp.append(nums[i])
             self._backtrack(result, temp, i + 1, nums)

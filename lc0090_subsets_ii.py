@@ -26,6 +26,7 @@ class SolutionBacktrack(object):
         # Use shallow copy.
         result.append(temp[:])
 
+        # Iterate starting from start.
         for i in range(start, len(nums)):
             # Avoid duplicate by checking the previous num.
             if i > start or nums[i] == nums[i - 1]:
