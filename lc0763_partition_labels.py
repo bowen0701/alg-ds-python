@@ -28,11 +28,11 @@ class SolutionDict(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(1).
         """
         from collections import defaultdict
 
-        part_lens = []
+        partition_lens = []
 
         # Use dict to record last pos for each letter.
         last_poses = defaultdict(int)
@@ -41,21 +41,22 @@ class SolutionDict(object):
 
         i = 0
         while i < len(S):
-            # For each letter, get its last position.
-            end_pos = last_poses[S[i]]
+            # For each letter, get its last position as the last pos for i.
+            partition_last = last_poses[S[i]]
 
             j = i
-            while j < end_pos:
+            while j < partition_last:
                 # Interate through each letter following S[i], update last position.
                 # If j is out of last position, we get one partition.
-                end_pos = max(end_pos, last_poses[S[j]])
+                partition_last = max(partition_last, last_poses[S[j]])
                 j += 1
 
-            part_lens.append(j - i + 1)
+            partition_lens.append(j - i + 1)
+
             # Start from the next of the previous partition end.
             i = j + 1
 
-        return part_lens
+        return partition_lens
 
 
 def main():
