@@ -39,14 +39,15 @@ class SolutionRecurNaive(object):
         if not s:
             return 1
 
+        # Check 1 digit: if the start is not valid.
         if s[0] == '0':
             return 0
 
-        # Since s[0] is valid, decode s by decoding s[1:].
+        # Then decode s by decoding s[1:].
         n_ways = self.numDecodings(s[1:])
 
-        # If len of s is larger than 2 and the first 2 chars are valid,
-        # further decode s by s[2:].
+        # Check 2 digits: if len of s >= 2 and first 2 chars are valid,
+        # further decode s by the remaining s[2:].
         if len(s) >= 2 and '10' <= s[:2] <= '26':
             n_ways += self.numDecodings(s[2:])
 
@@ -56,22 +57,19 @@ class SolutionRecurNaive(object):
 class SolutionRecur(object):
     def numDecodingsUtil(self, s, k):
         """Helper function for numDecodings."""
-        # Check the last k chars.
         if k == 0:
             return 1
 
-        # Check the start of the last k chars is valid.
+        # Check 1 digit: if the start of the last k chars is not valid.
         start = len(s) - k
         if s[start] == '0':
             return 0
 
-        # Since start of the last k chars is valid, 
-        # decode s by decoding the last (k - 1) chars.
+        # Then decode s by decoding the last (k - 1) chars.
         n_ways = self.numDecodingsUtil(s, k - 1)
 
-        # If the len of the last k chars is larger than 2, 
-        # and the first 2 chars are valid, 
-        # further decode the last (k - 2) chars.
+        # Check 2 digits: if k >= 2, and the first 2 chars are valid, 
+        # further decode the remaining (k - 2) chars.
         if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
             n_ways += self.numDecodingsUtil(s, k - 2)
 
@@ -92,25 +90,23 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def numDecodingsUtil(self, s, k, T):
-        # Check the last k chars.
+        # Check the memo result.
         if T[k]:
             return T[k]
 
         if k == 0:
             return 1
 
-        # Check the start of the last k chars is valid.
+        # Check 1 digit: if the start of the last k chars is not valid.
         start = len(s) - k
         if s[start] == '0':
             return 0
 
-        # Since start of the last k chars is valid, 
-        # decode s by decoding the last (k - 1) chars.
+        # Then decode s by decoding the remaining (k - 1) chars.
         result = self.numDecodingsUtil(s, k - 1, T)
 
-        # If the len of the last k chars is larger than 2, 
-        # and the first 2 chars are valid, 
-        # further decode the last (k - 2) chars.
+        # Check 2 digits: if k >= 2, and the first 2 chars are valid, 
+        # further decode the remaining (k - 2) chars.
         if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
             result += self.numDecodingsUtil(s, k - 2, T)
 
@@ -143,28 +139,27 @@ class SolutionDP(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # If empty string, decode in 1 way.
         if not s:
             return 1
 
-        # Check s[0] is valid.
+        # Check if s[0] is not valid.
         if s[0] == '0':
             return 0
 
         n = len(s)
-
-        # Apply bottom-up dynamic programming.
         T = [0] * (n + 1)
-        # For (1) empty string and (2) the 1st char is valid, decode in 1 way.
+
+        # For empty string and the valid 1st char, decode in 1 way.
         T[0] = 1
         T[1] = 1
         
         for i in range(2, n + 1):
+            # Check 1 digit: if the previous 1 char is valid, add its result.
             if s[i - 1] != '0':
-                # If the previous 1 char is valid, add its decode ways.
                 T[i] += T[i - 1]
+
+            # Check 2 digits: if the previous 2 are valid, add its result.
             if '10' <= s[(i - 2):i] <= '26':
-                # If the previous 2 chars are valid, further add its decode ways.
                 T[i] += T[i - 2]
         
         return T[-1]
@@ -185,21 +180,24 @@ class SolutionIter(object):
         if not s:
             return 1
 
-        # Check s[0] is valid.
+        # Check if s[0] is not valid.
         if s[0] == '0':
             return 0
 
         n = len(s)
-        # For (a) empty string and (b) the 1st char is valid, decode in 1 way.
+
+        # For empty string and the valid 1st char, decode in 1 way.
         a, b = 1, 1
 
         for i in range(2, n + 1):
             c = 0
+
+            # Check 1 digit: if the previous 1 char is valid, add its result.
             if s[i - 1] != '0':
-                # If the previous 1 char is valid, add its decode ways.
                 c += b
+
+            # Check 2 digits: if the previous 2 are valid, add its result.
             if '10' <= s[(i - 2):i] <= '26':
-                # If the previous 2 chars are valid, further add its decode ways.
                 c += a
 
             a, b = b, c
@@ -210,29 +208,6 @@ class SolutionIter(object):
 def main():
     import time
 
-    s = '110' # Should be 1 = #{(1,10)}.
-
-    start_time = time.time()
-    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    start_time = time.time()
-    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    start_time = time.time()
-    print 'By iter: {}'.format(SolutionIter().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
-
-    print '==='
     s = '12' # Should be 2 = #{(1,2), (12)}.
 
     start_time = time.time()
@@ -255,7 +230,8 @@ def main():
     print 'By iter: {}'.format(SolutionIter().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
-    print '==='
+    print '---'
+
     s = '226' # Should be 3 = #{(2,2,6), (22,6), (2,26)}
 
     start_time = time.time()
