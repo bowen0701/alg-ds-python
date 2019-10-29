@@ -57,10 +57,10 @@ class SolutionSplitReplace(object):
             local, domain = email.split('@')
 
             # Remove local's '.'.
-            local = local.replace('.', '')
+            nodot_local = local.replace('.', '')
 
             # Truncate local's chars after '+'.
-            trunc_local = local.split('+')[0]
+            trunc_local = nodot_local.split('+')[0]
 
             # Concat modified local and domain.
             modified_email = '@'.join([trunc_local, domain])
