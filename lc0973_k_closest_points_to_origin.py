@@ -11,7 +11,6 @@ origin (0, 0).
 You may return the answer in any order.  The answer is guaranteed to be unique
 (except for the order that it is in.)
 
-
 Example 1:
 Input: points = [[1,3],[-2,2]], K = 1
 Output: [[-2,2]]
@@ -44,23 +43,20 @@ class SolutionMaxHeap(object):
         """
         import heapq
 
-        # Use maxheap by heapq with "negative" distances.
-        negdist_point_maxpq = []
+        # Use maxheap with "negative" distances since heapq is min heap.
+        negdist_point_maxheapq = []
 
         negdists = [-(p[0] ** 2 + p[1] ** 2) for p in points]
         negdists_points = zip(negdists, points)
 
-        # Push the first K points into max heap and keep the length.
-        # Then push the remaining points if negative distance > max heap's root.
-        for i, (nd, p) in enumerate(negdists_points):
-            if i < K:
-                heapq.heappush(negdist_point_maxpq, (nd, p))
-            elif i >= K:
-                if nd > negdist_point_maxpq[0][0]:
-                    heapq.heappop(negdist_point_maxpq)
-                    heapq.heappush(negdist_point_maxpq, (nd, p))
+        # Keep K points in maxheap.
+        for (negdist, point) in negdists_points:
+            heapq.heappush(negdist_point_maxheapq, (negdist, point))
+            
+            if len(negdist_point_maxheapq) > K:
+                heapq.heappop(negdist_point_maxheapq)
 
-        k_points = [p for (nd, p) in negdist_point_maxpq]
+        k_points = [point for (negdist, point) in negdist_point_maxheapq]
         return k_points
 
 
@@ -108,13 +104,13 @@ class SolutionSelect(object):
 
 
 def main():
-    # Ans: [[-2,2]]
+    # Output: [[-2,2]]
     points = [[1,3],[-2,2]]
     K = 1
     print SolutionMaxHeap().kClosest(points, K)
     print SolutionSelect().kClosest(points, K)
 
-    # Ans: [[3,3],[-2,4]]
+    # Output: [[3,3],[-2,4]]
     points = [[3,3],[5,-1],[-2,4]]
     K = 2
     print SolutionMaxHeap().kClosest(points, K)
