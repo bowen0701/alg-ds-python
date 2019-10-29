@@ -32,7 +32,7 @@ class SolutionRecur(object):
         current = ListNode(head.val)
         current.next = previous
 
-        # Increment current + previous and apply recursion.
+        # Increment previous & head and apply recursion.
         previous = current
         head = head.next
         return self._reverse(head, previous)
@@ -66,9 +66,9 @@ class SolutionIter(object):
             current = ListNode(head.val)
             current.next = previous
 
-            # Increment head + previous and apply iteration.
-            head = head.next
+            # Increment previous & head.
             previous = current
+            head = head.next
    
         return previous
 
