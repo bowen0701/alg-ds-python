@@ -16,7 +16,7 @@ room1: (0,30)
 room2: (5,10),(15,20)
 
 Example2
-Input: intervals = [[2,7]
+Input: intervals = [[7, 10], [2, 4]]
 Output: 1
 Explanation: 
 Only need one meeting room
@@ -40,18 +40,18 @@ class SolutionMinHeap(object):
         intervals.sort()
 
         # Use min heap to store end times.
-        endtimes_minpq = []
-        heapq.heappush(endtimes_minpq, intervals[0][1])
+        minheap_endtimes = []
+        heapq.heappush(minheap_endtimes, intervals[0][1])
 
         for i in range(1, len(intervals)):
-            # If start time is after min end time, remove the min end time.
-            if endtimes_minpq[0] <= intervals[i][0]:
-                heapq.heappop(endtimes_minpq)
+            # If next start time is after min end time, remove the min end time.
+            if intervals[i][0] >= minheap_endtimes[0]:
+                heapq.heappop(minheap_endtimes)
 
-            # Add end time to min heap.
-            heapq.heappush(endtimes_minpq, intervals[i][1])
+            # Add next end time to min heap.
+            heapq.heappush(minheap_endtimes, intervals[i][1])
 
-        return len(endtimes_minpq)
+        return len(minheap_endtimes)
 
 
 def main():
@@ -60,7 +60,7 @@ def main():
     print SolutionMinHeap().minMeetingRooms(intervals)
 
     # Output: 1.
-    intervals = [[2,7]]
+    intervals = [[7, 10], [2, 4]]
     print SolutionMinHeap().minMeetingRooms(intervals)
 
 
