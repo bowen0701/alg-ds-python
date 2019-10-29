@@ -49,9 +49,9 @@ class SolutionBFS(object):
         while queue:
             level = []
             
-            # Iterate through all nodes in each level.
+            # Iterate through all nodes in this level.
             for i in range(len(queue)):
-                # Get the last node in queue and append its value.
+                # Pop queue's last node and append it to level.
                 current = queue.pop()
                 level.append(current.val)
 
@@ -61,7 +61,7 @@ class SolutionBFS(object):
                 if current.right:
                     queue.insert(0, current.right)
             
-            # Append nodes in the level to result.
+            # Append level nodes to result.
             result.append(level)
 
         return result
