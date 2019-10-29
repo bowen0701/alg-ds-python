@@ -31,13 +31,13 @@ class SolutionSelectionSort(object):
         """
         n = len(nums)
 
-        # Selection sort to put the biggest, 2nd biggest,... from tail to head.
+        # Selection sort starting from behind: swith max element and last one.
         for i in range(n - 1, n - k - 1, -1):
-            cur = 0
+            max_i = 0
             for j in range(1, i + 1):
-                if nums[cur] < nums[j]:
-                    cur = j
-            nums[cur], nums[i] = nums[i], nums[cur]
+                if nums[max_i] < nums[j]:
+                    max_i = j
+            nums[max_i], nums[i] = nums[i], nums[max_i]
 
         return nums[-k]
 
@@ -71,6 +71,20 @@ class SolutionQuickSort(object):
         return sorted_nums[-k]
 
 
+class SolutionSort(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+
+        Time complexity: O(n*logn), where n is the length of nums.
+        Space complexity: O(n).
+        """
+        nums.sort()
+        return nums[-k]
+
+
 class SolutionMinHeap(object):
     def findKthLargest(self, nums, k):
         """
@@ -85,16 +99,12 @@ class SolutionMinHeap(object):
 
         minheap = []
 
-        # Push the first k nums into min heap.
-        for i in range(k):
+        for i in range(len(nums)):
             heapq.heappush(minheap, nums[i])
 
-        # Push the remaining nums into minheap if > minheap's root.
-        # Then keep maxheap with k elements.
-        for j in range(k + 1, len(nums)):
-            if nums[j] > minheap[0]:
+            # Maintain heap size = k.
+            if len(minheap) > k:
                 heapq.heappop(minheap)
-                heapq.heappush(minheap, nums[j])
 
         return minheap[0]
 
@@ -146,7 +156,11 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'Selection: ', SolutionMinHeap().findKthLargest(nums, k)
+    print 'Sort:', SolutionSort().findKthLargest(nums, k)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'MinHeap: ', SolutionMinHeap().findKthLargest(nums, k)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
@@ -167,7 +181,11 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'Selection: ', SolutionMinHeap().findKthLargest(nums, k)
+    print 'Sort:', SolutionSort().findKthLargest(nums, k)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'MinHeap: ', SolutionMinHeap().findKthLargest(nums, k)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
