@@ -3,14 +3,11 @@ Medium
 
 URL: https://leetcode.com/problems/fruit-into-baskets/
 
-Note: This problem is longest subsequence with only two characters.
-
 In a row of trees, the i-th tree produces fruit with type tree[i].
 
 You start at any tree of your choice, then repeatedly perform the following steps:
-
-Add one piece of fruit from this tree to your baskets. If you cannot, stop.
-Move to the next tree to the right of the current tree.
+  1. Add one piece of fruit from this tree to your baskets. If you cannot, stop.
+  2. Move to the next tree to the right of the current tree.
 If there is no tree to the right, stop.
 Note that you do not have any choice after the initial choice of starting tree:
 you must perform step 1, then step 2, then back to step 1, then step 2,
@@ -20,6 +17,8 @@ You have two baskets, and each basket can carry any quantity of fruit,
 but you want each basket to only carry one type of fruit each.
 
 What is the total amount of fruit you can collect with this procedure?
+
+Note: This problem is longest subsequence with only two characters.
 
 Example 1:
 Input: [1,2,1]
@@ -58,16 +57,21 @@ class SolutionDictTwoPointers(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        max_len = 0
-        fruit_counts = {}
+        from collections import defaultdict
 
+        # Use dict to mimic fruit baskets with counts.
+        fruit_counts = defaultdict(int)
+        max_len = 0
+
+        # Apply two pointers method with left l & right r.
         l = 0
         for r, f in enumerate(tree):
-            fruit_counts[f] = fruit_counts.get(f, 0) + 1
+            fruit_counts[f] += 1
 
+            # If more than 2 types, remove one fruit from the head. 
             while len(fruit_counts) > 2:
-                # If more than 2 types, remove one fruit of the first type. 
                 fruit_counts[tree[l]] -= 1
+
                 if fruit_counts[tree[l]] == 0:
                     del fruit_counts[tree[l]]
 
