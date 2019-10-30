@@ -31,7 +31,7 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 """
 
-class Solution(object):
+class SolutionIter(object):
     def maxProfit(self, prices):
         """
         :type prices: List[int]
@@ -40,25 +40,26 @@ class Solution(object):
         Time complexity: O(n), where n is the number of prices.
         Space complexity: O(1).
         """
-        profit = 0
-        # Iterate each day and compare it with yesterday to get profit.
+        # Iterate to compare each day and yesterday to update max profit.
+        max_profit = 0
+
         for i in range(1, len(prices)):
-            profit += max(prices[i] - prices[i - 1], 0)
-        return profit
+            max_profit += max(prices[i] - prices[i - 1], 0)
+        return max_profit
 
 
 def main():
     # Ans: 7.
     prices = [7,1,5,3,6,4]
-    print Solution().maxProfit(prices)
+    print SolutionIter().maxProfit(prices)
 
     # Ans: 4.
     prices = [1,2,3,4,5]
-    print Solution().maxProfit(prices)
+    print SolutionIter().maxProfit(prices)
 
     # Ans: 0.
     prices = [7,6,4,3,1]
-    print Solution().maxProfit(prices)
+    print SolutionIter().maxProfit(prices)
 
 
 if __name__ == '__main__':
