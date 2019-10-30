@@ -7,20 +7,20 @@ Say you have an array for which the ith element is the price of a given stock on
 
 If you were only permitted to complete at most one transaction
 (i.e., buy one and sell one share of the stock), 
-design an algorithm to find the maximum profit.
+design an algorithm to find the maximum max_profit.
 
 Note that you cannot sell a stock before you buy one.
 
 Example 1:
 Input: [7,1,5,3,6,4]
 Output: 5
-Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), max_profit = 6-1 = 5.
              Not 7-1 = 6, as selling price needs to be larger than buying price.
 
 Example 2:
 Input: [7,6,4,3,1]
 Output: 0
-Explanation: In this case, no transaction is done, i.e. max profit = 0.
+Explanation: In this case, no transaction is done, i.e. max max_profit = 0.
 """
 
 class SolutionNaive(object):
@@ -29,6 +29,7 @@ class SolutionNaive(object):
         :type prices: List[int]
         :rtype: int
 
+        Iterate through each pair of two pointers, update max_profit.
         Note: Time limit exceeded.
 
         Time complexity: O(n^2), where n is the number of prices.
@@ -37,27 +38,28 @@ class SolutionNaive(object):
         if not prices:
             return 0
 
-        profit = 0
+        max_profit = 0
 
         n = len(prices)
 
         for i in range(n - 1):
             for j in range(i + 1, n):
-                if prices[j] - prices[i] > profit:
-                    profit = prices[j] - prices[i]
-        
-        return profit
+                # Keep updating max profit for each (i, j).
+                if prices[j] - prices[i] > max_profit:
+                    max_profit = prices[j] - prices[i]
+
+        return max_profit
 
 
 class SolutionBinarySearch(object):
     def _binarySearch(self, prices, i, j):
+        # Only one date, thus cannot buy and then sell.
         if i == j:
-            # Only one date, thus we cannot buy and then sell.
             return 0
 
+        # Compute profits in left and right subarrays.
         mid = i + (j - i) // 2
 
-        # Compute profits in left and right subarrays.
         left_profit = self._binarySearch(prices, i, mid)
         right_profit = self._binarySearch(prices, mid + 1, j)
 
@@ -103,21 +105,21 @@ class SolutionIter(object):
         if not prices:
             return 0
     
-        # Continue tracking minimum price and profit.
-        minimun = prices[0]
-        profit = 0
+        # Continue tracking min price and max profit.
+        min_price = prices[0]
+        max_profit = 0
 
         for i in range(1, len(prices)):
-            current = prices[i]
+            cur_price = prices[i]
 
-            # Update the latest max profit.
-            cur_profit = current - minimun
-            profit = max(cur_profit, profit)
+            # Update the max profit.
+            cur_profit = cur_price - min_price
+            max_profit = max(cur_profit, max_profit)
             
-            # Update the latest minimum.
-            minimun = min(current, minimun)
+            # Update the min price.
+            min_price = min(cur_price, min_price)
 
-        return profit
+        return max_profit
 
 
 def main():
@@ -130,7 +132,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By divide-and-conquer:', SolutionBinarySearch().maxProfit(prices)
+    print 'By binary search:', SolutionBinarySearch().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
@@ -145,7 +147,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By divide-and-conquer:', SolutionBinarySearch().maxProfit(prices)
+    print 'By binary search:', SolutionBinarySearch().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
