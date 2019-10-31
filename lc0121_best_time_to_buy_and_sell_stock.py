@@ -112,12 +112,12 @@ class SolutionIter(object):
         for i in range(1, len(prices)):
             cur_price = prices[i]
 
-            # Update the max profit.
-            cur_profit = cur_price - min_price
-            max_profit = max(cur_profit, max_profit)
-            
-            # Update the min price.
-            min_price = min(cur_price, min_price)
+            if cur_price < min_price:
+                # Buy at the low price and update it.
+                min_price = cur_price
+            else:
+                # Check if sell st current price.
+                max_profit = max(cur_price - min_price, max_profit)
 
         return max_profit
 
