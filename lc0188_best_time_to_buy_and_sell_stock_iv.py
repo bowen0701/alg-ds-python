@@ -28,19 +28,46 @@ Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6),
              profit = 3-0 = 3.
 """
 
-class Solution(object):
+class SolutionDp(object):
     def maxProfit(self, k, prices):
         """
         :type k: int
         :type prices: List[int]
         :rtype: int
         """
-        pass
+        if not prices:
+            return 0
+
+        n = len(prices)
+
+        # If k >= half number of dates, we can make max transactions.
+        if k >= (n >> 1):
+            max_profit = 0
+            for i in range(1, n):
+                max_profit += max(prices[i] - prices[i - 1], 0)
+            return max_profit
+
+        # If not, use arrays of len k to store k transaction pairs.
+        T = [[0] * n for _ in range(k + 1)]
+
+        for i in range(1, k + 1):
+            max_profit_i = T[i - 1][0] - prices[0]
+
+            for j in range(1, n):
+                T[i][j] = max(T[i][j - 1], max_profit_i + prices[j])
+                max_profit_i = max(T[i - 1][j] - prices[j], max_profit_i)
+
+        return T[-1][-1]
 
 
 def main():
     # Output: 2
     prices = [2,4,1]
+    k = 2
+    print SolutionDp().maxProfit(k, prices)
+
+    # Output: 7
+    prices = [3,2,6,5,0,3]
     k = 2
     print SolutionDp().maxProfit(k, prices)
 
