@@ -35,17 +35,47 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 """
 
-class Solution(object):
+class SolutionIter(object):
     def maxProfit(self, prices):
         """
         :type prices: List[int]
         :rtype: int
         """
-        pass
+        if not prices:
+            return 0
+
+        # Continue tracking min prices 1 & 2 and max profits 1 & 2.
+        min_price1 = float('inf')
+        min_price2 = float('inf')
+        max_profit1 = 0
+        max_profit2 = 0
+
+        for i in range(len(prices)):
+            cur_price = prices[i]
+
+            # Track 1st buy and sell.
+            min_price1 = min(cur_price, min_price1)
+            max_profit1 = max(cur_price - min_price1, max_profit1)
+
+            # Track 2nd buy and sell, with asset max_profit1.
+            min_price2 = min(cur_price - max_profit1, min_price2)
+            max_profit2 = max(cur_price - min_price2, max_profit2)
+
+        return max_profit2
 
 
 def main():
-    pass
+    # Output: 6
+    prices = [3,3,5,0,0,3,1,4]
+    print SolutionIter().maxProfit(prices)
+
+    # Output: 4
+    prices = [1,2,3,4,5]
+    print SolutionIter().maxProfit(prices)
+
+    # Output: 0
+    prices = [7,6,4,3,1]
+    print SolutionIter().maxProfit(prices)
 
 
 if __name__ == '__main__':
