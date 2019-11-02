@@ -39,6 +39,9 @@ class SolutionDp(object):
         T[i, j] = max(T[i, j-1], prices[j] - prices[j'] + T[i-1, j']), for j' in [0, j-1]
                 = max(T[i, j-1], prices[j] + max(T[i-1, j'] - prices[j']))
         Note prices[j] - prices[j'] means profit with buying at j' and selling at j.
+
+        Time complexity: O(k*n), where n is the number of prices.
+        Space complexity: O(k*n).
         """
         if not prices:
             return 0
