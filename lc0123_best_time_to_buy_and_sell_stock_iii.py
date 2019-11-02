@@ -40,6 +40,9 @@ class SolutionIter(object):
         """
         :type prices: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         if not prices:
             return 0
