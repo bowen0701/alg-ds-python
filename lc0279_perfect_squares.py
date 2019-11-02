@@ -21,10 +21,11 @@ class SolutionDp(object):
         :type n: int
         :rtype: int
 
+        Apply dynamic programming: e.g. n is amount, squared nums are coins.
+
         Time complexity: O(n*m), where m is squared root of n.
         Space complexity: O(n*m).
         """
-        # Apply dynamic programming: e.g. n is amount, squared nums are coins.
         # Compute the max squared number.
         m = int(pow(n, 0.5))
         sq_nums = [pow(s, 2) for s in range(1, m + 1)]
@@ -35,13 +36,17 @@ class SolutionDp(object):
         for s in range(m):
             T[s][0] = 1
 
+        # For each squared number s, compute the least number for 1, ..., n.
         for s in range(m):
             for i in range(1, n + 1):
                 if i == sq_nums[s]:
+                    # If integer i is s, set to 1.
                     T[s][i] = 1
                 elif i > sq_nums[s]:
+                    # If integer i > s, set to min of that using s & not using s. 
                     T[s][i] = min(1 + T[s][i - sq_nums[s]], T[s - 1][i])
                 else:
+                    # If integer i < s, set to not using s. 
                     T[s][i] = T[s - 1][i]
 
         return T[-1][-1]
@@ -51,10 +56,10 @@ def main():
     import time
 
     n = 12
-    print Solution().numSquares(n)
+    print SolutionDp().numSquares(n)
 
     n = 13
-    print Solution().numSquares(n)
+    print SolutionDp().numSquares(n)
 
 
 if __name__ == '__main__':
