@@ -17,17 +17,36 @@ Output: 3
 Explanation: transactions = [buy, sell, cooldown, buy, sell]
 """
 
-class Solution(object):
+class SolutionDp(object):
     def maxProfit(self, prices):
         """
         :type prices: List[int]
         :rtype: int
         """
-        pass
+        if not prices:
+            return 0
+
+        n = len(prices)
+
+        # Before day i, the max profit ending with buy/sell.
+        profit_buys = [0] * n
+        profit_sells = [0] * n
+
+        profit_buys[0] = -prices[0]
+
+        for i in range(1, n):
+            profit_buys[i] = max(profit_sells[i - 2] - prices[i], 
+                                 profit_buys[i - 1])
+            profit_sells[i] = max(profit_buys[i - 1] + prices[i], 
+                                  profit_sells[i - 1])
+
+        return profit_sells[-1]
 
 
 def main():
-    pass
+    # Output: 3
+    prices = [1,2,3,0,2]
+    print SolutionDp().maxProfit(prices)
 
 
 if __name__ == '__main__':
