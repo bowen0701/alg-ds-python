@@ -28,18 +28,43 @@ Note:
 - 0 <= fee < 50000.
 """
 
-class Solution(object):
+class SolutionDp(object):
     def maxProfit(self, prices, fee):
         """
         :type prices: List[int]
         :type fee: int
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        if not prices:
+            return 0
+
+        n = len(prices)
+
+        # Before day i, the max profit ending with buy/sell.
+        profit_buys = [0] * n
+        profit_sells = [0] * n
+
+        profit_buys[0] = -prices[0]
+
+        for i in range(1, n):
+            profit_buys[i] = max(profit_sells[i - 1] - prices[i], 
+                                 profit_buys[i - 1])
+
+            # Pay transaction fee when sell.
+            profit_sells[i] = max(profit_buys[i - 1] + prices[i] - fee, 
+                                  profit_sells[i - 1])
+
+        return profit_sells[-1]
 
 
 def main():
-    pass
+    # Output: 8
+    prices = [1, 3, 2, 8, 4, 9]
+    fee = 2
+    print SolutionDp().maxProfit(prices, fee)
 
 
 if __name__ == '__main__':
