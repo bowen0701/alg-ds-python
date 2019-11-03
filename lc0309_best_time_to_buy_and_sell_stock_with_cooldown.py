@@ -22,6 +22,9 @@ class SolutionDp(object):
         """
         :type prices: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         if not prices:
             return 0
@@ -35,18 +38,44 @@ class SolutionDp(object):
         profit_buys[0] = -prices[0]
 
         for i in range(1, n):
-            profit_buys[i] = max(profit_sells[i - 2] - prices[i], 
-                                 profit_buys[i - 1])
-            profit_sells[i] = max(profit_buys[i - 1] + prices[i], 
-                                  profit_sells[i - 1])
+            profit_buys[i] = max(profit_sells[i - 2] - prices[i], profit_buys[i - 1])
+            profit_sells[i] = max(profit_buys[i - 1] + prices[i], profit_sells[i - 1])
 
         return profit_sells[-1]
+
+
+class SolutionIter(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if not prices:
+            return 0
+
+        profit_buy = -prices[0]
+        profit_sell = 0
+        profit_buy_prev = 0
+        profit_sell_prev = 0
+
+        for i in range(1, len(prices)):
+            profit_buy_prev = profit_buy
+            profit_buy = max(profit_sell_prev - prices[i], profit_buy_prev)
+
+            profit_sell_prev = profit_sell
+            profit_sell = max(profit_buy_prev + prices[i], profit_sell_prev)
+
+        return profit_sell
 
 
 def main():
     # Output: 3
     prices = [1,2,3,0,2]
     print SolutionDp().maxProfit(prices)
+    print SolutionIter().maxProfit(prices)
 
 
 if __name__ == '__main__':
