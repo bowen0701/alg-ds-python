@@ -42,8 +42,8 @@ class SolutionDFSRecurUpdate(object):
 
         # Visit 4 directions to accumulate area.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            area += self._dfs(r_neighbor, c_neighbor, grid)
+        for r_next, c_next in dirs:
+            area += self._dfs(r_next, c_next, grid)
 
         return area
 
@@ -77,11 +77,11 @@ class SolutionDFSIterUpdate(object):
 
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            if (0 <= r_neighbor < len(grid) and 
-                0 <= c_neighbor < len(grid[0]) and
-                grid[r_neighbor][c_neighbor] == 1):
-                tovisit_ls.append((r_neighbor, c_neighbor))
+        for r_next, c_next in dirs:
+            if (0 <= r_next < len(grid) and 
+                0 <= c_next < len(grid[0]) and
+                grid[r_next][c_next] == 1):
+                tovisit_ls.append((r_next, c_next))
 
         return tovisit_ls
 
@@ -98,11 +98,10 @@ class SolutionDFSIterUpdate(object):
             tovisit_ls = self._get_tovisit_ls(stack[-1], grid)
 
             if tovisit_ls:
-                for v_neighbor in tovisit_ls:
-                    r_neighbor, c_neighbor = v_neighbor
-                    grid[r_neighbor][c_neighbor] = 0
+                for r_next, c_next in tovisit_ls:
+                    grid[r_next][c_next] = 0
                     area += 1
-                    stack.append((r_neighbor, c_neighbor))
+                    stack.append((r_next, c_next))
                     # Break to continue DFS.
                     break
             else:
