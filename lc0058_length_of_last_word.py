@@ -16,7 +16,7 @@ Input: "Hello World"
 Output: 5
 """
 
-class SolutionSplit(object):
+class SolutionStripSplit(object):
     def lengthOfLastWord(self, s):
         """
         :type s: str
@@ -38,7 +38,7 @@ class SolutionSplit(object):
 def main():
     # Output: 5
     s = "Hello World"
-    print SolutionSplit().lengthOfLastWord(s)
+    print SolutionStripSplit().lengthOfLastWord(s)
 
 
 if __name__ == '__main__':
