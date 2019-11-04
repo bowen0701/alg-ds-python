@@ -33,17 +33,43 @@ Explanation:
 Note that 'A' and 'a' are treated as two different characters.
 """
 
-class Solution(object):
+class SolutionCharFreqDict(object):
     def frequencySort(self, s):
         """
         :type s: str
         :rtype: str
         """
-        pass
+        from collections import defaultdict
+
+        if not s:
+            return ''
+
+        # Use a dict to collect chars's frequencies.
+        char_freqs = defaultdict(int)
+        for c in s:
+            char_freqs[c] += 1
+
+        # Sort dict by values.
+        sorted_char_freqs = sorted(char_freqs.items(), 
+                                   key=lambda x: x[1], reverse=True)
+
+        # Convert dict to list with duplicated chars based on frequencies.
+        sorted_chars = [char * freq for (char, freq) in sorted_char_freqs]
+        return ''.join(sorted_chars)
 
 
 def main():
-    pass
+    # Output: eert
+    s = "tree"
+    print SolutionCharFreqDict().frequencySort(s)
+
+    # Output: cccaaa
+    s = "cccaaa"
+    print SolutionCharFreqDict().frequencySort(s)
+
+    # Output: bbAa
+    s = "Aabb"
+    print SolutionCharFreqDict().frequencySort(s)
 
 
 if __name__ == '__main__':
