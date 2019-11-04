@@ -16,17 +16,29 @@ Input: "Hello World"
 Output: 5
 """
 
-class Solution(object):
+class SolutionSplit(object):
     def lengthOfLastWord(self, s):
         """
         :type s: str
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        if not s:
+            return 0
+
+        # Strip and then split s with separator ' '.
+        splitted_s = s.strip().split(' ')
+
+        # Return last word's length.
+        return len(splitted_s[-1])
 
 
 def main():
-    pass
+    # Output: 5
+    s = "Hello World"
+    print SolutionSplit().lengthOfLastWord(s)
 
 
 if __name__ == '__main__':
