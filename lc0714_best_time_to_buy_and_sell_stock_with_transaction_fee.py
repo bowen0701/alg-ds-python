@@ -60,11 +60,42 @@ class SolutionDp(object):
         return profit_sells[-1]
 
 
+class SolutionIter(object):
+    def maxProfit(self, prices, fee):
+        """
+        :type prices: List[int]
+        :type fee: int
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if not prices:
+            return 0
+
+        profit_buy = -prices[0]
+        profit_sell = 0
+
+        for i in range(1, len(prices)):
+            profit_buy_prev = profit_buy
+            profit_buy = max(profit_sell - prices[i], profit_buy_prev)
+
+            # Pay transaction fee when sell.
+            profit_sell_prev = profit_sell
+            profit_sell = max(profit_buy_prev + prices[i] - fee, profit_sell_prev)
+
+        return profit_sell
+
+
 def main():
     # Output: 8
     prices = [1, 3, 2, 8, 4, 9]
     fee = 2
     print SolutionDp().maxProfit(prices, fee)
+
+    prices = [1,3,7,5,10,3]
+    fee = 3
+    print SolutionIter().maxProfit(prices, fee)
 
 
 if __name__ == '__main__':
