@@ -38,6 +38,9 @@ class SolutionCharFreqDict(object):
         """
         :type s: str
         :rtype: str
+
+        Time complexity: O(n*logn), where n is the length of s.
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
