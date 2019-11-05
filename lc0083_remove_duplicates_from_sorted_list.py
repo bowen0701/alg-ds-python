@@ -27,12 +27,48 @@ class Solution(object):
         """
         :type head: ListNode
         :rtype: ListNode
+
+        Time complexity: O(n), where n is the list length.
+        Space complexity: O(1).
         """
-        pass
+        if not head:
+            return None
+
+        current = head
+
+        while current and current.next:
+            if current.val == current.next.val:
+                # Continue updating next until it's not a duplicate, 
+                # then link current to non-duplicate.
+                next_ = current.next
+                while next_.next and next_.val == next_.next.val:
+                    next_ = next_.next
+                current.next = next_.next
+
+            # Increment current node.
+            current = current.next
+
+        return head
 
 
 def main():
-    pass
+    # Input: 1->1->2
+    # Output: 1->2
+    head = ListNode(1)
+    head.next = ListNode(1)
+    head.next.next = ListNode(2)
+    Solution().deleteDuplicates(head)
+    print (head.val, head.next.val, head.next.next)
+
+    # Input: 1->1->2->3->3
+    # Output: 1->2->3
+    head = ListNode(1)
+    head.next = ListNode(1)
+    head.next.next = ListNode(2)
+    head.next.next.next = ListNode(3)
+    head.next.next.next.next = ListNode(3)
+    Solution().deleteDuplicates(head)
+    print (head.val, head.next.val, head.next.next.val, head.next.next.next)
 
 
 if __name__ == '__main__':
