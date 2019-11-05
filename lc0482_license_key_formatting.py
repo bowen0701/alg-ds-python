@@ -48,24 +48,27 @@ class SolutionReverseIter(object):
         """
         # Upper case and drop dash.
         S_nodashes = S.upper().replace('-','')
-        size_nodashes = len(S_nodashes)
+        len_nodashes = len(S_nodashes)
 
         # Reversely iterate through no-dashed list, concat to string until K chars.
-        res_ls = [''] * (size_nodashes // K + (size_nodashes % K > 0))
+        str_ls = [''] * (len_nodashes // K + (len_nodashes % K > 0))
 
-        cur_idx = len(res_ls) - 1
+        cur_idx = len(str_ls) - 1
         cur_counter = 0
 
-        for i in range(size_nodashes - 1, -1, -1):
+        for i in range(len_nodashes - 1, -1, -1):
             if cur_counter < K:
-                res_ls[cur_idx] = S_nodashes[i] + res_ls[cur_idx]
+                # Still concat the current string.
+                str_ls[cur_idx] = S_nodashes[i] + str_ls[cur_idx]
                 cur_counter += 1
             else:
+                # Start concating the next string.
                 cur_idx -= 1
-                res_ls[cur_idx] = S_nodashes[i] + res_ls[cur_idx]
+                str_ls[cur_idx] = S_nodashes[i] + str_ls[cur_idx]
                 cur_counter = 1
 
-        return '-'.join(res_ls)
+        # Concat list's strings with -.
+        return '-'.join(str_ls)
 
 
 class SolutionForwardIterK(object):
@@ -80,24 +83,25 @@ class SolutionForwardIterK(object):
         """
         # Upper case and drop dash.
         S_nodashes = S.upper().replace('-', '')
-        size_nodashes = len(S_nodashes)
+        len_nodashes = len(S_nodashes)
 
         # Get the end index for the 1st part.
-        remainder = size_nodashes % K
+        remainder = len_nodashes % K
         if remainder:
             end_idx = remainder
         else:
             end_idx = K
 
         # Get the 1st part.
-        res_ls = [S_nodashes[:end_idx]]
+        str_ls = [S_nodashes[:end_idx]]
 
         # Iteratively append K chars at a time.
-        while end_idx < size_nodashes:
-            res_ls.append(S_nodashes[end_idx:end_idx+K])
+        while end_idx < len_nodashes:
+            str_ls.append(S_nodashes[end_idx:end_idx+K])
             end_idx += K
 
-        return '-'.join(res_ls)
+        # Concat list's strings with -.
+        return '-'.join(str_ls)
 
 
 def main():
