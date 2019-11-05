@@ -25,17 +25,42 @@ Explanation: It may be assumed that the returned time is next day's time since
 it is smaller than the input time numerically.
 """
 
-class Solution:
+class Solution(object):
     def nextClosestTime(self, time):
         """
         @param time: the given time
         @return: the next closest time
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
-        pass
+        hh, mm = time.split(':')
+        minutes = int(hh) * 60 + int(mm)
+
+        set_time = set(time)
+        day_minutes = 60 * 24
+
+        for new_minutes in range(minutes + 1, minutes + day_minutes + 1):
+            # Take mode for 2nd day's minutes.
+            new_minutes = new_minutes % day_minutes
+
+            new_time = '{:02d}:{:02d}'.format(new_minutes // 60, new_minutes % 60)
+
+            if set(new_time) <= set_time:
+                # Found new time reusing the current digits.
+                break
+
+        return new_time
 
 
 def main():
-    pass
+    # Output: "19:39"
+    time = "19:34"
+    print Solution().nextClosestTime(time)
+
+    # Output: "22:22"
+    time = "23:59"
+    print Solution().nextClosestTime(time)
 
 
 if __name__ == '__main__':
