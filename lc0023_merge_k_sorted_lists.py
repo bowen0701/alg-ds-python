@@ -60,6 +60,7 @@ class SolutionSort(object):
 
 class SolutionMergeTwoRecur(object):
     def _merge2Lists(self, l1, l2):
+        """Merge two sorted lists recursively."""
         if not l1 or not l2:
             return l1 or l2
 
@@ -75,6 +76,8 @@ class SolutionMergeTwoRecur(object):
         :type lists: List[ListNode]
         :rtype: ListNode
 
+        Merge each pair of two lists at a time. 
+
         Time complexity: O(kn*logk), where
           - n is the number of nodes,
           - k is the length of lists.
@@ -87,7 +90,7 @@ class SolutionMergeTwoRecur(object):
 
         # When there are at least two lists, merge them.
         while length > 1:
-            # Merge each pair of leftmost & rightmost lists, and put back to the former.
+            # Merge each pair of leftmost & rightmost lists to the former.
             for i in range(length // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[length - 1 - i])
 
@@ -99,6 +102,7 @@ class SolutionMergeTwoRecur(object):
 
 class SolutionMergeTwoIter(object):
     def _merge2Lists(self, l1, l2):
+        """Merge two sorted lists iteratively."""
         if not l1 or not l2:
             return l1 or l2
 
@@ -137,7 +141,7 @@ class SolutionMergeTwoIter(object):
 
         # When there are at least two lists, merge them.
         while length > 1:
-            # Merge each pair of leftmost & rightmost lists, and put back to the former.
+            # Merge each pair of leftmost & rightmost lists to the former.
             for i in range(length // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[length - 1 - i])
 
@@ -164,20 +168,20 @@ class SolutionMinHeap(object):
         if not lists:
             return None
 
-        # Just add the head nodes in lists to min heap.
+        # Just add lists's heads to min heap.
         minheap = [(head.val, head) for head in lists if head]
         heapq.heapify(minheap)
 
         pre_head = ListNode(None)
         current = pre_head
 
-        # Pop head of min heap and link it to the linked list.
+        # Pop min heap's head and link it to the linked list.
         while minheap:
             _, node = heapq.heappop(minheap)
             current.next = node
             current = current.next
 
-            # If head of min heap has a next node, push to min heap.
+            # If min heap's head has a next, push to min heap.
             if current.next:
                 heapq.heappush(minheap, (current.next.val, current.next))
 
