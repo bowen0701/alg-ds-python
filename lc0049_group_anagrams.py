@@ -32,22 +32,26 @@ class SolutionDict(object):
           - k is the lenght of the longest string.
         Space complexity: O(n).
         """
-        # Store in a dict with sorted string->string array.  
-        anagrams_d = {}
+        from collections import defaultdict
+
+        # Store in a dict with sorted string->string list.  
+        anagrams_d = defaultdict(list)
 
         for s in strs:
-            # Get sorted string as key.
+            # Use sorted string as dict key.
             k = ''.join(sorted(s))
-
-            if anagrams_d.get(k):
-                anagrams_d[k].append(s)
-            else:
-                anagrams_d[k] = [s]
+            anagrams_d[k].append(s)
 
         return anagrams_d.values()
 
 
 def main():
+    # Output:
+    # [
+    #   ["ate","eat","tea"],
+    #   ["nat","tan"],
+    #   ["bat"]
+    # ]
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
     print SolutionDict().groupAnagrams(strs)
 
