@@ -30,6 +30,9 @@ class SolutionCapitalCount(object):
         """
         :type word: str
         :rtype: bool
+
+        Time complexity: O(n), where n is word length.
+        Space complexity: O(1).
         """
         # Count the number of capitals.
         n_capitals = 0
