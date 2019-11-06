@@ -25,17 +25,32 @@ Note: The input will be a non-empty word consisting of uppercase and lowercase
 latin letters.
 """
 
-class Solution(object):
+class SolutionCapitalCount(object):
     def detectCapitalUse(self, word):
         """
         :type word: str
         :rtype: bool
         """
-        pass
+        # Count the number of capitals.
+        n_capitals = 0
+
+        for c in word:
+            if c.isupper():
+                n_capitals += 1
+
+        return (n_capitals == len(word) or
+                n_capitals == 0 or
+                (n_capitals == 1 and word[0].isupper()))
 
 
 def main():
-    pass
+    # Output: True
+    word = 'USA'
+    print SolutionCapitalCount().detectCapitalUse(word)
+
+    # Output: False
+    word = 'FlaG'
+    print SolutionCapitalCount().detectCapitalUse(word)
 
 
 if __name__ == '__main__':
