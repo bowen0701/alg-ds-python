@@ -102,6 +102,9 @@ class SolutionDp(object):
         if len(nums) == 1:
             return nums[0]
 
+        if len(nums) == 2:
+            return max(nums[0], nums[1])
+
         T = [0] * len(nums)
 
         # If only 1 or 2 houses, get the max amount.
@@ -129,6 +132,9 @@ class SolutionIter(object):
 
         if len(nums) == 1:
             return nums[0]
+
+        if len(nums) == 2:
+            return max(nums[0], nums[1])
 
         # If only 1 or 2 houses, get the max amount.
         a = nums[0]
