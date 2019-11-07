@@ -32,18 +32,53 @@ Note:
 - 1 <= people[i] <= limit <= 30000
 """
 
-class Solution(object):
+class SolutionTwoPointers(object):
     def numRescueBoats(self, people, limit):
         """
         :type people: List[int]
         :type limit: int
         :rtype: int
+
+        Time complexity: O(n*logn), where n is the number of people.
+        Space complexity: O(1).
         """
-        pass
+        # Sort people first.
+        people.sort()
+
+        # Apply two pointers method: the lightest & heaviest people.
+        i, j = 0, len(people) - 1
+
+        n_boats = 0
+
+        while i <= j:
+            if people[i] + people[j] <= limit:
+                # Both people can be in the boat.
+                i += 1
+                j -= 1
+            else:
+                # Put heaviest person in the boat, lightest goes to another.
+                j -= 1
+
+            n_boats += 1
+
+        return n_boats
 
 
 def main():
-    pass
+    # Output: 1
+    people = [1,2]
+    limit = 3
+    print SolutionTwoPointers().numRescueBoats(people, limit)
+
+    # Output: 3
+    people = [3,2,2,1]
+    limit = 3
+    print SolutionTwoPointers().numRescueBoats(people, limit)
+
+    # Output: 4
+    people = [3,5,3,4]
+    limit = 5
+    print SolutionTwoPointers().numRescueBoats(people, limit)
 
 
 if __name__ == '__main__':
