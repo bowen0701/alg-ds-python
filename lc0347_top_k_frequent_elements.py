@@ -30,14 +30,13 @@ class Solution(object):
         Time complexity: O(n*logn), where n is the number of nums.
         Space complexity: O(n).
         """
+        from collections import defaultdict
+
         # Make num->freq dict.
-        num_freq_d = {}
+        num_freq_d = defaultdict(int)
 
         for n in nums:
-            if n in num_freq_d:
-                num_freq_d[n] += 1
-            else:
-                num_freq_d[n] = 1
+            num_freq_d[n] += 1
 
         # Sort num->freq dict by freq. 
         sorted_num_freq_ls = sorted(num_freq_d.items(),
