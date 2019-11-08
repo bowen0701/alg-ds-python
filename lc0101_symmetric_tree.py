@@ -34,13 +34,14 @@ class TreeNode(object):
 
 class SolutionRecur(object):
     def isMirror(self, left, right):
-        # Check left & right nodes' existence.
+        # Check left & right nodes's symmetry.
         if not left and not right:
             return True
+
         if not left or not right:
             return False
 
-        # Check left & right nodes' values.
+        # Check left & right nodes's values.
         if left.val != right.val:
             return False
 
@@ -80,12 +81,14 @@ class SolutionIter(object):
         while queue:
             left, right = queue.pop()
 
+            # Check left & right nodes's symmetry.
             if not left and not right:
                 continue
+
             if not left or not right:
                 return False
 
-            # Check left & right nodes' values.
+            # Check left & right nodes's values.
             if left.val != right.val:
                 return False
 
