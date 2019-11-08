@@ -50,6 +50,38 @@ class SolutionSortComparator(object):
         return ''.join(num_strs)
 
 
+class SolutionSortComparator(object):
+    def largestNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: str
+
+        Time complexity: O(m*n*logn), where 
+          - n is the length of numbers
+          - m is the max length of numbers
+        Space complexity: O(m+n)
+        """
+        # Check any of numbers is larger than 0.
+        if not any(nums):
+            return '0'
+
+        # Convert number list to string list.
+        num_strs = [str(n) for n in nums]
+
+        # Sort string list by built-in sort with comparator.
+        def comparator(x, y):
+            if x + y > y + x:
+                return -1
+            elif x + y < y + x:
+                return 1
+            else:
+                return 0
+
+        num_strs.sort(cmp=comparator)
+
+        return ''.join(num_strs)
+
+
 def main():
     # Output: "210"
     nums = [10,2]
