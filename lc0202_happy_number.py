@@ -28,6 +28,7 @@ class SolutionSumSquaresSet(object):
         :type n: int
         :rtype: bool
         """
+        # Use set to collect all sum of squares.
         sum_squares = set()
 
         while True:
