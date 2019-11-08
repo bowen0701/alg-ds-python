@@ -8,9 +8,6 @@ def insertion_sort(nums):
 
     Time complexity: O(n^2).
     Space complexity: O(1).
-
-    Although its complexity is bigger than the ones with O(n*logn), 
-    one advantage is the sorting happens in place.
     """
     gen = ((i, val) for i, val in enumerate(nums) if i > 0)
     for (i, val) in gen:
