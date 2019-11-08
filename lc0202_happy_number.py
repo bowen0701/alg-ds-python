@@ -22,7 +22,7 @@ Explanation:
 1^2 + 0^2 + 0^2 = 1
 """
 
-class Solution(object):
+class SolutionSumSquaresSet(object):
     def isHappy(self, n):
         """
         :type n: int
@@ -31,7 +31,7 @@ class Solution(object):
         sum_squares = set()
 
         while True:
-            # Compute sum of squares.
+            # Compute sum of squares from the reverse order.
             ss = 0
             while n:
                 n, d = n // 10, n % 10
@@ -43,7 +43,7 @@ class Solution(object):
                 # If sum of squares occurred before.
                 return False
             else:
-                # If new sum of squares, add it to set and update n.
+                # Add sum of squares to set and update n.
                 sum_squares.add(ss)
                 n = ss
 
@@ -51,11 +51,11 @@ class Solution(object):
 def main():
     # Output: True.
     n = 19
-    print Solution().isHappy(n)
+    print SolutionSumSquaresSet().isHappy(n)
 
     # Output: False.
     n = 14
-    print Solution().isHappy(n)
+    print SolutionSumSquaresSet().isHappy(n)
 
 
 if __name__ == '__main__':
