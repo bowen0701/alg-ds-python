@@ -29,17 +29,47 @@ Input: 701
 Output: "ZY"
 """
 
-class Solution(object):
+class SolutionRemStack(object):
     def convertToTitle(self, n):
         """
         :type n: int
         :rtype: str
         """
-        pass
+        # Use stack to collect iterative remainders of n % 26.
+        rem_stack = []
+
+        while n:
+            # Since we use rem + ord('A'), decrement n by 1 first.
+            n -= 1
+            rem = n % 26
+            rem_stack.append(chr(rem + ord('A')))
+
+            n //= 26
+
+        # Reversely concat letters.
+        return ''.join(rem_stack[::-1])
 
 
 def main():
-    pass
+    # Output: "A"
+    n = 1
+    print SolutionRemStack().convertToTitle(n)
+
+    # Output: "AB"
+    n = 28
+    print SolutionRemStack().convertToTitle(n)
+
+    # Output: "ZY"
+    n = 701
+    print SolutionRemStack().convertToTitle(n)
+
+    # Output: "Z"
+    n = 26
+    print SolutionRemStack().convertToTitle(n)
+
+    # Output: "AZ"
+    n = 52
+    print SolutionRemStack().convertToTitle(n)
 
 
 if __name__ == '__main__':
