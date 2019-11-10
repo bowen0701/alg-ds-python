@@ -52,12 +52,13 @@ class SolutionEvenPointer(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        even_i = 0
+        even_idx = 0
 
         for i, n in enumerate(A):
             if n % 2 == 0:
-                A[even_i], A[i] = A[i], A[even_i]
-                even_i += 1
+                # Swap number i and even index, and increment even index.
+                A[even_idx], A[i] = A[i], A[even_idx]
+                even_idx += 1
 
         return A
 
