@@ -24,11 +24,11 @@ Given word = "ABCB", return false.
 
 class SolutionDFSRecurBacktrack(object):
     def _dfsRecur(self, i, j, board, word, pos, visited):
-        # If there are no letters, return True.
+        # If there are no letters, complete search.
         if pos == len(word):
             return True
 
-        # If (i, j) is out of boundaries, does not match word letter or is visited.
+        # If (i, j) is out of boundaries, does not match letter or is visited.
         if (i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or 
             board[i][j] != word[pos] or
             visited.get((i, j))):
@@ -41,7 +41,8 @@ class SolutionDFSRecurBacktrack(object):
         is_found = False
         dirs = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
         for r, c in dirs:
-            is_found = is_found or self._dfsRecur(r, c, board, word, pos + 1, visited)
+            is_found = is_found or self._dfsRecur(r, c, board, word,
+                                                  pos + 1, visited)
 
         # Backtrack.
         visited[(i, j)] = False
@@ -67,6 +68,7 @@ class SolutionDFSRecurBacktrack(object):
 
         for i in range(m):
             for j in range(n):
+                # Start from 0th letter pos of word.
                 pos = 0
                 visited = {}
                 if self._dfsRecur(i, j, board, word, pos, visited):
