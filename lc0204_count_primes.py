@@ -6,7 +6,6 @@ URL: https://leetcode.com/problems/count-primes/
 Count the number of prime numbers less than a non-negative number, n.
 
 Example:
-
 Input: 10
 Output: 4
 Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
@@ -20,8 +19,8 @@ class SolutionSqrt(object):
         # Only check sqrt(i) for prime, since i = p*q <= p^2 for small p.
         for p in range(2, int(i ** 0.5) + 1):
             if i % p == 0:
-                return 0
-        return 1
+                return False
+        return True
 
     def countPrimes(self, n):
         """
@@ -49,11 +48,11 @@ class SolutionSieve(object):
         """
         primes = [0] * n
 
-        # Set number 2 to n - 1 as prime.
+        # First set numbers, 2, ..., n - 1, as primes.
         for i in range(2, n):
             primes[i] = 1
 
-        # Sieve method (i*i, i*i + i, i*i + 2i, ...) for i <= sqrt(n).
+        # Sieve method: Flip i*i, i*i+i, ..., to non-primes, i <= sqrt(n).
         for i in range(2, int(n ** 0.5) + 1):
             if not primes[i]:
                 continue
