@@ -11,7 +11,8 @@ add up to the target, where index1 must be less than index2.
 
 Note:
 - Your returned answers (both index1 and index2) are not zero-based.
-- You may assume that each input would have exactly one solution and you may not use the same element twice.
+- You may assume that each input would have exactly one solution and
+  you may not use the same element twice.
 
 Example:
 Input: numbers = [2,7,11,15], target = 9
@@ -19,18 +20,29 @@ Output: [1,2]
 Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
 """
 
-class Solution(object):
+class SolutionBinarySearch(object):
     def twoSum(self, numbers, target):
         """
         :type numbers: List[int]
         :type target: int
         :rtype: List[int]
         """
-        pass
+        left, right = 0, len(numbers) - 1
+
+        while left < right:
+            two_sum = numbers[left] + numbers[right]
+            if two_sum == target:
+                return [left + 1, right + 1]
+            elif two_sum > target:
+                right -= 1
+            else:
+                left += 1
 
 
 def main():
-    pass
+    # Output: [1, 2]
+    numbers, target = [2,7,11,15], 9
+    print SolutionBinarySearch().twoSum(numbers, target)
 
 
 if __name__ == '__main__':
