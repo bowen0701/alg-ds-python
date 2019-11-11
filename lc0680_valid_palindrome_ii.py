@@ -45,7 +45,7 @@ class SolutionNaive(object):
 
 
 class SolutionTwoPointers(object):
-    def isPalindrome(self, s, l, r):
+    def _isPalindrome(self, s, l, r):
         while l < r:
             if s[l] != s[r]:
                 return False
@@ -59,14 +59,17 @@ class SolutionTwoPointers(object):
         """
         :type s: str
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # Apply two pointers method.
         l, r = 0, len(s) - 1
 
         while l < r:
             if s[l] != s[r]:
-                return (self.isPalindrome(s, l + 1, r) or 
-                        self.isPalindrome(s, l, r - 1))
+                return (self._isPalindrome(s, l + 1, r) or 
+                        self._isPalindrome(s, l, r - 1))
 
             l += 1
             r -= 1
