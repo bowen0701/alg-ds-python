@@ -68,6 +68,7 @@ class SolutionTwoPointers(object):
 
         while l < r:
             if s[l] != s[r]:
+                # If there is one mismatch, skip left or right char.
                 return (self._isPalindrome(s, l + 1, r) or 
                         self._isPalindrome(s, l, r - 1))
 
