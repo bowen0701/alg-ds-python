@@ -27,21 +27,52 @@ class SolutionReverse(object):
         Space complexity: O(n).
         """
         # Take lower, convert to list, and keep alphanumetic chars.
-        s_ls = [c for c in list(s.lower()) 
-                if 0 <= ord(c) - ord('a') <= 25 or 0 <= ord(c) - ord('0') <= 9]
+        s_converted = [c for c in list(s.lower()) if 
+                       0 <= ord(c) - ord('a') <= 25 or
+                       0 <= ord(c) - ord('0') <= 9]
 
         # Compare list with its reverse.
-        return s_ls == s_ls[::-1]
+        return s_converted == s_converted[::-1]
+
+
+class SolutionTwoPointers(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        # Apply two pointers from the leftmost and rightmost.
+        l, r = 0, len(s) - 1
+
+        while l < r:
+            # Skip not alphanumeric chars.
+            while l < r and not s[l].isalnum():
+                l += 1
+            while l < r and not s[r].isalnum():
+                r -= 1
+
+            if s[l].lower() != s[r].lower():
+                return False
+
+            l += 1
+            r -= 1
+
+        return True
 
 
 def main():
     # Ans: True
     s = "A man, a plan, a canal: Panama"
     print SolutionReverse().isPalindrome(s)
+    print SolutionTwoPointers().isPalindrome(s)
 
     # Ans: False
     s = "0P"
     print SolutionReverse().isPalindrome(s)
+    print SolutionTwoPointers().isPalindrome(s)
 
 
 if __name__ == '__main__':
