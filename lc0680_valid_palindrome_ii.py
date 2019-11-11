@@ -20,17 +20,43 @@ The string will only contain lowercase characters a-z.
 The maximum length of the string is 50000.
 """
 
-class Solution(object):
+class SolutionNaive(object):
     def validPalindrome(self, s):
         """
         :type s: str
         :rtype: bool
+
+        Note: Time Limit Exceeded
+
+        Time complexity: O(n^3).
+        Space complexity: O(n).
         """
-        pass
+        # Check full string.
+        if s == s[::-1]:
+            return True
+
+        # Check if delete one character.
+        for i in range(len(s)):
+            s_partial = s[:i] + s[(i+1):]
+            if s_partial == s_partial[::-1]:
+                return True
+
+        return False
 
 
 def main():
-    pass
+    # Output: True
+    s = 'aba'
+    print SolutionNaive().validPalindrome(s)
+
+    # Output: True
+    s = 'abca'
+    print SolutionNaive().validPalindrome(s)
+
+    # Output: True
+    s = 'aacb'
+    print SolutionNaive().validPalindrome(s)
+
 
 
 if __name__ == '__main__':
