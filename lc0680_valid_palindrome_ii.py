@@ -44,19 +44,51 @@ class SolutionNaive(object):
         return False
 
 
+class SolutionTwoPointers(object):
+    def isPalindrome(self, s, l, r):
+        while l < r:
+            if s[l] != s[r]:
+                return False
+
+            l += 1
+            r -= 1
+
+        return True
+
+    def validPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        # Apply two pointers method.
+        l, r = 0, len(s) - 1
+
+        while l < r:
+            if s[l] != s[r]:
+                return (self.isPalindrome(s, l + 1, r) or 
+                        self.isPalindrome(s, l, r - 1))
+
+            l += 1
+            r -= 1
+
+        return True
+
+
 def main():
     # Output: True
     s = 'aba'
     print SolutionNaive().validPalindrome(s)
+    print SolutionTwoPointers().validPalindrome(s)
 
     # Output: True
     s = 'abca'
     print SolutionNaive().validPalindrome(s)
+    print SolutionTwoPointers().validPalindrome(s)
 
-    # Output: True
+    # Output: False
     s = 'aacb'
     print SolutionNaive().validPalindrome(s)
-
+    print SolutionTwoPointers().validPalindrome(s)
 
 
 if __name__ == '__main__':
