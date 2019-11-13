@@ -30,7 +30,7 @@ Note:
 - You may assume that there are no duplicate edges in the input prerequisites.
 """
 
-class SolutionTopologicalSort(object):
+class SolutionBFSTopologicalSort(object):
     def canFinish(self, numCourses, prerequisites):
         """
         :type numCourses: int
@@ -80,17 +80,17 @@ def main():
     # Output: true
     numCourses = 2
     prerequisites = [[1,0]]
-    print SolutionTopologicalSort().canFinish(numCourses, prerequisites)
+    print SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites)
 
     # Output: false
     numCourses = 2
     prerequisites = [[1,0],[0,1]]
-    print SolutionTopologicalSort().canFinish(numCourses, prerequisites)
+    print SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites)
 
-    # Output: true
+    # Output: false
     numCourses = 3
-    prerequisites = [[1,0],[2,1]]
-    print SolutionTopologicalSort().canFinish(numCourses, prerequisites)
+    prerequisites = [[1,0],[2,1],[0,2]]
+    print SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites)
 
 
 if __name__ == '__main__':
