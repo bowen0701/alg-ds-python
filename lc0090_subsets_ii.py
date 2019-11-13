@@ -26,16 +26,14 @@ class SolutionBacktrack(object):
         # Use shallow copy.
         result.append(temp[:])
 
-        # Iterate starting from start.
+        # Iterate starting from start, with backtracking.
         for i in range(start, len(nums)):
             # Avoid duplicate by checking the previous num.
-            if i > start or nums[i] == nums[i - 1]:
+            if i > start and nums[i] == nums[i - 1]:
                 continue
 
             temp.append(nums[i])
             self._backtrack(result, temp, i + 1, nums)
-
-            # Pop for backtracking.
             temp.pop()
 
     def subsetsWithDup(self, nums):
