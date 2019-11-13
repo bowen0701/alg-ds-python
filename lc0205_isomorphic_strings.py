@@ -27,18 +27,62 @@ Note:
 You may assume both s and t have the same length.
 """
 
-class Solution(object):
+class SolutionCharMaps(object):
     def isIsomorphic(self, s, t):
         """
         :type s: str
         :type t: str
         :rtype: bool
+
+        Time complexity: O(n), where n is the length of t.
+        Space complexity: O(n).
         """
-        pass
+        from collections import defaultdict
+
+        # If both are empty string, return true.
+        if not s and not t:
+            return True
+
+        # Collect t->s and s->t.
+        t_s_char_map = defaultdict()
+        s_t_char_map = defaultdict()
+
+        for i in range(len(t)):
+            if t[i] not in t_s_char_map:
+                t_s_char_map[t[i]] = s[i]
+            else:
+                if t_s_char_map[t[i]] != s[i]:
+                    return False
+
+            if s[i] not in s_t_char_map:
+                s_t_char_map[s[i]] = t[i]
+            else:
+                if s_t_char_map[s[i]] != t[i]:
+                    return False
+
+        return True
 
 
 def main():
-    pass
+    # Output: true
+    s = "egg"
+    t = "add"
+    print SolutionCharMaps().isIsomorphic(s, t)
+
+    # Output: false
+    s = "foo"
+    t = "bar"
+    print SolutionCharMaps().isIsomorphic(s, t)
+
+    # Output: true
+    s = "paper"
+    t = "title"
+    print SolutionCharMaps().isIsomorphic(s, t)
+
+    # Output: False
+    s = "aba"
+    t = "baa"
+    print SolutionCharMaps().isIsomorphic(s, t)
 
 
 if __name__ == '__main__':
