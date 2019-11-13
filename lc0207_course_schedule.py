@@ -30,18 +30,67 @@ Note:
 - You may assume that there are no duplicate edges in the input prerequisites.
 """
 
-class Solution(object):
+class SolutionTopologicalSort(object):
     def canFinish(self, numCourses, prerequisites):
         """
         :type numCourses: int
         :type prerequisites: List[List[int]]
         :rtype: bool
+
+        Time complexity: O(|V|+|E|), where
+          - |V|: number of vertices, i.e. courses.
+          - |E|: number of edges.
+        Space complexity: O(|V|+|E|).
         """
-        pass
+        from collections import defaultdict
+        from collections import deque
+
+        prereq_courses_adj = defaultdict(list)
+        n_prereqs = [0] * numCourses
+
+        # Collect adjacencies for prereq->list(courses).
+        for course, prereq in prerequisites:
+            prereq_courses_adj[prereq].append(course)
+            n_prereqs[course] += 1
+
+        queue = deque()
+
+        for course in range(numCourses):
+            # For course with no prerequisites, we can take them.
+            if n_prereqs[course] == 0:
+                queue.appendleft(course)
+
+        while queue:
+            # Take course with no prerequisites.
+            course = queue.pop()
+            numCourses -= 1
+
+            for next_course in prereq_courses_adj[course]:
+                # Decrement number of prerequisites for next course.
+                n_prereqs[next_course] -= 1
+
+                # If there is no more prerequisites, take next course.
+                if n_prereqs[next_course] == 0:
+                    queue.appendleft(next_course)
+
+        return numCourses == 0
 
 
 def main():
-    pass
+    # Output: true
+    numCourses = 2
+    prerequisites = [[1,0]]
+    print SolutionTopologicalSort().canFinish(numCourses, prerequisites)
+
+    # Output: false
+    numCourses = 2
+    prerequisites = [[1,0],[0,1]]
+    print SolutionTopologicalSort().canFinish(numCourses, prerequisites)
+
+    # Output: true
+    numCourses = 3
+    prerequisites = [[1,0],[2,1]]
+    print SolutionTopologicalSort().canFinish(numCourses, prerequisites)
 
 
 if __name__ == '__main__':
