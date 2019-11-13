@@ -20,7 +20,7 @@ Note:
 All given inputs are in lowercase letters a-z.
 """
 
-class SolutionNaive(object):
+class SolutionIter(object):
     def longestCommonPrefix(self, strs):
         """
         :type strs: List[str]
@@ -29,12 +29,12 @@ class SolutionNaive(object):
         Time complexity: O(m*n), where
           - m is the maximum length of strs, and
           - n is the length of "minimum" string.
-        Space complexity: O(m).
+        Space complexity: O(1).
         """
         if not strs:
             return ''
 
-        # Choose str 0 as the baseline to compare with others.
+        # Choose str 0 as the baseline.
         prefix = ''
 
         for pos, c in enumerate(strs[0]):
@@ -51,11 +51,11 @@ class SolutionNaive(object):
 def main():
     # Output: "fl"
     strs = ["flower", "flow", "flight"]
-    print SolutionNaive().longestCommonPrefix(strs)
+    print SolutionIter().longestCommonPrefix(strs)
 
     # Output: ""
     strs = ["dog", "racecar", "car"]
-    print SolutionNaive().longestCommonPrefix(strs)
+    print SolutionIter().longestCommonPrefix(strs)
 
 
 if __name__ == '__main__':
