@@ -31,6 +31,7 @@ class SolutionTwoLists(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        # Use lists 1 & 2 to collect smaller and bigger nodes.
         prev_head1 = ListNode(None)
         prev_head2 = ListNode(None)
         current1 = prev_head1
@@ -47,6 +48,7 @@ class SolutionTwoLists(object):
 
             current = current.next
 
+        # Link list 1's tal to list 2's head, set list 2's next as None.
         current1.next = prev_head2.next
         current2.next = None
         return prev_head1.next
