@@ -27,6 +27,9 @@ class SolutionTwoLists(object):
         :type head: ListNode
         :type x: int
         :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         prev_head1 = ListNode(None)
         prev_head2 = ListNode(None)
