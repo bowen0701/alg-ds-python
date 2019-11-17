@@ -16,17 +16,33 @@ Follow up:
 Could you do it without any loop/recursion in O(1) runtime?
 """
 
-class Solution(object):
+class SolutionIter(object):
     def addDigits(self, num):
         """
         :type num: int
         :rtype: int
+
+        Time complexity: O(n), where n is number of digits in num.
+        Space complexity: O(1).
         """
-        pass
+        num_str = str(num)
+
+        if len(num_str) == 1:
+            return num
+
+        while len(num_str) > 1:
+            new_num = 0
+            for c in num_str:
+                new_num += int(c)
+
+            num_str = str(new_num)
+
+        return new_num
 
 
 def main():
-    pass
+    num = 38
+    print SolutionIter().addDigits(num)
 
 
 if __name__ == '__main__':
