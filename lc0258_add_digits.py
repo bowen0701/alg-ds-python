@@ -40,9 +40,28 @@ class SolutionIter(object):
         return new_num
 
 
+class SolutionDigitRoot(object):
+    def addDigits(self, num):
+        """
+        :type num: int
+        :rtype: int
+
+        Digit root problem with congruence formula:
+        https://en.wikipedia.org/wiki/Digital_root#Congruence_formula
+
+        Time complexity: O(1).
+        Space complexity: O(1).
+        """
+        if num == 0:
+            return 0
+
+        return 1 + (num - 1) % 9
+
+
 def main():
     num = 38
     print SolutionIter().addDigits(num)
+    print SolutionDigitRoot().addDigits(num)
 
 
 if __name__ == '__main__':
