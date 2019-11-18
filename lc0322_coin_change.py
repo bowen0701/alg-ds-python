@@ -103,27 +103,24 @@ class SolutionDp(object):
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a*n).
         """
-        # We want to start from smaller coins.
-        coins = sorted(coins)
-
         n_coins = len(coins)
-        T = [[float('inf')] * (amount + 1) for _ in range(n_coins + 1)]
+        T = [[float('inf')] * (amount + 1) for _ in range(n_coins)]
 
         # For amount 0, set num equal 0.
-        for c in range(1, n_coins + 1):
+        for c in range(n_coins):
             T[c][0] = 0
 
-        for c in range(1, n_coins + 1):
-            for a in range(1, amount + 1):
-                if a == coins[c - 1]:
+        for a in range(1, amount + 1):
+            for c in range(n_coins):
+                if coins[c] == a:
                     # Directly use coin c to change total amount.
                     T[c][a] = 1
-                elif a > coins[c - 1]:
+                elif coins[c] < a:
                     # If coin c can be included, decide which uses less coins:
                     # 1. #coins without coin c to make a
                     # 2. 1 + #coins with coin c to make a - coins[c]
-                    T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c - 1]])
-                elif a < coins[c - 1]:
+                    T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c]])
+                else:
                     # If coin c cannot be included, use previous #coins.
                     T[c][a] = T[c - 1][a]
 
