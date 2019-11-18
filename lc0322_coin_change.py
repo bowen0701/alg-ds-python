@@ -120,8 +120,8 @@ class SolutionDp(object):
                     T[c][a] = 1
                 elif a > coins[c - 1]:
                     # If coin c can be included, decide which uses less coins:
-                    # 1. 1 + #coins with coin c to make a - coins[c]
-                    # 2. #coins without coin c to make a
+                    # 1. #coins without coin c to make a
+                    # 2. 1 + #coins with coin c to make a - coins[c]
                     T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c - 1]])
                 elif a < coins[c - 1]:
                     # If coin c cannot be included, use previous #coins.
