@@ -130,6 +130,37 @@ class SolutionDp(object):
             return -1
 
 
+class SolutionDp2(object):
+    def coinChange(self, coins, amount):
+        """Change fewest #coins by bottom-up dynamic programming.
+
+        Time complexity: O(a*n), where a is amount, and n is number of coins.
+        Space complexity: O(a).
+        """
+        # Sort coins to optimize denomination.
+        coins = sorted(coins)
+
+        T = [float('inf')] * (amount + 1)
+
+        # For amount 0, set num of coints to 0.
+        T[0] = 0
+
+        for a in range(1, amount + 1):
+            for c in range(len(coins)):
+                if coins[c] <= a:
+                    # If coin c can be included:
+                    # 1. #coins without coin c to make a
+                    # 2. 1 + #coins with coin c to make a - coins[c]
+                    T[a] = min(T[a], 1 + T[a - coins[c]])
+                else:
+                    break
+
+        if T[-1] != float('inf'):
+            return T[-1]
+        else:
+            return -1
+
+
 def main():
     import time
 
@@ -149,6 +180,10 @@ def main():
     print 'By DP: {}'.format(SolutionDp().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'By DP2: {}'.format(SolutionDp2().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
+
     # Ans: -1.
     coins = [2]
     amount = 3
@@ -163,6 +198,10 @@ def main():
 
     start_time = time.time()
     print 'By DP: {}'.format(SolutionDp().coinChange(coins, amount))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'By DP2: {}'.format(SolutionDp2().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
 
