@@ -62,7 +62,8 @@ class SolutionLeadRecur(object):
         Time complexity: O(n*logn), for balanced tree; O(n^2) for single sided.
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Sum lead path sum (with root) and path sums for left/right. 
+        # Sum lead path sum (with root) and path sums for left/right.
+
         if not root:
             return 0
 
@@ -86,10 +87,10 @@ class SolutionSumFreqMemo(object):
         cur_sum += root.val
 
         # Compute complemented path sum.
-        comp_sum = cur_sum - sum
+        complement_sum = cur_sum - sum
 
         # Update num of paths if complemented path sum exists.
-        self.n_paths += sum_freqs[comp_sum]
+        self.n_paths += sum_freqs[complement_sum]
 
         # Update current path sum frequency.
         sum_freqs[cur_sum] += 1
@@ -98,7 +99,7 @@ class SolutionSumFreqMemo(object):
         self._dfs(root.left, sum, sum_freqs, cur_sum)
         self._dfs(root.right, sum, sum_freqs, cur_sum)
 
-        # When switch to another branch, backtrack.
+        # Backtrack when switch to another branch.
         sum_freqs[cur_sum] -= 1
 
     def pathSum(self, root, sum):
@@ -120,10 +121,8 @@ class SolutionSumFreqMemo(object):
         sum_freqs = defaultdict(int)
         sum_freqs[0] = 1
 
-        # Initialize current sum.
+        # Apply DFS with initial current sum 0.
         cur_sum = 0
-
-        # Apply DFS.
         self._dfs(root, sum, sum_freqs, cur_sum)
 
         return self.n_paths
