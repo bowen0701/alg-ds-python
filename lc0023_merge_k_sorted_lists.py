@@ -31,7 +31,7 @@ class SolutionSort(object):
 
         Time complexity: O(nk*log(nk)), where
           - n is the number of nodes,
-          - k is the length of lists.
+          - k is the n_lists of lists.
         Space complexity: O(nk).
         """
         # Collect all nodes from list.
@@ -86,16 +86,16 @@ class SolutionMergeTwoRecur(object):
         if not lists:
             return None
 
-        length = len(lists)
+        n_lists = len(lists)
 
         # When there are at least two lists, merge them.
-        while length > 1:
+        while n_lists > 1:
             # Merge each pair of leftmost & rightmost lists to the former.
-            for i in range(length // 2):
-                lists[i] = self._merge2Lists(lists[i], lists[length - 1 - i])
+            for i in range(n_lists // 2):
+                lists[i] = self._merge2Lists(lists[i], lists[n_lists - 1 - i])
 
-            # Decrement length.
-            length = (length + 1) // 2
+            # Decrement n_lists.
+            n_lists = (n_lists + 1) // 2
 
         return lists[0]
 
@@ -137,16 +137,16 @@ class SolutionMergeTwoIter(object):
         if not lists:
             return None
 
-        length = len(lists)
+        n_lists = len(lists)
 
         # When there are at least two lists, merge them.
-        while length > 1:
+        while n_lists > 1:
             # Merge each pair of leftmost & rightmost lists to the former.
-            for i in range(length // 2):
-                lists[i] = self._merge2Lists(lists[i], lists[length - 1 - i])
+            for i in range(n_lists // 2):
+                lists[i] = self._merge2Lists(lists[i], lists[n_lists - 1 - i])
 
-            # Decrement length.
-            length = (length + 1) // 2
+            # Decrement n_lists.
+            n_lists = (n_lists + 1) // 2
 
         return lists[0]
 
