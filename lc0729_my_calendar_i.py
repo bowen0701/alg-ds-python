@@ -63,6 +63,49 @@ class MyCalendarListIter(object):
         return True
 
 
+class Node(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+        self.left = None
+        self.right = None
+
+class MyCalendarBST(object):
+    def __init__(self):
+        self.root = None
+
+    def _binary_search(self, start, end, node):
+        if start >= node.end:
+            if not node.right:
+                node.right = Node(start, end)
+                return True
+            else:
+                return self._binary_search(start, end, node.right)
+        elif end <= node.start:
+            if not node.left:
+                node.left = Node(start, end)
+                return True
+            else:
+                return self._binary_search(start, end, node.left)
+        else:
+            return False
+
+    def book(self, start, end):
+        """
+        :type start: int
+        :type end: int
+        :rtype: bool
+
+        Time complexity: O(logn).
+        Space complexity: O(n).
+        """
+        if not self.root:
+            self.root = Node(start, end)
+            return True
+
+        return self._binary_search(start, end, self.root)
+
+
 def main():
     # MyCalendar.book(10, 20); // returns true
     # MyCalendar.book(15, 25); // returns false
@@ -71,6 +114,12 @@ def main():
     print calendar.book(10, 20)
     print calendar.book(15, 25)
     print calendar.book(20, 30)
+
+    calendar = MyCalendarBST()
+    print calendar.book(10, 20)
+    print calendar.book(15, 25)
+    print calendar.book(20, 30)
+
 
 
 if __name__ == '__main__':
