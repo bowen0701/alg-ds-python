@@ -41,12 +41,12 @@ class SolutionPreorderRecur(object):
         # Recursive call for preorder traversal.
         cur_path.append(root.val)
 
-        # Traverse root.
+        # Collect result if root-to-leaf path sum is sum.
         if root.val == sum and not root.left and not root.right:
             paths.append(cur_path)
             return None
 
-        # Traverse root's left & right with "copied" current path.
+        # Traverse root's left & right with shallow copied current path.
         self._find_paths(root.left, sum - root.val, cur_path[:], paths)
         self._find_paths(root.right, sum - root.val, cur_path[:], paths)
 
@@ -94,9 +94,11 @@ class SolutionPreorderIter(object):
 
             _cur_path.append(current.val)
 
+            # Collect result if root-to-leaf path sum is sum.
             if current.val == _sum and not current.left and not current.right:
                 paths.append(_cur_path)
 
+            # Append right before left to stack with shallow copied current path.
             if current.right:
                 stack.append((current.right, _cur_path[:], _sum - current.val))
             if current.left:
