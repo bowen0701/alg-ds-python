@@ -42,7 +42,7 @@ param_1 = obj.book(start,end)
 
 class MyCalendarList(object):
     def __init__(self):
-        self.books = []
+        self.events = []
 
     def book(self, start, end):
         """
@@ -53,13 +53,13 @@ class MyCalendarList(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Iteratively check all books overlapping with [start, end].
-        for book in self.books:
-            if max(book[0], start) < min(book[1], end):
+        # Iteratively check all events overlapping with [start, end].
+        for event in self.events:
+            if start < event[1] and end > event[0]:
                 return False
 
-        # If no overlaps, add to books.
-        self.books.append([start, end])
+        # If no overlaps, add to events.
+        self.events.append([start, end])
         return True
 
 
