@@ -49,21 +49,49 @@ obj = MyCalendarTwo()
 param_1 = obj.book(start,end)
 """
 
-class MyCalendarTwo(object):
+class MyCalendarTwoLists(object):
     def __init__(self):
-        pass
+        self.events = []
+        self.overlaps = []
 
     def book(self, start, end):
         """
         :type start: int
         :type end: int
         :rtype: bool
+
+        Time complexity: O(n^2).
+        Space complexity: O(n).
         """
-        pass
+        for overlap in self.overlaps:
+            # Check triple booking if double overlaps.
+            if start < overlap[1] and end > overlap[0]:
+                return False
+
+        for event in self.events:
+            # Check double booking.
+            if start < event[1] and end > event[0]:
+                # If yes, append overlapped period.
+                self.overlaps.append([max(start, event[0]), min(end, event[1])])
+
+        self.events.append([start, end])
+        return True
 
 
 def main():
-    pass
+    # MyCalendar.book(10, 20); // returns true
+    # MyCalendar.book(50, 60); // returns true
+    # MyCalendar.book(10, 40); // returns true
+    # MyCalendar.book(5, 15); // returns false
+    # MyCalendar.book(5, 10); // returns true
+    # MyCalendar.book(25, 55); // returns true
+    calendar = MyCalendarTwoLists()
+    print calendar.book(10, 20)
+    print calendar.book(50, 60)
+    print calendar.book(10, 40)
+    print calendar.book(5, 15)
+    print calendar.book(5, 10)
+    print calendar.book(25, 55)
 
 
 if __name__ == '__main__':
