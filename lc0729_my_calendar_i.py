@@ -40,7 +40,7 @@ obj = MyCalendar()
 param_1 = obj.book(start,end)
 """
 
-class MyCalendarListIter(object):
+class MyCalendarList(object):
     def __init__(self):
         self.books = []
 
@@ -110,7 +110,7 @@ def main():
     # MyCalendar.book(10, 20); // returns true
     # MyCalendar.book(15, 25); // returns false
     # MyCalendar.book(20, 30); // returns true
-    calendar = MyCalendarListIter()
+    calendar = MyCalendarList()
     print calendar.book(10, 20)
     print calendar.book(15, 25)
     print calendar.book(20, 30)
