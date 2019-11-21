@@ -42,9 +42,11 @@ class SolutionPreorderRecur(object):
         if not root:
             return False
 
+        # Base case: root-to-leaf path sum is sum.
         if root.val == sum and not root.left and not root.right:
             return True
 
+        # If not, traverse left and right nodes.
         return (self.hasPathSum(root.left, sum - root.val) or
                 self.hasPathSum(root.right, sum - root.val))
 
@@ -69,10 +71,11 @@ class SolutionPreorderIter(object):
         while stack:
             current, _sum = stack.pop()
 
+            # Base case: root-to-leaf path sum is sum.
             if current.val == _sum and not current.left and not current.right:
                 return True
 
-            # If exist, append right before left, since we use stack.
+            # Append right before left to stack.
             if current.right:
                 stack.append((current.right, _sum - current.val))
             if current.left:
