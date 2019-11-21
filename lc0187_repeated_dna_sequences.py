@@ -15,17 +15,41 @@ Input: s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
 Output: ["AAAAACCCCC", "CCCCCAAAAA"]
 """
 
-class Solution(object):
+class SolutionDict(object):
     def findRepeatedDnaSequences(self, s):
         """
         :type s: str
         :rtype: List[str]
         """
-        pass
+        # Apply dict to accumulate 10-letter sequence occurrence.
+
+        from collections import defaultdict
+
+        repeated_seq = []
+
+        # Start from index 0 to accumuluate sequence occurrence count.
+        seen_seq_count = defaultdict(int)
+
+        i = 0
+        while i + 10 <= len(s):
+            # Take substring and accumulate occurrence count.
+            seq = s[i:(i + 10)]
+            seen_seq_count[seq] += 1
+
+            if seen_seq_count[seq] == 2:
+                # Check double occurrence only to prevend duplicates.
+                repeated_seq.append(seq)
+
+            # Increment i.
+            i += 1
+
+        return repeated_seq
 
 
 def main():
-    pass
+    # Output: ["AAAAACCCCC", "CCCCCAAAAA"]
+    s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
+    print SolutionDict().findRepeatedDnaSequences(s)
 
 
 if __name__ == '__main__':
