@@ -22,17 +22,35 @@ Explanation: Paint house 0 into blue, paint house 1 into green, paint house 2 in
 Minimum cost: 2 + 5 + 3 = 10.
 """
 
-class Solution(object):
+class SolutionDp(object):
     def minCost(self, costs):
         """
         :type costs: List[List[int]]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        if not costs:
+            return 0
+
+        n_houses = len(costs)
+
+        for i in range(1, n_houses):
+            # Accumulate painting costs of the other two houses.
+            costs[i][0] += min(costs[i-1][1], costs[i-1][2])
+            costs[i][1] += min(costs[i-1][0], costs[i-1][2])
+            costs[i][2] += min(costs[i-1][0], costs[i-1][1])
+
+        return min(costs[-1])
 
 
 def main():
-    pass
+    # Output: 10
+    costs = [[17,2,17],
+             [16,16,5],
+             [14,3,19]]
+    print SolutionDp().minCost(costs)
 
 
 if __name__ == '__main__':
