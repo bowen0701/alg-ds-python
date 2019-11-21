@@ -40,21 +40,37 @@ obj = MyCalendar()
 param_1 = obj.book(start,end)
 """
 
-class MyCalendar(object):
+class MyCalendarListIter(object):
     def __init__(self):
-        pass
+        self.books = []
 
     def book(self, start, end):
         """
         :type start: int
         :type end: int
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        # Iteratively check all books overlapping with [start, end].
+        for book in self.books:
+            if max(book[0], start) < min(book[1], end):
+                return False
+
+        # If no overlaps, add to books.
+        self.books.append([start, end])
+        return True
 
 
 def main():
-    pass
+    # MyCalendar.book(10, 20); // returns true
+    # MyCalendar.book(15, 25); // returns false
+    # MyCalendar.book(20, 30); // returns true
+    calendar = MyCalendarListIter()
+    print calendar.book(10, 20)
+    print calendar.book(15, 25)
+    print calendar.book(20, 30)
 
 
 if __name__ == '__main__':
