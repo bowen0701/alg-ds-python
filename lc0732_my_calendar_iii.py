@@ -39,9 +39,10 @@ Note:
 - In calls to MyCalendarThree.book(start, end), start and end are integers in the range [0, 10^9].
 """
 
-class MyCalendarThree(object):
+class MyCalendarThreeDict(object):
     def __init__(self):
-        pass
+        from collections import defaultdict
+        self.timeline = defaultdict(int)
 
     def book(self, start, end):
         """
@@ -49,11 +50,35 @@ class MyCalendarThree(object):
         :type end: int
         :rtype: int
         """
-        pass
+        # New event starts at start, ends at end.
+        self.timeline[start] += 1
+        self.timeline[end] -= 1
+
+        # Accumulate k by iteratively checking sorted events by start times.
+        k = 0
+        cur_events = 0
+        for event_time, incre_event in sorted(
+            self.timeline.items(), key=lambda x: x[0]):
+            cur_events += incre_event
+            k = max(k, cur_events)
+
+        return k
 
 
 def main():
-    pass
+    # MyCalendarThree.book(10, 20); // returns 1
+    # MyCalendarThree.book(50, 60); // returns 1
+    # MyCalendarThree.book(10, 40); // returns 2
+    # MyCalendarThree.book(5, 15); // returns 3
+    # MyCalendarThree.book(5, 10); // returns 3
+    # MyCalendarThree.book(25, 55); // returns 3
+    calendar = MyCalendarThreeDict()
+    print calendar.book(10, 20)
+    print calendar.book(50, 60)
+    print calendar.book(10, 40)
+    print calendar.book(5, 15)
+    print calendar.book(5, 10)
+    print calendar.book(25, 55)
 
 
 if __name__ == '__main__':
