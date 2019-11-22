@@ -57,11 +57,40 @@ class MyCalendarThreeDict(object):
         self.timeline[start] += 1
         self.timeline[end] -= 1
 
-        # Accumulate k by iteratively checking sorted events by start times.
+        # Accumulate k by iterating sorted events by start times.
         k = 0
         cur_events = 0
         for event_time, incre_event in sorted(
             self.timeline.items(), key=lambda x: x[0]):
+            cur_events += incre_event
+            k = max(k, cur_events)
+
+        return k
+
+
+class MyCalendarThreeBisectList(object):
+    def __init__(self):
+        self.timeline = []
+
+    def book(self, start, end):
+        """
+        :type start: int
+        :type end: int
+        :rtype: int
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
+        """
+        from bisect import insort
+
+        # New event starts at start time, ends at end time.
+        insort(self.timeline, (start, 1))
+        insort(self.timeline, (end, -1))
+
+        # Accumulate k by iterating sorted events by start times.
+        k = 0
+        cur_events = 0
+        for event_time, incre_event in self.timeline:
             cur_events += incre_event
             k = max(k, cur_events)
 
@@ -76,6 +105,14 @@ def main():
     # MyCalendarThree.book(5, 10); // returns 3
     # MyCalendarThree.book(25, 55); // returns 3
     calendar = MyCalendarThreeDict()
+    print calendar.book(10, 20)
+    print calendar.book(50, 60)
+    print calendar.book(10, 40)
+    print calendar.book(5, 15)
+    print calendar.book(5, 10)
+    print calendar.book(25, 55)
+
+    calendar = MyCalendarThreeBisectList()
     print calendar.book(10, 20)
     print calendar.book(50, 60)
     print calendar.book(10, 40)
