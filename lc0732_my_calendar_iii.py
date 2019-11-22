@@ -49,6 +49,9 @@ class MyCalendarThreeDict(object):
         :type start: int
         :type end: int
         :rtype: int
+
+        Time complexity: O(n^2*logn).
+        Space complexity: O(n).
         """
         # New event starts at start, ends at end.
         self.timeline[start] += 1
