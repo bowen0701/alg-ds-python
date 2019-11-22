@@ -52,17 +52,50 @@ Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
 
-class Solution(object):
+class SolutionIntRomanList(object):
     def intToRoman(self, num):
         """
         :type num: int
         :rtype: str
         """
-        pass
+        # Use "decreasing" integer-roman list.
+        int_romans = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), 
+                      (90, 'XC'), (50, 'L'), (40, 'XL'), (10, 'X'), 
+                      (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
+
+        # Iteratively substract by integer, and store Roman into list.
+        res = []
+
+        for i, r in int_romans:
+            while num >= i:
+                res.append(r)
+                num -= i
+
+            # If no num, join into a Roman string.
+            if not num:
+                return ''.join(res)
 
 
 def main():
-    pass
+    # Output: "III"
+    num = 3
+    print SolutionIntRomanList().intToRoman(num)
+
+    # Output: "IV"
+    num = 4
+    print SolutionIntRomanList().intToRoman(num)
+
+    # Output: "IX"
+    num = 9
+    print SolutionIntRomanList().intToRoman(num)
+
+    # Output: "LVIII"
+    num = 58
+    print SolutionIntRomanList().intToRoman(num)
+
+    # Output: "MCMXCIV"
+    num = 1994
+    print SolutionIntRomanList().intToRoman(num)
 
 
 if __name__ == '__main__':
