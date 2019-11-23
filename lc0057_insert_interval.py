@@ -22,6 +22,9 @@ class SolutionIter(object):
         :type intervals: List[List[int]]
         :type newInterval: List[int]
         :rtype: List[List[int]]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         if not intervals:
             return [newInterval]
