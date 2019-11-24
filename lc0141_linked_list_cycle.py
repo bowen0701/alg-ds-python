@@ -46,15 +46,18 @@ class SolutionDict(object):
         Time complexity: O(n), where n is the lenght of linked list.
         Space complexity: O(n).
         """
+        from collections import defaultdict
+
         if not head:
             return False
 
-        visited_d = {}
+        visited_d = defaultdict(bool)
         visited_d[head] = True
 
         current = head
+
         while current.next:
-            if visited_d.get(current.next):
+            if current.next in visited_d:
                 return True
             else:
                 visited_d[current.next] = True
@@ -79,7 +82,7 @@ class SolutionFastSlow(object):
         fast = head
 
         while fast.next and fast.next.next:
-            # Two pointers: slow for 1 step; fast for 2 steps.
+            # Two pointers: slow move for 1 step; fast for 2 steps.
             slow = slow.next
             fast = fast.next.next
 
