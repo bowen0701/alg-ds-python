@@ -57,6 +57,7 @@ class SolutionDict(object):
             if c in '([{':
                 stack.append(c)
                 continue
+
             # If c in close bracket, pop element from stack and check match.
             if c in ')]}':
                 # If no open bracket in stack, we have non-matched close one.
@@ -64,7 +65,7 @@ class SolutionDict(object):
                     return False
 
                 open_c = stack.pop()
-                if open_close_d.get(open_c) != c:
+                if open_close_d[open_c] != c:
                     return False
 
         # Check whether there is non-matched open bracket left.
