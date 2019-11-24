@@ -72,20 +72,29 @@ class SolutionSlowFast(object):
         :type head: ListNode
         :rtype: ListNode
 
+        If there is a cycle. Assume 
+        - distance from head to loop start: x1
+        - distance from loop start to their meet: x2
+        - distance from their meet to loop start: x3
+        Then
+        - distance of fast moves when meets slow: x1 + x2 + x3 + x2.
+        - distance of slow moves when meets fast: x1 + x2.
+        - their relationship: x1 + x2 + x3 + x2 = 2 * (x1 + x2) => x1 = x3.
+
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        if not head:
+            return None
+
         slow, fast = head, head
 
-        while fast and fast.next:
+        while fast.next and fast.next.next:
+            # Two pointers: slow move for 1 step; fast for 2 steps.
             slow = slow.next
             fast = fast.next.next
 
-            # If there is a cycle. Assume 
-            # - distance of head->loop start is x1
-            # - distance of loop start->fast meets slow is x2
-            # - distance of fast meets slow-> loop start is x3
-            # x1 + x2 + x3 + x2 = 2 (x1 + x2) => x1 = x3
+            # Start from their meet, iterate to meet head and slow.
             if slow is fast:
                 current = head
                 while current:
