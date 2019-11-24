@@ -31,12 +31,12 @@ class SolutionRecur(object):
 
         # LIS is 1 + a LIS of nums[1:n], including nums[0],
         # if nums[0] is bigger than the current max.
-        lis_in = -float('inf')
         if nums[start] > cur_max:
             lis_in = 1 + self._LIS(nums, nums[start], start + 1, end)
+        else:
+            lis_in = -float('inf')
 
-        lis = max(lis_ex, lis_in)
-        return lis
+        return max(lis_ex, lis_in)
 
     def lengthOfLIS(self, nums):
         """Length of LIS by recursion.
@@ -117,6 +117,7 @@ class SolutionBinarySearch(object):
 def main():
     import time
 
+    # Output: 4.
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
 
     start_time = time.time()
