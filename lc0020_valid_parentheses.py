@@ -33,7 +33,7 @@ Input: "{[]}"
 Output: true
 """
 
-class Solution(object):
+class SolutionDict(object):
     def isValid(self, s):
         """
         :type s: str
@@ -78,37 +78,37 @@ def main():
     # Input: "()"
     # Output: true
     s = '()'
-    print Solution().isValid(s)
+    print SolutionDict().isValid(s)
 
     # Input: "()[]{}"
     # Output: true
     s = '()[]{}'
-    print Solution().isValid(s)
+    print SolutionDict().isValid(s)
 
     # Input: "(]"
     # Output: false
     s = '(]'
-    print Solution().isValid(s)
+    print SolutionDict().isValid(s)
 
     # Input: "([)]"
     # Output: false
     s = '([)]'
-    print Solution().isValid(s)
+    print SolutionDict().isValid(s)
 
     # Input: "{[]}"
     # Output: true
     s = '{[]}'
-    print Solution().isValid(s)
+    print SolutionDict().isValid(s)
 
     # Input: '['
     # Output: False
     s = '['
-    print Solution().isValid(s)
+    print SolutionDict().isValid(s)
 
     # Input: ']'
     # Output: False
     s = ']'
-    print Solution().isValid(s)
+    print SolutionDict().isValid(s)
 
 
 if __name__ == '__main__':
