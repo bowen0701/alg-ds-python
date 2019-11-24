@@ -40,6 +40,11 @@ class SolutionRecur(object):
         """
         :type s: str
         :rtype: int
+
+        Note: Time Limit Exceeded.
+
+        Time complexity: O(2^n).
+        Space complexity: O(n).
         """
         # Apply top-down recursion.
         left, right = 0, len(s) - 1
