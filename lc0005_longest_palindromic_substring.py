@@ -47,7 +47,7 @@ class SolutionDp(object):
         Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
-        if not len(s):
+        if not s:
             return ''
 
         n = len(s)
@@ -90,7 +90,7 @@ class SolutionIter(object):
         Time complexity: O(n^2).
         Space complexity: O(n).
         """
-        if not len(s):
+        if not s:
             return ''
 
         start = 0
