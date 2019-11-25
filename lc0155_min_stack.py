@@ -60,10 +60,10 @@ class MinStack(object):
         Time complexity: O(1).
         Space complexity: O(n), where n is the number of elements.
         """
-        if self._stack:
-            return self._stack.pop()[1]
-        else:
+        if not self._stack:
             return None
+
+        return self._stack.pop()[1]
 
     def top(self):
         """
@@ -72,10 +72,10 @@ class MinStack(object):
         Time complexity: O(1).
         Space complexity: O(n), where n is the number of elements.
         """
-        if self._stack:
-            return self._stack[-1][0]
-        else:
+        if not self._stack:
             return None
+
+        return self._stack[-1][0]
 
     def getMin(self):
         """
@@ -84,10 +84,10 @@ class MinStack(object):
         Time complexity: O(1).
         Space complexity: O(n), where n is the number of elements.
         """
-        if self._stack:
-            return self._stack[-1][1]
-        else:
+        if not self._stack:
             return None
+
+        return self._stack[-1][1]
 
 
 def main():
