@@ -31,6 +31,9 @@ class SolutionIter(object):
         :type flowerbed: List[int]
         :type n: int
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         if not n:
             return True
