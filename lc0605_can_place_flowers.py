@@ -25,18 +25,64 @@ Note:
 - n is a non-negative integer which won't exceed the input array size.
 """
 
-class Solution(object):
+class SolutionIter(object):
     def canPlaceFlowers(self, flowerbed, n):
         """
         :type flowerbed: List[int]
         :type n: int
         :rtype: bool
         """
-        pass
+        if not n:
+            return True
+
+        # Edge case: flowerbed = [0].
+        if flowerbed == [0]:
+            if n == 1:
+                return True
+            else:
+                return False
+
+        # Iterate to plant n flowers starting from position i = 0.
+        i = 0
+        while n > 0 and i < len(flowerbed):
+            if not flowerbed[i]:
+                if i == 0:
+                    if not flowerbed[i + 1]:
+                        flowerbed[i] = 1
+                        n -= 1
+                elif i == len(flowerbed) - 1:
+                    if not flowerbed[i - 1]:
+                        flowerbed[i] = 1
+                        n -= 1
+                else:
+                    if not flowerbed[i - 1] and not flowerbed[i + 1]:
+                        flowerbed[i] = 1
+                        n -= 1
+
+            i += 1
+
+        # Check if there remain flowers to plant.
+        if n > 0:
+            return False
+        else:
+            return True
 
 
 def main():
-    pass
+    # Output: True
+    flowerbed = [1,0,0,0,1]
+    n = 1
+    print SolutionIter().canPlaceFlowers(flowerbed, n)
+
+    # Output: False
+    flowerbed = [1,0,0,0,1]
+    n = 2
+    print SolutionIter().canPlaceFlowers(flowerbed, n)
+
+    # Output: True
+    flowerbed = [0,0,1]
+    n = 1
+    print SolutionIter().canPlaceFlowers(flowerbed, n)
 
 
 if __name__ == '__main__':
