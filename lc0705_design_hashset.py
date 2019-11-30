@@ -43,13 +43,13 @@ class _hashSet(object):
         
     def _hash(self, key):
         """
-        Define hash function: key->hashed key.
+        Hash function: key->hashed key.
         """
         return key % self.capacity
 
     def _rehash(self, hash_key):
         """
-        Define rehash function when there is collision.
+        Rehash function when there is collision: hashed key->rehashed key.
         """
         return (5 * hash_key + 1) % self.capacity
 
