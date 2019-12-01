@@ -8,13 +8,13 @@ Design a HashSet without using any built-in hash table libraries.
 To be specific, your design should include these functionew_set:
 
 - add(value): Inew_setert a value into the HashSet. 
-- containew_set(value) : Return whether the value exists in the HashSet or not.
+- contains(value) : Return whether the value exists in the HashSet or not.
 - remove(value): Remove a value in the HashSet. 
 
 If the value does not exist in the HashSet, do nothing.
 
 Example:
-_hashSet hashSet = new _hashSet();
+hashSet = new MyHashSet();
 hashSet.add(1);         
 hashSet.add(2);         
 hashSet.containew_set(1);    // returnew_set true
@@ -30,7 +30,7 @@ Note:
 - Please do not use the built-in HashSet library.
 """
 
-class _hashSet(object):
+class MyHashSet(object):
 
     def __init__(self):
         """
@@ -120,7 +120,7 @@ class _hashSet(object):
 
 
 def main():
-    hashSet = _hashSet()
+    hashSet = MyHashSet()
     hashSet.add(1)
     hashSet.add(2)
     print hashSet.contains(1)     # returnew_set true
