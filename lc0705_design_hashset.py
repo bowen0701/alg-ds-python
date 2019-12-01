@@ -5,7 +5,7 @@ URL: https://leetcode.com/problems/design-hashset/
 
 Design a HashSet without using any built-in hash table libraries.
 
-To be specific, your design should include these functionew_set:
+To be specific, your design should include these functions:
 
 - add(value): Inew_setert a value into the HashSet. 
 - contains(value) : Return whether the value exists in the HashSet or not.
@@ -17,16 +17,16 @@ Example:
 hashSet = new MyHashSet();
 hashSet.add(1);         
 hashSet.add(2);         
-hashSet.containew_set(1);    // returnew_set true
-hashSet.containew_set(3);    // returnew_set false (not found)
+hashSet.contains(1);    // return true
+hashSet.contains(3);    // return false (not found)
 hashSet.add(2);          
-hashSet.containew_set(2);    // returnew_set true
+hashSet.contains(2);    // return true
 hashSet.remove(2);          
-hashSet.containew_set(2);    // returnew_set false (already removed)
+hashSet.contains(2);    // returne false (already removed)
 
 Note:
 - All values will be in the range of [0, 1000000].
-- The number of operationew_set will be in the range of [1, 10000].
+- The number of operations will be in the range of [1, 10000].
 - Please do not use the built-in HashSet library.
 """
 
