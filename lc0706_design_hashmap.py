@@ -32,6 +32,7 @@ Note:
 """
 
 class MyHashMap(object):
+
     def __init__(self):
         """
         Initialize your data structure here.
