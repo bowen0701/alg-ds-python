@@ -74,6 +74,7 @@ class MyHashSet(object):
 
             self.set = new_set
 
+        # Get hashed key and apply Open Addressing for collision.
         h = self._hash(key)
 
         while self.set[h] is not None:
