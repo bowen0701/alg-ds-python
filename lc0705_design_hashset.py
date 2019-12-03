@@ -64,7 +64,7 @@ class MyHashSet(object):
             new_set = [None] * self.capacity
             
             for i in range(self.capacity >> 1):
-                if self.set[i] and self.set[i] != "TOMBSTONE":
+                if self.set[i] >= 0:
                     h = self._hash(self.set[i])
 
                     while new_set[h] is not None:
@@ -82,7 +82,7 @@ class MyHashSet(object):
                 return None
             else:
                 h = self._rehash(h)
-                if self.set[h] == "TOMBSTONE":
+                if self.set[h] == -1:
                     break
 
         self.set[h] = key
@@ -97,7 +97,7 @@ class MyHashSet(object):
 
         while self.set[h]:
             if self.set[h] == key:
-                self.set[h] = "TOMBSTONE"
+                self.set[h] = -1
                 self.size -= 1
                 return None
             else:
