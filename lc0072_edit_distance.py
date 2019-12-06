@@ -50,7 +50,6 @@ class SolutionRecurNaive(object):
             replace = 1 + self._recur(word1[1:], word2[1:])
             return min(insert, delete, replace)
 
-
     def minDistance(self, word1, word2):
         """
         :type word1: str
@@ -83,7 +82,6 @@ class SolutionRecurPointer(object):
             delete = 1 + self._recur(word1, word2, i1 + 1, i2)
             replace = 1 + self._recur(word1, word2, i1 + 1, i2 + 1)
             return min(insert, delete, replace)
-
 
     def minDistance(self, word1, word2):
         """
