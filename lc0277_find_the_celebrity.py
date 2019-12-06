@@ -46,17 +46,51 @@ Note:
 - Remember that you won't have direct access to the adjacency matrix.
 """
 
-class Solution(object):
+def knows(i, j):
+    return graph[i][j]
+
+
+class SolutionIter(object):
     def findCelebrity(self, n):
         """
         :type n: int
         :rtype: int
         """
-        pass
+        candidate = 0
+
+        # Find candidate: if i knows j, j could be candidate, i is not.
+        for i in range(n):
+            if knows(candidate, i):
+                candidate = i
+
+        # Validate candidate if she knows any others or is not know.
+        for i in range(n):
+            if i != candidate and (knows(candidate, i) or not knows(i, candidate)):
+                return -1
+
+        return candidate
 
 
 def main():
-    pass
+    global graph
+
+    # Output: 1.
+    graph = [
+      [1,1,0],
+      [0,1,0],
+      [1,1,1]
+    ]
+    n = len(graph)
+    print SolutionIter().findCelebrity(n)
+    
+    # Output: -1.
+    graph = [
+      [1,0,1],
+      [1,1,0],
+      [0,1,1]
+    ]
+    n = len(graph)
+    print SolutionIter().findCelebrity(n)
 
 
 if __name__ == '__main__':
