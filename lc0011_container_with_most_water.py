@@ -28,18 +28,18 @@ class SolutionTwoPointers(object):
         # - Since all of the remaining containers are less wide,
         #   to get bigger area, they must be higher.
         max_area = 0
-        l, r = 0, len(height) - 1
+        i, j = 0, len(height) - 1
 
-        while l < r:
-            h_left, h_right = height[l], height[r]
+        while i < j:
+            h_left, h_right = height[i], height[j]
             h_min = min(h_left, h_right)
 
-            max_area = max(max_area, (r - l) * h_min)
+            max_area = max(max_area, (j - i) * h_min)
 
-            if height[l] < height[r]:
-                l += 1
+            if height[i] < height[j]:
+                i += 1
             else:
-                r -= 1
+                j -= 1
 
         return max_area
 
