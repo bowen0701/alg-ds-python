@@ -39,14 +39,28 @@ class SolutionDict(object):
                 return n
 
 
+class SolutionSumDivide(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        return (sum(set(nums)) * 3 - sum(nums)) / 2
+
+
 def main():
     # Output: 3.
     nums = [2,2,3,2]
     print SolutionDict().singleNumber(nums)
+    print SolutionSumDivide().singleNumber(nums)
 
     # Output: 99.
     nums = [0,1,0,1,0,1,99]
     print SolutionDict().singleNumber(nums)
+    print SolutionSumDivide().singleNumber(nums)
 
 
 if __name__ == '__main__':
