@@ -16,8 +16,8 @@ Input: a = "1010", b = "1011"
 Output: "10101"
 """
 
-class Solution(object):
-    def normalize(self, a, b):
+class SolutionIter(object):
+    def _normalize(self, a, b):
         if len(a) < len(b):
             a = '0' * (len(b) - len(a)) + a
         elif len(a) > len(b):
@@ -34,10 +34,12 @@ class Solution(object):
         Space complexity: O(1).
         """
         # Normalize a and b to equal size by padding 0's to shorer one.
-        a, b = self.normalize(a, b)
+        a, b = self._normalize(a, b)
 
-        # Add numbers in a reversed order with carry.
-        s, carry = '', 0
+        # Add numbers from the last digits with carry.
+        s = ''
+        carry = 0
+
         i = len(a) - 1
 
         while i >= 0 or carry > 0:
@@ -46,6 +48,7 @@ class Solution(object):
             else:
                 total = carry
             carry, val = total // 2, total % 2
+
             s = str(val) + s
             i -= 1
         
@@ -53,15 +56,15 @@ class Solution(object):
 
 
 def main():
+    # Output: "100"
     a = "11"
     b = "1"
-    # Output: "100"
-    print Solution().addBinary(a, b)
+    print SolutionIter().addBinary(a, b)
 
+    # Output: "10101"
     a = "1010"
     b = "1011"
-    # Output: "10101"
-    print Solution().addBinary(a, b)
+    print SolutionIter().addBinary(a, b)
 
 
 if __name__ == '__main__':
