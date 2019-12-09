@@ -22,6 +22,32 @@ class ListNode(object):
         self.next = None
 
 
+class SolutionStack(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        stack = []
+
+        current = head
+        while current:
+            stack.append(current)
+            current = current.next
+
+        pre_head = ListNode(None)
+        new_current = pre_head
+        while stack:
+            current = stack.pop()
+            new_current.next = ListNode(current.val)
+            new_current = new_current.next
+
+        return pre_head.next
+
+
 class SolutionRecur(object):
     def _reverse(self, head, previous):
         if not head:
@@ -70,6 +96,7 @@ class SolutionIter(object):
             previous = current
             head = head.next
    
+        # New head is previous, with head = None.
         return previous
 
 
@@ -88,6 +115,7 @@ def main():
 
     # 5->4->3->2->1->NULL
     # Should be 5.
+    print SolutionStack().reverseList(node1).val
     print SolutionRecur().reverseList(node1).val
     print SolutionIter().reverseList(node1).val
     # Should be 4.
