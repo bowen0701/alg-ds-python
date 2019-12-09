@@ -50,8 +50,8 @@ class Solution(object):
         # Two pointer method: tail to store the distinct elements.
         tail = 0
         for i in range(1, len(nums)):
+            # When see a new distinct num, increment tail and replace it by the num.
             if nums[i] != nums[tail]:
-                # Increment tail and replace new tail by element i.
                 tail += 1
                 nums[tail] = nums[i]
 
