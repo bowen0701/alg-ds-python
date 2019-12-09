@@ -63,21 +63,21 @@ class SolutionDictTwoPointers(object):
         fruit_counts = defaultdict(int)
         max_len = 0
 
-        # Apply two pointers method with left l & right r.
-        l = 0
-        for r, f in enumerate(tree):
+        # Apply two pointers method with left i & right j.
+        i = 0
+        for j, f in enumerate(tree):
             fruit_counts[f] += 1
 
             # If more than 2 types, remove one fruit from the head. 
             while len(fruit_counts) > 2:
-                fruit_counts[tree[l]] -= 1
+                fruit_counts[tree[i]] -= 1
 
-                if fruit_counts[tree[l]] == 0:
-                    del fruit_counts[tree[l]]
+                if fruit_counts[tree[i]] == 0:
+                    del fruit_counts[tree[i]]
 
-                l += 1
+                i += 1
 
-            max_len = max(max_len, r - l + 1)
+            max_len = max(max_len, j - i + 1)
 
         return max_len
 
