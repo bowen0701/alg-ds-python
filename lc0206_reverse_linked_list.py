@@ -119,8 +119,12 @@ def main():
     print SolutionRecur().reverseList(node1).val
     print SolutionIter().reverseList(node1).val
     # Should be 4.
+    print SolutionStack().reverseList(node1).next.val
+    print SolutionRecur().reverseList(node1).next.val
     print SolutionIter().reverseList(node1).next.val
     # Should be 3.
+    print SolutionStack().reverseList(node1).next.next.val
+    print SolutionRecur().reverseList(node1).next.next.val
     print SolutionIter().reverseList(node1).next.next.val
 
 
