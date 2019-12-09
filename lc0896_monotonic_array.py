@@ -35,17 +35,48 @@ Note:
 - -100000 <= A[i] <= 100000
 """
 
-class Solution(object):
+class SolutionTwoBooleans(object):
     def isMonotonic(self, A):
         """
         :type A: List[int]
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(2).
         """
-        pass
+        is_increasing = True
+        is_decreasing = True
+
+        for i in range(len(A) - 1):
+            if A[i] > A[i + 1]:
+                is_decreasing = False
+            
+            if A[i] < A[i + 1]:
+                is_increasing = False
+
+        return is_increasing or is_decreasing
 
 
 def main():
-    pass
+    # Output: True
+    A = [1,2,2,3]
+    print SolutionTwoBooleans().isMonotonic(A)
+
+    # Output: True
+    A = [6,5,4,4]
+    print SolutionTwoBooleans().isMonotonic(A)
+
+    # Output: False
+    A = [1,3,2]
+    print SolutionTwoBooleans().isMonotonic(A)
+
+    # Output: True
+    A = [1,2,4,5]
+    print SolutionTwoBooleans().isMonotonic(A)
+
+    # Output: True
+    A = [1,1,1]
+    print SolutionTwoBooleans().isMonotonic(A)
 
 
 if __name__ == '__main__':
