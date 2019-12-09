@@ -54,7 +54,11 @@ class SolutionTwoBooleans(object):
             if A[i] < A[i + 1]:
                 is_increasing = False
 
-        return is_increasing or is_decreasing
+            # Enable early stopping.
+            if not is_increasing and not is_decreasing:
+                return False
+
+        return True
 
 
 def main():
