@@ -43,6 +43,42 @@ class SolutionRecur(object):
             return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
 
 
+class SolutionIter(object):
+    def sumOfLeftLeaves(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for singly linked list.
+        """
+        # Base case.
+        if not root:
+            return 0
+
+        # Use stack for iteratively accumulate left leave sum.
+        result = 0
+        stack = [root]
+
+        while stack:
+            current = stack.pop()
+
+            if current.left:
+                if not current.left.left and not current.left.right:
+                    # Accumualte result if it is a left leave.
+                    result += current.left.val
+                else:
+                    # If not, add left node to stack.
+                    stack.append(current.left)
+
+            if current.right:
+                if current.right.left or current.right.right:
+                    # If left node is not a leave, add it to stack.
+                    stack.append(current.right)
+
+        return result
+
+
 def main():
     # Output: 20.
     root = TreeNode(3)
@@ -51,6 +87,7 @@ def main():
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
     print SolutionRecur().sumOfLeftLeaves(root)
+    print SolutionIter().sumOfLeftLeaves(root)
 
 
 if __name__ == '__main__':
