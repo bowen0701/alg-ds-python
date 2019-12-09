@@ -24,17 +24,33 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
     def sumOfLeftLeaves(self, root):
         """
         :type root: TreeNode
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for singly linked list.
         """
-        pass
+        # Base case.
+        if not root:
+            return 0
+
+        if root.left and not root.left.left and not root.left.right:
+            return root.left.val + self.sumOfLeftLeaves(root.right)
+        else:
+            return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
 
 
 def main():
-    pass
+    # Output: 20.
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
+    print SolutionRecur().sumOfLeftLeaves(root)
 
 
 if __name__ == '__main__':
