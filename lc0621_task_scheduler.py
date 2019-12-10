@@ -25,18 +25,58 @@ Note:
 - The integer n is in the range [0, 100].
 """
 
-class Solution(object):
+class SolutionDictMaxHeap(object):
     def leastInterval(self, tasks, n):
         """
         :type tasks: List[str]
         :type n: int
         :rtype: int
         """
-        pass
+        from collections import defaultdict
+        import heapq
+
+        # Accumulate tasks's counts in dict.
+        task_count_d = defaultdict(int)
+        for t in tasks:
+            task_count_d[t] += 1
+
+        # Push tasks/counts into max heap (min heap with negative keys).
+        neg_count_hq = [-c for c in task_count_d.values()]
+        heapq.heapify(neg_count_hq)
+
+        cycles = 0
+
+        while neg_count_hq:
+            # Use cycle_tasks to collect tasks, denoted by their negative counts.
+            cycle_tasks = []
+            for i in range(n + 1):
+                if neg_count_hq:
+                    cycle_tasks.append(-heapq.heappop(neg_count_hq))
+
+            # If specific task remains after processed one, add back to maxheap.
+            for j in cycle_tasks:
+                if j - 1 > 0:
+                    heapq.heappush(neg_count_hq, -(j - 1))
+
+            # Add cycles for the last batch of tasks, or continue.  
+            if not neg_count_hq:
+                cycles += len(cycle_tasks)
+            else:
+                cycles += n + 1
+
+        return cycles
 
 
 def main():
-    pass
+    # Output: 8.
+    tasks = ["A","A","A","B","B","B"]
+    n = 2
+    print SolutionDictMaxHeap().leastInterval(tasks, n)
+
+    # Output: 16.
+    tasks = ["A","A","A","A","A","A","B","C","D","E","F","G"]
+    n = 2
+    print SolutionDictMaxHeap().leastInterval(tasks, n)
 
 
 if __name__ == '__main__':
