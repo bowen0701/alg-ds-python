@@ -31,6 +31,9 @@ class SolutionDictMaxHeap(object):
         :type tasks: List[str]
         :type n: int
         :rtype: int
+
+        Time complexity: O(m), where m is the length of tasks.
+        Space complexity: O(m).
         """
         from collections import defaultdict
         import heapq
