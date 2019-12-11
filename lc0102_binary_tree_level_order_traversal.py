@@ -38,13 +38,15 @@ class SolutionBFS(object):
         Time complexity: O(n), where n is the number of nodes.
         Space complexity: O(2^logn)=O(n), as the number of nodes in the bottom.
         """
+        from collections import deque
+
         if not root:
             return []
 
         result = []
 
         # Use queue for BFS.
-        queue = [root]
+        queue = deque([root])
 
         while queue:
             level = []
@@ -57,12 +59,12 @@ class SolutionBFS(object):
 
                 # Insert the nodes in next level into queue.
                 if current.left:
-                    queue.insert(0, current.left)
+                    queue.appendleft(current.left)
                 if current.right:
-                    queue.insert(0, current.right)
+                    queue.appendleft(current.right)
             
             # Append level nodes to result.
-            result.append(level)
+            result.append(list(level))
 
         return result
 
