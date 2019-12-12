@@ -31,13 +31,13 @@ Note: The length of each dimension in the given grid does not exceed 50.
 
 class SolutionDFSRecurUpdate(object):
     def _dfs(self, r, c, grid):
+        # Check exit conditions: out of boundaries, in water.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or 
             grid[r][c] == 0):
             return 0
 
-        # Mark as visited.
+        # Mark (r, c) as visited.
         grid[r][c] = 0
-
         area = 1
 
         # Visit 4 directions to accumulate area.
@@ -90,7 +90,6 @@ class SolutionDFSIterUpdate(object):
 
         # Use stack for DFS.
         stack = [(r, c)]
-
         area = 1
 
         while stack:
