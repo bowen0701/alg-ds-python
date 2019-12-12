@@ -18,7 +18,6 @@ An obstacle and empty space is marked as 1 and 0 respectively in the grid.
 Note: m and n will be at most 100.
 
 Example 1:
-
 Input:
 [
   [0,0,0],
