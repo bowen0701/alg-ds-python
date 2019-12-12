@@ -44,7 +44,7 @@ class SolutionMinHeap(object):
         heapq.heappush(minheap_endtimes, intervals[0][1])
 
         for i in range(1, len(intervals)):
-            # If next start time is after min end time, remove the min end time.
+            # If next start time is after min end time, remove min end time.
             if intervals[i][0] >= minheap_endtimes[0]:
                 heapq.heappop(minheap_endtimes)
 
