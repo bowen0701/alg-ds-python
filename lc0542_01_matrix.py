@@ -56,29 +56,28 @@ class SolutionBFS(object):
         for r in range(n_rows):
             for c in range(n_cols):
                 if matrix[r][c] == 0:
-                    # Just explore from cells with value 0.
+                    # Collect cells with value 0 for exploration.
                     queue.append((r, c))
                 else:
                     # For cell with value != 0, update its distance to inf.
                     matrix[r][c] = float('inf')
 
-        # Visiting directions.
+        # BFS explore from cells with value 0.
         dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
-        # BFS explore from cells with value 0.
         while queue:
             r, c = queue.pop()
-            for r_, c_ in dirs:
-                r_visit, c_visit = r + r_, c + c_
+            for dr, dc in dirs:
+                r_next, c_next = r + dr, c + dc
 
-                # If visiting is out of boundary or does not shorten distance.
-                if (r_visit < 0 or r_visit >= n_rows or
-                    c_visit < 0 or c_visit >= n_cols or
-                    matrix[r_visit][c_visit] < matrix[r][c] + 1):
+                # If out of boundary or does not shorten distance.
+                if (r_next < 0 or r_next >= n_rows or
+                    c_next < 0 or c_next >= n_cols or
+                    matrix[r_next][c_next] < matrix[r][c] + 1):
                     continue
 
-                matrix[r_visit][c_visit] = matrix[r][c] + 1
-                queue.insert(0, (r_visit, c_visit))
+                matrix[r_next][c_next] = matrix[r][c] + 1
+                queue.insert(0, (r_next, c_next))
 
         return matrix
 
