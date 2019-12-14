@@ -58,7 +58,7 @@ class SolutionDP(object):
         stone_jumps[1].add(1)
 
         for i, stone in enumerate(stones):
-            # Skip last stone since it's destination.
+            # i is up to n - 2 since it is the last start of destination.
             if i <= n - 2:
                 for j in stone_jumps[stone]:
                     for jump in [j - 1, j, j + 1]:
