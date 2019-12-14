@@ -23,7 +23,7 @@ class ListNode(object):
         self.next = None
 
 
-class SolutionSort(object):
+class SolutionAllSort(object):
     def mergeKLists(self, lists):
         """
         :type lists: List[ListNode]
@@ -220,8 +220,8 @@ def main():
 
     lists = [head1, head2, head3]
 
-    print 'By sort:'
-    head = SolutionSort().mergeKLists(lists)
+    print 'By all sort:'
+    head = SolutionAllSort().mergeKLists(lists)
     show(head)
 
     print 'By merge two with recursion:'
