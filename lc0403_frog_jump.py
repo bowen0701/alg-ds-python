@@ -36,7 +36,7 @@ Return false. There is no way to jump to the last stone as
 the gap between the 5th and 6th stone is too large.
 """
 
-class SolutionDP(object):
+class SolutionStoneJumpDictDP(object):
     def canCross(self, stones):
         """
         :type stones: List[int]
@@ -51,15 +51,13 @@ class SolutionDP(object):
         if stones[1] != 1:
             return False
 
-        n = len(stones)
-
         # Cache stone's steps by dict, with 1st jump in 1 unit.
         stone_jumps = {stone: set() for stone in stones}
         stone_jumps[1].add(1)
 
         for i, stone in enumerate(stones):
             # i is up to n - 2 since it is the last start of destination.
-            if i <= n - 2:
+            if i <= len(stones) - 2:
                 for j in stone_jumps[stone]:
                     for jump in [j - 1, j, j + 1]:
                         # Check if next jump is on a stone.
@@ -70,14 +68,62 @@ class SolutionDP(object):
         return bool(stone_jumps[stones[-1]])
 
 
+class SolutionPositionJumpStacksDP(object):
+    def canCross(self, stones):
+        """
+        :type stones: List[int]
+        :rtype: bool
+
+        Apply DP with cache for stone->set(steps).
+
+        Time complexity: O(n^2).
+        Space complexity: O(n^2).
+        """
+        for i in range(3, len(stones)):
+            if stones[i] > stones[i - 1] * 2:
+                return False
+
+        # Convert stones to set for quickly check position.
+        stones_set = set(stones)
+
+        # Track positions and jumps
+        positions = [0]
+        jumps = [0]
+
+        while positions:
+            position = positions.pop()
+            jump = jumps.pop()
+            next_jumps = [jump - 1, jump, jump + 1]
+
+            for j in next_jumps:
+                if j <= 0:
+                    continue
+
+                next_position = position + j
+                if next_position == stones[-1]:
+                    return True
+                elif next_position in stones_set:
+                    positions.append(next_position)
+                    jumps.append(j)
+
+        return False
+
+
 def main():
     # Output: True
     stones = [0,1,3,5,6,8,12,17]
-    print SolutionDP().canCross(stones)
+    print SolutionStoneJumpDictDP().canCross(stones)
+    print SolutionPositionJumpStacksDP().canCross(stones)
 
     # Output: False
     stones = [0,1,2,3,4,8,9,11]
-    print SolutionDP().canCross(stones)
+    print SolutionStoneJumpDictDP().canCross(stones)
+    print SolutionPositionJumpStacksDP().canCross(stones)
+
+    # Output: True
+    stones = [0,1]
+    print SolutionStoneJumpDictDP().canCross(stones)
+    print SolutionPositionJumpStacksDP().canCross(stones)
 
 
 if __name__ == '__main__':
