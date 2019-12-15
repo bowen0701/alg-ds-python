@@ -28,7 +28,7 @@ class SolutionNaive(object):
 
         Note: Time Limit Exceeded
 
-        Time complexity: O(n^3).
+        Time complexity: O(n^2).
         Space complexity: O(n).
         """
         # Check full string.
