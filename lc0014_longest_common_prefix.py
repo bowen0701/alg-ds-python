@@ -34,9 +34,10 @@ class SolutionIter(object):
         if not strs:
             return ''
 
-        # Choose str 0 as the baseline.
+        # Accumulate prefic starting from empty string.
         prefix = ''
 
+        # Choose string 0 as the baseline, and iteratively check other strings.
         for pos, c in enumerate(strs[0]):
             for j in range(1, len(strs)):
                 # Check if position is out of boundary or not matched. 
