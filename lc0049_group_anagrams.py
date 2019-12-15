@@ -19,7 +19,7 @@ Note:
 - The order of your output does not matter.
 """
 
-class SolutionDict(object):
+class SolutionSortedDict(object):
     def groupAnagrams(self, strs):
         """
         :type strs: List[str]
@@ -53,7 +53,7 @@ def main():
     #   ["bat"]
     # ]
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-    print SolutionDict().groupAnagrams(strs)
+    print SolutionSortedDict().groupAnagrams(strs)
 
 
 if __name__ == '__main__':
