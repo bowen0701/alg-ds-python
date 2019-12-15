@@ -37,12 +37,11 @@ class SolutionDFSRecurBacktrack(object):
         # Mark (i, j) as visited.
         visited[(i, j)] = True
 
-        # Start DFS visiting, one of DFSs is true, then return True.
+        # Start DFS: if one of DFSs is true, return True.
         is_found = False
         dirs = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
-        for r, c in dirs:
-            is_found = is_found or self._dfsRecur(r, c, board, word,
-                                                  pos + 1, visited)
+        for i_next, j_next in dirs:
+            is_found |= self._dfsRecur(i_next, j_next, board, word, pos + 1, visited)
 
         # Backtrack.
         visited[(i, j)] = False
