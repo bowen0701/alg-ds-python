@@ -23,7 +23,7 @@ class SolutionRecur(object):
     Space complexity: O(mn).
     """
     def uniquePaths(self, m, n):
-        # Recursively backbrack paths from (m - 1, n) and (m, n - 1). 
+        # Recursively backtrack paths from (m - 1, n) and (m, n - 1).
         if m == 1 or n == 1:
             return 1
         return self.uniquePaths(m - 1, n) + self.uniquePaths(m, n - 1)
