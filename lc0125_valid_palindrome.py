@@ -48,7 +48,7 @@ class SolutionTwoPointers(object):
         l, r = 0, len(s) - 1
 
         while l < r:
-            # Skip not alphanumeric chars.
+            # Skip if not alphanumeric chars.
             while l < r and not s[l].isalnum():
                 l += 1
             while l < r and not s[r].isalnum():
