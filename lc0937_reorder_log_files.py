@@ -43,11 +43,11 @@ class Solution(object):
         letters = []
         digits = []
 
-        for l in logs:
-            if l.split()[1].isdigit():
-                digits.append(l)
+        for log in logs:
+            if log.split()[1].isdigit():
+                digits.append(log)
             else:
-                letters.append(l)
+                letters.append(log)
 
         # Sort letters by identifier and in lexicographical order.
         letters.sort(key=lambda x: x.split()[0])
