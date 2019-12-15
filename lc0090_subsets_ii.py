@@ -23,10 +23,10 @@ Output:
 
 class SolutionBacktrack(object):
     def _backtrack(self, result, temp, start, nums):
-        # Use shallow copy.
+        # Append shallow copy.
         result.append(temp[:])
 
-        # Iterate starting from start, with backtracking.
+        # Iterate from start, with backtracking.
         for i in range(start, len(nums)):
             # Avoid duplicate by checking the previous num.
             if i > start and nums[i] == nums[i - 1]:
