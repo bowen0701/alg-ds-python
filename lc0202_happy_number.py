@@ -36,7 +36,7 @@ class SolutionSumSquaresSet(object):
             ss = 0
             while n:
                 n, d = n // 10, n % 10
-                ss += d ** 2
+                ss += d * d
 
             if ss == 1:
                 return True
