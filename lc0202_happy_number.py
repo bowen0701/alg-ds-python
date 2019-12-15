@@ -28,25 +28,28 @@ class SolutionSumSquaresSet(object):
         :type n: int
         :rtype: bool
         """
-        # Use set to collect all sum of squares.
+        # Use set to collect sum of squares.
         sum_squares = set()
 
-        while True:
+        # Use infinite loop when n does not equal 1.
+        while n != 1:
+            current = n
+
             # Compute sum of squares from the reverse order.
             ss = 0
-            while n:
-                n, d = n // 10, n % 10
+            while current:
+                current, d = current // 10, current % 10
                 ss += d * d
 
-            if ss == 1:
-                return True
-            elif ss in sum_squares:
-                # If sum of squares occurred before.
+            # If sum of squares occurred before.
+            if ss in sum_squares:
                 return False
-            else:
-                # Add sum of squares to set and update n.
-                sum_squares.add(ss)
-                n = ss
+            
+            # Add sum of squares to set and update n.
+            sum_squares.add(ss)
+            n = ss
+
+        return True
 
 
 def main():
