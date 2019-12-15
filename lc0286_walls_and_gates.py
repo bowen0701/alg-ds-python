@@ -4,9 +4,9 @@ Medium
 URL: https://leetcode.com/problems/walls-and-gates/
 
 You are given a m x n 2D grid initialized with these three possible values.
--1 - A wall or an obstacle.
-0 - A gate.
-INF - Infinity means an empty room. We use the value 231 - 1 = 2147483647 to
+- -1 - A wall or an obstacle.
+- 0 - A gate.
+- INF - Infinity means an empty room. We use the value 231 - 1 = 2147483647 to
 represent INF as you may assume that the distance to a gate is less than 2147483647.
  
 Fill each empty room with the distance to its nearest gate.
@@ -41,12 +41,13 @@ class SolutionBFS(object):
         """
         nrows, ncols = len(rooms), len(rooms[0])
 
-        # Collect all gates in queue.
+        # Collect all gates.
         gates = [(r, c) for r in range(nrows) for c in range(ncols)
                  if rooms[r][c] == 0]
 
         # For each gate, start BFS to update neighbors's shorter distances.
         while gates:
+            # Put one gate in a queue.
             queue = [gates.pop()]
 
             while queue:
@@ -62,7 +63,7 @@ class SolutionBFS(object):
 
 
 class SolutionDFSRecur(object):
-    def dfs(self, r, c, distance, rooms):
+    def _dfs(self, r, c, distance, rooms):
         if (r < 0 or r >= len(rooms) or c < 0 or c >= len(rooms[0]) or
             rooms[r][c] < distance):
             return None
@@ -71,17 +72,16 @@ class SolutionDFSRecur(object):
         rooms[r][c] = distance
 
         # Visit neighbors: up, down, left & right.
-        self.dfs(r - 1, c, distance + 1, rooms)
-        self.dfs(r + 1, c, distance + 1, rooms)
-        self.dfs(r, c - 1, distance + 1, rooms)
-        self.dfs(r, c + 1, distance + 1, rooms)
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_next, c_next in dirs:
+            self._dfs(r_next, c_next, distance + 1, rooms)
 
     def wallsAndGates(self, rooms):
         """
         :type rooms: List[List[int]]
         :rtype: void Do not return anything, modify rooms in-place instead.
 
-        Apply BFS starting from all gates.
+        Apply DFS starting from all gates.
 
         Time complexity: O(kmn), where
           - k: number of gates
@@ -91,12 +91,13 @@ class SolutionDFSRecur(object):
         """
         nrows, ncols = len(rooms), len(rooms[0])
 
+        # Collect all gates.
         gates = [(r, c) for r in range(nrows) for c in range(ncols)
                  if rooms[r][c] == 0]
 
         for (r, c) in gates:
             distance = 0
-            self.dfs(r, c, distance, rooms)
+            self._dfs(r, c, distance, rooms)
 
 
 def main():
