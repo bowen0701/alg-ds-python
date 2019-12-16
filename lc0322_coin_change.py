@@ -107,22 +107,22 @@ class SolutionDp(object):
         T = [[float('inf')] * (amount + 1) for _ in range(n_coins)]
 
         # For amount 0, set num equal 0.
-        for c in range(n_coins):
-            T[c][0] = 0
+        for i in range(n_coins):
+            T[i][0] = 0
 
         for a in range(1, amount + 1):
-            for c in range(n_coins):
-                if coins[c] == a:
-                    # Directly use coin c to change total amount.
-                    T[c][a] = 1
-                elif coins[c] < a:
-                    # If coin c can be included, decide which uses less coins:
-                    # 1. #coins without coin c to make a
-                    # 2. 1 + #coins with coin c to make a - coins[c]
-                    T[c][a] = min(T[c - 1][a], 1 + T[c][a - coins[c]])
+            for i in range(n_coins):
+                if coins[i] == a:
+                    # Directly use coin i to change total amount.
+                    T[i][a] = 1
+                elif coins[i] < a:
+                    # If coin i can be included, decide which uses less coins:
+                    # 1. #coins without coin i to make a
+                    # 2. 1 + #coins with coin i to make a - coins[i]
+                    T[i][a] = min(T[i - 1][a], 1 + T[i][a - coins[i]])
                 else:
-                    # If coin c cannot be included, use previous #coins.
-                    T[c][a] = T[c - 1][a]
+                    # If coin i cannot be included, use previous #coins.
+                    T[i][a] = T[i - 1][a]
 
         if T[-1][-1] != float('inf'):
             return T[-1][-1]
@@ -137,7 +137,7 @@ class SolutionDp2(object):
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a).
         """
-        # Sort coins to optimize denomination.
+        # Sort coins for early stopping.
         coins = sorted(coins)
 
         T = [float('inf')] * (amount + 1)
@@ -146,13 +146,14 @@ class SolutionDp2(object):
         T[0] = 0
 
         for a in range(1, amount + 1):
-            for c in range(len(coins)):
-                if coins[c] <= a:
-                    # If coin c can be included:
-                    # 1. #coins without coin c to make a
-                    # 2. 1 + #coins with coin c to make a - coins[c]
-                    T[a] = min(T[a], 1 + T[a - coins[c]])
+            for i in range(len(coins)):
+                if coins[i] <= a:
+                    # If coin i can be included:
+                    # 1. #coins without coin i to make a
+                    # 2. 1 + #coins with coin i to make a - coins[i]
+                    T[a] = min(T[a], 1 + T[a - coins[i]])
                 else:
+                    # Early stop.
                     break
 
         if T[-1] != float('inf'):
