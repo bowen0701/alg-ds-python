@@ -60,7 +60,7 @@ class SolutionRecur(object):
         :type l2: ListNode
         :rtype: ListNode
 
-        Time complexity: O(n1 + n2), where ni is the length of list i.
+        Time complexity: O(n1+n2), where ni is the length of list i.
         Space complexity: O(1).
         """
         if not l1 or not l2:
@@ -81,7 +81,7 @@ class SolutionIter(object):
         :type l2: ListNode
         :rtype: ListNode
 
-        Time complexity: O(n1 + n2), where ni is the length of list i.
+        Time complexity: O(n1+n2), where ni is the length of list i.
         Space complexity: O(1).
         """
         if not l1 or not l2:
