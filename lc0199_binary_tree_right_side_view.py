@@ -25,17 +25,56 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionLevelTraversalLast(object):
     def rightSideView(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
-        
+        from collections import deque
+
+        # Base case.
+        if not root:
+            return []
+
+        # Apply level traversal to collect visible values from top to bottom.
+        visible_vals = []
+
+        queue = deque([root])
+        while queue:
+            size = len(queue)
+            for i in range(size):
+                current = queue.pop()
+                if i == size - 1:
+                    visible_vals.append(current.val)
+
+                # Add current's left or right to queue if existed.
+                if current.left:
+                    queue.appendleft(current.left)
+                if current.right:
+                    queue.appendleft(current.right)
+
+        return visible_vals
+
 
 def main():
-    pass
+    # Input:
+    #    1
+    #  /   \
+    # 2     3
+    #  \     \
+    #   5     4
+    # Output: [1, 3, 4]
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.right = TreeNode(5)
+    root.right.right = TreeNode(4)
+
+    print SolutionLevelTraversalLast().rightSideView(root)
 
 
 if __name__ == '__main__':
