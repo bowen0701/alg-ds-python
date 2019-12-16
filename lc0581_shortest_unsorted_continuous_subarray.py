@@ -20,7 +20,7 @@ Note:
 - The input array may contain duplicates, so ascending order here means <=.
 """
 
-class SolutionSort(object):
+class SolutionSortTwoPoinsters(object):
     def findUnsortedSubarray(self, nums):
         """
         :type nums: List[int]
@@ -36,15 +36,15 @@ class SolutionSort(object):
 
         # Iterate from left/right to check element match of nums and sorted nums.
         n = len(nums)
-        l, r = 0, n - 1
+        i, j = 0, n - 1
 
-        while l < n and nums[l] == sorted_nums[l]:
-            l += 1
+        while i < n and nums[i] == sorted_nums[i]:
+            i += 1
 
-        while r > l and nums[r] == sorted_nums[r]:
-            r -= 1
+        while j > i and nums[j] == sorted_nums[j]:
+            j -= 1
 
-        return r - (l - 1)
+        return j - (i - 1)
 
 
 class SolutionMinRHSMaxLHS(object):
@@ -65,34 +65,34 @@ class SolutionMinRHSMaxLHS(object):
         min_r = float('inf')
         min_rhs = [None] * n
 
-        for r in range(n - 1, -1, -1):
-            min_r = min(min_r, nums[r])
-            min_rhs[r] = min_r
+        for j in range(n - 1, -1, -1):
+            min_r = min(min_r, nums[j])
+            min_rhs[j] = min_r
 
         # Create max LHS list from left to right.
         max_l = -float('inf')
         max_lhs = [None] * n
 
-        for l in range(n):
-            max_l = max(max_l, nums[l])
-            max_lhs[l] = max_l
+        for i in range(n):
+            max_l = max(max_l, nums[i])
+            max_lhs[i] = max_l
 
         # Iterate from left/right to check match of nums and min RHS / max LHS.
-        l, r = 0, n - 1
+        i, j = 0, n - 1
 
-        while l < n and nums[l] == min_rhs[l]:
-            l += 1
+        while i < n and nums[i] == min_rhs[i]:
+            i += 1
 
-        while r > l and nums[r] == max_lhs[r]:
-            r -= 1
+        while j > i and nums[j] == max_lhs[j]:
+            j -= 1
 
-        return r - (l - 1)
+        return j - (i - 1)
 
 
 def main():
     # Output: 5
     nums = [2, 6, 4, 8, 10, 9, 15]
-    print SolutionSort().findUnsortedSubarray(nums)
+    print SolutionSortTwoPoinsters().findUnsortedSubarray(nums)
     print SolutionMinRHSMaxLHS().findUnsortedSubarray(nums)
 
 
