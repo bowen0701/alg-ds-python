@@ -22,17 +22,49 @@ Output: false
 Explanation: The array cannot be partitioned into equal sum subsets.
 """
 
-class Solution(object):
+class SolutionIndexSumFoundMemo(object):
+    def partition(self, idx, cur_sum, idxsum_found_d, nums, total):
+        if (idx, cur_sum) in idxsum_found_d:
+            return idxsum_found_d[(idx, cur_sum)]
+
+        if cur_sum * 2 == total:
+            return True
+
+        if cur_sum * 2 > total or idx >= len(nums):
+            return False
+
+        # Take or not take nums[idx].
+        is_found = (
+            self.partition(idx + 1, cur_sum + nums[idx], idxsum_found_d, nums, total) or
+            self.partition(idx + 1, cur_sum, idxsum_found_d, nums, total))
+        idxsum_found_d[(idx, cur_sum)] = is_found
+        return is_found
+
     def canPartition(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
         """
-        pass
+        total = sum(nums)
+        
+        # Check if total is even.
+        if total % 2:
+            return False
+
+        idx = 0
+        cur_sum = 0
+        idxsum_found_d = {}
+        return self.partition(idx, cur_sum, idxsum_found_d, nums, total)
 
 
 def main():
-    pass
+    # Output: True
+    nums = [1, 5, 11, 5]
+    print SolutionIndexSumFoundMemo().canPartition(nums)
+
+    # Output: False
+    nums = [1, 2, 3, 5]
+    print SolutionIndexSumFoundMemo().canPartition(nums)
 
 
 if __name__ == '__main__':
