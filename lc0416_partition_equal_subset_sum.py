@@ -22,7 +22,7 @@ Output: false
 Explanation: The array cannot be partitioned into equal sum subsets.
 """
 
-class SolutionIndexSumFoundMemo(object):
+class SolutionIndexSumFoundDpMemo(object):
     def partition(self, idx, cur_sum, idxsum_found_d, nums, total):
         if (idx, cur_sum) in idxsum_found_d:
             return idxsum_found_d[(idx, cur_sum)]
@@ -44,6 +44,11 @@ class SolutionIndexSumFoundMemo(object):
         """
         :type nums: List[int]
         :rtype: bool
+
+        Apply bottom-up dynamic programming with memoization.
+
+        Time complexity: O(n), where n is the length of nums.
+        Space complexity: O(n).
         """
         total = sum(nums)
         
@@ -51,6 +56,7 @@ class SolutionIndexSumFoundMemo(object):
         if total % 2:
             return False
 
+        # Apply (idx, sum)->found dict to memorize temporary found.
         idx = 0
         cur_sum = 0
         idxsum_found_d = {}
@@ -60,11 +66,11 @@ class SolutionIndexSumFoundMemo(object):
 def main():
     # Output: True
     nums = [1, 5, 11, 5]
-    print SolutionIndexSumFoundMemo().canPartition(nums)
+    print SolutionIndexSumFoundDpMemo().canPartition(nums)
 
     # Output: False
     nums = [1, 2, 3, 5]
-    print SolutionIndexSumFoundMemo().canPartition(nums)
+    print SolutionIndexSumFoundDpMemo().canPartition(nums)
 
 
 if __name__ == '__main__':
