@@ -3,20 +3,19 @@ from __future__ import print_function
 from __future__ import division
 
 
-def merge_sorted_lists_recur(left, right):
-    """Merge two sorted lists by recusions."""
-    if len(left) == 0:
-        return right
-    if len(right) == 0:
-        return left
+def _merge_sorted_lists_recur(left, right):
+    """Merge two sorted lists by recusion."""
+    if not left or not right:
+        return left or right
 
+    # Merge two lists one element by one element.
     if left[0] <= right[0]:
-        return [left[0]] + merge_sorted_lists_recur(left[1:], right)
+        return [left[0]] + _merge_sorted_lists_recur(left[1:], right)
     else:
-        return [right[0]] + merge_sorted_lists_recur(left, right[1:])
+        return [right[0]] + _merge_sorted_lists_recur(left, right[1:])
 
 
-def merge_sorted_lists_iter(left, right):
+def _merge_sorted_lists_iter(left, right):
     """Merge two sorted lists by iteration."""
     # Apply two pointer method.
     i, j = 0, 0
@@ -66,11 +65,11 @@ def main():
     random.shuffle(arr)
 
     start_time = time.time()
-    print('By recur: {}'.format(merge_sort(arr, merge_sorted_lists_recur)))
+    print('By recur: {}'.format(merge_sort(arr, _merge_sorted_lists_recur)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By iter: {}'.format(merge_sort(arr, merge_sorted_lists_iter)))
+    print('By iter: {}'.format(merge_sort(arr, _merge_sorted_lists_iter)))
     print('Time: {}'.format(time.time() - start_time))
 
 
