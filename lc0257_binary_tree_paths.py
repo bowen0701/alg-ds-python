@@ -26,17 +26,54 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionDFS(object):
+    def _dfs(self, root, cur_path, paths):
+        # Concat root's value.
+        cur_path += str(root.val)
+
+        # Check if root is leaf or not.
+        if not root.left and not root.right:
+            paths.append(cur_path)
+
+        # Start DFS for left and right nodes respectively.
+        if root.left:
+            self._dfs(root.left, cur_path + '->', paths)
+        if root.right:
+            self._dfs(root.right, cur_path + '->', paths)
+
     def binaryTreePaths(self, root):
         """
         :type root: TreeNode
         :rtype: List[str]
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
-        pass
+        # Check base case.
+        if not root:
+            return []
+
+        # Apply DFS to collect paths.
+        paths = []
+        cur_path = ''
+        self._dfs(root, cur_path, paths)
+        return paths
 
 
 def main():
-    pass
+    # Input:
+    #    1
+    #  /   \
+    # 2     3
+    #  \
+    #   5
+    # Output: ["1->2->5", "1->3"]
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.right = TreeNode(5)
+
+    print SolutionDFS().binaryTreePaths(root)
 
 
 if __name__ == '__main__':
