@@ -27,6 +27,7 @@ param_3 = obj.startsWith(prefix)
 
 class Node(object):
     def __init__(self):
+        # Each node has a children dict of char->node. 
         self.children = {}
         self.word = None
 
@@ -99,6 +100,7 @@ class Trie(object):
                 return False
 
         return True
+
 
 def main():
     trie = Trie();

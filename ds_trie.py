@@ -6,6 +6,7 @@ from __future__ import print_function
 class Node(object):
     """Node class for Trie class."""
     def __init__(self):
+        # Each node has a children dict of char->node.
         self.children = {}
         self.word = None
 
@@ -129,8 +130,9 @@ class Trie(object):
           - m is the average number of connected words for each word.
         Space complexity: O(l*m).
         """
-        words = []
         current = self.root
+
+        words = []
 
         # Go through each char in prefix and check its existence in children.
         # Finally arrive at the prefix node.
