@@ -29,19 +29,71 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionBFS(object):
     def rangeSumBST(self, root, L, R):
         """
         :type root: TreeNode
         :type L: int
         :type R: int
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
         """
-        pass
+        from collections import deque
+
+        # Apply BFS level-traversal to accumulate sum.
+        range_sum = 0
+
+        queue = deque([root])
+
+        while queue:
+            # Level traversal.
+            for i in range(len(queue)):
+                current = queue.pop()
+
+                # Check if node's value is in range.
+                if L <= current.val <= R:
+                    range_sum += current.val
+
+                # Push left and right nodes to queue.
+                if current.left and current.val > L:
+                    queue.appendleft(current.left)
+                if current.right and current.val < R:
+                    queue.appendleft(current.right)
+
+        return range_sum
 
 
 def main():
-    pass
+    # Input: root = [10,5,15,3,7,null,18], L = 7, R = 15
+    # Output: 32
+    root = TreeNode(10)
+    root.left = TreeNode(5)
+    root.right = TreeNode(15)
+    root.left.left = TreeNode(3)
+    root.left.right = TreeNode(7)
+    root.right.right = TreeNode(18)
+    L = 7
+    R = 15
+
+    print SolutionBFS().rangeSumBST(root, L, R)
+
+    # Input: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10
+    # Output: 23
+    root = TreeNode(10)
+    root.left = TreeNode(5)
+    root.right = TreeNode(15)
+    root.left.left = TreeNode(3)
+    root.left.right = TreeNode(7)
+    root.right.left = TreeNode(13)
+    root.right.right = TreeNode(18)
+    root.left.left.left = TreeNode(1)
+    root.left.right.left = TreeNode(6)
+    L = 6 
+    R = 10
+
+    print SolutionBFS().rangeSumBST(root, L, R)
 
 
 if __name__ == '__main__':
