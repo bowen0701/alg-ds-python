@@ -42,7 +42,7 @@ class SolutionSort(object):
         # Sort nodes by their values.
         sorted_nodes = sorted(nodes, key=lambda x: x.val)
 
-        # Link nodes.
+        # Link sorted nodes.
         pre_head = ListNode(None)
         current = pre_head
 

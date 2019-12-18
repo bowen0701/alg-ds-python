@@ -39,7 +39,6 @@ class SolutionAllSort(object):
 
         for head in lists:
             current = head
-
             while current:
                 nodes.append(current)
                 current = current.next
@@ -47,7 +46,7 @@ class SolutionAllSort(object):
         # Sort all nodes by their values.
         sorted_nodes = sorted(nodes, key=lambda x: x.val)
 
-        # Link nodes in sorted_nodes.
+        # Link sorted nodes.
         pre_head = ListNode(None)
         current = pre_head
 
