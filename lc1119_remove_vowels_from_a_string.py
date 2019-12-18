@@ -19,17 +19,39 @@ Note:
 - 1 <= S.length <= 1000
 """
 
-class Solution(object):
+class SolutionSet(object):
     def removeVowels(self, S):
         """
         :type S: string
         :rtype: string
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        if not S:
+            return ''
+
+        # Push vowels into set for quick lookup.
+        vowels = set(['a', 'e', 'i', 'o', 'u'])
+
+        # Collect non-vowels into a list.
+        result = []
+
+        for s in S:
+            if s not in vowels:
+                result.append(s)
+
+        return ''.join(result)
 
 
 def main():
-    pass
+    # Output: "ltcdscmmntyfrcdrs"
+    S = 'leetcodeisacommunityforcoders'
+    print SolutionSet().removeVowels(S)
+
+    # Output: ""
+    S = 'aeiou'
+    print SolutionSet().removeVowels(S)
 
 
 if __name__ == '__main__':
