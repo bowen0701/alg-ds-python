@@ -44,19 +44,21 @@ class TreeNode(object):
 
 
 class SolutionRecur(object):
-    def _kthSmallestUtil(self, root):
+    def _inorder(self, root):
+        # Base case.
         if not root:
             return None
-        
-        self._kthSmallestUtil(root.left)
 
-        # Decrement k and check if k is 0, 
-        # then current node's val is the kth smallest value.
+        # Inorder traversal: left->node->right.
+        self._inorder(root.left)
+
+        # Decrement k to 0 to get the kth smallest value.
         self.k -= 1
         if self.k == 0:
-             self.k_smallest = root.val
+             self.kth_smallest = root.val
+             return None
 
-        self._kthSmallestUtil(root.right)
+        self._inorder(root.right)
 
     def kthSmallest(self, root, k):
         """
@@ -69,10 +71,10 @@ class SolutionRecur(object):
         """
         # Apply recursive inorder traversal.
         self.k = k
-        self.k_smallest = None
+        self.kth_smallest = None
 
-        self._kthSmallestUtil(root)
-        return self.k_smallest
+        self._inorder(root)
+        return self.kth_smallest
 
 
 class SolutionIter(object):
@@ -85,6 +87,7 @@ class SolutionIter(object):
         Time complexity: O(k).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Apply iterative inorder traversal.
         previous = None
         current = root
 
@@ -96,16 +99,15 @@ class SolutionIter(object):
                 stack.append(current)
                 current = current.left
             else:
-                # If not, pop stack as current.
+                # If not, pop stack as current, which is left.
                 current = stack.pop()
 
-                # Decrement k and check if k is 0, 
-                # then current node's value is the kth smallest.
+                # Decrement k to 0 to get the kth smallest value.
                 k -= 1
                 if k == 0:
                     break
 
-                # Update previous & current by current & current.right.
+                # Then visit right.
                 previous = current
                 current = current.right
 
