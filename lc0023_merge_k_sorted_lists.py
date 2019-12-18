@@ -30,8 +30,8 @@ class SolutionAllSort(object):
         :rtype: ListNode
 
         Time complexity: O(nk*log(nk)), where
-          - n is the number of nodes,
-          - k is the n_lists of lists.
+          - n is the max number of nodes in one list.
+          - k is the length of lists.
         Space complexity: O(nk).
         """
         # Collect all nodes from list.
@@ -78,9 +78,9 @@ class SolutionMergeTwoRecur(object):
         Merge each pair of two lists at a time. 
 
         Time complexity: O(kn*logk), where
-          - n is the number of nodes,
+          - n is the max number of nodes in one list.
           - k is the length of lists.
-        Space complexity: O(1).
+        Space complexity: O(logk).
         """
         if not lists:
             return None
@@ -129,7 +129,7 @@ class SolutionMergeTwoIter(object):
         :rtype: ListNode
 
         Time complexity: O(kn*logk), where
-          - n is the number of nodes,
+          - n is the max number of nodes in one list.
           - k is the length of lists.
         Space complexity: O(1).
         """
@@ -157,11 +157,11 @@ class SolutionMinHeap(object):
         :rtype: ListNode
 
         Time complexity: O(kn*logk), where
-          - n is the number of nodes,
+          - n is the max number of nodes in one list.
           - k is the length of lists.
-        Space complexity: O(1).
+        Space complexity: O(k).
         """
-        # Use min heap to collect sorted nodes.
+        # Use min heap to collect nodes.
         import heapq
 
         if not lists:
@@ -174,7 +174,7 @@ class SolutionMinHeap(object):
         pre_head = ListNode(None)
         current = pre_head
 
-        # Pop min heap's head and link it to the linked list.
+        # Pop min heap's head and link that min node to list.
         while minheap:
             _, node = heapq.heappop(minheap)
             current.next = node
