@@ -27,8 +27,9 @@ class SolutionRecur(object):
         """Change fewest #coins by recursion.
 
         Time complexity: O(c^a), where c is number of coins, and a is amount.
-        Space complexity: O(1).
+        Space complexity: O(c).
         """
+        # Base cases.
         if amount < 0:
             return -1
         if amount == 0:
@@ -37,13 +38,13 @@ class SolutionRecur(object):
         min_coins = float('inf')
 
         for c in coins:
-            if amount - c < 0:
+            # Not changeable.
+            if amount < c:
                 continue
 
             extra_coins = self.coinChange(coins, amount - c)
             if extra_coins < 0:
                 continue
-
             min_coins = min(min_coins, 1 + extra_coins)
 
         if min_coins != float('inf'):
@@ -55,6 +56,7 @@ class SolutionRecur(object):
 class SolutionMemo(object):
     def _coin_change_memo(self, coins, amount, T):
         """Helper function for coin_change_memo()."""
+        # Base cases.
         if amount < 0:
             return -1
         if amount == 0:
@@ -68,13 +70,13 @@ class SolutionMemo(object):
         min_coins = float('inf')
 
         for c in coins:
-            if amount - c < 0:
+            # Not changeable.
+            if amount < c:
                 continue
 
             extra_coins = self._coin_change_memo(coins, amount - c, T)
             if extra_coins < 0:
                 continue
-
             min_coins = min(min_coins, 1 + extra_coins)
 
         if min_coins != float('inf'):
