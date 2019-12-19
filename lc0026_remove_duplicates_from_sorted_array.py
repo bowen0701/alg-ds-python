@@ -38,7 +38,7 @@ for (int i = 0; i < len; i++) {
 }
 """
 
-class Solution(object):
+class SolutionTailIter(object):
     def removeDuplicates(self, nums):
         """
         :type nums: List[int]
@@ -47,10 +47,10 @@ class Solution(object):
         Time complexity: O(n), where n is the lenght of nums.
         Space complexity: O(1).
         """
-        # Two pointer method: tail to store the distinct elements.
+        # Use tail to store the distinct elements.
         tail = 0
         for i in range(1, len(nums)):
-            # When see a new distinct num, increment tail and replace it by the num.
+            # When see a distinct num, increment tail and replace it by num.
             if nums[i] != nums[tail]:
                 tail += 1
                 nums[tail] = nums[i]
@@ -59,11 +59,13 @@ class Solution(object):
 
 
 def main():
+    # Output: 2.
     nums = [1, 1, 2]
-    print Solution().removeDuplicates(nums)
+    print SolutionTailIter().removeDuplicates(nums)
 
+    # Output: 5.
     nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
-    print Solution().removeDuplicates(nums)
+    print SolutionTailIter().removeDuplicates(nums)
 
 
 if __name__ == '__main__':
