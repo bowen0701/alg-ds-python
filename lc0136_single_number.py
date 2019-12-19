@@ -17,7 +17,7 @@ Input: [4,1,2,1,2]
 Output: 4
 """
 
-class SolutionDict(object):
+class SolutionNumCountDict(object):
     def singleNumber(self, nums):
         """Lonely integer by naive dictionary.
         :type nums: List[int]
@@ -26,13 +26,11 @@ class SolutionDict(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        num_count_d = {}
-    
+        from collections import defaultdict
+        
+        num_count_d = defaultdict(int)
         for n in nums:
-            if n in num_count_d:
-                num_count_d[n] += 1
-            else:
-                num_count_d[n] = 1
+            num_count_d[n] += 1
 
         for num, count in num_count_d.items():
             if count == 1:
@@ -62,13 +60,11 @@ def main():
     nums = range(1000) + range(1000) + [1000]
 
     start_time = time.time()
-    print('By extra dictionary: {}'
-          .format(SolutionDict().singleNumber(nums)))
+    print('By dict: {}'.format(SolutionNumCountDict().singleNumber(nums)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By bit operation: {}'
-          .format(SolutionBit().singleNumber(nums)))
+    print('By bit oper: {}'.format(SolutionBit().singleNumber(nums)))
     print('Time: {}'.format(time.time() - start_time))
 
 
