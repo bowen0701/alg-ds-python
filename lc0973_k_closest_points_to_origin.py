@@ -44,19 +44,19 @@ class SolutionMaxHeap(object):
         import heapq
 
         # Use maxheap with "negative" distances since heapq is min heap.
-        negdist_point_maxheapq = []
+        negdist_point_maxhq = []
 
         negdists = [-(p[0] ** 2 + p[1] ** 2) for p in points]
         negdists_points = zip(negdists, points)
 
         # Keep K points in maxheap.
         for (negdist, point) in negdists_points:
-            heapq.heappush(negdist_point_maxheapq, (negdist, point))
+            heapq.heappush(negdist_point_maxhq, (negdist, point))
             
-            if len(negdist_point_maxheapq) > K:
-                heapq.heappop(negdist_point_maxheapq)
+            if len(negdist_point_maxhq) > K:
+                heapq.heappop(negdist_point_maxhq)
 
-        k_points = [point for (negdist, point) in negdist_point_maxheapq]
+        k_points = [point for (negdist, point) in negdist_point_maxhq]
         return k_points
 
 
