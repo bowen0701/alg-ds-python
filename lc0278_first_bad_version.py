@@ -16,13 +16,10 @@ version is bad. Implement a function to find the first bad version.
 You should minimize the number of calls to the API.
 
 Example:
-
 Given n = 5, and version = 4 is the first bad version.
-
 call isBadVersion(3) -> false
 call isBadVersion(5) -> true
 call isBadVersion(4) -> true
-
 Then 4 is the first bad version.
 """
 
@@ -33,7 +30,7 @@ def isBadVersion(version):
     return VERSION_FAILURES[version - 1]
 
 
-class Solution(object):
+class SolutionBinarySearch(object):
     def firstBadVersion(self, n):
         """
         :type n: int
@@ -64,7 +61,7 @@ def main():
     VERSION_FAILURES = [False] * 1000 + [True] * 100
     n = len(VERSION_FAILURES)
     
-    print Solution().firstBadVersion(n)
+    print SolutionBinarySearch().firstBadVersion(n)
 
 
 if __name__ == '__main__':
