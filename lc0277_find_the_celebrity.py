@@ -58,7 +58,8 @@ class SolutionIter(object):
         """
         candidate = 0
 
-        # Find candidate: if i knows j, j could be candidate, i is not.
+        # Iterate through people to find candidate: 
+        # if i knows j, j could be candidate, i is not.
         for i in range(n):
             if knows(candidate, i):
                 candidate = i
