@@ -49,10 +49,10 @@ class SolutionTwoBooleans(object):
 
         for i in range(len(A) - 1):
             if A[i] > A[i + 1]:
-                is_decreasing = False
+                is_increasing = False
             
             if A[i] < A[i + 1]:
-                is_increasing = False
+                is_decreasing = False
 
             # Enable early stopping.
             if not is_increasing and not is_decreasing:
