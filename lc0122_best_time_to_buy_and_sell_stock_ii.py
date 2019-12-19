@@ -42,7 +42,6 @@ class SolutionIter(object):
         """
         # Iterate to compare each day and yesterday to update max profit.
         max_profit = 0
-
         for i in range(1, len(prices)):
             max_profit += max(prices[i] - prices[i - 1], 0)
         return max_profit
