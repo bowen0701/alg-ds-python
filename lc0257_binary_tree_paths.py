@@ -31,7 +31,7 @@ class SolutionDFS(object):
         # Concat root's value.
         cur_path += str(root.val)
 
-        # Check if root is leaf or not.
+        # Check if root is leaf, append current path to result.
         if not root.left and not root.right:
             paths.append(cur_path)
 
