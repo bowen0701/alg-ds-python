@@ -74,7 +74,7 @@ class SolutionPositionJumpStacksDP(object):
         :type stones: List[int]
         :rtype: bool
 
-        Apply DP with cache for stone->set(steps).
+        Apply DP with cache for positions and jumps.
 
         Time complexity: O(n^2).
         Space complexity: O(n^2).
@@ -86,7 +86,7 @@ class SolutionPositionJumpStacksDP(object):
         # Convert stones to set for quickly check position.
         stones_set = set(stones)
 
-        # Track positions and jumps
+        # Track positions and jumps, with initial jump = 0 due to 1st jump.
         positions = [0]
         jumps = [0]
 
