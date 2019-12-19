@@ -15,7 +15,7 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 """
 
-class Solution(object):
+class SolutionNumIdxDict(object):
     def twoSum(self, nums, target):
         """
         :type nums: List[int]
@@ -34,7 +34,8 @@ class Solution(object):
 
 
 def main():
-    print Solution().twoSum([2, 7, 11, 15], 9)
+    # Output: [0, 1].
+    print SolutionNumIdxDict().twoSum([2, 7, 11, 15], 9)
 
 
 if __name__ == '__main__':
