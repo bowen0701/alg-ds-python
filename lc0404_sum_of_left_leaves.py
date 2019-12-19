@@ -11,7 +11,6 @@ Example:
   9  20
     /  \
    15   7
-
 There are two left leaves in the binary tree, with values 9 and 15 respectively. 
 Return 24.
 """
@@ -37,7 +36,7 @@ class SolutionRecur(object):
         if not root:
             return 0
 
-        if root.left and not root.left.left and not root.left.right:
+        if root.left and (not root.left.left and not root.left.right):
             return root.left.val + self.sumOfLeftLeaves(root.right)
         else:
             return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
@@ -73,7 +72,7 @@ class SolutionIter(object):
 
             if current.right:
                 if current.right.left or current.right.right:
-                    # If left node is not a leave, add it to stack.
+                    # If right node is not a leave, add it to stack.
                     stack.append(current.right)
 
         return result
