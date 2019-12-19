@@ -57,18 +57,57 @@ class SolutionReversedVowelPosDict(object):
         return ''.join(s_list)
 
 
+class SolutionSwapTwoPointers(object):
+    def reverseVowels(self, s):
+        """
+        :type s: str
+        :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        if not s:
+            return ''
+
+        # Use set to collect vowels for quick lookup.
+        vowels = set(['A', 'E', 'I', 'O', 'U',
+                      'a', 'e', 'i', 'o', 'u'])
+
+        # Since string is immutable.
+        s_list = list(s)
+
+        # Apply two pointers method from two sides to swap vowels.
+        i, j = 0, len(s) - 1
+        while i < j:
+            while i < j and s_list[i] not in vowels:
+                i += 1
+            while i < j and s_list[j] not in vowels:
+                j -= 1
+
+            if i != j:
+                s_list[i], s_list[j] = s_list[j], s_list[i]
+
+                i += 1
+                j -= 1
+
+        return ''.join(s_list)
+
+
 def main():
     # Output: "holle"
     s = "hello"
     print SolutionReversedVowelPosDict().reverseVowels(s)
+    print SolutionSwapTwoPointers().reverseVowels(s)
 
     # Output: "leotcede"
     s = "leetcode"
     print SolutionReversedVowelPosDict().reverseVowels(s)
+    print SolutionSwapTwoPointers().reverseVowels(s)
 
     # Output: "epplA"
     s = "Apple"
     print SolutionReversedVowelPosDict().reverseVowels(s)
+    print SolutionSwapTwoPointers().reverseVowels(s)
 
 
 if __name__ == '__main__':
