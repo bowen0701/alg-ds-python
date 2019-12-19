@@ -7,8 +7,11 @@ Write a program to find the node at which the intersection of
 two singly linked lists begins.
 
 For example, the following two linked lists:
-
-begin to intersect at node c1.
+      A1 -> A2
+             \ C1 -> C2 -> C2
+             /
+B1 -> B2 -> B3
+begin to intersect at node C1.
 
 Example 1:
 Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5],
@@ -16,13 +19,14 @@ skipA = 2, skipB = 3
 Output: Reference of the node with value = 8
 Input Explanation: The intersected node's value is 8
 (note that this must not be 0 if the two lists intersect).
-From the head of A, it reads as [4,1,8,4,5]. From the head of B,
-it reads as [5,0,1,8,4,5].
+From the head of A, it reads as [4,1,8,4,5].
+From the head of B, it reads as [5,0,1,8,4,5].
 There are 2 nodes before the intersected node in A;
 There are 3 nodes before the intersected node in B. 
 
 Example 2:
-Input: intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+Input: intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4],
+skipA = 3, skipB = 1
 Output: Reference of the node with value = 2
 Input Explanation: The intersected node's value is 2
 (note that this must not be 0 if the two lists intersect).
@@ -32,7 +36,8 @@ There are 3 nodes before the intersected node in A;
 There are 1 node before the intersected node in B.
 
 Example 3:
-Input: intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+Input: intersectVal = 0, listA = [2,6,4], listB = [1,5],
+skipA = 3, skipB = 2
 Output: null
 Input Explanation: From the head of A, it reads as [2,6,4].
 From the head of B, it reads as [1,5].
@@ -57,7 +62,7 @@ class ListNode(object):
 class SolutionTwoPointers(object):
     def getIntersectionNode(self, headA, headB):
         """
-        :type head1, head1: ListNode
+        :type headA, headB: ListNode
         :rtype: ListNode
 
         Time complexity: O(max(a, b)), where a and b is the lenght of lists A and B.
@@ -70,6 +75,7 @@ class SolutionTwoPointers(object):
         currentA = headA
         currentB = headB
 
+        # If current node A != B, continue visit next node, and then visit the end
         while currentA != currentB:
             if currentA:
                 # If not, visit next nodes.
@@ -94,18 +100,39 @@ def main():
     headB = ListNode(5)
     headB.next = ListNode(0)
     headB.next.next = ListNode(1)
-    # intersectNode1 = ListNode(8)
-    # intersectNode2 = ListNode(4)
-    # intersectNode3 = ListNode(5)
-
-    # headA.next.next = intersectNode1
-    # headA.next.next.next = intersectNode2
-    # headA.next.next.next.next = intersectNode3
-    # headB.next.next = intersectNode1
-    # headB.next.next.next = intersectNode2
-    # headB.next.next.next.next = intersectNode3  
-
+    intersectNode1 = ListNode(8)
+    intersectNode2 = ListNode(4)
+    intersectNode3 = ListNode(5)
+    headA.next.next = intersectNode1
+    headA.next.next.next = intersectNode2
+    headA.next.next.next.next = intersectNode3
+    headB.next.next = intersectNode1
+    headB.next.next.next = intersectNode2
+    headB.next.next.next.next = intersectNode3  
     print SolutionTwoPointers().getIntersectionNode(headA, headB).val
+
+    # Input: intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4],
+    # Output: Reference of the node with value = 2
+    headA = ListNode(0)
+    headA.next = ListNode(9)
+    headA.next.next = ListNode(1)
+    headB = ListNode(3)
+    intersectNode1 = ListNode(2)
+    intersectNode2 = ListNode(4)
+    headA.next.next.next = intersectNode1
+    headA.next.next.next.next = intersectNode2
+    headB.next = intersectNode1
+    headB.next.next = intersectNode2
+    print SolutionTwoPointers().getIntersectionNode(headA, headB).val
+
+    # Input: intersectVal = 0, listA = [2,6,4], listB = [1,5],
+    # Output: null
+    headA = ListNode(2)
+    headA.next = ListNode(6)
+    headA.next.next = ListNode(1)
+    headB = ListNode(1)
+    headB.next = ListNode(5)
+    print SolutionTwoPointers().getIntersectionNode(headA, headB)
 
 
 if __name__ == '__main__':
