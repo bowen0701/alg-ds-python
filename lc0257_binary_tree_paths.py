@@ -34,6 +34,7 @@ class SolutionDFS(object):
         # Check if root is leaf, append current path to result.
         if not root.left and not root.right:
             paths.append(cur_path)
+            return None
 
         # Start DFS for left and right nodes respectively.
         if root.left:
