@@ -33,7 +33,7 @@ Input: "{[]}"
 Output: true
 """
 
-class SolutionDict(object):
+class SolutionOpenCloseDict(object):
     def isValid(self, s):
         """
         :type s: str
@@ -50,16 +50,18 @@ class SolutionDict(object):
         }
 
         # Use stack to check valid parentheses.
+        open_set = set('([{')
+        close_set = set(')]}')
         stack = []
 
         for c in s:
             # If c is open bracket, push to stack.
-            if c in '([{':
+            if c in open_set:
                 stack.append(c)
                 continue
 
             # If c in close bracket, pop element from stack and check match.
-            if c in ')]}':
+            if c in close_set:
                 # If no open bracket in stack, we have non-matched close one.
                 if not stack:
                     return False
@@ -79,37 +81,37 @@ def main():
     # Input: "()"
     # Output: true
     s = '()'
-    print SolutionDict().isValid(s)
+    print SolutionOpenCloseDict().isValid(s)
 
     # Input: "()[]{}"
     # Output: true
     s = '()[]{}'
-    print SolutionDict().isValid(s)
+    print SolutionOpenCloseDict().isValid(s)
 
     # Input: "(]"
     # Output: false
     s = '(]'
-    print SolutionDict().isValid(s)
+    print SolutionOpenCloseDict().isValid(s)
 
     # Input: "([)]"
     # Output: false
     s = '([)]'
-    print SolutionDict().isValid(s)
+    print SolutionOpenCloseDict().isValid(s)
 
     # Input: "{[]}"
     # Output: true
     s = '{[]}'
-    print SolutionDict().isValid(s)
+    print SolutionOpenCloseDict().isValid(s)
 
     # Input: '['
     # Output: False
     s = '['
-    print SolutionDict().isValid(s)
+    print SolutionOpenCloseDict().isValid(s)
 
     # Input: ']'
     # Output: False
     s = ']'
-    print SolutionDict().isValid(s)
+    print SolutionOpenCloseDict().isValid(s)
 
 
 if __name__ == '__main__':
