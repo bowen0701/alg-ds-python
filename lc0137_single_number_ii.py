@@ -29,8 +29,8 @@ class SolutionDict(object):
         Space complexity: O(n).
         """
         from collections import defaultdict
-        num_counts = defaultdict(int)
 
+        num_counts = defaultdict(int)
         for n in nums:
             num_counts[n] += 1
 
