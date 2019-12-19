@@ -27,6 +27,9 @@ class SolutionCharCount(object):
         :type s: str
         :type t: str
         :rtype: bool
+
+        Time complexity: O(m+n).
+        Space complexity: O(1).
         """
         if len(s) != len(t):
             return False
