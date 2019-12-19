@@ -1,7 +1,7 @@
 """Leetcode 283. Move Zeroes
 Easy
 
-Given an array nums, write a function to move all 0's to the end of it 
+Given an array nums, write a function to move all 0's to the right of it 
 while maintaining the relative order of the non-zero elements.
 
 Example:
@@ -23,14 +23,14 @@ class SolutionPopAppend(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        start = 0
-        end = len(nums) - 1
-        while start < end:
-            if nums[start] == 0:
-                nums.append(nums.pop(start))
-                end -= 1
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            if nums[left] == 0:
+                nums.append(nums.pop(left))
+                right -= 1
             else:
-                start += 1
+                left += 1
 
 
 class SolutionUpdate(object):
@@ -42,13 +42,13 @@ class SolutionUpdate(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        start = 0
+        nonzero_idx = 0
         for i in range(len(nums)):
             if nums[i] != 0:
-                nums[start] = nums[i]
-                start += 1
+                nums[nonzero_idx] = nums[i]
+                nonzero_idx += 1
 
-        for i in range(start, len(nums)):
+        for i in range(nonzero_idx, len(nums)):
             nums[i] = 0
 
 
