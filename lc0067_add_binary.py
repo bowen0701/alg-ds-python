@@ -47,6 +47,7 @@ class SolutionIter(object):
                 total = int(a[i]) + int(b[i]) + carry
             else:
                 total = carry
+
             carry, val = total // 2, total % 2
 
             s = str(val) + s
