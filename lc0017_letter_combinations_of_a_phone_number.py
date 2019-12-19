@@ -71,15 +71,15 @@ class SolutionListComprehension(object):
 
 
 class SolutionBFSRecur(object):
-    def bfsRecur(self, letter_com, digits, dtol_d, cur_str, idx):
+    def _bfsRecur(self, letter_com, digits, dtol_d, cur_str, idx):
         if idx == len(digits):
             letter_com.append(cur_str)
             return None
 
         letters = dtol_d[digits[idx]]
-        for l in letters:
+        for letter in letters:
             # For letters in this BFS level, append letter and increment index.
-            self.bfsRecur(letter_com, digits, dtol_d, cur_str + l, idx + 1)
+            self._bfsRecur(letter_com, digits, dtol_d, cur_str + letter, idx + 1)
 
     def letterCombinations(self, digits):
         """
@@ -111,7 +111,7 @@ class SolutionBFSRecur(object):
         letter_com = []
         cur_str = ''
         idx = 0
-        self.bfsRecur(letter_com, digits, dtol_d, cur_str, idx)
+        self._bfsRecur(letter_com, digits, dtol_d, cur_str, idx)
         return letter_com
 
 
