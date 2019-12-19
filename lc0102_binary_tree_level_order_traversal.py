@@ -57,14 +57,14 @@ class SolutionBFS(object):
                 current = queue.pop()
                 level.append(current.val)
 
-                # Insert the nodes in next level into queue.
+                # Insert left/right nodes in next level into queue.
                 if current.left:
                     queue.appendleft(current.left)
                 if current.right:
                     queue.appendleft(current.right)
             
             # Append level nodes to result.
-            result.append(list(level))
+            result.append(level)
 
         return result
 
