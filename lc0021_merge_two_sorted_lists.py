@@ -18,7 +18,7 @@ class ListNode(object):
         self.next = None
 
 
-class SolutionSort(object):
+class SolutionSortAll(object):
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
@@ -128,7 +128,7 @@ def main():
     l2.next = ListNode(3)
     l2.next.next = ListNode(4)
 
-    ls = SolutionSort().mergeTwoLists(l1, l2)
+    ls = SolutionSortAll().mergeTwoLists(l1, l2)
     show(ls)
 
     print 'By recur:'
