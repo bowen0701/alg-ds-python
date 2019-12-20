@@ -21,34 +21,34 @@ Note:
 - S will consist of lowercase letters ('a' to 'z') only.
 """
 
-class SolutionDict(object):
+class SolutionCharLastPosDict(object):
     def partitionLabels(self, S):
         """
         :type S: str
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
         partition_lens = []
 
         # Use dict to record last pos for each letter.
-        last_poses = defaultdict(int)
+        char_last_poses = defaultdict(int)
         for i, c in enumerate(S):
-            last_poses[c] = i
+            char_last_poses[c] = i
 
         i = 0
         while i < len(S):
             # For each letter, get its last position as the last pos for i.
-            partition_last = last_poses[S[i]]
+            partition_last = char_last_poses[S[i]]
 
             j = i
             while j < partition_last:
                 # Interate through each letter following S[i], update last position.
                 # If j is out of last position, we get one partition.
-                partition_last = max(partition_last, last_poses[S[j]])
+                partition_last = max(partition_last, char_last_poses[S[j]])
                 j += 1
 
             partition_lens.append(j - i + 1)
@@ -61,7 +61,7 @@ class SolutionDict(object):
 
 def main():
     S = "ababcbacadefegdehijhklij"
-    print SolutionDict().partitionLabels(S)
+    print SolutionCharLastPosDict().partitionLabels(S)
 
 
 if __name__ == '__main__':
