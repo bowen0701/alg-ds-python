@@ -23,9 +23,12 @@ class SolutionRecur(object):
     Space complexity: O(mn).
     """
     def uniquePaths(self, m, n):
-        # Recursively backtrack paths from (m - 1, n) and (m, n - 1).
+        # Recursively backtrack paths from left and up.
+
+        # Base cases.
         if m == 1 or n == 1:
             return 1
+
         return self.uniquePaths(m - 1, n) + self.uniquePaths(m, n - 1)
 
 
@@ -40,10 +43,10 @@ class SolutionMemo(object):
             return path[m][n]
 
         if m == 1 or n == 1:
-            # Set the 1st row or col to 1.
+            # Base cases: Set the 1st row or col to 1.
             path[m][n] = 1
         else:
-            # For other rows/cols, backtrack from (m - 1, n) and (m, n - 1).
+            # For other rows/cols, backtrack from left and up.
             path[m][n] = (self._uniquePathsHelper(m - 1, n, path) + 
                           self._uniquePathsHelper(m, n - 1, path))
 
@@ -73,7 +76,7 @@ class SolutionDp(object):
         for i in range(m):
             path[i][0] = 1
 
-        # For other rows/cols, backtrack from (i - 1, j) and (i, j - 1).
+        # For other rows/cols, backtrack from left and up.
         for i in range(1, m):
             for j in range(1, n):
                 path[i][j] = path[i - 1][j] + path[i][j - 1]
