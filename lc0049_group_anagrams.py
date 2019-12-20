@@ -19,7 +19,7 @@ Note:
 - The order of your output does not matter.
 """
 
-class SolutionSortedDict(object):
+class SolutionSortedAnagramDict(object):
     def groupAnagrams(self, strs):
         """
         :type strs: List[str]
@@ -35,14 +35,14 @@ class SolutionSortedDict(object):
         from collections import defaultdict
 
         # Store in a dict with sorted string->string list.  
-        anagrams_d = defaultdict(list)
+        anagram_lists = defaultdict(list)
 
         for s in strs:
             # Use sorted string as dict key.
             k = ''.join(sorted(s))
-            anagrams_d[k].append(s)
+            anagram_lists[k].append(s)
 
-        return anagrams_d.values()
+        return anagram_lists.values()
 
 
 def main():
@@ -53,7 +53,7 @@ def main():
     #   ["bat"]
     # ]
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-    print SolutionSortedDict().groupAnagrams(strs)
+    print SolutionSortedAnagramDict().groupAnagrams(strs)
 
 
 if __name__ == '__main__':
