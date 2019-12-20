@@ -124,7 +124,6 @@ class SolutionSumFreqMemo(object):
         # Apply DFS with initial current sum 0.
         cur_sum = 0
         self._dfs(root, sum, sum_freqs, cur_sum)
-
         return self.n_paths
 
 

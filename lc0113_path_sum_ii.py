@@ -60,12 +60,9 @@ class SolutionPreorderRecur(object):
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         # Apply recursive preorder traversal.
-        # Collect paths and trace current path.
         paths = []
         cur_path = []
-
         self._find_paths(root, sum, cur_path, paths)
-
         return paths
 
 
