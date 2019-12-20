@@ -67,7 +67,7 @@ class SolutionNaive(object):
         return result
 
 
-class Solution(object):
+class SolutionAppendOrUpdateEnd(object):
     def merge(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -82,6 +82,7 @@ class Solution(object):
         # Sort by interval's start.
         intervals = sorted(intervals)
 
+        # Iterate through intervals to append them or update end. 
         result = [intervals[0]]
         
         for i in range(1, len(intervals)):
@@ -128,23 +129,23 @@ def main():
 
     # Ans: [[1,6],[8,10],[15,18]]
     intervals = [[1,3], [2,6], [8,10], [15,18]]
-    print Solution().merge(intervals)
+    print SolutionAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[1,5]]
     intervals = [[1,4], [4,5]]
-    print Solution().merge(intervals)
+    print SolutionAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[0, 4]]
     intervals = [[1,4], [0,4]]
-    print Solution().merge(intervals)
+    print SolutionAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[0,5]]
     intervals = [[1,4], [0,5]]
-    print Solution().merge(intervals)
+    print SolutionAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[1, 10]]
     intervals = [[2,3], [4,5], [6,7], [8,9], [1,10]]
-    print Solution().merge(intervals)
+    print SolutionAppendOrUpdateEnd().merge(intervals)
 
     print 'Time: {}'.format(time.time() - start_time)
 
