@@ -18,7 +18,7 @@ nums2 = [2,5,6],       n = 3
 Output: [1,2,2,3,5,6]
 """
 
-class Solution(object):
+class SolutionTwoPointersFromLast(object):
     def merge(self, nums1, m, nums2, n):
         """
         :type nums1: List[int]
@@ -30,12 +30,11 @@ class Solution(object):
         Time complexity: O(m+n).
         Space complexity: O(1).
         """
+        # Two pointer method: Start from last elements of nums1 & nums2.
         i = m - 1
         j = n - 1
 
-        # Start from the last element of nums1 to replace.
         for k in reversed(range(len(nums1))):
-            # Compare the last elements of nums1 and nums2.
             if i >= 0 and j >= 0:
                 if nums1[i] > nums2[j]:
                     nums1[k] = nums1[i]
@@ -57,7 +56,7 @@ def main():
     m = 3
     nums2 = [2,5,6]
     n = 3
-    Solution().merge(nums1, m, nums2, n)
+    SolutionTwoPointersFromLast().merge(nums1, m, nums2, n)
     print nums1
 
 
