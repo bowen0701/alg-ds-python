@@ -43,7 +43,7 @@ class SolutionMinHeap(object):
         Time complexity: O(n*logn).
         Space complexity: O(n).
         """
-        # Every time add the two shortest ropes by min heap.
+        # Apply min heap to iteratively connect two shortest ropes.
         import heapq
 
         if not ropes:
@@ -54,25 +54,21 @@ class SolutionMinHeap(object):
 
         min_cost = 0
 
-        min_h = ropes
-        heapq.heapify(min_h)
+        min_hq = ropes[:]
+        heapq.heapify(min_hq)
 
-        while len(min_h) > 1:
-            # Add the first 2 shortest ropes for additional cost.
-            min_rope1 = heapq.heappop(min_h)
+        # Iteratively connect stick pair when at least two.
+        while len(min_hq) >= 2:
+            rope1 = heapq.heappop(min_hq)
+            rope2 = heapq.heappop(min_hq)
             
-            if min_h:
-                min_rope2 = heapq.heappop(min_h)
-            else:
-                min_repe2 = 0
-            
-            connected_rope = min_rope1 + min_rope2
+            connected_rope = rope1 + rope2
 
             # Accumulate min cost with additional cost.
             min_cost += connected_rope
 
             # Push the additional cost to min heap.
-            heapq.heappush(min_h, connected_rope)
+            heapq.heappush(min_hq, connected_rope)
 
         return min_cost
 
