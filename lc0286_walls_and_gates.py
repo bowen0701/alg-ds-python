@@ -25,13 +25,13 @@ After running your function, the 2D grid should be:
 0  -1   3   4
 """
 
-class SolutionBFS(object):
+class SolutionBFSIter(object):
     def wallsAndGates(self, rooms):
         """
         :type rooms: List[List[int]]
         :rtype: void Do not return anything, modify rooms in-place instead.
 
-        Apply BFS starting from all gates.
+        Apply iterative BFS to visit rooms starting from all gates.
 
         Time complexity: O(kmn), where
           - k: number of gates
@@ -39,6 +39,8 @@ class SolutionBFS(object):
           - n: number of columns
         Space complexity: O(mn).
         """
+        from collections import deque
+
         nrows, ncols = len(rooms), len(rooms[0])
 
         # Collect all gates.
@@ -47,8 +49,8 @@ class SolutionBFS(object):
 
         # For each gate, start BFS to update neighbors's shorter distances.
         while gates:
-            # Put one gate in a queue.
-            queue = [gates.pop()]
+            # Put one gate in the queue.
+            queue = deque([gates.pop()])
 
             while queue:
                 r, c = queue.pop()
@@ -59,7 +61,7 @@ class SolutionBFS(object):
                     if (0 <= r_next < nrows and 0 <= c_next < ncols and
                         rooms[r_next][c_next] > rooms[r][c] + 1):
                         rooms[r_next][c_next] = rooms[r][c] + 1
-                        queue.insert(0, (r_next, c_next))
+                        queue.appendleft((r_next, c_next))
 
 
 class SolutionDFSRecur(object):
@@ -81,7 +83,7 @@ class SolutionDFSRecur(object):
         :type rooms: List[List[int]]
         :rtype: void Do not return anything, modify rooms in-place instead.
 
-        Apply DFS starting from all gates.
+        Apply recursive DFS to visit rooms starting from all gates.
 
         Time complexity: O(kmn), where
           - k: number of gates
@@ -112,7 +114,7 @@ def main():
         [float('inf'), -1, float('inf'), -1],
         [0, -1, float('inf'), float('inf')]
     ]
-    SolutionBFS().wallsAndGates(rooms)
+    SolutionBFSIter().wallsAndGates(rooms)
     print rooms
 
     rooms = [
