@@ -25,17 +25,43 @@ we combine 1 and 1 to get 0 so the array converts to [1] then that's the value
 of last stone.
 """
 
-class Solution(object):
+class SolutionMaxHeap(object):
     def lastStoneWeight(self, stones):
         """
         :type stones: List[int]
         :rtype: int
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
         """
-        pass
+        import heapq
+
+        if not stones:
+            return 0
+
+        # Add stones in max heap (min heap with negative weights).
+        max_stones = []
+        for s in stones:
+            heapq.heappush(max_stones, -s)
+
+        # Iteratively smash stone pairs when have at least two.
+        while len(max_stones) >= 2:
+            stone1 = -heapq.heappop(max_stones)
+            stone2 = -heapq.heappop(max_stones)
+
+            if stone1 != stone2:
+                heapq.heappush(max_stones, -(stone1 - stone2))
+
+        if max_stones:
+            return -max_stones[0]
+        else:
+            return 0
 
 
 def main():
-    pass
+    # Output: 1.
+    stones = [2,7,4,1,8,1]
+    print SolutionMaxHeap().lastStoneWeight(stones)
 
 
 if __name__ == '__main__':
