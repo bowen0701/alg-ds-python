@@ -28,8 +28,8 @@ class SolutionNaive(object):
         if not intervals:
             return []
 
-        # Sort by interval's left.
-        intervals = sorted(intervals, key=lambda x: x[0])
+        # Sort by interval's start.
+        intervals = sorted(intervals)
 
         result = [intervals[0]]
 
@@ -79,16 +79,17 @@ class Solution(object):
         if not intervals:
             return []
 
-        # Sort by interval's left.
-        intervals = sorted(intervals, key=lambda x: x[0])
+        # Sort by interval's start.
+        intervals = sorted(intervals)
 
         result = [intervals[0]]
         
         for i in range(1, len(intervals)):
             if intervals[i][0] > result[-1][1]:
-                # If interval is not overlapped with the last.
+                # If interval is not overlapped with the last, append interval.
                 result.append(intervals[i])
             else:
+                # If overlapped, update the result's end.
                 result[-1][1] = max(intervals[i][1], result[-1][1])
 
         return result
