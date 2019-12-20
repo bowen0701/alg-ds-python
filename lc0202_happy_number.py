@@ -31,7 +31,6 @@ class SolutionSumSquaresSet(object):
         # Use set to collect sum of squares.
         sum_squares = set()
 
-        # Use infinite loop when n does not equal 1.
         while n != 1:
             current = n
 
@@ -41,7 +40,7 @@ class SolutionSumSquaresSet(object):
                 current, d = current // 10, current % 10
                 ss += d * d
 
-            # If sum of squares occurred before.
+            # If sum of squares occurred before, return due to cycle.
             if ss in sum_squares:
                 return False
             
