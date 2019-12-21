@@ -27,6 +27,9 @@ class SolutionIter(object):
         """
         :type s: str
         :rtype: List[str]
+
+        Time complexity: O(n^2).
+        Space complexity: O(n).
         """
         # Edge cases.
         if len(s) <= 1:
