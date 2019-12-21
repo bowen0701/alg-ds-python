@@ -22,17 +22,42 @@ Output:
 Note: If there is no valid move, return an empty list [].
 """
 
-class Solution(object):
+class SolutionIter(object):
     def generatePossibleNextMoves(self, s):
         """
         :type s: str
         :rtype: List[str]
         """
-        pass
+        # Edge cases.
+        if len(s) <= 1:
+            return []
+
+        n_minus_1 = len(s) - 1
+        possible_states = []
+
+        # Iterate through string to check if char and its next are '++'.
+        i = 0
+        while i < n_minus_1:
+            if s[i] == '+':
+                while i < n_minus_1 and s[i + 1] == '+':
+                    possible_states.append(s[:i] + '--' + s[i+2:])
+                    i += 1
+
+            i += 1
+
+        return possible_states
 
 
 def main():
-    pass
+    # Input: s = "++++"
+    # Output: 
+    # [
+    #   "--++",
+    #   "+--+",
+    #   "++--"
+    # ]
+    s = '++++'
+    print SolutionIter().generatePossibleNextMoves(s)
 
 
 if __name__ == '__main__':
