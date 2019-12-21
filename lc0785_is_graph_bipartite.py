@@ -44,17 +44,67 @@ Note:
   graph[j].
 """
 
-class Solution(object):
+class SolutionNodeSetidDictDFSRecur(object):
+    def _dfs(self, i, graph, node_setid):
+        for j in graph[i]:
+            if j in node_setid:
+                # If connected nodes have the same set id.
+                if node_setid[j] == node_setid[i]:
+                    return False
+            else:
+                # If not, add j to the set with diff set id. 
+                node_setid[j] = 1 - node_setid[i]
+
+                # Continue DFS from node j.
+                is_bipartite = self._dfs(j, graph, node_setid)
+                if not is_bipartite:
+                    return False
+
+        return True
+
     def isBipartite(self, graph):
         """
-        :type graph: List[List[int]]
+        :type graph: List[List[int]]; a adjacency matrix.
         :rtype: bool
+
+        Apply recursive DFS through connected nodes to add to different sets.
+
+        Time complexity: O(|V|+|E|), where
+          - |V| is the number of nodes.
+          - |E| is the number of edges.
+        Space complexity: O(|V|).
         """
-        pass
+        # Edge cases: if only one or two nodes.
+        if len(graph) <= 2:
+            return True
+
+        # Use dict: node->setid={0,1} for denoting visits and binary setid.
+        node_setid = dict()
+
+        for i in range(len(graph)):
+            if i not in node_setid:
+                node_setid[i] = 0
+
+                # Start DFS from node i.
+                is_bipartite = self._dfs(i, graph, node_setid)
+
+                if not is_bipartite:
+                    # If one node cannot be added, return False.
+                    return False
+
+        return True
 
 
 def main():
-    pass
+    # Input: [[1,3], [0,2], [1,3], [0,2]]
+    # Output: true
+    graph = [[1,3], [0,2], [1,3], [0,2]]
+    print SolutionNodeSetidDictDFSRecur().isBipartite(graph)
+
+    # Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
+    # Output: true
+    graph = [[1,2,3], [0,2], [0,1,3], [0,2]]
+    print SolutionNodeSetidDictDFSRecur().isBipartite(graph)
 
 
 if __name__ == '__main__':
