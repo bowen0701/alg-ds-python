@@ -60,7 +60,6 @@ class Solution(object):
         # Then swap along the diagonal for the left-bottom elements.
         for i in range(n):
             for j in range(i):
-                print i, j
                 matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 
         return matrix
