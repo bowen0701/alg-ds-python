@@ -46,8 +46,8 @@ class SolutionCopy(object):
         :type matrix: List[List[int]]
         :rtype: None Do not return anything, modify matrix in-place instead.
 
-        Time complexity: O(m * n * max(m, n)).
-        Space complexity: O(m * n).
+        Time complexity: O(m*n*(m+n))).
+        Space complexity: O(m*n).
         """
         m, n = len(matrix), len(matrix[0])
 
@@ -64,35 +64,35 @@ class SolutionCopy(object):
                         matrix[i][c] = 0
 
 
-class SolutionRowCol(object):
+class SolutionZeroRowsCols(object):
     def setZeroes(self, matrix):
         """
         :type matrix: List[List[int]]
         :rtype: None Do not return anything, modify matrix in-place instead.
 
-        Time complexity: O(m * n).
-        Space complexity: O(m + n).
+        Time complexity: O(m*n).
+        Space complexity: O(m+n).
         """
         m, n = len(matrix), len(matrix[0])
 
-        # Create rows and cols for 0's positions.
-        rows = [0] * m
-        cols = [0] * n
+        # Use zero_rows and zero_cols to collect 0's positions.
+        zero_rows = [0] * m
+        zero_cols = [0] * n
         
-        # Update its row and col by checking matrix[i][j] == 0.
         for i in range(m):
             for j in range(n):
                 if matrix[i][j] == 0:
-                    rows[i] = 1
-                    cols[j] = 1
+                    zero_rows[i] = 1
+                    zero_cols[j] = 1
 
-        for r in range(len(rows)):
-            if rows[r] == 1:
+        # Update matrix rows and cols based on zero_rows and zero_cols.
+        for r in range(len(zero_rows)):
+            if zero_rows[r] == 1:
                 for j in range(n):
                     matrix[r][j] = 0
 
-        for c in range(len(cols)):
-            if cols[c] == 1:
+        for c in range(len(zero_cols)):
+            if zero_cols[c] == 1:
                 for i in range(m):
                     matrix[i][c] = 0
 
@@ -103,7 +103,7 @@ class SolutionOptimSpace(object):
         :type matrix: List[List[int]]
         :rtype: None Do not return anything, modify matrix in-place instead.
 
-        Time complexity: O().
+        Time complexity: O(m*n).
         Space complexity: O(1).
         """
         m, n = len(matrix), len(matrix[0])
@@ -146,7 +146,7 @@ def main():
                [1,1,1]
              ]
     # SolutionCopy().setZeroes(matrix)
-    SolutionRowCol().setZeroes(matrix)
+    SolutionZeroRowsCols().setZeroes(matrix)
     # SolutionOptimSpace().setZeroes(matrix)
     print matrix
 
@@ -157,7 +157,7 @@ def main():
                [1,3,1,5]
              ]
     # SolutionCopy().setZeroes(matrix)
-    SolutionRowCol().setZeroes(matrix)
+    SolutionZeroRowsCols().setZeroes(matrix)
     # SolutionOptimSpace().setZeroes(matrix)
     print matrix
 
