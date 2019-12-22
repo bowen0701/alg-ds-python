@@ -45,21 +45,69 @@ is replaced by "b12".
 Notice each digit has it's own entry in the array.
 
 Note:
-All characters have an ASCII value in [35, 126].
-1 <= len(chars) <= 1000.
+- All characters have an ASCII value in [35, 126].
+- 1 <= len(chars) <= 1000.
 """
 
-class Solution(object):
+class SolutionTwoPointersRepeat(object):
     def compress(self, chars):
         """
         :type chars: List[str]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        n = len(chars)
+        if n <= 1:
+            return n
+
+        # Apply two pointere method: i: old index, j: new index.
+        i, j = 0, 0
+
+        while i < n:
+            chars[j] = chars[i]
+            repeat = 1
+
+            # Iterate RHS of char i to check if same char.
+            while i + 1 < n and chars[i + 1] == chars[i]:
+                i += 1
+                repeat += 1
+
+            # If repeat > 1, replace chars by repeat.
+            if repeat > 1:
+                for c in str(repeat):
+                    j += 1
+                    chars[j] = c
+
+            # Increment i, j to continue visiting chars.
+            i += 1
+            j += 1
+
+        return j
 
 
 def main():
-    pass
+    # Input: ["a","a","b","b","c","c","c"]
+    # Output: Return 6, and the first 6 characters of the input array should be:
+    # ["a","2","b","2","c","3"]
+    chars = ["a","a","b","b","c","c","c"]
+    length = SolutionTwoPointersRepeat().compress(chars)
+    print length, chars[:length]
+
+    # Input: ["a"]
+    # Output: Return 1, and the first 1 characters of the input array should be:
+    # ["a"]
+    chars = ["a"]
+    length = SolutionTwoPointersRepeat().compress(chars)
+    print length, chars[:length]
+
+    # Input: ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
+    # Output: Return 4, and the first 4 characters of the input array should be: 
+    # ["a","b","1","2"].
+    chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
+    length = SolutionTwoPointersRepeat().compress(chars)
+    print length, chars[:length]
 
 
 if __name__ == '__main__':
