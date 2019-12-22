@@ -58,7 +58,7 @@ class MyHashSet(object):
         :type key: int
         :rtype: void
         """
-        # If hashset size is larger than capacity, double it and copy keys.
+        # If load >= load factor, double map and reset its keys.
         if float(self.size) / self.capacity >= self.load_factor:
             self.capacity <<= 1
             new_set = [None] * self.capacity
@@ -74,16 +74,19 @@ class MyHashSet(object):
 
             self.set = new_set
 
-        # Get hashed key and apply Open Addressing for collision.
+        # Get hash code and apply Open Addressing for collision.
         h = self._hash(key)
 
         while self.set[h] is not None:
             if self.set[h] == key:
+                # If get same key, stop.
                 return None
             else:
-                h = self._rehash(h)
+                # If get deleted key, insert to it.
                 if self.set[h] == -1:
                     break
+                # Otherwise, rehash and iterate again.
+                h = self._rehash(h)
 
         self.set[h] = key
         self.size += 1
@@ -97,10 +100,12 @@ class MyHashSet(object):
 
         while self.set[h]:
             if self.set[h] == key:
+                # If found the key, sink it by replacing by -1.
                 self.set[h] = -1
                 self.size -= 1
                 return None
             else:
+                # If not, rehash and iterate again.
                 h = self._rehash(h)
 
     def contains(self, key):

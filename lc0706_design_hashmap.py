@@ -50,13 +50,11 @@ class MyHashMap(object):
 
     def put(self, key, value):
         """
-        Value will always be non-negative.
-
         :type key: int
         :type value: int
         :rtype: None
         """
-        # If hashmap size is larger than capacity, double it and copy keys & values.
+        # If load >= load factor, double map and reset its keys & values.
         if float(self.size) / self.capacity >= self.load_factor:
             self.capacity <<= 1
             new_map = [[None, None]] * self.capacity
@@ -72,26 +70,26 @@ class MyHashMap(object):
 
             self.map = new_map
 
-        # Get hashed key and apply Open Addressing for collision.
+        # Get hash code and apply Open Addressing for collision.
         h = self._hash(key)
 
         while self.map[h][0] is not None:
             if self.map[h][0] == key:
+                # If get same key, update key's value.
                 self.map[h][1] = value
                 return None
             else:
-                h = self._rehash(h)
+                # If get deleted key, insert to it.
                 if self.map[h][0] == -1:
                     break
+                # Otherwise, rehash and iterate again.
+                h = self._rehash(h)
 
         self.map[h] = [key, value]
         self.size += 1
 
     def get(self, key):
         """
-        Returns the value to which the specified key is mapped, 
-        or -1 if this map contains no mapping for the key.
-
         :type key: int
         :rtype: int
         """
@@ -99,17 +97,16 @@ class MyHashMap(object):
 
         while self.map[h][0] is not None:
             if self.map[h][0] == key:
+                # If get same key, return its value.
                 return self.map[h][1]
             else:
+                # Otherwise, rehash and iterate again.
                 h = self._rehash(h)
 
         return -1
 
     def remove(self, key):
         """
-        Removes the mapping of the specified value key 
-        if this map contains a mapping for the key.
-        
         :type key: int
         :rtype: None
         """
@@ -117,10 +114,12 @@ class MyHashMap(object):
 
         while self.map[h][0]:
             if self.map[h][0] == key:
+                # If found same key, sink it by replacing by -1.
                 self.map[h] = [-1, None]
                 self.size -= 1
                 return None
             else:
+                # If not, rehash and iterate again.
                 h = self._rehash(h)
 
 
