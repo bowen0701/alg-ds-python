@@ -16,7 +16,7 @@ class HashTable(object):
         self.slots = [None] * self.size
         self.maps = [None] * self.size
 
-    def hash(self, key, is_weighted=False):
+    def _hash(self, key, is_weighted=False):
         """Hash function for integer or string."""
         if isinstance(key, int):
             # Hash an integer by mode division.
@@ -33,84 +33,67 @@ class HashTable(object):
                 ord_sum += wt * ord(key[pos])
             return ord_sum % self.size
 
-    def rehash(self, old_hash):
+    def _rehash(self, hash_code):
         """Rehash function using the linear probing method."""
-        return (old_hash + 1) % self.size
+        return (3 * hash_code + 1) % self.size
 
     def put(self, key, value):
         """
         Time complexity: average case O(1), worst case O(size).
         Space complexity: O(1).
         """
-        key_hash = self.hash(key)
+        h = self._hash(key)
 
-        # If key_hash's slot does not exist, set slots & map as key & value.
-        if not self.slots[key_hash]:
-            self.slots[key_hash] = key
-            self.maps[key_hash] = value
+        # If key_hash's slot is empty, set slots & map as key & value.
+        if not self.slots[h]:
+            self.slots[h] = key
+            self.maps[h] = value
         else:
             # If key_hash's slot is key, update its value.
-            if self.slots[key_hash] == key:
-                self.maps[key_hash] = value
+            if self.slots[h] == key:
+                self.maps[h] = value
             else:
-                # If collision exists for key_hash, keep rehashing till
-                # new key_hash's slot does not exist or is key.
-                next_slot = self.rehash(key_hash)
-                while (self.slots[next_slot] and 
-                       self.slots[next_slot] is not key):
-                    next_slot = self.rehash(next_slot)
+                # If collision exists for hashed code, keep rehashing till
+                # new hashed code's slot is empty or is key.
+                next_h = self._rehash(h)
+                while (self.slots[next_h] and self.slots[next_h] != key):
+                    next_h = self._rehash(next_h)
 
-                if not self.slots[next_slot]:
-                    self.slots[next_slot] = key
-                    self.maps[next_slot] = value
+                if not self.slots[next_h]:
+                    self.slots[next_h] = key
+                    self.maps[next_h] = value
                 else:
-                    self.maps[next_slot] = value
+                    self.maps[next_h] = value
 
     def get(self, key):
         """
         Time complexity: average case O(1), worst case O(size).
         Space complexity: O(1).
         """
-        start_key_hash = self.hash(key)
+        h = self._hash(key)
 
-        value = None
-        is_stop = False
-        is_found = False
-        key_hash = start_key_hash
-
-        while (self.slots[key_hash] and 
-               not is_found and not is_stop):
-            if self.slots[key_hash] == key:
-                is_found = True
-                value = self.maps[key_hash]
+        while self.slots[h]:
+            if self.slots[h] == key:
+                return self.maps[h]
             else:
-                key_hash = self.rehash(key_hash)
-                if key_hash == start_key_hash:
-                    is_stop = True
+                h = self._rehash(h)
 
-        return value
+        return None
 
     def delete(self, key):
         """
         Time complexity: average case O(1), worst case O(size).
         Space complexity: O(1).
         """
-        start_key_hash = self.hash(key)
+        h = self._hash(key)
 
-        is_stop = False
-        is_found = False
-        key_hash = start_key_hash
-
-        while (self.slots[key_hash] and
-               not is_found and not is_stop):
-            if self.slots[key_hash] == key:
-                is_found = True
-                self.slots[key_hash] = None
-                self.maps[key_hash] = None
+        while self.slots[h]:
+            if self.slots[h] == key:
+                self.slots[h] = None
+                self.maps[h] = None
+                return None
             else:
-                key_hash = self.rehash(key_hash)
-                if key_hash == start_key_hash:
-                    is_stop = True
+                h = self._rehash(h)
 
     def __setitem__(self, key, value):
         self.put(key, value)
