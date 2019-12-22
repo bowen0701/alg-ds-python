@@ -123,8 +123,7 @@ class SolutionOptimSpace(object):
                     matrix[i][0] = 0
                     matrix[0][j] = 0
 
-        # For each element which is not in the 1st row/col, 
-        # update it to zero by checking its 1st row/col elements. 
+        # For rest entries, update to zero by checking 1st row/col elements.
         for i in range(1, m):
             for j in range(1, n):
                 if matrix[i][0] == 0 or matrix[0][j] == 0:
