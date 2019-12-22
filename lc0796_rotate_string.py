@@ -22,18 +22,40 @@ Note:
 A and B will have length at most 100.
 """
 
-class Solution(object):
+class SolutionStringConcatSubstring(object):
     def rotateString(self, A, B):
         """
         :type A: str
         :type B: str
         :rtype: bool
+
+        Time complexity: O(2n+2n*n)=O(n^2).
+        Space complexity:O(n).
         """
-        pass
+        # Check if lengths are not equal.
+        if len(A) != len(B):
+            return False
+
+        # If rotate string, B is substring of concated string A + A.
+        AA = A + A
+        if B in AA:
+            return True
+        else:
+            return False
 
 
 def main():
-    pass
+    # Input: A = 'abcde', B = 'cdeab'
+    # Output: true
+    A = 'abcde'
+    B = 'cdeab'
+    print SolutionStringConcatSubstring().rotateString(A, B)
+
+    # Input: A = 'abcde', B = 'abced'
+    # Output: false
+    A = 'abcde'
+    B = 'abced'
+    print SolutionStringConcatSubstring().rotateString(A, B)
 
 
 if __name__ == '__main__':
