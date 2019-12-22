@@ -45,8 +45,8 @@ class MyHashMap(object):
     def _hash(self, key):
         return key % self.capacity
 
-    def _rehash(self, hash_key):
-        return (5 * hash_key + 1) % self.capacity
+    def _rehash(self, hash_code):
+        return (5 * hash_code + 1) % self.capacity
 
     def put(self, key, value):
         """
@@ -86,7 +86,6 @@ class MyHashMap(object):
 
         self.map[h] = [key, value]
         self.size += 1
-        # print self.map
 
     def get(self, key):
         """

@@ -4,13 +4,7 @@ from __future__ import print_function
 
 
 class HashTable(object):
-    """HashTable by the "division method" with "open addressing".
-
-    - Division method: Compute the hash value as the remainder when 
-      the key is divided by a specified prime number
-    - Open addressing technique: Resolve collision (two keys may hash 
-      to the same slot).
-    """
+    """HashTable with Open Addressing method for collision."""
     def __init__(self, size, is_weighted=False):
         self.size = size
         self.slots = [None] * self.size
@@ -106,7 +100,7 @@ class HashTable(object):
 
 
 def main():
-    print('HashMap with integer keys:')
+    print('HashTable with integer keys:')
     h = HashTable(11)
     h[54] = 'cat'
     h[26] = 'dog'
@@ -128,7 +122,7 @@ def main():
 
     print('- h[99]: {}'.format(h[99]))
 
-    print('Hash Map with string keys:')
+    print('HashTable with string keys:')
     h = HashTable(11)
     h['cat'] = 'c'
     h['dog'] = 'd'
@@ -146,7 +140,7 @@ def main():
 
     print('- h["pig"]: {}'.format(h['pig']))
 
-    print('Hash Map with string keys by weighted folding method:')
+    print('HashTable with string keys by weighted folding method:')
     h = HashTable(11, is_weighted=True)
     h['cat'] = 'c'
     h['dog'] = 'd'

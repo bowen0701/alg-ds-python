@@ -47,11 +47,11 @@ class MyHashSet(object):
         """
         return key % self.capacity
 
-    def _rehash(self, hash_key):
+    def _rehash(self, hash_code):
         """
         Rehash function when there is collision: hashed key->rehashed key.
         """
-        return (5 * hash_key + 1) % self.capacity
+        return (5 * hash_code + 1) % self.capacity
 
     def add(self, key):
         """
