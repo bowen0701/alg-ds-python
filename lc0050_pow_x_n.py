@@ -35,11 +35,12 @@ class SolutionNaive(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        if n == 0:
+            return 1
+
         if n < 0:
             x = 1 / x
             n = -n
-        elif n == 0:
-            return 1
 
         # Iteratively product x for n times. 
         res = 1
@@ -48,7 +49,7 @@ class SolutionNaive(object):
         return res
 
 
-class Solution(object):
+class SolutionSelfProductIter(object):
     def myPow(self, x, n):
         """
         :type x: float
@@ -58,14 +59,19 @@ class Solution(object):
         Time complexity: O(logn).
         Space complexity: O(1).
         """
+        # Observe that
+        # x^n = x^(n/2) * x^(n/2)
+        #     = (x^(n/4) * x^(n/4)) * (x^(n/4) * x^(n/4)) 
+        #     = ...
+
+        if n == 0:
+            return 1
+
         if n < 0:
             x = 1 / x
             n = -n
-        elif n == 0:
-            return 1
 
         res = 1
-        
         while n > 0:
             # If n is odd, product x once.
             if n & 1:
@@ -82,17 +88,17 @@ def main():
     # Should be 1024.
     x, n = 2.00000, 10
     print SolutionNaive().myPow(x, n)
-    print Solution().myPow(x, n)
+    print SolutionSelfProductIter().myPow(x, n)
 
     # Should be 9.26100.
     x, n = 2.10000, 3
     print SolutionNaive().myPow(x, n)
-    print Solution().myPow(x, n)
+    print SolutionSelfProductIter().myPow(x, n)
 
     # Should be 0.25.
     x, n = 2.00000, -2
     print SolutionNaive().myPow(x, n)
-    print Solution().myPow(x, n)
+    print SolutionSelfProductIter().myPow(x, n)
 
 
 if __name__ == '__main__':
