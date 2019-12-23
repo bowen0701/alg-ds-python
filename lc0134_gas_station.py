@@ -55,7 +55,7 @@ class SolutionNaiveIter(object):
         :rtype: int
 
         Time complexity: O(n^2).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         n = len(gas)
 
@@ -101,7 +101,7 @@ class SolutionIter(object):
             # If we don't have more fuel than costed in total.
             return -1
 
-        position = 0
+        start = 0
         current_bank = 0
 
         for i in range(len(gas)):
@@ -111,13 +111,13 @@ class SolutionIter(object):
             if current_bank < 0:
                 # If we don't have more gas, the current station is not a start.
                 current_bank = 0
-                position = i + 1
+                start = i + 1
             else:
                 # If we have more gas, then the current station is a start.
                 # No need for re-run the loop again.
                 continue
 
-        return position
+        return start
 
 
 def main():
