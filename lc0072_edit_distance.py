@@ -56,7 +56,7 @@ class SolutionRecurNaive(object):
         :type word2: str
         :rtype: int
 
-        Time complexity: O(n1*n2*2^(n1+n2)).
+        Time complexity: O((n1+n2)*2^(n1+n2)).
         Space complexity: O((n1*n2)^2).
         """
         # Apply top-down simple recursion.
@@ -129,7 +129,7 @@ class SolutionMemo(object):
         :type word2: str
         :rtype: int
 
-        Time complexity: O(2^(n1+n2)).
+        Time complexity: O(n1*n2).
         Space complexity: O(n1*n2).
         """
         # Apply top-down recursion with two pointers by memoization.
