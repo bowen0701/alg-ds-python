@@ -29,17 +29,49 @@ Note:
 - 0 <= A[i] <= 10000 
 """
 
-class Solution(object):
+class SolutionIter(object):
     def validMountainArray(self, A):
         """
         :type A: List[int]
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        # Edge case.
+        if len(A) <= 2:
+            return False
+
+        # Start from pos 0 to iteratively check strictly increasing.
+        i = 0
+        while i < len(A) and i + 1 < len(A) and A[i] < A[i + 1]:
+            i += 1
+
+        # If not strictly increasing at beginning or at all.
+        if i == 0 or i == len(A) - 1:
+            return False
+
+        # Start from last pos to check strictly decreasing.
+        while i < len(A) and i + 1 < len(A):
+            if A[i] <= A[i + 1]:
+                return False
+            i += 1
+
+        return True
 
 
 def main():
-    pass
+    # Output: false
+    A = [2,1]
+    print SolutionIter().validMountainArray(A)
+
+    # Output: false
+    A = [3,5,5]
+    print SolutionIter().validMountainArray(A)
+
+    # Output: true
+    A = [0,3,2,1]
+    print SolutionIter().validMountainArray(A)
 
 
 if __name__ == '__main__':
