@@ -43,7 +43,7 @@ rotate the input matrix in-place such that it becomes:
 """
 
 
-class Solution(object):
+class SolutionReverseSwapAlongDiagonal(object):
     def rotate(self, matrix):
         """
         :type matrix: List[List[int]]
@@ -71,7 +71,7 @@ def main():
                [4,5,6],
                [7,8,9]
              ]
-    print Solution().rotate(matrix)
+    print SolutionReverseSwapAlongDiagonal().rotate(matrix)
 
     matrix = [
                [ 5, 1, 9,11],
@@ -79,7 +79,7 @@ def main():
                [13, 3, 6, 7],
                [15,14,12,16]
              ]
-    print Solution().rotate(matrix)
+    print SolutionReverseSwapAlongDiagonal().rotate(matrix)
 
 
 if __name__ == '__main__':
