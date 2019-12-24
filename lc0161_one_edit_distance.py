@@ -66,6 +66,9 @@ class SolutionOneLenghtDiff(object):
         :type s: str
         :type t: str
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # Check if length difference is larger than or equal to 2.
         if abs(len(s) - len(t)) >= 2:
