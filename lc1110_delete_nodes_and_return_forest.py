@@ -56,6 +56,9 @@ class SolutionHasParentPreorder(object):
         :type root: TreeNode
         :type to_delete: List[int]
         :rtype: List[TreeNode]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         # Use set for quick lookup.
         to_delete_set = set(to_delete)
