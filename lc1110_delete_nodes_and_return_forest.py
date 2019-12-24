@@ -12,6 +12,11 @@ Return the roots of the trees in the remaining forest.  You may return the
 result in any order.
 
 Example 1:
+      1              1     
+    /   \          /
+   2     3   =>   2
+  / \   / \      /
+ 4   5 6   7    4      6   7
 Input: root = [1,2,3,4,5,6,7], to_delete = [3,5]
 Output: [[1,2,null,4],[6],[7]]
  
@@ -30,7 +35,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionHasParentPreorder(object):
+class SolutionHasParentPreorderRecur(object):
     def _preorderRecur(self, root, has_parent, result, to_delete_set):
         # Base case.
         if not root:
@@ -40,6 +45,8 @@ class SolutionHasParentPreorder(object):
             # If root is deleted, it left/right has no parent. Continue traversal.
             root.left = self._preorderRecur(root.left, False, result, to_delete_set)
             root.right = self._preorderRecur(root.right, False, result, to_delete_set)
+
+            # Return None to cut the link between deleted node and its parent.
             return None
         else:
             # If is not deleted and is root, collect it in result.
@@ -49,6 +56,7 @@ class SolutionHasParentPreorder(object):
             # Thus its left/right has parent. Continue traversal.
             root.left = self._preorderRecur(root.left, True, result, to_delete_set)
             root.right = self._preorderRecur(root.right, True, result, to_delete_set)
+
             return root
 
     def delNodes(self, root, to_delete):
@@ -60,12 +68,14 @@ class SolutionHasParentPreorder(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Apply recursive preorder traversal to collect forest trees's roots.
+        # The idea is to use has_parent to mark forest's tree root. 
+
         # Use set for quick lookup.
         to_delete_set = set(to_delete)
 
-        # Apply preorder traversal to collect forest trees's roots.
         result = []
-        # Use has_parent to mark forest's tree root. False for main root.
+        # For main root, has_parent is False
         has_parent = False
         self._preorderRecur(root, has_parent, result, to_delete_set)
         return result
@@ -82,7 +92,7 @@ def main():
     root.right.left = TreeNode(6)
     root.right.right = TreeNode(7)
     to_delete = [3,5]
-    forest_roots = SolutionHasParentPreorder().delNodes(root, to_delete)
+    forest_roots = SolutionHasParentPreorderRecur().delNodes(root, to_delete)
     print [r.val for r in forest_roots]
 
 
