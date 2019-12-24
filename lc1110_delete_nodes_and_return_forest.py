@@ -30,18 +30,57 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionHasParentPreorder(object):
+    def _preorderRecur(self, root, has_parent, result, to_delete_set):
+        # Base case.
+        if not root:
+            return None
+
+        if root.val in to_delete_set:
+            # If root is deleted, it left/right has no parent. Continue traversal.
+            root.left = self._preorderRecur(root.left, False, result, to_delete_set)
+            root.right = self._preorderRecur(root.right, False, result, to_delete_set)
+            return None
+        else:
+            # If is not deleted and is root, collect it in result.
+            if not has_parent:
+                result.append(root)
+
+            # Thus its left/right has parent. Continue traversal.
+            root.left = self._preorderRecur(root.left, True, result, to_delete_set)
+            root.right = self._preorderRecur(root.right, True, result, to_delete_set)
+            return root
+
     def delNodes(self, root, to_delete):
         """
         :type root: TreeNode
         :type to_delete: List[int]
         :rtype: List[TreeNode]
         """
-        pass
+        # Use set for quick lookup.
+        to_delete_set = set(to_delete)
+
+        # Apply preorder traversal to collect forest trees's roots.
+        result = []
+        # Use has_parent to mark forest's tree root. False for main root.
+        has_parent = False
+        self._preorderRecur(root, has_parent, result, to_delete_set)
+        return result
 
 
 def main():
-    pass
+    # Input: root = [1,2,3,4,5,6,7], to_delete = [3,5]
+    # Output: [[1,2,null,4],[6],[7]] => [1, 6, 7]
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.left = TreeNode(6)
+    root.right.right = TreeNode(7)
+    to_delete = [3,5]
+    forest_roots = SolutionHasParentPreorder().delNodes(root, to_delete)
+    print [r.val for r in forest_roots]
 
 
 if __name__ == '__main__':
