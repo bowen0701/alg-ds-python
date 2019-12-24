@@ -18,17 +18,45 @@ Input: "carerac"
 Output: true
 """
 
-class Solution(object):
+class SolutionOneOddCharCounts(object):
     def canPermutePalindrome(self, s):
         """
         :type s: str
         :rtype: bool
         """
-        pass
+        from collections import defaultdict
+
+        if not s:
+            return True
+
+        # Count char counts; palindrome permutation only has one odd char count.
+        char_counts = defaultdict(int)
+        for c in s:
+            char_counts[c] += 1
+
+        n_odd_chars = 0
+        for k, v in char_counts.items():
+            if v % 2 == 1:
+                n_odd_chars += 1
+
+            if n_odd_chars >= 2:
+                return False
+
+        return True
 
 
 def main():
-    pass
+    # Output: false
+    s = "code"
+    print SolutionOneOddCharCounts().canPermutePalindrome(s)
+
+    # Output: true
+    s = "aab"
+    print SolutionOneOddCharCounts().canPermutePalindrome(s)
+
+    # Output: true
+    s = "carerac"
+    print SolutionOneOddCharCounts().canPermutePalindrome(s)
 
 
 if __name__ == '__main__':
