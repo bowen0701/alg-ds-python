@@ -42,7 +42,7 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionPreorderRecur(object):
     def lowestCommonAncestor(self, root, p, q):
         """
         :type root: TreeNode
@@ -50,11 +50,51 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
-        pass
+        # Apply Preorder Traversal: root->left->right.
+        if not root:
+            return None
+
+        # Vist root: If root is p or q, return itself as p or q.
+        if root is p or root is q:
+            return root
+
+        # Visit left & right recursively.
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        if not left and not right:
+            # p & q are not in subtree.
+            return None
+
+        if left and right:
+            # p and q are in subtree.
+            return root
+
+        # Otherwise, p or q is in subtree.
+        return left or right
 
 
 def main():
-    pass
+    # Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+    # Output: 3
+    root = TreeNode(3)
+    root.left = TreeNode(5)
+    root.right = TreeNode(1)
+    root.left.left = TreeNode(6)
+    root.left.right = TreeNode(2)
+    root.right.left = TreeNode(0)
+    root.right.right = TreeNode(8)
+    root.left.right.left = TreeNode(7)
+    root.left.right.right = TreeNode(4)
+    p = root.left
+    q = root.right
+    print SolutionPreorderRecur().lowestCommonAncestor(root, p, q).val
+
+    # Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+    # Output: 5
+    p = root.left
+    q = root.left.right.right
+    print SolutionPreorderRecur().lowestCommonAncestor(root, p, q).val
 
 
 if __name__ == '__main__':
