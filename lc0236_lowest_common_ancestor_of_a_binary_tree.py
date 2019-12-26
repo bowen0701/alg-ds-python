@@ -49,12 +49,15 @@ class SolutionPreorderRecur(object):
         :type p: TreeNode
         :type q: TreeNode
         :rtype: TreeNode
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
-        # Apply Preorder Traversal: root->left->right.
+        # Apply recursive Preorder Traversal: root->left->right.
         if not root:
             return None
 
-        # Vist root: If root is p or q, return itself as p or q.
+        # Vist root: if root is p or q, return itself as p or q.
         if root is p or root is q:
             return root
 
