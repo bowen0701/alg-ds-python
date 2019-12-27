@@ -42,10 +42,6 @@ Note:
 
 class SolutionEmailAccountidsGraphDfsRecur(object):
     def _dfs(self, aid, emails, accounts, email_aids_graph, visited_aids):
-        # accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], 
-        # ["John", "johnnybravo@mail.com"], ["John", "johnsmith@mail.com", 
-        # "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
-
         # Check visited account id or not.
         if aid in visited_aids:
             return None
@@ -64,6 +60,9 @@ class SolutionEmailAccountidsGraphDfsRecur(object):
         """
         :type accounts: List[List[str]]
         :rtype: List[List[str]]
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
@@ -84,30 +83,33 @@ class SolutionEmailAccountidsGraphDfsRecur(object):
                 continue
 
             # Start DFS to visit account id, and collect name's emails.
-            name = accounts[aid][0]
             emails = set()
             self._dfs(aid, emails, accounts, email_aids_graph, visited_aids)
 
+            name = accounts[aid][0]
             result.append([name] + sorted(emails))
 
         return result
 
 
 class SolutionEmailParentUnionFind(object):
-    def _union(self, ei, ep):
-        ei = self._find(ei)
-        ep = self._find(ep)
-        self.email_parent[ei] = ep
+    def _union(self, i, j):
+        i = self._find(i)
+        j = self._find(j)
+        self.email_parent[i] = j
 
-    def _find(self, e):
-        if self.email_parent[e] != e:
-            self.email_parent[e] = self._find(self.email_parent[e])
-        return self.email_parent[e]
+    def _find(self, i):
+        if self.email_parent[i] != i:
+            self.email_parent[i] = self._find(self.email_parent[i])
+        return self.email_parent[i]
 
     def accountsMerge(self, accounts):
         """
         :type accounts: List[List[str]]
         :rtype: List[List[str]]
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
