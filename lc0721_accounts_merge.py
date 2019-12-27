@@ -93,6 +93,50 @@ class SolutionEmailAccountidsGraphDfsRecur(object):
         return result
 
 
+class SolutionEmailParentUnionFind(object):
+    def _union(self, ei, ep):
+        ei = self._find(ei)
+        ep = self._find(ep)
+        self.email_parent[ei] = ep
+
+    def _find(self, e):
+        if self.email_parent[e] != e:
+            self.email_parent[e] = self._find(self.email_parent[e])
+        return self.email_parent[e]
+
+    def accountsMerge(self, accounts):
+        """
+        :type accounts: List[List[str]]
+        :rtype: List[List[str]]
+        """
+        from collections import defaultdict
+
+        self.email_parent = defaultdict()
+        self.email_name = defaultdict()
+
+        for account in accounts:
+            name = account[0]
+
+            for j in range(1, len(account)):
+                email = account[j]
+                if email not in self.email_parent:
+                    self.email_parent[email] = email
+
+                self.email_name[email] = name
+
+                self._union(email, account[1])
+
+        result = []
+        email_trees = defaultdict(list)
+
+        for email in self.email_parent:
+            email_trees[self._find(email)].append(email)
+
+        for parent, emails in email_trees.items():
+            result.append([self.email_name[parent]] + sorted(emails))
+        return result
+
+
 def main():
     # Output: [["John", 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'], 
     #          ["John", "johnnybravo@mail.com"],
@@ -102,6 +146,7 @@ def main():
                 ["John", "johnsmith@mail.com", "john_newyork@mail.com"],
                 ["Mary", "mary@mail.com"]]
     print SolutionEmailAccountidsGraphDfsRecur().accountsMerge(accounts)
+    print SolutionEmailParentUnionFind().accountsMerge(accounts)
 
 
 if __name__ == '__main__':
