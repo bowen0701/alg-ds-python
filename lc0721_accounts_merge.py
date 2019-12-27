@@ -40,17 +40,68 @@ Note:
 - The length of accounts[i][j] will be in the range [1, 30].
 """
 
-class Solution(object):
+class SolutionEmailAccountidsGraphDfsRecur(object):
+    def _dfs(self, aid, emails, accounts, email_aids_graph, visited_aids):
+        # accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], 
+        # ["John", "johnnybravo@mail.com"], ["John", "johnsmith@mail.com", 
+        # "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
+
+        # Check visited account id or not.
+        if aid in visited_aids:
+            return None
+
+        visited_aids.add(aid)
+
+        # Continue recursive DFS to visit that account id's emails.
+        for j in range(1, len(accounts[aid])):
+            email = accounts[aid][j]
+            emails.add(email)
+
+            for aid_next in email_aids_graph[email]:
+                self._dfs(aid_next, emails, accounts, email_aids_graph, visited_aids)
+
     def accountsMerge(self, accounts):
         """
         :type accounts: List[List[str]]
         :rtype: List[List[str]]
         """
-        pass
+        from collections import defaultdict
+
+        # Use dict to collect email->account ids.
+        email_aids_graph = defaultdict(list)
+
+        for aid, account in enumerate(accounts):
+            for j in range(1, len(account)):
+                email = account[j]
+                email_aids_graph[email].append(aid)
+
+        # Apply recursive DFS to visit account ids over email_aids_graph.
+        visited_aids = set()
+        result = []
+
+        for aid, account in enumerate(accounts):
+            if aid in visited_aids:
+                continue
+
+            # Start DFS to visit account id, and collect name's emails.
+            name = accounts[aid][0]
+            emails = set()
+            self._dfs(aid, emails, accounts, email_aids_graph, visited_aids)
+
+            result.append([name] + sorted(emails))
+
+        return result
 
 
 def main():
-    pass
+    # Output: [["John", 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'], 
+    #          ["John", "johnnybravo@mail.com"],
+    #          ["Mary", "mary@mail.com"]]
+    accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], 
+                ["John", "johnnybravo@mail.com"],
+                ["John", "johnsmith@mail.com", "john_newyork@mail.com"],
+                ["Mary", "mary@mail.com"]]
+    print SolutionEmailAccountidsGraphDfsRecur().accountsMerge(accounts)
 
 
 if __name__ == '__main__':
