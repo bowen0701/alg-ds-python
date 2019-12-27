@@ -20,6 +20,9 @@ class SolutionTwoPointersLeftmaxRightmaxHeights(object):
         """
         :type height: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         # Apply two pointers from both sides with leftmax & rightmax heights.
 
