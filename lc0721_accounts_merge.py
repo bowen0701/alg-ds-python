@@ -79,15 +79,13 @@ class SolutionEmailAccountidsGraphDfsRecur(object):
         result = []
 
         for aid, account in enumerate(accounts):
-            if aid in visited_aids:
-                continue
+            if aid not in visited_aids:
+                # Start DFS to visit account id, and collect name's emails.
+                emails = set()
+                self._dfs(aid, emails, accounts, email_aids_graph, visited_aids)
 
-            # Start DFS to visit account id, and collect name's emails.
-            emails = set()
-            self._dfs(aid, emails, accounts, email_aids_graph, visited_aids)
-
-            name = accounts[aid][0]
-            result.append([name] + sorted(emails))
+                name = accounts[aid][0]
+                result.append([name] + sorted(emails))
 
         return result
 
