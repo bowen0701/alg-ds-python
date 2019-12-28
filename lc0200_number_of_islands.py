@@ -26,12 +26,9 @@ Answer: 3
 
 class SolutionDFSRecurVisit(object):
     def _dfs(self, r, c, grid, visited_d):
-        # If visit outside of the grid boundary.
-        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
-            return None
-
-        # If visit water or already visisted before.
-        if grid[r][c] == '0' or visited_d.get((r, c)):
+        # If visit outside of boundary or water or visited.
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
+            grid[r][c] == '0' or visited_d.get((r, c))):
             return None
 
         # Mark (r, c) as visited.
@@ -66,15 +63,12 @@ class SolutionDFSRecurVisit(object):
         return n_islands
 
 
-class SolutionDFSRecurVisit2(object):
+class SolutionDFSRecurVisitReturn(object):
     def _dfs(self, r, c, grid, visited_d):
-        # If visit outside of the grid boundary.
-        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
-            return 0
-
-        # If visit water or already visisted before.
-        if grid[r][c] == '0' or visited_d.get((r, c)):
-            return 0
+        # If visit outside of boundary or water or visited.
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
+            grid[r][c] == '0' or visited_d.get((r, c))):
+            return None
 
         # Mark (r, c) as visited.
         visited_d[(r, c)] = True
@@ -115,18 +109,15 @@ class SolutionDFSRecurVisit2(object):
 
 class SolutionDFSRecurUpdate(object):
     def _dfs(self, r, c, grid):
-        # If visit outside of the grid boundary.
-        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
-            return None
-
-        # If visit water or already visisted before.
-        if grid[r][c] == '0':
+        # If visit outside of boundary or water or visited.
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
+            grid[r][c] == '0'):
             return None
 
         # Update (r, c) as visited.
         grid[r][c] = '0'
 
-        # Vist up & down and left & right.
+        # Visit up & down and left & right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_neighbor, c_neighbor in dirs:
             self._dfs(r_neighbor, c_neighbor, grid)
@@ -154,15 +145,12 @@ class SolutionDFSRecurUpdate(object):
         return n_islands
 
 
-class SolutionDFSRecurUpdate2(object):
+class SolutionDFSRecurUpdateReturn(object):
     def _dfs(self, r, c, grid):
-        # If visit outside of the grid boundary.
-        if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
-            return 0
-
-        # If visit water or already visisted before.
-        if grid[r][c] == '0':
-            return 0
+        # If visit outside of boundary or water or visited.
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
+            grid[r][c] == '0'):
+            return None
 
         # Update (r, c) as visited.
         grid[r][c] = '0'
@@ -208,8 +196,7 @@ class SolutionDFSIterVisit(object):
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_neighbor, c_neighbor in dirs:
-            if (0 <= r_neighbor < len(grid) and 
-                0 <= c_neighbor < len(grid[0]) and
+            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
                 grid[r_neighbor][c_neighbor] == '1'):
                 tovisit_ls.append((r_neighbor, c_neighbor))
 
@@ -271,8 +258,7 @@ class SolutionDFSIterUpdate(object):
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_neighbor, c_neighbor in dirs:
-            if (0 <= r_neighbor < len(grid) and 
-                0 <= c_neighbor < len(grid[0]) and
+            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
                 grid[r_neighbor][c_neighbor] == '1'):
                 tovisit_ls.append((r_neighbor, c_neighbor))
 
