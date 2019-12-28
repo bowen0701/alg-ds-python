@@ -23,7 +23,7 @@ class SolutionBrute(object):
         :rtype: str
 
         Time complexity: O(n^3).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         lps = ''
 
@@ -59,7 +59,7 @@ class SolutionDp(object):
             start = i
             max_len = 1
             
-        # Check each consecutive char pairs are palindrom.
+        # Check if consecutive char pair is palindrom.
         for i in range(n - 1):
             if s[i] == s[i + 1]:
                 T[i][i + 1] = True
