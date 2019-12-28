@@ -40,7 +40,14 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-class Codec:
+class CodecPreorderRecur:
+    def _serializePreorderRecur(self, root, vals):
+        if root:
+            vals.append(str(root.val))
+            self._serializePreorderRecur(root.left, vals)
+            self._serializePreorderRecur(root.right, vals)
+        else:
+            vals.append('#')
 
     def serialize(self, root):
         """Encodes a tree to a single string.
@@ -48,7 +55,22 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        pass
+        # Apply preorder traversal to collect values and '#' for empty nodes.
+        vals = []
+        self._serializePreorderRecur(root, vals)
+
+        # Separate nodes's values by ','.
+        return ','.join(vals)
+
+    def _deserializePreorderRecur(self, vals_queue):
+        val_str = vals_queue.popleft()
+        if val_str != '#':
+            root = TreeNode(int(val_str))
+            root.left = self._deserializePreorderRecur(vals_queue)
+            root.right = self._deserializePreorderRecur(vals_queue)
+            return root
+        else:
+            return None
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -56,11 +78,43 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        pass
+        from collections import deque
+
+        vals = data.split(',')
+        vals_queue = deque(vals)
+        return self._deserializePreorderRecur(vals_queue)
 
 
 def main():
-    pass
+    # Binary tree:
+    #     1
+    #    / \
+    #   2   3
+    #      / \
+    #     4   5
+    # Serialized: "1,2,#,#,3,4,#,#,5,#,#".
+    # Deserialized: original binary tree.
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.right.left = TreeNode(4)
+    root.right.right = TreeNode(5)
+
+    codec = CodecPreorderRecur()
+    data = codec.serialize(root)
+    print data
+    deserialized_root = codec.deserialize(data)
+    print deserialized_root.val                # 1
+    print deserialized_root.left.val           # 2
+    print deserialized_root.left.left          # None
+    print deserialized_root.left.right         # None
+    print deserialized_root.right.val          # 3
+    print deserialized_root.right.left.val     # 4
+    print deserialized_root.right.right.val    # 5
+    print deserialized_root.right.left.left    # None
+    print deserialized_root.right.left.right   # None
+    print deserialized_root.right.right.left   # None
+    print deserialized_root.right.right.right  # None
 
 
 if __name__ == '__main__':
