@@ -30,7 +30,6 @@ class SolutionSelect(object):
         i1, i2 = len(nums1) // 2, len(nums2) // 2
         n1, n2 = nums1[i1], nums2[i2]
 
-
         if k <= i1 + i2:
             # When k is smaller than or equal to the sum of nums1 & nums2's 
             # middle indices.
