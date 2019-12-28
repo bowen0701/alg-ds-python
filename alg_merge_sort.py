@@ -3,38 +3,38 @@ from __future__ import print_function
 from __future__ import division
 
 
-def _merge_sorted_lists_recur(left, right):
+def _merge_sorted_lists_recur(arr1, arr2):
     """Merge two sorted lists by recusion."""
-    if not left or not right:
-        return left or right
+    if not arr1 or not arr2:
+        return arr1 or arr2
 
     # Merge two lists one element by one element.
-    if left[0] <= right[0]:
-        return [left[0]] + _merge_sorted_lists_recur(left[1:], right)
+    if arr1[0] <= arr2[0]:
+        return [arr1[0]] + _merge_sorted_lists_recur(arr1[1:], arr2)
     else:
-        return [right[0]] + _merge_sorted_lists_recur(left, right[1:])
+        return [arr2[0]] + _merge_sorted_lists_recur(arr1, arr2[1:])
 
 
-def _merge_sorted_lists_iter(left, right):
+def _merge_sorted_lists_iter(arr1, arr2):
     """Merge two sorted lists by iteration."""
     # Apply two pointer method.
     i, j = 0, 0
 
     merged = []
 
-    for _ in range(len(left) + len(right)):
-        if i < len(left) and j < len(right):
-            if left[i] <= right[j]:
-                merged.append(left[i])
+    for _ in range(len(arr1) + len(arr2)):
+        if i < len(arr1) and j < len(arr2):
+            if arr1[i] <= arr2[j]:
+                merged.append(arr1[i])
                 i += 1
             else:
-                merged.append(right[j])
+                merged.append(arr2[j])
                 j += 1      
-        elif i < len(left) and j >= len(right):
-            merged.extend(left[i:])
+        elif i < len(arr1) and j >= len(arr2):
+            merged.extend(arr1[i:])
             break
-        elif i >= len(left) and j < len(right):
-            merged.extend(right[j:])
+        elif i >= len(arr1) and j < len(arr2):
+            merged.extend(arr2[j:])
             break
 
     return merged
@@ -52,9 +52,9 @@ def merge_sort(arr, merge):
     # Sort the 1st & 2nd halves respectively and merge them.
     mid = len(arr) // 2
 
-    left = merge_sort(arr[:mid], merge)
-    right = merge_sort(arr[mid:], merge)
-    return merge(left, right)
+    arr1 = merge_sort(arr[:mid], merge)
+    arr2 = merge_sort(arr[mid:], merge)
+    return merge(arr1, arr2)
 
 
 def main():
