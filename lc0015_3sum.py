@@ -28,7 +28,7 @@ class SolutionSortBinarySearch(object):
         Time complexity: O(n*logn + n^2) = O(n^2).
         Space complexity: O(n).
         """
-        three_sum_ls = []
+        three_sums = []
 
         # Sort the list for easily iterating to check the triplets.
         nums.sort()
@@ -48,7 +48,7 @@ class SolutionSortBinarySearch(object):
                 total = nums[i] + nums[l] + nums[r]
 
                 if total == 0:
-                    three_sum_ls.append([nums[i], nums[l], nums[r]])
+                    three_sums.append([nums[i], nums[l], nums[r]])
                     # If left's right and right's left is the same as left and 
                     # right, respectively, increment it to avoid duplicates.
                     while l < r and nums[l] == nums[l + 1]:
@@ -65,7 +65,7 @@ class SolutionSortBinarySearch(object):
                     # The 3 sum is too big, decrease it by moving right to left. 
                     r -= 1
 
-        return three_sum_ls
+        return three_sums
 
 
 def main():
