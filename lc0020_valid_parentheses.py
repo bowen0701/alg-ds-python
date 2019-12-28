@@ -48,10 +48,10 @@ class SolutionOpenCloseDict(object):
             '[': ']',
             '{': '}'
         }
-
-        # Use stack to check valid parentheses.
         open_set = set('([{')
         close_set = set(')]}')
+
+        # Use stack to check valid parentheses.
         stack = []
 
         for c in s:
