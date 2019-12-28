@@ -47,7 +47,7 @@ class LRUCache(object):
     def __init__(self, capacity):
         """Least Recently Used (LRU) cache.
 
-        Apply dict with a doubly linked list (old->new) for LRU cache.
+        Apply dict with a doubly linked list (head->tail) for LRU cache (old->new).
 
         :type capacity: int
         """
@@ -56,7 +56,7 @@ class LRUCache(object):
         # Use a dict to store key and its node with val.
         self.dict = dict()
 
-        # Initialize doubly linked list with head and tail.
+        # Initialize doubly linked list with linked head and tail.
         self.head = Node(None, None)
         self.tail = Node(None, None)
         self.head.next = self.tail
