@@ -1,8 +1,7 @@
 """206. Reverse Linked List
+Easy
 
 URL: https://leetcode.com/problems/reverse-linked-list/
-
-Easy
 
 Reverse a singly linked list.
 
@@ -31,15 +30,18 @@ class SolutionStack(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Collect nodes in stack to reverse them.
         stack = []
-
         current = head
+
         while current:
             stack.append(current)
             current = current.next
 
+        # Create a new linked list from stack popping.
         pre_head = ListNode(None)
         new_current = pre_head
+
         while stack:
             current = stack.pop()
             new_current.next = ListNode(current.val)
@@ -53,7 +55,6 @@ class SolutionRecur(object):
         if not head:
             return previous
 
-        # Two pointers method: head + previous.
         # Create new current->current.next by reversing previous->head.
         current = ListNode(head.val)
         current.next = previous
@@ -71,6 +72,7 @@ class SolutionRecur(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Apply two pointers of head + previous.
         previous = None
         return self._reverse(head, previous)
 
