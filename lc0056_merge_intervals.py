@@ -67,7 +67,7 @@ class SolutionBrute(object):
         return result
 
 
-class SolutionAppendOrUpdateEnd(object):
+class SolutionSortStartAppendOrUpdateEnd(object):
     def merge(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -129,26 +129,25 @@ def main():
 
     # Ans: [[1,6],[8,10],[15,18]]
     intervals = [[1,3], [2,6], [8,10], [15,18]]
-    print SolutionAppendOrUpdateEnd().merge(intervals)
+    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[1,5]]
     intervals = [[1,4], [4,5]]
-    print SolutionAppendOrUpdateEnd().merge(intervals)
+    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[0, 4]]
     intervals = [[1,4], [0,4]]
-    print SolutionAppendOrUpdateEnd().merge(intervals)
+    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[0,5]]
     intervals = [[1,4], [0,5]]
-    print SolutionAppendOrUpdateEnd().merge(intervals)
+    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
 
     # Ans: [[1, 10]]
     intervals = [[2,3], [4,5], [6,7], [8,9], [1,10]]
-    print SolutionAppendOrUpdateEnd().merge(intervals)
+    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
 
     print 'Time: {}'.format(time.time() - start_time)
-
 
 
 if __name__ == '__main__':
