@@ -54,6 +54,9 @@ class CodecPreorderRecur:
         
         :type root: TreeNode
         :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         # Apply preorder traversal to collect values and '#' for empty nodes.
         vals = []
@@ -77,6 +80,9 @@ class CodecPreorderRecur:
         
         :type data: str
         :rtype: TreeNode
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         from collections import deque
 
