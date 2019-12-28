@@ -24,7 +24,7 @@ Note:
   repeated more than once.
 """
 
-class SolutionNaive(object):
+class SolutionBrute(object):
     def findDuplicate(self, nums):
         """
         :type nums: List[int]
@@ -99,7 +99,7 @@ def main():
     nums = [1, 3, 4, 2, 2]
 
     start_time = time.time()
-    print 'By naive: {}'.format(SolutionNaive().findDuplicate(nums))
+    print 'By brute force: {}'.format(SolutionBrute().findDuplicate(nums))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
@@ -114,7 +114,7 @@ def main():
     nums = [3, 1, 3, 4, 2]
 
     start_time = time.time()
-    print 'By naive: {}'.format(SolutionNaive().findDuplicate(nums))
+    print 'By brute force: {}'.format(SolutionBrute().findDuplicate(nums))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()

@@ -20,7 +20,7 @@ The string will only contain lowercase characters a-z.
 The maximum length of the string is 50000.
 """
 
-class SolutionNaive(object):
+class SolutionBrute(object):
     def validPalindrome(self, s):
         """
         :type s: str
@@ -81,17 +81,17 @@ class SolutionTwoPointers(object):
 def main():
     # Output: True
     s = 'aba'
-    print SolutionNaive().validPalindrome(s)
+    print SolutionBrute().validPalindrome(s)
     print SolutionTwoPointers().validPalindrome(s)
 
     # Output: True
     s = 'abca'
-    print SolutionNaive().validPalindrome(s)
+    print SolutionBrute().validPalindrome(s)
     print SolutionTwoPointers().validPalindrome(s)
 
     # Output: False
     s = 'aacb'
-    print SolutionNaive().validPalindrome(s)
+    print SolutionBrute().validPalindrome(s)
     print SolutionTwoPointers().validPalindrome(s)
 
 

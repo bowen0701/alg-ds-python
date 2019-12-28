@@ -23,7 +23,7 @@ Note:
 - n is a 32-bit signed integer, within the range [-2^31, 2^31 - 1].
 """
 
-class SolutionNaive(object):
+class SolutionBrute(object):
     def myPow(self, x, n):
         """
         :type x: float
@@ -87,17 +87,17 @@ class SolutionSelfProductIter(object):
 def main():
     # Should be 1024.
     x, n = 2.00000, 10
-    print SolutionNaive().myPow(x, n)
+    print SolutionBrute().myPow(x, n)
     print SolutionSelfProductIter().myPow(x, n)
 
     # Should be 9.26100.
     x, n = 2.10000, 3
-    print SolutionNaive().myPow(x, n)
+    print SolutionBrute().myPow(x, n)
     print SolutionSelfProductIter().myPow(x, n)
 
     # Should be 0.25.
     x, n = 2.00000, -2
-    print SolutionNaive().myPow(x, n)
+    print SolutionBrute().myPow(x, n)
     print SolutionSelfProductIter().myPow(x, n)
 
 

@@ -16,7 +16,7 @@ Input: "cbbd"
 Output: "bb"
 """
 
-class SolutionNaive(object):
+class SolutionBrute(object):
     def longestPalindrome(self, s):
         """
         :type s: str
@@ -120,7 +120,7 @@ def main():
     s = 'babad'    # Ans: bab.
    
     start_time = time.time()
-    print('By naive: {}'.format(SolutionNaive().longestPalindrome(s)))
+    print('By brute force: {}'.format(SolutionBrute().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
@@ -134,7 +134,7 @@ def main():
     s = 'cbbd'     # Ans: bb.
 
     start_time = time.time()
-    print('By naive: {}'.format(SolutionNaive().longestPalindrome(s)))
+    print('By brute force: {}'.format(SolutionBrute().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
@@ -148,7 +148,7 @@ def main():
     s = 'abcba'    # Ans: abcba
 
     start_time = time.time()
-    print('By naive: {}'.format(SolutionNaive().longestPalindrome(s)))
+    print('By brute force: {}'.format(SolutionBrute().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()

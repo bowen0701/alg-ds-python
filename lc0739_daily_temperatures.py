@@ -15,7 +15,7 @@ Note: The length of temperatures will be in the range [1, 30000]. Each
 temperature will be an integer in the range [30, 100].
 """
 
-class SolutionNaive(object):
+class SolutionBrute(object):
     def dailyTemperatures(self, T):
         """
         :type T: List[int]
@@ -68,7 +68,7 @@ def main():
     # Ans: [1, 1, 4, 2, 1, 1, 0, 0]
   
     start_time = time.time()
-    print 'By naive: {}'.format(SolutionNaive().dailyTemperatures(T))
+    print 'By brute force: {}'.format(SolutionBrute().dailyTemperatures(T))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
