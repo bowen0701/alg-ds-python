@@ -24,17 +24,68 @@ Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven
 Thousand Eight Hundred Ninety One"
 """
 
-class Solution(object):
+class SolutionPowersOfThousandRecur(object):
+    def _wordsRecur(self, num):
+        # Return empty array for exact matched case.
+        if not num:
+            return []
+
+        if num < 20:
+            return [self.lessThan20[num - 1]]
+
+        if num < 100:
+            return [self.tens[num // 10 - 1]] + self._wordsRecur(num % 10)
+
+        if num < 1000:
+            return [self.lessThan20[num // 100 - 1]] + ['Hundred'] + self._wordsRecur(num % 100)
+
+        for p, w in enumerate(self.powersOfThousand, start=1):
+            # Convert top-bottom by finding the largest power of thousand.
+            if num < 1000 ** (p + 1):
+                return self._wordsRecur(num // (1000 ** p)) + [w] + self._wordsRecur(num % (1000 ** p))
+
     def numberToWords(self, num):
         """
         :type num: int
         :rtype: str
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
-        pass
+        if not num:
+            return 'Zero'
+
+        self.lessThan20 = ['One', 'Two', 'Three', 'Four', 'Five', 
+                           'Six', 'Seven', 'Eight', 'Nine', 'Ten',
+                           'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen',
+                           'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen']
+        self.tens = ['Ten', 'Twenty', 'Thirty', 'Forty', 'Fifty',
+                     'Sixty', 'Seventy', 'Eighty', 'Ninety']
+        self.powersOfThousand = ['Thousand', 'Million', 'Billion']
+
+        words = self._wordsRecur(num)
+
+        # Strip extra spaces due to exact match.
+        return ' '.join(words)
 
 
 def main():
-    pass
+    # Output: "One Hundred Twenty Three"
+    num = 123
+    print SolutionPowersOfThousandRecur().numberToWords(num)
+
+    # Output: "Twelve Thousand Three Hundred Forty Five"
+    num = 12345
+    print SolutionPowersOfThousandRecur().numberToWords(num)
+
+    # Output: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
+    num = 1234567
+    print SolutionPowersOfThousandRecur().numberToWords(num)
+
+    # Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven 
+    #          Thousand Eight Hundred Ninety One"
+    num = 1234567891
+    print SolutionPowersOfThousandRecur().numberToWords(num)
 
 
 if __name__ == '__main__':
