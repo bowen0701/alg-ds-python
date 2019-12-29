@@ -22,12 +22,15 @@ I
 """
 
 def draw_stairs(n):
+    """
+    Time complexity: O(n^2).
+    Space complexity: O(n).
+    """
     stairs = []
     
     for i in range(n):
         # Append (i - 1) spaces.
-        for  _ in range(i):
-            stairs.append(' ')
+        stairs.append(' ' * i)
         
         # Append stair I.
         stairs.append('I')
