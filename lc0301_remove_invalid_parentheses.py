@@ -61,6 +61,11 @@ class SolutionTwoPointersDfsRecur(object):
         """
         :type s: str
         :rtype: List[str]
+
+        Time complexity: O(n*m), where
+          - n: lenght of s
+          - m: number of recursive calls.
+        Space complexity: O(n).
         """
         if not s:
             return [s]
