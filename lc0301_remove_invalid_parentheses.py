@@ -67,6 +67,9 @@ class SolutionTwoPointersDfsRecur(object):
           - m: number of recursive calls.
         Space complexity: O(n).
         """
+        # Apply two pointers method with DFS.
+        # - remove redundant ")" from left to right, and 
+        # - then removee redundant "(" from right to left.
         if not s:
             return [s]
 
