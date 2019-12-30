@@ -54,13 +54,13 @@ class SolutionTwoPointers(object):
                 is_split = True
 
             if not is_split:
-                # If not splitted, apply binary search based on mid element.
+                # If not splitted, apply binary search w.r.t mid element.
                 if target < nums[mid]:
                     right = mid - 1
                 else:
                     left = mid + 1
             else:
-                # If splitted, apply "reversed" binary search based on pivot.
+                # If splitted, apply "reversed" binary search w.r.t. pivot.
                 if target < pivot:
                     left = mid + 1
                 else:
