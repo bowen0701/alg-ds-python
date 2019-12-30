@@ -21,7 +21,7 @@ class SolutionSortStart(object):
         :type intervals: List[List[int]]
         :rtype: bool
         """
-        intervals.sort(key=lambda x: x[0])
+        intervals.sort()
 
         for i in range(len(intervals) - 1):
             if intervals[i][1] > intervals[i + 1][0]:
