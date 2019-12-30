@@ -30,7 +30,7 @@ class Codec:
         self.base_size = len(self.base)
         self.code2url = defaultdict(int)
         self.code_size = 6
-        self.tiny_predix = 'http://tinyurl.com'
+        self.tiny_predix = 'http://tinyurl.com/'
 
     def encode(self, longUrl):
         """Encodes a URL to a shortened URL.
@@ -44,6 +44,10 @@ class Codec:
             ord_sum += ord(c)
 
         # TODO: Continue hashing and appending resulting char to code until hash equals 0.
+        code = [self.tiny_predix]
+        while ord_sum and len(code) < 1 + self.code_size:
+            ord_sum, c = ord_sum // self.base_size, ord_sum % self.base_size
+            code.append(c)
 
     def decode(self, shortUrl):
         """Decodes a shortened URL to its original URL.
