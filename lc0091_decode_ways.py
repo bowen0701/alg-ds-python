@@ -36,6 +36,7 @@ class SolutionRecurNaive(object):
         Time complexity: O(2^n).
         Space complexity: O(n).
         """
+        # Base case.
         if not s:
             return 1
 
@@ -56,7 +57,8 @@ class SolutionRecurNaive(object):
 
 class SolutionRecur(object):
     def numDecodingsUtil(self, s, k):
-        """Helper function for numDecodings."""
+        # Recursively check the last k chars.
+        # Base case.
         if k == 0:
             return 1
 
@@ -90,10 +92,12 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def numDecodingsUtil(self, s, k, T):
+        # Recursively check the last k chars.
         # Check the memo result.
         if T[k]:
             return T[k]
 
+        # Base case.
         if k == 0:
             return 1
 
@@ -128,7 +132,7 @@ class SolutionMemo(object):
         return self.numDecodingsUtil(s, n, T)
 
 
-class SolutionDP(object):
+class SolutionDp(object):
     def numDecodings(self, s):
         """
         :type s: str
@@ -139,6 +143,7 @@ class SolutionDP(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Base case.
         if not s:
             return 1
 
@@ -176,7 +181,7 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # If empty string, decode in 1 way.
+        # Base case.
         if not s:
             return 1
 
@@ -223,7 +228,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
+    print 'By DP: {}'.format(SolutionDp().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
@@ -247,7 +252,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
+    print 'By DP: {}'.format(SolutionDp().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
