@@ -44,13 +44,36 @@ Note:
 - There may be multiple valid order of letters, return any one of them is fine.
 """
 
-class Solution(object):
+class SolutionTopologicalSort(object):
     def alienOrder(self, words):
         """
         :type words: List[str]
         :rtype: str
         """
-        pass
+        from collections import defaultdict
+
+        # Edge case.
+        if not words or not words[0]:
+            return ''
+
+        # Use dict to build graph: char_from->set(char_to).
+        graph = defaultdict(set)
+
+        # Use list to collect char's in-degree.
+        indegrees = [0] * 26
+
+        # Build graph and in-degrees.
+        self.build_graph(words, graph, indegrees)
+
+        # Run Topological Sort to create string order.
+        str_order = self.topological_sort(graph, indegrees)
+
+        # Check if length of string order is the same as that of graph keys.
+        if len(str_order) == len(graph.keys()):
+            return str_order
+        else:
+            return ''
+
 
 
 def main():
