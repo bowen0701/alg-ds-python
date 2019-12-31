@@ -22,7 +22,7 @@ s = "3[a2[c]]", return "accaccacc".
 s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 """
 
-class Solution(object):
+class SolutionStringRepeatedTimesStackIter(object):
     def decodeString(self, s):
         """
         :type s: str
@@ -59,15 +59,15 @@ class Solution(object):
 def main():
     # s = "3[a]2[bc]", return "aaabcbc".
     s = "3[a]2[bc]"
-    print Solution().decodeString(s)
+    print SolutionStringRepeatedTimesStackIter().decodeString(s)
 
     # s = "3[a2[c]]", return "accaccacc".
     s = "3[a2[c]]"
-    print Solution().decodeString(s)
+    print SolutionStringRepeatedTimesStackIter().decodeString(s)
 
     # s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
     s = "2[abc]3[cd]ef"
-    print Solution().decodeString(s)
+    print SolutionStringRepeatedTimesStackIter().decodeString(s)
 
 
 if __name__ == '__main__':
