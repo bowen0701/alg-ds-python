@@ -20,7 +20,7 @@ codec = Codec()
 codec.decode(codec.encode(url))
 """
 
-class Codec:
+class CodecRandom:
     def __init__(self):
         import string
         from collections import defaultdict
@@ -28,8 +28,9 @@ class Codec:
         # Create base 62: a-zA-Z0-9.
         self.base = string.ascii_letters + ''.join([str(i) for i in range(10)])
         self.base_size = len(self.base)
-        self.code2url = defaultdict(int)
         self.code_size = 6
+        self.code2urls = defaultdict(int)
+        self.url2codes = defaultdict(int)
         self.tiny_predix = 'http://tinyurl.com/'
 
     def encode(self, longUrl):
@@ -38,16 +39,16 @@ class Codec:
         :type longUrl: str
         :rtype: str
         """
-        # Hash by Folding method w/ sum of ordinal values plus mod base.
-        ord_sum = 0
-        for c in longUrl:
-            ord_sum += ord(c)
+        import random
 
-        # TODO: Continue hashing and appending resulting char to code until hash equals 0.
-        code = [self.tiny_predix]
-        while ord_sum and len(code) < 1 + self.code_size:
-            ord_sum, c = ord_sum // self.base_size, ord_sum % self.base_size
-            code.append(c)
+        # Continue randomly selecting 6 chars from base until get new code.
+        while longUrl not in self.url2codes:
+            code = ''.join(random.choice(self.base) for _ in range(self.code_size))
+            if code not in self.code2urls:
+                self.code2urls[code] = longUrl
+                self.url2codes[longUrl] = code
+
+        return self.tiny_predix + self.url2codes[longUrl]
 
     def decode(self, shortUrl):
         """Decodes a shortened URL to its original URL.
@@ -55,11 +56,65 @@ class Codec:
         :type shortUrl: str
         :rtype: str
         """
-        pass
+        code = shortUrl.split('/')[-1]
+        return self.code2urls[code]
+
+
+class CodecHash:
+    def __init__(self):
+        import string
+        from collections import defaultdict
+
+        # Create base 62: a-zA-Z0-9.
+        self.base = string.ascii_letters + ''.join([str(i) for i in range(10)])
+        self.base_size = len(self.base)
+        self.code_size = 6
+        self.code2urls = defaultdict(int)
+        self.tiny_predix = 'http://tinyurl.com/'
+
+    def encode(self, longUrl):
+        """Encodes a URL to a shortened URL.
+        
+        :type longUrl: str
+        :rtype: str
+        """
+        # Hash by Folding method w/ weighted sum of ordinal values with mod.
+        ord_sum = 0
+        for w, c in enumerate(longUrl):
+            ord_sum += w * ord(c)
+
+        # Continue hashing and appending resulting char to code until hash equals 0.
+        code_ls = []
+        while ord_sum and len(code_ls) < self.code_size:
+            ord_sum, c = ord_sum // self.base_size, ord_sum % self.base_size
+            code_ls.append(self.base[c])
+        code = ''.join(code_ls)
+
+        self.code2urls[code] = longUrl
+        return self.tiny_predix + code
+
+    def decode(self, shortUrl):
+        """Decodes a shortened URL to its original URL.
+        
+        :type shortUrl: str
+        :rtype: str
+        """
+        code = shortUrl.split('/')[-1]
+        return self.code2urls[code]
 
 
 def main():
-    pass
+    longUrl = 'https://leetcode.com/problems/design-tinyurl'
+
+    codec = CodecRandom()
+    shortUrl = codec.encode(longUrl)
+    print shortUrl
+    print codec.decode(shortUrl)
+
+    codec = CodecHash()
+    shortUrl = codec.encode(longUrl)
+    print shortUrl
+    print codec.decode(shortUrl)
 
 
 if __name__ == '__main__':
