@@ -33,20 +33,24 @@ class Solution(object):
           - n is maximun number.
         Space complexity: O(m).
         """
+        # Use stack of [string, repeated times] to get decoded string in 1st element.
         stack = [['', 1]]
         num = ''
 
         for c in s:
             if c.isdigit():
+                # Since digit means repeated times, accumulate them.
                 num += c
             elif c == '[':
+                # Start accumulating string with repeated times.
                 stack.append(['', int(num)])
                 num = ''
             elif c == ']':
-                # Concat the characters with repeated times to the previous chars.
-                chars, times = stack.pop()
-                stack[-1][0] += (chars * times)
+                # Stop accumulating string, and put it to the last stack.
+                string, times = stack.pop()
+                stack[-1][0] += string * times
             else:
+                # Continue accumulating string.
                 stack[-1][0] += c
 
         return stack[0][0]
