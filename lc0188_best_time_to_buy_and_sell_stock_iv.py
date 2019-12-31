@@ -61,9 +61,9 @@ class SolutionDp(object):
         for i in range(1, k + 1):
             local_max = -float('inf')
 
-            for j in range(n):
-                local_max = max(T[i - 1][j] - prices[j], local_max)
-                T[i][j] = max(T[i][j - 1], local_max + prices[j])
+            for j in range(1, n):
+                local_max = max(T[i - 1][j - 1] - prices[j - 1], local_max)
+                T[i][j] = max(T[i][j - 1], prices[j] + local_max)
 
         return T[-1][-1]
 

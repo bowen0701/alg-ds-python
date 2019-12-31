@@ -44,7 +44,7 @@ class SolutionBrute(object):
 
         for i in range(n - 1):
             for j in range(i + 1, n):
-                # Keep updating max profit for each (i, j).
+                # Keep updating max profit for each pair i & j.
                 if prices[j] - prices[i] > max_profit:
                     max_profit = prices[j] - prices[i]
 
@@ -65,14 +65,14 @@ class SolutionBinarySearch(object):
 
         # Compute crossmax for buying in left and selling in right.
         left_min = prices[i]
-        for l in range(i + 1, mid + 1):
-            if prices[l] < left_min:
-                left_min = prices[l]
+        for a in range(i + 1, mid + 1):
+            if prices[a] < left_min:
+                left_min = prices[a]
 
         right_max = prices[mid + 1]
-        for r in range(mid + 2, j + 1):
-            if prices[r] > right_max:
-                right_max = prices[r]      
+        for b in range(mid + 2, j + 1):
+            if prices[b] > right_max:
+                right_max = prices[b]
         
         cross_profit = max(0, right_max - left_min)
 

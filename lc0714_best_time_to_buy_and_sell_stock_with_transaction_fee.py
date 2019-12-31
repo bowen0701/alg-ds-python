@@ -43,17 +43,18 @@ class SolutionDp(object):
 
         n = len(prices)
 
-        # Before day i, the max profit ending with buy/sell.
+        # Max profit at day i in buy/sell status.
         profit_buys = [0] * n
         profit_sells = [0] * n
 
         profit_buys[0] = -prices[0]
 
         for i in range(1, n):
+            # Profit in buy is max of buy or not buy.
             profit_buys[i] = max(profit_sells[i - 1] - prices[i], 
                                  profit_buys[i - 1])
 
-            # Pay transaction fee when sell.
+            # Profit in sell is max of sell w/ trasaction fee or not sell.
             profit_sells[i] = max(profit_buys[i - 1] + prices[i] - fee, 
                                   profit_sells[i - 1])
 
@@ -73,14 +74,16 @@ class SolutionIter(object):
         if not prices:
             return 0
 
+        # Max profit in buy/sell status.
         profit_buy = -prices[0]
         profit_sell = 0
 
         for i in range(1, len(prices)):
+            # Profit in buy is max of buy or not buy.
             profit_buy_prev = profit_buy
             profit_buy = max(profit_sell - prices[i], profit_buy_prev)
 
-            # Pay transaction fee when sell.
+            # Profit in sell is max of sell w/ trasaction fee or not sell.
             profit_sell_prev = profit_sell
             profit_sell = max(profit_buy_prev + prices[i] - fee, profit_sell_prev)
 
