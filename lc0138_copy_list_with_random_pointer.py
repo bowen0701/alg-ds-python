@@ -3,22 +3,38 @@ Medium
 
 URL: https://leetcode.com/problems/copy-list-with-random-pointer/
 
-A linked list is given such that each node contains an additional 
-random pointer which could point to any node in the list or null.
+A linked list is given such that each node contains an additional random pointer
+which could point to any node in the list or null.
 
-Return a deep copy of the list. 
+Return a deep copy of the list.
+
+The Linked List is represented in the input/output as a list of n nodes. Each
+node is represented as a pair of [val, random_index] where:
+- val: an integer representing Node.val
+- random_index: the index of the node (range from 0 to n-1) where random pointer
+points to, or null if it does not point to any node.
 
 Example 1:
-Input:
-{"$id":"1","next":{"$id":"2","next":null,"random":{"$ref":"2"},"val":2},
- "random":{"$ref":"2"},"val":1}
-Explanation:
-Node 1's value is 1, both of its next and random pointer points to Node 2.
-Node 2's value is 2, its next pointer points to null and 
-its random pointer points to itself.
- 
-Note:
-You must return the copy of the given head as a reference to the cloned list.
+Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+
+Example 2:
+Input: head = [[1,1],[2,1]]
+Output: [[1,1],[2,1]]
+
+Example 3:
+Input: head = [[3,null],[3,0],[3,null]]
+Output: [[3,null],[3,0],[3,null]]
+
+Example 4:
+Input: head = []
+Output: []
+Explanation: Given linked list is empty (null pointer), so return null.
+
+Constraints:
+--10000 <= Node.val <= 10000
+-Node.random is null or pointing to a node in the linked list.
+- Number of Nodes will not exceed 1000.
 """
 
 # Definition for a Node.
@@ -29,7 +45,7 @@ class Node(object):
         self.random = random
 
 
-class SolutionInsert(object):
+class SolutionInsertItself(object):
     def copyRandomList(self, head):
         """
         :type head: Node
@@ -49,10 +65,9 @@ class SolutionInsert(object):
 
             current_cp.next = current.next
             current.next = current_cp
-
             current = current_cp.next
 
-        # Point copy's random to original's random's next, i.e. a copy node.
+        # Point copy's random to old random's copy: random's next.
         current = head
         while current:
             if current.random:
@@ -62,7 +77,7 @@ class SolutionInsert(object):
             current = current.next.next
 
 
-        # Break linked list into two: one for original, the other for copy.
+        # Break linked list into two: one for old, the other for copy.
         head_cp = head.next
 
         current = head
@@ -73,6 +88,7 @@ class SolutionInsert(object):
 
             current = current.next
             current_cp = current_cp.next
+
         current.next = None
 
         return head_cp
@@ -85,7 +101,7 @@ def main():
     head.next.next = None
     head.next.random = head.next
 
-    head_cp = SolutionInsert().copyRandomList(head)
+    head_cp = SolutionInsertItself().copyRandomList(head)
     print head_cp.val              # 1
     print head_cp.next.val         # 2
     print head_cp.random.val       # 2
