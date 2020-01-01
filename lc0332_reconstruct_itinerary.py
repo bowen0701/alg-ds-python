@@ -1,20 +1,20 @@
-"""Leetcode 332. Reconstruct post_visits.
+"""Leetcode 332. Reconstruct Itinerary
 Medium
 
-URL: https://leetcode.com/problems/reconstruct-post_visits/
+URL: https://leetcode.com/problems/reconstruct-itinerary/
 
 Given a list of airline tickets represented by pairs of 
-departure and arrival airports [from, to], reconstruct the post_visits in order. 
+departure and arrival airports [from, to], reconstruct the itinerary in order. 
 All of the tickets belong to a man who departs from JFK. 
-Thus, the post_visits must begin with JFK.
+Thus, the itinerary must begin with JFK.
 
 Note:
-If there are multiple valid itineraries, you should return the post_visits that 
+If there are multiple valid itineraries, you should return the itinerary that 
 has the smallest lexical order when read as a single string. 
-For example, the post_visits ["JFK", "LGA"] has a smaller lexical order than 
+For example, the itinerary ["JFK", "LGA"] has a smaller lexical order than 
 ["JFK", "LGB"].
 All airports are represented by three capital letters (IATA code).
-You may assume all tickets form at least one valid post_visits.
+You may assume all tickets form at least one valid itinerary.
 
 Example 1:
 Input: [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
@@ -27,22 +27,17 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
              But it is larger in lexical order.
 """
 
-class SolutionRecur(object):
-    def _makeGraph(self, tickets):
-        graph = {}
-        
-        for (start, end) in sorted(tickets)[::-1]:
-            # Append airport in lexical order.
-            if start not in graph:
-                graph[start] = [end]
-            else:
-                graph[start] += [end]
+class SolutionDfsRecur(object):
+    def _build_graph(self, tickets, graph):
+        # Append airport in lexical order.
+        for (departure, arrival) in sorted(tickets):
+            graph[departure].appendleft(arrival)
 
         return graph
 
     def _dfs_recur(self, start, graph, post_visits):
         # Keep DFS after popping out next airport.
-        while graph.get(start):
+        while graph[start]:
             self._dfs_recur(graph[start].pop(), graph, post_visits)
 
         post_visits.append(start)
@@ -56,8 +51,12 @@ class SolutionRecur(object):
           |E| is the number of tickets, due to sorting.
         Space complexity: O(|E|).
         """
-        # Make a graph for post_visits's adjacency lists in lexical order.
-        graph = self._makeGraph(tickets)
+        from collections import defaultdict
+        from collections import deque
+
+        # Build graph for itinerary's adjacency lists in lexical order.
+        graph = defaultdict(deque)
+        self._build_graph(tickets, graph)
 
         # Vist airports by DFS on graph and track post_visits.
         post_visits = []
@@ -69,16 +68,11 @@ class SolutionRecur(object):
         return itinerary
 
 
-class SolutionIter(object):
-    def _makeGraph(self, tickets):
-        graph = {}
-        
-        for (start, end) in sorted(tickets)[::-1]:
-            # Append airport in lexical order.
-            if start not in graph:
-                graph[start] = [end]
-            else:
-                graph[start] += [end]
+class SolutionDfsIter(object):
+    def _build_graph(self, tickets, graph):
+        # Append airport in lexical order.
+        for (departure, arrival) in sorted(tickets):
+            graph[departure].appendleft(arrival)
 
         return graph
 
@@ -87,7 +81,7 @@ class SolutionIter(object):
 
         # Keep DFS after popping out next airport.
         while stack:
-            while graph.get(stack[-1]):
+            while graph[stack[-1]]:
                 stack.append(graph[stack[-1]].pop())
 
             post_visits.append(stack.pop())
@@ -101,8 +95,12 @@ class SolutionIter(object):
           |E| is the number of tickets, due to sorting.
         Space complexity: O(|E|).
         """
-        # Make a graph for post_visits's adjacency lists in lexical order.
-        graph = self._makeGraph(tickets)
+        from collections import defaultdict
+        from collections import deque
+
+        # Build graph for itinerary's adjacency lists in lexical order.
+        graph = defaultdict(deque)
+        self._build_graph(tickets, graph)
 
         # Vist airports by DFS on graph and track post_visits.
         post_visits = []
@@ -117,37 +115,37 @@ class SolutionIter(object):
 def main():
     import time
 
-    # Answer: ["JFK", "MUC", "LHR", "SFO", "SJC"]
+    # Output: ["JFK", "MUC", "LHR", "SFO", "SJC"]
     tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
 
     start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().findItinerary(tickets))
+    print 'By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets))
     print 'Time: {}'.format(time.time() - start_time)
     
     start_time = time.time()
-    print 'By iter: {}'.format(SolutionIter().findItinerary(tickets))
+    print 'By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets))
     print 'Time: {}'.format(time.time() - start_time)
 
-    # Answer: ["JFK", "ATL", "JFK", "SFO", "ATL", "SFO"]
+    # Output: ["JFK", "ATL", "JFK", "SFO", "ATL", "SFO"]
     tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
 
     start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().findItinerary(tickets))
+    print 'By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets))
     print 'Time: {}'.format(time.time() - start_time)
     
     start_time = time.time()
-    print 'By iter: {}'.format(SolutionIter().findItinerary(tickets))
+    print 'By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets))
     print 'Time: {}'.format(time.time() - start_time)
 
-    # Answer: ["JFK","NRT","JFK","KUL"]
+    # Output: ["JFK","NRT","JFK","KUL"]
     tickets = [["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]
 
     start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().findItinerary(tickets))
+    print 'By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets))
     print 'Time: {}'.format(time.time() - start_time)
     
     start_time = time.time()
-    print 'By iter: {}'.format(SolutionIter().findItinerary(tickets))
+    print 'By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets))
     print 'Time: {}'.format(time.time() - start_time)
 
 
