@@ -104,6 +104,9 @@ class SolutionTopologicalSort(object):
         """
         :type words: List[str]
         :rtype: str
+
+        Time complexity: O(n), where n is the length of words.
+        Space complexity: O(1), since we have fixed number of chars.
         """
         # Apply Kahn's algorithm for topological sort for string order.
 
