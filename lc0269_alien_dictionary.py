@@ -1,4 +1,4 @@
-"""Leetcode 269. Alien Dictionary
+"""Leetcode 269. Alien Dictionary (Premium)
 Hard
 
 URL: https://leetcode.com/problems/alien-dictionary
