@@ -5,10 +5,9 @@ URL: https://leetcode.com/problems/lru-cache/
 
 Design and implement a data structure for Least Recently Used (LRU) cache.
 It should support the following operations: get and put.
-
-get(key) - Get the value (will always be positive) of the key if the key exists in
-the cache, otherwise return -1.
-put(key, value) - Set or insert the value if the key is not already present.
+- get(key) - Get the value (will always be positive) of the key if the key exists in
+  the cache, otherwise return -1.
+- put(key, value) - Set or insert the value if the key is not already present.
 When the cache reached its capacity, it should invalidate the least recently used
 item before inserting a new item.
 
@@ -53,8 +52,8 @@ class LRUCache(object):
         """
         self.capacity = capacity
 
-        # Use a dict to store key and its node with val.
-        self.dict = dict()
+        # Use a key_nodes dict to store key and its node with val.
+        self.key_nodes = dict()
 
         # Initialize doubly linked list with linked head and tail.
         self.head = Node(None, None)
@@ -90,8 +89,8 @@ class LRUCache(object):
         Space complexity: O(1).
         """
         # Check if key exists in dict, if yes, adjust key's pos.
-        if key in self.dict:
-            node = self.dict[key]
+        if key in self.key_nodes:
+            node = self.key_nodes[key]
 
             # Remove node from doubly linked list, and then add it back to tail.
             self._remove(node)
@@ -113,18 +112,18 @@ class LRUCache(object):
         node = Node(key, value)
 
         # Check if the node with key exists, if yes, remove it.
-        if key in self.dict:
-            self._remove(self.dict[key])
+        if key in self.key_nodes:
+            self._remove(self.key_nodes[key])
 
         # Add new node to tail and update dict.
         self._add_tail(node)
-        self.dict[key] = node
+        self.key_nodes[key] = node
 
-        # Check if larger than capacity, if yes, remove head's next node.
-        if len(self.dict) > self.capacity:
+        # Check if larger than capacity, remove head's next node: LRU node.
+        if len(self.key_nodes) > self.capacity:
             head_next = self.head.next
             self._remove(head_next)
-            del self.dict[head_next.key]
+            del self.key_nodes[head_next.key]
 
 
 def main():
@@ -133,10 +132,8 @@ def main():
     cache.put(2, 2)
     print 'Returns 1:', cache.get(1)
     cache.put(3, 3)
-    print 'Returns no 2:', cache.dict
     print 'Returns -1:', cache.get(2)
     cache.put(4, 4)
-    print 'Returns no 1: ', cache.dict
     print 'Returns -1:', cache.get(1)
     print 'Returns 3:', cache.get(3)
     print 'Returns 4:', cache.get(4)
