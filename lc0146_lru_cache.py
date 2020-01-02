@@ -70,6 +70,7 @@ class LRUCache(object):
         node.next.prev = node_prev
 
     def _add_tail(self, node):
+        # Get the recently used node.
         tail_prev = self.tail.prev
 
         # Link tail's prev and node together.
