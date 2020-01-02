@@ -43,17 +43,58 @@ class Node(object):
         self.bottomRight = bottomRight
 
 
-class Solution(object):
+class SolutionAllEqualTopLeftIsLeafRecur(object):
+    def _isLeaf(self, grid):
+        return all([val == grid[0][0]
+                   for row in grid for val in row])
+
     def construct(self, grid):
         """
         :type grid: List[List[int]]
         :rtype: Node
+
+        Time complexity: O(n^2).
+        Space complexity: O(n^2).
         """
-        pass
+        # Recursively check grid's vals equal top left. 
+        # If yes: leaf node. Otherwise: not.
+        if not grid:
+            return None
+
+        # If the node grid is leaf: all vals equal to top left val.
+        if self._isLeaf(grid):
+            return Node(grid[0][0], True, None, None, None, None)
+
+        # If not, recursively construct quad tree with non-leaf node grid and 
+        # its topLeft, topRight, bottomLeft, and bottomRight grid.
+        n = len(grid)
+        topLeft = self.construct([row[:n//2] for row in grid[:n//2]])
+        topRight = self.construct([row[n//2:] for row in grid[:n//2]])
+        bottomLeft = self.construct([row[:n//2] for row in grid[n//2:]])
+        bottomRight = self.construct([row[n//2:] for row in grid[n//2:]])
+        node = Node('*', False, topLeft, topRight, bottomLeft, bottomRight)
+        return node
 
 
 def main():
-    pass
+    grid = [[1, 0],
+            [0, 1]]
+    head = SolutionAllEqualTopLeftIsLeafRecur().construct(grid)
+
+    # Output: (False, '*')
+    print (head.isLeaf, head.val)
+
+    # Output: (True, 1)
+    print (head.topLeft.isLeaf, head.topLeft.val)
+
+    # Output: (True, 0)
+    print (head.topRight.isLeaf, head.topRight.val)
+    
+    # Output: (True, 0)
+    print (head.bottomLeft.isLeaf, head.bottomLeft.val)
+
+    # Output: (True, 1)
+    print (head.bottomRight.isLeaf, head.bottomRight.val)
 
 
 if __name__ == '__main__':
