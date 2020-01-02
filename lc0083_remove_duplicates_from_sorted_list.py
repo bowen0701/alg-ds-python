@@ -22,7 +22,7 @@ class ListNode(object):
         self.next = None
 
 
-class Solution(object):
+class SolutionCurrentNextIter(object):
     def deleteDuplicates(self, head):
         """
         :type head: ListNode
@@ -40,10 +40,10 @@ class Solution(object):
             if current.val == current.next.val:
                 # Continue updating next until it's not a duplicate, 
                 # then link current to non-duplicate.
-                next_ = current.next
-                while next_.next and next_.val == next_.next.val:
-                    next_ = next_.next
-                current.next = next_.next
+                _next = current.next
+                while _next.next and _next.val == _next.next.val:
+                    _next = _next.next
+                current.next = _next.next
 
             # Increment current node.
             current = current.next
@@ -57,8 +57,8 @@ def main():
     head = ListNode(1)
     head.next = ListNode(1)
     head.next.next = ListNode(2)
-    Solution().deleteDuplicates(head)
-    print (head.val, head.next.val, head.next.next)
+    SolutionCurrentNextIter().deleteDuplicates(head)
+    print(head.val, head.next.val, head.next.next)
 
     # Input: 1->1->2->3->3
     # Output: 1->2->3
@@ -67,8 +67,8 @@ def main():
     head.next.next = ListNode(2)
     head.next.next.next = ListNode(3)
     head.next.next.next.next = ListNode(3)
-    Solution().deleteDuplicates(head)
-    print (head.val, head.next.val, head.next.next.val, head.next.next.next)
+    SolutionCurrentNextIter().deleteDuplicates(head)
+    print(head.val, head.next.val, head.next.next.val, head.next.next.next)
 
 
 if __name__ == '__main__':

@@ -17,7 +17,7 @@ class ListNode(object):
         self.next = None
 
 
-class SolutionIter(object):
+class SolutionTwoPointersIter(object):
     def removeElements(self, head, val):
         """
         :type head: ListNode
@@ -65,7 +65,7 @@ def main():
     head.next.next.next.next.next = ListNode(5)
     head.next.next.next.next.next.next = ListNode(6)
     val = 6
-    new_head = SolutionIter().removeElements(head, val)
+    new_head = SolutionTwoPointersIter().removeElements(head, val)
     print(new_head.val,                     # Should be 1 
           new_head.next.val,                # Should be 2
           new_head.next.next.val,           # Should be 3

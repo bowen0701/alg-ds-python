@@ -47,15 +47,15 @@ class SolutionTailIter(object):
         Time complexity: O(n), where n is the lenght of nums.
         Space complexity: O(1).
         """
-        # Use tail to store the distinct elements.
-        tail = 0
+        # Use pos to store the distinct elements.
+        pos = 0
         for i in range(1, len(nums)):
-            # When see a distinct num, increment tail and replace it by num.
-            if nums[i] != nums[tail]:
-                tail += 1
-                nums[tail] = nums[i]
+            # When see a distinct num, increment pos and replace it by num.
+            if nums[i] != nums[pos]:
+                pos += 1
+                nums[pos] = nums[i]
 
-        return tail + 1
+        return pos + 1
 
 
 def main():

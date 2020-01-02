@@ -24,7 +24,7 @@ class ListNode(object):
         self.next = None
 
 
-class SolutionTwoPasses(object):
+class SolutionTwoPassesGetSize(object):
     def removeNthFromEnd(self, head, n):
         """
         :type head: ListNode
@@ -109,7 +109,7 @@ class SolutionOnePass(object):
 
 
 def main():
-    # Solution = SolutionTwoPasses
+    # Solution = SolutionTwoPassesGetSize
     Solution = SolutionOnePass
 
     # Given linked list: 1->2->3->4->5, and n = 2. Ans: 5.
