@@ -31,7 +31,7 @@ class SolutionTwoPassesGetSize(object):
         :type n: int
         :rtype: ListNode
 
-        Time complexity: O(n).
+        Time complexity: O(m), where m is the length of list.
         Space complexity: O(1).
         """
         # If no node will be removed.
@@ -73,46 +73,39 @@ class SolutionOnePass(object):
         :type n: int
         :rtype: ListNode
 
-        Time complexity: O(n).
+        Time complexity: O(m), where m is the length of list.
         Space complexity: O(1).
         """
         # If no node will be removed.
         if n == 0:
             return head
 
-        # Track current & previous nodes with distance n.
-        # Move iteratively both nodes to the end.
-        current_pos = 0
-        previous_pos = current_pos - n
+        # Apply Two Pointers: fast and slow.
+        fast = head
+        slow = head
+        previous = ListNode(None)
 
-        previous = None
-        current = head
+        # Move fast n nodes into the list.
+        for i in range(n):
+            fast = fast.next
 
-        while current.next:
-            current_pos += 1
-            previous_pos += 1
+        # Move all nodes at the same pace, and stop at the left of nth node.
+        while fast.next:
+            fast = fast.next
+            previous = slow
+            slow = slow.next
 
-            current = current.next
+        # Remove nth node.
+        previous.next = previous.next.next
 
-            if previous_pos == 0:
-                previous = head
-            elif previous_pos > 0:
-                previous = previous.next
-
-        # It previous_pos < 0, it means head will be removed.
-        # Else, remove the Nth node.
-        if previous_pos < 0:
-            return head.next
-        else:
-            previous.next = previous.next.next
-            return head
+        return head
 
 
 def main():
     # Solution = SolutionTwoPassesGetSize
     Solution = SolutionOnePass
 
-    # Given linked list: 1->2->3->4->5, and n = 2. Ans: 5.
+    # Given linked list: 1->2->3->4->5, and n = 2
     # Remove the 2nd node from the end: 1->2->3->5.
     head = ListNode(1)
     head.next = ListNode(2)
@@ -120,22 +113,6 @@ def main():
     head.next.next.next = ListNode(4)
     head.next.next.next.next = ListNode(5)
     print Solution().removeNthFromEnd(head, 2).next.next.next.val
-
-    # Remove the 5th node from the end: 2->3->4->5. Ans: 2.
-    head = ListNode(1)
-    head.next = ListNode(2)
-    head.next.next = ListNode(3)
-    head.next.next.next = ListNode(4)
-    head.next.next.next.next = ListNode(5)
-    print Solution().removeNthFromEnd(head, 5).val
-
-    # Remove the 0th node from the end: 1->2->3->4->5. Ans: 1.
-    head = ListNode(1)
-    head.next = ListNode(2)
-    head.next.next = ListNode(3)
-    head.next.next.next = ListNode(4)
-    head.next.next.next.next = ListNode(5)
-    print Solution().removeNthFromEnd(head, 0).val
 
 
 if __name__ == '__main__':
