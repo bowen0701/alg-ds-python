@@ -32,8 +32,8 @@ class SolutionSwapToCorrectPos(object):
         """
         n = len(nums)
 
-        # Iterate through all positions, continue swapping nums[i]'s to
-        # their correct position (i + 1)'s.
+        # Iterate through all positions, continue swapping 
+        # nums[i]'s to their correct position (i + 1)'s.
         for i in range(n):
             while 0 < nums[i] <= n and nums[i] != nums[nums[i] - 1]:
                 nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
@@ -54,22 +54,11 @@ def main():
 
     # Output: 2
     nums = [3,4,-1,1]
+    print nums
     print SolutionSwapToCorrectPos().firstMissingPositive(nums)
 
-    # Output: 1
+    # # Output: 1
     nums = [7,8,9,11,12]
-    print SolutionSwapToCorrectPos().firstMissingPositive(nums)
-
-    # Output: 1
-    nums = []
-    print SolutionSwapToCorrectPos().firstMissingPositive(nums)
-
-    # Output: 2
-    nums = [1]
-    print SolutionSwapToCorrectPos().firstMissingPositive(nums)
-
-    # Output: 3
-    nums = [-1,4,2,1,9,10]
     print SolutionSwapToCorrectPos().firstMissingPositive(nums)
 
 
