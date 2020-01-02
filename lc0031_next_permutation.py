@@ -38,7 +38,7 @@ class SolutionDecreasingPivotSwapReverse(object):
             nums.reverse()
             return None
 
-        # Find the first pos j with num which is bigger than pivot number. Swap them.
+        # From backward find the first pos j with num > pivot. Swap them.
         j = len(nums) - 1
         while j > pivot and nums[j] <= nums[pivot]:
             j -= 1
