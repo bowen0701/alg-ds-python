@@ -31,17 +31,41 @@ class ListNode(object):
         self.next = None
 
 
-class Solution(object):
+class SolutionFastSlow(object):
     def middleNode(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        fast = slow = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        return slow
 
 
 def main():
-    pass
+    # Input: [1,2,3,4,5]
+    # Output: Node 3 from this list (Serialization: [3,4,5])
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+    print SolutionFastSlow().middleNode(head).val
+
+    # Input: [1,2,3,4,5,6]
+    # Output: Node 4 from this list (Serialization: [4,5,6])
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+    head.next.next.next.next.next = ListNode(6)
+    print SolutionFastSlow().middleNode(head).val
 
 
 if __name__ == '__main__':
