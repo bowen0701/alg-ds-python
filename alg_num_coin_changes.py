@@ -1,16 +1,15 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 """Number of Coin Changes.
 
 Count how many distinct ways you can make change that amount.
 Assume that you have an infinite number of each kind of coin.
 """
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
-def _num_coin_changes_recur_util(amount, coins, n):
+
+def _change_recur_util(amount, coins, n):
     """Helper function for num_coin_changes_recur()."""
     if amount < 0:
         return 0
@@ -22,8 +21,8 @@ def _num_coin_changes_recur_util(amount, coins, n):
         return 0
 
     # Sum num of ways with coin n included & excluded.
-    n_changes = (_num_coin_changes_recur_util(amount - coins[n - 1], coins, n) +
-                 _num_coin_changes_recur_util(amount, coins, n - 1))
+    n_changes = (_change_recur_util(amount - coins[n - 1], coins, n)
+                 + _change_recur_util(amount, coins, n - 1))
     return n_changes
 
 
@@ -34,10 +33,10 @@ def num_coin_changes_recur(amount, coins):
     Space complexity: O(1).
     """
     n = len(coins)
-    return _num_coin_changes_recur_util(amount, coins, n)
+    return _change_recur_util(amount, coins, n)
 
 
-def _num_coin_changes_memo_util(amount, coins, T, n):
+def _change_memo_util(amount, coins, T, n):
     """Helper function for num_coin_changes_memo()."""
     if amount < 0:
         return 0
@@ -52,27 +51,28 @@ def _num_coin_changes_memo_util(amount, coins, T, n):
         return T[n][amount]
 
     # Sum num of ways with coin n included & excluded.
-    T[n][amount] = (_num_coin_changes_memo_util(amount - coins[n - 1], coins, T, n) +
-                    _num_coin_changes_memo_util(amount, coins, T, n - 1))
+    T[n][amount] = (_change_memo_util(amount - coins[n - 1], coins, T, n)
+                    + _change_memo_util(amount, coins, T, n - 1))
 
     return T[n][amount]
 
 
 def num_coin_changes_memo(amount, coins):
-    """Number of coin changes by top-bottom dynamic programming:
+    """Number of coin changes by top-down dynamic programming:
     recursion + memoization.
 
     Time complexity: O(a*n), where a is amount, and n is number of coins.
     Space complexity: O(a*n).
     """
+    # Apply top-down DP with memoization tabular T: (n+1)x(amount+1).
     n = len(coins)
     T = [[0] * (amount + 1) for c in range(n + 1)]
 
-    # For amount 0, set num equal 1.
+    # For amount 0, set T[c][0] equal 1.
     for c in range(1, n + 1):
         T[c][0] = 1
 
-    return _num_coin_changes_memo_util(amount, coins, T, n)
+    return _change_memo_util(amount, coins, T, n)
 
 
 def num_coin_changes_dp(amount, coins):
@@ -81,21 +81,22 @@ def num_coin_changes_dp(amount, coins):
     Time complexity: O(a*n), where a is amount, and n is number of coins.
     Space complexity: O(a*n).
     """
+    # Apply bottom-up DP with memoization tabular T: (n+1)x(amount+1).
     n = len(coins)
     T = [[0] * (amount + 1) for c in range(n + 1)]
 
-    # For amount 0, set num equal 1.
+    # For amount 0, set T[c][0] equal 1.
     for c in range(1, n + 1):
         T[c][0] = 1
 
     for c in range(1, n + 1):
         for a in range(1, amount + 1):
-            if a < coins[c - 1]:
+            if coins[c - 1] <= a:
+                # If can change, sum num of ways with coin n included & excluded.
+                T[c][a] = T[c][a - coins[c - 1]] + T[c - 1][a]
+            else:
                 # Cannot make a change by coin c.
                 T[c][a] = T[c - 1][a]
-            else:
-                # Sum num of ways with coin n included & excluded.
-                T[c][a] = T[c][a - coins[c - 1]] + T[c - 1][a]
 
     return T[-1][-1]
 
