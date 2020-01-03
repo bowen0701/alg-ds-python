@@ -105,19 +105,17 @@ class SolutionDp(object):
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a*n).
         """
+        # Apply DP with tabular T: n_coints x (amount + 1).
         n_coins = len(coins)
         T = [[float('inf')] * (amount + 1) for _ in range(n_coins)]
 
-        # For amount 0, set num equal 0.
+        # For amount 0, set T[i][0] equal 0.
         for i in range(n_coins):
             T[i][0] = 0
 
         for a in range(1, amount + 1):
             for i in range(n_coins):
-                if coins[i] == a:
-                    # Directly use coin i to change total amount.
-                    T[i][a] = 1
-                elif coins[i] < a:
+                if coins[i] <= a:
                     # If coin i can be included, decide which uses less coins:
                     # 1. #coins without coin i to make a
                     # 2. 1 + #coins with coin i to make a - coins[i]
@@ -132,14 +130,14 @@ class SolutionDp(object):
             return -1
 
 
-class SolutionDp2(object):
+class SolutionDpEarlyStop(object):
     def coinChange(self, coins, amount):
         """Change fewest #coins by bottom-up dynamic programming.
 
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a).
         """
-        # Sort coins for early stopping.
+        # Apply DP with tabular T with early stopping by sorting.
         coins = sorted(coins)
 
         T = [float('inf')] * (amount + 1)
@@ -184,7 +182,8 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP2: {}'.format(SolutionDp2().coinChange(coins, amount))
+    print 'By DP w/ early stop: {}'.format(
+        SolutionDpEarlyStop().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
     # Ans: -1.
@@ -204,7 +203,8 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP2: {}'.format(SolutionDp2().coinChange(coins, amount))
+    print 'By DP w/ early stop: {}'.format(
+        SolutionDpEarlyStop().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
 
