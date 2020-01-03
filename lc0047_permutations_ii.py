@@ -16,7 +16,7 @@ Output:
 ]
 """
 
-class SolutionBacktrack(object):
+class SolutionSortBacktrack(object):
     def _backtrack(self, result, temp, is_used, nums):
         if len(temp) == len(nums):
             # Once a permutation is completed, shallow copy it to result.
@@ -62,7 +62,7 @@ class SolutionBacktrack(object):
 def main():
     # Output: [[1,1,2],[1,2,1],[2,1,1]]
     nums = [1,1,2,4]
-    print SolutionBacktrack().permuteUnique(nums)
+    print SolutionSortBacktrack().permuteUnique(nums)
 
 
 if __name__ == '__main__':
