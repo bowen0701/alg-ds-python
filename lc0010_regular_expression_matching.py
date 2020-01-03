@@ -1,4 +1,4 @@
-"""Leetcode 10. Regular Expression Matching
+"""Leetcode 10. Regular Expression matching
 Hard
 
 URL: https://leetcode.com/problems/regular-expression-matching/
@@ -52,7 +52,7 @@ p = "mis*is*p*."
 Output: false
 """
 
-class Solution(object):
+class SolutionDp(object):
     def isMatch(self, s, p):
         """
         :type s: str
@@ -65,12 +65,20 @@ class Solution(object):
           n is the lenght of pattern.
         Space complexity: O(m*n).
         """
+        # Edge cases.
+        if not s and not p:
+            return True
+        if not s or not p:
+            return False
+
+        # Apply Dynamic Programming with s x p tabular. 
         T = [[False] * (len(p) + 1) for _ in range((len(s) + 1))]
 
-        # For empty s and p.
+        # For empty s matches empty p.
         T[0][0] = True
 
-        # For empty s and p = a*, a*b*, or a*b*c*.
+        # For T[i][0] = False, as s does not match empty p = ''.
+        # For T[0][j] = True as empty s matches p = a*b*c*, with '*' at even pos.
         for j in range(2, len(p) + 1):
             if p[j - 1] == '*':
                 T[0][j] = T[0][j - 2]
@@ -79,14 +87,17 @@ class Solution(object):
         for i in range(1, len(s) + 1):
             for j in range(1, len(p) + 1):
                 if s[i - 1] == p[j - 1] or p[j - 1] == '.':
-                    # Check match without s[i] & p[j].
+                    # Match without s[i] & p[j].
                     T[i][j] = T[i - 1][j - 1]
                 elif p[j - 1] == '*':
-                    # Check match for p before a*.
-                    T[i][j] = T[i][j - 2]
-                    if s[i - 1] == p[j - 2] or p[j - 2] == '.':
-                        # Further check s[i] and char or '.' before '*'.
-                        T[i][j] |= T[i - 1][j]
+                    if s[i - 1] != p[j - 2] and p[j - 2] != '.':
+                        # Match without a*.
+                        T[i][j] = T[i][j - 2]
+                    else:
+                        # Since s[i-1] = p[j-2] or p[j-2] = '.',
+                        # match with a or without a* or ignoring s[i].
+                        T[i][j] = T[i][j - 1] or T[i][j - 2] or T[i - 1][j]
+
 
         return T[-1][-1]
 
@@ -95,27 +106,27 @@ def main():
     s = "aa"
     p = "a"
     # Output: false.
-    print Solution().isMatch(s, p)
+    print SolutionDp().isMatch(s, p)
 
     s = "aa"
     p = "a*"
     # Output: true.
-    print Solution().isMatch(s, p)
+    print SolutionDp().isMatch(s, p)
 
     s = "ab"
     p = ".*"
     # Output: true.
-    print Solution().isMatch(s, p)
+    print SolutionDp().isMatch(s, p)
 
     s = "aab"
     p = "c*a*b"
     # Output: true.
-    print Solution().isMatch(s, p)
+    print SolutionDp().isMatch(s, p)
 
     s = "mississippi"
     p = "mis*is*p*."
     # Output: false.
-    print Solution().isMatch(s, p)
+    print SolutionDp().isMatch(s, p)
 
 
 if __name__ == '__main__':
