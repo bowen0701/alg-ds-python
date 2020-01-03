@@ -38,31 +38,32 @@ Explanation: The endWord "cog" is not in wordList,
 therefore no possible transformation.
 """
 
-class Solution(object):
+class SolutionBfs(object):
     def _buildWordsGraph(self, words):
         from collections import defaultdict
         from itertools import product
 
-        w_neighbors_d = defaultdict(list)
-        graph_d = defaultdict(set)
+        # To build word graph, first build words_neighbors dict: bucket->list(words).
+        words_neighbors = defaultdict(list)
 
-        # Create bucket of words that are different by one letter.
         for w in words:
             for i in range(len(w)):
+                # Create bucket of words that are different by one letter.
                 bucket = '{0}_{1}'.format(w[:i], w[i+1:])
-                w_neighbors_d[bucket].append(w)
+                words_neighbors[bucket].append(w)
 
-        # Add graph's vertices and edges for words in the same buckets.
-        for bucket, w_neighbors in w_neighbors_d.items():
-            w_pairs = ((w1, w2) 
-                       for (w1, w2) in product(w_neighbors, repeat=2)
+        # Build words_graph dict: word->set(words).
+        words_graph = defaultdict(set)
+
+        for bucket, w_neighbors in words_neighbors.items():
+            w_pairs = ((w1, w2) for (w1, w2) in product(w_neighbors, repeat=2)
                        if w1 != w2)
-        
-            for w1, w2 in w_pairs:
-                graph_d[w1].add(w2)
-                graph_d[w2].add(w1)
 
-        return graph_d
+            for w1, w2 in w_pairs:
+                words_graph[w1].add(w2)
+                words_graph[w2].add(w1)
+
+        return words_graph
 
     def ladderLength(self, beginWord, endWord, wordList):
         """
@@ -74,6 +75,14 @@ class Solution(object):
         Time complexity: O(WLW^2) + O(W+W^2)= O(W^3L) + O(W^2).
         Space complexity: O(W^2).
         """
+        # Apply iterative BFS with queue for shortest lengths from start.
+        # - Make words complete.
+        # - Build words graph dict, based on words neighbors dict.
+        # - Use lengths dict.
+
+        from collections import defaultdict
+        from collections import deque
+
         # If endWord is not in wordList, not possible to transform.
         if endWord not in wordList:
             return 0
@@ -85,26 +94,26 @@ class Solution(object):
         # Build words graph.
         words_graph = self._buildWordsGraph(words)
 
-        # Make length dict.
-        length_d = {w: float('inf') for w in words_graph}
-        length_d[beginWord] = 1
+        # Use lengths dict.
+        lengths = defaultdict(int)
+        for w in words_graph:
+            lengths[w] = float('inf')
 
-        # Apply BFS with queue for shortest length.
-        queue = [beginWord]
+        lengths[beginWord] = 1
+
+        # Apply BFS with queue for shortest lengths.
+        queue = deque([beginWord])
 
         while queue:
-            visit_word = queue.pop()
+            w = queue.pop()
 
-            for neighbor_word in words_graph[visit_word]:
-                # If neighbor word is not visited yet.
-                if length_d[neighbor_word] == float('inf'):
-                    queue.insert(0, neighbor_word)
-                    length_d[neighbor_word] = length_d[visit_word] + 1
+            # Start BFS if word neighbor is not visited yet.
+            for w_neighbor in words_graph[w]:
+                if lengths[w_neighbor] == float('inf'):
+                    queue.appendleft(w_neighbor)
+                    lengths[w_neighbor] = lengths[w] + 1
 
-        if length_d.get(endWord):
-            return length_d[endWord]
-        else:
-            return 0
+        return lengths[endWord]
 
 
 def main():
@@ -112,19 +121,19 @@ def main():
     beginWord = "hit"
     endWord = "cog"
     wordList = ["hot","dot","dog","lot","log","cog"]
-    print Solution().ladderLength(beginWord, endWord, wordList)
+    print SolutionBfs().ladderLength(beginWord, endWord, wordList)
 
     # Output: 0
     beginWord = "hit"
     endWord = "cog"
     wordList = ["hot","dot","dog","lot","log"]
-    print Solution().ladderLength(beginWord, endWord, wordList)
+    print SolutionBfs().ladderLength(beginWord, endWord, wordList)
 
     # Output: 0
     beginWord = "hot"
     endWord = "dog"
     wordList = ["dog"]
-    print Solution().ladderLength(beginWord, endWord, wordList)
+    print SolutionBfs().ladderLength(beginWord, endWord, wordList)
 
 
 if __name__ == '__main__':
