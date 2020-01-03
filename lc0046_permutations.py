@@ -18,7 +18,7 @@ Output:
 ]
 """
 
-class Solution(object):
+class SolutionBacktrack(object):
     def _backtrack(self, result, temp, nums):
         if len(temp) == len(nums):
             # Once a permutation is completed, shallow copy it to result.
@@ -55,7 +55,7 @@ class Solution(object):
 
 def main():
     nums = [1, 2, 3]
-    print Solution().permute(nums)
+    print SolutionBacktrack().permute(nums)
 
 
 if __name__ == '__main__':
