@@ -20,13 +20,13 @@ Output: [null,null,"bar","bar",null,"bar2","bar2"]
 Explanation:   
 TimeMap kv;   
 kv.set("foo", "bar", 1); // store the key "foo" and value "bar" along with timestamp = 1   
-kv.get("foo", 1);  // output "bar"   
+kv.get("foo", 1); // output "bar"   
 kv.get("foo", 3); // output "bar" since there is no value corresponding to foo at 
                   // timestamp 3 and timestamp 2, then the only value is at timestamp
                   // 1 ie "bar"   
 kv.set("foo", "bar2", 4);   
 kv.get("foo", 4); // output "bar2"   
-kv.get("foo", 5); //output "bar2"   
+kv.get("foo", 5); // output "bar2"   
 
 Example 2:
 Input: inputs = ["TimeMap","set","set","get","get","get","get","get"],
@@ -43,13 +43,16 @@ Note:
   (combined) per test case.
 """
 
-class TimeMap(object):
+class TimeMapBinarySearchGet(object):
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        pass
+        # Use key_timestampvalues dict: key->[timestamp, value].
+        from collections import defaultdict
+
+        self.key_timestampvalues = defaultdict(list)
 
     def set(self, key, value, timestamp):
         """
@@ -57,20 +60,67 @@ class TimeMap(object):
         :type value: str
         :type timestamp: int
         :rtype: None
+
+        Time complexity: O(1).
+        Space complexity: O(n), where n is the number of stored key-values.
         """
-        pass
+        self.key_timestampvalues[key].append([timestamp, value])
 
     def get(self, key, timestamp):
         """
         :type key: str
         :type timestamp: int
         :rtype: str
+
+        Time complexity: O(logn), where n is the number of stored key-values.
+        Space complexity: O(n).
         """
-        pass
+        # Since timestamp are sorted, use Binary Search to get value.
+
+        # Edge case.
+        if key not in self.key_timestampvalues:
+            return ''
+
+        timestamp_values = self.key_timestampvalues[key]
+
+        left, right = 0, len(timestamp_values) - 1
+        while left < right:
+            mid = left + (right - left) // 2
+
+            if timestamp_values[mid][0] == timestamp:
+                return timestamp_values[mid][1]
+            elif timestamp_values[mid][0] < timestamp:
+                # Check if moving left to feasible range.
+                if timestamp_values[mid + 1][0] > timestamp:
+                    return timestamp_values[mid][1]
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        # For left = right, check if there is reasonable timestamp.
+        if timestamp_values[left][0] <= timestamp:
+            return timestamp_values[left][1]
+        else:
+            return ''
 
 
 def main():
-    pass
+    timemap = TimeMapBinarySearchGet()
+    timemap.set("foo", "bar", 1)
+    print timemap.get("foo", 1)  # Output: 'bar'
+    print timemap.get("foo", 3)  # Output: 'bar'
+    timemap.set("foo", "bar2", 4)
+    print timemap.get("foo", 4)  # Output: 'bar2'
+    print timemap.get("foo", 5)  # Output: 'bar2'
+
+    timemap = TimeMapBinarySearchGet()
+    timemap.set("love", "high", 10)
+    timemap.set("love", "low", 20)
+    print timemap.get("love", 5)   # Output: ''
+    print timemap.get("love", 10)  # Output: 'high'
+    print timemap.get("love", 15)  # Output: 'high'
+    print timemap.get("love", 20)  # Output: 'low'
+    print timemap.get("love", 25)  # Output: 'low'
 
 
 if __name__ == '__main__':
