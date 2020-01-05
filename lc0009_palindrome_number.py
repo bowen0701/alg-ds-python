@@ -23,7 +23,7 @@ Follow up:
 Coud you solve it without converting the integer to a string?
 """
 
-class Solution(object):
+class SolutionConvertStr(object):
     def isPalindrome(self, x):
         """
         :type x: int
@@ -35,13 +35,13 @@ class Solution(object):
 
 def main():
     x = 121  # Ans: True.
-    print(Solution().isPalindrome(x))
+    print(SolutionConvertStr().isPalindrome(x))
 
     x = -121  # Ans: False.
-    print(Solution().isPalindrome(x))
+    print(SolutionConvertStr().isPalindrome(x))
 
     x = 10  # Ans: False.
-    print(Solution().isPalindrome(x))
+    print(SolutionConvertStr().isPalindrome(x))
 
 
 if __name__ == '__main__':
