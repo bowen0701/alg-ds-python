@@ -47,7 +47,7 @@ class SolutionStack(object):
         return True
 
 
-class SolutionSlowFast(object):
+class SolutionSlowFastReverse2nd(object):
     def isPalindrome(self, head):
         """
         :type head: ListNode
@@ -66,10 +66,9 @@ class SolutionSlowFast(object):
         reverse = None
         while slow:
             nxt = slow.next
-
             slow.next = reverse
-            reverse = slow
 
+            reverse = slow
             slow = nxt
         
         # Traverse the 1st half and reversed 2nd half at the same time
@@ -93,27 +92,27 @@ def main():
     head.next.next = ListNode(2)
     head.next.next.next = ListNode(1)
 
-    # start_time = time.time()
-    # print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
-    # print 'Time: {}'.format(time.time() - start_time)
-
     start_time = time.time()
-    print 'Optimized: {}'.format(SolutionSlowFast().isPalindrome(head))
+    print 'Stack: {}'.format(SolutionStack().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
-    # # 1->2->3->1: No.
-    # head = ListNode(1)
-    # head.next = ListNode(2)
-    # head.next.next = ListNode(3)
-    # head.next.next.next = ListNode(1)
+    start_time = time.time()
+    print 'Slow/fast: {}'.format(SolutionSlowFastReverse2nd().isPalindrome(head))
+    print 'Time: {}'.format(time.time() - start_time)
 
-    # start_time = time.time()
-    # print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
-    # print 'Time: {}'.format(time.time() - start_time)
+    # 1->2->3->1: No.
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(1)
 
-    # start_time = time.time()
-    # print 'Optimized: {}'.format(SolutionSlowFast().isPalindrome(head))
-    # print 'Time: {}'.format(time.time() - start_time)
+    start_time = time.time()
+    print 'Stack: {}'.format(SolutionStack().isPalindrome(head))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'Slow/fast: {}'.format(SolutionSlowFastReverse2nd().isPalindrome(head))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
