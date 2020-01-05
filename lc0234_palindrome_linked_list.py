@@ -88,32 +88,32 @@ def main():
     import time
 
     # 1->2->2->1: Yes.
-    head.ListNode(1)
+    head = ListNode(1)
     head.next = ListNode(2)
     head.next.next = ListNode(2)
     head.next.next.next = ListNode(1)
 
-    start_time = time.time()
-    print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
-    print 'Time: {}'.format(time.time() - start_time)
+    # start_time = time.time()
+    # print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
+    # print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
     print 'Optimized: {}'.format(SolutionSlowFast().isPalindrome(head))
     print 'Time: {}'.format(time.time() - start_time)
 
-    # 1->2->3->1: No.
-    head.ListNode(1)
-    head.next = ListNode(2)
-    head.next.next = ListNode(3)
-    head.next.next.next = ListNode(1)
+    # # 1->2->3->1: No.
+    # head = ListNode(1)
+    # head.next = ListNode(2)
+    # head.next.next = ListNode(3)
+    # head.next.next.next = ListNode(1)
 
-    start_time = time.time()
-    print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
-    print 'Time: {}'.format(time.time() - start_time)
+    # start_time = time.time()
+    # print 'Naive: {}'.format(SolutionStack().isPalindrome(head))
+    # print 'Time: {}'.format(time.time() - start_time)
 
-    start_time = time.time()
-    print 'Optimized: {}'.format(SolutionSlowFast().isPalindrome(head))
-    print 'Time: {}'.format(time.time() - start_time)
+    # start_time = time.time()
+    # print 'Optimized: {}'.format(SolutionSlowFast().isPalindrome(head))
+    # print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
