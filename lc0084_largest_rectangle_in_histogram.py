@@ -20,11 +20,14 @@ class SolutionIncreasingHeightIdxStack(object):
         """
         :type heights: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         # Use stack to collect idx of buildings with increasing heights.
-        # Boundary case handled by idx = -1 & height = 0.
-        idx_stack = [-1]
+        # Boundary case handled by height = 0 & idx = -1.
         heights.append(0)
+        idx_stack = [-1]
 
         max_area = 0
 
@@ -40,6 +43,9 @@ class SolutionIncreasingHeightIdxStack(object):
                 max_area = max(max_area, h * w)
 
             idx_stack.append(i)
+
+        # Recover the original heights.
+        heights.append(0)
 
         return max_area
 
