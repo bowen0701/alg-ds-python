@@ -15,17 +15,40 @@ Input: [2,1,5,6,2,3]
 Output: 10
 """
 
-class Solution(object):
+class SolutionIncreasingHeightIdxStack(object):
     def largestRectangleArea(self, heights):
         """
         :type heights: List[int]
         :rtype: int
         """
-        pass
+        # Use stack to collect idx of buildings with increasing heights.
+        # Boundary case handled by idx = -1 & height = 0.
+        idx_stack = [-1]
+        heights.append(0)
+
+        max_area = 0
+
+        for i in range(len(heights)):
+            # Before adding a new building, pop buildings taller than the new one.
+            while heights[i] < heights[idx_stack[-1]]:
+                # The building popped out represents the height.
+                h = heights[idx_stack.pop()]
+
+                # Last stack top & new building are the left & right boundaries.
+                w = i - idx_stack[-1] - 1
+
+                max_area = max(max_area, h * w)
+
+            idx_stack.append(i)
+
+        return max_area
 
 
 def main():
-    pass
+    # Output: 10 = 5 * 2.
+    heights = [2,1,5,6,2,3]
+    print heights
+    print SolutionIncreasingHeightIdxStack().largestRectangleArea(heights)
 
 
 if __name__ == '__main__':
