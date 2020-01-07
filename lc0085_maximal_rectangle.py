@@ -29,6 +29,9 @@ class SolutionEachRowHeightRectangleHistogram(object):
 
         :type matrix: List[List[str]]
         :rtype: int
+
+        Time complexity: O(n), where n is the number of columns.
+        Space complexity: O(n).
         """
         # Edge cases.
         if not matrix or not matrix[0]:
