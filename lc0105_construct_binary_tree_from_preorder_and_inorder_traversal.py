@@ -35,17 +35,17 @@ class SolutionRecur(object):
         # Preorder's first is root.
         root = TreeNode(preorder[pre_start])
 
-        # Get root's pos in inorder for left and right.
+        # In inorder, get root's pos for separating left and right.
         in_root_pos = inorder_d[root.val]
 
         # Compute the number of left from root.
-        n_left = in_root_pos - in_start
+        in_n_left = in_root_pos - in_start
 
-        # Build binary trees for root's left and right.
-        root.left = self._build(pre_start + 1, pre_start + n_left, 
+        # Build binary trees from root's left and right.
+        root.left = self._build(pre_start + 1, pre_start + in_n_left, 
                                 in_start, in_root_pos - 1,
                                 inorder_d, preorder, inorder)
-        root.right = self._build(pre_start + n_left + 1, pre_end, 
+        root.right = self._build(pre_start + in_n_left + 1, pre_end, 
                                  in_root_pos + 1, in_end,
                                  inorder_d, preorder, inorder)
 
@@ -57,6 +57,14 @@ class SolutionRecur(object):
         :type preorder: List[int]
         :type inorder: List[int]
         :rtype: TreeNode
+
+        - Preorder's first is root
+        - In inorder, get root's position.
+        - Then we can separate the the remaining data into left and right.
+          preorder = [3,9,20,15,7]
+                      ^ l r  r  r
+          inorder  = [9,3,15,20,7]
+                      l ^ r  r  r
 
         Time complexity: O(n), where n is the number of nodes.
         Space complexity: O(n).
