@@ -40,7 +40,7 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-class CodecPreorderRecur:
+class CodecValueQueuePreorderRecur(object):
     def _serializePreorderRecur(self, root, vals):
         if root:
             vals.append(str(root.val))
@@ -106,7 +106,7 @@ def main():
     root.right.left = TreeNode(4)
     root.right.right = TreeNode(5)
 
-    codec = CodecPreorderRecur()
+    codec = CodecValueQueuePreorderRecur()
     data = codec.serialize(root)
     print data
     deserialized_root = codec.deserialize(data)
