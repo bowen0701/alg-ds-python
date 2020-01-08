@@ -26,7 +26,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionPreorderFirstInorderRootRecur(object):
     def _build(self, pre_start, pre_end, in_start, in_end,
                inorder_d, preorder, inorder):
         if pre_start > pre_end or in_start > in_end:
@@ -88,7 +88,7 @@ def main():
     #  15   7
     preorder = [3, 9, 20, 15, 7]
     inorder = [9, 3, 15, 20, 7]
-    root = SolutionRecur().buildTree(preorder, inorder)
+    root = SolutionPreorderFirstInorderRootRecur().buildTree(preorder, inorder)
     
     print (root.val,
            root.left.val, root.right.val,
