@@ -36,17 +36,45 @@ The next byte is a continuation byte which starts with 10 and that's correct.
 But the second continuation byte does not start with 10, so it is invalid.
 """
 
-class Solution(object):
+class SolutionBitShiftNumRhsBytes(object):
     def validUtf8(self, data):
         """
         :type data: List[int]
         :rtype: bool
+
+        Time complexity: O(n), where n is length of data.
+        Space complexity: O(1).
         """
-        pass
+        n_rhs_bytes = 0
+
+        for d in data:
+            # In 1st iteration check number of RHS bytes.
+            if n_rhs_bytes == 0:
+                if d >> 3 == 0b11110:
+                    n_rhs_bytes = 3
+                elif d >> 4 == 0b1110:
+                    n_rhs_bytes = 2
+                elif d >> 5 == 0b110:
+                    n_rhs_bytes = 1
+                elif d >> 7 != 0:
+                    return False
+            else:
+                # For RHS bytes, check if marker matches pattern.
+                if n_rhs_bytes < 0 or d >> 6 != 0b10:
+                    return False
+                n_rhs_bytes -= 1
+
+        return n_rhs_bytes == 0
 
 
 def main():
-    pass
+    # Output: True
+    data = [197, 130, 1]
+    print SolutionBitShiftNumRhsBytes().validUtf8(data)
+
+    # Output: False
+    data = [235, 140, 4]
+    print SolutionBitShiftNumRhsBytes().validUtf8(data)
 
 
 if __name__ == '__main__':
