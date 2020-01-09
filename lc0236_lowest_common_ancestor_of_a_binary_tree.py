@@ -65,12 +65,12 @@ class SolutionPreorderRecur(object):
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
+        # p & q are not in subtree.
         if not left and not right:
-            # p & q are not in subtree.
             return None
 
+        # p and q are in subtree.
         if left and right:
-            # p and q are in subtree.
             return root
 
         # Otherwise, p or q is in subtree.
@@ -112,8 +112,8 @@ class SolutionPreorderIter(object):
             ancestors.add(p)
             p = child_parent[p]
 
+        # Then reversely traverse q's parents until meet one of p's parents.
         while q not in ancestors:
-            # Then reversely traverse q's parents until meet one of p's parents.
             q = child_parent[q]
 
         return q
