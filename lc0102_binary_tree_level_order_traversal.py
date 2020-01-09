@@ -43,10 +43,9 @@ class SolutionBFS(object):
         if not root:
             return []
 
-        result = []
-
         # Use queue for BFS.
         queue = deque([root])
+        result = []
 
         while queue:
             level = []
