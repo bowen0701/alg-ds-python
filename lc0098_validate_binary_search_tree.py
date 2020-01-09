@@ -1,8 +1,7 @@
 """Leetcode 98. Validate Binary Search Tree
+Medium
 
 URL: https://leetcode.com/problems/validate-binary-search-tree/
-
-Medium
 
 Given a binary tree, determine if it is a valid binary search tree (BST).
 
@@ -91,8 +90,8 @@ class SolutionMinMaxIter(object):
 
             # Validate left subtree with min and max=current and
             # also validate right subtree with min=current and max.
-            stack.append([current.left, min_val, current.val])
             stack.append([current.right, current.val, max_val])
+            stack.append([current.left, min_val, current.val])
 
         return True
 
@@ -110,9 +109,9 @@ class SolutionInorderRecur(object):
         # Compare root with its previous.
         if self.previous and self.previous.val >= current.val:
             return False
-        else:
-            # Keep updating previous by current node.
-            self.previous = current
+
+        # Keep updating previous by current node.
+        self.previous = current
 
         # Traverse right tree.
         if not self._isValidBSTUtil(current.right):
@@ -151,21 +150,21 @@ class SolutionInorderIter(object):
         stack = []
 
         while current or stack:
-            if current:
+            while current:
                 # If current exists, push to stack and visit left node.
                 stack.append(current)
                 current = current.left
-            else:
-                # If current does not exist, pop stack as current.
-                current = stack.pop()
 
-                # Check whether previous->node is increasing.
-                if previous and previous.val >= current.val:
-                    return False
+            # If current does not exist, pop stack as current.
+            current = stack.pop()
 
-                # Update current and previous by inorder traversal.
-                previous = current
-                current = current.right
+            # Check whether previous->node is increasing.
+            if previous and previous.val >= current.val:
+                return False
+
+            # Update current and previous by inorder traversal.
+            previous = current
+            current = current.right
 
         return True
 
