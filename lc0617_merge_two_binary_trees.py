@@ -85,17 +85,17 @@ class SolutionPreorderIter(object):
             # Traverse root.
             _t1.val += _t2.val
 
+            # Traverse right node first.
+            if not _t1.right:
+                _t1.right = _t2.right
+            else:
+                stack.append((_t1.right, _t2.right))
+
             # Traverse left node.
             if not _t1.left:
                 _t1.left = _t2.left
             else:
                 stack.append((_t1.left, _t2.left))
-
-            # Traverse right node.
-            if not _t1.right:
-                _t1.right = _t2.right
-            else:
-                stack.append((_t1.right, _t2.right))
 
         return t1
 
