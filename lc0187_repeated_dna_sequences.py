@@ -28,7 +28,7 @@ class SolutionDict(object):
 
         from collections import defaultdict
 
-        seen_seq_counts = defaultdict(int)
+        seq_counts = defaultdict(int)
 
         # Start from index 0 to accumuluate sequence occurrence count.
         repeated_seqs = []
@@ -37,10 +37,10 @@ class SolutionDict(object):
         while i + 10 <= len(s):
             # Take substring and accumulate occurrence count.
             seq = s[i:(i + 10)]
-            seen_seq_counts[seq] += 1
+            seq_counts[seq] += 1
 
-            if seen_seq_counts[seq] == 2:
-                # Check double occurrence only to prevend duplicates.
+            # Check double occurrence only to prevend duplicates.
+            if seq_counts[seq] == 2:
                 repeated_seqs.append(seq)
 
             # Increment i.
