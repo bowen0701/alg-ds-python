@@ -1,7 +1,7 @@
-"""Leetcode 34. Find First and Last Position of Element in Sorted Array
+"""Leetcode 34. Find left and right Position of Element in Sorted Array
 Medium
 
-URL: https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
+URL: https://leetcode.com/problems/find-left-and-right-position-of-element-in-sorted-array
 
 Given an array of integers nums sorted in ascending order, 
 find the starting and ending position of a given target value.
@@ -19,7 +19,7 @@ Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
 """
 
-class Solution(object):
+class SolutionBinarySearchTwice(object):
     def searchRange(self, nums, target):
         """
         :type nums: List[int]
@@ -36,31 +36,33 @@ class Solution(object):
             return res
 
         # Apply the 1st binary search to search target's left position.
-        first, last = 0, len(nums) - 1
+        left, right = 0, len(nums) - 1
 
-        while first < last:
-            mid = first + (last - first) // 2
+        while left < right:
+            mid = left + (right - left) // 2
             if nums[mid] < target:
-                first = mid + 1
+                left = mid + 1
             else:
-                last = mid
+                right = mid
 
-        if nums[first] != target:
+        if nums[left] != target:
             return res
         else:
-            res[0] = first
+            res[0] = left
 
         # Apply the 2nd binary search to search target's right position.
-        last = len(nums) - 1
-        while first < last:
-            # Make mid biased to the right.
-            mid = first + (last - first) // 2 + 1
-            if nums[mid] > target:
-                last = mid - 1
-            else:
-                first = mid
+        right = len(nums) - 1
 
-        res[1] = last
+        while left < right:
+            # Make mid biased to the right.
+            mid = left + (right - left) // 2 + 1
+            if nums[mid] > target:
+                right = mid - 1
+            else:
+                left = mid
+
+        res[1] = right
+
         return res
 
 
@@ -68,12 +70,12 @@ def main():
     # Ans: [3,4]
     nums = [5,7,7,8,8,10]
     target = 8
-    print Solution().searchRange(nums, target)
+    print SolutionBinarySearchTwice().searchRange(nums, target)
 
     # Ans: [-1,-1]
     nums = [5,7,7,8,8,10]
     target = 6
-    print Solution().searchRange(nums, target)
+    print SolutionBinarySearchTwice().searchRange(nums, target)
 
 
 if __name__ == '__main__':
