@@ -94,22 +94,22 @@ class SolutionIter(object):
         stack = []
 
         while current or stack:
-            if current:
-                # If current exists, push to stack and visit left node.
+            # Continuously push current to stack and visit left node.
+            while current:
                 stack.append(current)
                 current = current.left
-            else:
-                # If not, pop stack as current, which is left.
-                current = stack.pop()
 
-                # Decrement k to 0 to get the kth smallest value.
-                k -= 1
-                if k == 0:
-                    break
+            # Pop stack as current, which is left.
+            current = stack.pop()
 
-                # Then visit right.
-                previous = current
-                current = current.right
+            # Decrement k to 0 to get the kth smallest value.
+            k -= 1
+            if k == 0:
+                break
+
+            # Then visit right.
+            previous = current
+            current = current.right
 
         return current.val
 
