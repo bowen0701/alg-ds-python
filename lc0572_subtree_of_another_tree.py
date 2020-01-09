@@ -47,13 +47,13 @@ class TreeNode(object):
 
 
 class SolutionPreorderRecur(object):
-    def _isMatch(self, s, t):
+    def _isTreeMatch(self, s, t):
         if not s or not t:
             return s is t
             
         return (s.val == t.val and 
-                self._isMatch(s.left, t.left) and 
-                self._isMatch(s.right, t.right))
+                self._isTreeMatch(s.left, t.left) and 
+                self._isTreeMatch(s.right, t.right))
 
     def isSubtree(self, s, t):
         """
@@ -69,7 +69,8 @@ class SolutionPreorderRecur(object):
         if not s:
             return False
 
-        return (self._isMatch(s, t) or
+        # Check if tree matches or is subtree of left or right.
+        return (self._isTreeMatch(s, t) or
                 self.isSubtree(s.left, t) or 
                 self.isSubtree(s.right, t))
 
