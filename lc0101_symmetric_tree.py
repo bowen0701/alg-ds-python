@@ -45,10 +45,10 @@ class SolutionRecur(object):
         if left.val != right.val:
             return False
 
-        # Check outside & inside pairs.
-        out_pair = self.isMirror(left.left, right.right)
-        in_pair = self.isMirror(left.right, right.left)
-        return out_pair and in_pair
+        # Check if outside & inside pairs are mirrors.
+        is_out_pair_mirror = self.isMirror(left.left, right.right)
+        is_in_pair_mirror = self.isMirror(left.right, right.left)
+        return is_out_pair_mirror and is_in_pair_mirror
 
     def isSymmetric(self, root):
         """
