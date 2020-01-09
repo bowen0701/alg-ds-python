@@ -73,10 +73,10 @@ class SolutionPreorderIter(object):
             current = stack.pop()
             n_nodes += 1
 
-            if current.left:
-                stack.append(current.left)
             if current.right:
                 stack.append(current.right)
+            if current.left:
+                stack.append(current.left)
 
         return n_nodes
 
