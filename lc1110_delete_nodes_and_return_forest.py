@@ -42,7 +42,7 @@ class SolutionHasParentPreorderRecur(object):
             return None
 
         if root.val in to_delete_set:
-            # If root is deleted, it left/right has no parent. Continue traversal.
+            # If root is deleted, its left/right has no parent. Continue traversal.
             root.left = self._preorderRecur(root.left, False, result, to_delete_set)
             root.right = self._preorderRecur(root.right, False, result, to_delete_set)
 
