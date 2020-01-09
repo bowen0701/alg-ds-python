@@ -35,16 +35,16 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionConvert2Array(object):
-    def _preorderConvert(self, arr, left, right):
+class SolutionConvert2ArrayTwoPointers(object):
+    def _preorderConvert(self, vals, left, right):
         if left > right:
             return None
 
         mid = left + (right - left) // 2
 
-        root = TreeNode(arr[mid])
-        root.left = self._preorderConvert(arr, left, mid - 1)
-        root.right = self._preorderConvert(arr, mid + 1, right)
+        root = TreeNode(vals[mid])
+        root.left = self._preorderConvert(vals, left, mid - 1)
+        root.right = self._preorderConvert(vals, mid + 1, right)
 
         return root
 
@@ -60,18 +60,18 @@ class SolutionConvert2Array(object):
             return None
 
         # Convert linked list to arry first.
-        arr = []
+        vals = []
         current = head
         while current:
-            arr.append(current.val)
+            vals.append(current.val)
             current = current.next
 
         # Apply recursive preorder traversal with two pointer method.
-        left, right = 0, len(arr) - 1
-        return self._preorderConvert(arr, left, right)
+        left, right = 0, len(vals) - 1
+        return self._preorderConvert(vals, left, right)
 
 
-class SolutionpreorderSlowFastRecur(object):
+class SolutionPreorderSlowFastRecur(object):
     def preorderSlowFast(self, left, right):
         if not left or left == right:
             return None
@@ -113,9 +113,9 @@ class SolutionInorderRecur(object):
 
         root_left = self._inorder(left, mid - 1)
 
-        root = TreeNode(self.node.val)
+        root = TreeNode(self.current.val)
         root.left = root_left
-        self.node = self.node.next
+        self.current = self.current.next
 
         root.right = self._inorder(mid + 1, right)
 
@@ -141,7 +141,8 @@ class SolutionInorderRecur(object):
             current = current.next
 
         # Attach head to self for memorizing its update.
-        self.node = head
+        self.current = head
+
         left, right = 0, size - 1
         return self._inorder(left, right)
 
@@ -160,12 +161,12 @@ def main():
     head.next.next.next = ListNode(5)
     head.next.next.next.next = ListNode(9)
 
-    root = SolutionConvert2Array().sortedListToBST(head)
+    root = SolutionConvert2ArrayTwoPointers().sortedListToBST(head)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
 
-    root = SolutionpreorderSlowFastRecur().sortedListToBST(head)
+    root = SolutionPreorderSlowFastRecur().sortedListToBST(head)
     print (root.val,
            root.left.val, root.right.val,
            root.left.right.val, root.right.right.val)
