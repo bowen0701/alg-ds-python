@@ -39,15 +39,17 @@ class Node(object):
 
 
 class SolutionPreorderRecur(object):
-    def _preorder(self, node):
-        if node and node.left:
-            node.left.next = node.right
+    def _preorder(self, root):
+        if root and root.left:
+            # Connect left to its direct right.
+            root.left.next = root.right
             
-            if node.next:
-                node.right.next = node.next.left
+            # Connect right to parent connection's left, if parent has connection.
+            if root.next:
+                root.right.next = root.next.left
 
-            self.connect(node.left)
-            self.connect(node.right)
+            self._preorder(root.left)
+            self._preorder(root.right)
 
     def connect(self, root):
         """
