@@ -38,17 +38,18 @@ class Solution(object):
         Time complexity: O(n), where n is the number of nodes.
         Space complexity: O(m), where m is the biggest number of nodes in levels.
         """
+        from collections import deque
+
         if not root:
             return []
-    
-        result = []
 
         # Apply queue for BFS travesal in levels.
-        queue = [root]
+        queue = deque([root])
+        result = []
         level_id = 0
 
         while queue:
-            level = []
+            level = deque([])
 
             for i in range(len(queue)):
                 # Get the oldest node from queue.
@@ -56,19 +57,19 @@ class Solution(object):
 
                 # Insert its left and right nodes to queue.
                 if current.left:
-                    queue.insert(0, current.left)
+                    queue.appendleft(current.left)
                 if current.right:
-                    queue.insert(0, current.right)
+                    queue.appendleft(current.right)
             
                 if level_id % 2 == 0:
                     # If even level, append current value to level's tail.
                     level.append(current.val)
                 else:
                     # If odd, insert current value to level's head.
-                    level.insert(0, current.val)
+                    level.appendleft(current.val)
 
             level_id += 1
-            result.append(level)
+            result.append(list(level))
 
         return result
 
