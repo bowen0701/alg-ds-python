@@ -52,13 +52,14 @@ class SolutionBFS(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
+        from collections import deque
+
         if not root:
             return 0
 
-        depth = 0
-
         # Use queue for BFS.
-        queue = [root]
+        queue = deque([root])
+        depth = 0
 
         while queue:
             # Increment depth for each level.
@@ -68,9 +69,9 @@ class SolutionBFS(object):
             for i in range(len(queue)):
                 current = queue.pop()
                 if current.left:
-                    queue.insert(0, current.left)
+                    queue.appendleft(current.left)
                 if current.right:
-                    queue.insert(0, current.right)
+                    queue.appendleft(current.right)
 
         return depth
 
