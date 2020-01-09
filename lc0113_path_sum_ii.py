@@ -32,8 +32,8 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionPreorderRecur(object):
-    def _find_paths(self, root, sum, cur_path, paths):
+class SolutionPreorderBacktrackingRecur(object):
+    def _findPathsPreorderRecur(self, root, sum, cur_path, paths):
         # Base case.
         if not root:
             return None
@@ -47,8 +47,8 @@ class SolutionPreorderRecur(object):
             return None
 
         # Traverse root's left & right with current path.
-        self._find_paths(root.left, sum - root.val, cur_path, paths)
-        self._find_paths(root.right, sum - root.val, cur_path, paths)
+        self._findPathsPreorderRecur(root.left, sum - root.val, cur_path, paths)
+        self._findPathsPreorderRecur(root.right, sum - root.val, cur_path, paths)
 
     def pathSum(self, root, sum):
         """
@@ -62,11 +62,11 @@ class SolutionPreorderRecur(object):
         # Apply recursive preorder traversal.
         paths = []
         cur_path = []
-        self._find_paths(root, sum, cur_path, paths)
+        self._findPathsPreorderRecur(root, sum, cur_path, paths)
         return paths
 
 
-class SolutionPreorderIter(object):
+class SolutionPreorderBacktrackingIter(object):
     def pathSum(self, root, sum):
         """
         :type root: TreeNode
@@ -130,8 +130,8 @@ def main():
     root.right.right.left = TreeNode(5)
     root.right.right.right = TreeNode(1)
     sum = 22
-    print SolutionPreorderRecur().pathSum(root, sum)
-    print SolutionPreorderIter().pathSum(root, sum)
+    print SolutionPreorderBacktrackingRecur().pathSum(root, sum)
+    print SolutionPreorderBacktrackingIter().pathSum(root, sum)
 
 
 if __name__ == '__main__':
