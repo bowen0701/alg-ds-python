@@ -232,7 +232,7 @@ class BinarySearchTree(object):
             trans_node.left = del_node.left
             trans_node.left.parent = trans_node
 
-    def inorder_traverse_recur(self, root):
+    def inorder_recur(self, root):
         """Inorder traversal: left -> root -> right, by recursion.
 
         Time complexity: O(n).
@@ -241,11 +241,11 @@ class BinarySearchTree(object):
         if not root:
             return None
 
-        self.inorder_traverse_recur(root.left)
+        self.inorder_recur(root.left)
         print(root.val)
-        self.inorder_traverse_recur(root.right)
+        self.inorder_recur(root.right)
 
-    def inorder_traverse_iter(self, root):
+    def inorder_iter(self, root):
         """Inorder traversal: left -> root -> right, by iteration.
 
         Time complexity: O(n).
@@ -271,10 +271,10 @@ class BinarySearchTree(object):
             print(current.val)
 
             # Update current and previous by inorder traversal.
-            current = current.right
             previous = current
+            current = current.right
 
-    def preorder_traverse_recur(self, root):
+    def preorder_recur(self, root):
         """Preorder traversal: root -> left -> right, by recursion.
 
         Time complexity: O(n).
@@ -284,10 +284,10 @@ class BinarySearchTree(object):
             return None
 
         print(root.val)
-        self.preorder_traverse_recur(root.left)
-        self.preorder_traverse_recur(root.right)
+        self.preorder_recur(root.left)
+        self.preorder_recur(root.right)
 
-    def preorder_traverse_iter(self, root):
+    def preorder_iter(self, root):
         """Preorder traversal: root -> left -> right, by iteration.
 
         Time complexity: O(n).
@@ -309,7 +309,7 @@ class BinarySearchTree(object):
             if current.left:
                 stack.append(current.left)
 
-    def postorder_traverse_recur(self, root):
+    def postorder_recur(self, root):
         """Postorder traversal: left -> right -> root, by recursion.
 
         Time complexity: O(n).
@@ -318,11 +318,11 @@ class BinarySearchTree(object):
         if not root:
             return None
 
-        self.postorder_traverse_recur(root.left)
-        self.postorder_traverse_recur(root.right)
+        self.postorder_recur(root.left)
+        self.postorder_recur(root.right)
         print(root.val)
 
-    def postorder_traverse_iter(self, root):
+    def postorder_iter(self, root):
         """Postorder traversal: left -> right -> root, by iteration.
 
         Time complexity: O(n).
@@ -370,21 +370,21 @@ def main():
 
     # Inorder walk: 2, 4, 5, 6, 7, 8.
     print('Inorder traversal by recursion:')
-    bst.inorder_traverse_recur(bst.root)
+    bst.inorder_recur(bst.root)
     print('Inorder traversal by iteration:')
-    bst.inorder_traverse_iter(bst.root)
+    bst.inorder_iter(bst.root)
 
     # Preorder walk: 6, 4, 2, 5, 7, 8.
     print('Preorder traversal by recursion:')
-    bst.preorder_traverse_recur(bst.root)
+    bst.preorder_recur(bst.root)
     print('Preorder traversal by iteration:')
-    bst.preorder_traverse_iter(bst.root)
+    bst.preorder_iter(bst.root)
 
     # Postorder walk: 2, 5, 4, 8, 7, 6.
     print('Postorder traversal by recursion:')
-    bst.postorder_traverse_recur(bst.root)
+    bst.postorder_recur(bst.root)
     print('Postorder traversal by iteration:')
-    bst.postorder_traverse_iter(bst.root)
+    bst.postorder_iter(bst.root)
 
     # Search existing val 6.
     print('Search existing node with val 6:')
@@ -423,12 +423,12 @@ def main():
     # Delete root's left: 5, the run inorder walk: 2, 5, 6, 7, 8.
     bst.delete(bst.root.left)
     print('Inorder traversal by recursion:')
-    bst.inorder_traverse_recur(bst.root)
+    bst.inorder_recur(bst.root)
 
     # Further delete root: 6, the run inorder walk: 2, 5, 7, 8.
     bst.delete(bst.root)
     print('Inorder traversal after deleting 6:')
-    bst.inorder_traverse_recur(bst.root)
+    bst.inorder_recur(bst.root)
 
 
 if __name__ == '__main__':
