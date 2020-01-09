@@ -26,13 +26,13 @@ class TreeNode(object):
 
 
 class SolutionRecur(object):
-    def _inorderUtil(self, root, nodes):
+    def _inorderRecur(self, root, vals):
         if not root:
             return None
 
-        self._inorderUtil(root.left, nodes)
-        nodes.append(root.val)
-        self._inorderUtil(root.right, nodes)
+        self._inorderRecur(root.left, vals)
+        vals.append(root.val)
+        self._inorderRecur(root.right, vals)
 
     def inorderTraversal(self, root):
         """
@@ -42,9 +42,9 @@ class SolutionRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        nodes = []
-        self._inorderUtil(root, nodes)
-        return nodes
+        vals = []
+        self._inorderRecur(root, vals)
+        return vals
 
 
 class SolutionIter(object):
@@ -56,7 +56,7 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        nodes = []
+        vals = []
 
         previous = None
         current = root
@@ -72,13 +72,13 @@ class SolutionIter(object):
 
             # Pop stack as current and print its value.
             current = stack.pop()
-            nodes.append(current.val)
+            vals.append(current.val)
 
             # Update previous & current by current & right.
             current = current.right
             previous = current
 
-        return nodes
+        return vals
 
 
 def main():
