@@ -57,7 +57,7 @@ class SolutionPreorderRecur(object):
         if not root:
             return None
 
-        # Vist root: if root is p or q, return itself as p or q.
+        # Vist root: if root is p or q, return root since we found p or q.
         if root is p or root is q:
             return root
 
