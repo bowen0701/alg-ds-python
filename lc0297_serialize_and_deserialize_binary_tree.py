@@ -40,13 +40,16 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
 class CodecValueQueuePreorderRecur(object):
     def _serializePreorderRecur(self, root, vals):
         if root:
+            # Convert int to string for string join.
             vals.append(str(root.val))
             self._serializePreorderRecur(root.left, vals)
             self._serializePreorderRecur(root.right, vals)
         else:
+            # Use # to denote empty node.
             vals.append('#')
 
     def serialize(self, root):
@@ -68,6 +71,7 @@ class CodecValueQueuePreorderRecur(object):
     def _deserializePreorderRecur(self, vals_queue):
         val_str = vals_queue.popleft()
         if val_str != '#':
+            # Convert value string back to int.
             root = TreeNode(int(val_str))
             root.left = self._deserializePreorderRecur(vals_queue)
             root.right = self._deserializePreorderRecur(vals_queue)
