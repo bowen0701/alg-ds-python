@@ -28,7 +28,7 @@ class TreeNode(object):
 
 class SolutionPreorderFirstInorderRootRecur(object):
     def _build(self, pre_start, pre_end, in_start, in_end,
-               inorder_d, preorder, inorder):
+               in_val_pos, preorder, inorder):
         if pre_start > pre_end or in_start > in_end:
             return None
 
@@ -36,7 +36,7 @@ class SolutionPreorderFirstInorderRootRecur(object):
         root = TreeNode(preorder[pre_start])
 
         # In inorder, get root's pos for separating left and right.
-        in_root_pos = inorder_d[root.val]
+        in_root_pos = in_val_pos[root.val]
 
         # Compute the number of left from root.
         in_n_left = in_root_pos - in_start
@@ -44,13 +44,12 @@ class SolutionPreorderFirstInorderRootRecur(object):
         # Build binary trees from root's left and right.
         root.left = self._build(pre_start + 1, pre_start + in_n_left, 
                                 in_start, in_root_pos - 1,
-                                inorder_d, preorder, inorder)
+                                in_val_pos, preorder, inorder)
         root.right = self._build(pre_start + in_n_left + 1, pre_end, 
                                  in_root_pos + 1, in_end,
-                                 inorder_d, preorder, inorder)
+                                 in_val_pos, preorder, inorder)
 
         return root
-
 
     def buildTree(self, preorder, inorder):
         """
@@ -69,14 +68,14 @@ class SolutionPreorderFirstInorderRootRecur(object):
         Time complexity: O(n), where n is the number of nodes.
         Space complexity: O(n).
         """
-        # Create dict for inorder value->index.
-        inorder_d = {v: i for (i, v) in enumerate(inorder)}
+        # Create dict for inorder node->pos.
+        in_val_pos = {v: i for (i, v) in enumerate(inorder)}
 
         # Build binary tree by recursion.
         pre_start, pre_end = 0, len(preorder) - 1
         in_start, in_end = 0, len(inorder) - 1
         return self._build(pre_start, pre_end, in_start, in_end,
-                           inorder_d, preorder, inorder)
+                           in_val_pos, preorder, inorder)
 
 
 def main():
