@@ -93,7 +93,7 @@ class SolutionMergeTwoRecur(object):
             for i in range(n_lists // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[n_lists - 1 - i])
 
-            # Decrement n_lists.
+            # Decrement n_lists to half.
             n_lists = (n_lists + 1) // 2
 
         return lists[0]
@@ -144,7 +144,7 @@ class SolutionMergeTwoIter(object):
             for i in range(n_lists // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[n_lists - 1 - i])
 
-            # Decrement n_lists.
+            # Decrement n_lists to half.
             n_lists = (n_lists + 1) // 2
 
         return lists[0]
