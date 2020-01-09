@@ -1,8 +1,7 @@
 """Leetcode 703. Kth Largest Element in a Stream
+Easy
 
 URL: https://leetcode.com/problems/kth-largest-element-in-a-stream/
-
-Easy
 
 Design a class to find the kth largest element in a stream. 
 Note that it is the kth largest element in the sorted order, 
