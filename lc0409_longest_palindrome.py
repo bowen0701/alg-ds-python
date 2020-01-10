@@ -18,7 +18,7 @@ Explanation:
 One longest palindrome that can be built is "dccaccd", whose length is 7.
 """
 
-class SolutionDict(object):
+class SolutionDictDoubleEvenOneOdd(object):
     def longestPalindrome(self, s):
         """
         :type s: str
@@ -27,38 +27,37 @@ class SolutionDict(object):
         Time complexity: O(n), where n is the length of string s.
         Space complexity: O(n).
         """
+        from collections import defaultdict
+
         if len(s) <= 1:
             return len(s)
 
-        # Get letter->count dictionary.
-        letter_counts = {}
+        # Create dict: letter->count.
+        letter_count_d = defaultdict(int)
         for l in s:
-            if l in letter_counts:
-                letter_counts[l] += 1
-            else:
-                letter_counts[l] = 1
+            letter_count_d[l] += 1
 
         # Compute how many letters occur in even times.
-        lp_len, rem = 0, 0
-        for letter in letter_counts:
-            div, mod = divmod(letter_counts[letter], 2)
-            lp_len += div * 2
+        pal_len, odd = 0, 0
 
-            # If there is any letter remaining modulus is 1,
-            # set remainder to 1, which is a valid palindrome char.
+        for l in letter_count_d:
+            div, mod = divmod(letter_count_d[l], 2)
+            pal_len += div * 2
+
+            # If there is any letter number is odd, add one valid letter.
             if mod == 1:
-                rem = 1
+                odd = 1
 
-        lp_len += rem
-        return lp_len
+        pal_len += odd
+        return pal_len
 
 
 def main():
     s = 'abccccdd'  # Ans: 7, since 'dccaccd'.
-    print SolutionDict().longestPalindrome(s)
+    print SolutionDictDoubleEvenOneOdd().longestPalindrome(s)
 
     s = 'Aa'  # Ans: 1, since 'A'.
-    print SolutionDict().longestPalindrome(s)
+    print SolutionDictDoubleEvenOneOdd().longestPalindrome(s)
 
 
 if __name__ == '__main__':
