@@ -28,19 +28,25 @@ class Solution(object):
         :rtype: List[List[int]]
 
         Time complexity: O(n^2).
-        Space complexity: O(n^2).
+        Space complexity: O(n).
         """
         if numRows == 0:
             return []
 
+        # Create base of Pascal triangle.
         triangle = [[1] * (r + 1) for r in range(numRows)]
+
         if numRows <= 2:
             return triangle
+
         for r in range(2, numRows):
             last_row = triangle[r - 1]
             current_row = triangle[r]
+
+            # In middle of current row, sum last row's two numbers.
             for i in range(1, r):
                 current_row[i] = last_row[i - 1] + last_row[i]
+
         return triangle
 
 
