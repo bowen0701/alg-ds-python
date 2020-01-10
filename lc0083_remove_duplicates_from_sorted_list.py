@@ -40,10 +40,10 @@ class SolutionCurrentNextIter(object):
             if current.val == current.next.val:
                 # Continue updating next until it's not a duplicate, 
                 # then link current to non-duplicate.
-                _next = current.next
-                while _next.next and _next.val == _next.next.val:
-                    _next = _next.next
-                current.next = _next.next
+                cur_next = current.next
+                while cur_next.next and cur_next.val == cur_next.next.val:
+                    cur_next = cur_next.next
+                current.next = cur_next.next
 
             # Increment current node.
             current = current.next
