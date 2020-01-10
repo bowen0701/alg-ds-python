@@ -55,7 +55,8 @@ class SolutionTailIter(object):
                 pos += 1
                 nums[pos] = nums[i]
 
-        return pos + 1
+        new_len = pos + 1
+        return new_len
 
 
 def main():
