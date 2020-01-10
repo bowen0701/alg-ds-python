@@ -57,7 +57,7 @@ class SolutionSelect(object):
         Time complexity: O(log(m + n)).
         Space complexity: O(m + n).
         """
-        # Apply selection method.
+        # Apply selection method. Note: starting index is 0.
         l = len(nums1) + len(nums2)
         if l % 2 == 1:
             return self._findKth(nums1, nums2, l // 2)
