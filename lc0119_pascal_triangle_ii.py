@@ -14,8 +14,8 @@ above it.
 Example:
 Input: 3
 Output: [1,3,3,1]
-Follow up:
 
+Follow up:
 Could you optimize your algorithm to use only O(k) extra space?
 """
 
@@ -31,12 +31,16 @@ class Solution(object):
         if rowIndex <= 1:
             return [1] * (rowIndex + 1)
 
+        # If rowIndex >= 2, the 1st last row is [1, 1].
         last_row = [1] * 2
+
+        # Continue grow row based on last row.
         for r in range(2, rowIndex + 1):
             row = [1] * (r + 1)
             for i in range(1, r):
                 row[i] = last_row[i - 1] + last_row[i]
             last_row = row
+
         return row
 
 
