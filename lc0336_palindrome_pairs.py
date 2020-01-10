@@ -18,7 +18,7 @@ Output: [[0,1],[1,0]]
 Explanation: The palindromes are ["battab","tabbat"]
 """
 
-class SolutionWordIdxDictPrefixSuffixPalindrome(object):
+class SolutionWordposDictPrefixSuffixPalindrome(object):
     def _isPalindrom(self, word):
         return word == word[::-1]
 
@@ -36,30 +36,30 @@ class SolutionWordIdxDictPrefixSuffixPalindrome(object):
         n = len(words)
         pal_pairs = []
 
-        # Use dict: word->idx for quick lookup.
-        word_idx_d = {word: i for i, word in enumerate(words)}
+        # Use dict: word->pos for quick lookup.
+        word_pos_d = {word: pos for pos, word in enumerate(words)}
 
-        # Iterate through words, check word's prefix and reversed suffix (and vice versa).
-        for word, idx in word_idx_d.items():
+        # Iterate through words, check word's prefix and suffix based on each char.
+        for word, pos in word_pos_d.items():
             m = len(word)
 
             for j in range(m + 1):
                 prefix = word[:j]
                 suffix = word[j:]
 
+                # If prefix is palindrome, reversed suffix in words but not current one,
+                # append (reversed suffix pos, word pos).
                 if self._isPalindrom(prefix):
-                    # If prefix and reversed suffix are palindrome, 
-                    # append (reversed suffix idx, word idx).
                     rev_suffix = suffix[::-1]
-                    if rev_suffix != word and rev_suffix in word_idx_d:
-                        pal_pairs.append([word_idx_d[rev_suffix], idx])
+                    if rev_suffix != word and rev_suffix in word_pos_d:
+                        pal_pairs.append([word_pos_d[rev_suffix], pos])
 
+                # If suffix is palindrome but not '', and prefix in words, 
+                # append (word pos, reversed prefix pos).
                 if j != m and self._isPalindrom(suffix):
-                    # If suffix and reversed prefix are palindrome, 
-                    # append to (word idx, reversed prefix word idx).
                     rev_prefix = prefix[::-1]
-                    if rev_prefix in word_idx_d:
-                        pal_pairs.append([idx, word_idx_d[rev_prefix]])
+                    if rev_prefix in word_pos_d:
+                        pal_pairs.append([pos, word_pos_d[rev_prefix]])
 
         return pal_pairs
 
@@ -67,15 +67,15 @@ class SolutionWordIdxDictPrefixSuffixPalindrome(object):
 def main():
     # Output: [[0,1],[1,0],[3,2],[2,4]] 
     words = ["abcd","dcba","lls","s","sssll"]
-    print SolutionWordIdxDictPrefixSuffixPalindrome().palindromePairs(words)
+    print SolutionWordposDictPrefixSuffixPalindrome().palindromePairs(words)
 
     # Output: [[0,1],[1,0]] 
     words = ["bat","tab","cat"]
-    print SolutionWordIdxDictPrefixSuffixPalindrome().palindromePairs(words)
+    print SolutionWordposDictPrefixSuffixPalindrome().palindromePairs(words)
 
     # Output: [[2,0],[2,1]] 
     words = ["bot","t","to"]
-    print SolutionWordIdxDictPrefixSuffixPalindrome().palindromePairs(words)
+    print SolutionWordposDictPrefixSuffixPalindrome().palindromePairs(words)
 
 
 if __name__ == '__main__':
