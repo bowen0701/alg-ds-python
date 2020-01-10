@@ -25,7 +25,7 @@ Input: [1,3,5,6], 0
 Output: 0
 """
 
-class Solution(object):
+class SolutionBinarySearch(object):
     def searchInsert(self, nums, target):
         """
         :type nums: List[int]
@@ -39,10 +39,10 @@ class Solution(object):
 
             if nums[mid] == target:
                 return mid
-            elif nums[mid] > target:
-                right = mid - 1
-            else:
+            elif nums[mid] < target:
                 left = mid + 1
+            else:
+                right = mid - 1
 
         if nums[left] >= target:
             return left
@@ -54,22 +54,22 @@ def main():
     # Output: 2
     nums = [1,3,5,6]
     target = 5
-    print Solution().searchInsert(nums, target)
+    print SolutionBinarySearch().searchInsert(nums, target)
 
     # Output: 1
     nums = [1,3,5,6]
     target = 2
-    print Solution().searchInsert(nums, target)
+    print SolutionBinarySearch().searchInsert(nums, target)
 
     # Output: 4
     nums = [1,3,5,6]
     target = 7
-    print Solution().searchInsert(nums, target)
+    print SolutionBinarySearch().searchInsert(nums, target)
 
     # Output: 0
     nums = [1,3,5,6]
     target = 0
-    print Solution().searchInsert(nums, target)
+    print SolutionBinarySearch().searchInsert(nums, target)
 
 
 if __name__ == '__main__':
