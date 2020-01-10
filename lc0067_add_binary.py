@@ -33,13 +33,16 @@ class SolutionIter(object):
         Time complexity: O(n), where n is the length of the longer string.
         Space complexity: O(1).
         """
+        from collections import deque
+
         # Normalize a and b to equal size by padding 0's to shorer one.
         a, b = self._normalize(a, b)
 
         # Add numbers from the last digits with carry.
-        s = ''
+        s = deque([])
         carry = 0
 
+        # Add binary from backward if not out of boundary or exists carry.
         i = len(a) - 1
 
         while i >= 0 or carry > 0:
@@ -50,10 +53,10 @@ class SolutionIter(object):
 
             carry, val = total // 2, total % 2
 
-            s = str(val) + s
+            s.appendleft(str(val))
             i -= 1
         
-        return s
+        return ''.join(list(s))
 
 
 def main():
