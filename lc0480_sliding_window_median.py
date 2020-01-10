@@ -40,7 +40,7 @@ import random
 
 
 class SolutionSelect(object):
-    def _select_mth_smallest_sub_nums(self, sub_nums, m):
+    def _select_mth_smallest(self, sub_nums, m):
         # Randomly select a num in sub array as pivot.
         pivot_idx = random.choice(range(len(sub_nums)))
         pivot = sub_nums[pivot_idx]
@@ -56,15 +56,14 @@ class SolutionSelect(object):
         if m <= n_small:
             # Select the m from small nums.
             small_nums = [sub_nums[idx] for idx in small_idx]
-            return self._select_mth_smallest_sub_nums(small_nums, m)
+            return self._select_mth_smallest(small_nums, m)
         elif n_small < m <= n_small + n_mid:
             # Select pivot as the m.
             return pivot
         elif m > n_small + n_mid:
             # Select the m from large nums.
             large_nums = [sub_nums[idx] for idx in large_idx]
-            return self._select_mth_smallest_sub_nums(
-                large_nums, m - n_small - n_mid)
+            return self._select_mth_smallest(large_nums, m - n_small - n_mid)
 
     def medianSlidingWindow(self, nums, k):
         """
@@ -73,7 +72,7 @@ class SolutionSelect(object):
         :rtype: List[float]
 
         Time complexity: O(n*k), where n is the length of nums.
-        Space complexity: O(k).
+        Space complexity: O(n).
         """
         n = len(nums)
         medians = []
@@ -84,16 +83,14 @@ class SolutionSelect(object):
 
             if k % 2 == 1:
                 # If k is odd, select the (k // 2 + 1)th as median.
-                m = k // 2 + 1
-                med = self._select_mth_smallest_sub_nums(sub_nums, m)
+                med = self._select_mth_smallest(sub_nums, k // 2 + 1)
             elif k % 2 == 0:
                 # If k is even, select the (k // 2)th and (k // 2 + 1)th nums,
                 # and take mean of them as median.
-                m1 = k // 2
-                m2 = k // 2 + 1
-                med1 = self._select_mth_smallest_sub_nums(sub_nums, m1)
-                med2 = self._select_mth_smallest_sub_nums(sub_nums, m2)
+                med1 = self._select_mth_smallest(sub_nums, k // 2)
+                med2 = self._select_mth_smallest(sub_nums, k // 2 + 1)
                 med = (med1 + med2) / 2.0
+
             medians.append(med)
 
         return medians
@@ -106,14 +103,18 @@ class SolutionSortAndBinarySearch(object):
         # - insert new element into sorted window.
         left = 0
         right = k - 1
+
         while left < right:
             mid = left + (right - left) // 2
+
             if window[mid] == element:
                 return mid
             elif window[mid] < element:
                 left = mid + 1
             else:
+                # Note: not right = mid - 1.
                 right = mid
+
         return left
 
     def medianSlidingWindow(self, nums, k):
@@ -149,8 +150,9 @@ class SolutionSortAndBinarySearch(object):
 def main():
     import time
 
+    # Output: [1, -1, -1, 3, 5, 6].
     nums = [1, 3, -1, -3, 5, 3, 6, 7]
-    k = 3  # Should be  [1, -1, -1, 3, 5, 6].
+    k = 3
 
     start_time = time.time()
     print 'By kth smallest selection method:'
