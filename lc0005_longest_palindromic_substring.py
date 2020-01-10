@@ -69,7 +69,7 @@ class SolutionDp(object):
         # Use two pointer method with start i & end j in gaps >= 2 to
         # check they are equal and substring from i+1 to j-1 is palindrome. 
         for j in range(2, n):
-            for i in range(0, j - 1):
+            for i in range(j - 1):
                 if s[i] == s[j] and T[i + 1][j - 1]:
                     T[i][j] = True
                     if j - i + 1 > max_len:
