@@ -78,11 +78,12 @@ class SolutionNodeSetidDictDFSRecur(object):
         if len(graph) <= 2:
             return True
 
-        # Use dict: node->setid={0,1} for denoting visits and binary setid.
+        # Use dict: node->setid={0,1} to denote visits and binary setid.
         node_setid = dict()
 
         for i in range(len(graph)):
             if i not in node_setid:
+                # For disconnected node, set setid = 0 (anyoness).
                 node_setid[i] = 0
 
                 # Start DFS from node i.
