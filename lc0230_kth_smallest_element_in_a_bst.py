@@ -43,7 +43,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionInorderRecur(object):
     def _inorder(self, root):
         # Base case.
         if not root:
@@ -77,7 +77,7 @@ class SolutionRecur(object):
         return self.kth_smallest
 
 
-class SolutionIter(object):
+class SolutionInorderIter(object):
     def kthSmallest(self, root, k):
         """
         :type root: TreeNode
@@ -128,8 +128,8 @@ def main():
     root.left.right = TreeNode(2)
     k = 1
 
-    print 'By recur: {}'.format(SolutionRecur().kthSmallest(root, k))
-    print 'By iter: {}'.format(SolutionIter().kthSmallest(root, k))
+    print 'By recur: {}'.format(SolutionInorderRecur().kthSmallest(root, k))
+    print 'By iter: {}'.format(SolutionInorderIter().kthSmallest(root, k))
 
     # Input: root = [5,3,6,2,4,null,null,1], k = 3
     #        5
@@ -148,8 +148,8 @@ def main():
     root.left.left.left = TreeNode(1)
     k = 3
 
-    print 'By recur: {}'.format(SolutionRecur().kthSmallest(root, k))
-    print 'By iter: {}'.format(SolutionIter().kthSmallest(root, k))
+    print 'By recur: {}'.format(SolutionInorderRecur().kthSmallest(root, k))
+    print 'By iter: {}'.format(SolutionInorderIter().kthSmallest(root, k))
 
 
 if __name__ == '__main__':
