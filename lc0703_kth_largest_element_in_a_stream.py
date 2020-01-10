@@ -97,8 +97,11 @@ class KthLargestSortAndBinarySearch(object):
         # decide the position to add new element.
         left = 0
         right = self.k - 1
+
         while left < right:
             mid = left + (right - left) // 2
+
+            # Binary search with right & left in decreasing list.
             if self.topk[mid] < val:
                 right = mid
             elif self.topk[mid] >= val:
@@ -110,85 +113,6 @@ class KthLargestSortAndBinarySearch(object):
             self.topk.pop()
 
         return self.topk[-1]
-
-
-class KthLargestMinHeap(object):
-    def __init__(self, k, nums):
-        """
-        :type k: int
-        :type nums: List[int]
-
-        Time complexity: O(n*logn), where n is the length of the original nums.
-        Space complexity: O(k).
-        """
-        nums.sort()
-        self.k = k
-        self.heap = [0]
-        self.size = 0
-
-        self.heap.extend(nums[-k:])
-        self.size += len(nums[-k:])
-
-    def _parent(self, i):
-        return i // 2
-
-    def _left(self, i):
-        return i * 2
-
-    def _right(self, i):
-        return i * 2 + 1
-
-    def heapify_up(self, i):
-        """Min heapify up by iteration.
-
-        Time complexity: O(logk).
-        Space complexity: O(1).
-        """
-        # For node i, check it is "smaller" than parent, if yes, swap them.
-        while i > 1 and self.heap[i] < self.heap[self._parent(i)]:
-            self.heap[i], self.heap[self._parent(i)] = (
-                self.heap[self._parent(i)], self.heap[i])
-        
-    def heapify_down(self, i):
-        """Min heapify down by recursion.
-
-        Time complexity: O(log(k)).
-        Space complexity: O(1).
-        """
-        # Get min index from node i and its two child nodes.
-        l, r = self._left(i), self._right(i)
-        if l <= self.size and self.heap[l] < self.heap[i]:
-            min_i = l
-        else:
-            min_i = i
-        if r <= self.size and self.heap[r] < self.heap[min_i]:
-            min_i = r
-
-        # If node i is not min, swap node i and node min_i.
-        if min_i != i:
-            self.heap[i], self.heap[min_i] = self.heap[min_i], self.heap[i]
-            self.heapify_down(min_i)
-
-    def add(self, val):
-        """
-        :type val: int
-        :rtype: int
-
-        Time complexity: O(logk).
-        Space complexity: O(1). 
-        """
-        if self.size < self.k:
-            # If size < k, append new val to heap and run heapify_up(size).
-            self.heap.append(val)
-            self.size += 1
-            self.heapify_up(self.size)
-        elif self.heap[1] < val:
-            # If size = k and min < val, replace it by val and 
-            # run heapify_down(1).
-            self.heap[1] = val
-            self.heapify_down(1)
-
-        return self.heap[1]
 
 
 class KthLargestHeapq(object):
@@ -205,6 +129,7 @@ class KthLargestHeapq(object):
 
         # Heapify the original nums, and pop min until the len equals to k.
         heapq.heapify(self.heap)
+
         while len(self.heap) > self.k:
             heapq.heappop(self.heap)
 
@@ -264,21 +189,6 @@ def main():
         time.time() - start_time)
 
     start_time = time.time()
-    obj = KthLargestMinHeap(k, nums)
-    # Adding 3 returns 4
-    print obj.add(3)
-    # Adding 5 returns 5
-    print obj.add(5)
-    # Adding 10 returns 5
-    print obj.add(10)
-    # Adding 9 returns 8
-    print obj.add(9)
-    # Adding 4 returns 8
-    print obj.add(4)
-    print 'Time by min heap: {}'.format(
-        time.time() - start_time)
-
-    start_time = time.time()
     obj = KthLargestHeapq(k, nums)
     # Adding 3 returns 4
     print obj.add(3)
@@ -293,24 +203,8 @@ def main():
     print 'Time by heapq: {}'.format(
         time.time() - start_time)
 
-
     k = 1
     nums = []
-    
-    start_time = time.time()
-    obj = KthLargestMinHeap(k, nums)
-    # Adding -3 returns -3
-    print obj.add(-3)
-    # Adding -2 returns -2
-    print obj.add(-2)
-    # Adding -4 returns -2
-    print obj.add(-4)
-    # Adding 0 returns 0
-    print obj.add(0)
-    # Adding 4 returns 4
-    print obj.add(4)
-    print 'Time by min heap: {}'.format(
-        time.time() - start_time)
 
     start_time = time.time()
     obj = KthLargestHeapq(k, nums)
