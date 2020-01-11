@@ -33,6 +33,9 @@ class SolutionStack(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        if not head:
+            return True
+
         # Use stack to collect values.
         stack = []
 
@@ -55,7 +58,10 @@ class SolutionSlowFastReverse2nd(object):
 
         Time complexity: O(n).
         Space complexity: O(1).
-        """        
+        """
+        if not head:
+            return True
+
         # Find the middle node: slow + fast.
         slow = fast = head
         while fast and fast.next:
@@ -65,11 +71,11 @@ class SolutionSlowFastReverse2nd(object):
         # Reverse the 2nd half of linked list using slow.
         reverse = None
         while slow:
-            nxt = slow.next
+            slow_next = slow.next
             slow.next = reverse
 
             reverse = slow
-            slow = nxt
+            slow = slow_next
         
         # Traverse the 1st half and reversed 2nd half at the same time
         # and compare their val.
