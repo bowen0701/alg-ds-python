@@ -40,7 +40,7 @@ class ListNode(object):
         self.next = None
 
 
-class SolutionDict(object):
+class SolutionSet(object):
     def detectCycle(self, head):
         """
         :type head: ListNode
@@ -60,7 +60,6 @@ class SolutionDict(object):
                 return current
 
             visited_nodes.add(current)
-
             current = current.next
 
         return None
@@ -72,7 +71,9 @@ class SolutionSlowFast(object):
         :type head: ListNode
         :rtype: ListNode
 
-        If there is a cycle. Assume 
+        If there is a cycle, the node where fast and slow meet will
+        have the same distance to cycle starting node as head.
+        Specifically, suppose 
         - distance from head to loop start: x1
         - distance from loop start to their meet: x2
         - distance from their meet to loop start: x3
@@ -84,18 +85,15 @@ class SolutionSlowFast(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        if not head:
-            return None
-
+        # Two pointers: slow move for 1 step; fast for 2 steps.
         slow, fast = head, head
 
-        while fast.next and fast.next.next:
-            # Two pointers: slow move for 1 step; fast for 2 steps.
+        while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
-            # Start from their meet, iterate to meet head and slow.
-            if slow is fast:
+            # If there exists cycle, move head & slow together until they meet.
+            if slow == fast:
                 current = head
                 while current:
                     if current == slow:
@@ -116,7 +114,7 @@ def main():
     head.next.next = ListNode(-4)
     head.next.next.next = head.next
 
-    print SolutionDict().detectCycle(head).val
+    print SolutionSet().detectCycle(head).val
     print SolutionSlowFast().detectCycle(head).val
 
     # head = [1,2], pos = 0 (val: 1)
@@ -125,7 +123,7 @@ def main():
     head.next = ListNode(2)
     head.next.next = head
 
-    print SolutionDict().detectCycle(head).val
+    print SolutionSet().detectCycle(head).val
     print SolutionSlowFast().detectCycle(head).val
 
     # head = [1, 2], pos = -1
@@ -133,7 +131,7 @@ def main():
     head = ListNode(1)
     head.next = ListNode(2)
 
-    print SolutionDict().detectCycle(head)
+    print SolutionSet().detectCycle(head)
     print SolutionSlowFast().detectCycle(head)
 
     # head = [-1,-7,7,-4,19,6,-9,-5,-2,-5], pos = 6 (val: -9)
@@ -150,7 +148,7 @@ def main():
     head.next.next.next.next.next.next.next.next.next.next = (
         head.next.next.next.next.next.next)
 
-    print SolutionDict().detectCycle(head).val
+    print SolutionSet().detectCycle(head).val
     print SolutionSlowFast().detectCycle(head).val
 
 
