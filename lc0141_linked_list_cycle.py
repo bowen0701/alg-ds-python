@@ -43,7 +43,7 @@ class SolutionDict(object):
         :type head: ListNode
         :rtype: bool
 
-        Time complexity: O(n), where n is the lenght of linked list.
+        Time complexity: O(n), where n is the length of linked list.
         Space complexity: O(n).
         """
         from collections import defaultdict
@@ -51,16 +51,16 @@ class SolutionDict(object):
         if not head:
             return False
 
-        visited_d = defaultdict(bool)
-        visited_d[head] = True
+        # Create dict: node->bool of visited or not.
+        node_visited_d = defaultdict(bool)
 
         current = head
 
-        while current.next:
-            if current.next in visited_d:
+        while current:
+            if current in node_visited_d:
                 return True
             else:
-                visited_d[current.next] = True
+                node_visited_d[current] = True
             current = current.next
 
         return False
@@ -78,15 +78,15 @@ class SolutionSlowFast(object):
         if not head:
             return False
 
-        slow = head
-        fast = head
+        # Two pointers: slow move for 1 step; fast for 2 steps.
+        slow = fast = head
 
-        while fast.next and fast.next.next:
-            # Two pointers: slow move for 1 step; fast for 2 steps.
+        # while fast.next and fast.next.next:
+        while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
-            # If fast cathes slow, it means there is a cycle.
+            # If fast cathes up slow, there is a cycle.
             if slow == fast:
                 return True
 
