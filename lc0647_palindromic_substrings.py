@@ -41,10 +41,10 @@ class SolutionCenterExpandTwoPointers(object):
         self.n_pals = 0
 
         for i in range(len(s)):
-            # Extend palindrome with odd length.
+            # Extend palindrome of odd length.
             self._extendPalindrome(i, i, s)
 
-            # Extend palindrome with even length.
+            # Extend palindrome of even length.
             self._extendPalindrome(i, i + 1, s)
 
         return self.n_pals
