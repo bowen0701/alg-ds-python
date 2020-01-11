@@ -37,7 +37,7 @@ class ListNode(object):
         self.next = None
 
 
-class SolutionDict(object):
+class SolutionSet(object):
     def hasCycle(self, head):
         """
         :type head: ListNode
@@ -46,21 +46,19 @@ class SolutionDict(object):
         Time complexity: O(n), where n is the length of linked list.
         Space complexity: O(n).
         """
-        from collections import defaultdict
-
         if not head:
             return False
 
-        # Create dict: node->bool of visited or not.
-        node_visited_d = defaultdict(bool)
+        # Create set to collect visited nodes.
+        visited_nodes = set()
 
         current = head
 
         while current:
-            if current in node_visited_d:
+            if current in visited_nodes:
                 return True
-            else:
-                node_visited_d[current] = True
+
+            visited_nodes.add(current)
             current = current.next
 
         return False
@@ -100,19 +98,19 @@ def main():
     head.next.next = ListNode(0)
     head.next.next.next = ListNode(-4)
     head.next.next.next.next = head.next
-    print SolutionDict().hasCycle(head)
+    print SolutionSet().hasCycle(head)
     print SolutionSlowFast().hasCycle(head)
 
     # Input: head = [1,2], pos = 0. Output: true
     head = ListNode(1)
     head.next = ListNode(2)
     head.next.next = head
-    print SolutionDict().hasCycle(head)
+    print SolutionSet().hasCycle(head)
     print SolutionSlowFast().hasCycle(head)
 
     # Input: head = [1], pos = -1. Output: false
     head = ListNode(1)
-    print SolutionDict().hasCycle(head)    
+    print SolutionSet().hasCycle(head)    
     print SolutionSlowFast().hasCycle(head)
 
 
