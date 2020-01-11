@@ -89,7 +89,7 @@ class SolutionSet(object):
         return None
 
 
-class SolutionTwoPointersTraversalSwap(object):
+class SolutionTwoPointersTraverseSwap(object):
     def getIntersectionNode(self, headA, headB):
         """
         :type headA, headB: ListNode
@@ -105,7 +105,7 @@ class SolutionTwoPointersTraversalSwap(object):
         currentA = headA
         currentB = headB
 
-        # If current node A != B, visit next node or head of another list..
+        # If current node A != B, visit next node or head of another list.
         while currentA != currentB:
             if currentA:
                 # If not, visit next nodes.
@@ -123,7 +123,7 @@ class SolutionTwoPointersTraversalSwap(object):
 
 
 def main():
-    # Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5],
+    # Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5].
     # Output: Reference of the node with value = 8
     headA = ListNode(4)
     headA.next = ListNode(1)
@@ -140,9 +140,9 @@ def main():
     headB.next.next.next = intersectNode2
     headB.next.next.next.next = intersectNode3
     print SolutionSet().getIntersectionNode(headA, headB).val
-    print SolutionTwoPointersTraversalSwap().getIntersectionNode(headA, headB).val
+    print SolutionTwoPointersTraverseSwap().getIntersectionNode(headA, headB).val
 
-    # Input: intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4],
+    # Input: intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4].
     # Output: Reference of the node with value = 2
     headA = ListNode(0)
     headA.next = ListNode(9)
@@ -155,9 +155,9 @@ def main():
     headB.next = intersectNode1
     headB.next.next = intersectNode2
     print SolutionSet().getIntersectionNode(headA, headB).val
-    print SolutionTwoPointersTraversalSwap().getIntersectionNode(headA, headB).val
+    print SolutionTwoPointersTraverseSwap().getIntersectionNode(headA, headB).val
 
-    # Input: intersectVal = 0, listA = [2,6,4], listB = [1,5],
+    # Input: intersectVal = 0, listA = [2,6,4], listB = [1,5].
     # Output: null
     headA = ListNode(2)
     headA.next = ListNode(6)
@@ -165,7 +165,7 @@ def main():
     headB = ListNode(1)
     headB.next = ListNode(5)
     print SolutionSet().getIntersectionNode(headA, headB)
-    print SolutionTwoPointersTraversalSwap().getIntersectionNode(headA, headB)
+    print SolutionTwoPointersTraverseSwap().getIntersectionNode(headA, headB)
 
 
 if __name__ == '__main__':
