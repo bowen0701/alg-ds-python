@@ -59,37 +59,37 @@ class SolutionIter(object):
         k = k % n
 
         # Start from the 0th.
-        s = 0
+        start = 0
         count = 0
 
         # Iterate through nums to rotate them until all is updated.
         while count < n:
             # Backup current, and update current by the ith.
-            cur_pos = (s + k) % n
+            cur_pos = (start + k) % n
             cur_num = nums[cur_pos]
-            nums[cur_pos] = nums[s]
+            nums[cur_pos] = nums[start]
             
             count += 1
             j = cur_pos
 
-            # If there is no cycle, keep rotating starting from next current.
-            while j != s and count < n:
-                cur_pos = (j + k) % n
-                # Swap current and next current.
-                nums[cur_pos], cur_num = cur_num, nums[cur_pos]
+            # If no cycle, continue rotating current & next nums.
+            while j != start and count < n:
+                next_pos = (j + k) % n
+                # Swap current and next nums; current num -> next num.
+                cur_num, nums[next_pos] = nums[next_pos], cur_num
 
                 count += 1
-                j = cur_pos
+                j = next_pos
 
             # Increment start.
-            s += 1
+            start += 1
 
 
 def main():
     # Ans: [5,6,7,1,2,3,4]
     nums = [1,2,3,4,5,6,7]
     k = 3
-    print 'Raw:', nums
+    print 'Raw:', nums, 'k:', k
     # SolutionCopy().rotate(nums, k)
     SolutionIter().rotate(nums, k)
     print 'Rotated', nums
@@ -97,7 +97,7 @@ def main():
     # Ans: [3,99,-1,-100]
     nums = [-1,-100,3,99]
     k = 2
-    print 'Raw:', nums
+    print 'Raw:', nums, 'k:', k
     # SolutionCopy().rotate(nums, k)
     SolutionIter().rotate(nums, k)
     print 'Rotated', nums
@@ -105,7 +105,7 @@ def main():
     # Ans: [2,1]
     nums = [1,2]
     k = 3
-    print 'Raw:', nums
+    print 'Raw:', nums, 'k:', k
     # SolutionCopy().rotate(nums, k)
     SolutionIter().rotate(nums, k)
     print 'Rotated', nums
