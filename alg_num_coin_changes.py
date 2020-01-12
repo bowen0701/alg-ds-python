@@ -9,7 +9,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-def _change_recur_util(amount, coins, n):
+def _change_recur(amount, coins, n):
     """Helper function for num_coin_changes_recur()."""
     if amount < 0:
         return 0
@@ -21,8 +21,8 @@ def _change_recur_util(amount, coins, n):
         return 0
 
     # Sum num of ways with coin n included & excluded.
-    n_changes = (_change_recur_util(amount - coins[n - 1], coins, n)
-                 + _change_recur_util(amount, coins, n - 1))
+    n_changes = (_change_recur(amount - coins[n - 1], coins, n)
+                 + _change_recur(amount, coins, n - 1))
     return n_changes
 
 
@@ -33,10 +33,10 @@ def num_coin_changes_recur(amount, coins):
     Space complexity: O(1).
     """
     n = len(coins)
-    return _change_recur_util(amount, coins, n)
+    return _change_recur(amount, coins, n)
 
 
-def _change_memo_util(amount, coins, T, n):
+def _change_memo(amount, coins, T, n):
     """Helper function for num_coin_changes_memo()."""
     if amount < 0:
         return 0
@@ -51,8 +51,8 @@ def _change_memo_util(amount, coins, T, n):
         return T[n][amount]
 
     # Sum num of ways with coin n included & excluded.
-    T[n][amount] = (_change_memo_util(amount - coins[n - 1], coins, T, n)
-                    + _change_memo_util(amount, coins, T, n - 1))
+    T[n][amount] = (_change_memo(amount - coins[n - 1], coins, T, n)
+                    + _change_memo(amount, coins, T, n - 1))
 
     return T[n][amount]
 
@@ -72,7 +72,7 @@ def num_coin_changes_memo(amount, coins):
     for c in range(1, n + 1):
         T[c][0] = 1
 
-    return _change_memo_util(amount, coins, T, n)
+    return _change_memo(amount, coins, T, n)
 
 
 def num_coin_changes_dp(amount, coins):
