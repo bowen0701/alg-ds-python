@@ -53,6 +53,7 @@ class SolutionBFSTopologicalSort(object):
             prereq_courses_adj[prereq].append(course)
             n_prereqs[course] += 1
 
+        # Create a course queue to be taken in order.
         queue = deque()
 
         for course in range(numCourses):
