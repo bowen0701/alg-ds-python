@@ -14,11 +14,11 @@ def _reverse_quicksort(vals_per_wts):
 
     pivot = vals_per_wts[len(vals_per_wts) // 2]
 
-    left_ls = [(i, v, w, p) for (i, v, w, p) in vals_per_wts if p <  pivot[3]]
-    middle_ls = [(i, v, w, p) for (i, v, w, p) in vals_per_wts if p == pivot[3]]
-    right_ls = [(i, v, w, p) for (i, v, w, p) in vals_per_wts if p > pivot[3]]
+    smallers = [(v, w, p) for (v, w, p) in vals_per_wts if p <  pivot[2]]
+    middles = [(v, w, p) for (v, w, p) in vals_per_wts if p == pivot[2]]
+    biggers = [(v, w, p) for (v, w, p) in vals_per_wts if p > pivot[2]]
 
-    return _reverse_quicksort(right_ls) + middle_ls + _reverse_quicksort(left_ls)
+    return _reverse_quicksort(biggers) + middles + _reverse_quicksort(smallers)
 
 
 def knapsack(val, wt, wt_cap):
@@ -27,28 +27,28 @@ def knapsack(val, wt, wt_cap):
     Time complexity: O(n*logn), where n is the number of items. 
     Space complexity: O(n).
     """
-    vals_per_wts = [(i, v, w, v / w) for i, (v, w) in enumerate(zip(val, wt))]
+    vals_per_wts = [(v, w, v / w) for (v, w) in zip(val, wt)]
     sorted_vals_per_wts = _reverse_quicksort(vals_per_wts)
 
     max_val = 0
     total_wt = 0
 
-    for _, v, w, p in sorted_vals_per_wts:
+    for v, w, vw in sorted_vals_per_wts:
         if total_wt + w <= wt_cap:
             total_wt += w
             max_val += v
         else:
             wt_remain = (wt_cap - total_wt)
-            max_val += p * wt_remain
+            max_val += vw * wt_remain
             break
     return max_val
 
 
 def main():
+    # Output: 70.5.
     val = [3, 8, 18, 6, 8, 20, 5, 6, 7, 15]
     wt = [4, 2, 9, 5, 5, 8, 5, 4, 5, 5]
     wt_cap = 30
-    # Output: 70.5.
     print('Max value: {}'.format(knapsack(val, wt, wt_cap)))
 
 
