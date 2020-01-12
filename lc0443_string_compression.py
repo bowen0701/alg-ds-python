@@ -49,7 +49,7 @@ Note:
 - 1 <= len(chars) <= 1000.
 """
 
-class SolutionTwoPointersRepeat(object):
+class SolutionOldNewTwoPointersRepeat(object):
     def compress(self, chars):
         """
         :type chars: List[str]
@@ -62,14 +62,14 @@ class SolutionTwoPointersRepeat(object):
         if n <= 1:
             return n
 
-        # Apply two pointere method: i: old index, j: new index.
+        # Apply two pointers method: i & j for old & new positions.
         i, j = 0, 0
 
         while i < n:
             chars[j] = chars[i]
             repeat = 1
 
-            # Iterate RHS of char i to check if same char.
+            # Iterate through RHS of char i to check if same char.
             while i + 1 < n and chars[i + 1] == chars[i]:
                 i += 1
                 repeat += 1
@@ -92,21 +92,21 @@ def main():
     # Output: Return 6, and the first 6 characters of the input array should be:
     # ["a","2","b","2","c","3"]
     chars = ["a","a","b","b","c","c","c"]
-    length = SolutionTwoPointersRepeat().compress(chars)
+    length = SolutionOldNewTwoPointersRepeat().compress(chars)
     print length, chars[:length]
 
     # Input: ["a"]
     # Output: Return 1, and the first 1 characters of the input array should be:
     # ["a"]
     chars = ["a"]
-    length = SolutionTwoPointersRepeat().compress(chars)
+    length = SolutionOldNewTwoPointersRepeat().compress(chars)
     print length, chars[:length]
 
     # Input: ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
     # Output: Return 4, and the first 4 characters of the input array should be: 
     # ["a","b","1","2"].
     chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
-    length = SolutionTwoPointersRepeat().compress(chars)
+    length = SolutionOldNewTwoPointersRepeat().compress(chars)
     print length, chars[:length]
 
 
