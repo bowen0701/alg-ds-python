@@ -25,7 +25,7 @@ Note:
 - The integer n is in the range [0, 100].
 """
 
-class SolutionDictMaxHeap(object):
+class SolutionTaskCountDictMaxHeap(object):
     def leastInterval(self, tasks, n):
         """
         :type tasks: List[str]
@@ -38,31 +38,33 @@ class SolutionDictMaxHeap(object):
         from collections import defaultdict
         import heapq
 
-        # Accumulate tasks's counts in dict.
+        # Create dict: task->count.
         task_count_d = defaultdict(int)
         for t in tasks:
             task_count_d[t] += 1
 
         # Push tasks/counts into max heap (min heap with negative keys).
-        neg_count_hq = [-c for c in task_count_d.values()]
-        heapq.heapify(neg_count_hq)
+        neg_count_minheap = [-c for c in task_count_d.values()]
+        heapq.heapify(neg_count_minheap)
 
         cycles = 0
 
-        while neg_count_hq:
-            # Use cycle_tasks to collect tasks, denoted by their negative counts.
+        while neg_count_minheap:
+            # Collect cycle tasks, denoted by their negative counts.
             cycle_tasks = []
-            for i in range(n + 1):
-                if neg_count_hq:
-                    cycle_tasks.append(-heapq.heappop(neg_count_hq))
 
-            # If specific task remains after processed one, add back to maxheap.
+            # Run n + 1 tasks, 1 for 1sttask and n for cooling.
+            for i in range(n + 1):
+                if neg_count_minheap:
+                    cycle_tasks.append(-heapq.heappop(neg_count_minheap))
+
+            # If specific task exists after processed one, add back to maxheap.
             for j in cycle_tasks:
-                if j - 1 > 0:
-                    heapq.heappush(neg_count_hq, -(j - 1))
+                if j > 1:
+                    heapq.heappush(neg_count_minheap, -(j - 1))
 
             # Add cycles for the last batch of tasks, or continue.  
-            if not neg_count_hq:
+            if not neg_count_minheap:
                 cycles += len(cycle_tasks)
             else:
                 cycles += n + 1
@@ -74,12 +76,12 @@ def main():
     # Output: 8.
     tasks = ["A","A","A","B","B","B"]
     n = 2
-    print SolutionDictMaxHeap().leastInterval(tasks, n)
+    print SolutionTaskCountDictMaxHeap().leastInterval(tasks, n)
 
     # Output: 16.
     tasks = ["A","A","A","A","A","A","B","C","D","E","F","G"]
     n = 2
-    print SolutionDictMaxHeap().leastInterval(tasks, n)
+    print SolutionTaskCountDictMaxHeap().leastInterval(tasks, n)
 
 
 if __name__ == '__main__':
