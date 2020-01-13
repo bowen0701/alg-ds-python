@@ -53,7 +53,7 @@ class LRUCache(object):
         self.capacity = capacity
 
         # Use a key_nodes dict to store key and its node with val.
-        self.key_nodes = dict()
+        self.key_node_d = dict()
 
         # Initialize doubly linked list with linked head and tail.
         self.head = Node(None, None)
@@ -90,13 +90,14 @@ class LRUCache(object):
         Space complexity: O(1).
         """
         # Check if key exists in dict, if yes, adjust key's pos.
-        if key in self.key_nodes:
-            node = self.key_nodes[key]
+        if key in self.key_node_d:
+            node = self.key_node_d[key]
 
             # Remove node from doubly linked list, and then add it back to tail.
             self._remove(node)
             self._add_tail(node)
 
+            # Return node's value.
             return node.value
 
         return -1
@@ -113,18 +114,18 @@ class LRUCache(object):
         node = Node(key, value)
 
         # Check if the node with key exists, if yes, remove it.
-        if key in self.key_nodes:
-            self._remove(self.key_nodes[key])
+        if key in self.key_node_d:
+            self._remove(self.key_node_d[key])
 
         # Add new node to tail and update dict.
         self._add_tail(node)
-        self.key_nodes[key] = node
+        self.key_node_d[key] = node
 
         # Check if larger than capacity, remove head's next node: LRU node.
-        if len(self.key_nodes) > self.capacity:
+        if len(self.key_node_d) > self.capacity:
             head_next = self.head.next
             self._remove(head_next)
-            del self.key_nodes[head_next.key]
+            del self.key_node_d[head_next.key]
 
 
 def main():
