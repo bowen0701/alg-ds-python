@@ -84,8 +84,6 @@ class SolutionOneLenghtDiff(object):
             # If s is longer than t by one char, delete a char from s,
             # which is equivalent to insert a char into t.
             is_one_distance = self._one_insert(t, s)
-        else:
-            return None
 
         return is_one_distance
 
