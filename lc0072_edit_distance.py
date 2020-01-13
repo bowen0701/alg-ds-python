@@ -56,7 +56,7 @@ class SolutionRecurNaive(object):
         :type word2: str
         :rtype: int
 
-        Time complexity: O((n1+n2)*2^(n1+n2)).
+        Time complexity: O((n1+n2)*3^(n1+n2)).
         Space complexity: O((n1*n2)^2).
         """
         # Apply top-down simple recursion.
@@ -89,7 +89,7 @@ class SolutionRecurPointer(object):
         :type word2: str
         :rtype: int
 
-        Time complexity: O(2^(n1+n2)).
+        Time complexity: O(3^(n1+n2)).
         Space complexity: O(n1*n2).
         """
         # Apply top-down recursion with two pointers.
@@ -164,11 +164,11 @@ class SolutionDp(object):
         for i in range(1, n1 + 1):
             for j in range(1, n2 + 1):
                 if word1[i - 1] == word2[j - 1]:
-                    # If chars i & j are equal, set to the previous T[i-1][j-1]. 
+                    # If chars i & j are equal, ignore them: up-left.
                     T[i][j] = T[i - 1][j - 1]
                 else:
-                    # If not, set to min of insert, delete and replace.
-                    T[i][j] = min(1 + T[i][j - 1], 1 + T[i - 1][j], 1 + T[i - 1][j - 1])
+                    # If not: 1 + insert (up), delete (left) and replace (up-left).
+                    T[i][j] = 1 + min(T[i][j - 1], T[i - 1][j], T[i - 1][j - 1])
 
         return T[-1][-1]
 
