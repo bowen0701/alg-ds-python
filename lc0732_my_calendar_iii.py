@@ -81,7 +81,7 @@ class MyCalendarThreeBisectList(object):
         :type end: int
         :rtype: int
 
-        Time complexity: O(n*logn).
+        Time complexity: O(n).
         Space complexity: O(n).
         """
         from bisect import insort
