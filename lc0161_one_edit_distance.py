@@ -39,20 +39,10 @@ class SolutionOneLengthDiff(object):
         return n_replaced == 1
 
     def _one_insert(self, s, t):
-        # Iterate through two pointers, check how many chars are inserted.
-        n_replaced = 0
-
-        i, j = 0, 0
-        while i < len(s) and j < len(t):
-            if s[i] != t[j]:
-                n_replaced += 1
-                if n_replaced > 1:
-                    return False
-                j += 1
-            else:
-                i += 1
-                j += 1
-
+        # Iterate through indices in s, check how many chars are inserted.
+        for i in range(len(s)):
+            if s[i] != t[i]:
+                return s[i:] == t[i+1:]
         return True
 
     def isOneEditDistance(self, s, t):
@@ -99,7 +89,7 @@ def main():
     # Output: false
     s = ""
     t = ""
-    print SolutionOneLenghtDiff().isOneEditDistance(s, t)
+    print SolutionOneLengthDiff().isOneEditDistance(s, t)
 
 
 if __name__ == '__main__':
