@@ -25,7 +25,7 @@ Explanation: It may be assumed that the returned time is next day's time since
 it is smaller than the input time numerically.
 """
 
-class Solution(object):
+class SolutionMinutesToFullDayMinutes(object):
     def nextClosestTime(self, time):
         """
         @param time: the given time
@@ -38,10 +38,10 @@ class Solution(object):
         minutes = int(hh) * 60 + int(mm)
 
         set_time = set(time)
-        day_minutes = 60 * 24
+        day_minutes = 24 * 60
 
         for new_minutes in range(minutes + 1, minutes + day_minutes + 1):
-            # Take mode for 2nd day's minutes.
+            # Take mode for 2nd day's minutes and time.
             new_minutes = new_minutes % day_minutes
 
             new_time = '{:02d}:{:02d}'.format(new_minutes // 60, new_minutes % 60)
@@ -56,11 +56,11 @@ class Solution(object):
 def main():
     # Output: "19:39"
     time = "19:34"
-    print Solution().nextClosestTime(time)
+    print SolutionMinutesToFullDayMinutes().nextClosestTime(time)
 
     # Output: "22:22"
     time = "23:59"
-    print Solution().nextClosestTime(time)
+    print SolutionMinutesToFullDayMinutes().nextClosestTime(time)
 
 
 if __name__ == '__main__':
