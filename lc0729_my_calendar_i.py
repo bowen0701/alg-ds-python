@@ -40,7 +40,7 @@ obj = MyCalendar()
 param_1 = obj.book(start,end)
 """
 
-class MyCalendarList(object):
+class MyCalendarArray(object):
     def __init__(self):
         self.events = []
 
@@ -70,18 +70,21 @@ class Node(object):
         self.left = None
         self.right = None
 
+
 class MyCalendarBST(object):
     def __init__(self):
         self.root = None
 
     def _binary_search(self, start, end, node):
         if start >= node.end:
+            # If new event is in RHS of node, insert new as right or search in RHS.
             if not node.right:
                 node.right = Node(start, end)
                 return True
             else:
                 return self._binary_search(start, end, node.right)
         elif end <= node.start:
+            # If new event is in LHS of node, insert new as left or search in LHS.
             if not node.left:
                 node.left = Node(start, end)
                 return True
@@ -110,7 +113,7 @@ def main():
     # MyCalendar.book(10, 20); // returns true
     # MyCalendar.book(15, 25); // returns false
     # MyCalendar.book(20, 30); // returns true
-    calendar = MyCalendarList()
+    calendar = MyCalendarArray()
     print calendar.book(10, 20)
     print calendar.book(15, 25)
     print calendar.book(20, 30)
