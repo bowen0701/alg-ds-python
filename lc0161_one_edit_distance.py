@@ -27,33 +27,27 @@ Output: true
 Explanation: We can replace '0' with '1' to get t.
 """
 
-class SolutionOneLenghtDiff(object):
+class SolutionOneLengthDiff(object):
     def _one_replace(self, s, t):
-        # Iterate through strings, if more than two replaced, return False.
+        # Iterate through s, check how many chars are different.
         n_replaced = 0
-        i = 0
 
-        while i < len(s):
+        for i in range(len(s)):
             if s[i] != t[i]:
+                n_replaced += 1
+
+        return n_replaced == 1
+
+    def _one_insert(self, s, t):
+        # Iterate through two pointers, check how many chars are inserted.
+        n_replaced = 0
+
+        i, j = 0, 0
+        while i < len(s) and j < len(t):
+            if s[i] != t[j]:
                 n_replaced += 1
                 if n_replaced > 1:
                     return False
-            i += 1
-
-        return True
-
-    def _one_insert(self, s, t):
-        # Iterate with two pointers, if more than two inserted, return False.
-        n_inserted = 0
-        i, j = 0, 0
-
-        while i < len(s) and j < len(t):
-            if s[i] != t[j]:
-                n_inserted += 1
-                if n_inserted > 1:
-                    return False
-
-                # Increment j only since we will compare s[i] and t[j + 1].
                 j += 1
             else:
                 i += 1
@@ -70,38 +64,41 @@ class SolutionOneLenghtDiff(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Check if length difference is larger than or equal to 2.
-        if abs(len(s) - len(t)) >= 2:
+        # Check if length difference is larger than 1.
+        if abs(len(s) - len(t)) > 1:
             return False
 
         if len(s) == len(t):
             # If s is of equal lenght with t, replace a char from s and t.
-            is_one_distance = self._one_replace(s, t)
+            return self._one_replace(s, t)
         elif len(s) == len(t) - 1:
             # If s is shorter than t by one char, insert a char into s.
-            is_one_distance = self._one_insert(s, t)
+            return self._one_insert(s, t)
         elif len(s) == len(t) + 1:
             # If s is longer than t by one char, delete a char from s,
             # which is equivalent to insert a char into t.
-            is_one_distance = self._one_insert(t, s)
-
-        return is_one_distance
+            return self._one_insert(t, s)
 
 
 def main():
     # Output: true (by insert)
     s = "ab"
     t = "acb"
-    print SolutionOneLenghtDiff().isOneEditDistance(s, t)
+    print SolutionOneLengthDiff().isOneEditDistance(s, t)
 
     # Output: false
     s = "cab" 
     t = "ad"
-    print SolutionOneLenghtDiff().isOneEditDistance(s, t)
+    print SolutionOneLengthDiff().isOneEditDistance(s, t)
 
     # Output: true (by replace)
     s = "1203"
     t = "1213"
+    print SolutionOneLengthDiff().isOneEditDistance(s, t)
+
+    # Output: false
+    s = ""
+    t = ""
     print SolutionOneLenghtDiff().isOneEditDistance(s, t)
 
 
