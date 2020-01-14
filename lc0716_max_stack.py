@@ -1,4 +1,4 @@
-"""Leetcode 716.Max Stack (Premium)
+"""Leetcode 716. Max Stack (Premium)
 Easy
 
 URL: https://leetcode.com/problems/max-stack
@@ -30,7 +30,7 @@ Note:
 - The last four operations won't be called when stack is empty.
 """
 
-class MinStack(object):
+class MaxStack(object):
     def __init__(self):
         """
         initialize your data structure here.
@@ -58,6 +58,9 @@ class MinStack(object):
         Time complexity: O(1).
         Space complexity: O(n).
         """
+        if not self._stack:
+            return None
+
         return self._stack.pop()[0]
 
     def top(self):
@@ -71,7 +74,6 @@ class MinStack(object):
             return None
 
         return self._stack[-1][0]
-
 
     def peekMax(self):
         """
@@ -111,23 +113,28 @@ class MinStack(object):
 
 
 def main():
-    min_stack = MinStack()
-    min_stack.push(5)
-    min_stack.push(1)
-    min_stack.push(5)
+    max_stack = MaxStack()
+    max_stack.push(5)
+    max_stack.push(1)
+    max_stack.push(5)
 
     # Output: 5
-    print min_stack.top()
+    print max_stack.top()
+
     # Output: 5
-    print min_stack.popMax()
+    print max_stack.popMax()
+
     # Output: 1
-    print min_stack.top()
+    print max_stack.top()
+
     # Output: 5
-    print min_stack.peekMax()
+    print max_stack.peekMax()
+
     # Output: 1
-    print min_stack.pop()
+    print max_stack.pop()
+
     # Output: 5
-    print min_stack.top()
+    print max_stack.top()
 
 
 if __name__ == '__main__':
