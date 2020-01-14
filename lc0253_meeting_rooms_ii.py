@@ -22,15 +22,15 @@ Explanation:
 Only need one meeting room
 """
 
-class SolutionSortMinHeap(object):
-    """
-    @param intervals: an array of meeting time intervals
-    @return: the minimum number of conference rooms required
-
-    Time complexity: O(n*logn).
-    Space complexity: O(n).
-    """
+class SolutionSortEndtimeMinHeap(object):
     def minMeetingRooms(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
+        """
         import heapq
 
         if not intervals or not intervals[0]:
@@ -57,11 +57,11 @@ class SolutionSortMinHeap(object):
 def main():
     # Output: 2.
     intervals = [[0,30],[5,10],[15,20]]
-    print SolutionSortMinHeap().minMeetingRooms(intervals)
+    print SolutionSortEndtimeMinHeap().minMeetingRooms(intervals)
 
     # Output: 1.
     intervals = [[7, 10], [2, 4]]
-    print SolutionSortMinHeap().minMeetingRooms(intervals)
+    print SolutionSortEndtimeMinHeap().minMeetingRooms(intervals)
 
 
 if __name__ == '__main__':
