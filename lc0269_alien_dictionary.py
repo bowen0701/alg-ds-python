@@ -57,6 +57,7 @@ class SolutionTopologicalSort(object):
             word_to = words[i]
 
             min_len = min(len(word_from), len(word_to))
+
             for j in range(min_len):
                 char_from = word_from[j]
                 char_to = word_to[j]
@@ -66,12 +67,11 @@ class SolutionTopologicalSort(object):
                         graph[char_from].add(char_to)
                         indegrees[char_to] += 1
 
-                        # Break after get the 1st different char.
-                        break
+                    # Break after get the 1st different char.
+                    break
 
     def _topological_sort(self, graph, indegrees):
         # Build order string based on in-degrees by Kahn's algorithm.
-
         from collections import deque
 
         # Put char into zero in-degree queue if its in-degree is 0.
@@ -84,12 +84,11 @@ class SolutionTopologicalSort(object):
         order_chars = []
 
         while zero_indegree_queue:
-            # Put zero in-degree char in order chars.
+            # Remove zero in-degree char c and add it to order chars.
             c = zero_indegree_queue.pop()
             order_chars.append(c)
 
-            # Visit zero in-degree char c's neighbors and decrement their 
-            # in-degrees, since c is removed.
+            # Visit zero in-degree char c's neighbors and decrement their in-degrees.
             for c_neighbor in graph[c]:
                 indegrees[c_neighbor] -= 1
 
@@ -97,8 +96,8 @@ class SolutionTopologicalSort(object):
                 if indegrees[c_neighbor] == 0:
                     zero_indegree_queue.appendleft(c_neighbor)
 
-        order_string = ''.join(order_chars)
-        return order_string
+        order_str = ''.join(order_chars)
+        return order_str
 
     def alienOrder(self, words):
         """
@@ -109,19 +108,16 @@ class SolutionTopologicalSort(object):
         Space complexity: O(1), since we have fixed number of chars.
         """
         # Apply Kahn's algorithm for topological sort for string order.
-
         from collections import defaultdict
 
         # Edge case.
         if not words or not words[0]:
             return ''
 
-        # Build graph dict for char_from->set(char_to),
-        # and indegrees list for char's in-degree.
+        # Build dicts: grraph: char_from->set(char_to) & indegrees: char->in_count.
         graph = defaultdict(set)
         indegrees = defaultdict(int)
 
-        # Build graph and in-degrees.
         self._build_graph(words, graph, indegrees)
 
         # Run Topological Sort to create string order.
@@ -158,6 +154,17 @@ def main():
       "x",
       "z"
     ] 
+    print SolutionTopologicalSort().alienOrder(words)
+
+    # Output: "wertf"
+    words = [
+      "wrt",
+      "wrf",
+      "er",
+      "ett",
+      "rftt",
+      "te"
+    ]
     print SolutionTopologicalSort().alienOrder(words)
 
 
