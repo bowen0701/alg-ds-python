@@ -23,6 +23,9 @@ class SolutionOneOddCharCounts(object):
         """
         :type s: str
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
