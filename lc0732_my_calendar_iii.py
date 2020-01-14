@@ -42,7 +42,8 @@ Note:
 class MyCalendarThreeDict(object):
     def __init__(self):
         from collections import defaultdict
-        self.timeline = defaultdict(int)
+
+        self.time_diff_d = defaultdict(int)
 
     def book(self, start, end):
         """
@@ -54,23 +55,25 @@ class MyCalendarThreeDict(object):
         Space complexity: O(n).
         """
         # New event starts at start, ends at end.
-        self.timeline[start] += 1
-        self.timeline[end] -= 1
+        self.time_diff_d[start] += 1
+        self.time_diff_d[end] -= 1
 
-        # Accumulate k by iterating sorted events by start times.
-        k = 0
-        cur_events = 0
-        for event_time, incre_event in sorted(
-            self.timeline.items(), key=lambda x: x[0]):
-            cur_events += incre_event
-            k = max(k, cur_events)
+        # Update max k-events by iterating through sorted events by times.
+        sorted_time_diffs = sorted(self.time_diff_d.items(), key=lambda x: x[0])
 
-        return k
+        max_k_events = 0
+        k_events = 0
+
+        for time, diff in sorted_time_diffs:
+            k_events += diff
+            max_k_events = max(max_k_events, k_events)
+
+        return max_k_events
 
 
 class MyCalendarThreeBisectList(object):
     def __init__(self):
-        self.timeline = []
+        self.time_diffs = []
 
     def book(self, start, end):
         """
@@ -83,18 +86,19 @@ class MyCalendarThreeBisectList(object):
         """
         from bisect import insort
 
-        # New event starts at start time, ends at end time.
-        insort(self.timeline, (start, 1))
-        insort(self.timeline, (end, -1))
+        # Create sorted events with diffs by times.
+        insort(self.time_diffs, (start, 1))
+        insort(self.time_diffs, (end, -1))
 
-        # Accumulate k by iterating sorted events by start times.
-        k = 0
-        cur_events = 0
-        for event_time, incre_event in self.timeline:
-            cur_events += incre_event
-            k = max(k, cur_events)
+        # Update max k-events by iterating through sorted events.
+        max_k_events = 0
+        k_events = 0
 
-        return k
+        for time, diff in self.time_diffs:
+            k_events += diff
+            max_k_events = max(max_k_events, k_events)
+
+        return max_k_events
 
 
 def main():
