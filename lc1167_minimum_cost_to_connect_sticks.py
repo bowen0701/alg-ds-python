@@ -35,40 +35,40 @@ Output: 20
 """
 
 class SolutionMinHeap(object):
-    def minCost(self, ropes):
+    def connectSticks(self, sticks):
         """
-        :type self: List[int]
+        :type sticks: List[int]
         :rtype: int
 
         Time complexity: O(n*logn).
         Space complexity: O(n).
         """
-        # Apply min heap to iteratively connect two shortest ropes.
+        # Apply min heap to iteratively connect two shortest sticks.
         import heapq
 
-        if not ropes:
+        if not sticks or len(sticks) == 1:
             return 0
 
-        if len(ropes) <= 2:
-            return sum(ropes)
+        if len(sticks) == 2:
+            return sum(sticks)
 
         min_cost = 0
 
-        min_hq = ropes[:]
+        min_hq = sticks[:]
         heapq.heapify(min_hq)
 
         # Iteratively connect stick pair when at least two.
         while len(min_hq) >= 2:
-            rope1 = heapq.heappop(min_hq)
-            rope2 = heapq.heappop(min_hq)
+            stick1 = heapq.heappop(min_hq)
+            stick2 = heapq.heappop(min_hq)
             
-            connected_rope = rope1 + rope2
+            connected_stick = stick1 + stick2
 
             # Accumulate min cost with additional cost.
-            min_cost += connected_rope
+            min_cost += connected_stick
 
             # Push the additional cost to min heap.
-            heapq.heappush(min_hq, connected_rope)
+            heapq.heappush(min_hq, connected_stick)
 
         return min_cost
 
@@ -76,19 +76,19 @@ class SolutionMinHeap(object):
 def main():
     # Ans: 58
     ropes = [8, 4, 6, 12]
-    print SolutionMinHeap().minCost(ropes)
+    print SolutionMinHeap().connectSticks(ropes)
 
     # Ans: 54
     ropes = [20, 4, 8, 2]
-    print SolutionMinHeap().minCost(ropes)
+    print SolutionMinHeap().connectSticks(ropes)
 
     # Ans: 224
     ropes = [1, 2, 5, 10, 35, 89]
-    print SolutionMinHeap().minCost(ropes)
+    print SolutionMinHeap().connectSticks(ropes)
 
     # AnsL 20
     ropes = [2, 2, 3, 3]
-    print SolutionMinHeap().minCost(ropes)
+    print SolutionMinHeap().connectSticks(ropes)
 
 
 if __name__ == '__main__':
