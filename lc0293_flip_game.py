@@ -22,7 +22,7 @@ Output:
 Note: If there is no valid move, return an empty list [].
 """
 
-class SolutionIter(object):
+class SolutionCheckCharAndNeighborIter(object):
     def generatePossibleNextMoves(self, s):
         """
         :type s: str
@@ -35,14 +35,14 @@ class SolutionIter(object):
         if len(s) <= 1:
             return []
 
-        n_minus_1 = len(s) - 1
+        n = len(s)
         possible_states = []
 
         # Iterate through string to check if char and its next are '++'.
         i = 0
-        while i < n_minus_1:
+        while i < n - 1:
             if s[i] == '+':
-                while i < n_minus_1 and s[i + 1] == '+':
+                while i < n - 1 and s[i + 1] == '+':
                     possible_states.append(s[:i] + '--' + s[i+2:])
                     i += 1
 
@@ -60,7 +60,7 @@ def main():
     #   "++--"
     # ]
     s = '++++'
-    print SolutionIter().generatePossibleNextMoves(s)
+    print SolutionCheckCharAndNeighborIter().generatePossibleNextMoves(s)
 
 
 if __name__ == '__main__':
