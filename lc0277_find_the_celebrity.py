@@ -55,11 +55,13 @@ class SolutionIter(object):
         """
         :type n: int
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
         candidate = 0
 
-        # Iterate through people to find candidate: 
-        # if i knows j, j could be candidate, i is not.
+        # Iterate through people: if i knows j, j could be candidate, i is not.
         for i in range(n):
             if knows(candidate, i):
                 candidate = i
