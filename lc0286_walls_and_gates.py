@@ -25,45 +25,6 @@ After running your function, the 2D grid should be:
 0  -1   3   4
 """
 
-class SolutionBFSIter(object):
-    def wallsAndGates(self, rooms):
-        """
-        :type rooms: List[List[int]]
-        :rtype: void Do not return anything, modify rooms in-place instead.
-
-        Apply iterative BFS to visit rooms starting from all gates.
-
-        Time complexity: O(kmn), where
-          - k: number of gates
-          - m: number of rows
-          - n: number of columns
-        Space complexity: O(mn).
-        """
-        from collections import deque
-
-        nrows, ncols = len(rooms), len(rooms[0])
-
-        # Collect all gates.
-        gates = [(r, c) for r in range(nrows) for c in range(ncols)
-                 if rooms[r][c] == 0]
-
-        # For each gate, start BFS to update neighbors's shorter distances.
-        while gates:
-            # Put one gate in the queue.
-            queue = deque([gates.pop()])
-
-            while queue:
-                r, c = queue.pop()
-
-                # Visit neighbors: up, down, left & right.
-                dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-                for r_next, c_next in dirs:
-                    if (0 <= r_next < nrows and 0 <= c_next < ncols and
-                        rooms[r_next][c_next] > rooms[r][c] + 1):
-                        rooms[r_next][c_next] = rooms[r][c] + 1
-                        queue.appendleft((r_next, c_next))
-
-
 class SolutionDFSRecur(object):
     def _dfs(self, r, c, distance, rooms):
         if (r < 0 or r >= len(rooms) or c < 0 or c >= len(rooms[0]) or
@@ -91,6 +52,9 @@ class SolutionDFSRecur(object):
           - n: number of columns
         Space complexity: O(mn).
         """
+        if not rooms:
+            return None
+        
         nrows, ncols = len(rooms), len(rooms[0])
 
         # Collect all gates.
@@ -100,6 +64,48 @@ class SolutionDFSRecur(object):
         for (r, c) in gates:
             distance = 0
             self._dfs(r, c, distance, rooms)
+
+
+class SolutionBFSIter(object):
+    def wallsAndGates(self, rooms):
+        """
+        :type rooms: List[List[int]]
+        :rtype: void Do not return anything, modify rooms in-place instead.
+
+        Apply iterative BFS to visit rooms starting from all gates.
+
+        Time complexity: O(kmn), where
+          - k: number of gates
+          - m: number of rows
+          - n: number of columns
+        Space complexity: O(mn).
+        """
+        from collections import deque
+
+        if not rooms:
+            return None
+
+        nrows, ncols = len(rooms), len(rooms[0])
+
+        # Collect all gates.
+        gates = [(r, c) for r in range(nrows) for c in range(ncols)
+                 if rooms[r][c] == 0]
+
+        # For each gate, start BFS to update neighbors's shorter distances.
+        while gates:
+            # Put one of gates in the queue.
+            queue = deque([gates.pop()])
+
+            while queue:
+                r, c = queue.pop()
+
+                # Visit gate's neighbors: up, down, left & right.
+                dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+                for r_next, c_next in dirs:
+                    if (0 <= r_next < nrows and 0 <= c_next < ncols and
+                        rooms[r_next][c_next] > rooms[r][c] + 1):
+                        rooms[r_next][c_next] = rooms[r][c] + 1
+                        queue.appendleft((r_next, c_next))
 
 
 def main():
@@ -114,7 +120,7 @@ def main():
         [float('inf'), -1, float('inf'), -1],
         [0, -1, float('inf'), float('inf')]
     ]
-    SolutionBFSIter().wallsAndGates(rooms)
+    SolutionDFSRecur().wallsAndGates(rooms)
     print rooms
 
     rooms = [
@@ -123,7 +129,7 @@ def main():
         [float('inf'), -1, float('inf'), -1],
         [0, -1, float('inf'), float('inf')]
     ]
-    SolutionDFSRecur().wallsAndGates(rooms)
+    SolutionBFSIter().wallsAndGates(rooms)
     print rooms
 
 
