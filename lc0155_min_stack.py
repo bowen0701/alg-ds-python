@@ -63,7 +63,7 @@ class MinStack(object):
         if not self._stack:
             return None
 
-        return self._stack.pop()[1]
+        self._stack.pop()
 
     def top(self):
         """
@@ -95,11 +95,15 @@ def main():
     minStack.push(-2)
     minStack.push(0)
     minStack.push(-3)
-    # Returns -3.
+
+    # Output: -3.
     print minStack.getMin()
+
     minStack.pop()
-    # Returns 0.
+
+    # Output: 0.
     print minStack.top()
+
     # Returns -2.
     print minStack.getMin()
 
