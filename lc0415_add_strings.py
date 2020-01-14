@@ -45,12 +45,12 @@ class SolutionPaddingAddBackwardIter(object):
 
         while i >= 0 or carry > 0:
             if i >= 0:
-                _sum = int(num1[i]) + int(num2[i]) + carry
+                val = int(num1[i]) + int(num2[i]) + carry
             else:
-                _sum = carry
+                val = carry
 
-            carry, _sum = _sum // 10, _sum % 10
-            sum_arr.appendleft(str(_sum))
+            carry, val = val // 10, val % 10
+            sum_arr.appendleft(str(val))
 
             i -= 1
 
