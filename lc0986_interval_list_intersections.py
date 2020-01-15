@@ -28,18 +28,46 @@ NOTE: input types have been changed on April 15, 2019. Please reset to default
 code definition to get new method signature.
 """
 
-class Solution(object):
+class SolutionTwoPointersOverlap(object):
     def intervalIntersection(self, A, B):
         """
         :type A: List[List[int]]
         :type B: List[List[int]]
         :rtype: List[List[int]]
+
+        Time complexity: O(a+b), where a & b are lengths of A & B.
+        Space complexity: O(1).
         """
-        pass
+        # Apply two pointers to add overlapped intervals to result.
+        result = []
+
+        i, j = 0, 0
+        while i < len(A) and j < len(B):
+            if A[i][1] < B[j][0]:
+                # If A[i] is on the LHS of B[j], increment i.
+                i += 1
+            elif A[i][0] > B[j][1]:
+                # If A[i] is on the RHS of B[j], increment j.
+                j += 1
+            else:
+                # If overlapped, add overlapped interval.
+                result.append([max(A[i][0], B[j][0]), min(A[i][1], B[j][1])])
+
+                if A[i][1] < B[j][1]:
+                    # If A[i] is overlapped with LHS of B[j], increment j.
+                    i += 1
+                else:
+                    # If A[i] is overlapped with RHS of B[j], increment j.
+                    j += 1
+
+        return result
 
 
 def main():
-    pass
+    # Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+    A = [[0,2],[5,10],[13,23],[24,25]]
+    B = [[1,5],[8,12],[15,24],[25,26]]
+    print SolutionTwoPointersOverlap().intervalIntersection(A, B)
 
 
 if __name__ == '__main__':
