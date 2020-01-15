@@ -1,7 +1,7 @@
 """Leetcode 124. Binary Tree Maximum Path Sum
 Hard
 
-URL:
+URL: https://leetcode.com/problems/binary-tree-maximum-path-sum/
 
 Given a non-empty binary tree, find the maximum path sum.
 
@@ -34,17 +34,59 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionLeftRightMaxPathDownSumRecur(object):
+    def maxPathDownSum(self, root):
+        # Edge case.
+        if not root:
+            return 0
+
+        # Collect max path sum from root value, down paths from left/right nodes.
+        # If one branch sum is less than 0, do not connect that branch by max(0, .).
+        left_max_val = max(0, self.maxPathDownSum(root.left))
+        right_max_val = max(0, self.maxPathDownSum(root.right))
+        self.max_val = max(self.max_val, root.val + left_max_val + right_max_val)
+
+        # Return max path down sum from left or right, including root values.
+        return max(left_max_val, right_max_val) + root.val
+
     def maxPathSum(self, root):
         """
         :type root: TreeNode
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree, O(n) for singly linked list.
         """
-        pass
+        # Use global max path sum for memorization.
+        self.max_val = -float('inf')
+
+        # Collect max path down sum from left or right and update global max sum.
+        self.maxPathDownSum(root)
+        return self.max_val
 
 
 def main():
-    pass
+    # Output: 6
+    #   1
+    #  / \
+    # 2   3
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    print SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root)
+
+    # Output: 42
+    #  -10
+    #  / \
+    # 9  20
+    #   /  \
+    #  15   7
+    root = TreeNode(-10)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
+    print SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root)
 
 
 if __name__ == '__main__':
