@@ -78,14 +78,43 @@ Note:
 - It is guaranteed that in a given test case the same buffer buf is called by read.
 """
 
-class Solution(object):
+class SolutionPreviousSizeIdxBuffer(object):
+    def __init__(self):
+        self.prev_size = 0
+        self.prev_idx = 0
+        self.prev_buf = [''] * 4
+
     def read(self, buf, n):
         """
         :type buf: Destination buffer (List[str])
         :type n: Number of characters to read (int)
         :rtype: The number of actual characters read (int)
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        # Use counter to increment reading n chars from previous buffer.
+        counter = 0
+
+        while counter < n:
+            # If previous buffer index is still in previous buffer, 
+            # read char from previous buffer and increment counter & index.
+            if self.prev_idx < self.prev_size:
+                buf[counter] = self.prev_buf[self.prev_idx]
+
+                self.prev_idx += 1
+                counter += 1
+            else:
+                # If previous buffer index is out of boundary of previous buffer,
+                # read new chars by read4, store in previous buffer & reset previous index.
+                self.prev_size = read4(self.prev_buf)
+                self.prev_idx = 0
+
+                # If read4's reading receives no more chars, break.
+                if self.prev_size == 0:
+                    break
+
+        return counter
 
 
 def main():
