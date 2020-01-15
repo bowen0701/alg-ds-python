@@ -37,7 +37,7 @@ class Node(object):
         self.neighbors = neighbors
 
 
-class SolutionBFS(object):
+class SolutionNodeCopyDictBFS(object):
     def cloneGraph(self, node):
         """
         :type node: Node
@@ -59,8 +59,8 @@ class SolutionBFS(object):
         copy = Node(node.val, [])
 
         # Create dict to map node->copied node, to avoid copying duplicated node.
-        nodes_copies = defaultdict()
-        nodes_copies[node] = copy
+        node_copy_d = defaultdict()
+        node_copy_d[node] = copy
 
         # Apply BFS with queue.
         queue = deque([node])
@@ -69,32 +69,32 @@ class SolutionBFS(object):
             current = queue.pop()
 
             for neighbor in current.neighbors:
-                if neighbor not in nodes_copies:
+                if neighbor not in node_copy_d:
                     # If current's neighbor is not visited, create a current copy.
                     neighbor_copy = Node(neighbor.val, [])
-                    nodes_copies[neighbor] = neighbor_copy
+                    node_copy_d[neighbor] = neighbor_copy
 
                     queue.appendleft(neighbor)
 
                 # Add neighbor's copy to current copy's neighbor.
-                nodes_copies[current].neighbors.append(nodes_copies[neighbor])
+                node_copy_d[current].neighbors.append(node_copy_d[neighbor])
 
         return copy
 
 
-class SolutionDFSRecur(object):
-    def _dfs(self, node, nodes_copies):
+class SolutionNodeCopyDictDFSRecur(object):
+    def _dfs(self, node, node_copy_d):
         for neighbor in node.neighbors:
-            if neighbor not in nodes_copies:
+            if neighbor not in node_copy_d:
                 # If neighbor is not visited, create neighbor's copy.
                 neighbor_copy = Node(neighbor.val, [])
-                nodes_copies[neighbor] = neighbor_copy
+                node_copy_d[neighbor] = neighbor_copy
 
                 # Apply DFS.
-                self._dfs(neighbor, nodes_copies)
+                self._dfs(neighbor, node_copy_d)
 
             # Add neighbor's copy to node copy's neighbor.
-            nodes_copies[node].neighbors.append(nodes_copies[neighbor])
+            node_copy_d[node].neighbors.append(node_copy_d[neighbor])
 
     def cloneGraph(self, node):
         """
@@ -114,16 +114,16 @@ class SolutionDFSRecur(object):
             return None
 
         copy = Node(node.val, [])
-        nodes_copies = defaultdict()
-        nodes_copies[node] = copy
+        node_copy_d = defaultdict()
+        node_copy_d[node] = copy
 
         # Apply recursive DFS.
-        self._dfs(node, nodes_copies)
+        self._dfs(node, node_copy_d)
 
         return copy
 
 
-class SolutionDFSIter(object):
+class SolutionNodeCopyDictDFSIter(object):
     def cloneGraph(self, node):
         """
         :type node: Node
@@ -143,8 +143,8 @@ class SolutionDFSIter(object):
             return None
 
         copy = Node(node.val, [])
-        nodes_copies = defaultdict()
-        nodes_copies[node] = copy
+        node_copy_d = defaultdict()
+        node_copy_d[node] = copy
 
         stack = deque([node])
 
@@ -152,14 +152,14 @@ class SolutionDFSIter(object):
             current = stack.pop()
 
             for neighbor in current.neighbors:
-                if neighbor not in nodes_copies:
+                if neighbor not in node_copy_d:
                     neighbor_copy = Node(neighbor.val, [])
-                    nodes_copies[neighbor] = neighbor_copy
+                    node_copy_d[neighbor] = neighbor_copy
 
                     # Append neighbor to stack and break for DFS.
                     stack.append(neighbor)
 
-                nodes_copies[current].neighbors.append(nodes_copies[neighbor])
+                node_copy_d[current].neighbors.append(node_copy_d[neighbor])
 
         return copy
 
@@ -183,7 +183,7 @@ def main():
     node4.neighbors.append(node3)
 
     print 'Apply BFS with queue:'
-    node1_copy = SolutionBFS().cloneGraph(node1)
+    node1_copy = SolutionNodeCopyDictBFS().cloneGraph(node1)
     print node1_copy.neighbors[0].val  # Should be 2.
     print node1_copy.neighbors[1].val  # Should be 4.
     print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
@@ -194,7 +194,7 @@ def main():
     print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
 
     print 'Apply recursive DFS:'
-    node1_copy = SolutionDFSRecur().cloneGraph(node1)
+    node1_copy = SolutionNodeCopyDictDFSRecur().cloneGraph(node1)
     print node1_copy.neighbors[0].val  # Should be 2.
     print node1_copy.neighbors[1].val  # Should be 4.
     print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
@@ -205,7 +205,7 @@ def main():
     print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
 
     print 'Apply iterative DFS:'
-    node1_copy = SolutionDFSIter().cloneGraph(node1)
+    node1_copy = SolutionNodeCopyDictDFSIter().cloneGraph(node1)
     print node1_copy.neighbors[0].val  # Should be 2.
     print node1_copy.neighbors[1].val  # Should be 4.
     print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
