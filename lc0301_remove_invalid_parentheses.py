@@ -50,7 +50,8 @@ class SolutionTwoPointersDfsRecur(object):
             j = last_j
             while j <= i:
                 if s[j] == close_par and (j == last_j or s[j - 1] != close_par):
-                    # After removal, the prefix is valid. Then recursively remove the rest of the string.
+                    # After removal, the prefix is valid. 
+                    # Then recursively remove the rest of the string.
                     # New last_i is i + 1 - 1, due to removal; similarly with last_j.
                     # To avoid duplicates, only remove the 1st ')'.
                     self._removeDfs(s[:j] + s[j+1:], result, i, j, open_par, close_par)
@@ -69,14 +70,14 @@ class SolutionTwoPointersDfsRecur(object):
         """
         # Apply two pointers method with DFS.
         # - remove redundant ")" from left to right, and 
-        # - then removee redundant "(" from right to left.
+        # - then remove redundant "(" from right to left.
         if not s:
             return [s]
 
-        result = []
         # Two poinsters: Use last_i to denote last char we checked, last_j we removed.
         last_i = 0
         last_j = 0
+        result = []
         open_par = '('
         close_par = ')'
         self._removeDfs(s, result, last_i, last_j, open_par, close_par)
