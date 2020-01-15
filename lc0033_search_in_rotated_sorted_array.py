@@ -47,14 +47,14 @@ class SolutionTwoPointers(object):
             if nums[mid] == target:
                 return mid
 
-            # Check if target & middle are bigger than pivot (not splitted).
+            # Check if target & middle are bigger than pivot (in the same side).
             if (target >= pivot) == (nums[mid] >= pivot):
-                is_split = False
+                is_same_side = True
             else:
-                is_split = True
+                is_same_side = False
 
-            if not is_split:
-                # If not splitted, apply normal binary search w.r.t. mid.
+            if is_same_side:
+                # If in the same side, apply normal binary search w.r.t. mid.
                 if nums[mid] < target:
                     left = mid + 1
                 else:
