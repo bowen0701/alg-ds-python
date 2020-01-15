@@ -33,7 +33,7 @@ class TreeNode(object):
 
 
 class SolutionPreorderBacktrackingRecur(object):
-    def _findPathsPreorderRecur(self, root, sum, cur_path, paths):
+    def _findPathsPreorderRecur(self, root, sum, paths, cur_path):
         # Base case.
         if not root:
             return None
@@ -46,9 +46,9 @@ class SolutionPreorderBacktrackingRecur(object):
             paths.append(cur_path[:])
             return None
 
-        # Traverse root's left & right with current path.
-        self._findPathsPreorderRecur(root.left, sum - root.val, cur_path, paths)
-        self._findPathsPreorderRecur(root.right, sum - root.val, cur_path, paths)
+        # Traverse root's left & right if existed by shallow copy.
+        self._findPathsPreorderRecur(root.left, sum - root.val, paths, cur_path[:])
+        self._findPathsPreorderRecur(root.right, sum - root.val, paths, cur_path[:])
 
     def pathSum(self, root, sum):
         """
@@ -62,7 +62,7 @@ class SolutionPreorderBacktrackingRecur(object):
         # Apply recursive preorder traversal.
         paths = []
         cur_path = []
-        self._findPathsPreorderRecur(root, sum, cur_path, paths)
+        self._findPathsPreorderRecur(root, sum, paths, cur_path)
         return paths
 
 
@@ -95,11 +95,11 @@ class SolutionPreorderBacktrackingIter(object):
             if current.val == _sum and not current.left and not current.right:
                 paths.append(_cur_path[:])
 
-            # Append right before left to stack with shallow copied current path.
+            # Traverse root's left & right if existed by shallow copy.
             if current.right:
-                stack.append((current.right, _cur_path, _sum - current.val))
+                stack.append((current.right, _cur_path[:], _sum - current.val))
             if current.left:
-                stack.append((current.left, _cur_path, _sum - current.val))
+                stack.append((current.left, _cur_path[:], _sum - current.val))
 
         return paths
 
@@ -130,7 +130,7 @@ def main():
     root.right.right.left = TreeNode(5)
     root.right.right.right = TreeNode(1)
     sum = 22
-    print SolutionPreorderBacktrackingRecur().pathSum(root, sum)
+    # print SolutionPreorderBacktrackingRecur().pathSum(root, sum)
     print SolutionPreorderBacktrackingIter().pathSum(root, sum)
 
 
