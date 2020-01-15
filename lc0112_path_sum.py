@@ -61,12 +61,14 @@ class SolutionPreorderIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        from collections import deque
+
         # Apply iterative preorder traversal with queue.
         if not root:
             return False
 
         # Apply DFS with stack.
-        stack = [(root, sum)]
+        stack = deque([(root, sum)])
 
         while stack:
             current, _sum = stack.pop()
@@ -75,11 +77,11 @@ class SolutionPreorderIter(object):
             if current.val == _sum and not current.left and not current.right:
                 return True
 
-            # Append right before left to stack.
-            if current.right:
-                stack.append((current.right, _sum - current.val))
+            # Append left and right if existed.
             if current.left:
-                stack.append((current.left, _sum - current.val))
+                stack.appendleft((current.left, _sum - current.val))
+            if current.right:
+                stack.appendleft((current.right, _sum - current.val))
 
         return False
 
