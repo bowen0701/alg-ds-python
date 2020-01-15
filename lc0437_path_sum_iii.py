@@ -78,7 +78,7 @@ class SolutionLeadRecur(object):
 
 
 class SolutionSumFreqMemo(object):
-    def _dfs(self, root, sum, sum_freqs, cur_sum):
+    def _dfs(self, root, sum, sum_freq_d, cur_sum):
         # Apply DFS in a preorder traversal fashion.
         if not root:
             return None
@@ -90,17 +90,17 @@ class SolutionSumFreqMemo(object):
         complement_sum = cur_sum - sum
 
         # Update num of paths if complemented path sum exists.
-        self.n_paths += sum_freqs[complement_sum]
+        self.n_paths += sum_freq_d[complement_sum]
 
         # Update current path sum frequency.
-        sum_freqs[cur_sum] += 1
+        sum_freq_d[cur_sum] += 1
 
         # DFS for left/right nodes.
-        self._dfs(root.left, sum, sum_freqs, cur_sum)
-        self._dfs(root.right, sum, sum_freqs, cur_sum)
+        self._dfs(root.left, sum, sum_freq_d, cur_sum)
+        self._dfs(root.right, sum, sum_freq_d, cur_sum)
 
         # Backtrack when switch to another branch.
-        sum_freqs[cur_sum] -= 1
+        sum_freq_d[cur_sum] -= 1
 
     def pathSum(self, root, sum):
         """
@@ -116,14 +116,13 @@ class SolutionSumFreqMemo(object):
 
         self.n_paths = 0
 
-        # Memoization for sum frequences, initialized by sum=0->freq=1.
-        # This technique is similar with that for two-sum problem.
-        sum_freqs = defaultdict(int)
-        sum_freqs[0] = 1
+        # Memoization by dict: sum->freq, similar with that for two-sum problem.
+        sum_freq_d = defaultdict(int)
+        sum_freq_d[0] = 1
 
         # Apply DFS with initial current sum 0.
         cur_sum = 0
-        self._dfs(root, sum, sum_freqs, cur_sum)
+        self._dfs(root, sum, sum_freq_d, cur_sum)
         return self.n_paths
 
 
