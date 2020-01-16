@@ -55,7 +55,7 @@ class SolutionTwoPointersDfsRecur(object):
                 # Start removing '(' from reversed string by DFS.
                 self._removeDfs(rev_s, result, 0, 0, ')', '(')
             else:
-                # Finished removing '(', append the original string to result.
+                # Finished removing '(', append the resulting s w/ further reverse.
                 result.append(rev_s)
 
     def removeInvalidParentheses(self, s):
