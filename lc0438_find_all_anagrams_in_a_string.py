@@ -38,7 +38,7 @@ class SolutionCharCountListSlidingWindow(object):
         :type p: str
         :rtype: List[int]
 
-        Time complexity: O(m*n), where m & n is length of s & p.
+        Time complexity: O(n), where n is length of s.
         Space complexity: O(1).
         """
         # Edge case.
