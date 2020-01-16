@@ -76,17 +76,111 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionOrderValsDictQueue(object):
     def verticalOrder(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        from collections import defaultdict
+        from collections import deque
+
+        # Create dict: order->list(node values).
+        order_vals_d = defaultdict(list)
+
+        # Use queue to add root and left/right nodes with their orders to dict.
+        current = root
+        queue = deque([(current, 0)])
+        while queue:
+            current, order = queue.popleft()
+            if current:
+                order_vals_d[order].append(current.val)
+
+                # Append left/right nodes to queue.
+                queue += (current.left, order - 1), (current.right, order + 1)
+
+        # Return sorted list(node values) based on order.
+        sorted_vals = [vals for order, vals in sorted(order_vals_d.items())]
+        return sorted_vals
 
 
 def main():
-    pass
+    #    3
+    #   /\
+    #  /  \
+    #  9  20
+    #     /\
+    #    /  \
+    #   15   7
+    # Output:
+    # [
+    #   [9],
+    #   [3,15],
+    #   [20],
+    #   [7]
+    # ]
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(17)
+    print SolutionOrderValsDictQueue().verticalOrder(root)
+
+    #      3
+    #     /\
+    #    /  \
+    #    9   8
+    #   /\  /\
+    #  /  \/  \
+    #  4  01   7
+    # Output:
+    # [
+    #   [4],
+    #   [9],
+    #   [3,0,1],
+    #   [8],
+    #   [7]
+    # ]
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(8)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(0)
+    root.right.left = TreeNode(1)
+    root.right.right = TreeNode(7)
+    print SolutionOrderValsDictQueue().verticalOrder(root)
+
+    #     3
+    #    /\
+    #   /  \
+    #   9   8
+    #  /\  /\
+    # /  \/  \
+    # 4  01   7
+    #    /\
+    #   /  \
+    #   5   2
+    # Output:
+    # [
+    #   [4],
+    #   [9,5],
+    #   [3,0,1],
+    #   [8,2],
+    #   [7]
+    # ]
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(8)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(0)
+    root.right.left = TreeNode(1)
+    root.right.right = TreeNode(7)
+    root.left.right.right = TreeNode(2)
+    root.right.left.left = TreeNode(5)
+    print SolutionOrderValsDictQueue().verticalOrder(root)
 
 
 if __name__ == '__main__':
