@@ -23,7 +23,7 @@ Output: [""]
 
 class SolutionTwoPointersDfsRecur(object):
     def _removeDfs(self, s, result, last_i, last_j, open_par, close_par):
-        # Accumulate parentheses match until close ones are more. 
+        # Accumulate parentheses match until ')' are more: count < 0.
         count = 0
         i = last_i
         while i < len(s) and count >= 0:
@@ -34,7 +34,20 @@ class SolutionTwoPointersDfsRecur(object):
 
             i += 1
 
-        if count >= 0:
+        if count < 0:
+            # Remove the 1st ')' only to avoid duplicates.
+            # Get the index of abnormal ')' which makes count < 0: i - 1.
+            i -= 1
+            j = last_j
+            while j <= i:
+                if s[j] == close_par and (j == last_j or s[j - 1] != close_par):
+                    # After removal, the prefix is valid. 
+                    # Then recursively remove the rest of the string.
+                    # New last_i is i + 1 - 1, due to removal; similarly with last_j.
+                    self._removeDfs(s[:j] + s[j+1:], result, i, j, open_par, close_par)
+                
+                j += 1
+        else:
             # No extrac ')' is detected, now detect extra '(' by reversing string.
             rev_s = s[::-1]
 
@@ -44,19 +57,6 @@ class SolutionTwoPointersDfsRecur(object):
             else:
                 # Finished removing '(', append the original string to result.
                 result.append(rev_s)
-        else:
-            # Get the index of abnormal ')' which makes count < 0: i - 1.
-            i -= 1
-            j = last_j
-            while j <= i:
-                if s[j] == close_par and (j == last_j or s[j - 1] != close_par):
-                    # After removal, the prefix is valid. 
-                    # Then recursively remove the rest of the string.
-                    # New last_i is i + 1 - 1, due to removal; similarly with last_j.
-                    # To avoid duplicates, only remove the 1st ')'.
-                    self._removeDfs(s[:j] + s[j+1:], result, i, j, open_par, close_par)
-                
-                j += 1
 
     def removeInvalidParentheses(self, s):
         """
@@ -72,7 +72,7 @@ class SolutionTwoPointersDfsRecur(object):
         # - remove redundant ")" from left to right, and 
         # - then remove redundant "(" from right to left.
         if not s:
-            return [s]
+            return ['']
 
         # Two poinsters: Use last_i to denote last char we checked, last_j we removed.
         last_i = 0
