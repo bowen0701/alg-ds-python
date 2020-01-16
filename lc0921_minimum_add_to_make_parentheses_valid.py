@@ -35,7 +35,7 @@ S.length <= 1000
 S only consists of '(' and ')' characters.
 """
 
-class Solution(object):
+class SolutionStackEmptyIncrementCount(object):
     def minAddToMakeValid(self, S):
         """
         :type S: str
@@ -66,19 +66,19 @@ class Solution(object):
 
 def main():
     S = '(())'  # Ans: 0.
-    print(Solution().minAddToMakeValid(S))
+    print(SolutionStackEmptyIncrementCount().minAddToMakeValid(S))
 
     S = '())'  # Ans: 1.
-    print(Solution().minAddToMakeValid(S))
+    print(SolutionStackEmptyIncrementCount().minAddToMakeValid(S))
 
     S = '((('  # Ans: 3.
-    print(Solution().minAddToMakeValid(S))
+    print(SolutionStackEmptyIncrementCount().minAddToMakeValid(S))
 
     S = '()'  # Ans: 0.
-    print(Solution().minAddToMakeValid(S))
+    print(SolutionStackEmptyIncrementCount().minAddToMakeValid(S))
 
     S = '()))((' # Ans: 4.
-    print(Solution().minAddToMakeValid(S))
+    print(SolutionStackEmptyIncrementCount().minAddToMakeValid(S))
 
 
 if __name__ == '__main__':
