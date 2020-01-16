@@ -39,31 +39,67 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-class BSTIterator(object):
+
+class BSTIteratorCurrentStackInorderIter(object):
 
     def __init__(self, root):
         """
         :type root: TreeNode
         """
-        pass
+        # Creat global current node and stack for collected sorted nodes.
+        self.current = root
+        self.stack = []
 
     def next(self):
         """
         @return the next smallest number
         :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(h).
         """
-        pass
+        # Apply iterative inorder traversal with current and stack.
+        while self.current:
+            self.stack.append(self.current)
+            self.current = self.current.left
+
+        nxt = self.stack.pop()
+        self.current = nxt.right
+        return nxt.val
 
     def hasNext(self):
         """
         @return whether we have a next smallest number
         :rtype: bool
+
+        Time complexity: O(1).
+        Space complexity: O(h).
         """
-        pass
+        return bool(self.current or self.stack)
 
 
 def main():
-    pass
+    #   7
+    #  / \
+    # 3  15
+    #   /  \
+    #  9   20
+    root = TreeNode(7)
+    root.left = TreeNode(3)
+    root.right = TreeNode(15)
+    root.right.left = TreeNode(9)
+    root.right.right = TreeNode(20)
+
+    iterator = BSTIteratorCurrentStackInorderIter(root);
+    print iterator.next()     # return 3
+    print iterator.next()     # return 7
+    print iterator.hasNext()  # return true
+    print iterator.next()     # return 9
+    print iterator.hasNext()  # return true
+    print iterator.next()     # return 15
+    print iterator.hasNext()  # return true
+    print iterator.next()     # return 20
+    print iterator.hasNext()  # return false
 
 
 if __name__ == '__main__':
