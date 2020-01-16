@@ -17,6 +17,11 @@ element of the linked list.
 
 Example 1:
 Input: root = [4,2,5,1,3]
+     4
+    / \
+   2   5
+  / \
+ 1   3
 Output: [1,2,3,4,5]
 Explanation: The figure below shows the transformed BST. The solid line indicates
 the successor relationship, while the dashed line means the predecessor relationship.
@@ -49,17 +54,64 @@ class Node(object):
         self.right = right
 
 
-class Solution(object):
+class SolutionInorderIter(object):
     def treeToDoublyList(self, root):
         """
         :type root: Node
         :rtype: Node
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        # Apply iterative inorder traversal with stack for visited nodes.
+        if not root:
+            return None
+
+        # Create pre_head for new doubly linked list, and set it to previous.
+        pre_head = Node(None)
+        previous = pre_head
+        current = root
+        stack = []
+
+        # Pop node from stack, connect parent and child nodes.
+        while current or stack:
+            # Visit the leftmost node.
+            while current:
+                stack.append(current)
+                current = current.left
+
+            # Pop stack's last node to get current.
+            current = stack.pop()
+
+            # Connect double links between previous & current.
+            previous.right = current
+            current.left = previous
+
+            # Increment prrevious & current.
+            previous = current
+            current = current.right
+
+        # Connect double links between 1st and last nodes.
+        pre_head.right.left = previous
+        previous.right = pre_head.right
+
+        return pre_head.right
 
 
 def main():
-    pass
+    root = Node(4)
+    root.left = Node(2)
+    root.right = Node(5)
+    root.left.left = Node(1)
+    root.left.right = Node(3)
+    dll_head = SolutionInorderIter().treeToDoublyList(root)
+    print dll_head.val  # Output: 1.
+    print dll_head.right.val  # Output: 2.
+    print dll_head.right.right.val  # Output: 3.
+    print dll_head.right.right.right.val  # Output: 4.
+    print dll_head.right.right.right.right.val  # Output: 5.
+    print dll_head.right.right.right.right.right.val  # Output: 1.
+    print dll_head.left.val  # Output: 5.  
 
 
 if __name__ == '__main__':
