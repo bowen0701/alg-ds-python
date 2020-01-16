@@ -38,17 +38,72 @@ Constraints:
 """
 
 
-class Solution(object):
+class SolutionStackAppendValidChars(object):
     def minRemoveToMakeValid(self, s):
         """
         :type s: str
         :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        # Iterate through chars, add valid chars to valid chars array.
+        LOWER_CHARS = 'abcdefghijklmnopqrstuvwxyz'
+        stack = []
+        valid_chars = []
+
+        for c in s:
+            if c == '(' or c in LOWER_CHARS:
+                # If char is '(' or lower, add char to valid chars.
+                valid_chars.append(c)
+
+                if c == '(':
+                    # If '(', push it to stack.
+                    stack.append('(')
+
+            elif c == ')' and stack:
+                # If char is ')' and stack contains ')' for matching,
+                # add char to valid chars and pop '('.
+                valid_chars.append(c)
+                stack.pop()
+            else:
+                # If not match, ignore ')' and continue.
+                continue
+
+        if stack:
+            # If there remain '(', remove redundant '(' by its number from backward.
+            counter = len(stack)
+            for i in range(len(valid_chars) - 1, -1, -1):
+                if counter > 0:
+                    if valid_chars[i] == '(':
+                        valid_chars[i] = ''
+                        counter -= 1
+                else:
+                    break
+        
+        return ''.join(valid_chars)
 
 
 def main():
-    pass
+    # Output: "lee(t(c)o)de"
+    s = "lee(t(c)o)de)"
+    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+
+    # Output: "ab(c)d"
+    s = "a)b(c)d"
+    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+
+    # Output: ""
+    s = "))(("
+    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+
+    # Output: "a(b(c)d)"
+    s = "(a(b(c)d)"
+    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+
+    # Output: "()()"
+    s = "())()((("
+    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
 
 
 if __name__ == '__main__':
