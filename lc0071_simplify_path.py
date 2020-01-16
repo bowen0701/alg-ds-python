@@ -45,17 +45,52 @@ Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
 """
 
-class Solution(object):
+class SolutionCurrentStack(object):
     def simplifyPath(self, path):
         """
         :type path: str
         :rtype: str
+
+        Time complexity: O(n), where n is the length of path.
+        Space complexity: O(n).
         """
-        pass
+        # Split path by '/', and remove empty strings.
+        split_path = path.split('/')
+
+        # Create stack to mimic dir hierarchy.
+        stack = []
+
+        # Iterate through split path to change dir.
+        for i in range(len(split_path)):
+            if split_path[i] == '' or split_path[i] == '.':
+                continue
+            elif split_path[i] == '..':
+                if not stack:
+                    current = ''
+                else:
+                    current = stack.pop()
+            else:
+                stack.append(split_path[i])
+
+        return '/' + '/'.join(stack)
 
 
 def main():
-    pass
+    # Output: "/home/foo"
+    path = "/home//foo/"
+    print SolutionCurrentStack().simplifyPath(path)
+
+    # Output: "/c"
+    path = "/a/./b/../../c/"
+    print SolutionCurrentStack().simplifyPath(path)
+
+    # Output: "/c"
+    path = "/a/../../b/../c//.//"
+    print SolutionCurrentStack().simplifyPath(path)
+
+    # Output: "/a/b/c"
+    path = "/a//b////c/d//././/.."
+    print SolutionCurrentStack().simplifyPath(path)
 
 
 if __name__ == '__main__':
