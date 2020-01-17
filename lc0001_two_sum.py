@@ -15,7 +15,7 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 """
 
-class SolutionNumIdxDict(object):
+class SolutionNumPosDict(object):
     def twoSum(self, nums, target):
         """
         :type nums: List[int]
@@ -25,17 +25,18 @@ class SolutionNumIdxDict(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        num_idx_d = {}
+        num_pos_d = {}
         for i, n in enumerate(nums):
-            if target - n in num_idx_d:
-                return [num_idx_d[target - n], i]
-            num_idx_d[n] = i
+            if target - n in num_pos_d:
+                return [num_pos_d[target - n], i]
+            else:
+                num_pos_d[n] = i
         return []
 
 
 def main():
     # Output: [0, 1].
-    print SolutionNumIdxDict().twoSum([2, 7, 11, 15], 9)
+    print SolutionNumPosDict().twoSum([2, 7, 11, 15], 9)
 
 
 if __name__ == '__main__':
