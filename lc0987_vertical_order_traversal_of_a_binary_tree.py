@@ -48,17 +48,84 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionOrderValsDictSortedLevelOrderValsDict(object):
     def verticalTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
+
+        Time complexity: O(n+n*logn), where n is number of nodes.
+        Space complexity: O(n).
         """
-        pass
+        from collections import defaultdict
+        from collections import deque
+
+        # Create dict: order->list(vals).
+        order_vals_d = defaultdict(list)
+
+        # Apply level traversal by queue.
+        queue = deque([(root, 0)])
+
+        while queue:
+            # Create dict: level order->list(vals) 
+            level_order_vals_d = defaultdict(list)
+
+            for i in range(len(queue)):
+                current, order = queue.pop()
+                level_order_vals_d[order].append(current.val)
+
+                if current.left:
+                    queue.appendleft((current.left, order - 1))
+                if current.right:
+                    queue.appendleft((current.right, order + 1))
+
+            # After level traversal, append sorted vals to order_vals_d.
+            for order, vals in level_order_vals_d.items():
+                order_vals_d[order].extend(sorted(vals))
+
+        # Sort dict by order to return vals.
+        return [vals for order, vals in sorted(order_vals_d.items())]
 
 
 def main():
-    pass
+    # Input: [3,9,20,null,null,15,7]
+    # Output: [[9],[3,15],[20],[7]]
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
+    print SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root)
+
+    # Input: [1,2,3,4,5,6,7]
+    # Output: [[4],[2],[1,5,6],[3],[7]]
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.left = TreeNode(6)
+    root.right.right = TreeNode(7)
+    print SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root)
+
+    # Input: [0,2,1,3,null,null,null,4,5,null,7,6,null,10,8,11,9]
+    # Output: [[4,10,11],[3,6,7],[2,5,8,9],[0],[1]]
+    root = TreeNode(0)
+    root.left = TreeNode(2)
+    root.right = TreeNode(1)
+    root.left.left = TreeNode(3)
+    root.left.right = None
+    root.right.left = None
+    root.right.right = Nones
+    root.left.left.left = TreeNode(4)
+    root.left.left.right = TreeNode(5)
+    root.left.left.left.right = TreeNode(7)
+    root.left.left.right.left = TreeNode(6)
+    root.left.left.left.right.left = TreeNode(10)
+    root.left.left.left.right.right = TreeNode(8)
+    root.left.left.right.left.left = TreeNode(11)
+    root.left.left.right.left.right = TreeNode(9)
+    print SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root)
 
 
 if __name__ == '__main__':
