@@ -38,9 +38,8 @@ class Trie(object):
             if c in current.children:
                 current = current.children[c]
             else:
-                new = Node()
-                current.children[c] = new
-                current = new
+                current.children[c] = Node()
+                current = current.children[c]
 
         current.word = word
 
