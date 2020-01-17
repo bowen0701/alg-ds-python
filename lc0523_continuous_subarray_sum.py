@@ -24,24 +24,64 @@ Note:
 """
 
 
-class Solution(object):
+class SolutionModCumsumPosDict(object):
     def checkSubarraySum(self, nums, k):
         """
         :type nums: List[int]
         :type k: int
         :rtype: bool
+
+        Time complexity: O(n), where n is the length of nums.
+        Space complexity: O(k).
         """
-        pass
+        from collections import defaultdict
+
+        # Edge case.
+        if not nums:
+            return k == 0
+
+        # Create dict: cumsum->pos.
+        cumsum_pos_d = defaultdict()
+        cumsum_pos_d[0] = -1
+
+        cumsum = 0
+
+        # Iterate through nums to add cumsum % k to dict.
+        for i in range(len(nums)):
+            cumsum += nums[i]
+
+            # Update cumsum by taking % k.
+            if k != 0:
+                cumsum %= k
+
+            if cumsum in cumsum_pos_d:
+                # If cumsum in dict and more than 1 nums lie between pos i & j.
+                # then subarray - nums[:j] is a multiple of k.
+                j = cumsum_pos_d[cumsum]
+                if j is not None and i - j > 1:
+                    return True
+            else:
+                # If not, add cumsum to dict.
+                cumsum_pos_d[cumsum] = i
+
+        return False
 
 
 def main():
     # Output: True
     nums = [23, 2, 4, 6, 7]
-    k=6
+    k = 6
+    print SolutionModCumsumPosDict().checkSubarraySum(nums, k)
 
     # Output: True
     nums = [23, 2, 6, 4, 7]
-    k=6
+    k = 6
+    print SolutionModCumsumPosDict().checkSubarraySum(nums, k)    
+
+    # Output: True
+    nums = [5,0,0]
+    k = 0
+    print SolutionModCumsumPosDict().checkSubarraySum(nums, k)    
 
 
 if __name__ == '__main__':
