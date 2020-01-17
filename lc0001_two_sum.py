@@ -15,7 +15,7 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 """
 
-class SolutionNumPosDict(object):
+class SolutionNumPosDictIter(object):
     def twoSum(self, nums, target):
         """
         :type nums: List[int]
@@ -36,7 +36,7 @@ class SolutionNumPosDict(object):
 
 def main():
     # Output: [0, 1].
-    print SolutionNumPosDict().twoSum([2, 7, 11, 15], 9)
+    print SolutionNumPosDictIter().twoSum([2, 7, 11, 15], 9)
 
 
 if __name__ == '__main__':

@@ -24,7 +24,7 @@ Note:
 """
 
 
-class SolutionModCumsumPosDict(object):
+class SolutionModCumsumPosDictIter(object):
     def checkSubarraySum(self, nums, k):
         """
         :type nums: List[int]
@@ -71,17 +71,17 @@ def main():
     # Output: True
     nums = [23, 2, 4, 6, 7]
     k = 6
-    print SolutionModCumsumPosDict().checkSubarraySum(nums, k)
+    print SolutionModCumsumPosDictIter().checkSubarraySum(nums, k)
 
     # Output: True
     nums = [23, 2, 6, 4, 7]
     k = 6
-    print SolutionModCumsumPosDict().checkSubarraySum(nums, k)    
+    print SolutionModCumsumPosDictIter().checkSubarraySum(nums, k)    
 
     # Output: True
     nums = [5,0,0]
     k = 0
-    print SolutionModCumsumPosDict().checkSubarraySum(nums, k)    
+    print SolutionModCumsumPosDictIter().checkSubarraySum(nums, k)    
 
 
 if __name__ == '__main__':
