@@ -53,12 +53,13 @@ class SolutionNodeCopyDictBFS(object):
         from collections import defaultdict
         from collections import deque
 
+        # Edge case.
         if not node:
             return None
 
         copy = Node(node.val, [])
 
-        # Create dict to map node->copied node, to avoid copying duplicated node.
+        # Create dict: node->copied node, to avoid copying duplicated node.
         node_copy_d = defaultdict()
         node_copy_d[node] = copy
 
@@ -110,10 +111,13 @@ class SolutionNodeCopyDictDFSRecur(object):
         """
         from collections import defaultdict
 
+        # Edge case.
         if not node:
             return None
 
         copy = Node(node.val, [])
+
+        # Create dict: node->copied node, to avoid copying duplicated node.
         node_copy_d = defaultdict()
         node_copy_d[node] = copy
 
@@ -139,10 +143,13 @@ class SolutionNodeCopyDictDFSIter(object):
         from collections import defaultdict
         from collections import deque
 
+        # Edge case.
         if not node:
             return None
 
         copy = Node(node.val, [])
+
+        # Create dict: node->copied node, to avoid copying duplicated node.
         node_copy_d = defaultdict()
         node_copy_d[node] = copy
 
@@ -156,7 +163,7 @@ class SolutionNodeCopyDictDFSIter(object):
                     neighbor_copy = Node(neighbor.val, [])
                     node_copy_d[neighbor] = neighbor_copy
 
-                    # Append neighbor to stack and break for DFS.
+                    # Append neighbor to stack.
                     stack.append(neighbor)
 
                 node_copy_d[current].neighbors.append(node_copy_d[neighbor])
