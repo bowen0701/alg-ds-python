@@ -3,7 +3,7 @@ Medium
 
 URL: https://leetcode.com/problems/exclusive-time-of-functions/
 
-On a single threaded CPU, we execute some functions.  Each function has a unique id
+On a single threaded CPU, we execute some functions. Each function has a unique id
 between 0 and N-1.
 
 We store logs in timestamp order that describe when a function is entered or exited.
@@ -42,18 +42,49 @@ Note:
 """
 
 
-class Solution(object):
+class SolutionStartStackIter(object):
     def exclusiveTime(self, n, logs):
         """
         :type n: int
         :type logs: List[str]
         :rtype: List[int]
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        # Use times to store fid's exec times.
+        times = [0] * n
+
+        # Use start_stack to store starting fid's logs.
+        start_stack = []
+
+        # logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
+        for log in logs:
+            fid, op, time = log.split(':')
+            fid, time = int(fid), int(time)
+
+            if op == 'start':
+                # A new fid starts, add its log to stack.
+                start_stack.append((fid, op, time))
+            else:
+                # A fid ends, since single thread, this fid must be equal to last fid.
+                # Obtain its exec time.
+                fid, op, start_time = start_stack.pop()
+                times[fid] += time - start_time + 1
+
+                # If there still exist running fid's, update its exec time by 
+                # substracting last fid's exec time.
+                if start_stack:
+                    times[start_stack[-1][0]] -= time - start_time + 1
+
+        return times
 
 
 def main():
-    pass
+    # Output: [3, 4]
+    n = 2
+    logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
+    print SolutionStartStackIter().exclusiveTime(n, logs)
 
 
 if __name__ == '__main__':
