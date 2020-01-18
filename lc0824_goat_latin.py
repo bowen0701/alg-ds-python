@@ -38,17 +38,43 @@ S contains only uppercase, lowercase and spaces. Exactly one space between each 
 1 <= S.length <= 150.
 """
 
-class Solution(object):
+class SolutionSplitWordList(object):
     def toGoatLatin(self, S):
         """
         :type S: str
         :rtype: str
+
+        Time complexity: O(n*m), where
+          - n: length of words.
+          - m: max lengths of words.
+        Space complexity: O(m).
         """
-        pass
+        # Split S into word list.
+        words = S.split()
+
+        # Create lowercase & upercase vowel set for quick lookup.
+        vowels = set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'])
+
+        # Iterate through words, with word index.
+        for i, w in enumerate(words):
+            if w[0] in vowels:
+                # For word starting with a, e, i, o, or u, append ma and repeated a's.
+                words[i] = w + 'ma' + 'a' * (i + 1)
+            else:
+                # For word starting with non-vowels, move 1st char to tail and append repeated a's.
+                words[i] = w[1:] + w[0] + 'ma' + 'a' * (i + 1)
+
+        return ' '.join(words)
 
 
 def main():
-    pass
+    # Output: "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
+    S = "I speak Goat Latin"
+    print SolutionSplitWordList().toGoatLatin(S)
+
+    # Output: "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
+    S = "The quick brown fox jumped over the lazy dog"
+    print SolutionSplitWordList().toGoatLatin(S)
 
 
 if __name__ == '__main__':
