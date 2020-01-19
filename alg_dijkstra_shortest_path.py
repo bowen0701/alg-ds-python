@@ -27,7 +27,7 @@ def dijkstra_shortest_path(w_graph_d, v_start):
             if (distance_d[v_neighbor] > distance_d[v] + w_graph_d[v][v_neighbor]):
                 distance_d[v_neighbor] = distance_d[v] + w_graph_d[v][v_neighbor]
 
-                # Push neighbor node with its distance into minheap.
+                # Push neighbor node to minheap, for starting from node with min distance.
                 heapq.heappush(visit_minhq, (distance_d[v_neighbor], v_neighbor))
 
     return distance_d
