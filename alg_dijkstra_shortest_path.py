@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from ds_min_heap_attribute import MinHeapAttribute
+import heapq
 
 
 def dijkstra_shortest_path(w_graph_d, v_start):
@@ -15,17 +15,20 @@ def dijkstra_shortest_path(w_graph_d, v_start):
     distance_d = {v: float('inf') for v in w_graph_d.keys()}
     distance_d[v_start] = 0
     
-    visited_pq = MinHeapAttribute()    
-    visited_pq.insert([0, v_start])
+    visit_minhq = []
+    heapq.heappush(visit_minhq, (0, v_start))
 
-    while visited_pq.size > 0:
-        k, v = visited_pq.extract_min()
+    while visit_minhq:
+        # Extrac node with min weight.
+        k, v = heapq.heappop(visit_minhq)
 
+        # BFS for node's neighbors, update distance if shorter through this node.
         for v_neighbor in w_graph_d[v].keys():
-            if (distance_d[v_neighbor] > 
-                    distance_d[v] + w_graph_d[v][v_neighbor]):
+            if (distance_d[v_neighbor] > distance_d[v] + w_graph_d[v][v_neighbor]):
                 distance_d[v_neighbor] = distance_d[v] + w_graph_d[v][v_neighbor]
-                visited_pq.insert([distance_d[v_neighbor], v_neighbor])
+
+                # Push neighbor node with its distance into minheap.
+                heapq.heappush(visit_minhq, (distance_d[v_neighbor], v_neighbor))
 
     return distance_d
 
