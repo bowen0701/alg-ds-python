@@ -60,8 +60,8 @@ class SolutionOrderValsDictSortedLevelOrderValsDict(object):
         from collections import defaultdict
         from collections import deque
 
-        # Create dict: order->list(vals).
-        order_vals_d = defaultdict(list)
+        # Create dict: vertical order->list(vals).
+        vorder_vals_d = defaultdict(list)
 
         # Apply level traversal by queue.
         queue = deque([(root, 0)])
@@ -79,12 +79,12 @@ class SolutionOrderValsDictSortedLevelOrderValsDict(object):
                 if current.right:
                     queue.appendleft((current.right, order + 1))
 
-            # After level traversal, append sorted vals to order_vals_d.
+            # After level traversal, append sorted vals to vorder_vals_d.
             for order, vals in level_order_vals_d.items():
-                order_vals_d[order].extend(sorted(vals))
+                vorder_vals_d[order].extend(sorted(vals))
 
         # Sort dict by order to return vals.
-        return [vals for order, vals in sorted(order_vals_d.items())]
+        return [vals for order, vals in sorted(vorder_vals_d.items())]
 
 
 def main():
@@ -116,7 +116,7 @@ def main():
     root.left.left = TreeNode(3)
     root.left.right = None
     root.right.left = None
-    root.right.right = Nones
+    root.right.right = None
     root.left.left.left = TreeNode(4)
     root.left.left.right = TreeNode(5)
     root.left.left.left.right = TreeNode(7)
