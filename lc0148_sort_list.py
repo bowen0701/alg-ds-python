@@ -29,23 +29,23 @@ class SolutionMergeSortRecur(object):
         if not l1 or not l2:
             return l1 or l2
 
-        prev = ListNode(None)
-        current = prev
+        prev_head = ListNode(None)
+        cur = prev_head
 
         while l1 and l2:
             if l1.val <= l2.val:
-                current.next = l1
+                cur.next = l1
                 l1 = l1.next
             else:
-                current.next = l2
+                cur.next = l2
                 l2 = l2.next
 
-            current = current.next
+            cur = cur.next
 
         # Link the remaining non-empty list.
-        current.next = l1 or l2
+        cur.next = l1 or l2
 
-        return prev.next
+        return prev_head.next
 
 
     def sortList(self, head):
@@ -84,51 +84,52 @@ class SolutionMergeSortIterBottomUp(object):
     def _get_length(self, head):
         """Get list length."""
         length = 0
-        current = head
+        cur = head
 
-        while current:
+        while cur:
             length += 1
-            current = current.next
+            cur = cur.next
 
         return length
 
     def _split(self, head, step):
-        """Split list with length equal to step, and return next head."""
+        # Split list with length equal to step.
         counter = 1
-        current = head
-        while current and counter < step:
-            current = current.next
+        cur = head
+        while cur and counter < step:
+            cur = cur.next
             counter += 1
 
-        if not current:
+        if not cur:
             return None
 
-        next_head = current.next
-        current.next = None
+        # Disconnect the previous node and next head.
+        next_head = cur.next
+        cur.next = None
         return next_head
 
     def _merge(self, l1, l2, head):
-        """Merge two lists and return next head."""
-        current = head
+        # Merge two sorted lists.
+        cur = head
 
         # Merge two soreted lists.
         while l1 and l2:
             if l1.val <= l2.val:
-                current.next = l1
+                cur.next = l1
                 l1 = l1.next
             else:
-                current.next = l2
+                cur.next = l2
                 l2 = l2.next
-            current = current.next
+            cur = cur.next
 
         # Connect the remaining list node.
-        current.next = l1 or l2
+        cur.next = l1 or l2
 
         # Arrive at the end of merged list.
-        while current.next:
-            current = current.next
+        while cur.next:
+            cur = cur.next
 
-        next_head = current
+        next_head = cur
         return next_head
 
     def sortList(self, head):
@@ -140,34 +141,34 @@ class SolutionMergeSortIterBottomUp(object):
         Space complexity: O(1).
         """
         # Apply iterative bottom-up merge sort with merging sorted lists.
-
         if not head or not head.next:
             return head
 
         # Get the list length.
         length = self._get_length(head)
 
-        # Iterate over list with step = 1 (and then double step size):
-        # - split into 2 lists, with tracking next head, and 
-        # - merge sorted lists.
-        prev = ListNode(None)
-        prev.next = head     
+        # Merge to sorted lists of length step, and increment step.
+        prev_head = ListNode(None)
+        prev_head.next = head
         step = 1
 
         while step < length:
-            current = prev.next
-            next_head = prev
+            cur = prev_head.next
+            next_head = prev_head
 
-            while current:
-                l1 = current
+            while cur:
+                # Split to separate lists of length step.
+                l1 = cur
                 l2 = self._split(l1, step)
-                current = self._split(l2, step)
+                cur = self._split(l2, step)
+
+                # Merge to a sorted list.
                 next_head = self._merge(l1, l2, next_head)
 
             # Double step size.
             step *= 2
 
-        return prev.next
+        return prev_head.next
 
 
 def main():
