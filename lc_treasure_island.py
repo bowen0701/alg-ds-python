@@ -43,17 +43,18 @@ class SolutionBFSSteps(object):
         Time complexity: O(r*c).
         Space complexity: O(r*c).
         """
+        from collections import deque
+
         if not grid or not grid[0]:
             return -1
 
         n_rows, n_cols = len(grid), len(grid[0])
 
         # Apply BFS using queue for shortest route.
-        queue = [(0, 0)]
+        queue = deque([(0, 0)])
 
         # Update grid to mark (0, 0) as visited.
         grid[0][0] = 'D'
-
         steps = 0
 
         while queue:
@@ -63,20 +64,20 @@ class SolutionBFSSteps(object):
                 # Visiting directions.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
 
-                for r_neighbor, c_neighbor in dirs:
+                for r_next, c_next in dirs:
                     # If is out of boundary or visited, skip visiting.
-                    if (r_neighbor < 0 or r_neighbor >= n_rows or 
-                        c_neighbor < 0 or c_neighbor >= n_cols or
-                        grid[r_neighbor][c_neighbor] == 'D'):
+                    if (r_next < 0 or r_next >= n_rows or 
+                        c_next < 0 or c_next >= n_cols or
+                        grid[r_next][c_next] == 'D'):
                         continue
 
-                    if grid[r_neighbor][c_neighbor] == 'X':
+                    if grid[r_next][c_next] == 'X':
                         return steps + 1
                     
-                    if grid[r_neighbor][c_neighbor] == 'O':
+                    if grid[r_next][c_next] == 'O':
                         # Update grid to mark as visited.
-                        grid[r_neighbor][c_neighbor] = 'D'
-                        queue.insert(0, (r_neighbor, c_neighbor))
+                        grid[r_next][c_next] = 'D'
+                        queue.appendleft((r_next, c_next))
 
             steps += 1
 
@@ -93,6 +94,7 @@ class SolutionBFSAllSteps(object):
         Space complexity: O(r*c).
         """
         from collections import defaultdict
+        from collections import deque
 
         if not grid or not grid[0]:
             return -1
@@ -100,7 +102,7 @@ class SolutionBFSAllSteps(object):
         n_rows, n_cols = len(grid), len(grid[0])
 
         # Apply BFS using queue for shortest route.
-        queue = [(0, 0)]
+        queue = deque([(0, 0)])
 
         # Update grid to mark (0, 0) as visited.
         grid[0][0] = 'D'
@@ -115,25 +117,25 @@ class SolutionBFSAllSteps(object):
                 # Visiting directions.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
 
-                for r_neighbor, c_neighbor in dirs:
+                for r_next, c_next in dirs:
                     # If is out of boundary or visited, skip visiting.
-                    if (r_neighbor < 0 or r_neighbor >= n_rows or 
-                        c_neighbor < 0 or c_neighbor >= n_cols or
-                        grid[r_neighbor][c_neighbor] == 'D'):
+                    if (r_next < 0 or r_next >= n_rows or 
+                        c_next < 0 or c_next >= n_cols or
+                        grid[r_next][c_next] == 'D'):
                         continue
 
-                    if grid[r_neighbor][c_neighbor] == 'X':
+                    if grid[r_next][c_next] == 'X':
                         # Update the desitination's distance.
-                        steps_d[(r_neighbor, c_neighbor)] =  steps_d[(r, c)] + 1
+                        steps_d[(r_next, c_next)] = steps_d[(r, c)] + 1
                         break
                     
-                    if grid[r_neighbor][c_neighbor] == 'O':
+                    if grid[r_next][c_next] == 'O':
                         # Update grid to mark as visited.
-                        grid[r_neighbor][c_neighbor] = 'D'
+                        grid[r_next][c_next] = 'D'
 
                         # Update the neighbor's distance.
-                        steps_d[(r_neighbor, c_neighbor)] =  steps_d[(r, c)] + 1
-                        queue.insert(0, (r_neighbor, c_neighbor))
+                        steps_d[(r_next, c_next)] = steps_d[(r, c)] + 1
+                        queue.appendleft((r_next, c_next))
 
         if steps_d.get((n_rows - 1, 0)):
             return steps_d[(n_rows - 1, 0)]
