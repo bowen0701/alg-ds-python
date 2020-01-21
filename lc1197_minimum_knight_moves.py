@@ -16,30 +16,70 @@ It is guaranteed the answer exists.
 Example 1:
 Input: x = 2, y = 1
 Output: 1
-Explanation: [0, 0] → [2, 1]
+Explanation: [0, 0] -> [2, 1]
 
 Example 2:
 Input: x = 5, y = 5
 Output: 4
-Explanation: [0, 0] → [2, 1] → [4, 2] → [3, 4] → [5, 5]
+Explanation: [0, 0] -> [2, 1] -> [4, 2] -> [3, 4] -> [5, 5]
 
 Constraints:
 |x| + |y| <= 300
 """
 
 
-class Solution(object):
+class SolutionNaiveBFS(object):
     def minKnightMoves(self, x, y):
         """
         :type x: int
         :type y: int
         :rtype: int
         """
-        pass
+        # Apply naive BFS from source (x, y) to search (0, 0), with seen_set.
+        from collections import deque
+
+        # Edge case.
+        if (x, y) == (0, 0):
+            return 0
+
+        # Apply iterative BFS with queue for traversal and seen set for marking visited.         
+        queue = deque([(x, y)])
+        seen_set = set([(x, y)])
+        step = 0
+
+        while queue:
+            for i in range(len(queue)):
+                r, c = queue.pop()
+
+                # Directions for knight moves.
+                dirs = [
+                    (r + 1, c + 2), (r + 1, c - 2), 
+                    (r - 1, c + 2), (r - 1, c - 2),
+                    (r + 2, c + 1), (r + 2, c - 1), 
+                    (r - 2, c + 1), (r - 2, c - 1)
+                ]
+
+                for r_next, c_next in dirs:
+                    if (r_next, c_next) not in seen_set:
+                        if (r_next, c_next) == (0, 0):
+                            return step + 1
+                        else:
+                            seen_set.add((r_next, c_next))
+                            queue.appendleft((r_next, c_next))
+
+            step += 1
 
 
 def main():
-    pass
+    # Output: 1
+    x = 2
+    y = 1
+    print SolutionNaiveBFS().minKnightMoves(x, y)
+
+    # Output: 4
+    x = 5
+    y = 5
+    print SolutionNaiveBFS().minKnightMoves(x, y)
 
 
 if __name__ == '__main__':
