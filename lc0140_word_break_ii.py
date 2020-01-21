@@ -41,18 +41,76 @@ Output:
 []
 """
 
-class Solution(object):
+class SolutionDPBacktrackDFS(object):
+    def _check_word_break(self, s, wordDict):
+        # Apply DP with T, where T[i] denotes s[:i] is segmented.
+        n = len(s)
+        T = [False] * (n + 1)
+
+        # Edge case: empty string is segmented.
+        T[0] = True
+
+        # Iterate to check if s[:i] is segmented, and the remaining of s in dict.
+        for i in range(n):
+            for j in range(i + 1, n + 1):
+                if T[i] and s[i:j] in wordDict:
+                    T[j] = True
+
+        return T
+
+    def _backtrack(self, result, temp, s, wordDict):
+        # Append temp string if arrived at the end of s, with the last char ' '.
+        if not s:
+            result.append(temp[:-1])
+            return None
+
+        # Check if the 1st part of s is in dict, if yes, apply DFS for the remaining s.
+        for i in range(1, len(s) + 1):
+            if s[:i] in wordDict:
+                self._backtrack(
+                    result, temp + s[:i] + ' ', s[i:], wordDict)
+
     def wordBreak(self, s, wordDict):
         """
         :type s: str
         :type wordDict: List[str]
         :rtype: List[str]
+
+        Time complexity: O(n^3+n*2^n)=O(n*n^2), where n is the length of s.
+        Space complexity: O(n^2).
         """
-        pass
+        # Apply backtracking:
+        # - check if s can be segmented by word break I.
+        # - if yes, apply DFS to search remaining part of s.
+
+        # Edge case.
+        if not s:
+            return []
+
+        # Use set for quick lookup.
+        wordDict = set(wordDict)
+
+        # Check if s can be segmented.
+        T = self._check_word_break(s, wordDict)
+        if not T[-1]:
+            return []
+
+        # Apply backtracking DFS to collect sentences.
+        result = []
+        temp = ''
+        self._backtrack(result, temp, s, wordDict)
+        return result
 
 
 def main():
-    pass
+    # Output:
+    # [
+    #   "cats and dog",
+    #   "cat sand dog"
+    # ]
+    s = "catsanddog"
+    wordDict = ["cat", "cats", "and", "sand", "dog"]
+    print SolutionDPBacktrackDFS().wordBreak(s, wordDict)
 
 
 if __name__ == '__main__':
