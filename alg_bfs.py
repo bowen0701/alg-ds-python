@@ -16,20 +16,23 @@ def bfs(graph_adj_d, v_start):
     Time complexity: O(|V|+|E|).
     Space complexity: O(|V|).
     """
+    from collections import deque
+
     # Create distance dict.
     distance_d = {v: float('inf') for v in graph_adj_d}
     distance_d[v_start] = 0
 
-    # Apply BFS with queue for shortest distance.
-    queue = [v_start]
+    # Apply iterative BFS with queue.
+    queue = deque([v_start])
     
     while queue:
         v = queue.pop()
         for v_neighbor in graph_adj_d[v]:
             # If v_neighbor is not visited.
             if distance_d[v_neighbor] == float('inf'):
-                queue.insert(0, v_neighbor)
+                queue.appendleft(v_neighbor)
                 distance_d[v_neighbor] = distance_d[v] + 1
+
     return distance_d
 
 
