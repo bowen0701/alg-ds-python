@@ -40,7 +40,7 @@ class SolutionDp(object):
           - k is the max length of words.
         Space complexity: O(max(n, k)).
         """
-        # Apply DP with tabular T, where T[i] denotes if s[:i+1] can be segmented.
+        # Apply DP with tabular T, where T[i] denotes if s[:i] can be segmented.
         n = len(s)        
         T = [False] * (n + 1)
 
@@ -72,7 +72,7 @@ class SolutionDp2(object):
           - k is the max length of words.
         Space complexity: O(max(m, n, k)).
         """
-        # Apply DP with tabular T, where T[i] denotes if s[:i+1] can be segmented.
+        # Apply DP with tabular T, where T[i] denotes if s[:i] can be segmented.
         n = len(s)        
         T = [False] * (n + 1)
 
@@ -85,7 +85,7 @@ class SolutionDp2(object):
         for i in range(n):
             for j in range(i + 1, n + 1):
                 if T[i] and s[i:j] in wordDict:
-                    # Check if s[:i-1] and s[i:j] are in dict.
+                    # Check if s[:i] and s[i:j] are in dict.
                     T[j] = True
 
         return T[-1]
