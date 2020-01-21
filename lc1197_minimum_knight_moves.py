@@ -42,7 +42,7 @@ class SolutionNaiveBFS(object):
         if (x, y) == (0, 0):
             return 0
 
-        # Apply iterative BFS with queue for traversal and seen set for marking visited.         
+        # Apply iterative BFS with queue for traversal and seen set for marking visited.
         queue = deque([(x, y)])
         seen_set = set([(x, y)])
         step = 0
@@ -70,16 +70,67 @@ class SolutionNaiveBFS(object):
             step += 1
 
 
+class SolutionBFS(object):
+    def minKnightMoves(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        # Apply BFS from source (x, y) to search (0, 0), with seen_set.
+        # - Based on symmetry, search (|x|, |y|) from (0, 0).
+        # - Search only in 1st quadrant.
+
+        from collections import deque
+
+        # Edge case.
+        if (x, y) == (0, 0):
+            return 0
+
+        # Apply iterative BFS with queue for traversal and seen set for marking visited.
+        # Based on symmetry, search (|x|, |y|) from (0, 0).
+        x, y = abs(x), abs(y)
+        queue = deque([(0, 0)])
+        seen_set = set([(0, 0)])
+        step = 0
+
+        while queue:
+            for i in range(len(queue)):
+                r, c = queue.pop()
+
+                # Directions for knight moves.
+                dirs = [
+                    (r + 1, c + 2), (r + 1, c - 2), 
+                    (r - 1, c + 2), (r - 1, c - 2),
+                    (r + 2, c + 1), (r + 2, c - 1), 
+                    (r - 2, c + 1), (r - 2, c - 1)
+                ]
+
+                for r_next, c_next in dirs:
+                    # Search if not seen and only in 1st quadrant.
+                    if ((r_next, c_next) not in seen_set and
+                        r_next > -2 and c_next > -2):
+                        if (r_next, c_next) == (x, y):
+                            return step + 1
+                        else:
+                            seen_set.add((r_next, c_next))
+                            queue.appendleft((r_next, c_next))
+
+            step += 1
+
+
 def main():
     # Output: 1
     x = 2
     y = 1
     print SolutionNaiveBFS().minKnightMoves(x, y)
+    print SolutionBFS().minKnightMoves(x, y)
 
     # Output: 4
     x = 5
     y = 5
     print SolutionNaiveBFS().minKnightMoves(x, y)
+    print SolutionBFS().minKnightMoves(x, y)
 
 
 if __name__ == '__main__':
