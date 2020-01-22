@@ -12,7 +12,6 @@ Note: A leaf is a node with no children.
 
 Example:
 Given binary tree [3,9,20,null,null,15,7],
-
     3
    / \
   9  20
@@ -23,23 +22,55 @@ return its minimum depth = 2.
 
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
+    def __init__(self, val):
+        self.val = val
         self.left = None
         self.right = None
 
 
-class Solution(object):
+class SolutionRecur(object):
     def minDepth(self, root):
         """
         :type root: TreeNode
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        # Edge case.
+        if not root:
+            return 0
+
+        # If min depth > 0, return 1 + min depth; otherwise, return 1 + max depth.
+        left_depth = self.minDepth(root.left)
+        right_depth = self.minDepth(root.right)
+        min_depth = min(left_depth, right_depth)
+        if min_depth > 0:
+            return 1 + min_depth
+        else:
+            return 1 + max(left_depth, right_depth)
 
 
 def main():
-    pass
+    # Tree: [1, 2]
+    # Output: 2
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    print SolutionRecur().minDepth(root)
+
+    # Tree: [3,9,20,null,null,15,7],
+    #     3
+    #    / \
+    #   9  20
+    #     /  \
+    #    15   7
+    # return its minimum depth = 2.
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)    
+    print SolutionRecur().minDepth(root)
 
 
 if __name__ == '__main__':
