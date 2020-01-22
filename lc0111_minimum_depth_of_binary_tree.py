@@ -51,12 +51,46 @@ class SolutionRecur(object):
             return 1 + max(left_depth, right_depth)
 
 
+class SolutionLevelBFS(object):
+    def minDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        from collections import deque
+
+        # Apply level-traversal BFS with queue.
+        if not root:
+            return 0
+
+        queue = deque([root])
+        level = 0
+
+        while queue:
+            level += 1
+
+            for i in range(len(queue)):
+                current = queue.pop()
+
+                if current.left:
+                    queue.appendleft(current.left)
+                if current.right:
+                    queue.appendleft(current.right)
+
+                if not current.left and not current.right:
+                    return level
+
+
 def main():
     # Tree: [1, 2]
     # Output: 2
     root = TreeNode(1)
     root.left = TreeNode(2)
     print SolutionRecur().minDepth(root)
+    print SolutionLevelBFS().minDepth(root)
 
     # Tree: [3,9,20,null,null,15,7],
     #     3
@@ -71,6 +105,7 @@ def main():
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)    
     print SolutionRecur().minDepth(root)
+    print SolutionLevelBFS().minDepth(root)
 
 
 if __name__ == '__main__':
