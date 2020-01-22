@@ -6,7 +6,6 @@ URL: https://leetcode.com/problems/count-complete-tree-nodes/
 Given a complete binary tree, count the number of nodes.
 
 Note:
-
 Definition of a complete binary tree from Wikipedia:
 In a complete binary tree every level, except possibly the last,
 is completely filled, and all nodes in the last level are as far left as
@@ -82,10 +81,10 @@ class SolutionPreorderIter(object):
 
 
 class SolutionLeftRightDepths(object):
-    def _countDepth(self, root):
+    def _countLeftDepth(self, root):
         if not root:
             return 0
-        return 1 + self._countDepth(root.left)
+        return 1 + self._countLeftDepth(root.left)
 
     def countNodes(self, root):
         """
@@ -99,15 +98,15 @@ class SolutionLeftRightDepths(object):
             return 0
 
         # Compare left & right subtrees's depths.
-        depth_left = self._countDepth(root.left)
-        depth_right = self._countDepth(root.right)
+        depth_left = self._countLeftDepth(root.left)
+        depth_right = self._countLeftDepth(root.right)
 
         if depth_left == depth_right:
             # If left & right depths are equal, the left subtree is full.
-            return pow(2, depth_left) + self.countNodes(root.right)
+            return pow(2, depth_left) + self._countLeftDepth(root.right)
         else:
             # If not, the right subtree is full, and the left depth is bigger.
-            return self.countNodes(root.left) + pow(2, depth_right)
+            return self._countLeftDepth(root.left) + pow(2, depth_right)
 
 
 def main():
