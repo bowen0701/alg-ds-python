@@ -32,17 +32,57 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionLevelorderOneByOneIter(object):
     def isCompleteTree(self, root):
         """
         :type root: TreeNode
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for complete tree, O(n) for singly linked list.
         """
-        pass
+        from collections import deque
+
+        # Apply level-order traversal with queue to collect all nodes one by ones.
+        queue = deque([root])
+
+        # Stop collection until met empty node.
+        while queue and queue[-1]:
+            print queue
+            current = queue.pop()
+            if not current:
+                break
+
+            queue.appendleft(current.left)
+            queue.appendleft(current.right)            
+
+        # Pop empty nodes until met node, then check if queue is empty or not.
+        while queue and not queue[-1]:
+            queue.pop()
+
+        return not queue
 
 
 def main():
-    pass
+    # Input: [1,2,3,4,5,6]
+    # Output: true
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.left = TreeNode(6)
+    print SolutionLevelorderOneByOneIter().isCompleteTree(root)
+
+    # Input: [1,2,3,4,5,null,7]
+    # Output: false
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.right = TreeNode(7)
+    print SolutionLevelorderOneByOneIter().isCompleteTree(root)
 
 
 if __name__ == '__main__':
