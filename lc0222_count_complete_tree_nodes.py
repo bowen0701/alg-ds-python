@@ -80,6 +80,33 @@ class SolutionPreorderIter(object):
         return n_nodes
 
 
+class SolutionLevelorderIter(object):
+    def countNodes(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
+        """
+        from collections import deque
+
+        queue = deque([root])
+        n_nodes = 0
+
+        while queue:
+            for i in range(len(queue)):
+                current = queue.pop()
+                n_nodes += 1
+
+                if current.left:
+                    queue.appendleft(current.left)
+                if current.right:
+                    queue.appendleft(current.right)
+
+        return n_nodes
+
+
 class SolutionLeftRightDepths(object):
     def _countLeftDepth(self, root):
         if not root:
@@ -126,6 +153,7 @@ def main():
 
     print SolutionPreorderRecur().countNodes(root)
     print SolutionPreorderIter().countNodes(root)
+    print SolutionLevelorderIter().countNodes(root)
     print SolutionLeftRightDepths().countNodes(root)
 
 
