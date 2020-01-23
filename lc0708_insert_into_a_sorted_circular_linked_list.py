@@ -51,7 +51,7 @@ class SolutionTwoPointersIter(object):
         :rtype: Node
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(1s).
         """
         # Edge case for empty head with circular link.
         if not head:
