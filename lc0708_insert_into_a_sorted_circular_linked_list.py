@@ -43,18 +43,81 @@ class Node(object):
         self.next = next
 
 
-class Solution(object):
+class SolutionTwoPointersIter(object):
     def insert(self, head, insertVal):
         """
         :type head: Node
         :type insertVal: int
         :rtype: Node
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        # Edge case for empty head with circular link.
+        if not head:
+            head = Node(val=insertVal)
+            head.next = head
+            return head
+
+        # Iterate to move two pointers: previous & current, until
+        # insert is in the middle of previous & current, or
+        # insert is out of range of previous & current.
+        previous = head
+        current = head.next
+        while (not (previous.val <= insertVal and insertVal <= current.val) and
+               not (previous.val > current.val and insertVal < current.val) and
+               not (previous.val > current.val and insertVal > previous.val)):
+            previous = previous.next
+            current = current.next
+
+            if current is head:
+                break
+
+        # Connect previous to new node to current.
+        previous.next = Node(val=insertVal, next=current)
+
+        return head
 
 
 def main():
-    pass
+    # Input: head = [3,4,1]
+    # Output: [3,4,1,2]
+    head = Node(val=3)
+    head.next = Node(val=4)
+    head.next.next = Node(val=1)
+    head.next.next.next = head    
+    insertVal = 2
+    new_head = SolutionTwoPointersIter().insert(head, insertVal)
+    print (new_head.val, new_head.next.val, 
+           new_head.next.next.val, new_head.next.next.next.val,
+           new_head.next.next.next.next.val)
+
+    # Input: head = []
+    # Output: [1]
+    head = None
+    insertVal = 1
+    new_head = SolutionTwoPointersIter().insert(head, insertVal)
+    print (new_head.val, new_head.next.val)
+
+    # Input: head = [1]
+    # Output: [1,0]
+    head = Node(1)
+    head.next = head
+    insertVal = 0
+    new_head = SolutionTwoPointersIter().insert(head, insertVal)
+    print (new_head.val, new_head.next.val, new_head.next.next.val)
+
+    # Input: head = [3,5,1]
+    # Output: [3,5,0,1]
+    head = Node(val=3)
+    head.next = Node(val=5)
+    head.next.next = Node(val=1)
+    head.next.next.next = head
+    insertVal = 0
+    new_head = SolutionTwoPointersIter().insert(head, insertVal)
+    print (new_head.val, new_head.next.val, 
+           new_head.next.next.val, new_head.next.next.next.val,
+           new_head.next.next.next.next.val)
 
 
 if __name__ == '__main__':
