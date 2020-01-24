@@ -29,6 +29,9 @@ class SolutionMapDictIter(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        if not num:
+            return True
+
         # Reverse num.
         rev_num = num[::-1]
 
@@ -53,22 +56,62 @@ class SolutionMapDictIter(object):
         return mapped_num == num
 
 
+class SolutionTwoPointersIter(object):
+    def isStrobogrammatic(self, num):
+        """
+        :type num: str
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if not num:
+            return True
+
+        # Use two pointers from two sides: left & right.
+        left, right = 0, len(num) - 1
+
+        # Create mapping table.
+        map_d = {
+            '0': '0',
+            '1': '1',
+            '6': '9',
+            '8': '8',
+            '9': '6'
+        }
+
+        # Check if two pointers's char can be mapped.
+        # If yes, move two pointers to middle; if not return False.
+        while left <= right:
+            if num[right] not in map_d or num[left] != map_d[num[right]]:
+                return False
+
+            left += 1
+            right -= 1
+
+        return True
+
+
 def main():
     # Output: true
     num = "69"
     print SolutionMapDictIter().isStrobogrammatic(num)
+    print SolutionTwoPointersIter().isStrobogrammatic(num)
 
     # Output: true
     num = "88"
     print SolutionMapDictIter().isStrobogrammatic(num)
+    print SolutionTwoPointersIter().isStrobogrammatic(num)
 
     # Output: false
     num = "962"
     print SolutionMapDictIter().isStrobogrammatic(num)
+    print SolutionTwoPointersIter().isStrobogrammatic(num)
 
     # Output: false
     num = "2"
     print SolutionMapDictIter().isStrobogrammatic(num)
+    print SolutionTwoPointersIter().isStrobogrammatic(num)
 
 
 if __name__ == '__main__':
