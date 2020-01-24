@@ -20,27 +20,55 @@ Output: false
 """
 
 
-class Solution(object):
+class SolutionMapDictIter(object):
     def isStrobogrammatic(self, num):
         """
         :type num: str
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        # Reverse num.
+        rev_num = num[::-1]
+
+        # Convert to mapped number or empty string.
+        map_d = {
+            '0': '0',
+            '1': '1',
+            '6': '9',
+            '8': '8',
+            '9': '6'
+        }
+
+        mapped_num_ls = []
+        for n in rev_num:
+            if n in map_d:
+                mapped_num_ls.append(map_d[n])
+            else:
+                mapped_num_ls.append(' ')
+        mapped_num = ''.join(mapped_num_ls)
+
+        # Check if strobogrammatic.
+        return mapped_num == num
 
 
 def main():
     # Output: true
     num = "69"
-    print Solution().isStrobogrammatic(num)
+    print SolutionMapDictIter().isStrobogrammatic(num)
 
     # Output: true
     num = "88"
-    print Solution().isStrobogrammatic(num)
+    print SolutionMapDictIter().isStrobogrammatic(num)
 
     # Output: false
     num = "962"
-    print Solution().isStrobogrammatic(num)
+    print SolutionMapDictIter().isStrobogrammatic(num)
+
+    # Output: false
+    num = "2"
+    print SolutionMapDictIter().isStrobogrammatic(num)
 
 
 if __name__ == '__main__':
