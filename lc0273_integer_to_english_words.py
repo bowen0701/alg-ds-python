@@ -24,7 +24,7 @@ Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven
 Thousand Eight Hundred Ninety One"
 """
 
-class SolutionPowersOfThousandRecur(object):
+class SolutionLessThan20TensPowersOfThousandsRecur(object):
     def _wordsRecur(self, num):
         # Return empty array for exact matched case.
         if not num:
@@ -72,20 +72,20 @@ class SolutionPowersOfThousandRecur(object):
 def main():
     # Output: "One Hundred Twenty Three"
     num = 123
-    print SolutionPowersOfThousandRecur().numberToWords(num)
+    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
 
     # Output: "Twelve Thousand Three Hundred Forty Five"
     num = 12345
-    print SolutionPowersOfThousandRecur().numberToWords(num)
+    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
 
     # Output: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
     num = 1234567
-    print SolutionPowersOfThousandRecur().numberToWords(num)
+    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
 
     # Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven 
     #          Thousand Eight Hundred Ninety One"
     num = 1234567891
-    print SolutionPowersOfThousandRecur().numberToWords(num)
+    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
 
 
 if __name__ == '__main__':
