@@ -77,7 +77,7 @@ class SolutionMergeTwoRecur(object):
 
         Merge each pair of two lists at a time. 
 
-        Time complexity: O(kn*logk), where
+        Time complexity: O(nk*logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
         Space complexity: O(logk).
@@ -85,16 +85,16 @@ class SolutionMergeTwoRecur(object):
         if not lists:
             return None
 
-        n_lists = len(lists)
+        n = len(lists)
 
         # When there are at least two lists, merge them.
-        while n_lists > 1:
+        while n > 1:
             # Merge each pair of leftmost & rightmost lists to the former.
-            for i in range(n_lists // 2):
-                lists[i] = self._merge2Lists(lists[i], lists[n_lists - 1 - i])
+            for i in range(n // 2):
+                lists[i] = self._merge2Lists(lists[i], lists[n - 1 - i])
 
-            # Decrement n_lists to half.
-            n_lists = (n_lists + 1) // 2
+            # Decrement n to half.
+            n = (n + 1) // 2
 
         return lists[0]
 
@@ -128,7 +128,7 @@ class SolutionMergeTwoIter(object):
         :type lists: List[ListNode]
         :rtype: ListNode
 
-        Time complexity: O(kn*logk), where
+        Time complexity: O(nk*logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
         Space complexity: O(1).
@@ -136,16 +136,16 @@ class SolutionMergeTwoIter(object):
         if not lists:
             return None
 
-        n_lists = len(lists)
+        n = len(lists)
 
         # When there are at least two lists, merge them.
-        while n_lists > 1:
+        while n > 1:
             # Merge each pair of leftmost & rightmost lists to the former.
-            for i in range(n_lists // 2):
-                lists[i] = self._merge2Lists(lists[i], lists[n_lists - 1 - i])
+            for i in range(n // 2):
+                lists[i] = self._merge2Lists(lists[i], lists[n - 1 - i])
 
-            # Decrement n_lists to half.
-            n_lists = (n_lists + 1) // 2
+            # Decrement n to half.
+            n = (n + 1) // 2
 
         return lists[0]
 
@@ -156,7 +156,7 @@ class SolutionMinHeap(object):
         :type lists: List[ListNode]
         :rtype: ListNode
 
-        Time complexity: O(kn*logk), where
+        Time complexity: O(nk*logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
         Space complexity: O(k).
