@@ -52,7 +52,7 @@ class SolutionLeftRightProducts(object):
             elif i == n - 1:
                 # Rightmost = neighbor's left product.
                 prods[i] = left_prods[i - 1]
-            if 1 <= i <= n - 2:
+            else:  # 1 <= i <= n - 2:
                 # Middles = product of neighbors's left & right products.
                 prods[i] = left_prods[i - 1] * right_prods[i + 1]
 
@@ -66,7 +66,7 @@ class SolutionLeftRightProducts2(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         n = len(nums)
         prods = [1] * n
