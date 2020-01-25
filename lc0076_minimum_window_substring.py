@@ -31,43 +31,41 @@ class SolutionCharCountDictTwoPointers(object):
         """
         from collections import defaultdict
 
-        s_len, t_len = len(s), len(t)
-
-        # Use dict to collect char counts of t.
-        t_char_counts = defaultdict(int)
+        # Use dict to collect t's char->count.
+        t_char_count_d = defaultdict(int)
         for c in t:
-            t_char_counts[c] += 1
+            t_char_count_d[c] += 1
 
-        # Track min left & len, and counter.
+        # Track min left & len, and t_counter.
         min_left = 0
         min_len = float('inf')
-        counter = t_len
 
-        ### s = "ADOBECODEBANC"; t = "ABC"
-        # Apply two pointers method with left & right from head as a window.
+        t_counter = len(t)
+
+        # Apply two pointers with left & right from head as a window.
         left, right = 0, 0
 
         # In s, move right to increase window to satify t.
-        while right < s_len:
-            # If the char exits in t, decrement counter.
-            if t_char_counts[s[right]] > 0:
-                counter -= 1
+        while right < len(s):
+            # If right char exits in t, decrement t_counter.
+            if t_char_count_d[s[right]] > 0:
+                t_counter -= 1
 
-            # Decrement t_char_counts and increment right.
-            t_char_counts[s[right]] -= 1
+            # Decrement t_char_count_d and increment right.
+            t_char_count_d[s[right]] -= 1
             right += 1
 
-            # While we found valid window, move left to shorten it.
-            while counter == 0:
+            # While window satisfies t, move left to shorten it.
+            while t_counter == 0:
                 # Update min_len and min_left if improve min_len.
                 if right - left < min_len:
                     min_len = right - left
                     min_left = left
 
-                # Before increment left, add back t_char_counts & counter.
-                t_char_counts[s[left]] += 1
-                if t_char_counts[s[left]] > 0:
-                    counter += 1
+                # Before increment left, add back t_char_count_d & t_counter.
+                t_char_count_d[s[left]] += 1
+                if t_char_count_d[s[left]] > 0:
+                    t_counter += 1
 
                 left += 1
 
@@ -81,6 +79,10 @@ def main():
     # Output: "BANC"
     s = "ADOBECODEBANC"
     t = "ABC"
+    print SolutionCharCountDictTwoPointers().minWindow(s, t)
+
+    s = "ABBBBBBBBBA"
+    t = "AA"
     print SolutionCharCountDictTwoPointers().minWindow(s, t)
 
 
