@@ -41,7 +41,7 @@ class TreeNode(object):
         self.right = None
 
 
-class CodecValueQueuePreorderRecur(object):
+class CodecHashtagEmptyNodePreorderRecurValueQueue(object):
     def _serializePreorderRecur(self, root, vals):
         if root:
             # Convert int to string for string join.
@@ -110,7 +110,7 @@ def main():
     root.right.left = TreeNode(4)
     root.right.right = TreeNode(5)
 
-    codec = CodecValueQueuePreorderRecur()
+    codec = CodecHashtagEmptyNodePreorderRecurValueQueue()
     data = codec.serialize(root)
     print data
     deserialized_root = codec.deserialize(data)
