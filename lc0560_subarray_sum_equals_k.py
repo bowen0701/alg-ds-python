@@ -46,7 +46,7 @@ class SolutionCusumCountsDict(object):
 
         n_subarrs = 0
         cusum = 0
-        cusum_counts = defaultdict(int)
+        cusum_count_d = defaultdict(int)
         
         for num in nums:
             # Compute cumulative sum.
@@ -58,11 +58,11 @@ class SolutionCusumCountsDict(object):
 
             # If cusum - k exists in cusum counts, 
             # the subarray from (cusum - k) to "current" cusum equals k.
-            if cusum - k in cusum_counts:
-                n_subarrs += cusum_counts[cusum - k]
+            if cusum - k in cusum_count_d:
+                n_subarrs += cusum_count_d[cusum - k]
 
             # Save cusum to cusum counts.
-            cusum_counts[cusum] += 1
+            cusum_count_d[cusum] += 1
 
         return n_subarrs
         
