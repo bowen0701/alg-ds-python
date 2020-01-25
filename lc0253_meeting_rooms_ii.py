@@ -22,7 +22,7 @@ Explanation:
 Only need one meeting room
 """
 
-class SolutionSortEndtimeMinHeap(object):
+class SolutionSortEndMinHeapEnd(object):
     def minMeetingRooms(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -57,11 +57,11 @@ class SolutionSortEndtimeMinHeap(object):
 def main():
     # Output: 2.
     intervals = [[0,30],[5,10],[15,20]]
-    print SolutionSortEndtimeMinHeap().minMeetingRooms(intervals)
+    print SolutionSortEndMinHeapEnd().minMeetingRooms(intervals)
 
     # Output: 1.
     intervals = [[7, 10], [2, 4]]
-    print SolutionSortEndtimeMinHeap().minMeetingRooms(intervals)
+    print SolutionSortEndMinHeapEnd().minMeetingRooms(intervals)
 
 
 if __name__ == '__main__':
