@@ -83,11 +83,14 @@ class NumMatrixDP(object):
         # Create T for memoization of region sum from (0, 0) to (r, c).
         T = [[0] * (ncols + 1) for _ in range(nrows + 1)]
 
+        # Compute top-left range sum:
         # T[r][c] = T[r-1][c] + T[r][c-1] + matrix[r][c] - T[r-1][c-1].
         for r in range(1, nrows + 1):
             for c in range(1, ncols + 1):
-                T[r][c] = (T[r - 1][c] + T[r][c - 1]
-                           + matrix[r - 1][c - 1] - T[r - 1][c - 1])
+                T[r][c] = (T[r - 1][c] 
+                           + T[r][c - 1]
+                           + matrix[r - 1][c - 1]
+                           - T[r - 1][c - 1])
 
         self.T = T
 
@@ -110,10 +113,10 @@ class NumMatrixDP(object):
         row2 += 1
         col2 += 1
 
-        # sumRegion(row1, col1, row2, col2) 
-        # = T[row2][col2] - T[row1-1][col2] - T[row2][col1-1] + T[row1-1][col1-1].
+        # Compute sum region based on top-left range sum. 
         return (self.T[row2][col2]
-                - self.T[row1 - 1][col2] - self.T[row2][col1 - 1]
+                - self.T[row1 - 1][col2]
+                - self.T[row2][col1 - 1]
                 + self.T[row1 - 1][col1 - 1])
 
 
