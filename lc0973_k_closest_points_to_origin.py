@@ -50,13 +50,13 @@ class SolutionMaxHeap(object):
         negdists_points = zip(negdists, points)
 
         # Keep K points in maxheap.
-        for (negdist, point) in negdists_points:
-            heapq.heappush(negdist_point_maxhq, (negdist, point))
+        for (nd, pt) in negdists_points:
+            heapq.heappush(negdist_point_maxhq, (nd, pt))
             
             if len(negdist_point_maxhq) > K:
                 heapq.heappop(negdist_point_maxhq)
 
-        k_points = [point for (negdist, point) in negdist_point_maxhq]
+        k_points = [pt for (nd, pt) in negdist_point_maxhq]
         return k_points
 
 
