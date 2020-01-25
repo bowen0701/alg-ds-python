@@ -26,8 +26,8 @@ class SolutionReverse(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Take lower, convert to list, and keep alphanumetic chars.
-        s_converted = [c for c in list(s.lower()) if 
+        # Take lower and keep alphanumetic chars.
+        s_converted = [c for c in s.lower() if 
                        0 <= ord(c) - ord('a') <= 25 or
                        0 <= ord(c) - ord('0') <= 9]
 
