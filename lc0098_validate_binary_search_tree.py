@@ -39,17 +39,17 @@ class TreeNode(object):
 
 
 class SolutionMinMaxRecur(object):
-    def _isValidBSTUtil(self, current, min_val, max_val):
-        if not current:
+    def _isValidBSTUtil(self, root, min_val, max_val):
+        if not root:
             return True
         
-        if current.val <= min_val or current.val >= max_val:
+        # Validate root's val
+        if root.val <= min_val or root.val >= max_val:
             return False
 
-        # Validate left subtree with min and max=current and
-        # also validate right subtree with min=current and max.
-        return (self._isValidBSTUtil(current.left, min_val, current.val) and
-                self._isValidBSTUtil(current.right, current.val, max_val))
+        # Validate left and right subtrees.
+        return (self._isValidBSTUtil(root.left, min_val, root.val) and
+                self._isValidBSTUtil(root.right, root.val, max_val))
 
     def isValidBST(self, root):
         """
@@ -109,8 +109,7 @@ class SolutionInorderRecur(object):
         # Compare root with its previous.
         if self.previous and self.previous.val >= current.val:
             return False
-
-        # Keep updating previous by current node.
+        # Update previous by current node.
         self.previous = current
 
         # Traverse right tree.
