@@ -22,63 +22,55 @@ Output: [""]
 """
 
 class SolutionTwoPointersDfsRecur(object):
-    def _removeDfs(self, s, result, last_i, last_j, open_par, close_par):
-        # Accumulate parentheses match until ')' are more: count < 0.
-        count = 0
-        i = last_i
-        while i < len(s) and count >= 0:
-            if s[i] == open_par:
-                count += 1
-            if s[i] == close_par:
-                count -= 1
+    def _removeDfs(self, s, result, last_i, last_j, pars):
+        # Increment open / decrement close counter until ')' are more.
+        counter = 0
+        for i in range(last_i, len(s)):
+            if s[i] == pars[0]:
+                counter += 1
+            elif s[i] == pars[1]:
+                counter -= 1
+            if counter >= 0:
+                continue
 
-            i += 1
+            # If counter < 0 with more ')' than '('.
+            for j in range(last_j, len(s)):
+                if s[j] == pars[1] and (j == last_j or s[j - 1] != pars[1]):
+                    self._removeDfs(
+                        s[:j] + s[j+1:], result, i + 1 - 1, j + 1 - 1, pars)
+            return None
 
-        if count < 0:
-            # Get the index of abnormal ')' which makes count < 0: i - 1.
-            i -= 1
-            j = last_j
-            while j <= i:
-                # Remove the 1st ')' only to avoid duplicates.
-                if s[j] == close_par and (j == last_j or s[j - 1] != close_par):
-                    # After removal, the prefix is valid. 
-                    # Then recursively remove the rest of the string.
-                    # New last_i is i + 1 - 1, due to removal; similarly with last_j.
-                    self._removeDfs(s[:j] + s[j+1:], result, i, j, open_par, close_par)
-                
-                j += 1
+        rev_s = s[::-1]
+
+        if pars[0] == '(':
+            # Finished left to right.
+            self._removeDfs(rev_s, result, 0, 0, [')', '('])
         else:
-            # No extrac ')' is detected, now detect extra '(' by reversing string.
-            rev_s = s[::-1]
-
-            if open_par == '(':
-                # Start removing '(' from reversed string by DFS.
-                self._removeDfs(rev_s, result, 0, 0, ')', '(')
-            else:
-                # Finished removing '(', append the resulting s w/ further reverse.
-                result.append(rev_s)
+            # Finished right to left.
+            result.append(rev_s)
 
     def removeInvalidParentheses(self, s):
         """
         :type s: str
         :rtype: List[str]
 
+        Apply DFS backtracking with two pointers from head.
+          - remove redundant ")" from left to right, and 
+          - then remove redundant "(" from right to left.
+
         Time complexity: O(n*m), where
           - n: lenght of s
           - m: number of recursive calls.
         Space complexity: O(n).
         """
-        # Apply two pointers method with DFS.
-        # - remove redundant ")" from left to right, and 
-        # - then remove redundant "(" from right to left.
         if not s:
             return ['']
 
-        # Two poinsters: Use last_i to denote last char we checked, last_j we removed.
+        # Apply DFS backtracking with two pointers from head:
         last_i, last_j = 0, 0
-        open_par, close_par = '(', ')'
+        pars = ['(', ')']
         result = []
-        self._removeDfs(s, result, last_i, last_j, open_par, close_par)
+        self._removeDfs(s, result, last_i, last_j, pars)
         return result
 
 
