@@ -4,7 +4,7 @@ Medium
 URL: https://leetcode.com/problems/task-scheduler/
 
 Given a char array representing tasks CPU need to do. It contains capital letters
-A to Z where different letters represent differenttasks. Tasks could be done
+A to Z where different letters represent different tasks. Tasks could be done
 without original order. Each task could be done in one interval. For each
 interval, CPU could finish one task or just be idle.
 
@@ -44,32 +44,32 @@ class SolutionTaskCountDictMaxHeap(object):
             task_count_d[t] += 1
 
         # Push tasks/counts into max heap (min heap with negative keys).
-        neg_count_minheap = [-c for c in task_count_d.values()]
-        heapq.heapify(neg_count_minheap)
+        negcount_minheap = [-c for c in task_count_d.values()]
+        heapq.heapify(negcount_minheap)
 
-        cycles = 0
+        n_cycles = 0
 
-        while neg_count_minheap:
+        while negcount_minheap:
             # Collect cycle tasks, denoted by their negative counts.
             cycle_tasks = []
 
-            # Run n + 1 tasks, 1 for 1sttask and n for cooling.
+            # Run n + 1 tasks, 1 for 1st task and n for cooling.
             for i in range(n + 1):
-                if neg_count_minheap:
-                    cycle_tasks.append(-heapq.heappop(neg_count_minheap))
+                if negcount_minheap:
+                    cycle_tasks.append(-heapq.heappop(negcount_minheap))
 
             # If specific task exists after processed one, add back to maxheap.
             for j in cycle_tasks:
                 if j > 1:
-                    heapq.heappush(neg_count_minheap, -(j - 1))
+                    heapq.heappush(negcount_minheap, -(j - 1))
 
-            # Add cycles for the last batch of tasks, or continue.  
-            if not neg_count_minheap:
-                cycles += len(cycle_tasks)
+            # Add full cycles or add cycles for the last batch of tasks.  
+            if negcount_minheap:
+                n_cycles += n + 1
             else:
-                cycles += n + 1
+                n_cycles += len(cycle_tasks)
 
-        return cycles
+        return n_cycles
 
 
 def main():
