@@ -76,13 +76,13 @@ class SolutionDPBacktrackDFS(object):
         :type wordDict: List[str]
         :rtype: List[str]
 
+        Apply backtracking:
+        - check if s can be segmented by word break I.
+        - if yes, apply DFS to search remaining part of s.
+
         Time complexity: O(n^3+n*2^n)=O(n*n^2), where n is the length of s.
         Space complexity: O(n^2).
         """
-        # Apply backtracking:
-        # - check if s can be segmented by word break I.
-        # - if yes, apply DFS to search remaining part of s.
-
         # Edge case.
         if not s:
             return []
