@@ -254,8 +254,8 @@ class BinarySearchTree(object):
         if not root:
             return None
 
-        current = root
         previous = None
+        current = root
 
         # Use stack for DFS for inorder traversal.
         stack = []
