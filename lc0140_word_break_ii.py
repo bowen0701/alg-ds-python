@@ -56,7 +56,8 @@ class SolutionDPBacktrackDFS(object):
                 if T[i] and s[i:j] in wordDict:
                     T[j] = True
 
-        return T
+        is_breakable = T[-1]
+        return is_breakable
 
     def _backtrack(self, result, temp, s, wordDict):
         # Append temp string if arrived at the end of s, with the last char ' '.
@@ -91,8 +92,8 @@ class SolutionDPBacktrackDFS(object):
         wordDict = set(wordDict)
 
         # Check if s can be segmented.
-        T = self._check_word_break(s, wordDict)
-        if not T[-1]:
+        is_breakable = self._check_word_break(s, wordDict)
+        if not is_breakable:
             return []
 
         # Apply backtracking DFS to collect sentences.
