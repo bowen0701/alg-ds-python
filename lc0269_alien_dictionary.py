@@ -111,9 +111,11 @@ class SolutionTopologicalSort(object):
         :type words: List[str]
         :rtype: str
 
-        # Apply Kahn's algorithm for topological sort for string order.
+        Apply Kahn's algorithm for topological sort for string order.
 
-        Time complexity: O(n), where n is the length of words.
+        Time complexity: O(n*m), where 
+          - n: length of words
+          - m: max number of chars in words
         Space complexity: O(1), since we have fixed number of chars.
         """
         # Edge case.

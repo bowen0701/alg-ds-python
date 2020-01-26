@@ -37,16 +37,17 @@ Constraints:
 - All characters in words[i] and order are English lowercase letters.
 """
 
-class SolutionIsWordCharUnorderedLenBigger(object):
-    def _is_not_ordered(self, small_w, big_w):
-        min_len = min(len(small_w), len(big_w))
+class SolutionCharOrderDicPrevCurCharOrder(object):
+    def _is_not_ordered(self, w_prev, w_cur):
+        min_len = min(len(w_prev), len(w_cur))
 
         for j in range(min_len):
-            small_c, big_c = small_w[j], big_w[j]
-            if small_c != big_c:
-                return self.char_order_d[small_c] > self.char_order_d[big_c]
+            c_prev, c_cur = w_prev[j], w_cur[j]
 
-        return len(small_w) > len(big_w)
+            if c_prev != c_cur:
+                return self.char_order_d[c_prev] > self.char_order_d[c_cur]
+
+        return len(w_prev) > len(w_cur)
 
     def isAlienSorted(self, words, order):
         """
@@ -60,16 +61,16 @@ class SolutionIsWordCharUnorderedLenBigger(object):
         if not words or len(words) == 1:
             return True
 
-        # Create dict: char->order.
-        self.char_order_d = {char: i for i, char in enumerate(order)}
+        # Create dict: char->order; +1 for empty string order.
+        self.char_order_d = {char: i + 1 for i, char in enumerate(order)}
 
         # For each word & previous one, check 1st mismatch chars's order correctness.
         n = len(words)
 
         for i in range(1, n):
-            small_w, big_w = words[i - 1], words[i]
+            w_prev, w_cur = words[i - 1], words[i]
             
-            if self._is_not_ordered(small_w, big_w):
+            if self._is_not_ordered(w_prev, w_cur):
                 return False
 
         return True
@@ -79,22 +80,22 @@ def main():
     # Output: true
     words = ["hello","leetcode"]
     order = "hlabcdefgijkmnopqrstuvwxyz"
-    print SolutionIsWordCharUnorderedLenBigger().isAlienSorted(words, order)
+    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
 
     # Output: false
     words = ["word","world","row"]
     order = "worldabcefghijkmnpqstuvxyz"
-    print SolutionIsWordCharUnorderedLenBigger().isAlienSorted(words, order)
+    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
 
     # Output: false
     words = ["apple","app"]
     order = "abcdefghijklmnopqrstuvwxyz"
-    print SolutionIsWordCharUnorderedLenBigger().isAlienSorted(words, order)
+    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
 
     # Output: true
     words = ["kuvp","q"]
     order = "ngxlkthsjuoqcpavbfdermiywz"
-    print SolutionIsWordCharUnorderedLenBigger().isAlienSorted(words, order)
+    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
 
 
 if __name__ == '__main__':
