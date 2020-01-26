@@ -44,24 +44,26 @@ class SolutionStackEmptyIncrementCount(object):
         Time complexity: O(n), where n is the length of S.
         Space complexity: O(n).
         """
-        count = 0
+        counter = 0
         stack = []
 
         for c in S:
             if c == '(':
-                # Append left parenthesis to stack.
+                # Append open parenthesis to stack.
                 stack.append(c)
-            elif stack:
-                # If right parenthesis and not empty stack, pop stack.
-                stack.pop()
             else:
-                # If right parenthesis and empty stack. Count extra right ones.
-                count += 1
+                # If close parenthesis.
+                if stack:
+                    # If not empty stack, pop stack.
+                    stack.pop()
+                else:
+                    # If empty stack, count extra close ones.
+                    counter += 1
 
-        # Count the remaining left stack.
-        count += len(stack)
+        # Count the remaining stack.
+        counter += len(stack)
 
-        return count
+        return counter
 
 
 def main():
