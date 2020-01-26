@@ -18,6 +18,7 @@ Input:
   "rftt"
 ]
 Output: "wertf"
+
 Example 2:
 Input:
 [
@@ -46,26 +47,26 @@ Note:
 
 class SolutionTopologicalSort(object):
     def _build_graph(self, words, graph, indegrees):
-        # Set graph keys as all chars.
+        # Create graph keys by all chars in words.
         for w in words:
             for c in w:
                 graph[c] = set()
 
         # Build graph and in-degree in order of words with different chars.
         for i in range(1, len(words)):
-            word_from = words[i - 1]
-            word_to = words[i]
+            w_from = words[i - 1]
+            w_to = words[i]
 
-            min_len = min(len(word_from), len(word_to))
+            min_len = min(len(w_from), len(w_to))
 
             for j in range(min_len):
-                char_from = word_from[j]
-                char_to = word_to[j]
+                c_from = w_from[j]
+                c_to = w_to[j]
 
-                if char_from != char_to:
-                    if char_to not in graph[char_from]:
-                        graph[char_from].add(char_to)
-                        indegrees[char_to] += 1
+                if c_from != c_to:
+                    if c_to not in graph[c_from]:
+                        graph[c_from].add(c_to)
+                        indegrees[c_to] += 1
 
                     # Break after get the 1st different char.
                     break
@@ -88,16 +89,15 @@ class SolutionTopologicalSort(object):
             c = zero_indegree_queue.pop()
             order_chars.append(c)
 
-            # Visit zero in-degree char c's neighbors and decrement their in-degrees.
-            for c_neighbor in graph[c]:
-                indegrees[c_neighbor] -= 1
+            # Visit zero in-degree char c's neighbors and decrement in-degrees.
+            for c_next in graph[c]:
+                indegrees[c_next] -= 1
 
                 # If c's neighbor has zero in-degrees, append to queue.
-                if indegrees[c_neighbor] == 0:
-                    zero_indegree_queue.appendleft(c_neighbor)
+                if indegrees[c_next] == 0:
+                    zero_indegree_queue.appendleft(c_next)
 
-        order_str = ''.join(order_chars)
-        return order_str
+        return ''.join(order_chars)
 
     def alienOrder(self, words):
         """
@@ -114,7 +114,7 @@ class SolutionTopologicalSort(object):
         if not words or not words[0]:
             return ''
 
-        # Build dicts: grraph: char_from->set(char_to) & indegrees: char->in_count.
+        # Build graph: char_from->set(char_to) and indegrees: char->in_count.
         graph = defaultdict(set)
         indegrees = defaultdict(int)
 
