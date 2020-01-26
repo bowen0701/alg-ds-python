@@ -33,13 +33,14 @@ class SolutionTwoPointersDfsRecur(object):
             if counter >= 0:
                 continue
 
-            # If counter < 0 with more ')' than '('.
+            # If counter < 0, remove '('.
             for j in range(last_j, len(s)):
                 if s[j] == pars[1] and (j == last_j or s[j - 1] != pars[1]):
                     self._removeDfs(
                         s[:j] + s[j+1:], result, i + 1 - 1, j + 1 - 1, pars)
             return None
 
+        # Reverse s to remove invalid '('.
         rev_s = s[::-1]
 
         if pars[0] == '(':
