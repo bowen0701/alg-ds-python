@@ -83,17 +83,17 @@ class SolutionTopologicalSort(object):
         from collections import deque
 
         # Put char into zero in-degree queue if its in-degree is 0.
-        zero_indegree_queue = deque([])
+        indegree0_queue = deque([])
 
         for c in graph:
             if indegrees[c] == 0:
-                zero_indegree_queue.appendleft(c)
+                indegree0_queue.appendleft(c)
 
         order_chars = []
 
-        while zero_indegree_queue:
+        while indegree0_queue:
             # Remove zero in-degree char c and add it to order chars.
-            c = zero_indegree_queue.pop()
+            c = indegree0_queue.pop()
             order_chars.append(c)
 
             # Visit zero in-degree char c's neighbors and decrement in-degrees.
@@ -102,9 +102,9 @@ class SolutionTopologicalSort(object):
 
                 # If c's neighbor has zero in-degrees, append to queue.
                 if indegrees[c_next] == 0:
-                    zero_indegree_queue.appendleft(c_next)
+                    indegree0_queue.appendleft(c_next)
 
-        return ''.join(order_chars)
+        return order_chars
 
     def alienOrder(self, words):
         """
@@ -124,11 +124,11 @@ class SolutionTopologicalSort(object):
         graph, indegrees = self._build_graph(words)
 
         # Run Topological Sort to create string order.
-        order_str = self._topological_sort(graph, indegrees)
+        order_chars = self._topological_sort(graph, indegrees)
 
         # Check if length of string order is the same as that of graph keys.
-        if len(order_str) == len(graph.keys()):
-            return order_str
+        if len(order_chars) == len(graph.keys()):
+            return ''.join(order_chars)
         else:
             return ''
 
