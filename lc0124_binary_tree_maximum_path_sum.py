@@ -44,6 +44,7 @@ class SolutionLeftRightMaxPathDownSumRecur(object):
         # If one branch sum is less than 0, do not connect that branch by max(0, .).
         left_max_val = max(0, self.maxPathDownSum(root.left))
         right_max_val = max(0, self.maxPathDownSum(root.right))
+
         self.max_val = max(self.max_val, root.val + left_max_val + right_max_val)
 
         # Return max path down sum from left or right, including root values.
