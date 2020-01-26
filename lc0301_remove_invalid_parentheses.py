@@ -35,11 +35,11 @@ class SolutionTwoPointersDfsRecur(object):
             i += 1
 
         if count < 0:
-            # Remove the 1st ')' only to avoid duplicates.
             # Get the index of abnormal ')' which makes count < 0: i - 1.
             i -= 1
             j = last_j
             while j <= i:
+                # Remove the 1st ')' only to avoid duplicates.
                 if s[j] == close_par and (j == last_j or s[j - 1] != close_par):
                     # After removal, the prefix is valid. 
                     # Then recursively remove the rest of the string.
@@ -75,11 +75,9 @@ class SolutionTwoPointersDfsRecur(object):
             return ['']
 
         # Two poinsters: Use last_i to denote last char we checked, last_j we removed.
-        last_i = 0
-        last_j = 0
+        last_i, last_j = 0, 0
+        open_par, close_par = '(', ')'
         result = []
-        open_par = '('
-        close_par = ')'
         self._removeDfs(s, result, last_i, last_j, open_par, close_par)
         return result
 
