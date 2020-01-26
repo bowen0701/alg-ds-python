@@ -46,7 +46,12 @@ Note:
 """
 
 class SolutionTopologicalSort(object):
-    def _build_graph(self, words, graph, indegrees):
+    def _build_graph(self, words):
+        from collections import defaultdict
+
+        graph = defaultdict(set)
+        indegrees = defaultdict(int)
+
         # Create graph keys by all chars in words.
         for w in words:
             for c in w:
@@ -70,6 +75,8 @@ class SolutionTopologicalSort(object):
 
                     # Break after get the 1st different char.
                     break
+
+        return graph, indegrees
 
     def _topological_sort(self, graph, indegrees):
         # Build order string based on in-degrees by Kahn's algorithm.
@@ -104,21 +111,17 @@ class SolutionTopologicalSort(object):
         :type words: List[str]
         :rtype: str
 
+        # Apply Kahn's algorithm for topological sort for string order.
+
         Time complexity: O(n), where n is the length of words.
         Space complexity: O(1), since we have fixed number of chars.
         """
-        # Apply Kahn's algorithm for topological sort for string order.
-        from collections import defaultdict
-
         # Edge case.
         if not words or not words[0]:
             return ''
 
-        # Build graph: char_from->set(char_to) and indegrees: char->in_count.
-        graph = defaultdict(set)
-        indegrees = defaultdict(int)
-
-        self._build_graph(words, graph, indegrees)
+        # Build graph: char_from->set(char_to) and indegrees: to_char->count.
+        graph, indegrees = self._build_graph(words)
 
         # Run Topological Sort to create string order.
         order_str = self._topological_sort(graph, indegrees)
