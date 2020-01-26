@@ -44,7 +44,7 @@ class SolutionTwoPointersDfsRecur(object):
         rev_s = s[::-1]
 
         if pars[0] == '(':
-            # Finished left to right.
+            # Finished left to right, start from right to left.
             self._removeDfs(rev_s, result, 0, 0, [')', '('])
         else:
             # Finished right to left.
