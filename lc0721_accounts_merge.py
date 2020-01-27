@@ -42,10 +42,6 @@ Note:
 
 class SolutionEmailAccountidsDictDfsRecur(object):
     def _dfs(self, aid, emails, accounts, email_aids_d, visited_aids):
-        # Check visited account id or not.
-        if aid in visited_aids:
-            return None
-
         visited_aids.add(aid)
 
         # Continue recursive DFS to visit that account id's emails.
@@ -54,7 +50,8 @@ class SolutionEmailAccountidsDictDfsRecur(object):
             emails.add(email)
 
             for aid_next in email_aids_d[email]:
-                self._dfs(aid_next, emails, accounts, email_aids_d, visited_aids)
+                if aid_next not in visited_aids:
+                    self._dfs(aid_next, emails, accounts, email_aids_d, visited_aids)
 
     def accountsMerge(self, accounts):
         """
