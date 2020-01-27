@@ -60,7 +60,7 @@ class MyCalendarEventsOverlapsArrays(object):
         :type end: int
         :rtype: bool
 
-        Time complexity: O(n^2).
+        Time complexity: O(n).
         Space complexity: O(n).
         """
         for overlap in self.overlaps:
