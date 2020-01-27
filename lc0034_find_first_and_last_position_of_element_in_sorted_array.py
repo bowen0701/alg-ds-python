@@ -45,6 +45,7 @@ class SolutionBinarySearchTwice(object):
             else:
                 right = mid
 
+        # If left pos is not target, return not found.
         if nums[left] != target:
             return res
         else:
@@ -62,7 +63,6 @@ class SolutionBinarySearchTwice(object):
                 left = mid
 
         res[1] = right
-
         return res
 
 
