@@ -141,7 +141,6 @@ class SolutionNodeCopyDictDFSIter(object):
         Space complexity: O(|V|).
         """
         from collections import defaultdict
-        from collections import deque
 
         # Edge case.
         if not node:
@@ -153,7 +152,7 @@ class SolutionNodeCopyDictDFSIter(object):
         node_copy_d = defaultdict()
         node_copy_d[node] = copy
 
-        stack = deque([node])
+        stack = [node]
 
         while stack:
             current = stack.pop()
