@@ -27,7 +27,7 @@ class CharNode(object):
     def __init__(self):
         from collections import defaultdict
 
-        # Create char node with dict children: char node->char node & word.
+        # Create children dict: char->node.
         self.children = defaultdict()
         self.is_end = False
 
