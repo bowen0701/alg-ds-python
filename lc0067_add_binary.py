@@ -17,7 +17,7 @@ Output: "10101"
 """
 
 class SolutionIter(object):
-    def _normalize(self, a, b):
+    def _padding(self, a, b):
         if len(a) < len(b):
             a = '0' * (len(b) - len(a)) + a
         elif len(a) > len(b):
@@ -36,27 +36,25 @@ class SolutionIter(object):
         from collections import deque
 
         # Normalize a and b to equal size by padding 0's to shorer one.
-        a, b = self._normalize(a, b)
-
-        # Add numbers from the last digits with carry.
-        s = deque([])
-        carry = 0
+        a, b = self._padding(a, b)
 
         # Add binary from backward if not out of boundary or exists carry.
+        sum_arr = deque([])
+        carry = 0
         i = len(a) - 1
 
         while i >= 0 or carry > 0:
             if i >= 0: 
-                total = int(a[i]) + int(b[i]) + carry
+                val = int(a[i]) + int(b[i]) + carry
             else:
-                total = carry
+                val = carry
 
-            carry, val = total // 2, total % 2
+            carry, val = val // 2, val % 2
 
-            s.appendleft(str(val))
+            sum_arr.appendleft(str(val))
             i -= 1
         
-        return ''.join(list(s))
+        return ''.join(list(sum_arr))
 
 
 def main():
