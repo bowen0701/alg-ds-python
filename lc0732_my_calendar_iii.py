@@ -39,11 +39,10 @@ Note:
 - In calls to MyCalendarThree.book(start, end), start and end are integers in the range [0, 10^9].
 """
 
-class MyCalendarThreeDict(object):
+class MyCalendarThreeTimeCounterDict(object):
     def __init__(self):
         from collections import defaultdict
-
-        self.time_diff_d = defaultdict(int)
+        self.time_counter_d = defaultdict(int)
 
     def book(self, start, end):
         """
@@ -54,26 +53,26 @@ class MyCalendarThreeDict(object):
         Time complexity: O(n^2*logn).
         Space complexity: O(n).
         """
-        # New event starts at start, ends at end.
-        self.time_diff_d[start] += 1
-        self.time_diff_d[end] -= 1
+        # Create time counter: new event starts at start, ends at end.
+        self.time_counter_d[start] += 1
+        self.time_counter_d[end] -= 1
 
         # Update max k-events by iterating through sorted events by times.
-        sorted_time_diffs = sorted(self.time_diff_d.items(), key=lambda x: x[0])
+        sorted_time_counters = sorted(self.time_counter_d.items(), key=lambda x: x[0])
 
         max_k_events = 0
-        k_events = 0
+        cur_k_events = 0
 
-        for time, diff in sorted_time_diffs:
-            k_events += diff
-            max_k_events = max(max_k_events, k_events)
+        for time, counter in sorted_time_counters:
+            cur_k_events += counter
+            max_k_events = max(max_k_events, cur_k_events)
 
         return max_k_events
 
 
-class MyCalendarThreeBisectList(object):
+class MyCalendarThreeTimeCountersBisectList(object):
     def __init__(self):
-        self.time_diffs = []
+        self.time_counters = []
 
     def book(self, start, end):
         """
@@ -87,16 +86,16 @@ class MyCalendarThreeBisectList(object):
         from bisect import insort
 
         # Create sorted events with diffs by times.
-        insort(self.time_diffs, (start, 1))
-        insort(self.time_diffs, (end, -1))
+        insort(self.time_counters, (start, 1))
+        insort(self.time_counters, (end, -1))
 
         # Update max k-events by iterating through sorted events.
         max_k_events = 0
-        k_events = 0
+        cur_k_events = 0
 
-        for time, diff in self.time_diffs:
-            k_events += diff
-            max_k_events = max(max_k_events, k_events)
+        for time, counter in self.time_counters:
+            cur_k_events += counter
+            max_k_events = max(max_k_events, cur_k_events)
 
         return max_k_events
 
@@ -108,7 +107,7 @@ def main():
     # MyCalendarThree.book(5, 15); // returns 3
     # MyCalendarThree.book(5, 10); // returns 3
     # MyCalendarThree.book(25, 55); // returns 3
-    calendar = MyCalendarThreeDict()
+    calendar = MyCalendarThreeTimeDiffDict()
     print calendar.book(10, 20)
     print calendar.book(50, 60)
     print calendar.book(10, 40)
@@ -116,7 +115,7 @@ def main():
     print calendar.book(5, 10)
     print calendar.book(25, 55)
 
-    calendar = MyCalendarThreeBisectList()
+    calendar = MyCalendarThreeTimeCountersBisectList()
     print calendar.book(10, 20)
     print calendar.book(50, 60)
     print calendar.book(10, 40)
