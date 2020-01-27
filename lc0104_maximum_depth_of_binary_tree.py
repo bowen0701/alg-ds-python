@@ -43,7 +43,7 @@ class SolutionDFSRecur(object):
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
 
-class SolutionBFS(object):
+class SolutionLevelBFSIter(object):
     def maxDepth(self, root):
         """
         :type root: TreeNode
@@ -94,7 +94,7 @@ def main():
     root.right.left.left = TreeNode(15)
 
     print SolutionDFSRecur().maxDepth(root)   
-    print SolutionBFS().maxDepth(root)
+    print SolutionLevelBFSIter().maxDepth(root)
 
 
 if __name__ == '__main__':
