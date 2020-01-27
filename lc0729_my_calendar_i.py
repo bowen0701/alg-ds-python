@@ -75,21 +75,21 @@ class MyCalendarBST(object):
     def __init__(self):
         self.root = None
 
-    def _binary_search(self, start, end, node):
-        if start >= node.end:
-            # If new event is in RHS of node, insert new as right or search in RHS.
-            if not node.right:
-                node.right = Node(start, end)
+    def _binary_search(self, start, end, root):
+        if start >= root.end:
+            # If new event is in RHS of root, insert new as right or search in RHS.
+            if not root.right:
+                root.right = Node(start, end)
                 return True
             else:
-                return self._binary_search(start, end, node.right)
-        elif end <= node.start:
-            # If new event is in LHS of node, insert new as left or search in LHS.
-            if not node.left:
-                node.left = Node(start, end)
+                return self._binary_search(start, end, root.right)
+        elif end <= root.start:
+            # If new event is in LHS of root, insert new as left or search in LHS.
+            if not root.left:
+                root.left = Node(start, end)
                 return True
             else:
-                return self._binary_search(start, end, node.left)
+                return self._binary_search(start, end, root.left)
         else:
             return False
 
