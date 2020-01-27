@@ -41,7 +41,7 @@ class SolutionRecur(object):
         if not root:
             return 0
 
-        # If min depth > 0, return 1 + min depth; otherwise, return 1 + max depth.
+        # If min depth > 0: 1 + min depth; otherwise: 1 + max depth.
         left_depth = self.minDepth(root.left)
         right_depth = self.minDepth(root.right)
         min_depth = min(left_depth, right_depth)
@@ -51,7 +51,7 @@ class SolutionRecur(object):
             return 1 + max(left_depth, right_depth)
 
 
-class SolutionLevelorderBFS(object):
+class SolutionLevelBFS(object):
     def minDepth(self, root):
         """
         :type root: TreeNode
@@ -67,10 +67,10 @@ class SolutionLevelorderBFS(object):
             return 0
 
         queue = deque([root])
-        level = 0
+        depth = 0
 
         while queue:
-            level += 1
+            depth += 1
 
             for i in range(len(queue)):
                 current = queue.pop()
@@ -80,8 +80,9 @@ class SolutionLevelorderBFS(object):
                 if current.right:
                     queue.appendleft(current.right)
 
+                # When no child nodes, arrived at leaf.
                 if not current.left and not current.right:
-                    return level
+                    return depth
 
 
 def main():
@@ -90,7 +91,7 @@ def main():
     root = TreeNode(1)
     root.left = TreeNode(2)
     print SolutionRecur().minDepth(root)
-    print SolutionLevelorderBFS().minDepth(root)
+    print SolutionLevelBFS().minDepth(root)
 
     # Tree: [3,9,20,null,null,15,7],
     #     3
@@ -98,14 +99,14 @@ def main():
     #   9  20
     #     /  \
     #    15   7
-    # return its minimum depth = 2.
+    # Output: 2.
     root = TreeNode(3)
     root.left = TreeNode(9)
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)    
     print SolutionRecur().minDepth(root)
-    print SolutionLevelorderBFS().minDepth(root)
+    print SolutionLevelBFS().minDepth(root)
 
 
 if __name__ == '__main__':
