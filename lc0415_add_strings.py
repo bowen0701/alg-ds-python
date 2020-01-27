@@ -39,7 +39,6 @@ class SolutionPaddingAddBackwardIter(object):
 
         # Start with carry 0, add digits of num1 & num2 from backward to array.
         sum_arr = deque([])
-
         i = len(num1) - 1
         carry = 0
 
