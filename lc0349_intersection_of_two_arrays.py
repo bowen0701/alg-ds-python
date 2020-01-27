@@ -31,7 +31,7 @@ class SolutionBuiltIn(object):
         return list(set(nums1).intersection(set(nums2)))
 
 
-class SolutionSet(object):
+class SolutionSmallerCharCountDict(object):
     def intersection(self, nums1, nums2):
         """
         :type nums1: List[int]
@@ -43,26 +43,26 @@ class SolutionSet(object):
         """
         from collections import defaultdict
 
-        res = []
-
         # Convert smaller nums to nums1.
         if len(nums1) > len(nums2):
             nums1, nums2 = nums2, nums1
 
-        # Set smaller nums to dict.
-        nums1_count = defaultdict(int)
-
+        # Create smaller nums to dict: n1->count.
+        nums1_count_d = defaultdict(int)
         for n1 in nums1:
-            nums1_count[n1] += 1
+            nums1_count_d[n1] += 1
+
+        # Collect n2 in nums1_count_d with char count > 0.
+        result = []
 
         for n2 in nums2:
-            if n2 in nums1_count and nums1_count[n2] > 0:
-                res.append(n2)
+            if n2 in nums1_count_d and nums1_count_d[n2] > 0:
+                result.append(n2)
 
                 # Set n2 count to 0 to prevent duplicates.
-                nums1_count[n2] = 0
+                nums1_count_d[n2] = 0
 
-        return res
+        return result
 
 
 def main():
@@ -70,13 +70,13 @@ def main():
     nums1 = [1,2,2,1]
     nums2 = [2,2]
     print SolutionBuiltIn().intersection(nums1, nums2)
-    print SolutionSet().intersection(nums1, nums2)
+    print SolutionSmallerCharCountDict().intersection(nums1, nums2)
 
     # Output: [9, 4]
     nums1 = [4,9,5]
     nums2 = [9,4,9,8,4]
     print SolutionBuiltIn().intersection(nums1, nums2)
-    print SolutionSet().intersection(nums1, nums2)
+    print SolutionSmallerCharCountDict().intersection(nums1, nums2)
 
 
 if __name__ == '__main__':
