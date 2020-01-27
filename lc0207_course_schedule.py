@@ -40,24 +40,23 @@ class SolutionBFSTopologicalSort(object):
         Time complexity: O(|V|+|E|), where
           - |V|: number of vertices, i.e. courses.
           - |E|: number of edges.
-        Space complexity: O(|V|+|E|).
+        Space complexity: O(|V|).
         """
         from collections import defaultdict
         from collections import deque
 
+        # Collect adjacencies for prereq->list(courses).
         prereq_courses_adj = defaultdict(list)
         n_prereqs = [0] * numCourses
 
-        # Collect adjacencies for prereq->list(courses).
         for course, prereq in prerequisites:
             prereq_courses_adj[prereq].append(course)
             n_prereqs[course] += 1
 
-        # Create a course queue to be taken in order.
+        # Create a course queue for courses w/o prereq.
         queue = deque()
 
         for course in range(numCourses):
-            # For course with no prerequisites, we can take them.
             if n_prereqs[course] == 0:
                 queue.appendleft(course)
 
@@ -66,13 +65,13 @@ class SolutionBFSTopologicalSort(object):
             course = queue.pop()
             numCourses -= 1
 
-            for next_course in prereq_courses_adj[course]:
+            for nxt in prereq_courses_adj[course]:
                 # Decrement number of prerequisites for next course.
-                n_prereqs[next_course] -= 1
+                n_prereqs[nxt] -= 1
 
-                # If there is no more prerequisites, take next course.
-                if n_prereqs[next_course] == 0:
-                    queue.appendleft(next_course)
+                # If no more prerequisites, take next.
+                if n_prereqs[nxt] == 0:
+                    queue.appendleft(nxt)
 
         return numCourses == 0
 
