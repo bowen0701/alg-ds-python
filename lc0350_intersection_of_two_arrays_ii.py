@@ -24,27 +24,8 @@ Follow up:
   you cannot load all elements into the memory at once?
 """
 
-class SolutionNaiveIter(object):
-    def intersect(self, nums1, nums2):
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: List[int]
 
-        Time complexity: O(n1*n2), where ni is the length of numsi.
-        Space complexity: O(1).
-        """
-        intersect = []
-        for n1 in nums1:
-            for i2, n2 in enumerate(nums2):
-                if n1 == n2:
-                    intersect.append(n1)
-                    nums2[i2] = None
-                    break
-        return intersect
-
-
-class SolutionTwoDicts(object):
+class SolutionTwoNumCountDicts(object):
     def intersect(self, nums1, nums2):
         """
         :type nums1: List[int]
@@ -60,33 +41,34 @@ class SolutionTwoDicts(object):
         if not nums1 or not nums2:
             return []
 
-        nums1_counts = defaultdict(int)
-        nums2_counts = defaultdict(int)
+        # Create dict: num->count for two nums.
+        nums1_count_d = defaultdict(int)
+        nums2_count_d = defaultdict(int)
 
         for n1 in nums1:
-            nums1_counts[n1] += 1
+            nums1_count_d[n1] += 1
         for n2 in nums2:
-            nums2_counts[n2] += 1
+            nums2_count_d[n2] += 1
 
         # Obtain intersection set of number count keys.
-        unique_nums1 = set(nums1_counts.keys())
-        unique_nums2 = set(nums2_counts.keys())
+        unique_nums1 = set(nums1_count_d.keys())
+        unique_nums2 = set(nums2_count_d.keys())
         intersect_nums = unique_nums1.intersection(unique_nums2)
 
         # Collect smaller number counts.
         intersect = []
         for n in intersect_nums:
-            if nums1_counts[n] < nums2_counts[n]:
-                intersect_times = nums1_counts[n]
+            if nums1_count_d[n] < nums2_count_d[n]:
+                intersect_times = nums1_count_d[n]
             else:
-                intersect_times = nums2_counts[n]
+                intersect_times = nums2_count_d[n]
 
             intersect.extend([n] * intersect_times)
 
         return intersect
 
 
-class SolutionDict(object):
+class SolutionNumCountDict(object):
     def intersect(self, nums1, nums2):
         """
         :type nums1: List[int]
@@ -102,17 +84,17 @@ class SolutionDict(object):
         if not nums1 or not nums2:
             return []
 
-        # Collect nums1's number counts.
-        nums1_counts = defaultdict(int)
+        # Collect nums1's number->count.
+        nums1_count_d= defaultdict(int)
         for n1 in nums1:
-            nums1_counts[n1] += 1
+            nums1_count_d[n1] += 1
 
         # Iterate through nums1, if number is in nums2 and decrement its count.
         intersect = []
         for n2 in nums2:
-            if n2 in nums1_counts and nums1_counts[n2] > 0:
+            if n2 in nums1_count_d and nums1_count_d[n2] > 0:
                 intersect.append(n2)
-                nums1_counts[n2] -= 1
+                nums1_count_d[n2] -= 1
 
         return intersect
 
@@ -122,22 +104,22 @@ def main():
     nums1 = [1,2,2,1]
     nums2 = [2,2]
     # print SolutionNaiveIter().intersect(nums1, nums2)
-    print SolutionTwoDicts().intersect(nums1, nums2)
-    print SolutionDict().intersect(nums1, nums2)
+    print SolutionTwoNumCountDicts().intersect(nums1, nums2)
+    print SolutionNumCountDict().intersect(nums1, nums2)
 
     # Output: [4,9]
     nums1 = [4,9,5]
     nums2 = [9,4,9,8,4]
     # print SolutionNaiveIter().intersect(nums1, nums2)
-    print SolutionTwoDicts().intersect(nums1, nums2)
-    print SolutionDict().intersect(nums1, nums2)
+    print SolutionTwoNumCountDicts().intersect(nums1, nums2)
+    print SolutionNumCountDict().intersect(nums1, nums2)
 
     # Output: [2]
     nums1 = [1,2,2,1]
     nums2 = [2]
     # print SolutionNaiveIter().intersect(nums1, nums2)
-    print SolutionTwoDicts().intersect(nums1, nums2)
-    print SolutionDict().intersect(nums1, nums2)
+    print SolutionTwoNumCountDicts().intersect(nums1, nums2)
+    print SolutionNumCountDict().intersect(nums1, nums2)
 
 
 if __name__ == '__main__':
