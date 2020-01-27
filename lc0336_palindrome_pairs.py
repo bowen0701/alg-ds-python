@@ -18,7 +18,7 @@ Output: [[0,1],[1,0]]
 Explanation: The palindromes are ["battab","tabbat"]
 """
 
-class SolutionWordposDictPrefixSuffixPalindrome(object):
+class SolutionWordPosDictPrefixSuffixPalindrome(object):
     def _isPalindrom(self, word):
         return word == word[::-1]
 
@@ -67,15 +67,15 @@ class SolutionWordposDictPrefixSuffixPalindrome(object):
 def main():
     # Output: [[0,1],[1,0],[3,2],[2,4]] 
     words = ["abcd","dcba","lls","s","sssll"]
-    print SolutionWordposDictPrefixSuffixPalindrome().palindromePairs(words)
+    print SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words)
 
     # Output: [[0,1],[1,0]] 
     words = ["bat","tab","cat"]
-    print SolutionWordposDictPrefixSuffixPalindrome().palindromePairs(words)
+    print SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words)
 
     # Output: [[2,0],[2,1]] 
     words = ["bot","t","to"]
-    print SolutionWordposDictPrefixSuffixPalindrome().palindromePairs(words)
+    print SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words)
 
 
 if __name__ == '__main__':
