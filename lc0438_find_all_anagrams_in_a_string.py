@@ -55,10 +55,10 @@ class SolutionCharCountListSlidingWindow(object):
         for i in range(len_p):
             p_char_counts[ord(p[i]) - ord('a')] += 1
 
-        # Apply sliding window for s of length p to get char's count.
+        # In s, apply sliding window of length p to get char's count.
         s_char_counts = [0] * 26
-        
-        # Initalize 1st sliding window's prefix for s w/o last char of p.
+
+        # Initialize sliding window except the p's last char.
         for i in range(len_p - 1):
             s_char_counts[ord(s[i]) - ord('a')] += 1
 
