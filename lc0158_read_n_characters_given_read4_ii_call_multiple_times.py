@@ -93,17 +93,17 @@ class SolutionPreviousSizeIdxBuffer(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Use counter to increment reading n chars from previous buffer.
-        counter = 0
+        # Use read counter to increment reading n chars from previous buffer.
+        read_counter = 0
 
-        while counter < n:
+        while read_counter < n:
             # If previous buffer index is still in previous buffer, 
-            # read char from previous buffer and increment counter & index.
+            # read char from previous buffer, increment read counter & buffer index.
             if self.prev_idx < self.prev_size:
-                buf[counter] = self.prev_buf[self.prev_idx]
+                buf[read_counter] = self.prev_buf[self.prev_idx]
 
                 self.prev_idx += 1
-                counter += 1
+                read_counter += 1
             else:
                 # If previous buffer index is out of boundary of previous buffer,
                 # read new chars by read4, store in previous buffer & reset previous index.
@@ -114,7 +114,7 @@ class SolutionPreviousSizeIdxBuffer(object):
                 if self.prev_size == 0:
                     break
 
-        return counter
+        return read_counter
 
 
 def main():
