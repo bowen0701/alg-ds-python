@@ -91,7 +91,7 @@ class SolutionInorderIter(object):
             previous = current
             current = current.right
 
-        # Connect double links between 1st and last nodes.
+        # Connect double links between 1st (prev_head.right) and last nodes (previous).
         pre_head.right.left = previous
         previous.right = pre_head.right
 
