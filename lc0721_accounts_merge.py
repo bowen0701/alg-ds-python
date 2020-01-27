@@ -40,8 +40,8 @@ Note:
 - The length of accounts[i][j] will be in the range [1, 30].
 """
 
-class SolutionEmailAccountidsGraphDfsRecur(object):
-    def _dfs(self, aid, emails, accounts, email_aids_graph, visited_aids):
+class SolutionEmailAccountidsDictDfsRecur(object):
+    def _dfs(self, aid, emails, accounts, email_aids_d, visited_aids):
         # Check visited account id or not.
         if aid in visited_aids:
             return None
@@ -53,8 +53,8 @@ class SolutionEmailAccountidsGraphDfsRecur(object):
             email = accounts[aid][j]
             emails.add(email)
 
-            for aid_next in email_aids_graph[email]:
-                self._dfs(aid_next, emails, accounts, email_aids_graph, visited_aids)
+            for aid_next in email_aids_d[email]:
+                self._dfs(aid_next, emails, accounts, email_aids_d, visited_aids)
 
     def accountsMerge(self, accounts):
         """
@@ -66,25 +66,25 @@ class SolutionEmailAccountidsGraphDfsRecur(object):
         """
         from collections import defaultdict
 
-        # Use dict to collect email->account ids.
-        email_aids_graph = defaultdict(list)
+        # Create graph adjacency list to collect email->account ids.
+        email_aids_d = defaultdict(list)
 
         for aid, account in enumerate(accounts):
             for j in range(1, len(account)):
                 email = account[j]
-                email_aids_graph[email].append(aid)
+                email_aids_d[email].append(aid)
 
-        # Apply recursive DFS to visit account ids over email_aids_graph.
+        # Apply recursive DFS to visit account ids over email_aids_d.
         visited_aids = set()
         result = []
 
         for aid, account in enumerate(accounts):
             if aid not in visited_aids:
-                # Start DFS to visit account id, and collect name's emails.
+                # Start DFS to visit account id to collect name's emails.
                 emails = set()
-                self._dfs(aid, emails, accounts, email_aids_graph, visited_aids)
+                self._dfs(aid, emails, accounts, email_aids_d, visited_aids)
 
-                name = accounts[aid][0]
+                name = account[0]
                 result.append([name] + sorted(emails))
 
         return result
@@ -145,7 +145,7 @@ def main():
                 ["John", "johnnybravo@mail.com"],
                 ["John", "johnsmith@mail.com", "john_newyork@mail.com"],
                 ["Mary", "mary@mail.com"]]
-    print SolutionEmailAccountidsGraphDfsRecur().accountsMerge(accounts)
+    print SolutionEmailAccountidsDictDfsRecur().accountsMerge(accounts)
     print SolutionEmailParentUnionFind().accountsMerge(accounts)
 
 
