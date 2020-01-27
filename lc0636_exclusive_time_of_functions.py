@@ -55,10 +55,9 @@ class SolutionStartStackIter(object):
         # Use times to store fid's exec times.
         times = [0] * n
 
-        # Use start_stack to store starting fid's logs.
+        # Use start_stack to store fid's start logs.
         start_stack = []
 
-        # logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
         for log in logs:
             fid, op, time = log.split(':')
             fid, time = int(fid), int(time)
@@ -68,14 +67,13 @@ class SolutionStartStackIter(object):
                 start_stack.append((fid, op, time))
             else:
                 # A fid ends, since single thread, this fid must be equal to last fid.
-                # Obtain its exec time.
                 fid, op, start_time = start_stack.pop()
-                times[fid] += time - start_time + 1
+                exec_time = time - start_time + 1
+                times[fid] += exec_time
 
-                # If there still exist running fid's, update its exec time by 
-                # substracting last fid's exec time.
+                # If exist running fid's, update its exec time by removing last fid's exec time.
                 if start_stack:
-                    times[start_stack[-1][0]] -= time - start_time + 1
+                    times[start_stack[-1][0]] -= exec_time
 
         return times
 
