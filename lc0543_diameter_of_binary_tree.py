@@ -28,13 +28,13 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionDepthsSumRecur(object):
-    def _depth(self, root):
+class SolutionPathDepthRecur(object):
+    def _pathDepth(self, root):
         if not root:
             return 0
 
-        left_depth = self._depth(root.left)
-        right_depth = self._depth(root.right)
+        left_depth = self._pathDepth(root.left)
+        right_depth = self._pathDepth(root.right)
 
         self.diameter = max(self.diameter, left_depth + right_depth)
 
@@ -50,7 +50,7 @@ class SolutionDepthsSumRecur(object):
         """
         # Apply postorder traversal to get sum of left & right subtree depths.
         self.diameter = 0
-        self._depth(root)
+        self._pathDepth(root)
         return self.diameter
 
 
@@ -67,7 +67,7 @@ def main():
     root.right = TreeNode(3)
     root.left.left = TreeNode(4)
     root.left.right = TreeNode(5)
-    print SolutionDepthsSumRecur().diameterOfBinaryTree(root)
+    print SolutionPathDepthRecur().diameterOfBinaryTree(root)
 
 
 if __name__ == '__main__':
