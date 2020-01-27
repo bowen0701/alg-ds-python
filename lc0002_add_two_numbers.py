@@ -49,8 +49,8 @@ class Solution(object):
                 val2 = l2.val
                 l2 = l2.next
     
-            total = val1 + val2 + carry
-            carry, val = total // 10, total % 10
+            val = val1 + val2 + carry
+            carry, val = val // 10, val % 10
 
             current.next = ListNode(val)
             current = current.next
