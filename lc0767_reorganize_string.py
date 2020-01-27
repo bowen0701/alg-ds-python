@@ -20,7 +20,7 @@ Note:
 S will consist of lowercase letters and have length in range [1, 500].
 """
 
-class SolutionMaxHeap(object):
+class SolutionCharCountMaxHeap(object):
     def reorganizeString(self, S):
         """
         :type S: str
@@ -33,46 +33,47 @@ class SolutionMaxHeap(object):
         import heapq
 
         # Create char counts in S.
-        char_counts = defaultdict(int)
+        char_count_d = defaultdict(int)
         for char in S:
-            char_counts[char] += 1
+            char_count_d[char] += 1
 
         # To get the most frequent char, push (count, char) into max heap.
+        # Specifically, push (-count, char) into min heap.
         max_hq = []
-        for char, count in char_counts.items():
-            # Specifically, push (-count, char) into min heap.
+        for char, count in char_count_d.items()
             heapq.heappush(max_hq, (-count, char))
 
         # Create previous char and its negative count.
-        prev_neg_count, prev_char = 0, ''
-        res = ''
+        prev_neg_count = 0
+        prev_char = ''
+        result = ''
 
         while max_hq:
             neg_count, char = heapq.heappop(max_hq)
-            res += char
+            result += char
 
             # If there remains previous char, push back to max heap.
             if prev_neg_count < 0:
                 heapq.heappush(max_hq, (prev_neg_count, prev_char))
 
-            # Increment negative count, and update previous char and its count.
-            neg_count += 1
-            prev_neg_count, prev_char = neg_count, char
+            # Update previous char and its negative count by neg_count + 1.
+            prev_neg_count = neg_count + 1
+            prev_char = char
 
-        if len(res) != len(S):
+        if len(result) != len(S):
             return ''
-
-        return res
+        else:
+            return result
 
 
 def main():
-    # Output: "aba"
-    S = "aab"
-    print SolutionMaxHeap().reorganizeString(S)
+    # # Output: "aba"
+    # S = "aab"
+    # print SolutionCharCountMaxHeap().reorganizeString(S)
 
     # Output: ""
     S = "aaab"
-    print SolutionMaxHeap().reorganizeString(S)
+    print SolutionCharCountMaxHeap().reorganizeString(S)
 
 
 if __name__ == '__main__':
