@@ -45,7 +45,7 @@ class SolutionBFSTopologicalSort(object):
         from collections import defaultdict
         from collections import deque
 
-        # Collect adjacencies for prereq->list(courses).
+        # Collect adjacency list for prereq->list(courses) & indegrees for n_prereqs.
         prereq_courses_adj = defaultdict(list)
         n_prereqs = [0] * numCourses
 
