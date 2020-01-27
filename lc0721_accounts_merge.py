@@ -58,8 +58,10 @@ class SolutionEmailAccountidsDictDfsRecur(object):
         :type accounts: List[List[str]]
         :rtype: List[List[str]]
 
-        Time complexity: O(n*logn).
-        Space complexity: O(n).
+        Time complexity: O(|V|+|E|+|V|*log|V|), where
+          - |V|: number of emails
+          - |E|: number of edges.
+        Space complexity: O(|V|).
         """
         from collections import defaultdict
 
@@ -103,8 +105,10 @@ class SolutionEmailParentUnionFind(object):
         :type accounts: List[List[str]]
         :rtype: List[List[str]]
 
-        Time complexity: O(n*logn).
-        Space complexity: O(n).
+        Time complexity: O(|V|*log|V|), where
+          - |V|: number of emails
+          - |E|: number of edges.
+        Space complexity: O(|V|).
         """
         from collections import defaultdict
 
