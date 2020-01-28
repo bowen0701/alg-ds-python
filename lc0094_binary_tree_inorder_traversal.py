@@ -75,8 +75,8 @@ class SolutionIter(object):
             vals.append(current.val)
 
             # Update previous & current by current & right.
-            current = current.right
             previous = current
+            current = current.right
 
         return vals
 
