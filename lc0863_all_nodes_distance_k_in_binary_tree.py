@@ -10,6 +10,13 @@ Return a list of the values of all nodes that have a distance K from the target
 node.  The answer can be returned in any order.
 
 Example 1:
+        3
+      /   \
+     5     1
+    / \   / \
+   6   2 0   8
+      / \
+     7   4
 Input: root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, K = 2
 Output: [7,4,1]
 Explanation: 
@@ -33,7 +40,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionUndirectedParentChildrenGraphBFS(object):
+class SolutionPreorderUndirectedParentChildrenGraphBFS(object):
     def distanceK(self, root, target, K):
         """
         :type root: TreeNode
@@ -89,7 +96,7 @@ def main():
     root.left.right.right = TreeNode(4)
     target = root.left
     K = 2
-    print SolutionUndirectedParentChildrenGraphBFS().distanceK(root, target, K)
+    print SolutionPreorderUndirectedParentChildrenGraphBFS().distanceK(root, target, K)
 
 
 if __name__ == '__main__':
