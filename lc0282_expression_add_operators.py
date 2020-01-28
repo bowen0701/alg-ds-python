@@ -37,7 +37,7 @@ class SolutionBacktrack(object):
             return None
 
         for i in range(pos, len(self.num)):
-            if i > pos and self.num[pos] == '0':
+            if self.num[pos] == '0' and i > pos:
                 # If current char is 0, use it as single digit. Skip latter iterations.
                 break
 
