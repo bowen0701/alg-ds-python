@@ -42,9 +42,6 @@ class SolutionRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        if not root:
-            return []
-
         vals = []
         self._postorderRecur(root, vals)
         return vals
@@ -64,7 +61,6 @@ class SolutionIter(object):
 
         # Collect revsersed values.
         rev_vals = []
-
         stack = [root]
 
         while stack:
@@ -74,7 +70,6 @@ class SolutionIter(object):
             # Push left before right since we use stack with FILO.
             if current.left:
                 stack.append(current.left)
-
             if current.right:
                 stack.append(current.right)
 
