@@ -46,10 +46,10 @@ class Solution(object):
         # Apply queue for BFS travesal in levels.
         queue = deque([root])
         result = []
-        level_id = 0
+        level = 0
 
         while queue:
-            level = deque([])
+            level_vals = deque([])
 
             for i in range(len(queue)):
                 # Get the oldest node from queue.
@@ -61,15 +61,15 @@ class Solution(object):
                 if current.right:
                     queue.appendleft(current.right)
             
-                if level_id % 2 == 0:
+                if level % 2 == 0:
                     # If even level, append current value to level's tail.
-                    level.append(current.val)
+                    level_vals.append(current.val)
                 else:
                     # If odd, insert current value to level's head.
-                    level.appendleft(current.val)
+                    level_vals.appendleft(current.val)
 
-            level_id += 1
-            result.append(list(level))
+            level += 1
+            result.append(list(level_vals))
 
         return result
 
