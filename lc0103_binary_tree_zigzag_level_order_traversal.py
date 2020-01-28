@@ -55,18 +55,18 @@ class Solution(object):
                 # Get the oldest node from queue.
                 current = queue.pop()
 
-                # Insert its left and right nodes to queue.
-                if current.left:
-                    queue.appendleft(current.left)
-                if current.right:
-                    queue.appendleft(current.right)
-            
                 if level % 2 == 0:
                     # If even level, append current value to level's tail.
                     level_vals.append(current.val)
                 else:
                     # If odd, insert current value to level's head.
                     level_vals.appendleft(current.val)
+
+                # Insert its left and right nodes to queue.
+                if current.left:
+                    queue.appendleft(current.left)
+                if current.right:
+                    queue.appendleft(current.right)
 
             result.append(list(level_vals))
             level += 1
