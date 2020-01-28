@@ -30,10 +30,9 @@ class SolutionRecur(object):
         if not root:
             return None
 
-        current = root
-        vals.append(current.val)
-        self._preorderRecur(current.left, vals)
-        self._preorderRecur(current.right, vals)
+        vals.append(root.val)
+        self._preorderRecur(root.left, vals)
+        self._preorderRecur(root.right, vals)
 
     def preorderTraversal(self, root):
         """
@@ -63,7 +62,6 @@ class SolutionIter(object):
 
         # Apply iterative preorder traversal with stack.
         vals = []
-
         stack = [root]
 
         while stack:
