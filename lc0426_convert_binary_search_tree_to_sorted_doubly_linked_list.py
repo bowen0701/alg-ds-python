@@ -83,7 +83,7 @@ class SolutionInorderIter(object):
             # Pop stack's last node to get current.
             current = stack.pop()
 
-            # Connect double links between previous & current.
+            # Connect previous and current.
             previous.right = current
             current.left = previous
 
@@ -91,7 +91,7 @@ class SolutionInorderIter(object):
             previous = current
             current = current.right
 
-        # Connect double links between 1st (prev_head.right) and last nodes (previous).
+        # Connect 1st (prev_head.right) and last nodes (previous).
         pre_head.right.left = previous
         previous.right = pre_head.right
 
