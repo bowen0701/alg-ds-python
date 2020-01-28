@@ -43,8 +43,8 @@ class SolutionValMinDiffBST(object):
         # Traverse through BST to update currrent value & min_diff
         val = 0
         min_diff = float('inf')
-
         current = root
+
         while current:
             if abs(current.val - target) < min_diff:
                 val = current.val
