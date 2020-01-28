@@ -59,7 +59,8 @@ class SolutionBacktrack(object):
                                 val - cur_val, -cur_val)
                 # Use operation: '*', e.g. 1+2*3 = (1+2)-2+2*3.
                 self._backtrack(result, temp + '*' + cur_num, i + 1,
-                                val - prev_val + prev_val * cur_val, prev_val * cur_val)
+                                val - prev_val + prev_val * cur_val, 
+                                prev_val * cur_val)
 
     def addOperators(self, num, target):
         """
