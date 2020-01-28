@@ -68,8 +68,8 @@ class Solution(object):
                     # If odd, insert current value to level's head.
                     level_vals.appendleft(current.val)
 
-            level += 1
             result.append(list(level_vals))
+            level += 1
 
         return result
 
