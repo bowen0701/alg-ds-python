@@ -23,7 +23,7 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max max_profit = 0.
 """
 
-class SolutionBrute(object):
+class SolutionBruteForce(object):
     def maxProfit(self, prices):
         """
         :type prices: List[int]
@@ -124,7 +124,7 @@ def main():
     prices = [7,1,5,3,6,4]
 
     start_time = time.time()
-    print 'By naive:', SolutionBrute().maxProfit(prices)
+    print 'By naive:', SolutionBruteForce().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
@@ -139,7 +139,7 @@ def main():
     prices = [6,1,3,2,4,7]
 
     start_time = time.time()
-    print 'By naive:', SolutionBrute().maxProfit(prices)
+    print 'By naive:', SolutionBruteForce().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
