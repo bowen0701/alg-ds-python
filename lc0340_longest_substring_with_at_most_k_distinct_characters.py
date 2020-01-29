@@ -42,7 +42,7 @@ class SolutionTwoPointerCharCountDictIter(object):
             char_count_d[s[j]] += 1
 
             if len(char_count_d) > k:
-                # If distinct char number > k, decrement char count for s[i].
+                # If distinct char count > k, move i to decrement it for s[i].
                 char_count_d[s[i]] -= 1
                 if char_count_d[s[i]] == 0:
                     del char_count_d[s[i]]
