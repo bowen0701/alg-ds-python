@@ -38,7 +38,7 @@ class SolutionSlidingWindowMaxKZerosSubarray(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Translate problem into finding max subarray w/ almost K zero.
+        # Translate problem into finding longest subarray w/ at most K zero.
         
         # Apply sliding window with two pointers to update max_len.
         max_len = 0
@@ -52,7 +52,7 @@ class SolutionSlidingWindowMaxKZerosSubarray(object):
                 n_zerios += 1
 
             # If n_zerios overflows, move left i and decrement it if A[i] is 0.
-            if n_zerios > K:
+            while n_zerios > K:
                 if A[i] == 0:
                     n_zerios -= 1
                 i += 1
