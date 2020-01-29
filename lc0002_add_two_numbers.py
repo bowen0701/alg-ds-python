@@ -36,7 +36,6 @@ class Solution(object):
         Space complexity: O(1).
         """
         pre_head = ListNode(0)
-
         current = pre_head
         carry = 0
 
