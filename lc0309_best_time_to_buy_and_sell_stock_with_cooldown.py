@@ -38,8 +38,10 @@ class SolutionDp(object):
         profit_buys[0] = -prices[0]
 
         for i in range(1, n):
-            profit_buys[i] = max(profit_sells[i - 2] - prices[i], profit_buys[i - 1])
-            profit_sells[i] = max(profit_buys[i - 1] + prices[i], profit_sells[i - 1])
+            profit_buys[i] = max(profit_sells[i - 2] - prices[i],
+                                 profit_buys[i - 1])
+            profit_sells[i] = max(profit_buys[i - 1] + prices[i],
+                                  profit_sells[i - 1])
 
         return profit_sells[-1]
 
