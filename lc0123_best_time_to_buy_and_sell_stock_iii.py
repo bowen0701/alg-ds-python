@@ -60,7 +60,7 @@ class SolutionIter(object):
             min_price1 = min(cur_price, min_price1)
             max_profit1 = max(cur_price - min_price1, max_profit1)
 
-            # Track 2nd buy with asset worth max_profit1.
+            # Track 2nd buy with asset worth max_profit1 for "net" price.
             min_price2 = min(cur_price - max_profit1, min_price2)
             max_profit2 = max(cur_price - min_price2, max_profit2)
 
