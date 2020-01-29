@@ -49,20 +49,19 @@ class SolutionSortBinarySearch(object):
 
                 if total == 0:
                     three_sums.append([nums[i], nums[l], nums[r]])
-                    # If left's right and right's left is the same as left and 
-                    # right, respectively, increment it to avoid duplicates.
+                    # Move l & r towards middle if duplicates.
                     while l < r and nums[l] == nums[l + 1]:
                         l += 1
                     while l < r and nums[r] == nums[r - 1]:
                         r -= 1
-                    # Checkout another triplet by incrementing left and right.
+                    # Move l & r towards middle.
                     l += 1
                     r -= 1
                 elif total < 0:
-                    # The 3 sum is too small, increase it by moving left to right. 
+                    # Too small, increase it by moving l to right. 
                     l += 1
                 elif total > 0:
-                    # The 3 sum is too big, decrease it by moving right to left. 
+                    # Too big, decrease it by moving r to left. 
                     r -= 1
 
         return three_sums
