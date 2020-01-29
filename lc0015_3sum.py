@@ -26,7 +26,7 @@ class SolutionSortBinarySearch(object):
         :rtype: List[List[int]]
 
         Time complexity: O(n*logn + n^2) = O(n^2).
-        Space complexity: O(n).
+        Space complexity: O(1).
         """
         three_sums = []
 
@@ -61,7 +61,7 @@ class SolutionSortBinarySearch(object):
                     # Too small, increase it by moving l to right. 
                     l += 1
                 elif total > 0:
-                    # Too big, decrease it by moving r to left. 
+                    # Too big, decrease it by moving return to left. 
                     r -= 1
 
         return three_sums
