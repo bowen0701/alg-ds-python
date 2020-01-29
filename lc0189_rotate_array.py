@@ -59,21 +59,21 @@ class SolutionIter(object):
         k = k % n
 
         # Start from the 0th.
-        start = 0
+        i = 0
         count = 0
 
         # Iterate through nums to rotate them until all is updated.
         while count < n:
             # Backup current, and update current by the ith.
-            cur_pos = (start + k) % n
+            cur_pos = (i + k) % n
             cur_num = nums[cur_pos]
-            nums[cur_pos] = nums[start]
+            nums[cur_pos] = nums[i]
             
             count += 1
             j = cur_pos
 
             # If no cycle, continue rotating current & next nums.
-            while j != start and count < n:
+            while j != i and count < n:
                 next_pos = (j + k) % n
                 # Swap current and next nums; current num -> next num.
                 cur_num, nums[next_pos] = nums[next_pos], cur_num
@@ -81,8 +81,8 @@ class SolutionIter(object):
                 count += 1
                 j = next_pos
 
-            # Increment start.
-            start += 1
+            # Increment start i.
+            i += 1
 
 
 def main():
