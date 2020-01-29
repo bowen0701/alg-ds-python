@@ -56,9 +56,8 @@ class SolutionModCumsumPosDictIter(object):
 
             if cumsum in cumsum_pos_d:
                 # If cumsum in dict and more than 1 nums lie between pos i & j.
-                # then subarray - nums[:j] is a multiple of k.
                 j = cumsum_pos_d[cumsum]
-                if j is not None and i - j > 1:
+                if i - j > 1:
                     return True
             else:
                 # If not, add cumsum to dict.
