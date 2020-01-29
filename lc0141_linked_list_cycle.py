@@ -85,7 +85,7 @@ class SolutionSlowFast(object):
             fast = fast.next.next
 
             # If fast cathes up slow, there is a cycle.
-            if slow == fast:
+            if fast == slow:
                 return True
 
         return False
