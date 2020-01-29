@@ -62,8 +62,6 @@ class SolutionReverseSwapAlongDiagonal(object):
             for j in range(i):
                 matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 
-        return matrix
-
 
 def main():
     matrix = [
@@ -71,7 +69,8 @@ def main():
                [4,5,6],
                [7,8,9]
              ]
-    print SolutionReverseSwapAlongDiagonal().rotate(matrix)
+    SolutionReverseSwapAlongDiagonal().rotate(matrix)
+    print matrix
 
     matrix = [
                [ 5, 1, 9,11],
@@ -79,7 +78,8 @@ def main():
                [13, 3, 6, 7],
                [15,14,12,16]
              ]
-    print SolutionReverseSwapAlongDiagonal().rotate(matrix)
+    SolutionReverseSwapAlongDiagonal().rotate(matrix)
+    print matrix
 
 
 if __name__ == '__main__':
