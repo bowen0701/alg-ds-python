@@ -63,11 +63,13 @@ class SolutionBFS(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        from collections import deque
+
         if not root:
             return root
 
         # Apply BFS w/ queue to iteratively visit and invert tree.
-        queue = [root]
+        queue = deque([root])
 
         while queue:
             current = queue.pop()
@@ -77,9 +79,9 @@ class SolutionBFS(object):
  
             # Insert left/right child into queue if exists.
             if current.left:
-                queue.insert(0, current.left)
+                queue.appendleft(current.left)
             if current.right:
-                queue.insert(0, current.right)
+                queue.appendleft(current.right)
 
         return root
 
