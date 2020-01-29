@@ -42,47 +42,47 @@ class SolutionLeftRightMaxSumMidIter(object):
         max_sum = 0
         result = [0, 0, 0]
 
-        # Compute cumsum before pos i: [0, n1, n1+n2, ...]
-        cumsum = [0]
+        # Compute cumsums before pos i: [0, n1, n1+n2, ...]
+        cumsums = [0]
 
         for num in nums:
-            cumsum.append(cumsum[-1] + num)
+            cumsums.append(cumsums[-1] + num)
 
-        # Compute left max sum's starting pos in range [0, i], with initial 0.
+        # Compute left max sum's starting pos in range [0, r], with initial 0.
         # Interate through left intervals's right pos r.
-        left_pos = [0] * n
-        left_sum = cumsum[k] - cumsum[0]
+        left_start_pos = [0] * n
+        left_max_sum = cumsums[k] - cumsums[0]
 
         for r in range(k, n):
-            if cumsum[r + 1] - cumsum[r + 1 - k] > left_sum:
-                left_pos[r] = r + 1 - k
-                left_sum = cumsum[r + 1] - cumsum[r + 1 - k]
+            if cumsums[r + 1] - cumsums[r + 1 - k] > left_max_sum:
+                left_max_sum = cumsums[r + 1] - cumsums[r + 1 - k]
+                left_start_pos[r] = r - k + 1
             else:
-                left_pos[r] = left_pos[r - 1]
+                left_start_pos[r] = left_start_pos[r - 1]
 
-        # Compute right max sum's starting pos in range [i, n-1], with initial n - k.
+        # Compute right max sum's starting pos in range [l, n-1], with initial n - k.
         # Interate through right intervals's left pos l.
-        right_pos = [n - k] * n
-        right_sum = cumsum[n] - cumsum[n - k]
+        right_start_pos = [n - k] * n
+        right_max_sum = cumsums[n] - cumsums[n - k]
 
         for l in range(n - k - 1, -1, -1):
-            if cumsum[l + k] - cumsum[l] >= right_sum:
-                right_pos[l] = l
-                right_sum = cumsum[l + k] - cumsum[l]
+            if cumsums[l + k] - cumsums[l] >= right_max_sum:
+                right_max_sum = cumsums[l + k] - cumsums[l]
+                right_start_pos[l] = l
             else:
-                right_pos[l] = right_pos[l + 1]
+                right_start_pos[l] = right_start_pos[l + 1]
 
         # Check every possible middle interval and its left/right ones.
         # Interate through left pos l of middle intervals to update max sum.
         for m in range(k, n - 2 * k + 1):
-            l = left_pos[m - 1]
-            r = right_pos[m + k]
+            l = left_start_pos[m - 1]
+            r = right_start_pos[m + k]
 
-            total_sum = ((cumsum[l + k] - cumsum[l]) +
-                       (cumsum[m + k] - cumsum[m]) +
-                       (cumsum[r + k] - cumsum[r]))
-            if total_sum > max_sum:
-                max_sum = total_sum
+            subarrays_sum = ((cumsums[l + k] - cumsums[l]) +
+                             (cumsums[m + k] - cumsums[m]) +
+                             (cumsums[r + k] - cumsums[r]))
+            if subarrays_sum > max_sum:
+                max_sum = subarrays_sum
                 result = [l, m, r]
 
         return result
