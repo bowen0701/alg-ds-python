@@ -59,14 +59,14 @@ class SolutionOneLengthDiff(object):
             return False
 
         if len(s) == len(t):
-            # If s is of equal lenght with t, replace a char from s and t.
+            # If s is of equal lenght, replace a char from s and t.
             return self._one_replace(s, t)
         elif len(s) == len(t) - 1:
-            # If s is shorter than t by one char, insert a char into s.
+            # If s is shorter by one char, insert a char into s.
             return self._one_insert(s, t)
         elif len(s) == len(t) + 1:
-            # If s is longer than t by one char, delete a char from s,
-            # which is equivalent to insert a char into t.
+            # If s is longer by one char, delete a char from s;
+            # equivalent to insert a char into t.
             return self._one_insert(t, s)
 
 
