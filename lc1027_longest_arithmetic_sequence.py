@@ -33,7 +33,7 @@ Note:
 - 0 <= A[i] <= 10000
 """
 
-class SolutionPosDiffCountDp(object):
+class SolutionPosDiffLenDp(object):
     def longestArithSeqLength(self, A):
         """
         :type A: List[int]
@@ -42,21 +42,21 @@ class SolutionPosDiffCountDp(object):
         Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
-        # Use dict:pos+diff->count to memorize previous pos's diff count.
-        posdiff_count_d = {}
+        # Use dict:pos+diff->len to memorize previous pos's diff length.
+        posdiff_len_d = {}
 
         n = len(A)
 
         for i in range(n):
             for j in range(i + 1, n):
                 diff = A[j] - A[i]
-                if (i, diff) not in posdiff_count_d:
+                if (i, diff) not in posdiff_len_d:
                     # Initialize pos diff's count = 1+1.
-                    posdiff_count_d[(j, diff)] = 2
+                    posdiff_len_d[(j, diff)] = 2
                 else:
-                    posdiff_count_d[(j, diff)] = posdiff_count_d[(i, diff)] + 1
+                    posdiff_len_d[(j, diff)] = posdiff_len_d[(i, diff)] + 1
 
-        return max(posdiff_count_d.values())
+        return max(posdiff_len_d.values())
 
 
 def main():
