@@ -46,7 +46,8 @@ class LRUCache(object):
     def __init__(self, capacity):
         """Least Recently Used (LRU) cache.
 
-        Apply dict with a doubly linked list (head->tail) for LRU cache (old->new).
+        Apply dict with a doubly linked list for LRU cache (old->new).
+        head<->node1<->node2<->tail.
 
         :type capacity: int
         """
@@ -113,13 +114,13 @@ class LRUCache(object):
         """
         node = Node(key, value)
 
-        # Check if the node with key exists, if yes, remove it.
+        # Check if node with key exists, if yes, remove it and update dict.
         if key in self.key_node_d:
             self._remove(self.key_node_d[key])
-
-        # Add new node to tail and update dict.
-        self._add_tail(node)
         self.key_node_d[key] = node
+
+        # Add new node to tail.
+        self._add_tail(node)
 
         # Check if larger than capacity, remove head's next node: LRU node.
         if len(self.key_node_d) > self.capacity:
