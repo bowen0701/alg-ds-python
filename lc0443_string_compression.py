@@ -62,19 +62,19 @@ class SolutionOldNewTwoPointersRepeat(object):
         if n <= 1:
             return n
 
-        # Apply two pointers method: i & j for old & new positions.
+        # Apply two pointers: i & j for old & new positions.
         i, j = 0, 0
 
         while i < n:
             chars[j] = chars[i]
             repeat = 1
 
-            # Iterate through RHS of char i to check if same char.
+            # Iterate through RHS of char i until different char.
             while i + 1 < n and chars[i + 1] == chars[i]:
                 i += 1
                 repeat += 1
 
-            # If repeat > 1, replace chars by repeat.
+            # If repeat > 1, replace chars by str(repeat).
             if repeat > 1:
                 for c in str(repeat):
                     j += 1
