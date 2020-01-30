@@ -30,7 +30,9 @@ class SolutionEachRowHeightRectangleHistogram(object):
         :type matrix: List[List[str]]
         :rtype: int
 
-        Time complexity: O(n), where n is the number of columns.
+        Time complexity: O(m*n), where
+          - m: number of rows
+          - n: number of columns.
         Space complexity: O(n).
         """
         # Edge cases.
@@ -62,7 +64,7 @@ class SolutionEachRowHeightRectangleHistogram(object):
                     # The building popped out represents the height.
                     h = heights[idx_stack.pop()]
 
-                    # Last stack top & new buildings are the left & right boundaries.
+                    # Last stack top & new building's left are left & right boundaries.
                     w = i - idx_stack[-1] - 1
 
                     max_area = max(max_area, h * w)
