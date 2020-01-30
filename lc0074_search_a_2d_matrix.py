@@ -90,6 +90,7 @@ class SolutionBinarySearch(object):
             elif matrix[i][j] > target:
                 right = mid - 1
 
+        # Finally check left = right case.
         i, j = left // n_cols, left % n_cols
         if matrix[i][j] == target:
             return True
