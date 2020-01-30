@@ -82,7 +82,6 @@ class SolutionMemo(object):
             return 0
 
         T = [None] * len(nums)
-
         return self._recurMemo(nums, len(nums) - 1, T)
 
 
