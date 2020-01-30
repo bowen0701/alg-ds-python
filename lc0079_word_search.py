@@ -22,8 +22,8 @@ Given word = "SEE", return true.
 Given word = "ABCB", return false.
 """
 
-class SolutionDFSRecurBacktrack(object):
-    def _dfsRecur(self, i, j, board, word, pos, visited):
+class SolutionDfsBacktrackRecur(object):
+    def _dfsBracktrackRecur(self, i, j, board, word, pos, visited_d):
         # If there are no letters, complete search.
         if pos == len(word):
             return True
@@ -31,20 +31,21 @@ class SolutionDFSRecurBacktrack(object):
         # If (i, j) is out of boundaries, does not match letter or is visited.
         if (i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or 
             board[i][j] != word[pos] or
-            visited.get((i, j))):
+            visited_d.get((i, j))):
             return False
 
         # Mark (i, j) as visited.
-        visited[(i, j)] = True
+        visited_d[(i, j)] = True
 
         # Start DFS: if one of DFSs is true, return True.
         is_found = False
         dirs = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
         for i_next, j_next in dirs:
-            is_found |= self._dfsRecur(i_next, j_next, board, word, pos + 1, visited)
+            is_found |= self._dfsBracktrackRecur(
+                i_next, j_next, board, word, pos + 1, visited_d)
 
         # Backtrack.
-        visited[(i, j)] = False
+        visited_d[(i, j)] = False
 
         return is_found
 
@@ -69,8 +70,8 @@ class SolutionDFSRecurBacktrack(object):
             for j in range(n):
                 # Start from 0th letter pos of word.
                 pos = 0
-                visited = {}
-                if self._dfsRecur(i, j, board, word, pos, visited):
+                visited_d = {}
+                if self._dfsBracktrackRecur(i, j, board, word, pos, visited_d):
                     return True
 
         return False
@@ -85,15 +86,15 @@ def main():
 
     # Given word = "ABCCED", return true.
     word = 'ABCCED'
-    print SolutionDFSRecurBacktrack().exist(board, word)
+    print SolutionDfsBacktrackRecur().exist(board, word)
 
     # Given word = "SEE", return true.
     word = 'SEE'
-    print SolutionDFSRecurBacktrack().exist(board, word)
+    print SolutionDfsBacktrackRecur().exist(board, word)
 
     # Given word = "ABCB", return false.
     word = 'ABCB'
-    print SolutionDFSRecurBacktrack().exist(board, word)
+    print SolutionDfsBacktrackRecur().exist(board, word)
 
 
 if __name__ == '__main__':
