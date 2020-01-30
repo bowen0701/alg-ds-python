@@ -1,4 +1,4 @@
-"""Leetcode Treasure Island
+"""Leetcode: Treasure Island
 Medium
 
 URL: https://leetcode.com/discuss/interview-question/347457
@@ -15,11 +15,11 @@ Assume the map area is a two dimensional grid,
 represented by a matrix of characters.
 You must start from the top-left corner of the map and
 can move one block up, down, left or right at a time.
-The treasure island is marked as 'X' in a block of the matrix.
-'X' will not be at the top-left corner.
-Any block with dangerous rocks or reefs will be marked as 'D'.
-You must not enter dangerous blocks.
-You cannot leave the map area. Other areas 'O' are safe to sail in.
+- The treasure island is marked as 'X' in a block of the matrix.
+  'X' will not be at the top-left corner.
+- Any block with dangerous rocks or reefs will be marked as 'D'.
+  You must not enter dangerous blocks.
+- You cannot leave the map area. Other areas 'O' are safe to sail in.
 The top-left corner is always safe.
 Output the minimum number of steps to get to the treasure.
 
@@ -63,7 +63,6 @@ class SolutionBFSSteps(object):
 
                 # Visiting directions.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-
                 for r_next, c_next in dirs:
                     # If is out of boundary or visited, skip visiting.
                     if (r_next < 0 or r_next >= n_rows or 
