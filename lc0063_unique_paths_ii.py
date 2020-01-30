@@ -41,14 +41,14 @@ class Solution(object):
         if obstacleGrid[0][0] == 0:
             path[0][0] = 1
     
-        # Set the 1st row to 1 util reach obstacles.
+        # Set the 0th row to its left util reach obstacles.
         for j in range(1, n):
             if obstacleGrid[0][j] == 0:
                 path[0][j] = path[0][j - 1]
             else:
                 break
 
-        # Set the 1st col to 1 util reach obstacles.
+        # Set the 0th col to its up util reach obstacles.
         for i in range(1, m):
             if obstacleGrid[i][0] == 0:
                 path[i][0] = path[i - 1][0]
