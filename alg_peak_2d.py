@@ -1,9 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import itertools
-
 """
 Find a peak in 2D array.
 
@@ -15,7 +9,14 @@ In general, a[i][j] is a peak iff
 Similarly for corner cases, a[i][j], i = 0 or m - 1, or j = 0 or n -1.
 """
 
-def peak_2d_iter(arr):
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import itertools
+
+
+def peak_2d_bruteforce(arr):
     """Find peak in 2D array (nxm) by iterative algorithm.
 
     Time complexity: O(n*m).
@@ -83,13 +84,13 @@ def _max_1d(arr):
     Time complexity: O(m).
     Space complexity: O(1).
     """
-    max_id = 0
+    max_col = 0
     max_item = arr[0]
     for i in range(1, len(arr)):
         if arr[i] > max_item:
-            max_id = i
+            max_col = i
             max_item = arr[i]
-    return max_id, max_item
+    return max_col, max_item
 
 
 def peak_2d(arr, start_row, end_row):
@@ -103,16 +104,20 @@ def peak_2d(arr, start_row, end_row):
     Space complexity: O(1).
     """
     if end_row - start_row == 0:
+        # For last one row, find the max item.
         _, max_item = _max_1d(arr)
         return max_item
     else:
         mid_row = start_row + (end_row - start_row) // 2
         max_col, _ = _max_1d(arr[mid_row])
-        if arr[mid_row][max_col] < arr[mid_row - 1][max_col]:
+        if arr[mid_row - 1][max_col] > arr[mid_row][max_col]:
+            # Binary search the upper half.
             return peak_2d(arr, start_row, mid_row - 1)
-        elif arr[mid_row][max_col] < arr[mid_row + 1][max_col]:
+        elif arr[mid_row + 1][max_col] > arr[mid_row][max_col]:
+            # Binary search the bottom half.
             return peak_2d(arr, mid_row + 1, end_row)
         else:
+            # Find 2D peak.
             return arr[mid_row][max_col]
 
 
@@ -126,7 +131,7 @@ def main():
            [16, 17, 19, 20, 18]]
 
     start_time = time.time()
-    print('Peak: {}'.format(peak_2d_iter(arr)))
+    print('Peak: {}'.format(peak_2d_bruteforce(arr)))
     print('Time for peak_2D_iter(): {}'.format(time.time() - start_time))
 
     start_time = time.time()
