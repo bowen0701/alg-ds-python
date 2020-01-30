@@ -32,7 +32,7 @@ obj = NumMatrix(matrix)
 param_1 = obj.sumRegion(row1,col1,row2,col2)
 """
 
-class NumMatrixNaive(object):
+class NumMatrixBruteForce(object):
     def __init__(self, matrix):
         """
         :type matrix: List[List[int]]
@@ -83,12 +83,10 @@ class NumMatrixDP(object):
         # Create T for memoization of region sum from (0, 0) to (r, c).
         T = [[0] * (ncols + 1) for _ in range(nrows + 1)]
 
-        # Compute top-left range sum:
-        # T[r][c] = T[r-1][c] + T[r][c-1] + matrix[r][c] - T[r-1][c-1].
+        # Compute top-left range sum: left + up + entry - overlap.
         for r in range(1, nrows + 1):
             for c in range(1, ncols + 1):
-                T[r][c] = (T[r - 1][c] 
-                           + T[r][c - 1]
+                T[r][c] = (T[r - 1][c] + T[r][c - 1]
                            + matrix[r - 1][c - 1]
                            - T[r - 1][c - 1])
 
@@ -115,8 +113,7 @@ class NumMatrixDP(object):
 
         # Compute sum region based on top-left range sum. 
         return (self.T[row2][col2]
-                - self.T[row1 - 1][col2]
-                - self.T[row2][col1 - 1]
+                - self.T[row1 - 1][col2] - self.T[row2][col1 - 1]
                 + self.T[row1 - 1][col1 - 1])
 
 
@@ -137,7 +134,7 @@ def main():
 
     print 'By naive:'
     start_time = time.time()
-    num_matrix = NumMatrixNaive(matrix)
+    num_matrix = NumMatrixBruteForce(matrix)
 
     # sumRegion(2, 1, 4, 3) -> 8
     print num_matrix.sumRegion(2, 1, 4, 3)
