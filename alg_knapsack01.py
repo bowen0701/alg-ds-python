@@ -1,12 +1,12 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 """0-1 Knapsack Problem
 Given weights and values of n "non-splittable" items, put these items in a 
 knapsack of capacity to get the maximum total value in the knapsack. 
 """
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 
 def _knapsack01_recur(val, wt, wt_cap, n):
     """0-1 Knapsack Problem by naive recursion.
@@ -18,8 +18,10 @@ def _knapsack01_recur(val, wt, wt_cap, n):
         return 0
     
     if wt[n] > wt_cap:
+        # Cannot be put.
         max_val = _knapsack01_recur(val, wt, wt_cap, n - 1)
     else:
+        # Can be put: to put or not to put. 
         val_in = val[n] + _knapsack01_recur(val, wt, wt_cap - wt[n], n - 1)
         val_ex = _knapsack01_recur(val, wt, wt_cap, n - 1)
         max_val = max(val_in, val_ex)
@@ -44,11 +46,14 @@ def _knapsack01_memo(val, wt, wt_cap, T, n):
         return T[n][wt_cap]
 
     if wt[n] > wt_cap:
+        # Cannot be put.
         max_val = _knapsack01_memo(val, wt, wt_cap, T, n - 1)
     else:
+        # Can be put: to put or not to put. 
         val_in = val[n] + _knapsack01_memo(val, wt, wt_cap - wt[n], T, n - 1)
         val_ex = _knapsack01_memo(val, wt, wt_cap, T, n - 1)
         max_val = max(val_in, val_ex)
+
     T[n][wt_cap] = max_val
     return max_val
 
@@ -63,8 +68,8 @@ def knapsack01_memo(val, wt, wt_cap):
     """
     n = len(wt) - 1
 
-    # Create tabular T of (n+1) x (wt_cap+1).
-    T = [[None for j in range(wt_cap + 1)] for i in range(n + 1)]
+    # Create tabular T of (n+1)x(wt_cap+1).
+    T = [[None] * (wt_cap + 1) for i in range(n + 1)]
 
     # For empty cap, no value can be added.
     for i in range(n + 1):
@@ -84,7 +89,7 @@ def knapsack_dp(val, wt, wt_cap):
     n = len(wt)
 
     # Create tabular T of n x (wt_cap+1).
-    T = [[None for j in range(wt_cap + 1)] for i in range(n)]
+    T = [[None] * (wt_cap + 1) for i in range(n)]
  
     # For empty cap, no value can be added.   
     for i in range(n):
@@ -100,8 +105,10 @@ def knapsack_dp(val, wt, wt_cap):
     for i in range(1, n):
         for j in range(1, wt_cap + 1):
             if wt[i] <= j:
-                T[i][j] = max(T[i-1][j], val[i] + T[i-1][j-wt[i]])
+                # Can be put: to put or not to put.
+                T[i][j] = max(val[i] + T[i - 1][j - wt[i]], T[i - 1][j])
             else:
+                # Cannot be put.
                 T[i][j] = T[i-1][j]
 
     return T
@@ -109,14 +116,16 @@ def knapsack_dp(val, wt, wt_cap):
 
 def item_list(T, wt, wt_cap):
     n = len(wt)
-    items = [0 for _ in range(n)]
+    items = [0] * n
 
-    j = wt_cap
+    w = wt_cap
     for i in range(n - 1, -1, -1):
-        if i >= 1 and T[i][j] > T[i - 1][j]:
+        if i >= 1 and T[i][w] > T[i - 1][w]:
+            # Item i, i >= 1, is put.
             items[i] = 1
-            j -= wt[i]
-        elif i == 0 and T[i][j] != 0:
+            w -= wt[i]
+        elif i == 0 and T[i][w] != 0:
+            # Item 0 is put.
             items[i] = 1
 
     return items
@@ -139,10 +148,10 @@ def main():
     print('Time by memo: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    M = knapsack_dp(val, wt, wt_cap)
-    print('By DP: {}'.format(M[-1][-1]))
+    T = knapsack_dp(val, wt, wt_cap)
+    print('By DP: {}'.format(T[-1][-1]))
     print('Time: {}'.format(time.time() - start_time))
-    print('Items: {}'.format(item_list(M, wt, wt_cap)))
+    print('Items: {}'.format(item_list(T, wt, wt_cap)))
 
 
 if __name__ == '__main__':
