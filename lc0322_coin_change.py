@@ -39,7 +39,7 @@ class SolutionRecur(object):
 
         for c in coins:
             # Not changeable.
-            if amount < c:
+            if c > amount:
                 continue
 
             extra_coins = self.coinChange(coins, amount - c)
@@ -71,7 +71,7 @@ class SolutionMemo(object):
 
         for c in coins:
             # Not changeable.
-            if amount < c:
+            if c > amount:
                 continue
 
             extra_coins = self._coin_change_memo(coins, amount - c, T)
@@ -106,22 +106,20 @@ class SolutionDp(object):
         Space complexity: O(a*n).
         """
         # Apply DP with tabular T: n_coints x (amount + 1).
-        n_coins = len(coins)
-        T = [[float('inf')] * (amount + 1) for _ in range(n_coins)]
+        n = len(coins)
+        T = [[float('inf')] * (amount + 1) for _ in range(n)]
 
         # For amount 0, set T[i][0] equal 0.
-        for i in range(n_coins):
+        for i in range(n):
             T[i][0] = 0
 
         for a in range(1, amount + 1):
-            for i in range(n_coins):
+            for i in range(n):
                 if coins[i] <= a:
-                    # If coin i can be included, decide which uses less coins:
-                    # 1. #coins without coin i to make a
-                    # 2. 1 + #coins with coin i to make a - coins[i]
+                    # If coin i is included: to change or not to change.
                     T[i][a] = min(T[i - 1][a], 1 + T[i][a - coins[i]])
                 else:
-                    # If coin i cannot be included, use previous #coins.
+                    # If coin i is not included, use previous #coins.
                     T[i][a] = T[i - 1][a]
 
         if T[-1][-1] != float('inf'):
@@ -134,7 +132,9 @@ class SolutionDpEarlyStop(object):
     def coinChange(self, coins, amount):
         """Change fewest #coins by bottom-up dynamic programming.
 
-        Time complexity: O(a*n), where a is amount, and n is number of coins.
+        Time complexity: O(a*n+n*logn), where 
+          - a is amount, and 
+          - n is number of coins.
         Space complexity: O(a).
         """
         # Apply DP with tabular T with early stopping by sorting.
@@ -148,9 +148,7 @@ class SolutionDpEarlyStop(object):
         for a in range(1, amount + 1):
             for i in range(len(coins)):
                 if coins[i] <= a:
-                    # If coin i can be included:
-                    # 1. #coins without coin i to make a
-                    # 2. 1 + #coins with coin i to make a - coins[i]
+                    # If coin i is included: to change or not to change.
                     T[a] = min(T[a], 1 + T[a - coins[i]])
                 else:
                     # Early stop.
