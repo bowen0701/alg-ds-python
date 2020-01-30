@@ -41,7 +41,7 @@ def _fibonacci_memo(n, T):
 
 
 def fibonacci_memo(n):
-    T = [None for _ in range(n + 1)]
+    T = [None] * (n + 1)
     return _fibonacci_memo(n, T)
 
 
@@ -51,7 +51,7 @@ def fibonacci_dp(n):
     - Time complexity: O(n).
     - Space complexity: O(n).
     """
-    T = [None for _ in range(n + 1)]
+    T = [None] * (n + 1)
     T[0] = 0
     T[1] = 1
     for n in range(2, n + 1):
