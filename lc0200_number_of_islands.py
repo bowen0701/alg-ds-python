@@ -68,7 +68,7 @@ class SolutionDFSRecurVisitReturn(object):
         # If visit outside of boundary or water or visited.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
             grid[r][c] == '0' or visited_d.get((r, c))):
-            return None
+            return 0
 
         # Mark (r, c) as visited.
         visited_d[(r, c)] = True
