@@ -1,7 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 """
 Find a peak position in 1D array.
 
@@ -11,6 +7,11 @@ In general, a[k] is a peak iff a[k] > a[k - 1] and a[k] > a[k + 1].
 If a[0] > a[1], then a[0] is a peak.
 If a[n - 1] > a[n - 2], then a[n - 1] is a peak.  
 """
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 
 def peak_1d_iter(arr):
     """Find peak by naive iteration.
@@ -23,28 +24,6 @@ def peak_1d_iter(arr):
         if ((i == 0 or arr[i - 1] <= arr[i]) and 
             (i == len(arr) - 1 or arr[i] >= arr[i + 1])):
             return i
-
-
-def peak_1d_binary_search_iter(arr):
-    """Find peak by iterative binary search algorithm.
-
-    Time complexity: O(logn).
-    Space complexity: O(1).
-    """
-    left, right = 0, len(arr) - 1
-
-    while left < right:
-        mid = (left + right + 1) // 2
-
-        if arr[mid - 1] > arr[mid]:
-            # If mid's left > mid, search left part.
-            right = mid - 1
-        else:
-            # Otherwise, search right part.
-            left = mid
-
-    # For left = right.
-    return left
 
 
 def _binary_search_recur_helper(arr, left, right):
@@ -71,13 +50,34 @@ def peak_1d_binary_search_recur(arr):
     return _binary_search_recur_helper(arr, 0, len(arr) - 1)
 
 
+def peak_1d_binary_search_iter(arr):
+    """Find peak by iterative binary search algorithm.
+
+    Time complexity: O(logn).
+    Space complexity: O(1).
+    """
+    left, right = 0, len(arr) - 1
+
+    while left < right:
+        mid = (left + right + 1) // 2
+
+        if arr[mid - 1] > arr[mid]:
+            # If mid's left > mid, search left part.
+            right = mid - 1
+        else:
+            # Otherwise, search right part.
+            left = mid
+
+    # For left = right.
+    return left
+
+
 def main():
     import time
     import numpy as np
 
     # Array of length 5 with peak at 3.
-    # arr = [0, 1, 2, 4, 3]
-    arr = [0, 1]
+    arr = [0, 1, 2, 4, 3]
     print('arr', arr)
     
     start_time = time.time()
@@ -85,13 +85,13 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By peak_1d_binary_search_iter(): {}'
-          .format(peak_1d_binary_search_iter(arr)))
+    print('By peak_1d_binary_search_recur(): {}'
+          .format(peak_1d_binary_search_recur(arr)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By peak_1d_binary_search_recur(): {}'
-          .format(peak_1d_binary_search_recur(arr)))
+    print('By peak_1d_binary_search_iter(): {}'
+          .format(peak_1d_binary_search_iter(arr)))
     print('Time: {}'.format(time.time() - start_time))
 
     np.random.seed(71)
@@ -103,13 +103,13 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By peak_1d_binary_search_iter(): {}'
-          .format(peak_1d_binary_search_iter(arr)))
+    print('By peak_1d_binary_search_recur(): {}'
+          .format(peak_1d_binary_search_recur(arr)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By peak_1d_binary_search_recur(): {}'
-          .format(peak_1d_binary_search_recur(arr)))
+    print('By peak_1d_binary_search_iter(): {}'
+          .format(peak_1d_binary_search_iter(arr)))
     print('Time: {}'.format(time.time() - start_time))
 
 
