@@ -66,6 +66,7 @@ class SolutionTwoPointers(object):
                 else:
                     right = mid - 1
 
+        # Finally check left = right case.
         if nums[left] == target:
             return left
         else:
