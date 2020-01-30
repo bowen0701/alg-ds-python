@@ -32,20 +32,20 @@ def climbing_stairs_three_recur(steps):
             climbing_stairs_three_recur(steps - 3))
 
 
-def _climbing_stairs_three_memo(steps, M):
+def _climbing_stairs_three_memo(steps, T):
     if steps < 0:
         return 0
 
     if steps == 0:
         return 1
 
-    if M[steps]:
-        return M[steps]
+    if T[steps]:
+        return T[steps]
 
-    M[steps] = (_climbing_stairs_three_memo(steps - 1, M) +
-                _climbing_stairs_three_memo(steps - 2, M) + 
-                _climbing_stairs_three_memo(steps - 3, M))
-    return M[steps]
+    T[steps] = (_climbing_stairs_three_memo(steps - 1, T) +
+                _climbing_stairs_three_memo(steps - 2, T) + 
+                _climbing_stairs_three_memo(steps - 3, T))
+    return T[steps]
 
 
 def climbing_stairs_three_memo(steps):
@@ -54,8 +54,8 @@ def climbing_stairs_three_memo(steps):
     Time complexity: O(n).
     Space complexity: O(n).
     """
-    M = [0] * (steps + 1)
-    return _climbing_stairs_three_memo(steps, M)
+    T = [0] * (steps + 1)
+    return _climbing_stairs_three_memo(steps, T)
 
 
 def climbing_stairs_three_dp(steps):
@@ -64,10 +64,10 @@ def climbing_stairs_three_dp(steps):
     Time complexity: O(n).
     Space complexity: O(n).
     """
-    M = [0] * (steps + 1)
-    M[0] = 1
-    M[1] = 1
-    M[2] = 2
+    T = [0] * (steps + 1)
+    T[0] = 1
+    T[1] = 1
+    T[2] = 2
     
     for s in range(3, steps + 1):
         M[s] = M[s - 1] + M[s - 2] + M[s - 3]
@@ -80,6 +80,11 @@ def climbing_stairs_three_iter(steps):
     Time complexity: O(n).
     Space complexity: O(1).
     """
+    if steps <= 1:
+        return 1
+    if steps == 2:
+        return 2
+
     # Track the last three staircase results.
     a, b, c = 1, 1, 2
 
