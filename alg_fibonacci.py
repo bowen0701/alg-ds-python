@@ -65,6 +65,9 @@ def fibonacci_iter(n):
     - Time complexity: O(n).
     - Space complexity: O(1).
     """
+    if n <= 1:
+        return n
+
     # Track the last two fib numbers.
     a, b = 0, 1
     for _ in range(2, n + 1):
