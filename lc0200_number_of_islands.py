@@ -99,7 +99,7 @@ class SolutionDFSRecurVisitReturn(object):
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 # If a "new" land is 1, start DFS visiting.
-                if grid[r][c] == '1' and not visited_d.get((r, c)):
+                if grid[r][c] == '1':
                     n_connects = self._dfs(r, c, grid, visited_d)
                     if n_connects > 0:
                         n_islands += 1
