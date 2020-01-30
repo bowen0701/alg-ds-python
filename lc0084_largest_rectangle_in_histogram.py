@@ -24,10 +24,10 @@ class SolutionIncreasingHeightIdxStack(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Use stack to collect idx of buildings with increasing heights.
-        # Height's boundary case handled by height = 0 & idx = -1.
-        heights.append(0)
+        # Use stack to create buildings with increasing heights.
+        # Height's boundary case handled by idx = -1 with height = 0
         idx_stack = [-1]
+        heights.append(0)
 
         max_area = 0
 
@@ -37,7 +37,7 @@ class SolutionIncreasingHeightIdxStack(object):
                 # The building popped out represents the height.
                 h = heights[idx_stack.pop()]
 
-                # Last stack top & new buildings are the left & right boundaries.
+                # Last stack top & new building's left are left & right boundaries.
                 w = i - idx_stack[-1] - 1
 
                 max_area = max(max_area, h * w)
@@ -45,7 +45,7 @@ class SolutionIncreasingHeightIdxStack(object):
             idx_stack.append(i)
 
         # Recover the original heights.
-        heights.append(0)
+        heights.pop()
 
         return max_area
 
