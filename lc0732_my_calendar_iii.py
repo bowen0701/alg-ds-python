@@ -58,7 +58,7 @@ class MyCalendarThreeTimeCounterDict(object):
         self.time_counter_d[end] -= 1
 
         # Update max k-events by iterating through sorted events by times.
-        sorted_time_counters = sorted(self.time_counter_d.items(), key=lambda x: x[0])
+        sorted_time_counters = sorted(self.time_counter_d.items())
 
         max_k_events = 0
         cur_k_events = 0
@@ -107,7 +107,7 @@ def main():
     # MyCalendarThree.book(5, 15); // returns 3
     # MyCalendarThree.book(5, 10); // returns 3
     # MyCalendarThree.book(25, 55); // returns 3
-    calendar = MyCalendarThreeTimeDiffDict()
+    calendar = MyCalendarThreeTimeCounterDict()
     print calendar.book(10, 20)
     print calendar.book(50, 60)
     print calendar.book(10, 40)
