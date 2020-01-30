@@ -8,33 +8,20 @@ from __future__ import division
 from __future__ import print_function
 
 
-def _reverse_quicksort(vals_per_wts):
-    """Reverse quick sort by p = v / w."""
-    if len(vals_per_wts) <= 1:
-        return vals_per_wts
-
-    pivot = vals_per_wts[len(vals_per_wts) // 2]
-
-    smallers = [(v, w, p) for (v, w, p) in vals_per_wts if p <  pivot[2]]
-    middles = [(v, w, p) for (v, w, p) in vals_per_wts if p == pivot[2]]
-    biggers = [(v, w, p) for (v, w, p) in vals_per_wts if p > pivot[2]]
-
-    return _reverse_quicksort(biggers) + middles + _reverse_quicksort(smallers)
-
-
 def knapsack(val, wt, wt_cap):
     """Knapsack Problem by greedy algorithm w/ max val per wt.
 
     Time complexity: O(n*logn), where n is the number of items. 
     Space complexity: O(n).
     """
-    vals_per_wts = [(v, w, v / w) for (v, w) in zip(val, wt)]
-    sorted_vals_per_wts = _reverse_quicksort(vals_per_wts)
+    # Add highest value per weight first.
+    vals_per_wts = [(v / w, v, w) for (v, w) in zip(val, wt)]
+    sorted_vals_per_wts = sorted(vals_per_wts, reverse=True)
 
     max_val = 0
     total_wt = 0
 
-    for v, w, vw in sorted_vals_per_wts:
+    for vw, v, w in sorted_vals_per_wts:
         if total_wt + w <= wt_cap:
             total_wt += w
             max_val += v
