@@ -1,11 +1,12 @@
+"""Knapsack Problem
+Given weights and values of n "splittable" items, put these items in a 
+knapsack of capacity to get the maximum total value in the knapsack. 
+"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-"""Knapsack Problem
-Given weights and values of n "splittable" items, put these items in a knapsack of 
-capacity to get the maximum total value in the knapsack. 
-"""
 
 def _reverse_quicksort(vals_per_wts):
     """Reverse quick sort by p = v / w."""
