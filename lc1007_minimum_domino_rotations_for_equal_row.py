@@ -36,7 +36,7 @@ Note:
 - 2 <= A.length == B.length <= 20000
 """
 
-class SolutionNumCover(object):
+class SolutionNumCountsCover(object):
     def minDominoRotations(self, A, B):
         """
         :type A: List[int]
@@ -65,7 +65,7 @@ class SolutionNumCover(object):
         return -1
 
 
-class SolutionNumCounts(object):
+class SolutionNumCountsUnion(object):
     def minDominoRotations(self, A, B):
         """
         :type A: List[int]
@@ -101,20 +101,20 @@ def main():
     # Output: 2
     A = [2,1,2,4,2,2]
     B = [5,2,6,2,3,2]
-    print SolutionNumCover().minDominoRotations(A, B)
-    print SolutionNumCounts().minDominoRotations(A, B)
+    print SolutionNumCountsCover().minDominoRotations(A, B)
+    print SolutionNumCountsUnion().minDominoRotations(A, B)
 
     # Output: -1
     A = [3,5,1,2,3]
     B = [3,6,3,3,4]
-    print SolutionNumCover().minDominoRotations(A, B)
-    print SolutionNumCounts().minDominoRotations(A, B)
+    print SolutionNumCountsCover().minDominoRotations(A, B)
+    print SolutionNumCountsUnion().minDominoRotations(A, B)
 
-    # Output: 2
+    # Output: 1
     A = [1,5,1,2,3]
     B = [3,3,3,3,4]
-    print SolutionNumCover().minDominoRotations(A, B)
-    print SolutionNumCounts().minDominoRotations(A, B)
+    print SolutionNumCountsCover().minDominoRotations(A, B)
+    print SolutionNumCountsUnion().minDominoRotations(A, B)
 
 
 if __name__ == '__main__':
