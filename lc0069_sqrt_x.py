@@ -35,21 +35,20 @@ class SolutionBinarySearch(object):
         	return 0
 
         # Apply binary search with right = x // 2 for smaller search space.
-        left = 1
-        right = x // 2
+        left, right = 1, x // 2
 
         while left < right:
-        	mid = left + (right - left) // 2
-        	mid_squared = mid ** 2
+            mid = left + (right - left) // 2
+            mid_squared = mid ** 2
 
-        	if mid_squared == x:
-        		return mid
-        	elif mid_squared > x:
-        		right = mid - 1
-        	else:
-        		left = mid + 1
+            if mid_squared == x:
+                return mid
+            elif mid_squared < x:
+                left = mid + 1
+            else:
+                right = mid - 1
         
-        # Final check for left: if too big, minus 1.
+        # Final check for left = right: if too big, minus 1.
         if left * left > x:
         	return left - 1
 
