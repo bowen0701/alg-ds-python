@@ -45,7 +45,7 @@ class SolutionRecur(object):
             extra_coins = self.coinChange(coins, amount - c)
             if extra_coins < 0:
                 continue
-            min_coins = min(min_coins, 1 + extra_coins)
+            min_coins = min(1 + extra_coins, min_coins)
 
         if min_coins != float('inf'):
             return min_coins
@@ -77,7 +77,7 @@ class SolutionMemo(object):
             extra_coins = self._coin_change_memo(coins, amount - c, T)
             if extra_coins < 0:
                 continue
-            min_coins = min(min_coins, 1 + extra_coins)
+            min_coins = min(1 + extra_coins, min_coins)
 
         if min_coins != float('inf'):
             T[amount] = min_coins
@@ -117,7 +117,7 @@ class SolutionDp(object):
             for i in range(n):
                 if coins[i] <= a:
                     # If coin i is included: to change or not to change.
-                    T[i][a] = min(T[i - 1][a], 1 + T[i][a - coins[i]])
+                    T[i][a] = min(1 + T[i][a - coins[i]], T[i - 1][a])
                 else:
                     # If coin i is not included, use previous #coins.
                     T[i][a] = T[i - 1][a]
@@ -149,7 +149,7 @@ class SolutionDpEarlyStop(object):
             for i in range(len(coins)):
                 if coins[i] <= a:
                     # If coin i is included: to change or not to change.
-                    T[a] = min(T[a], 1 + T[a - coins[i]])
+                    T[a] = min(1 + T[a - coins[i]], T[a])
                 else:
                     # Early stop.
                     break
