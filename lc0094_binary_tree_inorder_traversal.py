@@ -56,9 +56,10 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
+        vals = []
+
         # Use stack for inorder traversal.
         stack = []
-        vals = []
         previous = None
         current = root
 
