@@ -305,7 +305,6 @@ class BinarySearchTree(object):
             # Push right before left since we use stack with FILO.
             if current.right:
                 stack.append(current.right)
-
             if current.left:
                 stack.append(current.left)
 
@@ -343,7 +342,6 @@ class BinarySearchTree(object):
             # Push left before right since we use stack with FILO.
             if current.left:
                 stack.append(current.left)
-
             if current.right:
                 stack.append(current.right)
 
