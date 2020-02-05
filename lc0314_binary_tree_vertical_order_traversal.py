@@ -88,19 +88,22 @@ class SolutionOrderValsDictQueue(object):
         from collections import defaultdict
         from collections import deque
 
+        if not root:
+            return []
+
         # Create dict: vertical order->list(node values).
         vorder_vals_d = defaultdict(list)
 
-        # Use queue to add root and left/right nodes with their orders to dict.
+        # Use queue to add root and left/right with their orders to dict.
         queue = deque([(root, 0)])
 
         while queue:
             current, order = queue.pop()
+            vorder_vals_d[order].append(current.val)
 
-            # Check if current exists, append val & left/right.
-            if current:
-                vorder_vals_d[order].append(current.val)
+            if current.left:
                 queue.appendleft((current.left, order - 1))
+            if current.right:
                 queue.appendleft((current.right, order + 1))
 
         # Return sorted list(node values) based on order.
