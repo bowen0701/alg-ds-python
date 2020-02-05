@@ -43,14 +43,15 @@ class TreeNode(object):
 
 class CodecHashtagEmptyNodePreorderRecurValueQueue(object):
     def _serializePreorderRecur(self, root, vals):
-        if root:
-            # Convert int to string for string join.
-            vals.append(str(root.val))
-            self._serializePreorderRecur(root.left, vals)
-            self._serializePreorderRecur(root.right, vals)
-        else:
+        if not root:
             # Use # to denote empty node.
             vals.append('#')
+            return None
+
+        # Append val string to vals.
+        vals.append(str(root.val))
+        self._serializePreorderRecur(root.left, vals)
+        self._serializePreorderRecur(root.right, vals)
 
     def serialize(self, root):
         """Encodes a tree to a single string.
@@ -70,14 +71,15 @@ class CodecHashtagEmptyNodePreorderRecurValueQueue(object):
 
     def _deserializePreorderRecur(self, vals_queue):
         val_str = vals_queue.popleft()
-        if val_str != '#':
-            # Convert value string back to int.
+
+        if val_str == '#':
+            return None
+        else:
+            # Recursively deserialize vals in queue to left/right subtrees.
             root = TreeNode(int(val_str))
             root.left = self._deserializePreorderRecur(vals_queue)
             root.right = self._deserializePreorderRecur(vals_queue)
             return root
-        else:
-            return None
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
