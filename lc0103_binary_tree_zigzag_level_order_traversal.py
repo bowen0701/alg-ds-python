@@ -29,7 +29,7 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionBFS(object):
     def zigzagLevelOrder(self, root):
         """
         :type root: TreeNode
@@ -43,9 +43,10 @@ class Solution(object):
         if not root:
             return []
 
+        result = []
+
         # Apply queue for BFS travesal in levels.
         queue = deque([root])
-        result = []
         level = 0
 
         while queue:
@@ -90,7 +91,7 @@ def main():
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
 
-    print Solution().zigzagLevelOrder(root)
+    print SolutionBFS().zigzagLevelOrder(root)
 
 
 if __name__ == '__main__':
