@@ -48,7 +48,6 @@ class SolutionLevelorderOneByOneIter(object):
 
         # Stop collection until met empty node.
         while queue and queue[-1]:
-            print queue
             current = queue.pop()
             if not current:
                 break
