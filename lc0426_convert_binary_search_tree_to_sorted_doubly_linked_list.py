@@ -67,7 +67,7 @@ class SolutionInorderIter(object):
         if not root:
             return None
 
-        # Create pre_head for new doubly linked list, and set it to previous.
+        # Create pre_head for doubly linked list, and set it to previous.
         pre_head = Node(None)
         previous = pre_head
         current = root
