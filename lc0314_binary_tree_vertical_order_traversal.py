@@ -98,15 +98,15 @@ class SolutionOrderValsDictQueue(object):
         queue = deque([(root, 0)])
 
         while queue:
-            current, order = queue.pop()
-            vorder_vals_d[order].append(current.val)
+            current, vorder = queue.pop()
+            vorder_vals_d[vorder].append(current.val)
 
             if current.left:
-                queue.appendleft((current.left, order - 1))
+                queue.appendleft((current.left, vorder - 1))
             if current.right:
-                queue.appendleft((current.right, order + 1))
+                queue.appendleft((current.right, vorder + 1))
 
-        # Return sorted list(node values) based on order.
+        # Return sorted list(node values) based on vertical order.
         vorder_vals = [vals for vorder, vals in sorted(vorder_vals_d.items())]
         return vorder_vals
 
