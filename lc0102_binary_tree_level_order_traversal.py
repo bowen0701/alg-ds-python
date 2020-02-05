@@ -43,14 +43,15 @@ class SolutionBFS(object):
         if not root:
             return []
 
+        result = []
+
         # Use queue for BFS.
         queue = deque([root])
-        result = []
 
         while queue:
             level_vals = []
             
-            # Iterate through all nodes in this level.
+            # Iterate through all nodes in one level.
             for i in range(len(queue)):
                 # Pop queue's last node and append it to level.
                 current = queue.pop()
