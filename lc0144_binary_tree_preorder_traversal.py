@@ -60,8 +60,9 @@ class SolutionIter(object):
         if not root:
             return None
 
-        # Apply iterative preorder traversal with stack.
         vals = []
+
+        # Apply iterative preorder traversal with stack.
         stack = [root]
 
         while stack:
