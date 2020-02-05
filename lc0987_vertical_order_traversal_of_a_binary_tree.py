@@ -77,24 +77,24 @@ class SolutionOrderValsDictSortedLevelOrderValsDict(object):
         queue = deque([(root, 0)])
 
         while queue:
-            # Create dict: level order->list(vals) 
-            level_order_vals_d = defaultdict(list)
+            # Create dict: level vertical order->list(vals) 
+            level_vorder_vals_d = defaultdict(list)
 
             for i in range(len(queue)):
-                current, order = queue.pop()
-                level_order_vals_d[order].append(current.val)
+                current, vorder = queue.pop()
+                level_vorder_vals_d[vorder].append(current.val)
 
                 if current.left:
-                    queue.appendleft((current.left, order - 1))
+                    queue.appendleft((current.left, vorder - 1))
                 if current.right:
-                    queue.appendleft((current.right, order + 1))
+                    queue.appendleft((current.right, vorder + 1))
 
             # After level traversal, append sorted vals to vorder_vals_d.
-            for order, vals in level_order_vals_d.items():
-                vorder_vals_d[order].extend(sorted(vals))
+            for vorder, vals in level_vorder_vals_d.items():
+                vorder_vals_d[vorder].extend(sorted(vals))
 
-        # Sort dict by order to return vals.
-        return [vals for order, vals in sorted(vorder_vals_d.items())]
+        # Sort dict by vertical order to return vals.
+        return [vals for vorder, vals in sorted(vorder_vals_d.items())]
 
 
 def main():
