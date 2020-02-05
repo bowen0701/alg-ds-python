@@ -61,6 +61,8 @@ class SolutionIter(object):
 
         # Collect revsersed values.
         rev_vals = []
+
+        # Apply postorder traversal with stack.
         stack = [root]
 
         while stack:
