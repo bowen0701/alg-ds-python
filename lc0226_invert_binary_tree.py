@@ -72,9 +72,8 @@ class SolutionBFS(object):
         queue = deque([root])
 
         while queue:
+            # Invert tree by swapping current's left and right subtrees.
             current = queue.pop()
-            
-            # Invert tree by swapping left and right trees.
             current.left, current.right = current.right, current.left
  
             # Insert left/right child into queue if exists.
