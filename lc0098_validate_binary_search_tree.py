@@ -39,7 +39,7 @@ class TreeNode(object):
 
 
 class SolutionMinMaxRecur(object):
-    def _isValidBSTUtil(self, root, min_val, max_val):
+    def _isValidBSTRecur(self, root, min_val, max_val):
         if not root:
             return True
         
@@ -48,8 +48,8 @@ class SolutionMinMaxRecur(object):
             return False
 
         # Validate left and right subtrees.
-        return (self._isValidBSTUtil(root.left, min_val, root.val) and
-                self._isValidBSTUtil(root.right, root.val, max_val))
+        return (self._isValidBSTRecur(root.left, min_val, root.val) and
+                self._isValidBSTRecur(root.right, root.val, max_val))
 
     def isValidBST(self, root):
         """
@@ -60,7 +60,7 @@ class SolutionMinMaxRecur(object):
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         min_val, max_val = -float('inf'), float('inf')
-        return self._isValidBSTUtil(root, min_val, max_val)
+        return self._isValidBSTRecur(root, min_val, max_val)
 
 
 class SolutionMinMaxIter(object):
@@ -81,39 +81,36 @@ class SolutionMinMaxIter(object):
 
         while stack:
             current, min_val, max_val = stack.pop()
-
-            if not current:
-                continue
-
             if current.val <= min_val or current.val >= max_val:
                 return False
 
-            # Validate left subtree with min and max=current and
-            # also validate right subtree with min=current and max.
-            stack.append([current.right, current.val, max_val])
-            stack.append([current.left, min_val, current.val])
+            if current.right:
+                stack.append([current.right, current.val, max_val])
+            if current.left:
+                stack.append([current.left, min_val, current.val])
 
         return True
 
 
 class SolutionInorderRecur(object):
-    def _isValidBSTUtil(self, current):
+    def _isValidBSTRecur(self, root):
         # Apply inorder traversal to check values in an increasing fashion.
-        if not current:
+        if not root:
             return True
  
         # Traverse left tree.
-        if not self._isValidBSTUtil(current.left):
+        if not self._isValidBSTRecur(root.left):
             return False
 
         # Compare root with its previous.
-        if self.previous and self.previous.val >= current.val:
+        if self.previous and self.previous.val >= root.val:
             return False
-        # Update previous by current node.
-        self.previous = current
+
+        # Update previous by root node.
+        self.previous = root
 
         # Traverse right tree.
-        if not self._isValidBSTUtil(current.right):
+        if not self._isValidBSTRecur(root.right):
             return False
 
         return True
@@ -127,7 +124,7 @@ class SolutionInorderRecur(object):
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
         self.previous = None
-        return self._isValidBSTUtil(root)
+        return self._isValidBSTRecur(root)
 
 
 class SolutionInorderIter(object):
