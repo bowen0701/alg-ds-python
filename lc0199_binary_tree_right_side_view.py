@@ -40,24 +40,25 @@ class SolutionLevelTraversalLast(object):
         if not root:
             return []
 
-        # Apply level traversal to collect visible values from top to bottom.
-        visible_vals = []
+        right_vals = []
 
+        # Apply level traversal to collect right side values.
         queue = deque([root])
+
         while queue:
             size = len(queue)
             for i in range(size):
                 current = queue.pop()
                 if i == size - 1:
-                    visible_vals.append(current.val)
+                    right_vals.append(current.val)
 
-                # Add current's left or right to queue if existed.
+                # Add current's left/right to queue if existed.
                 if current.left:
                     queue.appendleft(current.left)
                 if current.right:
                     queue.appendleft(current.right)
 
-        return visible_vals
+        return right_vals
 
 
 def main():
