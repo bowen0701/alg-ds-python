@@ -30,13 +30,13 @@ class TreeNode(object):
 
 
 class SolutionPreorderRecur(object):
-    def _preorder(self, root):
+    def _preorderRecur(self, root):
         if not root:
             return None
         
         self.n_nodes += 1
-        self._preorder(root.left)
-        self._preorder(root.right)
+        self._preorderRecur(root.left)
+        self._preorderRecur(root.right)
 
     def countNodes(self, root):
         """
@@ -48,7 +48,7 @@ class SolutionPreorderRecur(object):
         """
         # Apply recursive preorder traversal.
         self.n_nodes = 0
-        self._preorder(root)
+        self._preorderRecur(root)
         return self.n_nodes
 
 
@@ -125,15 +125,15 @@ class SolutionLeftRightDepths(object):
             return 0
 
         # Compare left & right subtrees's depths.
-        depth_left = self._countLeftDepth(root.left)
-        depth_right = self._countLeftDepth(root.right)
+        left_depth = self._countLeftDepth(root.left)
+        right_depth = self._countLeftDepth(root.right)
 
-        if depth_left == depth_right:
-            # If left & right depths are equal, the left subtree is full.
-            return pow(2, depth_left) + self._countLeftDepth(root.right)
+        if left_depth == right_depth:
+            # If left & right depths are equal, left subtree is full.
+            return pow(2, left_depth) + self.countNodes(root.right)
         else:
-            # If not, the right subtree is full, and the left depth is bigger.
-            return self._countLeftDepth(root.left) + pow(2, depth_right)
+            # If not, right subtree is full, and left depth is bigger.
+            return self.countNodes(root.left) + pow(2, right_depth)
 
 
 def main():
