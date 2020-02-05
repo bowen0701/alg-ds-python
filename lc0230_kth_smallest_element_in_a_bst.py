@@ -44,21 +44,22 @@ class TreeNode(object):
 
 
 class SolutionInorderRecur(object):
-    def _inorder(self, root):
+    def _inorderRecur(self, root):
         # Base case.
         if not root:
             return None
 
-        # Inorder traversal: left->node->right.
-        self._inorder(root.left)
+        # Visit left first.
+        self._inorderRecur(root.left)
 
-        # Decrement k to 0 to get the kth smallest value.
+        # Visit root: decrement k to 0 to get the kth smallest value.
         self.k -= 1
         if self.k == 0:
-             self.kth_smallest = root.val
-             return None
+            self.kth_smallest = root.val
+            return None
 
-        self._inorder(root.right)
+        # Visit right.
+        self._inorderRecur(root.right)
 
     def kthSmallest(self, root, k):
         """
@@ -72,8 +73,7 @@ class SolutionInorderRecur(object):
         # Apply recursive inorder traversal.
         self.k = k
         self.kth_smallest = None
-
-        self._inorder(root)
+        self._inorderRecur(root)
         return self.kth_smallest
 
 
@@ -99,10 +99,8 @@ class SolutionInorderIter(object):
                 stack.append(current)
                 current = current.left
 
-            # Pop stack as current, which is left.
+            # Pop stack as current, decrement k to 0 to get the kth smallest.
             current = stack.pop()
-
-            # Decrement k to 0 to get the kth smallest value.
             k -= 1
             if k == 0:
                 break
