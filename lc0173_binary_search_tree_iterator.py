@@ -46,7 +46,8 @@ class BSTIteratorCurrentStackInorderIter(object):
         """
         :type root: TreeNode
         """
-        # Creat global current node and stack for collected sorted nodes.
+        # Creat global previous/current and stack for collected sorted nodes.
+        self.previous = None
         self.current = root
         self.stack = []
 
@@ -58,14 +59,17 @@ class BSTIteratorCurrentStackInorderIter(object):
         Time complexity: O(1).
         Space complexity: O(h).
         """
-        # Apply iterative inorder traversal with current and stack.
+        # Apply iterative inorder traversal with inside loop.
         while self.current:
             self.stack.append(self.current)
             self.current = self.current.left
 
-        nxt = self.stack.pop()
-        self.current = nxt.right
-        return nxt.val
+        current = self.stack.pop()
+
+        self.previous = current
+        self.current = current.right
+
+        return current.val
 
     def hasNext(self):
         """
