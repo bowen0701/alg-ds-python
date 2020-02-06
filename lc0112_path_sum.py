@@ -65,21 +65,21 @@ class SolutionPreorderIter(object):
         if not root:
             return False
 
-        # Apply DFS with stack.
+        # Apply iterative preorder traversal with stack.
         stack = [(root, sum)]
 
         while stack:
-            current, _sum = stack.pop()
+            cur, cur_sum = stack.pop()
 
             # Base case: root-to-leaf path sum is sum.
-            if current.val == _sum and not current.left and not current.right:
+            if cur.val == cur_sum and not cur.left and not cur.right:
                 return True
 
             # Append left and right if existed.
-            if current.right:
-                stack.append((current.right, _sum - current.val))
-            if current.left:
-                stack.append((current.left, _sum - current.val))
+            if cur.right:
+                stack.append((cur.right, cur_sum - cur.val))
+            if cur.left:
+                stack.append((cur.left, cur_sum - cur.val))
 
         return False
 
