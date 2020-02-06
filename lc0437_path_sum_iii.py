@@ -36,22 +36,21 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionLeadRecur(object):
+class SolutionLeadPathSumRecur(object):
     def _leadPathSum(self, root, sum):
         if not root:
             return 0
 
         # Single root val is sum.
         if root.val == sum:
-            is_sum = 1
+            is_root_sum = 1
         else:
-            is_sum = 0
+            is_root_sum = 0
 
-        # With root val, count path sum leading by left/right node. 
-        left_lead_paths = self._leadPathSum(root.left, sum - root.val)
-        right_lead_paths = self._leadPathSum(root.right, sum - root.val)
-
-        return is_sum + left_lead_paths + right_lead_paths
+        # Including root val, count path sum leading by left/right node.
+        return (is_root_sum
+                + self._leadPathSum(root.left, sum - root.val)
+                + self._leadPathSum(root.right, sum - root.val))
 
     def pathSum(self, root, sum):
         """
@@ -62,45 +61,36 @@ class SolutionLeadRecur(object):
         Time complexity: O(n*logn), for balanced tree; O(n^2) for single sided.
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Sum lead path sum (with root) and path sums for left/right.
-
         if not root:
             return 0
-
-        # Count path sum leading by root.
-        lead_paths = self._leadPathSum(root, sum)
-
-        # Recursively get path sum starting from left/right node.
-        left_paths = self.pathSum(root.left, sum)
-        right_paths = self.pathSum(root.right, sum)
         
-        return lead_paths + left_paths + right_paths
+        return (self._leadPathSum(root, sum)
+                + self.pathSum(root.left, sum)
+                + self.pathSum(root.right, sum))
 
 
-class SolutionSumFreqMemo(object):
-    def _dfs(self, root, sum, sum_freq_d, cur_sum):
+class SolutionSumCountDictBacktracking(object):
+    def _backtrack(self, root, sum, sum_count_d, cusum):
         # Apply DFS in a preorder traversal fashion.
         if not root:
             return None
 
-        # Accumulate current sum.
-        cur_sum += root.val
-
-        # Compute complemented path sum.
-        complement_sum = cur_sum - sum
+        # Accumulate path sum and compute complemented path sum.
+        cusum += root.val
+        complement_sum = cusum - sum
 
         # Update num of paths if complemented path sum exists.
-        self.n_paths += sum_freq_d[complement_sum]
+        self.n_paths += sum_count_d[complement_sum]
 
-        # Update current path sum frequency.
-        sum_freq_d[cur_sum] += 1
+        # Update path sum count.
+        sum_count_d[cusum] += 1
 
         # DFS for left/right nodes.
-        self._dfs(root.left, sum, sum_freq_d, cur_sum)
-        self._dfs(root.right, sum, sum_freq_d, cur_sum)
+        self._backtrack(root.left, sum, sum_count_d, cusum)
+        self._backtrack(root.right, sum, sum_count_d, cusum)
 
         # Backtrack when switch to another branch.
-        sum_freq_d[cur_sum] -= 1
+        sum_count_d[cusum] -= 1
 
     def pathSum(self, root, sum):
         """
@@ -114,15 +104,14 @@ class SolutionSumFreqMemo(object):
         # Apply memoization to cache sum frequences.
         from collections import defaultdict
 
-        self.n_paths = 0
-
-        # Memoization by dict: sum->freq, similar with that for two-sum problem.
-        sum_freq_d = defaultdict(int)
-        sum_freq_d[0] = 1
+        # Memoization by dict: sum->count, similar with two-sum problem.
+        sum_count_d = defaultdict(int)
+        sum_count_d[0] = 1
 
         # Apply DFS with initial current sum 0.
-        cur_sum = 0
-        self._dfs(root, sum, sum_freq_d, cur_sum)
+        self.n_paths = 0
+        cusum = 0
+        self._backtrack(root, sum, sum_count_d, cusum)
         return self.n_paths
 
 
@@ -146,8 +135,8 @@ def main():
     root.left.right.right = TreeNode(1)
     sum = 8
 
-    print SolutionLeadRecur().pathSum(root, sum)
-    print SolutionSumFreqMemo().pathSum(root, sum)
+    print SolutionLeadPathSumRecur().pathSum(root, sum)
+    print SolutionSumCountDictBacktracking().pathSum(root, sum)
 
 
 if __name__ == '__main__':
