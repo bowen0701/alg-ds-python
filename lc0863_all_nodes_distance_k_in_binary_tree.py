@@ -68,7 +68,7 @@ class SolutionPreorderParentChildrenUndirectedGraphBFS(object):
             if current.left:
                 stack.append((current, current.left))
 
-        # Starting from target, iterate BFS K times to collect nodes in distance K.
+        # Starting from target, BFS K times to collect nodes in distance K.
         queue = deque([target.val])
         visited = set([target.val])
         for i in range(K):
