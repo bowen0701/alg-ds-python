@@ -29,12 +29,12 @@ class TreeNode(object):
 
 
 class SolutionPathDepthRecur(object):
-    def _pathDepth(self, root):
+    def _pathDepthRecur(self, root):
         if not root:
             return 0
 
-        left_depth = self._pathDepth(root.left)
-        right_depth = self._pathDepth(root.right)
+        left_depth = self._pathDepthRecur(root.left)
+        right_depth = self._pathDepthRecur(root.right)
 
         self.diameter = max(self.diameter, left_depth + right_depth)
 
@@ -50,7 +50,7 @@ class SolutionPathDepthRecur(object):
         """
         # Apply postorder traversal to get sum of left & right subtree depths.
         self.diameter = 0
-        self._pathDepth(root)
+        self._pathDepthRecur(root)
         return self.diameter
 
 
