@@ -40,12 +40,12 @@ class SolutionPreorderBacktrackingRecur(object):
 
         temp.append(root.val)
 
-        # Visit root and append sum by shallow copy.
+        # Visit root and append sum with temp's shallow copy.
         if root.val == sum and not root.left and not root.right:
             result.append(temp[:])
             return None
 
-        # Traverse root's left & right if existed by shallow copy.
+        # Visit root's left & right if existed, with temp's shallow copy.
         self._findPathsPreorder(root.left, sum - root.val, result, temp[:])
         self._findPathsPreorder(root.right, sum - root.val, result, temp[:])
 
