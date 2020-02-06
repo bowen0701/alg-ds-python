@@ -42,7 +42,7 @@ class SolutionPreorderRecur(object):
         if not root:
             return False
 
-        # Base case: root-to-leaf path sum is sum.
+        # Visit root to check if root-to-leaf path sum is sum.
         if root.val == sum and not root.left and not root.right:
             return True
 
