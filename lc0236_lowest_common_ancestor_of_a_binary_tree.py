@@ -57,19 +57,19 @@ class SolutionPreorderRecur(object):
         if not root:
             return None
 
-        # Vist root: if root is p or q, return root since we found p or q.
+        # Vist root: if root is p or q, we found p or q is LCA.
         if root is p or root is q:
             return root
 
-        # Visit left & right recursively.
+        # Visit left & right recursively in left and right subtrees.
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
-        # p & q are not in subtree.
+        # p & q are not in both subtrees.
         if not left and not right:
             return None
 
-        # p and q are in subtree.
+        # p and q are in left and right subtrees.
         if left and right:
             return root
 
@@ -89,32 +89,31 @@ class SolutionPreorderIter(object):
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
         # Use dict to memorize node and its parent.
-        child_parent = {}
-        child_parent[root] = None
+        child_parent_d = {}
+        child_parent_d[root] = None
 
-        # Apply iterative Preorder Traversal: root->left->right.
+        # Apply iterative preorder traversal to find p & q's parents.
         stack = [root]
-        while p not in child_parent or q not in child_parent:
+        while p not in child_parent_d or q not in child_parent_d:
             current = stack.pop()
 
             # Visit right and then left since we use stack with FILO.
             if current.right:
-                child_parent[current.right] = current
+                child_parent_d[current.right] = current
                 stack.append(current.right)
-
             if current.left:
-                child_parent[current.left] = current
+                child_parent_d[current.left] = current
                 stack.append(current.left)
 
         # Use set to collect ancestors: reversely traverse p's parents.
         ancestors = set()
         while p:
             ancestors.add(p)
-            p = child_parent[p]
+            p = child_parent_d[p]
 
         # Then reversely traverse q's parents until meet one of p's parents.
         while q not in ancestors:
-            q = child_parent[q]
+            q = child_parent_d[q]
 
         return q
 
