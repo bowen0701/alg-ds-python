@@ -33,22 +33,21 @@ class TreeNode(object):
 
 
 class SolutionPreorderBacktrackingRecur(object):
-    def _findPathsPreorderRecur(self, root, sum, paths, cur_path):
+    def _findPathsPreorder(self, root, sum, result, temp):
         # Base case.
         if not root:
             return None
 
-        # Recursive call for preorder traversal.
-        cur_path.append(root.val)
+        temp.append(root.val)
 
-        # Collect result if root-to-leaf path sum is sum by shallow copy.
+        # Visit root and append sum by shallow copy.
         if root.val == sum and not root.left and not root.right:
-            paths.append(cur_path[:])
+            result.append(temp[:])
             return None
 
         # Traverse root's left & right if existed by shallow copy.
-        self._findPathsPreorderRecur(root.left, sum - root.val, paths, cur_path[:])
-        self._findPathsPreorderRecur(root.right, sum - root.val, paths, cur_path[:])
+        self._findPathsPreorder(root.left, sum - root.val, result, temp[:])
+        self._findPathsPreorder(root.right, sum - root.val, result, temp[:])
 
     def pathSum(self, root, sum):
         """
@@ -60,10 +59,10 @@ class SolutionPreorderBacktrackingRecur(object):
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         # Apply recursive preorder traversal.
-        paths = []
-        cur_path = []
-        self._findPathsPreorderRecur(root, sum, paths, cur_path)
-        return paths
+        result = []
+        temp = []
+        self._findPathsPreorder(root, sum, result, temp)
+        return result
 
 
 class SolutionPreorderBacktrackingIter(object):
@@ -76,32 +75,32 @@ class SolutionPreorderBacktrackingIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Apply iterative preorder traversal with stack.
         if not root:
             return []
 
-        # Collect paths and trace current path.
-        paths = []
-        cur_path = []
+        # Apply iterative backtracking with result and temp.
+        result = []
+        temp = []
 
-        stack = [(root, cur_path, sum)]
+        # Apply iterative preorder traversal with stack.
+        stack = [(root, sum, temp)]
 
         while stack:
-            current, _cur_path, _sum = stack.pop()
+            cur, cur_sum, temp = stack.pop()
 
-            _cur_path.append(current.val)
+            temp.append(cur.val)
 
             # Collect result if root-to-leaf path sum is sum by shallow copy.
-            if current.val == _sum and not current.left and not current.right:
-                paths.append(_cur_path[:])
+            if cur.val == cur_sum and not cur.left and not cur.right:
+                result.append(temp[:])
 
             # Traverse root's left & right if existed by shallow copy.
-            if current.right:
-                stack.append((current.right, _cur_path[:], _sum - current.val))
-            if current.left:
-                stack.append((current.left, _cur_path[:], _sum - current.val))
+            if cur.right:
+                stack.append((cur.right, cur_sum - cur.val, temp[:]))
+            if cur.left:
+                stack.append((cur.left, cur_sum - cur.val, temp[:]))
 
-        return paths
+        return result
 
 
 def main():
@@ -130,7 +129,7 @@ def main():
     root.right.right.left = TreeNode(5)
     root.right.right.right = TreeNode(1)
     sum = 22
-    # print SolutionPreorderBacktrackingRecur().pathSum(root, sum)
+    print SolutionPreorderBacktrackingRecur().pathSum(root, sum)
     print SolutionPreorderBacktrackingIter().pathSum(root, sum)
 
 
