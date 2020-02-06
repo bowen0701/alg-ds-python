@@ -35,20 +35,21 @@ class TreeNode(object):
 
 
 class SolutionLeftRightMaxPathDownSumRecur(object):
-    def maxPathDownSum(self, root):
+    def _maxPathDownSum(self, root):
         # Edge case.
         if not root:
             return 0
 
         # Collect max path sum from root value, down paths from left/right nodes.
         # If one branch sum is less than 0, do not connect that branch by max(0, .).
-        left_max_sum = max(0, self.maxPathDownSum(root.left))
-        right_max_sum = max(0, self.maxPathDownSum(root.right))
+        left_max_down_sum = max(0, self._maxPathDownSum(root.left))
+        right_max_down_sum = max(0, self._maxPathDownSum(root.right))
 
-        self.max_sum = max(self.max_sum, root.val + left_max_sum + right_max_sum)
+        self.max_path_sum = max(self.max_path_sum, 
+                                left_max_down_sum + root.val + right_max_down_sum)
 
         # Return max path down sum from left or right, including root values.
-        return max(left_max_sum, right_max_sum) + root.val
+        return root.val + max(left_max_down_sum, right_max_down_sum)
 
     def maxPathSum(self, root):
         """
@@ -59,11 +60,11 @@ class SolutionLeftRightMaxPathDownSumRecur(object):
         Space complexity: O(logn) for balanced tree, O(n) for singly linked list.
         """
         # Use global max path sum for memorization.
-        self.max_sum = -float('inf')
+        self.max_path_sum = -float('inf')
 
         # Collect max path down sum from left or right and update global max sum.
-        self.maxPathDownSum(root)
-        return self.max_val
+        self._maxPathDownSum(root)
+        return self.max_path_sum
 
 
 def main():
