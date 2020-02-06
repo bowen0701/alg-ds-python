@@ -40,7 +40,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionPreorderUndirectedParentChildrenGraphBFS(object):
+class SolutionPreorderParentChildrenUndirectedGraphBFS(object):
     def distanceK(self, root, target, K):
         """
         :type root: TreeNode
@@ -58,17 +58,17 @@ class SolutionPreorderUndirectedParentChildrenGraphBFS(object):
         parent_children_d = defaultdict(list)
         stack = [(None, root)]
         while stack:
-            parent, current = stack.pop()
-            if parent and current:
-                parent_children_d[parent.val].append(current.val)
-                parent_children_d[current.val].append(parent.val)
+            previous, current = stack.pop()
+            if previous and current:
+                parent_children_d[previous.val].append(current.val)
+                parent_children_d[current.val].append(previous.val)
 
             if current.right:
                 stack.append((current, current.right))
             if current.left:
                 stack.append((current, current.left))
 
-        # Start from target, iterate BFS K times to collect node with distance K.
+        # Starting from target, iterate BFS K times to collect nodes in distance K.
         queue = deque([target.val])
         visited = set([target.val])
         for i in range(K):
@@ -96,7 +96,7 @@ def main():
     root.left.right.right = TreeNode(4)
     target = root.left
     K = 2
-    print SolutionPreorderUndirectedParentChildrenGraphBFS().distanceK(root, target, K)
+    print SolutionPreorderParentChildrenUndirectedGraphBFS().distanceK(root, target, K)
 
 
 if __name__ == '__main__':
