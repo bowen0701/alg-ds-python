@@ -115,7 +115,6 @@ class SolutionBFSAllSteps(object):
 
                 # Visiting directions.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-
                 for r_next, c_next in dirs:
                     # If is out of boundary or visited, skip visiting.
                     if (r_next < 0 or r_next >= n_rows or 
