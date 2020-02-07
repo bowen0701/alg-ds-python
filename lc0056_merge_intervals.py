@@ -16,7 +16,7 @@ Output: [[1,5]]
 Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 """
 
-class SolutionBrute(object):
+class SolutionBruteForce(object):
     def merge(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -104,23 +104,23 @@ def main():
 
     # Ans: [[1,6],[8,10],[15,18]]
     intervals = [[1,3], [2,6], [8,10], [15,18]]
-    print SolutionBrute().merge(intervals)
+    print SolutionBruteForce().merge(intervals)
 
     # Ans: [[1,5]]
     intervals = [[1,4], [4,5]]
-    print SolutionBrute().merge(intervals)
+    print SolutionBruteForce().merge(intervals)
 
     # Ans: [[0, 4]]
     intervals = [[1,4], [0,4]]
-    print SolutionBrute().merge(intervals)
+    print SolutionBruteForce().merge(intervals)
 
     # Ans: [[0,5]]
     intervals = [[1,4], [0,5]]
-    print SolutionBrute().merge(intervals)
+    print SolutionBruteForce().merge(intervals)
 
     # Ans: [[1, 10]]
     intervals = [[2,3], [4,5], [6,7], [8,9], [1,10]]
-    print SolutionBrute().merge(intervals)
+    print SolutionBruteForce().merge(intervals)
 
     print 'Time: {}'.format(time.time() - start_time)
 
