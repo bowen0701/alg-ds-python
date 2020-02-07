@@ -51,11 +51,12 @@ class SolutionRecur(object):
         :type q: TreeNode
         :rtype: TreeNode
 
+        Check both p & q are in the node's left or right subtree. 
+        If not, the node splits p and q, so returh the node.
+
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(logn) or O(n).
         """
-        # Check both p & q are in the node's left or right subtree. 
-        # If not, the node splits p and q, so returh the node.
         if p.val < root.val and q.val < root.val:
             return self.lowestCommonAncestor(root.left, p, q)
         elif p.val > root.val and q.val > root.val:
@@ -72,11 +73,12 @@ class SolutionIter(object):
         :type q: TreeNode
         :rtype: TreeNode
 
+        Check both p & q are in the node's left or right subtree. 
+        If not, the node splits p and q, so returh the node.
+
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(1).
         """
-        # Check both p & q are in the node's left or right subtree. 
-        # If not, the node splits p and q, so returh the node.
         while root:
             if p.val < root.val and q.val < root.val:
                 root = root.left
