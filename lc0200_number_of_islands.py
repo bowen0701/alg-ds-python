@@ -36,8 +36,8 @@ class SolutionDFSRecurVisit(object):
 
         # Vist up & down and left & right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            self._dfs(r_neighbor, c_neighbor, grid, visited_d)
+        for r_next, c_next in dirs:
+            self._dfs(r_next, c_next, grid, visited_d)
 
     def numIslands(self, grid):
         """Number of islands by recursion.
@@ -77,8 +77,8 @@ class SolutionDFSRecurVisitReturn(object):
 
         # Count connects by visiting up, down, left & right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            n_connects += self._dfs(r_neighbor, c_neighbor, grid, visited_d)
+        for r_next, c_next in dirs:
+            n_connects += self._dfs(r_next, c_next, grid, visited_d)
 
         return n_connects
 
@@ -119,8 +119,8 @@ class SolutionDFSRecurUpdate(object):
 
         # Visit up & down and left & right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            self._dfs(r_neighbor, c_neighbor, grid)
+        for r_next, c_next in dirs:
+            self._dfs(r_next, c_next, grid)
 
     def numIslands(self, grid):
         """Number of islands by recursion.
@@ -159,8 +159,8 @@ class SolutionDFSRecurUpdateReturn(object):
 
         # Count connects by visiting up, down, left & right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            n_connects += self._dfs(r_neighbor, c_neighbor, grid)
+        for r_next, c_next in dirs:
+            n_connects += self._dfs(r_next, c_next, grid)
 
         return n_connects
 
@@ -195,10 +195,10 @@ class SolutionDFSIterVisit(object):
 
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
-                grid[r_neighbor][c_neighbor] == '1'):
-                tovisit_ls.append((r_neighbor, c_neighbor))
+        for r_next, c_next in dirs:
+            if (0 <= r_next < len(grid) and 0 <= c_next < len(grid[0]) and
+                grid[r_next][c_next] == '1'):
+                tovisit_ls.append((r_next, c_next))
 
         return tovisit_ls
 
@@ -218,10 +218,10 @@ class SolutionDFSIterVisit(object):
             if set(tovisit_ls) - set(visited_ls):
                 for v_neighbor in tovisit_ls:
                     if v_neighbor not in visited_ls:
-                        # Mark (r_neighbor, c_neighbor) as visited.
-                        (r_neighbor, c_neighbor) = v_neighbor
-                        visited_d[(r_neighbor, c_neighbor)] = True
-                        stack.append((r_neighbor, c_neighbor))
+                        # Mark (r_next, c_next) as visited.
+                        (r_next, c_next) = v_neighbor
+                        visited_d[(r_next, c_next)] = True
+                        stack.append((r_next, c_next))
                         # break for continuing DFS.
                         break
             else:
@@ -257,10 +257,10 @@ class SolutionDFSIterUpdate(object):
 
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_neighbor, c_neighbor in dirs:
-            if (0 <= r_neighbor < len(grid) and 0 <= c_neighbor < len(grid[0]) and
-                grid[r_neighbor][c_neighbor] == '1'):
-                tovisit_ls.append((r_neighbor, c_neighbor))
+        for r_next, c_next in dirs:
+            if (0 <= r_next < len(grid) and 0 <= c_next < len(grid[0]) and
+                grid[r_next][c_next] == '1'):
+                tovisit_ls.append((r_next, c_next))
 
         return tovisit_ls
 
@@ -276,10 +276,10 @@ class SolutionDFSIterUpdate(object):
 
             if tovisit_ls:
                 for v_neighbor in tovisit_ls:
-                    # Mark (r_neighbor, c_neighbor) as visited.
-                    (r_neighbor, c_neighbor) = v_neighbor
-                    grid[r_neighbor][c_neighbor] = '0'
-                    stack.append((r_neighbor, c_neighbor))
+                    # Mark (r_next, c_next) as visited.
+                    (r_next, c_next) = v_neighbor
+                    grid[r_next][c_next] = '0'
+                    stack.append((r_next, c_next))
                     # break for continuing DFS.
                     break
             else:
