@@ -75,12 +75,9 @@ class SolutionSumCountDictBacktracking(object):
         if not root:
             return None
 
-        # Accumulate path sum and compute complemented path sum.
-        cusum += root.val
-        complement_sum = cusum - sum
-
         # Update num of paths if complemented path sum exists.
-        self.n_paths += sum_count_d[complement_sum]
+        cusum += root.val
+        self.n_paths += sum_count_d[cusum - sum]
 
         # Update path sum count.
         sum_count_d[cusum] += 1
@@ -101,10 +98,9 @@ class SolutionSumCountDictBacktracking(object):
         Time complexity: O(n), as traverse once.
         Space complexity: O(n), as extra space for memoization.
         """
-        # Apply memoization to cache sum frequences.
         from collections import defaultdict
 
-        # Memoization by dict: sum->count, similar with two-sum problem.
+        # Use dict: sum->count, similar with two-sum problem.
         sum_count_d = defaultdict(int)
         sum_count_d[0] = 1
 
