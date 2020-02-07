@@ -77,7 +77,7 @@ class SolutionPreorderRecur(object):
         return left or right
 
 
-class SolutionPreorderIter(object):
+class SolutionChildParentDictPreorderIter(object):
     def lowestCommonAncestor(self, root, p, q):
         """
         :type root: TreeNode
@@ -88,7 +88,7 @@ class SolutionPreorderIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
-        # Use dict to memorize node and its parent.
+        # Use dict: child->parent.
         child_parent_d = {}
         child_parent_d[root] = None
 
@@ -105,7 +105,7 @@ class SolutionPreorderIter(object):
                 child_parent_d[current.left] = current
                 stack.append(current.left)
 
-        # Use set to collect ancestors: reversely traverse p's parents.
+        # Use set to reversely collect p's ancestors.
         ancestors = set()
         while p:
             ancestors.add(p)
@@ -141,7 +141,7 @@ def main():
     print 'Time for recur: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionPreorderIter().lowestCommonAncestor(root, p, q).val
+    print SolutionChildParentDictPreorderIter().lowestCommonAncestor(root, p, q).val
     print 'Time for iter: {}'.format(time.time() - start_time)
 
     # Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
@@ -154,7 +154,7 @@ def main():
     print 'Time for recur: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print SolutionPreorderIter().lowestCommonAncestor(root, p, q).val
+    print SolutionChildParentDictPreorderIter().lowestCommonAncestor(root, p, q).val
     print 'Time for iter: {}'.format(time.time() - start_time)
 
 
