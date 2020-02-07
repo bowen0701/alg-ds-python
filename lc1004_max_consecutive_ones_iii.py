@@ -39,7 +39,6 @@ class SolutionSlidingWindowMaxKZerosSubarray(object):
         Space complexity: O(1).
         """
         # Translate problem into finding longest subarray w/ at most K zero.
-        
         # Apply sliding window with two pointers to update max_len.
         max_len = 0
         n_zerios = 0
