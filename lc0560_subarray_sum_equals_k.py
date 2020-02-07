@@ -14,7 +14,7 @@ The range of numbers in the array is [-1000, 1000] and the range of the
 integer k is [-1e7, 1e7].
 """
 
-class SolutionBrute(object):
+class SolutionBruteForce(object):
     def subarraySum(self, nums, k):
         """
         :type nums: List[int]
@@ -75,7 +75,7 @@ def main():
     k = 2
 
     start_time = time.time()
-    print 'Brute force: {}'.format(SolutionBrute().subarraySum(nums, k))
+    print 'Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
@@ -87,7 +87,7 @@ def main():
     k = -10
 
     start_time = time.time()
-    print 'Brute force: {}'.format(SolutionBrute().subarraySum(nums, k))
+    print 'Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
@@ -99,7 +99,7 @@ def main():
     k = 0
 
     start_time = time.time()
-    print 'Brute force: {}'.format(SolutionBrute().subarraySum(nums, k))
+    print 'Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
