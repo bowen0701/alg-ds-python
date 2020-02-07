@@ -90,11 +90,11 @@ class SolutionPreorderBacktrackingIter(object):
 
             temp.append(cur.val)
 
-            # Collect result if root-to-leaf path sum is sum by shallow copy.
+            # Visit root to check if root-to-leaf path sum is sum by shallow copy.
             if cur.val == cur_sum and not cur.left and not cur.right:
                 result.append(temp[:])
 
-            # Traverse root's left & right if existed by shallow copy.
+            # Visit root's left & right if existed by shallow copy.
             if cur.right:
                 stack.append((cur.right, cur_sum - cur.val, temp[:]))
             if cur.left:
