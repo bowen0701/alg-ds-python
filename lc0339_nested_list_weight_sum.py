@@ -64,13 +64,29 @@ Explanation: One 1 at depth 1, one 4 at depth 2, and one 6 at depth 3;
 #        :rtype List[NestedInteger]
 #        """
 
-class Solution(object):
+class SolutionDFS(object):
+    def _dfs(self, nestedList, depth):
+        depth_sum = 0
+        for e in nestedList():
+            if e.isInteger:
+                depth_sum += e.getInteger() * depth
+            else:
+                depth_sum += self._dfs(e.getList(), depth + 1)
+        return depth_sum
+
     def depthSum(self, nestedList):
         """
         :type nestedList: List[NestedInteger]
         :rtype: int
+
+        Time complexity: O(n), where n is the total elements.
+        Space complexity: O(d), where d is the depth.
         """
-        pass
+        if not nestedList:
+            return 0
+
+        depth = 1
+        return self._dfs(nestedList, depth)
 
 
 def main():
