@@ -92,9 +92,32 @@ class SolutionDFSRecur(object):
         return depth_sum
 
 
-def main():
-    pass
+class SolutionLevelBFS(object):
+    def depthSum(self, nestedList):
+        """
+        :type nestedList: List[NestedInteger]
+        :rtype: int
 
+        Time complexity: O(n).
+        Space complexity: O(w), where w is the biggest width.
+        """
+        from collections import deque
 
-if __name__ == '__main__':
-    main()
+        if not nestedList:
+            return 0
+
+        depth_sum = 0
+        depth = 0
+        queue = deque(nestedList)
+
+        while queue:
+            depth += 1
+            for i in range(len(queue)):
+                item = queue.pop()
+                if item.isInteger():
+                    depth_sum += item.getInteger() * depth
+                else:
+                    for neighbor in item.getList():
+                        queue.appendleft(neighbor)
+
+        return depth_sum
