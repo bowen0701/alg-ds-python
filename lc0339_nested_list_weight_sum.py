@@ -64,14 +64,14 @@ Explanation: One 1 at depth 1, one 4 at depth 2, and one 6 at depth 3;
 #        :rtype List[NestedInteger]
 #        """
 
-class SolutionDFS(object):
-    def _dfs(self, nestedList, depth):
+class SolutionDFSRecur(object):
+    def _dfs(self, item, depth):
+        if item.isInteger():
+            return item.getInteger() * depth
+
         depth_sum = 0
-        for e in nestedList():
-            if e.isInteger:
-                depth_sum += e.getInteger() * depth
-            else:
-                depth_sum += self._dfs(e.getList(), depth + 1)
+        for neighbor in item.getList():
+            depth_sum += self._dfs(neighbor, depth + 1)
         return depth_sum
 
     def depthSum(self, nestedList):
@@ -85,8 +85,11 @@ class SolutionDFS(object):
         if not nestedList:
             return 0
 
+        depth_sum = 0
         depth = 1
-        return self._dfs(nestedList, depth)
+        for item in nestedList:
+            depth_sum += self._dfs(item, depth)
+        return depth_sum
 
 
 def main():
