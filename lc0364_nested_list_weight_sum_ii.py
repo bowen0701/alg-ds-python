@@ -68,10 +68,41 @@ Explanation: One 1 at depth 3, one 4 at depth 2, and one 6 at depth 1;
 #        :rtype List[NestedInteger]
 #        """
 
-class Solution(object):
+class SolutionLevelBFS(object):
     def depthSumInverse(self, nestedList):
         """
         :type nestedList: List[NestedInteger]
         :rtype: int
+
+        Time complexity: O(n), where n is the number of elements.
+        Space complexity: O(n).
         """
-        pass
+        from collections import deque
+
+        if not nestedList:
+            return 0
+
+        # Append (item, negative depth) to item_negdepths.
+        item_negdepths = []
+        negdepth = 0
+
+        # Apply iterative level-order traversal with queue.
+        queue = deque(nestedList)
+
+        while queue:
+            negdepth -= 1
+
+            for i in range(len(queue)):
+                item = queue.pop()
+                if item.isInteger():
+                    item_negdepths.append((item, negdepth))
+                else:
+                    for neighbor in item.getList():
+                        queue.appendleft(neighbor)
+
+        depth_sum = 0
+        max_depth = abs(negdepth)
+        for item, negdepth in item_negdepths:
+            depth_sum += item.getInteger() * (negdepth + max_depth + 1)
+
+        return depth_sum
