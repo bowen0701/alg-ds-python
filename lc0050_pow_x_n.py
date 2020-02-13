@@ -56,14 +56,14 @@ class SolutionSelfProductIter(object):
         :type n: int
         :rtype: float
 
+        Note that
+        x^n = x^(n/2) * x^(n/2)
+            = (x^(n/4) * x^(n/4)) * (x^(n/4) * x^(n/4)) 
+            = ...
+
         Time complexity: O(logn).
         Space complexity: O(1).
         """
-        # Observe that
-        # x^n = x^(n/2) * x^(n/2)
-        #     = (x^(n/4) * x^(n/4)) * (x^(n/4) * x^(n/4)) 
-        #     = ...
-
         if n == 0:
             return 1
 
@@ -77,7 +77,7 @@ class SolutionSelfProductIter(object):
             if n & 1:
                 res *= x
 
-            # Obtain x to the power of 2, then shift n to n/2.
+            # Increment x to its power of 2, then shift n to n/2.
             x *= x
             n >>= 1
         
