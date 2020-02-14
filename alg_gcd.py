@@ -3,7 +3,18 @@ from __future__ import division
 from __future__ import print_function
 
 
-def gcd(m, n):
+def gcd_recur(m, n):
+    """Greatest Common Divisor (GCD) by Euclid's Algorithm.
+
+    Time complexity: O(m%n).
+    Space complexity: O(m%n).
+    """
+    if n == 0:
+        return m
+    return gcd_recur(n, m % n)
+
+
+def gcd_iter(m, n):
     """Greatest Common Divisor (GCD) by Euclid's Algorithm.
 
     Time complexity: O(m%n).
@@ -15,14 +26,25 @@ def gcd(m, n):
 
 
 def main():
-    print('gcd(4, 2): {}'.format(gcd(4, 2)))
-    print('gcd(2, 4): {}'.format(gcd(2, 4)))
+    import time
 
-    print('gcd(10, 4): {}'.format(gcd(10, 4)))
-    print('gcd(4, 10): {}'.format(gcd(4, 10)))
+    start_time = time.time()
+    print('gcd_recur(4, 2): {}'.format(gcd_recur(4, 2)))
+    print('gcd_recur(2, 4): {}'.format(gcd_recur(2, 4)))
+    print('gcd_recur(10, 4): {}'.format(gcd_recur(10, 4)))
+    print('gcd_recur(4, 10): {}'.format(gcd_recur(4, 10)))
+    print('gcd_recur(3, 4): {}'.format(gcd_recur(3, 4)))
+    print('gcd_recur(4, 3): {}'.format(gcd_recur(4, 3)))
+    print('Time:', time.time() - start_time)
 
-    print('gcd(3, 4): {}'.format(gcd(3, 4)))
-    print('gcd(4, 3): {}'.format(gcd(4, 3)))
+    start_time = time.time()
+    print('gcd_iter(4, 2): {}'.format(gcd_iter(4, 2)))
+    print('gcd_iter(2, 4): {}'.format(gcd_iter(2, 4)))
+    print('gcd_iter(10, 4): {}'.format(gcd_iter(10, 4)))
+    print('gcd_iter(4, 10): {}'.format(gcd_iter(4, 10)))
+    print('gcd_iter(3, 4): {}'.format(gcd_iter(3, 4)))
+    print('gcd_iter(4, 3): {}'.format(gcd_iter(4, 3)))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':
