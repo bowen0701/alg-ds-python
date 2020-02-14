@@ -7,6 +7,7 @@ def gcd(m, n):
     """Greatest Common Divisor (GCD) by Euclid's Algorithm.
 
     Time complexity: O(m%n).
+    Space complexity: O(1).
     """
     while n != 0:
         m, n = n, m % n
