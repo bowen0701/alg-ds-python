@@ -36,6 +36,12 @@ Please reset to default code definition to get new method signature.
 """
 
 class Solution(object):
+    def _gcd(self, m, n):
+        """Greatest common divisor."""
+        if n == 0:
+            return m
+        return self._gcd(n, m % n)
+
     def maxPoints(self, points):
         """
         :type points: List[List[int]]
