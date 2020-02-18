@@ -36,11 +36,11 @@ Please reset to default code definition to get new method signature.
 """
 
 class Solution(object):
-    def _gcd(self, a, b):
+    def _gcd(self, x, y):
         """Greatest common divisor."""
-        if b == 0:
-            return a
-        return self._gcd(b, a % b)
+        if y == 0:
+            return x
+        return self._gcd(y, x % y)
 
     def maxPoints(self, points):
         """
@@ -53,15 +53,19 @@ class Solution(object):
         if n <= 2:
             return n
 
-        # Compute lines based on point pairs, add to dict: (intercept, slope)->points.
-        interceptslope_point_d = defaultdict(list)
+        # Use dict: line's (a, b, c)->points, where line is ax+by+c=0.
+        line_points_d = defaultdict(list)
 
         for i in range(n - 1):
             for j in range(i + 1, n):
-                p1 = points[i]
-                p2 = points[j]
-                # TODO
+                x1, y1 = points[i]
+                x2, y2 = points[j]
 
+                if x1 == x2:
+                    # line: x = x1
+                    a, b, c = 1, 0, -x1
+                else:
+                    # TODO
 
 
 def main():
