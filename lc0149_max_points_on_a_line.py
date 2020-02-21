@@ -53,7 +53,7 @@ class Solution(object):
         if n <= 2:
             return n
 
-        # Use dict: line's (a, b, c)->points, where line is ax+by+c=0.
+        # Use dict: line's (a, b, c)->points, with line: ax+by+c=0.
         line_points_d = defaultdict(list)
 
         for i in range(n - 1):
