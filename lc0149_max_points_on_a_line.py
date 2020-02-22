@@ -35,7 +35,7 @@ NOTE: input types have been changed on April 15, 2019.
 Please reset to default code definition to get new method signature.
 """
 
-class Solution(object):
+class SolutionGCDLinePointsDict(object):
     def _gcd(self, x, y):
         """Greatest common divisor."""
         if y == 0:
@@ -93,11 +93,11 @@ class Solution(object):
 def main():
     # Output: 3
     points = [[1,1],[2,2],[3,3]]
-    print Solution().maxPoints(points)
+    print SolutionGCDLinePointsDict().maxPoints(points)
 
     # Output: 4
     points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
-    print Solution().maxPoints(points)
+    print SolutionGCDLinePointsDict().maxPoints(points)
 
 
 if __name__ == '__main__':
