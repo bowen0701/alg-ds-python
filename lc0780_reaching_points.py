@@ -29,7 +29,7 @@ Note:
 sx, sy, tx, ty will all be integers in the range [1, 10^9].
 """
 
-class Solution(object):
+class SolutionTopDownRecur(object):
     def reachingPoints(self, sx, sy, tx, ty):
         """
         :type sx: int
@@ -37,12 +37,36 @@ class Solution(object):
         :type tx: int
         :type ty: int
         :rtype: bool
+
+        Note: Time limit exceeded.
+
+        Time complexity: O(2^n), where n = max(tx, ty).
+        Space complexity: O(n).
         """
-        pass
+        # Base case: when start meets target.
+        if sx == tx and sy == ty:
+            return True
+
+        # Out of boundary cases.
+        if sx > tx or sy > ty:
+            return False
+
+        return (self.reachingPoints(sx + sy, sy, tx, ty) or
+                self.reachingPoints(sx, sx + sy, tx, ty))
 
 
 def main():
-    pass
+    # Output: True
+    sx, sy, tx, ty = 1, 1, 3, 5
+    print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
+
+    # Output: False
+    sx, sy, tx, ty = 1, 1, 2, 2
+    print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
+
+    # Output: True
+    sx, sy, tx, ty = 1, 1, 1, 1
+    print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
 
 
 if __name__ == '__main__':
