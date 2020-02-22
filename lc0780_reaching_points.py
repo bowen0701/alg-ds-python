@@ -97,21 +97,48 @@ class SolutionBottomUpRecur(object):
         return self._recur(sx, sy, tx, ty)
 
 
+class SolutionBottomUpIter(object):
+    def reachingPoints(self, sx, sy, tx, ty):
+        """
+        :type sx: int
+        :type sy: int
+        :type tx: int
+        :type ty: int
+        :rtype: bool
+
+        Apply bottom-up recursion.
+
+        Time complexity: O(log(max(tx, ty))).
+        Space complexity: O(1).
+        """
+        while tx > sx and ty > sy:
+            if tx < ty:
+                ty %= tx
+            else:
+                tx %= ty
+
+        return ((tx == sx and ty >= sy and (ty - sy) % sx == 0) or
+                (ty == sy and tx >= sx and (tx - sx) % sy == 0))
+
+
 def main():
     # Output: True
     sx, sy, tx, ty = 1, 1, 3, 5
     print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
     print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
+    print SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty)
 
     # Output: False
     sx, sy, tx, ty = 1, 1, 2, 2
     print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
     print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
+    print SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty)
 
     # Output: True
     sx, sy, tx, ty = 1, 1, 1, 1
     print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
     print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
+    print SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty)
 
 
 if __name__ == '__main__':
