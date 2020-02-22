@@ -46,15 +46,19 @@ class Solution(object):
         """
         :type points: List[List[int]]
         :rtype: int
+
+        Time complexity: O(n^2).
+        Space complexity: O(n).
         """
         from collections import defaultdict
+        from functools import reduce
 
         n = len(points)
         if n <= 2:
             return n
 
-        # Use dict: line's (a, b, c)->points, with line: ax+by+c=0.
-        line_points_d = defaultdict(list)
+        # Use dict: line's (a,b,c)->set(points), with line: ax+by+c=0.
+        line_points_d = defaultdict(set)
 
         for i in range(n - 1):
             for j in range(i + 1, n):
@@ -62,14 +66,38 @@ class Solution(object):
                 x2, y2 = points[j]
 
                 if x1 == x2:
-                    # line: x = x1
+                    # Obtain line: x=x1.
                     a, b, c = 1, 0, -x1
                 else:
-                    # TODO
+                    # Obtain line: ax+by+c=0 with (x1,y1) and (x2,y2).
+                    # a/b = -(y2-y1) / (x2-x1)
+                    # c = x2*y1 - y2*x1
+                    a, b, c = y2 - y1, -(x2 - x1), x2*y1 - y2*x1
+
+                    # Unify lines with positive a.
+                    if a < 0:
+                        a, b, c = -a, -b, -c
+
+                    # Divide (a, b, c) by their common GCD.
+                    d = reduce(self._gcd, (a, b, c))
+                    a, b, c = a / d, b / d, c / d
+
+                line = (a, b, c)
+                line_points_d[line].add(i)
+                line_points_d[line].add(j)
+
+        n_line_points = [len(v) for v in line_points_d.values()]
+        return max(n_line_points)
 
 
 def main():
-    pass
+    # Output: 3
+    points = [[1,1],[2,2],[3,3]]
+    print Solution().maxPoints(points)
+
+    # Output: 4
+    points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+    print Solution().maxPoints(points)
 
 
 if __name__ == '__main__':
