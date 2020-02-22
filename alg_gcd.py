@@ -3,26 +3,26 @@ from __future__ import division
 from __future__ import print_function
 
 
-def gcd_recur(m, n):
+def gcd_recur(a, b):
     """Greatest Common Divisor (GCD) by Euclid's Algorithm.
 
-    Time complexity: O(m%n).
-    Space complexity: O(m%n).
+    Time complexity: O(log(max(a, b))).
+    Space complexity: O(log(max(a, b))).
     """
-    if n == 0:
-        return m
-    return gcd_recur(n, m % n)
+    if b == 0:
+        return a
+    return gcd_recur(b, a % b)
 
 
 def gcd_iter(m, n):
     """Greatest Common Divisor (GCD) by Euclid's Algorithm.
 
-    Time complexity: O(m%n).
+    Time complexity: O(log(max(a, b))).
     Space complexity: O(1).
     """
-    while n != 0:
-        m, n = n, m % n
-    return m
+    while b != 0:
+        a, b = b, a % b
+    return a
 
 
 def main():
