@@ -38,6 +38,7 @@ class SolutionTopDownRecur(object):
         :type ty: int
         :rtype: bool
 
+        Apply top-dow recursion.
         Note: Time limit exceeded.
 
         Time complexity: O(2^n), where n = max(tx, ty).
@@ -55,18 +56,62 @@ class SolutionTopDownRecur(object):
                 self.reachingPoints(sx, sx + sy, tx, ty))
 
 
+class SolutionBottomUpRecur(object):
+    def _recur(self, sx, sy, tx, ty):
+        if tx == sx and ty == sy:
+            return True
+
+        if tx < sx or ty < sy:
+            return False
+
+        if tx == sx:
+            # Since tx=sx, ty can traverse back to sy if (ty-sy)%sx=0.
+            if (ty - sy) % sx == 0:
+                return True
+            else:
+                return False
+
+        if ty == sy:
+            # Since ty=sy, tx can traverse back to sx if (tx-sx)%sy=0.
+            if (tx - sx) % sy == 0:
+                return True
+            else:
+                return False
+
+        return (self._recur(sx, sy, tx - ty, ty) or
+                self._recur(sx, sy, tx, ty - tx))
+
+    def reachingPoints(self, sx, sy, tx, ty):
+        """
+        :type sx: int
+        :type sy: int
+        :type tx: int
+        :type ty: int
+        :rtype: bool
+
+        Apply bottom-up recursion.
+
+        Time complexity: O(log(max(tx, ty))).
+        Space complexity: O(log(max(tx, ty))).
+        """
+        return self._recur(sx, sy, tx, ty)
+
+
 def main():
     # Output: True
     sx, sy, tx, ty = 1, 1, 3, 5
     print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
+    print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
 
     # Output: False
     sx, sy, tx, ty = 1, 1, 2, 2
     print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
+    print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
 
     # Output: True
     sx, sy, tx, ty = 1, 1, 1, 1
     print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
+    print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
 
 
 if __name__ == '__main__':
