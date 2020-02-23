@@ -46,7 +46,15 @@ param_2 = obj.retrieve(s, e, gra)
 class LogSystem(object):
 
     def __init__(self):
-        
+        self.logs = []
+        self.granularity = {
+            'Year': 4,
+            'Month': 7,
+            'Day': 10,
+            'Hour': 13,
+            'Minute': 16,
+            'Second': 19
+        }
 
     def put(self, id, timestamp):
         """
@@ -54,7 +62,7 @@ class LogSystem(object):
         :type timestamp: str
         :rtype: None
         """
-        pass
+        self.logs.append([timestamp, id])
 
     def retrieve(self, s, e, gra):
         """
@@ -63,11 +71,18 @@ class LogSystem(object):
         :type gra: str
         :rtype: List[int]
         """
-        pass
+        index = self.granularity[gra]
+        start, end = s[:index], e[:index]
+        return [i for t, i in self.logs if start <= t[:index] <= end]
 
 
 def main():
-    pass
+    logsys = LogSystem()
+    logsys.put(1, "2017:01:01:23:59:59")
+    logsys.put(2, "2017:01:01:22:59:59")
+    logsys.put(3, "2016:01:01:00:00:00")
+    print logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Year")
+    print logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Hour")
 
 
 if __name__ == '__main__':
