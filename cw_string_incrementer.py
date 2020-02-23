@@ -20,8 +20,48 @@ Attention: If the number has leading zeros the amount of digits should be consid
 """
 
 
+def _add_one(nums):
+    """Add one to nums."""
+    from collections import deque
+
+    nums = deque(nums)
+    n = len(nums)
+    carry = 1
+    for i in reversed(range(n)):
+        add = carry + int(nums[i])
+        carry, nums[i] = add // 10, str(add % 10)
+    
+    if carry:
+        nums.appendleft(str(carry))
+    
+    return list(nums)
+
+
 def increment_string(strng):
-    pass
+    """Increment string."""
+    # Edge case.
+    if not strng:
+        return '1'
+  
+    # Find the 1st position from reverse where it's not digit.
+    index = -1
+    for i in reversed(range(len(strng))):
+        if not strng[i].isdigit():
+            index = i
+            break
+
+    # Separate strng into char and number strings.    
+    char_str = strng[:index+1]
+    num_str = strng[index+1:]
+    
+    # Add one to number string.
+    if not num_str:
+        num_str = '1'
+    else:
+        nums_add_one = _add_one(num_str)
+        num_str = ''.join(nums_add_one)
+    
+    return char_str + num_str
 
 
 def main():
