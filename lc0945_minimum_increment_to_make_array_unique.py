@@ -82,12 +82,16 @@ class SolutionUnionFind(object):
 
         def find(x):
             if x not in root:
+                # If x not in root, set its root by itself.
                 root[x] = x
             elif x != root[x]:
+                # If x != its root, set its root by its ancestor.
                 root[x] = find(root[x])
             elif x + 1 in root:
+                # If x + 1 in root, set x's root by x+1's ancestor.
                 root[x] = find(root[x + 1])
             else:
+                # Otherwise, set x's & x+1's roots by x+1.
                 root[x] = root[x + 1] = x + 1
             return root[x]
 
