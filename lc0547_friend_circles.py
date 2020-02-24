@@ -41,17 +41,50 @@ Note:
 - If M[i][j] = 1, then M[j][i] = 1.
 """
 
-class Solution(object):
+class SolutionDFS(object):
+    def _dfs(self, i, M, visited):
+        for neighbor, edge in enumerate(M[i]):
+            if edge == 1 and neighbor not in visited:
+                visited.add(neighbor)
+                self._dfs(neighbor, M, visited)
+
     def findCircleNum(self, M):
         """
         :type M: List[List[int]]
         :rtype: int
+
+        Time complexity: O(m*n), where
+          - m: number of rows in M
+          - n: number of columns in N
+        Space complexity: O(m*n).
         """
-        pass
+        n = len(M)
+        if n == 1:
+            return 1
+
+        circles = 0
+        visited = set()
+
+        for i in range(n):
+            if i not in visited:
+                circles += 1
+                self._dfs(i, M, visited)
+
+        return circles
 
 
 def main():
-    pass
+    # Output: 2.
+    M = [[1,1,0],
+         [1,1,0],
+         [0,0,1]]
+    print SolutionDFS().findCircleNum(M)
+
+    # Output: 1.
+    M = [[1,1,0],
+         [1,1,1],
+         [0,1,1]]
+    print SolutionDFS().findCircleNum(M)
 
 
 if __name__ == '__main__':
