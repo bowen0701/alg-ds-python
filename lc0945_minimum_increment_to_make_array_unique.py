@@ -66,6 +66,35 @@ class SolutionBruteForce(object):
         return moves
 
 
+class SolutionUnionFind(object):
+    def minIncrementForUnique(self, A):
+        """
+        :type A: List[int]
+        :rtype: int
+
+        Time complexity: O(n^2), where n is A's length.
+        Space complexity: O(n).
+        """
+        if not A:
+            return 0
+
+        root = {}
+
+        def find(x):
+            if x not in root:
+                root[x] = x
+            elif x != root[x]:
+                root[x] = find(root[x])
+            elif x + 1 in root:
+                root[x] = find(root[x + 1])
+            else:
+                root[x] = root[x + 1] = x + 1
+            return root[x]
+
+        moves = [find(x) - x for x in A]
+        return sum(moves)
+
+
 class SolutionSortPrevPlusOne(object):
     def minIncrementForUnique(self, A):
         """
@@ -80,7 +109,6 @@ class SolutionSortPrevPlusOne(object):
 
         # Sort the input array, compare current number with previous one.
         moves = need = 0
-        print sorted(A)
         for num in sorted(A):
             # Current number need to be at least previous + 1.
             moves += max(need - num, 0)
@@ -93,11 +121,13 @@ def main():
     # Output: 1
     A = [1, 2, 2]
     print SolutionBruteForce().minIncrementForUnique(A)
+    print SolutionUnionFind().minIncrementForUnique(A)
     print SolutionSortPrevPlusOne().minIncrementForUnique(A)
 
     # Output: 6
     A = [3, 2, 1, 2, 1, 7]
     print SolutionBruteForce().minIncrementForUnique(A)
+    print SolutionUnionFind().minIncrementForUnique(A)
     print SolutionSortPrevPlusOne().minIncrementForUnique(A)
 
 
