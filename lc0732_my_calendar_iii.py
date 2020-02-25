@@ -69,7 +69,7 @@ class MyCalendarThreeTimeCounterDictSort(object):
         return max_k_events
 
 
-class MyCalendarThreeTimeCountersListBisectInsort(object):
+class MyCalendarThreeTimeCountersListInsort(object):
     def __init__(self):
         self.time_counters = []
 
@@ -113,7 +113,7 @@ def main():
     print calendar.book(5, 10)
     print calendar.book(25, 55)
 
-    calendar = MyCalendarThreeTimeCountersListBisectInsort()
+    calendar = MyCalendarThreeTimeCountersListInsort()
     print calendar.book(10, 20)
     print calendar.book(50, 60)
     print calendar.book(10, 40)

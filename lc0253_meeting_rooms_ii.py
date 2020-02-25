@@ -54,14 +54,40 @@ class SolutionSortEndMinHeapEnd(object):
         return len(end_minheap)
 
 
+class SolutionTimeCounterListInsort(object):
+    def minMeetingRooms(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        from bisect import insort
+
+        time_counters = []
+        for i in range(len(intervals)):
+            insort(time_counters, (intervals[i][0], 1))
+            insort(time_counters, (intervals[i][1], -1))
+
+        cur_n, max_n = 0, 0
+        for t, counter in time_counters:
+            cur_n += counter
+            max_n = max(max_n, cur_n)
+
+        return max_n
+
+
 def main():
     # Output: 2.
     intervals = [[0,30],[5,10],[15,20]]
     print SolutionSortEndMinHeapEnd().minMeetingRooms(intervals)
+    print SolutionTimeCounterListInsort().minMeetingRooms(intervals)
 
     # Output: 1.
     intervals = [[7, 10], [2, 4]]
     print SolutionSortEndMinHeapEnd().minMeetingRooms(intervals)
+    print SolutionTimeCounterListInsort().minMeetingRooms(intervals)
 
 
 if __name__ == '__main__':
