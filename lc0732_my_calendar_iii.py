@@ -60,8 +60,7 @@ class MyCalendarThreeTimeCounterDictSort(object):
         # Update max k-events by iterating through sorted events by times.
         sorted_time_counters = sorted(self.time_counter_d.items())
 
-        max_k_events = 0
-        cur_k_events = 0
+        cur_k_events, max_k_events = 0, 0
 
         for time, counter in sorted_time_counters:
             cur_k_events += counter
@@ -90,8 +89,7 @@ class MyCalendarThreeTimeCountersListBisectInsort(object):
         insort(self.time_counters, (end, -1))
 
         # Update max k-events by iterating through sorted events.
-        max_k_events = 0
-        cur_k_events = 0
+        cur_k_events, max_k_events = 0, 0
 
         for time, counter in self.time_counters:
             cur_k_events += counter
