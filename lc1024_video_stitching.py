@@ -88,27 +88,60 @@ class SolutionSortStartPrevEndAndEndGreedy(object):
             return -1
 
 
+class SolutionSortStartDPGreedy(object):
+    def videoStitching(self, clips, T):
+        """
+        :type clips: List[List[int]]
+        :type T: int
+        :rtype: int
+
+        Time complexity: O(n*logn+n*T), where n is clips length.
+        Space complexity: O(T).
+        """
+        # Sort clips by start.
+        clips = sorted(clips)
+
+        # Create DP table dp, where dp[i] is min number of clips 
+        # required to reach minute i.
+        dp = [101] * 101
+        dp[0] = 0
+
+        for c in clips:
+            for i in range(c[0] + 1, c[1] + 1):
+                dp[i] = min(dp[i], dp[c[0]] + 1)
+
+        if dp[T] >= T:
+            # If dp at minute T is not updated.
+            return -1
+        else:
+            return dp[T]
+
+
 def main():
     # Output: 3
     clips = [[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]]
     T = 10
     print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
+    print SolutionSortStartDPGreedy().videoStitching(clips, T)
 
     # Output: -1
     clips = [[0,1],[1,2]]
     T = 5
     print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
+    print SolutionSortStartDPGreedy().videoStitching(clips, T)
 
     # Output: 3
     clips = [[0,1],[6,8],[0,2],[5,6],[0,4],[0,3],[6,7],[1,3],
              [4,7],[1,4],[2,5],[2,6],[3,4],[4,5],[5,7],[6,9]]
     T = 9
     print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
+    print SolutionSortStartDPGreedy().videoStitching(clips, T)
 
     # Output: 2
     clips = [[0,4],[2,8]]
     T = 5
     print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
+    print SolutionSortStartDPGreedy().videoStitching(clips, T)
 
 
 if __name__ == '__main__':
