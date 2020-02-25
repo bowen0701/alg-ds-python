@@ -39,7 +39,7 @@ Note:
 - In calls to MyCalendarThree.book(start, end), start and end are integers in the range [0, 10^9].
 """
 
-class MyCalendarThreeTimeCounterDict(object):
+class MyCalendarThreeTimeCounterDictSort(object):
     def __init__(self):
         from collections import defaultdict
         self.time_counter_d = defaultdict(int)
@@ -50,7 +50,7 @@ class MyCalendarThreeTimeCounterDict(object):
         :type end: int
         :rtype: int
 
-        Time complexity: O(n^2*logn).
+        Time complexity: O(n*logn).
         Space complexity: O(n).
         """
         # Create time counter: new event starts at start, ends at end.
@@ -70,7 +70,7 @@ class MyCalendarThreeTimeCounterDict(object):
         return max_k_events
 
 
-class MyCalendarThreeTimeCountersBisectList(object):
+class MyCalendarThreeTimeCountersListBisectInsort(object):
     def __init__(self):
         self.time_counters = []
 
@@ -107,7 +107,7 @@ def main():
     # MyCalendarThree.book(5, 15); // returns 3
     # MyCalendarThree.book(5, 10); // returns 3
     # MyCalendarThree.book(25, 55); // returns 3
-    calendar = MyCalendarThreeTimeCounterDict()
+    calendar = MyCalendarThreeTimeCounterDictSort()
     print calendar.book(10, 20)
     print calendar.book(50, 60)
     print calendar.book(10, 40)
@@ -115,7 +115,7 @@ def main():
     print calendar.book(5, 10)
     print calendar.book(25, 55)
 
-    calendar = MyCalendarThreeTimeCountersBisectList()
+    calendar = MyCalendarThreeTimeCountersListBisectInsort()
     print calendar.book(10, 20)
     print calendar.book(50, 60)
     print calendar.book(10, 40)
