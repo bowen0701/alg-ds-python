@@ -15,15 +15,15 @@ Example 1:
 Input: 2, [[1,0]] 
 Output: true
 Explanation: There are a total of 2 courses to take. 
-             To take course 1 you should have finished course 0. So it is
-             possible.
+To take course 1 you should have finished course 0. So it is possible.
 
 Example 2:
 Input: 2, [[1,0],[0,1]]
 Output: false
 Explanation: There are a total of 2 courses to take. 
-             To take course 1 you should have finished course 0, and to take
-             course 0 you should also have finished course 1. So it is impossible.
+To take course 1 you should have finished course 0, and to take
+course 0 you should also have finished course 1. So it is impossible.
+
 Note:
 - The input prerequisites is a graph represented by a list of edges,
   not adjacency matrices. Read more about how a graph is represented.
@@ -45,12 +45,12 @@ class SolutionBFSTopologicalSort(object):
         from collections import defaultdict
         from collections import deque
 
-        # Collect adjacency list for prereq->list(courses) & indegrees for n_prereqs.
-        prereq_courses_adj = defaultdict(list)
+        # Collect dict:prereq->list(courses) & courses's indegrees.
+        prereq_courses_d = defaultdict(list)
         n_prereqs = [0] * numCourses
 
         for course, prereq in prerequisites:
-            prereq_courses_adj[prereq].append(course)
+            prereq_courses_d[prereq].append(course)
             n_prereqs[course] += 1
 
         # Create a course queue for courses w/o prereq.
@@ -65,7 +65,7 @@ class SolutionBFSTopologicalSort(object):
             course = queue.pop()
             numCourses -= 1
 
-            for nxt in prereq_courses_adj[course]:
+            for nxt in prereq_courses_d[course]:
                 # Decrement number of prerequisites for next course.
                 n_prereqs[nxt] -= 1
 
