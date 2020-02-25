@@ -52,18 +52,62 @@ Note:
 - 0 <= T <= 100
 """
 
-class Solution(object):
+class SolutionSortStartPrevEndAndEndGreedy(object):
     def videoStitching(self, clips, T):
         """
         :type clips: List[List[int]]
         :type T: int
         :rtype: int
+
+        Time complexity: O(n*logn), where n is clips length.
+        Space complexity: O(1).
         """
-        pass
+        # Sort clips by start.
+        clips = sorted(clips)
+
+        # Apply greedy algorithm to check (start, end) in prev_end and end.
+        prev_end, end = -1, 0
+        counter = 0
+
+        for s, e in clips:
+            # If reached T already or exists gap between end and s.
+            if end >= T or s > end:
+                break
+            elif prev_end < s <= end:
+                counter += 1
+                prev_end = end
+
+            # Update end by new clip.
+            end = max(end, e)
+
+        # Check if end passes T.
+        if end >= T:
+            return counter
+        else:
+            return -1
 
 
 def main():
-    pass
+    # Output: 3
+    clips = [[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]]
+    T = 10
+    print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
+
+    # Output: -1
+    clips = [[0,1],[1,2]]
+    T = 5
+    print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
+
+    # Output: 3
+    clips = [[0,1],[6,8],[0,2],[5,6],[0,4],[0,3],[6,7],[1,3],
+             [4,7],[1,4],[2,5],[2,6],[3,4],[4,5],[5,7],[6,9]]
+    T = 9
+    print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
+
+    # Output: 2
+    clips = [[0,4],[2,8]]
+    T = 5
+    print SolutionSortStartPrevEndAndEndGreedy().videoStitching(clips, T)
 
 
 if __name__ == '__main__':
