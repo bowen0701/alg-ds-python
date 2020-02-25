@@ -73,7 +73,7 @@ class LogSystem(object):
         """
         index = self.granularity[gra]
         start, end = s[:index], e[:index]
-        return [i for t, i in self.logs if start <= t[:index] <= end]
+        return [id for t, id in self.logs if start <= t[:index] <= end]
 
 
 def main():
@@ -81,7 +81,11 @@ def main():
     logsys.put(1, "2017:01:01:23:59:59")
     logsys.put(2, "2017:01:01:22:59:59")
     logsys.put(3, "2016:01:01:00:00:00")
+
+    # Output: [1, 2, 3]
     print logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Year")
+
+    # Output: [1, 2]
     print logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Hour")
 
 
