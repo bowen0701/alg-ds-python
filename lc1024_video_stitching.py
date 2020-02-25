@@ -107,6 +107,7 @@ class SolutionSortStartDPGreedy(object):
         dp[0] = 0
 
         for c in clips:
+            # For each clip, update dp[clip[0]] ~ dp[clip[1]].
             for i in range(c[0] + 1, c[1] + 1):
                 dp[i] = min(dp[i], dp[c[0]] + 1)
 
