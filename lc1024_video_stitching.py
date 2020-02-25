@@ -70,10 +70,11 @@ class SolutionSortStartPrevEndAndEndGreedy(object):
         counter = 0
 
         for s, e in clips:
-            # If reached T already or exists gap between end and s.
             if end >= T or s > end:
+                # If reached T already or s falls behind end.
                 break
-            elif prev_end < s <= end:
+            elif prev_end < s:
+                # If s falls in between prev_end and end.
                 counter += 1
                 prev_end = end
 
