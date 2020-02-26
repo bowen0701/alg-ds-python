@@ -64,7 +64,6 @@ class SolutionSortStartPrevEndAndEndGreedy(object):
         """
         # Create intervals based on ranges.
         intervals = [[i - r, i + r] for i, r in enumerate(ranges) if r > 0]
-        print intervals
 
         # Sort intervals by start.
         intervals.sort()
