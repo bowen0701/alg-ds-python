@@ -101,8 +101,7 @@ class SolutionSortStartDPGreedy(object):
         # Sort clips by start.
         clips = sorted(clips)
 
-        # Create DP table dp, where dp[t] is min number of clips 
-        # required to reach minute t.
+        # Create dp table, where dp[t] is min number of clips to cover [0, t].
         dp = [101] * 101
         dp[0] = 0
 
@@ -128,8 +127,7 @@ class SolutionDPGreedy(object):
         Time complexity: O(n*T), where n is clips length.
         Space complexity: O(T).
         """
-        # Create DP table dp, where dp[t] is min number of clips
-        # required to reach minute t.
+        # Create dp table, where dp[t] is min number of clips to cover [0, t].
         dp = [T + 1] * (T + 1)
         dp[0] = 0
 
