@@ -50,18 +50,73 @@ Constraints:
 - 0 <= ranges[i] <= 100
 """
 
-class Solution(object):
+class SolutionSortStartPrevEndAndEndGreedy(object):
     def minTaps(self, n, ranges):
         """
         :type n: int
         :type ranges: List[int]
         :rtype: int
+
+        Apply the same approach for Leetcode 1024. Video Stitching.
+
+        Time complexity: O(n*logn).
+        Space complexity: O(n).
         """
-        pass
+        # Create intervals based on ranges.
+        intervals = [[i - r, i + r] for i, r in enumerate(ranges) if r > 0]
+        print intervals
+
+        # Sort intervals by start.
+        intervals.sort()
+
+        # Apply greedy algorithm to check (start, end) in previous end and end.
+        prev_end, end = -float('inf'), 0
+        counter = 0
+
+        for s, e in intervals:
+            if end >= n or s > end:
+                # If reached n already or s falls behind end.
+                break
+            elif prev_end < s:
+                # If s falls in between prev_end and end.
+                counter += 1
+                prev_end = end
+
+            # Update end by new interval.
+            end = max(end, e)
+
+        # Check if end passes n.s
+        if end >= n:
+            return counter
+        else:
+            return -1
 
 
 def main():
-    pass
+    # Output: 1
+    n = 5
+    ranges = [3,4,1,1,0,0]
+    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+
+    # Output: -1
+    n = 3
+    ranges = [0,0,0,0]
+    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+
+    # Output: 3
+    n = 7
+    ranges = [1,2,1,0,2,1,0,1]
+    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+
+    # Output: 2
+    n = 8
+    ranges = [4,0,0,0,0,0,0,0,4]
+    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+
+    # Output: 1
+    n = 8
+    ranges = [4,0,0,0,4,0,0,0,4]
+    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
 
 
 if __name__ == '__main__':
