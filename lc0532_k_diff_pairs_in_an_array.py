@@ -32,18 +32,58 @@ Note:
 - All the integers in the given input belong to the range: [-1e7, 1e7].
 """
 
-class Solution(object):
+class SolutionNumCountDict(object):
     def findPairs(self, nums, k):
         """
         :type nums: List[int]
         :type k: int
         :rtype: int
+
+        Similar approach with two sum problem.
         """
-        pass
+        from collections import defaultdict
+
+        # Edge case.
+        if not nums or k < 0:
+            return 0
+
+        # One scan to create dict:num->count..
+        num_count_d = defaultdict(int)
+        counter = 0
+
+        # Iterate through nums to check if has k-diff.
+        for num in nums:
+            if num in num_count_d:
+                # If visited num before, has k-diff only if k=0 & its count=1.
+                if k == 0 and num_count_d[num] == 1:
+                    counter += 1
+                    num_count_d[num] += 1
+            else:
+                # If not, check if has k-diff.
+                if num + k in num_count_d:
+                    counter += 1
+                if num - k in num_count_d:
+                    counter += 1
+                num_count_d[num] = 1
+
+        return counter
 
 
 def main():
-    pass
+    # Output: 2
+    nums = [3, 1, 4, 1, 5]
+    k = 2
+    print SolutionNumCountDict().findPairs(nums, k)
+
+    # Output: 4
+    nums = [1, 2, 3, 4, 5]
+    k = 1
+    print SolutionNumCountDict().findPairs(nums, k)
+
+    # Output: 1
+    nums = [1, 3, 1, 5, 4]
+    k = 0
+    print SolutionNumCountDict().findPairs(nums, k)
 
 
 if __name__ == '__main__':
