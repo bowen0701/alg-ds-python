@@ -40,6 +40,9 @@ class SolutionNumCountDict(object):
         :rtype: int
 
         Similar approach with two sum problem.
+
+        Time complexity: O(n), where n is the length of nums.
+        Space complexity: O(n).
         """
         from collections import defaultdict
 
@@ -47,7 +50,7 @@ class SolutionNumCountDict(object):
         if not nums or k < 0:
             return 0
 
-        # One scan to create dict:num->count..
+        # One scan to create dict:num->count.
         num_count_d = defaultdict(int)
         counter = 0
 
