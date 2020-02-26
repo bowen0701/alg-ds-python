@@ -63,12 +63,12 @@ class SolutionDp(object):
         if not nums:
             return 0
 
-        # Create a LIS table with each element denoting LIS up to i.
-        # Init all elements to 1, since LIS of each element is at least 1.
+        # Create a table T with each T[i] denoting LIS up to i.
+        # Init all elements to 1, since LIS of each num is at least 1.
         T = [1] * len(nums)
 
-        # Apply two pointer method: for each j, check all i left to j; 
-        # if element i is smaller than element j, set T[j] = max(T[j], T[i] + 1).
+        # Apply two pointer method: for each j, check all i < j; 
+        # if num i is smaller than num j, set T[j] = max(T[j], T[i] + 1).
         for j in range(1, len(nums)):
             for i in range(j):
                 if nums[i] < nums[j]:
