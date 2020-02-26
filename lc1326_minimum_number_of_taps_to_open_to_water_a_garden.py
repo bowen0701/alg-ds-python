@@ -50,6 +50,32 @@ Constraints:
 - 0 <= ranges[i] <= 100
 """
 
+
+class SolutionDPGreedy(object):
+    def minTaps(self, n, ranges):
+        """
+        :type n: int
+        :type ranges: List[int]
+        :rtype: int
+
+        Time complexity: O(n*R).
+        Space complexity: O(n).
+        """
+        # Create DP table T, where T[i] is min number of taps to water [0, i].
+        T = [float('inf')] * (n + 1)
+        T[0] = 0
+
+        # For each range, loop over its interval to update T[j].
+        for i, r in enumerate(ranges):
+            for j in range(max(i - r + 1, 0), min(i + r, n) + 1):
+                T[j] = min(T[j], T[max(i - r, 0)] + 1)
+
+        if T[n] < float('inf'):
+            return T[n]
+        else:
+            return -1
+
+
 class SolutionSortStartPrevEndAndEndGreedy(object):
     def minTaps(self, n, ranges):
         """
@@ -95,26 +121,31 @@ def main():
     # Output: 1
     n = 5
     ranges = [3,4,1,1,0,0]
+    print SolutionDPGreedy().minTaps(n, ranges)
     print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
 
     # Output: -1
     n = 3
     ranges = [0,0,0,0]
+    print SolutionDPGreedy().minTaps(n, ranges)
     print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
 
     # Output: 3
     n = 7
     ranges = [1,2,1,0,2,1,0,1]
+    print SolutionDPGreedy().minTaps(n, ranges)
     print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
 
     # Output: 2
     n = 8
     ranges = [4,0,0,0,0,0,0,0,4]
+    print SolutionDPGreedy().minTaps(n, ranges)
     print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
 
     # Output: 1
     n = 8
     ranges = [4,0,0,0,4,0,0,0,4]
+    print SolutionDPGreedy().minTaps(n, ranges)
     print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
 
 
