@@ -19,7 +19,7 @@ Example 2:
 Input: [3,2,1,0,4]
 Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
-             jump length is 0, which makes it impossible to reach the last index.
+jump length is 0, which makes it impossible to reach the last index.
 """
 
 class Solution(object):
