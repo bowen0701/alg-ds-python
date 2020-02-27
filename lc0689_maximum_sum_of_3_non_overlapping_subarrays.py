@@ -42,7 +42,7 @@ class SolutionLeftRightMaxSumMidIter(object):
         max_sum = 0
         result = [0, 0, 0]
 
-        # Compute cumsums before pos i: [0, n1, n1+n2, ...]
+        # Compute cumsums before pos i: [0, n[0], n[0]+n[1], ...]
         cumsums = [0]
 
         for num in nums:
