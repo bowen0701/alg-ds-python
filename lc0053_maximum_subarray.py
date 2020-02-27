@@ -28,7 +28,6 @@ class SolutionDp(object):
         """
         cur_max_sums = [0] * len(nums)
         cur_max_sums[0] = nums[0]
-
         global_max_sum = cur_max_sums[0]
 
         for i in range(1, len(nums)):
@@ -65,9 +64,8 @@ class SolutionIter(object):
 
 
 def main():
-    nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
     # Output: 6.
-
+    nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
     print SolutionDp().maxSubArray(nums)
     print SolutionIter().maxSubArray(nums)
 
