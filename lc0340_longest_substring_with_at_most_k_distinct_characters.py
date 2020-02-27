@@ -46,7 +46,6 @@ class SolutionTwoPointerCharCountDictIter(object):
                 char_count_d[s[i]] -= 1
                 if char_count_d[s[i]] == 0:
                     del char_count_d[s[i]]
-
                 i += 1
 
             max_len = max(max_len, j - i + 1)
