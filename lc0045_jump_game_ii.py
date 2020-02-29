@@ -20,21 +20,33 @@ Note:
 You can assume that you can always reach the last index.
 """
 
-class Solution(object):
+class SolutionEndGreedy(object):
     def jump(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        # Since we can always reach the last, just need end.
+        n = len(nums)
         end = 0
         jumps = 0
-        for num in nums:
-            if 
+        for i in range(n):
+            print 'i:', i
+            if end >= n:
+                break
+
+            if i + nums[i] > end:
+                jumps += 1
+                end = i + nums[i]
+                print 'jumps:', jumps
+                print 'end:', end
+
+        return jumps
 
 
 def main():
-    pass
+    # Outpout: 2
+    nums = [2, 3, 1, 1, 4]
+    print SolutionEndGreedy().jump(nums)
 
 
 if __name__ == '__main__':

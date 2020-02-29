@@ -40,8 +40,7 @@ class Solution(object):
                 return False
 
             # Update end by checking i + nums[i] > end.
-            if i + nums[i] > end:
-                end = i + nums[i]
+            end = max(end, i + nums[i])
 
         return True
 
