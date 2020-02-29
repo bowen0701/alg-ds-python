@@ -20,6 +20,32 @@ Note:
 You can assume that you can always reach the last index.
 """
 
+class SolutionDPGreedy(object):
+    def jump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n^2), where n is length of nums.
+        Space complexity: O(n).
+        """
+        n = len(nums)
+
+        # Create table T, where T[i] is min number of jumps to reach i.
+        T = [n] * n
+        T[0] = 0
+
+        # For each pos i, loop to update T[end+1] ~ T[i+nums[i]].
+        end = 0
+        for i in range(n):
+            for j in range(end + 1, min(i + nums[i], n - 1) + 1):
+                T[j] = min(T[j], T[i] + 1)
+
+            end = max(end, i + nums[i])
+
+        return T[-1]
+
+
 class SolutionPrevEndAndEndGreedy(object):
     def jump(self, nums):
         """
@@ -54,10 +80,12 @@ class SolutionPrevEndAndEndGreedy(object):
 def main():
     # Outpout: 2
     nums = [2,3,1,1,4]
+    print SolutionDPGreedy().jump(nums)
     print SolutionPrevEndAndEndGreedy().jump(nums)
 
     # Outpout: 2
     nums = [7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]
+    print SolutionDPGreedy().jump(nums)
     print SolutionPrevEndAndEndGreedy().jump(nums)
 
 
