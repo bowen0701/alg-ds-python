@@ -20,33 +20,45 @@ Note:
 You can assume that you can always reach the last index.
 """
 
-class SolutionEndGreedy(object):
+class SolutionPrevEndAndEndGreedy(object):
     def jump(self, nums):
         """
         :type nums: List[int]
         :rtype: int
+
+        Time complexity: O(n), where n is length of nums.
+        Space complexity: O(1).
         """
         n = len(nums)
-        end = 0
+
+        # Apply greedy algorithm to check pos i in prev_end and end.
+        prev_end, end = -1, 0
         jumps = 0
+
         for i in range(n):
-            print 'i:', i
-            if end >= n:
+            # Check if reached last index already.
+            if end >= n - 1:
                 break
 
-            if i + nums[i] > end:
+            # Update jump if current pos is behind prev_end.
+            if prev_end < i:
                 jumps += 1
-                end = i + nums[i]
-                print 'jumps:', jumps
-                print 'end:', end
+                prev_end = end
+
+            # Update end with current index and jump.
+            end = max(end, i + nums[i])
 
         return jumps
 
 
 def main():
     # Outpout: 2
-    nums = [2, 3, 1, 1, 4]
-    print SolutionEndGreedy().jump(nums)
+    nums = [2,3,1,1,4]
+    print SolutionPrevEndAndEndGreedy().jump(nums)
+
+    # Outpout: 2
+    nums = [7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]
+    print SolutionPrevEndAndEndGreedy().jump(nums)
 
 
 if __name__ == '__main__':
