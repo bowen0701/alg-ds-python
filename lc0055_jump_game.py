@@ -31,17 +31,17 @@ class Solution(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Memorize max reachable index.
-        reachable = 0
+        # Memorize max reachable index by end.
+        end = 0
 
         for i in range(len(nums)):
-            if i > reachable:
-                # Index i is not reachable.
+            if i > end:
+                # Position i is not reachable.
                 return False
 
-            # Update reachable by checking i + nums[i] > reachable.
-            if reachable < i + nums[i]:
-                reachable = i + nums[i]
+            # Update end by checking i + nums[i] > end.
+            if i + nums[i] > end:
+                end = i + nums[i]
 
         return True
 

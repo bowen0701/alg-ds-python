@@ -26,7 +26,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        pass
+        # Since we can always reach the last, just need end.
+        end = 0
+        jumps = 0
+        for num in nums:
+            if 
 
 
 def main():
