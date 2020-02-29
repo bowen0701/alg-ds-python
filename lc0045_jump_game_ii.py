@@ -31,7 +31,7 @@ class SolutionPrevEndAndEndGreedy(object):
         """
         n = len(nums)
 
-        # Apply greedy algorithm to check pos i in prev_end and end.
+        # Apply greedy algorithm to check index i in prev_end and end.
         prev_end, end = -1, 0
         jumps = 0
 
@@ -40,7 +40,7 @@ class SolutionPrevEndAndEndGreedy(object):
             if end >= n - 1:
                 break
 
-            # Update jump if current pos is behind prev_end.
+            # Update jump if current index is behind prev_end.
             if prev_end < i:
                 jumps += 1
                 prev_end = end
