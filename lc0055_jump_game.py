@@ -22,7 +22,7 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
 jump length is 0, which makes it impossible to reach the last index.
 """
 
-class Solution(object):
+class SolutionGreedy(object):
     def canJump(self, nums):
         """
         :type nums: List[int]
@@ -31,12 +31,12 @@ class Solution(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Memorize max reachable index by end.
+        # Update max reachable index by end.
         end = 0
 
         for i in range(len(nums)):
-            if i > end:
-                # Position i is not reachable.
+            # Index i is not reachable.
+            if end < i:
                 return False
 
             # Update end by checking i + nums[i] > end.
@@ -48,11 +48,11 @@ class Solution(object):
 def main():
     # Ans: True
     nums = [2,3,1,1,4]
-    print Solution().canJump(nums)
+    print SolutionGreedy().canJump(nums)
 
     # Ans: False
     nums = [3,2,1,0,4]
-    print Solution().canJump(nums)
+    print SolutionGreedy().canJump(nums)
 
 
 if __name__ == '__main__':
