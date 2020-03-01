@@ -46,7 +46,38 @@ class SolutionDPGreedy(object):
         return T[-1]
 
 
-class SolutionBFSGreedy(object):
+class SolutionBFSGreedy1(object):
+    def jump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        Time complexity: O(n), where n is length of nums.
+        Space complexity: O(1).
+        """
+        n = len(nums)
+
+        # Apply greedy algorithm to check index i in prev_end and end.
+        prev_end, end = -1, 0
+        jumps = 0
+
+        for i in range(n):
+            # Check if reached last index already.
+            if end >= n - 1:
+                break
+
+            # Update jump if current index is behind prev_end.
+            if prev_end < i:
+                jumps += 1
+                prev_end = end
+
+            # Update end with current index and jump.
+            end = max(end, i + nums[i])
+
+        return jumps
+
+
+class SolutionBFSGreedy2(object):
     def jump(self, nums):
         """
         :type nums: List[int]
@@ -80,12 +111,14 @@ def main():
     # Outpout: 2
     nums = [2,3,1,1,4]
     print SolutionDPGreedy().jump(nums)
-    print SolutionBFSGreedy().jump(nums)
+    print SolutionBFSGreedy1().jump(nums)
+    print SolutionBFSGreedy2().jump(nums)
 
     # Outpout: 2
     nums = [7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]
     print SolutionDPGreedy().jump(nums)
-    print SolutionBFSGreedy().jump(nums)
+    print SolutionBFSGreedy1().jump(nums)
+    print SolutionBFSGreedy2().jump(nums)
 
 
 if __name__ == '__main__':
