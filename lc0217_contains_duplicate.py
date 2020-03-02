@@ -30,22 +30,18 @@ class SolutionSet(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        num_set = set()
+        seen_set = set()
 
         for n in nums:
-            if n in num_set:
+            if n in seen_set:
                 return True
             else:
-                num_set.add(n)
+                seen_set.add(n)
 
         return False
 
 
 def main():
-    import time
-
-    start_time = time.time()
-    print 'By set:'
     # Output: True
     nums = [1,2,3,1]
     print SolutionSet().containsDuplicate(nums)
@@ -57,7 +53,6 @@ def main():
     # Output: True
     nums = [1,1,1,3,3,4,3,2,4,2]
     print SolutionSet().containsDuplicate(nums)
-    print 'Time:', time.time() - start_time
 
 
 if __name__ == '__main__':
