@@ -44,8 +44,8 @@ class SolutionDFSRecurVisit(object):
         :type grid: List[List[str]]
         :rtype: int
 
-        Time complexity: O(m * n).
-        Space complexity: O(m * n).
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         if not grid or not grid[0]:
             return 0
@@ -73,9 +73,8 @@ class SolutionDFSRecurVisitReturn(object):
         # Mark (r, c) as visited.
         visited_d[(r, c)] = True
 
-        n_connects = 1
-
         # Count connects by visiting up, down, left & right.
+        n_connects = 1
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             n_connects += self._dfs(r_next, c_next, grid, visited_d)
@@ -87,8 +86,8 @@ class SolutionDFSRecurVisitReturn(object):
         :type grid: List[List[str]]
         :rtype: int
 
-        Time complexity: O(m * n).
-        Space complexity: O(m * n).
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         if not grid or not grid[0]:
             return 0
@@ -127,8 +126,8 @@ class SolutionDFSRecurUpdate(object):
         :type grid: List[List[str]]
         :rtype: int
 
-        Time complexity: O(m * n).
-        Space complexity: O(m * n).
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         if not grid or not grid[0]:
             return 0
@@ -155,9 +154,8 @@ class SolutionDFSRecurUpdateReturn(object):
         # Update (r, c) as visited.
         grid[r][c] = '0'
 
-        n_connects = 1
-
         # Count connects by visiting up, down, left & right.
+        n_connects = 1
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             n_connects += self._dfs(r_next, c_next, grid)
@@ -169,8 +167,8 @@ class SolutionDFSRecurUpdateReturn(object):
         :type grid: List[List[str]]
         :rtype: int
 
-        Time complexity: O(m * n).
-        Space complexity: O(m * n).
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         if not grid or not grid[0]:
             return 0
@@ -231,8 +229,8 @@ class SolutionDFSIterVisit(object):
     def numIslands(self, grid):
         """Number of islands by iteration using stack.
 
-        Time complexity: O(m * n).
-        Space complexity: O(m * n).
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         if not grid or not grid[0]:
             return 0
@@ -289,8 +287,8 @@ class SolutionDFSIterUpdate(object):
     def numIslands(self, grid):
         """Number of islands by iteration using stack.
 
-        Time complexity: O(m * n).
-        Space complexity: O(m * n).
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         if not grid or not grid[0]:
             return 0
