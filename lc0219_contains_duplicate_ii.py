@@ -30,10 +30,8 @@ class SolutionDict(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        from collections import defaultdict
-
         # Create a dict to collect number and their indices.
-        num_idx_d = defaultdict()
+        num_idx_d = dict()
 
         for i, n in enumerate(nums):
             if n in num_idx_d and i - num_idx_d[n] <= k:
