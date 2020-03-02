@@ -40,20 +40,20 @@ class Solution(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        fizzbuzz = [None] * n
+        result = [None] * n
 
         for i in range(1, n + 1):
             if i % 15 == 0:
                 # Since 15 = 3 * 5, check 15 first.
-                fizzbuzz[i - 1] = "FizzBuzz"
+                result[i - 1] = "FizzBuzz"
             elif i % 3 == 0:
-                fizzbuzz[i - 1] = "Fizz"
+                result[i - 1] = "Fizz"
             elif i % 5 == 0:
-                fizzbuzz[i - 1] = "Buzz"
+                result[i - 1] = "Buzz"
             else:
-                fizzbuzz[i - 1] = str(i)
+                result[i - 1] = str(i)
 
-        return fizzbuzz
+        return result
 
 
 def main():
