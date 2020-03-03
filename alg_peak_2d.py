@@ -14,22 +14,41 @@ from __future__ import division
 from __future__ import print_function
 
 
-def _max_1d(arr):
+def _max_1d(nums):
     """Find max in 1D array.
 
     Time complexity: O(m).
     Space complexity: O(1).
     """
     max_col = 0
-    max_item = arr[0]
-    for i in range(1, len(arr)):
-        if arr[i] > max_item:
+    max_item = nums[0]
+    for i in range(1, len(nums)):
+        if nums[i] > max_item:
             max_col = i
-            max_item = arr[i]
+            max_item = nums[i]
     return max_col, max_item
 
 
-def peak_2d(arr, start_row, end_row):
+def _peak_2d_recur(nums, start_row, end_row):
+    if end_row - start_row == 0:
+        # For last one row, find the max item.
+        max_col, max_item = _max_1d(nums)
+        return max_item
+    else:
+        mid_row = start_row + (end_row - start_row) // 2
+        max_col, max_item = _max_1d(nums[mid_row])
+
+        if nums[mid_row][max_col] < nums[mid_row + 1][max_col]:
+            # Binary search in bottom half.
+            return _peak_2d_recur(nums, mid_row + 1, end_row)
+        elif nums[mid_row][max_col] < nums[mid_row - 1][max_col]:
+            # Binary search in upper half.
+            return _peak_2d_recur(nums, start_row, mid_row - 1)
+        else:
+            # Find 2D peak.
+            return nums[mid_row][max_col]
+
+def peak_2d(nums):
     """Find peak in 2D array (nxm) by divide & conquer algorithm.
 
     Procedure:
@@ -39,33 +58,17 @@ def peak_2d(arr, start_row, end_row):
     Time complexity: O(m*log(n)).
     Space complexity: O(1).
     """
-    if end_row - start_row == 0:
-        # For last one row, find the max item.
-        _, max_item = _max_1d(arr)
-        return max_item
-    else:
-        mid_row = start_row + (end_row - start_row) // 2
-        max_col, _ = _max_1d(arr[mid_row])
-        if arr[mid_row - 1][max_col] > arr[mid_row][max_col]:
-            # Binary search the upper half.
-            return peak_2d(arr, start_row, mid_row - 1)
-        elif arr[mid_row + 1][max_col] > arr[mid_row][max_col]:
-            # Binary search the bottom half.
-            return peak_2d(arr, mid_row + 1, end_row)
-        else:
-            # Find 2D peak.
-            return arr[mid_row][max_col]
+    start_row, end_row = 0, len(nums) - 1
+    return _peak_2d_recur(nums, start_row, end_row)
 
 
 def main():
     # 2D array with peak 21 at pos (2, 3).
-    arr = [[10, 8, 10, 10, 7], 
+    nums = [[10, 8, 10, 10, 7], 
            [14, 13, 12, 11, 9], 
            [15, 9, 11, 21, 20], 
            [16, 17, 19, 20, 18]]
-
-    start_row, end_row = 0, len(arr) - 1
-    print('Peak: {}'.format(peak_2d(arr, start_row, end_row)))
+    print(peak_2d(nums))
 
 
 if __name__ == '__main__':
