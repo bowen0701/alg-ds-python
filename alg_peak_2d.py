@@ -15,11 +15,7 @@ from __future__ import print_function
 
 
 def _max_1d(nums):
-    """Find max in 1D array.
-
-    Time complexity: O(m).
-    Space complexity: O(1).
-    """
+    """Find max in 1D array."""
     max_col = 0
     max_item = nums[0]
     for i in range(1, len(nums)):
@@ -30,6 +26,7 @@ def _max_1d(nums):
 
 
 def _peak_2d_recur(nums, start_row, end_row):
+    """Recursive peak in 2D array."""
     if end_row - start_row == 0:
         # For last one row, find the max item.
         max_col, max_item = _max_1d(nums)
