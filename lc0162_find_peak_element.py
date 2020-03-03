@@ -40,16 +40,15 @@ class SolutionBinarySearchIter(object):
         left, right = 0, len(nums) - 1
 
         while left < right:
-            mid = (left + right + 1) // 2
+            mid = left + (right - left) // 2
 
-            if nums[mid - 1] > nums[mid]:
-                # If mid's left > mid, search left part.
-                right = mid - 1
+            if nums[mid] < nums[mid + 1]:
+                # If mid < mid's right, search right part. 
+                left = mid + 1
             else:
-                # Otherwise, search right part.
-                left = mid
+                # Otherwise, search left part.
+                right = mid
 
-        # For left = right.
         return left
 
 
