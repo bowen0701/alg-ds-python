@@ -37,16 +37,16 @@ Can you solve it in O(N) time and O(1) space?
 
 class SolutionStack(object):
     def _add_stack(self, s):
-        s_stack = []
+        stack = []
 
         for i in range(len(s)):
             if s[i] != '#':
-                s_stack.append(s[i])
+                stack.append(s[i])
             else:
-                if s_stack:
-                    s_stack.pop()
+                if stack:
+                    stack.pop()
 
-        return s_stack
+        return stack
 
     def backspaceCompare(self, S, T):
         """
@@ -54,10 +54,10 @@ class SolutionStack(object):
         :type T: str
         :rtype: bool
 
-        Time complexity: O(m + n), where
+        Time complexity: O(m+n), where
           - m: length of S
           - n: length of T.
-        Space complexity: O(m + n).
+        Space complexity: O(m+n).
         """
         # Use stack to store chars and pop by backspace.
         S_stack = self._add_stack(S)
@@ -93,7 +93,7 @@ class SolutionIterCharBackwards(object):
         :type T: str
         :rtype: bool
 
-        Time complexity: O(m + n).
+        Time complexity: O(m+n).
         Space complexity: O(1).
         """
         # Visit backwards.
@@ -126,7 +126,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'By backward:', SolutionIterCharBackwards().backspaceCompare(S, T)
     print 'Time:', time.time() - start_time
 
     # Output: True
@@ -138,7 +138,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'By backward:', SolutionIterCharBackwards().backspaceCompare(S, T)
     print 'Time:', time.time() - start_time
 
     # Output: True
@@ -150,7 +150,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'By backward:', SolutionIterCharBackwards().backspaceCompare(S, T)
     print 'Time:', time.time() - start_time
 
     # Output: False
@@ -162,7 +162,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By backward', SolutionIterCharBackwards().backspaceCompare(S, T)
+    print 'By backward:', SolutionIterCharBackwards().backspaceCompare(S, T)
     print 'Time:', time.time() - start_time
 
 
