@@ -31,7 +31,8 @@ class SolutionNegativeOverflow(object):
         else:
             x_rev = int(x_str[::-1])
 
-        # If reversed integer is overflow.
+        # If reversed integer is overflow:
+        # 0x7FFFFFFF = 0b0111_1111_1111_1111_1111_1111_1111_1111.
         if abs(x_rev) > 0x7FFFFFFF:
             x_rev = 0
 
