@@ -70,18 +70,18 @@ class SolutionStack(object):
 class SolutionIterCharBackwards(object):
     def _getChar(self, s, pos):
         char = ''
-        bs_count = 0
+        n_bs = 0
 
         while pos >= 0 and not char:
             if s[pos] == '#':
                 # If char is #, increment counter.
-                bs_count += 1
-            elif bs_count == 0:
+                n_bs += 1
+            elif n_bs == 0:
                 # If char != # and backspace counter = 0, get char.
                 char = s[pos]
             else:
                 # If else, skip char and decrement counter.
-                bs_count -= 1
+                n_bs -= 1
 
             pos -= 1
 
