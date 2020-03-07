@@ -28,17 +28,20 @@ def peak_1d_brute_force(nums):
 
 def _binary_search_recur(nums, left, right):
     """Helper function for peak_1d_binary_search_recur()."""
-    if right - left == 0:
+    if left == right:
         return left
-    else:
-        mid = left + (right - left) // 2
+        
+    mid = left + (right - left) // 2
 
-        if nums[mid] < nums[mid + 1]:
-            # If mid < mid's right, search right part.
-            return _binary_search_recur(nums, mid + 1, right)
-        else:
-            # Otherwise, search left part.
-            return _binary_search_recur(nums, left, mid)
+    if nums[mid] < nums[mid + 1]:
+        # If mid < its right, search right part.
+        return _binary_search_recur(nums, mid + 1, right)
+    elif nums[mid] < nums[mid - 1]:
+        # If mid < its left, search left part.
+        return _binary_search_recur(nums, left, mid - 1)
+    else:
+        # Else, found peak.
+        return mid
 
 
 def peak_1d_binary_search_recur(nums):
@@ -62,11 +65,14 @@ def peak_1d_binary_search_iter(nums):
         mid = left + (right - left) // 2
 
         if nums[mid] < nums[mid + 1]:
-            # If mid < mid's right, search right part.
+            # If mid < its right, search right part.
             left = mid + 1
+        elif nums[mid] < nums[mid - 1]:
+            # If mid < its left, search left part.
+            right = mid - 1
         else:
-            # Otherwise, search left part.
-            right = mid
+            # Else, found peak.
+            return mid
 
     # For left = right.
     return left
@@ -76,7 +82,7 @@ def main():
     import time
     import numpy as np
 
-    # numsay of length 5 with peak at 3.
+    # nums of length 5 with peak 4 at 3.
     nums = [0, 1, 2, 4, 3]
     print('nums', nums)
     
