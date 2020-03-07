@@ -43,11 +43,13 @@ class SolutionBinarySearchIter(object):
             mid = left + (right - left) // 2
 
             if nums[mid] < nums[mid + 1]:
-                # If mid < mid's right, search right part. 
+                # If mid < its right, search right part. 
                 left = mid + 1
+            elif nums[mid] < nums[mid - 1]:
+                # If mid < its left, search left part.
+                right = mid - 1
             else:
-                # Otherwise, search left part.
-                right = mid
+                return mid
 
         return left
 
