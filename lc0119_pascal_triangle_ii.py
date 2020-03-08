@@ -31,15 +31,15 @@ class Solution(object):
         if rowIndex <= 1:
             return [1] * (rowIndex + 1)
 
-        # If rowIndex >= 2, the 1st last row is [1, 1].
-        last_row = [1] * 2
+        # If rowIndex >= 2, the previos row is [1, 1].
+        prev_row = [1] * 2
 
         # Continue grow row based on last row.
         for r in range(2, rowIndex + 1):
             row = [1] * (r + 1)
             for i in range(1, r):
-                row[i] = last_row[i - 1] + last_row[i]
-            last_row = row
+                row[i] = prev_row[i - 1] + prev_row[i]
+            prev_row = row
 
         return row
 
