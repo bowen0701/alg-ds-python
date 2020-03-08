@@ -34,20 +34,17 @@ class Solution(object):
             return []
 
         # Create base of Pascal triangle.
-        triangle = [[1] * (r + 1) for r in range(numRows)]
+        T = [[1] * (r + 1) for r in range(numRows)]
 
         if numRows <= 2:
-            return triangle
+            return T
 
+        # For each row >= 3, update middle numers by last row.
         for r in range(2, numRows):
-            last_row = triangle[r - 1]
-            current_row = triangle[r]
-
-            # In middle of current row, sum last row's two numbers.
             for i in range(1, r):
-                current_row[i] = last_row[i - 1] + last_row[i]
+                T[r][i] = T[r - 1][i - 1] + T[r - 1][i]
 
-        return triangle
+        return T
 
 
 def main():
