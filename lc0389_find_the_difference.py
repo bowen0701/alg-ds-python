@@ -65,7 +65,7 @@ class SolutionCharCountDict(object):
 
         # Iterate through t's chars.
         for c in t:
-            if char_count_d[c] == 0:
+            if not char_count_d[c]:
                 # If c is not in s, c is additional char.
                 return c
             else:
