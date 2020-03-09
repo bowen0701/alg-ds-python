@@ -20,7 +20,7 @@ Input: nums = [1,2,3,1,2,3], k = 2
 Output: false
 """
 
-class SolutionDict(object):
+class SolutionNumIdxDict(object):
     def containsNearbyDuplicate(self, nums, k):
         """
         :type nums: List[int]
@@ -33,11 +33,11 @@ class SolutionDict(object):
         # Create a dict to collect number and their indices.
         num_idx_d = dict()
 
-        for i, n in enumerate(nums):
-            if n in num_idx_d and i - num_idx_d[n] <= k:
+        for i, num in enumerate(nums):
+            if num in num_idx_d and i - num_idx_d[num] <= k:
                 return True
-
-            num_idx_d[n] = i
+            else:
+                num_idx_d[num] = i
 
         return False
 
@@ -46,17 +46,17 @@ def main():
     # Output: True
     nums = [1,2,3,1]
     k = 3
-    print SolutionDict().containsNearbyDuplicate(nums, k)
+    print SolutionNumIdxDict().containsNearbyDuplicate(nums, k)
 
     # Output: True
     nums = [1,0,1,1]
     k = 1
-    print SolutionDict().containsNearbyDuplicate(nums, k)
+    print SolutionNumIdxDict().containsNearbyDuplicate(nums, k)
 
     # Output: False
     nums = [1,2,3,1,2,3]
     k = 2
-    print SolutionDict().containsNearbyDuplicate(nums, k)
+    print SolutionNumIdxDict().containsNearbyDuplicate(nums, k)
 
 
 if __name__ == '__main__':
