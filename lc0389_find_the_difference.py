@@ -30,19 +30,22 @@ class SolutionSortIter(object):
         Time complexity: O(n*logn).
         Space complexity: O(n).
         """
+        # Sort s & t.
         s_ls = list(s)
         t_ls = list(t)
         s_ls.sort()
         t_ls.sort()
 
+        # Iterate through s's chars to check mismatch.
         for i, c in enumerate(s_ls):
             if c != t_ls[i]:
                 return t_ls[i]
 
+        # If no mismatch, then the t's last char is the diff one.
         return t_ls[-1]
 
 
-class SolutionDict(object):
+class SolutionCharCountDict(object):
     def findTheDifference(self, s, t):
         """
         :type s: str
@@ -53,22 +56,24 @@ class SolutionDict(object):
         Space complexity: O(n).
         """
         from collections import defaultdict
-        char_nums = defaultdict(int)
 
-        # Iterate char in s and increment its counter.
+        char_count_d = defaultdict(int)
+
+        # Iterate through s's chars and increment counter.
         for c in s:
-            char_nums[c] += 1
+            char_count_d[c] += 1
 
-        # Iterate char in t and decrement its counter.
+        # Iterate through t's chars.
         for c in t:
-            # If new char in t or its counter = 0, obtain the difference.
-            if char_nums.get(c, 0) == 0:
+            if char_count_d[c] == 0:
+                # If c is not in s, c is additional char.
                 return c
             else:
-                char_nums[c] -= 1
+                # If c is in s, decrement its counter.
+                char_count_d[c] -= 1
 
 
-class SolutionOrdDiff(object):
+class SolutionOrdSumDiff(object):
     def findTheDifference(self, s, t):
         """
         :type s: str
@@ -78,17 +83,17 @@ class SolutionOrdDiff(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        ord_diff = 0
+        ord_sum_diff = 0
 
-        # Decrement by s's char ord.
+        # Decrement ord_sum_diff by s's char ordinal.
         for c in s:
-            ord_diff -= ord(c)
+            ord_sum_diff -= ord(c)
 
-        # Increment by t's char ord.
+        # Increment by t's char ordinal.
         for c in t:
-            ord_diff += ord(c)
+            ord_sum_diff += ord(c)
 
-        return chr(ord_diff)
+        return chr(ord_sum_diff)
 
 
 class SolutionXOR(object):
@@ -119,16 +124,16 @@ def main():
     s = "abcd"
     t = "abcde"
     print SolutionSortIter().findTheDifference(s, t)
-    print SolutionDict().findTheDifference(s, t)
-    print SolutionOrdDiff().findTheDifference(s, t)
+    print SolutionCharCountDict().findTheDifference(s, t)
+    print SolutionOrdSumDiff().findTheDifference(s, t)
     print SolutionXOR().findTheDifference(s, t)
 
     # Output: a
     s = ""
     t = "a"
     print SolutionSortIter().findTheDifference(s, t)
-    print SolutionDict().findTheDifference(s, t)
-    print SolutionOrdDiff().findTheDifference(s, t)
+    print SolutionCharCountDict().findTheDifference(s, t)
+    print SolutionOrdSumDiff().findTheDifference(s, t)
     print SolutionXOR().findTheDifference(s, t)
 
 
