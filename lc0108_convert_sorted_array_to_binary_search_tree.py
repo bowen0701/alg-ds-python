@@ -37,10 +37,10 @@ class SolutionPreorderRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn).
         """
-        # Apply recursive preorder traversal.
         if not nums:
             return None
 
+        # Apply recursive preorder traversal: root->left->right.
         left, right = 0, len(nums) - 1
         mid = left + (right - left) // 2
 
@@ -52,15 +52,16 @@ class SolutionPreorderRecur(object):
 
 
 class SolutionPreorderRecurTwoPointers(object):
-    def _convert(self, nums, left, right):
+    def _preorderRecur(self, nums, left, right):
         if left > right:
             return None
 
+        # Apply recursive preorder traversal: root->left->right.
         mid = left + (right - left) // 2
 
         root = TreeNode(nums[mid])
-        root.left = self._convert(nums, left, mid - 1)
-        root.right = self._convert(nums, mid + 1, right)
+        root.left = self._preorderRecur(nums, left, mid - 1)
+        root.right = self._preorderRecur(nums, mid + 1, right)
 
         return root
 
@@ -77,21 +78,21 @@ class SolutionPreorderRecurTwoPointers(object):
             return None
 
         left, right = 0, len(nums) - 1
-        return self._convert(nums, left, right)
+        return self._preorderRecur(nums, left, right)
 
 
 class SolutionInorderRecurTwoPointers(object):
-    def _inorder(self, nums, left, right):
+    def _inorderRecur(self, nums, left, right):
         if left > right:
             return None
 
         mid = left + (right - left) // 2
 
-        # Inorder traversal: left->root->right.
-        left = self._inorder(nums, left, mid - 1)
+        # Apply recursive inorder traversal: left->root->right.
+        left = self._inorderRecur(nums, left, mid - 1)
         root = TreeNode(nums[mid])
         root.left = left
-        root.right = self._inorder(nums, mid + 1, right)
+        root.right = self._inorderRecur(nums, mid + 1, right)
 
         return root
 
@@ -103,12 +104,12 @@ class SolutionInorderRecurTwoPointers(object):
         Time complexity: O(n).
         Space complexity: O(logn).
         """
-        # Apply recursive inorder traversal.
+        # Apply recursive inorder traversal w/ two pointers.
         if not nums:
             return None
 
         left, right = 0, len(nums) - 1
-        return self._inorder(nums, left, right)
+        return self._inorderRecur(nums, left, right)
 
 
 def main():
