@@ -18,7 +18,7 @@ Input: [2,2,1,1,1,2,2]
 Output: 2
 """
 
-class SolutionDict(object):
+class SolutionNumCountDict(object):
     def majorityElement(self, nums):
         """
         :type nums: List[int]
@@ -27,26 +27,26 @@ class SolutionDict(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        num_d = {}
+        from collections import defaultdict
+
+        # Create dict:number->count.
+        num_count_d = defaultdict(int)
 
         for n in nums:
-            if n in num_d:
-                num_d[n] += 1
-            else:
-                num_d[n] = 1
+            num_count_d[n] += 1
 
-            if num_d[n] > len(nums) // 2:
+            if num_count_d[n] > len(nums) // 2:
                 return n
 
 
 def main():
     # Output: 3
     nums = [3,2,3]
-    print SolutionDict().majorityElement(nums)
+    print SolutionNumCountDict().majorityElement(nums)
 
     # Output: 2
     nums = [2,2,1,1,1,2,2]
-    print SolutionDict().majorityElement(nums)
+    print SolutionNumCountDict().majorityElement(nums)
 
 
 if __name__ == '__main__':
