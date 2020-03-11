@@ -34,7 +34,7 @@ class SolutionListComprehension(object):
         :type digits: str
         :rtype: List[str]
  
-        Time complexity: O(n * m^2)
+        Time complexity: O(n*m^2)
           - n is the length of digits,
           - m is the mean length of digit's letters, basically 3.
         Space complexity: O(m^n).
@@ -86,7 +86,7 @@ class SolutionBFSRecur(object):
         :type digits: str
         :rtype: List[str]
  
-        Time complexity: O(n * m^2)
+        Time complexity: O(n*m^2)
           - n is the length of digits,
           - m is the mean length of digit's letters, basically 3.
         Space complexity: O(m^n).
