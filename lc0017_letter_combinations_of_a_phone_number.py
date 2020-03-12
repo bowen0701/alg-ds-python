@@ -39,7 +39,7 @@ class SolutionListComprehension(object):
           - m is the mean length of digit's letters, basically 3.
         Space complexity: O(m^n).
         """
-        # Store digit->letter-list dict.
+        # Create dict:digit->list(letters).
         dtol_d = {
             '2': ['a', 'b', 'c'],
             '3': ['d', 'e', 'f'],
@@ -56,18 +56,16 @@ class SolutionListComprehension(object):
         if len(digits) == 1:
             return dtol_d[digits]
 
-        # Initialize output letter_com by the 0th digit's letter-list.
-        letter_com = dtol_d[digits[0]]
+        # Initialize output letters by the 0th digit's letters.
+        letters = dtol_d[digits[0]]
 
-        # Run for loop over digits starting from index i = 1.
-        # - Get the ith digit's letter list lecter_i.
-        # - Use list comprehension to combine letter_com and lecter_i 
-        #   to replace letter_com.
+        # Iterate through digits starting from i = 1, 
+        # replace letters by combining letters and letter_i.
         for i in range(1, len(digits)):
-            lecter_i = dtol_d[digits[i]]
-            letter_com = [m + n for m in letter_com for n in lecter_i]
+            letters_i = dtol_d[digits[i]]
+            letters = [m + n for m in letters for n in letter_i]
         
-        return letter_com
+        return letters
 
 
 class SolutionBFSRecur(object):
@@ -91,7 +89,7 @@ class SolutionBFSRecur(object):
           - m is the mean length of digit's letters, basically 3.
         Space complexity: O(m^n).
         """
-        # Store digit->letter-list dict.
+        # Create dict:digit->list(letter).
         dtol_d = {
             '2': ['a', 'b', 'c'],
             '3': ['d', 'e', 'f'],
