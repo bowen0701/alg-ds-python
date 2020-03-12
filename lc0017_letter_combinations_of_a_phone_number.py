@@ -60,24 +60,26 @@ class SolutionListComprehension(object):
         letters = dtol_d[digits[0]]
 
         # Iterate through digits starting from i = 1, 
-        # replace letters by combining letters and letter_i.
+        # replace letters by combining letters and letters_i.
         for i in range(1, len(digits)):
             letters_i = dtol_d[digits[i]]
-            letters = [m + n for m in letters for n in letter_i]
+            letters = [m + n for m in letters for n in letters_i]
         
         return letters
 
 
-class SolutionBFSRecur(object):
-    def _bfsRecur(self, letter_com, digits, dtol_d, cur_str, idx):
+class SolutionDFSRecur(object):
+    def _dfsRecur(self, letters, digits, dtol_d, cur_str, idx):
+        # If idx is out of boundary, complete combination.
         if idx == len(digits):
-            letter_com.append(cur_str)
+            letters.append(cur_str)
             return None
 
-        letters = dtol_d[digits[idx]]
-        for letter in letters:
-            # For letters in this BFS level, append letter and increment index.
-            self._bfsRecur(letter_com, digits, dtol_d, cur_str + letter, idx + 1)
+        # Iterate through letters at digit i.
+        letters_idx = dtol_d[digits[idx]]
+        for letter in letters_idx:
+            # Apply DFS to append letter and increment index.
+            self._dfsRecur(letters, digits, dtol_d, cur_str + letter, idx + 1)
 
     def letterCombinations(self, digits):
         """
@@ -106,11 +108,12 @@ class SolutionBFSRecur(object):
         if len(digits) == 1:
             return dtol_d[digits]
 
-        letter_com = []
+        # Apply recursive DFS.
+        letters = []
         cur_str = ''
         idx = 0
-        self._bfsRecur(letter_com, digits, dtol_d, cur_str, idx)
-        return letter_com
+        self._dfsRecur(letters, digits, dtol_d, cur_str, idx)
+        return letters
 
 
 def main():
@@ -124,7 +127,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By BFS recur', SolutionBFSRecur().letterCombinations(digits)
+    print 'By BFS recur', SolutionDFSRecur().letterCombinations(digits)
     print 'Time:', time.time() - start_time
 
 
