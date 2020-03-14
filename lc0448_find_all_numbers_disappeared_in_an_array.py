@@ -31,16 +31,16 @@ class SolutionSetDiff(object):
             return []
 
         # Create the complete set of 1 to n.
-        size = len(nums)
-        complete_set = set([i for i in range(1, size + 1)])
+        n = len(nums)
+        complete_set = set([i for i in range(1, n + 1)])
 
-        # Use a set to collect distinct elements in nums.
-        distinct_set = set()
-        for n in nums:
-            distinct_set.add(n)
+        # Use a set to collect distinct numbers in nums.
+        nums_set = set()
+        for num in nums:
+            nums_set.add(num)
 
-        # Return difference between the complete list and distinct one.
-        diff_set = complete_set - distinct_set
+        # Compute difference set.
+        diff_set = complete_set - nums_set
         return list(diff_set)
 
 
@@ -56,11 +56,11 @@ class SolutionNegMark(object):
         if not nums:
             return []
 
-        for n in nums:
-            # Use index to mark appeared number:
-            # If number n is appeared, mark nums[n-1] by -num[n-1].
-            idx = abs(n) - 1
+        for num in nums:
+            # At idx=num-1, if num is appeared, mark nums[idx] by -num[idx].
+            idx = abs(num) - 1
             nums[idx] = -abs(nums[idx])
+            print num, idx, nums
 
         return [i + 1 for i in range(len(nums)) if nums[i] > 0]
 
@@ -68,8 +68,9 @@ class SolutionNegMark(object):
 def main():
     # Output: [5,6]
     nums = [4,3,2,7,8,2,3,1]
+    print nums
     print SolutionSetDiff().findDisappearedNumbers(nums)
-    print SolutionSetDiff().findDisappearedNumbers(nums)
+    print SolutionNegMark().findDisappearedNumbers(nums)
 
 
 if __name__ == '__main__':
