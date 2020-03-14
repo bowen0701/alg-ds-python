@@ -57,7 +57,7 @@ class SolutionNegMark(object):
             return []
 
         for num in nums:
-            # At idx=num-1, if num is appeared, mark nums[idx] by -num[idx].
+            # Use idx=num-1 to mark appeared by updating num[idx]=-num[idx].
             idx = abs(num) - 1
             nums[idx] = -abs(nums[idx])
             print num, idx, nums
