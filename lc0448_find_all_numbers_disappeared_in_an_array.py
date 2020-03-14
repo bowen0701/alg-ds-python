@@ -18,7 +18,7 @@ Output:
 [5,6]
 """
 
-class SolutionSetDiff(object):
+class SolutionDistinctNumsSet(object):
     def findDisappearedNumbers(self, nums):
         """
         :type nums: List[int]
@@ -30,21 +30,20 @@ class SolutionSetDiff(object):
         if not nums:
             return []
 
-        # Create the complete set of 1 to n.
-        n = len(nums)
-        complete_set = set([i for i in range(1, n + 1)])
-
-        # Use a set to collect distinct numbers in nums.
-        nums_set = set()
+        # Use set to collect distinct numbers.
+        distinct_nums = set()
         for num in nums:
-            nums_set.add(num)
+            distinct_nums.add(num)
 
-        # Compute difference set.
-        diff_set = complete_set - nums_set
-        return list(diff_set)
+        # Iterate through nums to collect disappeared numbers.
+        disappeared_nums = []
+        for i in range(1, len(nums) + 1):
+            if i not in distinct_nums:
+                disappeared_nums.append(i)
+        return disappeared_nums
 
 
-class SolutionNegMark(object):
+class SolutionMarkIdxNumNeg(object):
     def findDisappearedNumbers(self, nums):
         """
         :type nums: List[int]
@@ -68,8 +67,8 @@ class SolutionNegMark(object):
 def main():
     # Output: [5,6]
     nums = [4,3,2,7,8,2,3,1]
-    print SolutionSetDiff().findDisappearedNumbers(nums)
-    print SolutionNegMark().findDisappearedNumbers(nums)
+    print SolutionDistinctNumsSet().findDisappearedNumbers(nums)
+    print SolutionMarkIdxNumNeg().findDisappearedNumbers(nums)
 
 
 if __name__ == '__main__':
