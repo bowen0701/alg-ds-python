@@ -56,19 +56,18 @@ class SolutionNegMark(object):
         if not nums:
             return []
 
+        # Use idx=num-1 to mark appeared by updating num[idx]=-num[idx].
         for num in nums:
-            # Use idx=num-1 to mark appeared by updating num[idx]=-num[idx].
             idx = abs(num) - 1
             nums[idx] = -abs(nums[idx])
-            print num, idx, nums
 
+        # Return disappeared numbers which are idx's with positive values. 
         return [i + 1 for i in range(len(nums)) if nums[i] > 0]
 
 
 def main():
     # Output: [5,6]
     nums = [4,3,2,7,8,2,3,1]
-    print nums
     print SolutionSetDiff().findDisappearedNumbers(nums)
     print SolutionNegMark().findDisappearedNumbers(nums)
 
