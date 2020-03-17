@@ -25,10 +25,7 @@ class SolutionTwoPointers(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Two pointer method:
-        # - Start from the widest container.
-        # - Since all of the remaining containers are less wide,
-        #   to get bigger area, they must be higher.
+        # Two pointers from the widest container.
         max_area = 0
         i, j = 0, len(height) - 1
 
@@ -38,6 +35,7 @@ class SolutionTwoPointers(object):
 
             max_area = max(max_area, (j - i) * h_min)
 
+            # Move shorter line toward middle to see bigger area.
             if height[i] < height[j]:
                 i += 1
             else:
