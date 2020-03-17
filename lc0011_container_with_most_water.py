@@ -31,11 +31,12 @@ class SolutionTwoPointers(object):
 
         while i < j:
             h_left, h_right = height[i], height[j]
-            h_min = min(h_left, h_right)
 
+            # Compute the area based on shorter height.
+            h_min = min(h_left, h_right)
             max_area = max(max_area, (j - i) * h_min)
 
-            # Move shorter line toward middle to see bigger area.
+            # Move shorter height toward middle to find bigger area.
             if height[i] < height[j]:
                 i += 1
             else:
