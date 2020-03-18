@@ -38,8 +38,21 @@ digital_root(493193)
 """
 
 
+def _sum_digits(n):
+    # Compute sum of n's digits.
+    result = 0
+    while n > 0:
+        div, digit = n // 10, n % 10
+        result += digit
+        n = div
+    return result
+
+
 def digital_root(n):
-    pass
+    # Iterate when number of digits is bigger than 1.
+    while len(str(n)) > 1:
+        n = _sum_digits(n)
+    return n
 
 
 def main():
