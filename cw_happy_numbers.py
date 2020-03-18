@@ -31,9 +31,38 @@ Your task is to write a program which will print a list of all happy numbers bet
 Disclaimer: This Kata is an adaptation of a HW assignment I had for McGill University's COMP 208 (Computers in Engineering) class.
 """
 
+def _sum_squares(number):
+    # Compute sum of squares by sum of squared digit by digit.
+    result = 0
+    while number > 0:
+        carry, digit = number // 10, number % 10
+        result += digit * digit
+        number = carry
+    return result
+
+
+def _is_happy_number(number):
+    # Use set seens to memorize seen sum of squares.
+    seens = set()
+    while number > 1:
+        sum_squares = _sum_squares(number)
+        
+        # If seen sum of squares before, not happy number.
+        if sum_squares in seens:
+            return False
+        
+        # If not, add sum of squares to seen, and iterate with updating number.
+        seens.add(sum_squares)
+        number = sum_squares
+    return True
+
 
 def happy_numbers(n):
-    pass
+    result = []
+    for number in range(1, n + 1):
+        if _is_happy_number(number):
+            result.append(number)
+    return result
 
 
 def main():
