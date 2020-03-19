@@ -42,10 +42,11 @@ class SolutionBFSTopologicalSort(object):
           - |E|: number of edges.
         Space complexity: O(|V|).
         """
+        # Apply BFS Topological Sort to take courses.
         from collections import defaultdict
         from collections import deque
 
-        # Collect dict:prereq->list(courses) & courses's indegrees.
+        # Collect dict:prereq->list(courses) & courses's indegrees n_prereqs.
         prereq_courses_d = defaultdict(list)
         n_prereqs = [0] * numCourses
 
@@ -53,23 +54,22 @@ class SolutionBFSTopologicalSort(object):
             prereq_courses_d[prereq].append(course)
             n_prereqs[course] += 1
 
-        # Create a course queue for courses w/o prereq.
+        # Create a queue for courses w/o prereq so that they can be taken.
         queue = deque()
-
         for course in range(numCourses):
             if n_prereqs[course] == 0:
                 queue.appendleft(course)
 
         while queue:
-            # Take course with no prerequisites.
+            # Take course w/o prerequisites.
             course = queue.pop()
             numCourses -= 1
 
             for nxt in prereq_courses_d[course]:
-                # Decrement number of prerequisites for next course.
+                # Decrement number of prerequisites of next course.
                 n_prereqs[nxt] -= 1
 
-                # If no more prerequisites, take next.
+                # If no more prerequisites, add to queue as course candidate.
                 if n_prereqs[nxt] == 0:
                     queue.appendleft(nxt)
 
