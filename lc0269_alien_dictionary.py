@@ -52,12 +52,12 @@ class SolutionTopologicalSort(object):
         graph = defaultdict(set)
         indegrees = defaultdict(int)
 
-        # Create graph keys by all chars in words.
+        # Create graph:each char -> set.
         for w in words:
             for c in w:
                 graph[c] = set()
 
-        # Build graph and in-degree in order of words with different chars.
+        # Build graph and indegrees in order of words with different chars.
         for i in range(1, len(words)):
             w_from = words[i - 1]
             w_to = words[i]
@@ -79,30 +79,29 @@ class SolutionTopologicalSort(object):
         return graph, indegrees
 
     def _topological_sort(self, graph, indegrees):
-        # Build order string based on in-degrees by Kahn's algorithm.
+        # Build ordered string based on indegrees by Kahn's algorithm.
         from collections import deque
 
-        # Put char into zero in-degree queue if its in-degree is 0.
-        indegree0_queue = deque([])
-
+        # Put char into zero indegree queue if its indegree is 0.
+        queue = deque([])
         for c in graph:
             if indegrees[c] == 0:
-                indegree0_queue.appendleft(c)
+                queue.appendleft(c)
 
         order_chars = []
 
-        while indegree0_queue:
+        while queue:
             # Remove zero in-degree char c and add it to order chars.
-            c = indegree0_queue.pop()
+            c = queue.pop()
             order_chars.append(c)
 
-            # Visit zero in-degree char c's neighbors and decrement in-degrees.
+            # Visit zero indegree char's neighbors and decrement indegrees.
             for c_next in graph[c]:
                 indegrees[c_next] -= 1
 
                 # If c's neighbor has zero in-degrees, append to queue.
                 if indegrees[c_next] == 0:
-                    indegree0_queue.appendleft(c_next)
+                    queue.appendleft(c_next)
 
         return order_chars
 
@@ -122,10 +121,10 @@ class SolutionTopologicalSort(object):
         if not words or not words[0]:
             return ''
 
-        # Build graph: char_from->set(char_to) and indegrees: to_char->count.
+        # Build dict graph:char_from->set(char_to) and dict indegrees:to_char->count.
         graph, indegrees = self._build_graph(words)
 
-        # Run Topological Sort to create string order.
+        # Apply Topological Sort to create string order.
         order_chars = self._topological_sort(graph, indegrees)
 
         # Check if length of string order is the same as that of graph keys.
