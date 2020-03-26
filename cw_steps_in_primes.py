@@ -57,7 +57,7 @@ def step(g, m, n):
     if n - m < g:
         return None
     
-    # Iterate to check number pairs between gap are primes.
+    # Iterate from start to check if number pairs between gap are primes.
     for i in range(m, n + 1):
         if _is_prime(i) and _is_prime(i + g):
             return [i, i + g]
