@@ -43,18 +43,36 @@ A "gap" is more restrictive: there must be no primes in between (101-107 is a
 "step" but not a "gap". Next kata will be about "gaps":-).
 """
 
+def _is_prime(n):
+    """Check if is a prime number."""
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True 
+
+
 def step(g, m, n):
-	pass
+    """Steps in Primes."""
+    # Edge case: when gap is out of boundary.
+    if n - m < g:
+        return None
+    
+    # Iterate to check number pairs between gap are primes.
+    for i in range(m, n + 1):
+        if _is_prime(i) and _is_prime(i + g):
+            return [i, i + g]
+    
+    return None
 
 
 def main():
-	assert step(2,100,110) == [101, 103]
-	assert step(4,100,110) == [103, 107]
-	assert step(2,5,5) == None
-	assert step(6,100,110) == [101, 107]
-	assert step(8,300,400) == [359, 367]
-	assert step(10,300,400) == [307, 317]
+    assert step(2,100,110) == [101, 103]
+    assert step(4,100,110) == [103, 107]
+    assert step(2,5,5) == None
+    assert step(6,100,110) == [101, 107]
+    assert step(8,300,400) == [359, 367]
+    assert step(10,300,400) == [307, 317]
 
 
 if __name__ == '__main__':
-	main()
+    main()
