@@ -13,16 +13,40 @@ To invert an image means that each 0 is replaced by 1, and each 1 is replaced by
 For example, inverting [0, 1, 1] results in [1, 0, 0].
 
 Example 1:
-Input: [[1,1,0],[1,0,1],[0,0,0]]
-Output: [[1,0,0],[0,1,0],[1,1,1]]
-Explanation: First reverse each row: [[0,1,1],[1,0,1],[0,0,0]].
-Then, invert the image: [[1,0,0],[0,1,0],[1,1,1]]
+Input: [[1,1,0],
+        [1,0,1],
+        [0,0,0]]
+Output: [[1,0,0],
+         [0,1,0],
+         [1,1,1]]
+Explanation: First reverse each row: 
+[[0,1,1],
+ [1,0,1],
+ [0,0,0]].
+Then, invert the image:
+[[1,0,0],
+ [0,1,0],
+ [1,1,1]]
 
 Example 2:
-Input: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
-Output: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
-Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]].
-Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+Input: [[1,1,0,0],
+        [1,0,0,1],
+        [0,1,1,1],
+        [1,0,1,0]]
+Output: [[1,1,0,0],
+         [0,1,1,0],
+         [0,0,0,1],
+         [1,0,1,0]]
+Explanation: First reverse each row:
+[[0,0,1,1],
+ [1,0,0,1],
+ [1,1,1,0],
+ [0,1,0,1]].
+Then invert the image:
+[[1,1,0,0],
+ [0,1,1,0],
+ [0,0,0,1],
+ [1,0,1,0]]
 
 Notes:
 - 1 <= A.length = A[0].length <= 20
