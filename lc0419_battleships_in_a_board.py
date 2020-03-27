@@ -69,7 +69,7 @@ class SolutionDFSRecur(object):
         return count
 
 
-class SolutionCheckFirstIter(object):
+class SolutionCheckFirst(object):
     def countBattleships(self, board):
         """
         :type board: List[List[str]]
@@ -83,17 +83,18 @@ class SolutionCheckFirstIter(object):
 
         count = 0
 
+        # Start from top-left to check the 1st only.
         for r in range(len(board)):
             for c in range(len(board[0])):
                 # Skip if empty.
                 if board[r][c] == '.':
                     continue
 
-                # Skip if it's up is 'X' already.
+                # Skip if its up is 'X'.
                 if r > 0 and board[r - 1][c] == 'X':
                     continue
 
-                # Skip if it's left is 'X' already.
+                # Skip if its left is 'X'.
                 if c > 0 and board[r][c - 1] == 'X':
                     continue
 
@@ -113,12 +114,12 @@ def main():
     print SolutionDFSRecur().countBattleships(board)
     print 'Time:', time.time() - start_time
 
-    print 'By DFS recur:'
+    print 'By checking the 1st:'
     start_time = time.time()
     board = [['X','.','.','X'],
              ['.','.','.','X'],
              ['.','.','.','X']]
-    print SolutionCheckFirstIter().countBattleships(board)
+    print SolutionCheckFirst().countBattleships(board)
     print 'Time:', time.time() - start_time
 
 
