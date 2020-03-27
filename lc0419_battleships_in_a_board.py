@@ -31,6 +31,7 @@ without modifying the value of the board?
 
 class SolutionDFSRecur(object):
     def _dfsRecur(self, board, r, c):
+        # Check exit condition: out of boundary or empty.
         if (r < 0 or r >= len(board) or c < 0 or c >= len(board[0]) or
             board[r][c] == '.'):
             return None
@@ -38,7 +39,7 @@ class SolutionDFSRecur(object):
         # Update board as visited.
         board[r][c] = '.'
 
-        # Recursively visit 4 dirs: up, down, left, and right.
+        # Recursively DFS 4 dirs: up, down, left, and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             self._dfsRecur(board, r_next, c_next)
@@ -58,6 +59,7 @@ class SolutionDFSRecur(object):
 
         count = 0
 
+        # For each slot, start DFS if satisfies entry condition.
         for r in range(len(board)):
             for c in range(len(board[0])):
                 if board[r][c] == 'X':
