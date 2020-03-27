@@ -59,6 +59,7 @@ class Solution(object):
         :type A: List[List[int]]
         :rtype: List[List[int]]
         """
+        # Iterate through each row r to flip and invert.
         for r in range(len(A)):
             # Flip the image horizontally.
             j, k = 0, len(A[r]) - 1
