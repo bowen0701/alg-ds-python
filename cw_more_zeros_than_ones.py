@@ -23,17 +23,54 @@ not be counted.
 """
 
 
+def _dedup(s):
+    """Step 2: Deduplicate string in the same order."""
+    # Use set seens to memorize seen chars.
+    s_dedup_ls = []
+    seens = set()
+    for c in s:
+        if c not in seens:
+            seens.add(c)
+            s_dedup_ls.append(c)
+    return s_dedup_ls
+
+
+def _compute_n_zeros_ones(c):
+    """Step 3: Compute number of zeros & ones."""
+    # Compute ascii's binary string, e.g. 0b100.
+    bin_c = bin(ord(c))
+    bin_str = bin_c[2:]
+    return bin_str.count('0'), bin_str.count('1')
+
+
 def more_zeros(s):
-    pass
+    """Step 1: main function."""
+    # Deduplicate chars in the same order.
+    s_dedup_ls = _dedup(s)
+
+    # Iterate through chars, compute its ascii's #0s/#1s.
+    n_zeros_ls = []
+    n_ones_ls = []   
+    for c in s_dedup_ls:
+        n_zeros, n_ones = _compute_n_zeros_ones(c)
+        n_zeros_ls.append(n_zeros)
+        n_ones_ls.append(n_ones)
+
+    # Filter only chars with more zeros.
+    result = []
+    for i in range(len(s_dedup_ls)):
+        if n_zeros_ls[i] > n_ones_ls[i]:
+            result.append(s_dedup_ls[i])
+    return result
 
 
 def main():
-    pass
-
-
-if __name__ == '__main__':
     assert more_zeros('abcde') == ['a', 'b', 'd']
     assert more_zeros('thequickbrownfoxjumpsoverthelazydog') == ['h', 'b', 'p', 'a', 'd']
     assert more_zeros('THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG') == ['T', 'H', 'E', 'Q', 'I', 'C', 'B', 'R', 'F', 'X', 'J', 'P', 'L', 'A', 'D']
     assert more_zeros('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_') == ['a', 'b', 'd', 'h', 'p', 'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'L', 'P', 'Q', 'R', 'T', 'X', '0']
-    assert more_zeros('DIGEST') == ['D', 'I', 'E', 'T'])
+    assert more_zeros('DIGEST') == ['D', 'I', 'E', 'T']
+
+
+if __name__ == '__main__':
+    main()
