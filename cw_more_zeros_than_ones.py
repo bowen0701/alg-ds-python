@@ -49,18 +49,12 @@ def more_zeros(s):
     s_dedup_ls = _dedup(s)
 
     # Iterate through chars, compute its ascii's #0s/#1s.
-    n_zeros_ls = []
-    n_ones_ls = []   
+    result = []
     for c in s_dedup_ls:
         n_zeros, n_ones = _compute_n_zeros_ones(c)
-        n_zeros_ls.append(n_zeros)
-        n_ones_ls.append(n_ones)
+        if n_zeros > n_ones:
+            result.append(c)
 
-    # Filter only chars with more zeros.
-    result = []
-    for i in range(len(s_dedup_ls)):
-        if n_zeros_ls[i] > n_ones_ls[i]:
-            result.append(s_dedup_ls[i])
     return result
 
 
