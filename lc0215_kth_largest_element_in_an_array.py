@@ -31,7 +31,7 @@ class SolutionSelectionSort(object):
         """
         n = len(nums)
 
-        # Selection sort starting from behind: swith max element and last one.
+        # Selection sort from behind: swith max element & last one, and so on.
         for i in range(n - 1, n - k - 1, -1):
             max_i = 0
             for j in range(1, i + 1):
@@ -99,8 +99,8 @@ class SolutionMinHeap(object):
 
         minheap = []
 
-        for i in range(len(nums)):
-            heapq.heappush(minheap, nums[i])
+        for num in nums:
+            heapq.heappush(minheap, num)
 
             # Maintain heap size = k.
             if len(minheap) > k:
@@ -109,7 +109,7 @@ class SolutionMinHeap(object):
         return minheap[0]
 
 
-class SolutionSelect(object):
+class SolutionSelection(object):
     def findKthLargest(self, nums, k):
         """
         :type nums: List[int]
@@ -122,24 +122,23 @@ class SolutionSelect(object):
         # Select w/o consider the relative order of other elements.
         pivot = nums[len(nums) // 2]
 
-        large_pos = [pos for pos, x in enumerate(nums) if x > pivot]
-        mid_pos = [pos for pos, x in enumerate(nums) if x == pivot]
-        small_pos = [pos for pos, x in enumerate(nums) if x < pivot]
+        small_nums = [x for x in nums if x < pivot]
+        mid_nums = [x for x in nums if x == pivot]
+        large_nums = [x for x in nums if x > pivot]
 
-        n_large = len(large_pos)
-        n_mid = len(mid_pos)
+        n_large = len(large_nums)
+        n_mid = len(mid_nums)
 
         if k <= n_large:
-            large_nums = [nums[pos] for pos in large_pos]
             return self.findKthLargest(large_nums, k)
         elif n_large < k <= n_mid + n_large:
             return pivot
         elif k > n_mid + n_large:
-            small_nums = [nums[pos] for pos in small_pos]
             return self.findKthLargest(small_nums, k - n_large - n_mid)
 
 
 def main():
+    import random
     import time
 
     # Input: [3,2,1,5,6,4] and k = 2
@@ -164,7 +163,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'Selection: ', SolutionSelect().findKthLargest(nums, k)
+    print 'Selection: ', SolutionSelection().findKthLargest(nums, k)
     print 'Time:', time.time() - start_time
 
     # Input: [3,2,3,1,2,4,5,5,6] and k = 4
@@ -189,7 +188,33 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'Selection: ', SolutionSelect().findKthLargest(nums, k)
+    print 'Selection: ', SolutionSelection().findKthLargest(nums, k)
+    print 'Time:', time.time() - start_time
+
+    # Input: shuffle([0~999]) and k = 5
+    # Output: 995
+    nums = list(range(1000))
+    random.shuffle(nums)
+    k = 5
+
+    start_time = time.time()
+    print 'Selection sort:', SolutionSelectionSort().findKthLargest(nums, k)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'Quick sort:', SolutionQuickSort().findKthLargest(nums, k)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'Sort:', SolutionSort().findKthLargest(nums, k)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'MinHeap: ', SolutionMinHeap().findKthLargest(nums, k)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'Selection: ', SolutionSelection().findKthLargest(nums, k)
     print 'Time:', time.time() - start_time
 
 
