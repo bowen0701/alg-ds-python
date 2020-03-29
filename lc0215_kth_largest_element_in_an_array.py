@@ -126,15 +126,15 @@ class SolutionSelection(object):
         mid_nums = [x for x in nums if x == pivot]
         large_nums = [x for x in nums if x > pivot]
 
-        n_large = len(large_nums)
-        n_mid = len(mid_nums)
+        n_larges = len(large_nums)
+        n_mids = len(mid_nums)
 
-        if k <= n_large:
+        if k <= n_larges:
             return self.findKthLargest(large_nums, k)
-        elif n_large < k <= n_mid + n_large:
+        elif n_larges < k <= n_mids + n_larges:
             return pivot
-        elif k > n_mid + n_large:
-            return self.findKthLargest(small_nums, k - n_large - n_mid)
+        elif k > n_mids + n_larges:
+            return self.findKthLargest(small_nums, k - n_larges - n_mids)
 
 
 def main():
