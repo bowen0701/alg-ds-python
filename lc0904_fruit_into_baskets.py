@@ -18,8 +18,6 @@ but you want each basket to only carry one type of fruit each.
 
 What is the total amount of fruit you can collect with this procedure?
 
-Note: This problem is longest subsequence with only two characters.
-
 Example 1:
 Input: [1,2,1]
 Output: 3
@@ -54,26 +52,28 @@ class SolutionDictTwoPointers(object):
         :type tree: List[int]
         :rtype: int
 
+        Note: This problem is longest subsequence with only two characters.
+
         Time complexity: O(n).
         Space complexity: O(1).
         """
         from collections import defaultdict
 
         # Use dict to mimic fruit baskets with counts.
-        fruit_counts = defaultdict(int)
+        fruit_count_d = defaultdict(int)
         max_len = 0
 
         # Apply two pointers method with left i & right j.
         i = 0
         for j, f in enumerate(tree):
-            fruit_counts[f] += 1
+            fruit_count_d[f] += 1
 
-            # If more than 2 types, remove one fruit from the head. 
-            while len(fruit_counts) > 2:
-                fruit_counts[tree[i]] -= 1
+            # If more than 2 types, remove one fruit from the left. 
+            while len(fruit_count_d) > 2:
+                fruit_count_d[tree[i]] -= 1
 
-                if fruit_counts[tree[i]] == 0:
-                    del fruit_counts[tree[i]]
+                if fruit_count_d[tree[i]] == 0:
+                    del fruit_count_d[tree[i]]
 
                 i += 1
 
