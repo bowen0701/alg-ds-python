@@ -38,17 +38,55 @@ Constraints:
 """
 
 
-class Solution(object):
+class SolutionDict(object):
     def findLucky(self, arr):
         """
         :type arr: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        from collections import defaultdict
+
+        # Create a dict:num->freq.
+        num_freq_d = defaultdict(int)
+        for num in arr:
+            num_freq_d[num] += 1
+
+        # Iterate through dict keys to collect lucky nums.
+        lucky_nums = []
+        for num, freq in num_freq_d.items():
+            if num == freq:
+                lucky_nums.append(num)
+
+        # Return max lucky number if existed.
+        if lucky_nums:
+            return max(lucky_nums)
+        else:
+            return -1
 
 
 def main():
-    pass
+    # Output: 2
+    arr = [2,2,3,4]
+    print SolutionDict().findLucky(arr)
+
+    # Output: 3
+    arr = [1,2,2,3,3,3]
+    print SolutionDict().findLucky(arr)
+
+    # Output: -1
+    arr = [2,2,2,3,3]
+    print SolutionDict().findLucky(arr)
+    
+    # Output: -1
+    arr = [5]
+    print SolutionDict().findLucky(arr)
+    
+    # Output: 7
+    arr = [7,7,7,7,7,7,7]
+    print SolutionDict().findLucky(arr)
 
 
 if __name__ == '__main__':
