@@ -39,7 +39,7 @@ or None or nothing (except in Haskell, Elixir, C++, Rust, R, Shell, PureScript).
 """
 
 
-def comp(a1, a2):
+def comp_dict(a1, a2):
     from collections import defaultdict
 
     # Edge cases.
@@ -66,15 +66,15 @@ def comp(a1, a2):
 def main():
     a1 = [121, 144, 19, 161, 19, 144, 19, 11]  
     a2 = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
-    assert comp(a1, a2) == True
+    assert comp_dict(a1, a2) == True
 
     a1 = [121, 144, 19, 161, 19, 144, 19, 11]  
     a2 = [132, 14641, 20736, 361, 25921, 361, 20736, 361]
-    assert comp(a1, a2) == False
+    assert comp_dict(a1, a2) == False
 
     a1 = [121, 144, 19, 161, 19, 144, 19, 11]  
     a2 = [121, 14641, 20736, 36100, 25921, 361, 20736, 361]
-    assert comp(a1, a2) == False
+    assert comp_dict(a1, a2) == False
 
 
 if __name__ == '__main__':
