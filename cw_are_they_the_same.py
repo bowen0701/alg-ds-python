@@ -63,18 +63,30 @@ def comp_dict(a1, a2):
     return True
 
 
+def comp_sort(a1, a2):
+    # Edge cases.
+    if a1 is None or a2 is None:
+        return False
+
+    # Compare if sorted squared a1 matches sorted a2.
+    return sorted([x ** 2 for x in a1]) == sorted(a2)
+
+
 def main():
     a1 = [121, 144, 19, 161, 19, 144, 19, 11]  
     a2 = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
     assert comp_dict(a1, a2) == True
+    assert comp_sort(a1, a2) == True
 
     a1 = [121, 144, 19, 161, 19, 144, 19, 11]  
     a2 = [132, 14641, 20736, 361, 25921, 361, 20736, 361]
     assert comp_dict(a1, a2) == False
+    assert comp_sort(a1, a2) == False
 
     a1 = [121, 144, 19, 161, 19, 144, 19, 11]  
     a2 = [121, 14641, 20736, 36100, 25921, 361, 20736, 361]
     assert comp_dict(a1, a2) == False
+    assert comp_sort(a1, a2) == False
 
 
 if __name__ == '__main__':
