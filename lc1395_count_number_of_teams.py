@@ -36,7 +36,7 @@ Constraints:
 - 1 <= rating[i] <= 10^5
 """
 
-class Solution(object):
+class SolutionBruteForce(object):
     def numTeams(self, rating):
         """
         :type rating: List[int]
@@ -64,15 +64,15 @@ class Solution(object):
 def main():
     # Output: 3
     rating = [2,5,3,4,1]
-    print Solution().numTeams(rating)
+    print SolutionBruteForce().numTeams(rating)
 
     # Output: 0
     rating = [2,1,3]
-    print Solution().numTeams(rating)
+    print SolutionBruteForce().numTeams(rating)
 
     # Output: 4
     rating = [1,2,3,4]
-    print Solution().numTeams(rating)
+    print SolutionBruteForce().numTeams(rating)
 
 
 if __name__ == '__main__':
