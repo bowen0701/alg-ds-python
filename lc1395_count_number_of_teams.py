@@ -61,6 +61,30 @@ class SolutionBruteForce(object):
         return result
 
 
+class SolutionGreaterLess(object):
+    def numTeams(self, rating):
+        """
+        :type rating: List[int]
+        :rtype: int
+
+        Time complexity: O(n^2).
+        Space complexity: O(n).
+        """
+        n = len(rating)
+
+        # Edge case.
+        if n <= 2:
+            return 0
+
+        # Use greaters & lesses to get counters > or < than rating[i].
+        greaters = [0] * n
+        lesses = [0] * n
+
+        # Iterate through rating to find increasing rating.
+
+        # Iterate through rating to find decreasing rating.
+
+
 def main():
     # Output: 3
     rating = [2,5,3,4,1]
