@@ -41,12 +41,38 @@ class Solution(object):
         """
         :type rating: List[int]
         :rtype: int
+
+        Time complexity: O(n^3).
+        Space complexity: O(1).
         """
-        pass
+        n = len(rating)
+        
+        # Edge case.
+        if n <= 2:
+            return 0
+
+        result = 0
+        for i in range(n - 2):
+            for j in range(i + 1, n - 1):
+                for k in range(j + 1, n):
+                    if (rating[i] - rating[j]) * (rating[j] - rating[k]) > 0:
+                        result += 1
+
+        return result
 
 
 def main():
-    pass
+    # Output: 3
+    rating = [2,5,3,4,1]
+    print Solution().numTeams(rating)
+
+    # Output: 0
+    rating = [2,1,3]
+    print Solution().numTeams(rating)
+
+    # Output: 4
+    rating = [1,2,3,4]
+    print Solution().numTeams(rating)
 
 
 if __name__ == '__main__':
