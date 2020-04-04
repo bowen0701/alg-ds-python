@@ -61,14 +61,14 @@ class SolutionBruteForce(object):
         return result
 
 
-class SolutionGreaterLess(object):
+class SolutionLeftRightGreaterLess(object):
     def numTeams(self, rating):
         """
         :type rating: List[int]
         :rtype: int
 
         Time complexity: O(n^2).
-        Space complexity: O(n).
+        Space complexity: O(1).
         """
         n = len(rating)
 
@@ -76,27 +76,65 @@ class SolutionGreaterLess(object):
         if n <= 2:
             return 0
 
-        # Use greaters & lesses to get counters > or < than rating[i].
-        greaters = [0] * n
-        lesses = [0] * n
+        # Iterate through rating to find increasing/decreasing rating.
+        result = 0
+        for i in range(n):
+            # Get left/right's greater/less for each element i.
+            left_less = right_greater = 0
+            left_greater = right_less = 0
 
-        # Iterate through rating to find increasing rating.
+            for j in range(n):
+                if i < j:
+                    if rating[i] < rating[j]:
+                        right_greater += 1
+                    else:
+                        right_less += 1
+                elif j < i:
+                    if rating[j] < rating[i]:
+                        left_less += 1
+                    else:
+                        left_greater += 1
 
-        # Iterate through rating to find decreasing rating.
+            result += left_less * right_greater + left_greater * right_less
+
+        return result
 
 
 def main():
+    import time
+
     # Output: 3
     rating = [2,5,3,4,1]
+
+    start_time = time.time()
     print SolutionBruteForce().numTeams(rating)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionLeftRightGreaterLess().numTeams(rating)
+    print 'Time: {}'.format(time.time() - start_time)
 
     # Output: 0
     rating = [2,1,3]
+
+    start_time = time.time()
     print SolutionBruteForce().numTeams(rating)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionLeftRightGreaterLess().numTeams(rating)
+    print 'Time: {}'.format(time.time() - start_time)
 
     # Output: 4
     rating = [1,2,3,4]
+
+    start_time = time.time()
     print SolutionBruteForce().numTeams(rating)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionLeftRightGreaterLess().numTeams(rating)
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
