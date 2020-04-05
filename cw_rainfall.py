@@ -32,11 +32,11 @@ Notes:
 """
 
 
-def _get_towns_rainfalls(strng):
-    # Create a dict: town->rainfalls.
-    town_rainfalls_d = {}
+def _get_towns_stats(strng):
+    # Create a dict: town->rainfall stats.
+    town_stats_d = {}
     
-    # Get towns's rainfalls.
+    # Compute towns's rainfall statistics.
     towns_strng = strng.split('\n')
     for ts in towns_strng:
         ts_split = ts.split(':')
@@ -46,29 +46,65 @@ def _get_towns_rainfalls(strng):
         n = len(rainfalls)
         _mean = sum(rainfalls) / n
         _var = sum([(r - _mean) ** 2 for r in rainfalls]) / n
-        town_rainfalls_d[town] = {'mean': _mean, 'var': _var}
+        town_stats_d[town] = {'mean': _mean, 'var': _var}
 
-    return town_rainfalls_d
+    return town_stats_d
 
 
 def mean_split(town, strng):
-    # Get a dict: town->rainfalls.
-    town_rainfalls_d = _get_towns_rainfalls(strng)
+    # Create a dict: town->rainfall stats.
+    town_stats_d = _get_towns_stats(strng)
 
-    # Compute mean of rainfalls.
-    if town in town_rainfalls_d:
-        return town_rainfalls_d[town]['mean']
+    # Get mean of rainfalls.
+    if town in town_stats_d:
+        return town_stats_d[town]['mean']
     else:
         return -1
 
 
 def variance_split(town, strng):
-    # Create a dict: town->rainfalls.
-    town_rainfalls_d = _get_towns_rainfalls(strng)
+    # Create a dict: town->rainfall stats.
+    town_stats_d = _get_towns_stats(strng)
     
-    # Compute variance of rainfalls.
-    if town in town_rainfalls_d:
-        return town_rainfalls_d[town]['var']
+    # Get variance of rainfalls.
+    if town in town_stats_d:
+        return town_stats_d[town]['var']
+    else:
+        return -1
+
+
+def _get_town_rainfalls(town, strng):
+    import re
+    town_strng = re.search(r'{}\:.+'.format(town), strng)
+    if town_strng:
+        rainfalls = [float(mr.split(' ')[1]) 
+                     for mr in town_strng.group().split(':')[1].split(',')]
+        n = len(rainfalls)
+        _mean = sum(rainfalls) / n
+        _var = sum([(r - _mean) ** 2 for r in rainfalls]) / n
+        return {'mean': _mean, 'var': _var}
+    else:
+        return {}
+
+
+def mean_re(town, strng):
+    # Create that town's dict: mean & var.
+    stats_d = _get_town_rainfalls(town, strng)
+
+    # Get town's mean.
+    if stats_d:
+        return stats_d['mean']
+    else:
+        return -1
+
+
+def variance_re(town, strng):
+    # Create that town's dict: mean & var.
+    stats_d = _get_town_rainfalls(town, strng)
+
+    # Get town's mean.
+    if stats_d:
+        return stats_d['var']
     else:
         return -1
 
@@ -96,9 +132,13 @@ Lima:Jan 1.2,Feb 0.9,Mar 0.7,Apr 0.4,May 0.6,Jun 1.8,Jul 4.4,Aug 3.1,Sep 3.3,Oct
 
     assertFuzzyEquals(mean_split("London", data), 51.199999999999996) 
     assertFuzzyEquals(mean_split("Beijing", data), 52.416666666666664)
-
     assertFuzzyEquals(variance_split("London", data), 57.42833333333374)
     assertFuzzyEquals(variance_split("Beijing", data), 4808.37138888889)
+
+    assertFuzzyEquals(mean_re("London", data), 51.199999999999996) 
+    assertFuzzyEquals(mean_re("Beijing", data), 52.416666666666664)
+    assertFuzzyEquals(variance_re("London", data), 57.42833333333374)
+    assertFuzzyEquals(variance_re("Beijing", data), 4808.37138888889)
 
 
 if __name__ == '__main__':
