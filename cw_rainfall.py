@@ -102,7 +102,7 @@ def variance_re(town, strng):
     # Create that town's dict: mean & var.
     stats_d = _get_town_rainfalls(town, strng)
 
-    # Get town's mean.
+    # Get town's variance.
     if stats_d:
         return stats_d['var']
     else:
