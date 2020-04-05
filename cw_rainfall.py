@@ -31,12 +31,45 @@ Notes:
   see "Sample Tests:") are adapted from: http://www.worldclimate.com
 """
 
+
+def _get_town_rainfall(strng):
+    # Create a dict: town->rainfalls.
+    town_rainfalls_d = {}
+    
+    # Get towns's rainfalls.
+    towns_strng = strng.split('\n')
+    for ts in towns_strng:
+        ts_split = ts.split(':')
+        town, month_rainfalls  = ts_split[0], ts_split[1].split(',')
+        rainfalls = [float(mr.split(' ')[1]) for mr in month_rainfalls]
+        town_rainfalls_d[town] = rainfalls
+    return town_rainfalls_d
+
+
 def mean(town, strng):
-    pass
+    # Get a dict: town->rainfalls.
+    town_rainfalls_d = _get_town_rainfall(strng)
+
+    # Compute mean of rainfalls.
+    if town in town_rainfalls_d:
+        town_rainfalls = town_rainfalls_d[town]
+        return sum(town_rainfalls) / len(town_rainfalls)
+    else:
+        return -1
 
 
 def variance(town, strng):
-    pass
+    # Create a dict: town->rainfalls.
+    town_rainfalls_d = _get_town_rainfall(strng)
+    
+    # Compute variance of rainfalls.
+    if town in town_rainfalls_d:
+        town_rainfalls = town_rainfalls_d[town]
+        n = len(town_rainfalls)
+        _mean = sum(town_rainfalls) / n
+        return sum([(r - _mean) ** 2 for r in town_rainfalls]) / n
+    else:
+        return -1
 
 
 def main():
