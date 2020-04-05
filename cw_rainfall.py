@@ -32,7 +32,7 @@ Notes:
 """
 
 
-def _get_town_rainfall(strng):
+def _get_towns_rainfalls(strng):
     # Create a dict: town->rainfalls.
     town_rainfalls_d = {}
     
@@ -42,32 +42,33 @@ def _get_town_rainfall(strng):
         ts_split = ts.split(':')
         town, month_rainfalls  = ts_split[0], ts_split[1].split(',')
         rainfalls = [float(mr.split(' ')[1]) for mr in month_rainfalls]
-        town_rainfalls_d[town] = rainfalls
+
+        n = len(rainfalls)
+        _mean = sum(rainfalls) / n
+        _var = sum([(r - _mean) ** 2 for r in rainfalls]) / n
+        town_rainfalls_d[town] = {'mean': _mean, 'var': _var}
+
     return town_rainfalls_d
 
 
-def mean(town, strng):
+def mean_split(town, strng):
     # Get a dict: town->rainfalls.
-    town_rainfalls_d = _get_town_rainfall(strng)
+    town_rainfalls_d = _get_towns_rainfalls(strng)
 
     # Compute mean of rainfalls.
     if town in town_rainfalls_d:
-        town_rainfalls = town_rainfalls_d[town]
-        return sum(town_rainfalls) / len(town_rainfalls)
+        return town_rainfalls_d[town]['mean']
     else:
         return -1
 
 
-def variance(town, strng):
+def variance_split(town, strng):
     # Create a dict: town->rainfalls.
-    town_rainfalls_d = _get_town_rainfall(strng)
+    town_rainfalls_d = _get_towns_rainfalls(strng)
     
     # Compute variance of rainfalls.
     if town in town_rainfalls_d:
-        town_rainfalls = town_rainfalls_d[town]
-        n = len(town_rainfalls)
-        _mean = sum(town_rainfalls) / n
-        return sum([(r - _mean) ** 2 for r in town_rainfalls]) / n
+        return town_rainfalls_d[town]['var']
     else:
         return -1
 
@@ -91,14 +92,13 @@ Lima:Jan 1.2,Feb 0.9,Mar 0.7,Apr 0.4,May 0.6,Jun 1.8,Jul 4.4,Aug 3.1,Sep 3.3,Oct
         if (inrange == False):
             msg = "abs(actual - expected) must be <= 1e-2. With 10 decimals: Expected was {:.10f} but got {:.10f}"
             msg = msg.format(expected, actual)
-            print(msg)
-        return Test.expect(inrange, msg)
+            raise Exception(msg)
 
-    assertFuzzyEquals(mean("London", data), 51.199999999999996) 
-    assertFuzzyEquals(mean("Beijing", data), 52.416666666666664)
+    assertFuzzyEquals(mean_split("London", data), 51.199999999999996) 
+    assertFuzzyEquals(mean_split("Beijing", data), 52.416666666666664)
 
-    assertFuzzyEquals(variance("London", data), 57.42833333333374)
-    assertFuzzyEquals(variance("Beijing", data), 4808.37138888889)
+    assertFuzzyEquals(variance_split("London", data), 57.42833333333374)
+    assertFuzzyEquals(variance_split("Beijing", data), 4808.37138888889)
 
 
 if __name__ == '__main__':
