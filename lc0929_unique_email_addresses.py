@@ -50,24 +50,21 @@ class SolutionSplitReplace(object):
           - n is the length of email address.
         Space complexity: O(m*n).
         """
-        unique_emails = set()
+        emails_set = set()
 
         for email in emails:
             # Split email by '@' into local and domain.
             local, domain = email.split('@')
 
-            # Remove local's '.'.
-            nodot_local = local.replace('.', '')
-
-            # Truncate local's chars after '+'.
-            trunc_local = nodot_local.split('+')[0]
+            # Remove local's '.' and truncate chars after '+'.
+            trunc_local = local.replace('.', '').split('+')[0]
 
             # Concat modified local and domain.
             modified_email = '@'.join([trunc_local, domain])
 
-            unique_emails.add(modified_email)
+            emails_set.add(modified_email)
 
-        return len(unique_emails)
+        return len(emails_set)
 
 
 def main():
