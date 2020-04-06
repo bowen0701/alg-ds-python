@@ -23,31 +23,25 @@ Explanation:
 """
 
 class SolutionSumSquaresSet(object):
-    def isHappy(self, n):
-        """
-        :type n: int
-        :rtype: bool
-        """
-        # Use set to collect sum of squares.
-        sum_squares = set()
+    def _compute_sum_squares(self, n: int) -> int:
+        ss = 0
+        while n > 0:
+            n, digit = n // 10, n % 10
+            ss += digit * digit
+        return ss
 
+    def isHappy(self, n: int) -> bool:
+        # Use set to store visited numbers.
+        visited = set()
+        
+        # Loop to compute sum of squares and add it to visited set.
         while n != 1:
-            current = n
-
-            # Compute sum of squares from the reverse order.
-            ss = 0
-            while current:
-                current, d = current // 10, current % 10
-                ss += d * d
-
-            # If sum of squares occurred before, return due to cycle.
-            if ss in sum_squares:
-                return False
+            n = self._compute_sum_squares(n)
             
-            # Add sum of squares to set and update n.
-            sum_squares.add(ss)
-            n = ss
-
+            if n in visited:
+                return False
+            visited.add(n)
+            
         return True
 
 
