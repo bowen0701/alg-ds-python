@@ -40,15 +40,15 @@ class SolutionRecurNaive(object):
         if not s:
             return 1
 
-        # Check 1 digit: if the start is not valid.
+        # Check 1 digit: if the start char is not valid.
         if s[0] == '0':
             return 0
 
-        # Then decode s by decoding s[1:].
+        # If valid, decode the remaining string after 1 digit.
         n_ways = self.numDecodings(s[1:])
 
         # Check 2 digits: if len of s >= 2 and first 2 chars are valid,
-        # further decode s by the remaining s[2:].
+        # decode the remaining string after 2 digits.
         if len(s) >= 2 and '10' <= s[:2] <= '26':
             n_ways += self.numDecodings(s[2:])
 
@@ -56,8 +56,8 @@ class SolutionRecurNaive(object):
 
 
 class SolutionRecur(object):
-    def numDecodingsUtil(self, s, k):
-        # Recursively check the last k chars.
+    def _decodeRecur(self, s, k):
+        """Recursively decode the last k chars."""
         # Base case.
         if k == 0:
             return 1
@@ -67,13 +67,13 @@ class SolutionRecur(object):
         if s[start] == '0':
             return 0
 
-        # Then decode s by decoding the last (k - 1) chars.
-        n_ways = self.numDecodingsUtil(s, k - 1)
+        # If valid, decode the last (k - 1) chars.
+        n_ways = self._decodeRecur(s, k - 1)
 
-        # Check 2 digits: if k >= 2, and the first 2 chars are valid, 
-        # further decode the remaining (k - 2) chars.
+        # Check 2 digits: if k >= 2 and first 2 chars are valid,
+        # decode the last (k - 2) chars.
         if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
-            n_ways += self.numDecodingsUtil(s, k - 2)
+            n_ways += self._decodeRecur(s, k - 2)
 
         return n_ways
 
@@ -86,13 +86,14 @@ class SolutionRecur(object):
 
         Time complexity: O(2^n).
         Space complexity: O(1).
-        """ 
-        return self.numDecodingsUtil(s, len(s))
+        """
+        n = len(s)
+        return self._decodeRecur(s, n)
 
 
 class SolutionMemo(object):
-    def numDecodingsUtil(self, s, k, T):
-        # Recursively check the last k chars.
+    def _decodeRecur(self, s, k, T):
+        """Recursively check the last k chars."""
         # Check the memo result.
         if T[k]:
             return T[k]
@@ -106,13 +107,13 @@ class SolutionMemo(object):
         if s[start] == '0':
             return 0
 
-        # Then decode s by decoding the remaining (k - 1) chars.
-        result = self.numDecodingsUtil(s, k - 1, T)
+        # If valid, decode the remaining (k - 1) chars.
+        result = self._decodeRecur(s, k - 1, T)
 
-        # Check 2 digits: if k >= 2, and the first 2 chars are valid, 
-        # further decode the remaining (k - 2) chars.
+        # Check 2 digits: if k >= 2 and first 2 chars are valid, 
+        # decode the remaining (k - 2) chars.
         if k >= 2 and '10' <= s[start:(start + 2)] <= '26':
-            result += self.numDecodingsUtil(s, k - 2, T)
+            result += self._decodeRecur(s, k - 2, T)
 
         T[k] = result
         return result
@@ -128,8 +129,8 @@ class SolutionMemo(object):
         Space complexity: O(n).
         """
         n = len(s)
-        T = [None] * (n + 1)
-        return self.numDecodingsUtil(s, n, T)
+        T = [0] * (n + 1)
+        return self._decodeRecur(s, n, T)
 
 
 class SolutionDp(object):
@@ -147,7 +148,7 @@ class SolutionDp(object):
         if not s:
             return 1
 
-        # Check if s[0] is not valid.
+        # Check if the 1st char is not valid.
         if s[0] == '0':
             return 0
 
@@ -159,11 +160,11 @@ class SolutionDp(object):
         T[1] = 1
         
         for i in range(2, n + 1):
-            # Check 1 digit: if the previous 1 char is valid, add its result.
+            # Check 1 digit: if the previous 1 char is valid, add to result.
             if s[i - 1] != '0':
                 T[i] += T[i - 1]
 
-            # Check 2 digits: if the previous 2 are valid, add its result.
+            # Check 2 digits: if the previous 2 are valid, add to result.
             if '10' <= s[(i - 2):i] <= '26':
                 T[i] += T[i - 2]
         
@@ -176,7 +177,7 @@ class SolutionIter(object):
         :type s: str
         :rtype: int
 
-        Apply bottom-up iteration
+        Apply bottom-up iteration.
 
         Time complexity: O(n).
         Space complexity: O(1).
@@ -197,11 +198,11 @@ class SolutionIter(object):
         for i in range(2, n + 1):
             c = 0
 
-            # Check 1 digit: if the previous 1 char is valid, add its result.
+            # Check 1 digit: if the previous 1 char is valid, add to result.
             if s[i - 1] != '0':
                 c += b
 
-            # Check 2 digits: if the previous 2 are valid, add its result.
+            # Check 2 digits: if the previous 2 are valid, add to result.
             if '10' <= s[(i - 2):i] <= '26':
                 c += a
 
