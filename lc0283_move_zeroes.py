@@ -42,13 +42,14 @@ class SolutionUpdate(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        nonzero_idx = 0
+        # Use idx to denote non-zero index.
+        idx = 0
         for i in range(len(nums)):
             if nums[i] != 0:
-                nums[nonzero_idx] = nums[i]
-                nonzero_idx += 1
+                nums[idx] = nums[i]
+                idx += 1
 
-        for i in range(nonzero_idx, len(nums)):
+        for i in range(idx, len(nums)):
             nums[i] = 0
 
 
