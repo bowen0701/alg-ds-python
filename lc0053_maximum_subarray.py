@@ -28,16 +28,14 @@ class SolutionDp(object):
         """
         cur_max_sums = [0] * len(nums)
         cur_max_sums[0] = nums[0]
-        global_max_sum = cur_max_sums[0]
+        max_sum = cur_max_sums[0]
 
         for i in range(1, len(nums)):
-            # Compute current max subarray sum before pos i or update it.
+            # Compute max sum at i: to include max sum at i - 1 or not.
             cur_max_sums[i] = max(cur_max_sums[i - 1] + nums[i], nums[i])
+            max_sum = max(max_sum, cur_max_sums[i])
 
-            # Update global max sum before pos i.
-            global_max_sum = max(global_max_sum, cur_max_sums[i])
-
-        return global_max_sum
+        return max_sum
 
 
 class SolutionIter(object):
@@ -51,16 +49,14 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """        
-        cur_max_sum = global_max_sum = nums[0]
+        cur_max_sum = max_sum = nums[0]
 
         for i in range(1, len(nums)):
-            # Track current max subarray sum before pos i or update it.
+            # Compute max sum at i: to include max sum at i - 1 or not.
             cur_max_sum = max(cur_max_sum + nums[i], nums[i])
+            max_sum = max(max_sum, cur_max_sum)
 
-            # Update global max sum before pos i.
-            global_max_sum = max(global_max_sum, cur_max_sum)
-
-        return global_max_sum
+        return max_sum
 
 
 def main():
