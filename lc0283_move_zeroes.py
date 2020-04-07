@@ -21,7 +21,7 @@ class SolutionPopAppend(object):
         :rtype: None Do not return anything, modify nums in-place instead.
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         left = 0
         right = len(nums) - 1
