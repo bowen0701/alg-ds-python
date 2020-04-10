@@ -102,17 +102,31 @@ class SolutionSelection(object):
 
 
 def main():
+    import time
+
     # Output: [[-2,2]]
     points = [[1,3],[-2,2]]
     K = 1
+
+    start_time = time.time()
     print SolutionMaxHeap().kClosest(points, K)
+    print 'MaxHeap: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print SolutionSelection().kClosest(points, K)
+    print 'Selection: {}'.format(time.time() - start_time)
 
     # Output: [[3,3],[-2,4]]
     points = [[3,3],[5,-1],[-2,4]]
     K = 2
+
+    start_time = time.time()
     print SolutionMaxHeap().kClosest(points, K)
+    print 'MaxHeap: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
     print SolutionSelection().kClosest(points, K)
+    print 'Selection: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
