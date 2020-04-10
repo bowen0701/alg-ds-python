@@ -40,18 +40,18 @@ class SolutionSortEndMinHeapEnd(object):
         intervals.sort()
 
         # Use min heap to store end times.
-        end_minheap = []
-        heapq.heappush(end_minheap, intervals[0][1])
+        end_minhq = []
+        heapq.heappush(end_minhq, intervals[0][1])
 
         for i in range(1, len(intervals)):
             # If next start time is after min end time, remove min end time.
-            if intervals[i][0] >= end_minheap[0]:
-                heapq.heappop(end_minheap)
+            if intervals[i][0] >= end_minhq[0]:
+                heapq.heappop(end_minhq)
 
             # Add next end time to min heap.
-            heapq.heappush(end_minheap, intervals[i][1])
+            heapq.heappush(end_minhq, intervals[i][1])
 
-        return len(end_minheap)
+        return len(end_minhq)
 
 
 class SolutionTimeCounterListInsort(object):
