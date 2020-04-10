@@ -65,6 +65,7 @@ class SolutionTimeCounterListInsort(object):
         """
         from bisect import insort
 
+        # Sort times and add increment/decrement counters by start/end.
         time_counters = []
         for i in range(len(intervals)):
             insort(time_counters, (intervals[i][0], 1))
