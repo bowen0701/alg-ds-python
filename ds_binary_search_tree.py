@@ -22,7 +22,7 @@ class BinarySearchTree(object):
       the node's val.
 
     Travesal:
-    - Inorder (typical): left -> root -> right
+    - Inorder: left -> root -> right
     - Preorder: root -> left -> right
     - Postorder: left -> right -> root
     """
