@@ -23,6 +23,10 @@ we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
 we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
 we combine 1 and 1 to get 0 so the array converts to [1] then that's the value
 of last stone.
+
+Note:
+- 1 <= stones.length <= 30
+- 1 <= stones[i] <= 1000
 """
 
 class SolutionMaxHeap(object):
@@ -36,23 +40,23 @@ class SolutionMaxHeap(object):
         """
         import heapq
 
-        if not stones:
-            return 0
+        if len(stones) == 1:
+            return stones[0]
 
         # Add stones in max heap (min heap with negative weights).
         max_stones = []
         for w in stones:
             heapq.heappush(max_stones, -w)
 
-        # Iteratively smash stone pairs when have at least two.
+        # Iteratively smash stone pairs when have at least two. 
         while len(max_stones) >= 2:
-            stone1 = -heapq.heappop(max_stones)
-            stone2 = -heapq.heappop(max_stones)
+            w1 = -heapq.heappop(max_stones)
+            w2 = -heapq.heappop(max_stones)
 
-            if stone1 != stone2:
-                heapq.heappush(max_stones, -(stone1 - stone2))
+            if w1 != w2:
+                heapq.heappush(max_stones, -(w1 - w2))
 
-        if max_stones:
+        if len(max_stones):
             return -max_stones[0]
         else:
             return 0
