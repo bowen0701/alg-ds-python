@@ -39,7 +39,7 @@ k is always smaller than input array's size for non-empty array.
 import random
 
 
-class SolutionSelect(object):
+class SolutionSelection(object):
     def _select_mth_smallest(self, sub_nums, m):
         # Randomly select a num in sub array as pivot.
         pivot_idx = random.choice(range(len(sub_nums)))
@@ -156,7 +156,7 @@ def main():
 
     start_time = time.time()
     print 'By kth smallest selection method:'
-    print SolutionSelect().medianSlidingWindow(nums, k)
+    print SolutionSelection().medianSlidingWindow(nums, k)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
