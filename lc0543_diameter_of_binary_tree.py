@@ -35,9 +35,7 @@ class SolutionPathDepthRecur(object):
 
         left_depth = self._pathDepth(root.left)
         right_depth = self._pathDepth(root.right)
-
         self.diameter = max(self.diameter, left_depth + right_depth)
-
         return 1 + max(left_depth, right_depth)
 
     def diameterOfBinaryTree(self, root):
