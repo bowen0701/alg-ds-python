@@ -41,8 +41,8 @@ class SolutionMaxHeap(object):
 
         # Add stones in max heap (min heap with negative weights).
         max_stones = []
-        for s in stones:
-            heapq.heappush(max_stones, -s)
+        for w in stones:
+            heapq.heappush(max_stones, -w)
 
         # Iteratively smash stone pairs when have at least two.
         while len(max_stones) >= 2:
