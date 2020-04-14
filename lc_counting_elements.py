@@ -31,18 +31,51 @@ Constraints:
 - 0 <= arr[i] <= 1000
 """
 
-
-class Solution(object):
+    
+class SolutionNumCountict(object):
     def countElements(self, arr):
         """
         :type arr: List[int]
         :rtype: int
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
-        pass
+        from collections import defaultdict
+        
+        # Edge case.
+        if len(arr) == 1:
+            return 0
+        
+        # Create a dict:number->count.
+        num_count_d = defaultdict(int)
+        for num in arr:
+            num_count_d[num] += 1
+        
+        result = 0
+        for num, count in num_count_d.items():
+            if num + 1 in num_count_d:
+                result += count
+        
+        return result
 
 
 def main():
-    pass
+    # Output: 2
+    arr = [1,2,3]
+    print SolutionNumCountict().countElements(arr)
+
+    # Output: 0
+    arr = [1,1,3,3,5,5,7,7]
+    print SolutionNumCountict().countElements(arr)
+
+    # Output: 3
+    arr = [1,3,2,3,5,0]
+    print SolutionNumCountict().countElements(arr)
+
+    # Output: 2
+    arr = [1,1,2,2]
+    print SolutionNumCountict().countElements(arr)
 
 
 if __name__ == '__main__':
