@@ -37,18 +37,51 @@ Constraints:
 - 0 <= shift[i][1] <= 100
 """
 
-class Solution(object):
+class SolutionAccumShiftsModeLength(object):
     def stringShift(self, s, shift):
         """
         :type s: str
         :type shift: List[List[int]]
         :rtype: str
+
+        Time complexity: O(n).
+        Space complexity: O(1).
         """
-        pass
+        # Edge case with one char.
+        n = len(s)
+        if n == 1:
+            return s
+
+        # Accumulate total shifts: left:-1, right:+1.
+        n_shifts = 0
+        for direct, amount in shift:
+            n_shifts += (2 * direct - 1) * amount
+
+        # Take n_shift mod s length to remove redundant shifts.
+        n_shifts %= n
+
+        # Shift string by total shifts.
+        s_shifted = [None] * n
+        for i in range(n):
+            i_shifted = (i + n_shifts) % n
+            s_shifted[i_shifted] = s[i]
+        return ''.join(s_shifted)
 
 
 def main():
-    pass
+    import time
+
+    start_time = time.time()
+    # Output: "cab"
+    s = "abc"
+    shift = [[0,1],[1,2]]
+    print SolutionAccumShiftsModeLength().stringShift(s, shift)
+
+    # Output: "efgabcd"
+    s = "abcdefg"
+    shift = [[1,1],[1,1],[0,2],[1,3]]
+    print SolutionAccumShiftsModeLength().stringShift(s, shift)
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
