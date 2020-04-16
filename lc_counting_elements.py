@@ -32,7 +32,7 @@ Constraints:
 """
 
     
-class SolutionNumCountict(object):
+class SolutionNumCountDict(object):
     def countElements(self, arr):
         """
         :type arr: List[int]
@@ -63,19 +63,19 @@ class SolutionNumCountict(object):
 def main():
     # Output: 2
     arr = [1,2,3]
-    print SolutionNumCountict().countElements(arr)
+    print SolutionNumCountDict().countElements(arr)
 
     # Output: 0
     arr = [1,1,3,3,5,5,7,7]
-    print SolutionNumCountict().countElements(arr)
+    print SolutionNumCountDict().countElements(arr)
 
     # Output: 3
     arr = [1,3,2,3,5,0]
-    print SolutionNumCountict().countElements(arr)
+    print SolutionNumCountDict().countElements(arr)
 
     # Output: 2
     arr = [1,1,2,2]
-    print SolutionNumCountict().countElements(arr)
+    print SolutionNumCountDict().countElements(arr)
 
 
 if __name__ == '__main__':
