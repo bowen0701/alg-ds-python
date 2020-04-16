@@ -45,7 +45,7 @@ class SolutionAccumShiftsModeLength(object):
         :rtype: str
 
         Time complexity: O(n).
-        Space complexity: O(1).
+        Space complexity: O(n).
         """
         # Edge case with one char.
         n = len(s)
