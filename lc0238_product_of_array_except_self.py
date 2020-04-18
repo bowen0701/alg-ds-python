@@ -28,33 +28,29 @@ class SolutionLeftRightProducts(object):
         """
         n = len(nums)
 
-        # Compute left_prod as product of left number and nums[i].
-        left_prods = [1] * n
-        left_prods[0] = nums[0]
-
+        # Compute left products: nums=[a,b,c] => lprods=[a,ab,abc]
+        lprods = [1] * n
+        lprods[0] = nums[0]
         for i in range(1, n):
-            left_prods[i] = left_prods[i - 1] * nums[i]
+            lprods[i] = lprods[i - 1] * nums[i]
 
-        # Compute right_prods= as product of right number and nums[i].
-        right_prods = [1] * n
-        right_prods[-1] = nums[-1]
-
+        # Compute right products: rprods=[abc,bc,c]
+        rprods = [1] * n
+        rprods[-1] = nums[-1]
         for i in range(n - 2, -1, -1):
-            right_prods[i] = nums[i] * right_prods[i + 1]
+            rprods[i] = nums[i] * rprods[i + 1]
 
-        # Multiply left_prod and right_prod excluding nums[i].
         prods = [1] * n
-
         for i in range(n):
             if i == 0:
                 # Leftmost = neighbor's right product.
-                prods[i] = right_prods[i + 1]
+                prods[i] = rprods[1]
             elif i == n - 1:
                 # Rightmost = neighbor's left product.
-                prods[i] = left_prods[i - 1]
+                prods[i] = lprods[n - 2]
             else:
-                # Middles = product of neighbors's left & right products.
-                prods[i] = left_prods[i - 1] * right_prods[i + 1]
+                # Middles: multiply left & right products excluding nums[i].
+                prods[i] = lprods[i - 1] * rprods[i + 1]
 
         return prods
 
@@ -66,20 +62,20 @@ class SolutionLeftRightProductsOptim(object):
         :rtype: List[int]
 
         Time complexity: O(n).
-        Space complexity: O(n).
+        Space complexity: O(1).
         """
         n = len(nums)
-        prods = [1] * n
 
-        # Compute prod as product of number left to nums[i].
+        # Compute prods (excluding nums[i]): nums=[a,b,c] => prods=[1,a,ab].
+        prods = [1] * n
         for i in range(1, n):
             prods[i] = prods[i - 1] * nums[i - 1]
 
-        # Product prod and right_prod as product of number right to nums[i].
-        right_prods = 1
+        # Compute prods by rprods (excluding nums[i]): bc<-c<-1.
+        rprods = 1
         for i in range(n - 1, -1, -1):
-            prods[i] *= right_prods
-            right_prods *= nums[i]
+            prods[i] *= rprods
+            rprods *= nums[i]
 
         return prods
 
