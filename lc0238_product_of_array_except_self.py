@@ -28,21 +28,21 @@ class SolutionLeftRightProducts(object):
         """
         n = len(nums)
 
-        # Compute left_prods as product of left numbers and nums[i].
+        # Compute left_prod as product of left number and nums[i].
         left_prods = [1] * n
         left_prods[0] = nums[0]
 
         for i in range(1, n):
             left_prods[i] = left_prods[i - 1] * nums[i]
 
-        # Compute right_prods as product of right numbers and nums[i].
+        # Compute right_prods= as product of right number and nums[i].
         right_prods = [1] * n
         right_prods[-1] = nums[-1]
 
         for i in range(n - 2, -1, -1):
             right_prods[i] = nums[i] * right_prods[i + 1]
 
-        # Multiply left_prods and right_prods excluding nums[i].
+        # Multiply left_prod and right_prod excluding nums[i].
         prods = [1] * n
 
         for i in range(n):
@@ -59,7 +59,7 @@ class SolutionLeftRightProducts(object):
         return prods
 
 
-class SolutionLeftRightProducts2(object):
+class SolutionLeftRightProductsOptim(object):
     def productExceptSelf(self, nums):
         """
         :type nums: List[int]
@@ -71,13 +71,11 @@ class SolutionLeftRightProducts2(object):
         n = len(nums)
         prods = [1] * n
 
-        # Compute prods as product of numbers left to nums[i].
-        # Say nums: [a, b, c, d] => prods: [1, a, ab, abc].
+        # Compute prod as product of number left to nums[i].
         for i in range(1, n):
             prods[i] = prods[i - 1] * nums[i - 1]
 
-        # Product prods and product of numbers right to nums[i],
-        # by right_prods: bcd <- cd <- d <- 1.
+        # Product prod and right_prod as product of number right to nums[i].
         right_prods = 1
         for i in range(n - 1, -1, -1):
             prods[i] *= right_prods
@@ -90,7 +88,7 @@ def main():
     # Output: [60, 40, 30, 24]
     nums = [2, 3, 4, 5]
     print SolutionLeftRightProducts().productExceptSelf(nums)
-    print SolutionLeftRightProducts2().productExceptSelf(nums)
+    print SolutionLeftRightProductsOptim().productExceptSelf(nums)
 
 
 if __name__ == '__main__':
