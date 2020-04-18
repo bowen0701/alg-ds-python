@@ -37,7 +37,7 @@ class SolutionLeftRightProducts(object):
 
         # Compute right_prods as product of right numbers and nums[i].
         right_prods = [1] * n
-        right_prods[n - 1] = nums[n - 1]
+        right_prods[-1] = nums[-1]
 
         for i in range(n - 2, -1, -1):
             right_prods[i] = nums[i] * right_prods[i + 1]
@@ -52,7 +52,7 @@ class SolutionLeftRightProducts(object):
             elif i == n - 1:
                 # Rightmost = neighbor's left product.
                 prods[i] = left_prods[i - 1]
-            else:  # 1 <= i <= n - 2:
+            else:
                 # Middles = product of neighbors's left & right products.
                 prods[i] = left_prods[i - 1] * right_prods[i + 1]
 
@@ -87,10 +87,8 @@ class SolutionLeftRightProducts2(object):
 
 
 def main():
-    # Input:  [2, 3, 4, 5]
     # Output: [60, 40, 30, 24]
     nums = [2, 3, 4, 5]
-
     print SolutionLeftRightProducts().productExceptSelf(nums)
     print SolutionLeftRightProducts2().productExceptSelf(nums)
 
