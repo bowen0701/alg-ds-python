@@ -33,6 +33,7 @@ class SolutionTwoPointers(object):
         Time complexity: O(logn), where n is the lenght of nums.
         Space complexity: O(1).
         """
+        # Edge case.
         if not nums:
             return -1
 
@@ -47,26 +48,26 @@ class SolutionTwoPointers(object):
             if nums[mid] == target:
                 return mid
 
-            # Check if target & middle are bigger than pivot (in the same side).
+            # Check target & mid num are at the same side of pivot or not.
             if (target >= pivot) == (nums[mid] >= pivot):
                 is_same_side = True
             else:
                 is_same_side = False
 
             if is_same_side:
-                # If in the same side, apply normal binary search w.r.t. mid.
+                # If in the same side, apply normal binary search.
                 if nums[mid] < target:
                     left = mid + 1
                 else:
                     right = mid - 1
             else:
-                # If splitted, apply "reversed" binary search w.r.t. pivot.
-                if nums[mid] > target:
-                    left = mid + 1
-                else:
+                # If splitted, apply "reversed" binary search.
+                if nums[mid] < target:
                     right = mid - 1
+                else:
+                    left = mid + 1
 
-        # Finally check left = right case.
+        # Check for left = right case.
         if nums[left] == target:
             return left
         else:
