@@ -78,7 +78,6 @@ class SolutionBruteForce(object):
 
         # Enumerate all strings with '*' replaced by, '(', '', ')'.
         s_lst = self._enumerate(s)
-        print(s_lst)
 
         # Iterate through list to check if there is one valid.
         for si in s_lst:
@@ -87,30 +86,70 @@ class SolutionBruteForce(object):
         return False
 
 
+class SolutionMinMaxCloseCount(object):
+    def checkValidString(self, s):
+        """
+        :type s: str
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
+        if len(s) == 1:
+            return s == '*'
+
+        # Iterate through s to collect expected min/max number of '('.
+        # - max_ncloses treats each '*' as '(', should never be negative.
+        # - min_ncloses treats each '*' as ')'; treat it as '' if < 0.
+        min_ncloses = max_ncloses = 0
+        for c in s:
+            if c == '(':
+                max_ncloses += 1
+                min_ncloses += 1
+            elif c == ')':
+                max_ncloses -= 1
+                min_ncloses = max(min_ncloses - 1, 0)
+            else:
+                max_ncloses += 1
+                min_ncloses = max(min_ncloses - 1, 0)
+
+            if max_ncloses < 0:
+                return False
+
+        # If min_ncloses > 0, there are not enough ')'.
+        return min_ncloses == 0
+
+
 def main():
     # Output: True
     s = "()"
     print(SolutionBruteForce().checkValidString(s))
+    print(SolutionMinMaxCloseCount().checkValidString(s))
 
     # Output: True
     s = "(*)"
     print(SolutionBruteForce().checkValidString(s))
+    print(SolutionMinMaxCloseCount().checkValidString(s))
 
     # Output: True
     s = "(*))"
     print(SolutionBruteForce().checkValidString(s))
+    print(SolutionMinMaxCloseCount().checkValidString(s))
 
     # Output: False
     s = "*(("
     print(SolutionBruteForce().checkValidString(s))
+    print(SolutionMinMaxCloseCount().checkValidString(s))
 
     # Output: False
     s = "**(("
     print(SolutionBruteForce().checkValidString(s))
+    print(SolutionMinMaxCloseCount().checkValidString(s))
 
     # Output: False
-    # s = "()(()(*(())()*)(*)))()))*)((()(*(((()())()))()()*)((*)))()))(*)(()()(((()*()()((()))((*((*)()"
-    # print(SolutionBruteForce().checkValidString(s))
+    s = "()(()(*(())()*)(*)))()))*)((()(*(((()())()))()()*)((*)))()))(*)(()()(((()*()()((()))((*((*)()"
+    print(SolutionBruteForce().checkValidString(s))
+    print(SolutionMinMaxCloseCount().checkValidString(s))
 
 
 if __name__ == '__main__':
