@@ -34,14 +34,61 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+class SolutionInsertBSTRecur(object):
+    def _insertBSTRecur(self, val, root):
+        new = TreeNode(val)
+
+        if val < root.val:
+            if not root.left:
+                root.left = new
+                return None
+            else:
+                self._insertBSTRecur(val, root.left)
+        else:
+            if not root.right:
+                root.right = new
+                return None
+            else:
+                self._insertBSTRecur(val, root.right)
+
     def bstFromPreorder(self, preorder):
         """
         :type preorder: List[int]
         :rtype: TreeNode
+
+        Time complexity: O(n*logn).
+        Space complexity: O(logn).
         """
-        pass
+        # Edge case with one node.
+        if len(preorder) == 1:
+            return TreeNode(preorder[0])
+
+        # Convert preorder to deque for quick left-popping.
+        val = preorder[0]
+        root = TreeNode(val)
+
+        # Iterate through all the remaining preorder vals to insert to BST.
+        for i in range(1, len(preorder)):
+            val = preorder[i]
+            self._insertBSTRecur(val, root)
+        return root
 
 
 def main():
-    pass
+    # Input: [8,5,1,7,10,12]
+    # Output: [8,5,10,1,7,null,12]
+    #      8
+    #    /   \
+    #   5    10
+    #  / \     \
+    # 1   7    12
+    preorder = [8,5,1,7,10,12]
+    root = SolutionInsertBSTRecur().bstFromPreorder(preorder)
+    print [root.val, 
+           root.left.val, root.right.val,
+           root.left.left.val, root.left.right.val,
+           root.right.left, root.right.right.val]
+
+
+if __name__ == '__main__':
+    main()
