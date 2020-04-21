@@ -74,6 +74,11 @@ class SolutionInorderIter(object):
         stack = []
 
         # Pop node from stack, connect parent and child nodes.
+             4
+            / \
+           2   5
+          / \
+         1   3
         while current or stack:
             # Visit the leftmost node.
             while current:
@@ -83,11 +88,11 @@ class SolutionInorderIter(object):
             # Pop stack's last node to get current.
             current = stack.pop()
 
-            # Connect previous and current.
+            # Connect: previous <-> current.
             previous.right = current
             current.left = previous
 
-            # Increment prrevious & current.
+            # Increment previous & current.
             previous = current
             current = current.right
 
