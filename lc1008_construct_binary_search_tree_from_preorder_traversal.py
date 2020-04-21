@@ -74,7 +74,42 @@ class SolutionInsertBSTRecur(object):
         return root
 
 
+class SolutionBinarySearchRecur(object):
+    def _binarySearchRecur(self, left, right):
+        import bisect
+
+        if left == right:
+            return None
+
+        # Use left to create root.
+        val = self.preorder[left]
+        root = TreeNode(val)
+
+        # Apply binary search to find root't position to get left/right.
+        mid = bisect.bisect(self.preorder, val, left + 1, right)
+        root.left = self._binarySearchRecur(left + 1, mid)
+        root.right = self._binarySearchRecur(mid, right)
+        return root
+
+    def bstFromPreorder(self, preorder):
+        """
+        :type preorder: List[int]
+        :rtype: TreeNode
+
+        Time complexity: O(n*logn).
+        Space complexity: O(logn).
+        """
+        self.preorder = preorder
+
+        # Apply recursive binary search to find left & right subtrees.
+        left, right = 0, len(preorder)
+        return self._binarySearchRecur(left, right)
+
+
+
 def main():
+    import time
+
     # Input: [8,5,1,7,10,12]
     # Output: [8,5,10,1,7,null,12]
     #      8
@@ -83,11 +118,22 @@ def main():
     #  / \     \
     # 1   7    12
     preorder = [8,5,1,7,10,12]
+
+    start_time = time.time()
     root = SolutionInsertBSTRecur().bstFromPreorder(preorder)
     print [root.val, 
            root.left.val, root.right.val,
            root.left.left.val, root.left.right.val,
            root.right.left, root.right.right.val]
+    print 'Time for SolutionInsertBSTRecur: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    root = SolutionBinarySearchRecur().bstFromPreorder(preorder)
+    print [root.val, 
+           root.left.val, root.right.val,
+           root.left.left.val, root.left.right.val,
+           root.right.left, root.right.right.val]
+    print 'Time for SolutionBinarySearchRecur: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
