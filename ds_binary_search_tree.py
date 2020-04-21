@@ -33,7 +33,7 @@ class BinarySearchTree(object):
         """Search val starting from root by recursion.
 
         Time complexity: O(logn), where n is the node number.
-        Space complexity: O(1).
+        Space complexity: O(logn).
         """
         if not root:
             return False
@@ -84,7 +84,7 @@ class BinarySearchTree(object):
         """Insert a new node with val by recursion.
 
         Time complexity: O(logn).
-        Space complexity: O(1).
+        Space complexity: O(logn).
         """
         if not self.root:
             self.root = Node(new_val)
