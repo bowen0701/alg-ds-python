@@ -74,11 +74,6 @@ class SolutionInorderIter(object):
         stack = []
 
         # Pop node from stack, connect parent and child nodes.
-             4
-            / \
-           2   5
-          / \
-         1   3
         while current or stack:
             # Visit the leftmost node.
             while current:
