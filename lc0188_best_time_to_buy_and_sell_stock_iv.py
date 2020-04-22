@@ -28,16 +28,16 @@ Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6),
              profit = 3-0 = 3.
 """
 
-class SolutionDp(object):
+class SolutionDP(object):
     def maxProfit(self, k, prices):
         """
         :type k: int
         :type prices: List[int]
         :rtype: int
 
-        Let T[i, j] be the max profit up until prices[j] using at most i transactions.
-        T[i, j] = max(T[i, j-1], prices[j] - prices[j'] + T[i-1, j']), for 0 <= j' <= j-1.
-                = max(T[i, j-1], prices[j] + max(T[i-1, j'] - prices[j']))
+        Let T[i][j] be the max profit until prices[j] using at most i transactions.
+        T[i][j] = max(T[i][j-1], prices[j] - prices[j'] + T[i-1][j']), for 0 <= j' <= j-1.
+                = max(T[i][j-1], prices[j] + max(T[i-1][j'] - prices[j']))
         Note prices[j] - prices[j'] means profit with buying at j' and selling at j.
 
         Time complexity: O(k*n), where n is the number of prices.
@@ -55,10 +55,11 @@ class SolutionDp(object):
                 max_profit += max(prices[i] - prices[i - 1], 0)
             return max_profit
 
-        # Let T[i][j] be max profit up until prices[j] using at most i transactions.
+        # Let T[i][j] be max profit until prices[j] using at most i transactions.
         T = [[0] * n for _ in range(k + 1)]
 
         for i in range(1, k + 1):
+            # Continue updating current max profit up tp price j.
             cur_max_profit = -float('inf')
             for j in range(1, n):
                 cur_max_profit = max(cur_max_profit, 
@@ -72,12 +73,12 @@ def main():
     # Output: 2
     prices = [2,4,1]
     k = 2
-    print SolutionDp().maxProfit(k, prices)
+    print SolutionDP().maxProfit(k, prices)
 
     # Output: 7
     prices = [3,2,6,5,0,3]
     k = 2
-    print SolutionDp().maxProfit(k, prices)
+    print SolutionDP().maxProfit(k, prices)
 
 
 if __name__ == '__main__':
