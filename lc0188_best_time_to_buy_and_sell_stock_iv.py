@@ -28,6 +28,7 @@ Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6),
              profit = 3-0 = 3.
 """
 
+
 class SolutionDP(object):
     def maxProfit(self, k, prices):
         """
