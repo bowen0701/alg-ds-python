@@ -36,7 +36,7 @@ class SolutionDp(object):
         :rtype: int
 
         Let T[i, j] be the max profit up until prices[j] using at most i transactions.
-        T[i, j] = max(T[i, j-1], prices[j] - prices[j'] + T[i-1, j']), for j' in [0, j-1]
+        T[i, j] = max(T[i, j-1], prices[j] - prices[j'] + T[i-1, j']), for 0 <= j' <= j-1.
                 = max(T[i, j-1], prices[j] + max(T[i-1, j'] - prices[j']))
         Note prices[j] - prices[j'] means profit with buying at j' and selling at j.
 
@@ -48,22 +48,22 @@ class SolutionDp(object):
 
         n = len(prices)
 
-        # If k >= half number of dates, we can make max transactions.
+        # If k >= half number of dates, can make max transactions.
         if k >= (n >> 1):
             max_profit = 0
             for i in range(1, n):
                 max_profit += max(prices[i] - prices[i - 1], 0)
             return max_profit
 
-        # Let T[i, j] be max profit up until prices[j] using at most i transactions.
+        # Let T[i][j] be max profit up until prices[j] using at most i transactions.
         T = [[0] * n for _ in range(k + 1)]
 
         for i in range(1, k + 1):
-            local_max_profit = -float('inf')
+            cur_max_profit = -float('inf')
             for j in range(1, n):
-                local_max_profit = max(T[i - 1][j - 1] - prices[j - 1], 
-                                       local_max_profit)
-                T[i][j] = max(T[i][j - 1], prices[j] + local_max_profit)
+                cur_max_profit = max(cur_max_profit, 
+                                     T[i - 1][j - 1] - prices[j - 1])
+                T[i][j] = max(T[i][j - 1], cur_max_profit + prices[j])
 
         return T[-1][-1]
 
