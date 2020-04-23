@@ -1,6 +1,6 @@
-"""Binomial Cofficients
+"""Binomial cofficients
 
-Binomial Coefficient of m chooses k, 
+Binomial coefficient of m chooses k:
 C(m, k) = m!/[(m - k)! * k!]
 """
 
