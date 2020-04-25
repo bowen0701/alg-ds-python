@@ -51,31 +51,95 @@ Constraints:
 
 # BinaryMatrix's API interface.
 class BinaryMatrix(object):
-   def get(self, row, col):
-       """
-       :type row : int, col : int
-       :rtype int
-       """
-       pass
+    def __init__(self, mat):
+        self.mat = mat
+        self.shape = [len(self.mat), len(self.mat[0])]
 
-   def dimensions:
-       """
-       :rtype list[]
-       """
-       pass
+    def get(self, row, col):
+        """
+        :type row : int, col : int
+        :rtype int
+        """
+        return self.mat[row][col]
+
+    def dimensions(self):
+        """
+        :rtype list[]
+        """
+        return self.shape
 
 
-class Solution(object):
+class SolutionBinarySearchRows(object):
+    def _binarySearchRow(self, row, binaryMatrix):
+        nrows, ncols = binaryMatrix.dimensions()
+        left_col, right_col = 0, ncols - 1
+        while left_col < right_col:
+            mid_col = left_col + (right_col - left_col) // 2
+            mid_num = binaryMatrix.get(row, mid_col)
+            if mid_num == 0:
+                left_col = mid_col + 1
+            else:
+                right_col = mid_col
+
+        if binaryMatrix.get(row, left_col) == 1:
+            return left_col
+        else:
+            return float('inf')
+
     def leftMostColumnWithOne(self, binaryMatrix):
         """
         :type binaryMatrix: BinaryMatrix
         :rtype: int
+
+        Time complexity: O(m*logn), where
+          - m is the number of rows
+          - n is the number of columns
         """
-        pass
+        # Edge case.
+        nrows, ncols = binaryMatrix.dimensions()
+        if binaryMatrix.dimensions == [1, 1]:
+            if binaryMatrix.get(0, 0) == 1:
+                return 0
+            else:
+                return -1
+
+        # Apply binary search in row to update min col index.
+        min_col = float('inf')
+        for r in range(nrows):
+            left_col_idx = self._binarySearchRow(r, binaryMatrix)
+            min_col = min(min_col, left_col_idx)
+
+        if min_col == float('inf'):
+            return -1
+        else:
+            return min_col
 
 
 def main():
-    pass
+    # Output: 0
+    mat = [[0,0],[1,1]]
+    binaryMatrix = BinaryMatrix(mat)
+    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
+
+    # Output: 1
+    mat = [[0,0],[0,1]]
+    binaryMatrix = BinaryMatrix(mat)
+    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
+
+    # Output: -1
+    mat = [[0,0],[0,0]]
+    binaryMatrix = BinaryMatrix(mat)
+    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
+
+    # Output: 1
+    mat = [[0,0,0,1],[0,0,1,1],[0,1,1,1]]
+    binaryMatrix = BinaryMatrix(mat)
+    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
+
+    # Output: 2
+    mat = [[0,0,0,1],[0,0,1,1],[0,0,1,1]]
+    binaryMatrix = BinaryMatrix(mat)
+    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
 
 
 if __name__ == '__main__':
