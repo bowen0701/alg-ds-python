@@ -7,7 +7,7 @@ def binary_search_recur(sorted_nums, target):
     """Binary search for sorted list by recursion.
 
     Time complexity: O(logn).
-    Space complexity: O(n).
+    Space complexity: O(max(n, logn))=O(n).
     """
     if len(sorted_nums) == 0:
         return False
@@ -28,7 +28,7 @@ def binary_search_two_pointers_recur(sorted_nums, target, left, right):
     Note: It performs faster than binary_search_recur().
     
     Time complexity: O(logn).
-    Space complexity: O(1).
+    Space complexity: O(logn).
     """
     if left > right:
         return False
