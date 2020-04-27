@@ -24,15 +24,15 @@ class SolutionBruteForce(object):
         Time complexity: O(n^3).
         Space complexity: O(n).
         """
-        n_subarrs = 0
+        result = 0
         for i in range(len(nums)):
             for j in range(i, len(nums)):
                 if sum(nums[i:(j + 1)]) == k:
-                    n_subarrs += 1
-        return n_subarrs
+                    result += 1
+        return result
 
 
-class SolutionCusumCountsDict(object):
+class SolutionCusumCountDict(object):
     def subarraySum(self, nums, k):
         """
         :type nums: List[int]
@@ -44,9 +44,10 @@ class SolutionCusumCountsDict(object):
         """
         from collections import defaultdict
 
-        n_subarrs = 0
-        cusum = 0
+        # Create a dict: cusum->count.
         cusum_count_d = defaultdict(int)
+        result = 0
+        cusum = 0
         
         for num in nums:
             # Compute cumulative sum.
@@ -54,17 +55,17 @@ class SolutionCusumCountsDict(object):
 
             # If cusum equals k, then increment result by 1.
             if cusum == k:
-                n_subarrs += 1
+                result += 1
 
-            # If cusum - k exists in cusum counts, 
+            # If cusum - k exists in cusum counts,
             # the subarray from (cusum - k) to "current" cusum equals k.
             if cusum - k in cusum_count_d:
-                n_subarrs += cusum_count_d[cusum - k]
+                result += cusum_count_d[cusum - k]
 
             # Save cusum to cusum counts.
             cusum_count_d[cusum] += 1
 
-        return n_subarrs
+        return result
         
 
 def main():
@@ -79,7 +80,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Dict: {}'.format(SolutionCusumCountsDict().subarraySum(nums, k))
+    print 'Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k))
     print 'Time: {}'.format(time.time() - start_time)
 
     # Output: 3
@@ -91,7 +92,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Dict: {}'.format(SolutionCusumCountsDict().subarraySum(nums, k))
+    print 'Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k))
     print 'Time: {}'.format(time.time() - start_time)
 
     # Output: 0
@@ -103,7 +104,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'Dict: {}'.format(SolutionCusumCountsDict().subarraySum(nums, k))
+    print 'Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k))
     print 'Time: {}'.format(time.time() - start_time)
 
 
