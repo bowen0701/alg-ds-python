@@ -94,6 +94,7 @@ class SolutionBinarySearchRows(object):
         Time complexity: O(m*logn), where
           - m is the number of rows
           - n is the number of columns
+        Space complexity: O(1).
         """
         # Edge case.
         nrows, ncols = binaryMatrix.dimensions()
