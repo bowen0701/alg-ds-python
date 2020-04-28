@@ -16,12 +16,17 @@ Output: 0
 """
 
 
-class Solution(object):
+class SolutionBruteForce(object):
     def rangeBitwiseAnd(self, m, n):
         """
         :type m: int
         :type n: int
         :rtype: int
+
+        Time limit exceeded.
+
+        Time complexity: O(n-m).
+        Space complexity: O(1).
         """
         if m == 0:
             return 0
@@ -35,11 +40,11 @@ class Solution(object):
 def main():
     # Output: 4
     m, n = 5, 7
-    print Solution().rangeBitwiseAnd(m, n)
+    print SolutionBruteForce().rangeBitwiseAnd(m, n)
 
     # Output: 0
     m, n = 0, 1
-    print Solution().rangeBitwiseAnd(m, n)
+    print SolutionBruteForce().rangeBitwiseAnd(m, n)
 
 
 if __name__ == '__main__':
