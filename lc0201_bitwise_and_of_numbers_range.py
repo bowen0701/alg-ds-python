@@ -23,11 +23,23 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        pass
+        if m == 0:
+            return 0
+
+        result = m
+        for i in range(m + 1, n + 1):
+            result &= i
+        return result
 
 
 def main():
-    pass
+    # Output: 4
+    m, n = 5, 7
+    print Solution().rangeBitwiseAnd(m, n)
+
+    # Output: 0
+    m, n = 0, 1
+    print Solution().rangeBitwiseAnd(m, n)
 
 
 if __name__ == '__main__':
