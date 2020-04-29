@@ -34,7 +34,7 @@ Constraints:
 """
 
 
-class Solution(object):
+class SolutionDP(object):
     def longestCommonSubsequence(self, text1, text2):
         """
         :type text1: str
@@ -47,37 +47,37 @@ class Solution(object):
         # By bottom-up dynamic programming.
         n1, n2 = len(text1), len(text2)
 
-        # Create memoization table.
-        M = [[0] * (n2 + 1) for _ in range(n1 + 1)]
+        # Create memoization table: n1xn2.
+        T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
 
         for r in range(1, n1 + 1):
             for c in range(1, n2 + 1):
                 # Since char idx is from 0 ~ n_i - 1.
                 if text1[r - 1] == text2[c - 1]:
                     # If the current chars are the same, LCS is the last LCS plus 1.
-                    M[r][c] = M[r - 1][c - 1] + 1
+                    T[r][c] = T[r - 1][c - 1] + 1
                 else:
                     # If not, LCS is the max of LCS's w/o current char of text1 or text2.
-                    M[r][c] = max(M[r - 1][c], M[r][c - 1])
+                    T[r][c] = max(T[r - 1][c], T[r][c - 1])
 
-        return M[-1][-1]
+        return T[-1][-1]
 
 
 def main():
     # Ans: 3.
     text1 = "abcde"
     text2 = "ace" 
-    print Solution().longestCommonSubsequence(text1, text2)
+    print SolutionDP().longestCommonSubsequence(text1, text2)
 
     # Ans: 3
     text1 = "abc"
     text2 = "abc"
-    print Solution().longestCommonSubsequence(text1, text2)
+    print SolutionDP().longestCommonSubsequence(text1, text2)
 
     # Ans: 0
     text1 = "abc"
     text2 = "def"
-    print Solution().longestCommonSubsequence(text1, text2)
+    print SolutionDP().longestCommonSubsequence(text1, text2)
 
 
 if __name__ == '__main__':
