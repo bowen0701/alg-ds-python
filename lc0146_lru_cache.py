@@ -46,17 +46,17 @@ class LRUCache(object):
     def __init__(self, capacity):
         """Least Recently Used (LRU) cache.
 
-        Apply dict with a doubly linked list for LRU cache (old->new).
+        Apply dict:key->node with a doubly linked list:
         head<->node1<->node2<->tail.
 
         :type capacity: int
         """
         self.capacity = capacity
 
-        # Use a key_nodes dict to store key and its node with val.
+        # Create a dict key_node_d: key->node.
         self.key_node_d = dict()
 
-        # Initialize doubly linked list with linked head and tail.
+        # Create doubly linked list with head and tail.
         self.head = Node(None, None)
         self.tail = Node(None, None)
         self.head.next = self.tail
@@ -66,7 +66,7 @@ class LRUCache(object):
         node_prev = node.prev
         node_next = node.next
 
-        # Link node's prev and next together.
+        # Skip-connect node's prev and next.
         node.prev.next = node_next
         node.next.prev = node_prev
 
@@ -74,11 +74,11 @@ class LRUCache(object):
         # Get the recently used node.
         tail_prev = self.tail.prev
 
-        # Link tail's prev and node together.
+        # Connect tail's prev and node.
         tail_prev.next = node
         node.prev = tail_prev
 
-        # Link node and tail together.
+        # Connect node and tail together.
         node.next = self.tail
         self.tail.prev = node
 
@@ -90,7 +90,7 @@ class LRUCache(object):
         Time complexity: O(1).
         Space complexity: O(1).
         """
-        # Check if key exists in dict, if yes, adjust key's pos.
+        # Check if key exists in dict. If yes, adjust key's pos.
         if key in self.key_node_d:
             node = self.key_node_d[key]
 
@@ -114,7 +114,7 @@ class LRUCache(object):
         """
         node = Node(key, value)
 
-        # Check if node with key exists, if yes, remove it and update dict.
+        # Check if node with key exists. If yes, remove it and update dict.
         if key in self.key_node_d:
             self._remove(self.key_node_d[key])
         self.key_node_d[key] = node
@@ -122,7 +122,7 @@ class LRUCache(object):
         # Add new node to tail.
         self._add_tail(node)
 
-        # Check if larger than capacity, remove head's next node: LRU node.
+        # Check if larger than capacity, remove LRU node.
         if len(self.key_node_d) > self.capacity:
             head_next = self.head.next
             self._remove(head_next)
