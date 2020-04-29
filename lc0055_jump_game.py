@@ -31,16 +31,16 @@ class SolutionGreedy(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Update max reachable index by end.
-        end = 0
+        # Create max reachable index.
+        reachable = 0
 
         for i in range(len(nums)):
             # Index i is not reachable.
-            if end < i:
+            if reachable < i:
                 return False
 
-            # Update end by checking i + nums[i] > end.
-            end = max(end, i + nums[i])
+            # Update reachable by taking max of itself and i+nums[i].
+            reachable = max(reachable, i + nums[i])
 
         return True
 
