@@ -32,15 +32,15 @@ class SolutionGreedy(object):
         Space complexity: O(1).
         """
         # Create max reachable index.
-        reachable = 0
+        reach = 0
 
         for i in range(len(nums)):
             # Index i is not reachable.
-            if reachable < i:
+            if reach < i:
                 return False
 
-            # Update reachable by taking max of itself and i+nums[i].
-            reachable = max(reachable, i + nums[i])
+            # Update reach by taking max of itself and i+nums[i].
+            reach = max(reach, i + nums[i])
 
         return True
 
