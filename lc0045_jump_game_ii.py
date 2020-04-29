@@ -35,13 +35,13 @@ class SolutionDPGreedy(object):
         T = [n] * n
         T[0] = 0
 
-        # For each pos i, loop to update T[end+1] ~ T[i+nums[i]].
-        end = 0
+        # For each index i, loop to update T[reach+1] ~ T[i+nums[i]].
+        reach = 0
         for i in range(n):
-            for j in range(end + 1, min(i + nums[i], n - 1) + 1):
+            for j in range(reach + 1, min(i + nums[i], n - 1) + 1):
                 T[j] = min(T[j], T[i] + 1)
 
-            end = max(end, i + nums[i])
+            reach = max(reach, i + nums[i])
 
         return T[-1]
 
@@ -57,24 +57,24 @@ class SolutionBFSGreedy1(object):
         """
         n = len(nums)
 
-        # Apply greedy algorithm to check index i in prev_end and end.
-        prev_end, end = -1, 0
-        jumps = 0
+        # Apply greedy algorithm to check index i in prev_reach and reach.
+        prev_reach, reach = -1, 0
+        result = 0
 
         for i in range(n):
             # Check if reached last index already.
-            if end >= n - 1:
+            if reach >= n - 1:
                 break
 
-            # Update jump if current index is behind prev_end.
-            if prev_end < i:
-                jumps += 1
-                prev_end = end
+            # Update jump if prev_reach is behind current index.
+            if prev_reach < i:
+                result += 1
+                prev_reach = reach
 
-            # Update end with current index and jump.
-            end = max(end, i + nums[i])
+            # Update reach with current index and jump.
+            reach = max(reach, i + nums[i])
 
-        return jumps
+        return result
 
 
 class SolutionBFSGreedy2(object):
@@ -88,23 +88,24 @@ class SolutionBFSGreedy2(object):
         """
         n = len(nums)
 
-        cur_end, end = 0, 0
-        jumps = 0
+        # Apply greedy algorithm to check index i in cur_reach and reach.
+        cur_reach, reach = 0, 0
+        result = 0
 
         for i in range(n - 1):
             # Break if reaches last index.
-            if cur_end >= n - 1:
+            if cur_reach >= n - 1:
                 break
 
-            # Update end with current index and jump.
-            end = max(end, i + nums[i])
+            # Update reach with current index and jump.
+            reach = max(reach, i + nums[i])
 
-            # If i reaches cur_end, trigger another jump and update cur_end.
-            if i == cur_end:
-                jumps += 1
-                cur_end = end
+            # If i reaches cur_reach, trigger another jump and update cur_reach.
+            if i == cur_reach:
+                result += 1
+                cur_reach = reach
 
-        return jumps
+        return result
 
 
 def main():
