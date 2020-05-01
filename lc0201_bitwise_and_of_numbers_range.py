@@ -61,7 +61,7 @@ class SolutionCommonPrefixBit(object):
             n_shifts += 1
 
         # Left-shift m by n_shifts digits.
-        return m <<= n_shifts
+        return m << n_shifts
 
 
 def main():
