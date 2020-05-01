@@ -21,33 +21,34 @@ Follow up: Could you improve it to O(n*logn) time complexity?
 
 
 class SolutionRecur(object):
-    def _LIS(self, nums, cur_max, start, end):
+    def _LIS(self, nums, start, cur_max):
         # Base case.
-        if start > end:
+        if start == len(nums):
             return 0
 
-        # LIS of nums[1:n], excluding nums[0].
-        lis_ex = self._LIS(nums, cur_max, start + 1, end)
-
-        # LIS is 1 + a LIS of nums[1:n], including nums[0],
-        # if nums[0] is bigger than the current max.
+        # LIS is 1 + LIS including nums[start+1:], 
+        # if nums[start] is bigger than cur_max.
+        lis_in = 0
         if nums[start] > cur_max:
-            lis_in = 1 + self._LIS(nums, nums[start], start + 1, end)
-        else:
-            lis_in = -float('inf')
+            lis_in = 1 + self._LIS(nums, start + 1, nums[start])
 
-        return max(lis_ex, lis_in)
+        # LIS of nums[1:n], excluding nums[0].
+        lis_ex = self._LIS(nums, start + 1, cur_max)
+
+        return max(lis_in, lis_ex)
 
     def lengthOfLIS(self, nums):
         """Length of LIS by recursion.
 
+        Time limit exceeded.
+
         Time complexity: O(2^n).
-        Space complexity: O(1).
+        Space complexity: O(n^2).
         """
-        # Apply top-down recursion with two pointers, starting from the two sides.
-        start, end = 0, len(nums) - 1
+        # Apply top-down recursion starting from left.
+        start = 0
         cur_max = -float('inf')
-        return self._LIS(nums, cur_max, start, end)
+        return self._LIS(nums, start, cur_max)
 
 
 class SolutionDP(object):
@@ -59,20 +60,20 @@ class SolutionDP(object):
         Time complexity: O(n^2), where n is the length of the nums.
         Space complexity: O(n).
         """
-        # Apply bottom-up DP.
+        # Edge case.
         if not nums:
             return 0
 
-        # Create a table T with each T[i] denoting LIS up to i.
+        # Apply bottom-up DP with table T with T[i] denoting LIS up to i.
         # Init all elements to 1, since LIS of each num is at least 1.
         T = [1] * len(nums)
 
-        # Apply two pointer method: for each j, check all i < j; 
-        # if num i is smaller than num j, set T[j] = max(T[j], T[i] + 1).
-        for j in range(1, len(nums)):
-            for i in range(j):
-                if nums[i] < nums[j]:
-                    T[j] = max(T[j], T[i] + 1)
+        # Apply two pointer method: for each r, check all l < r; 
+        # if num l is smaller than num r, set T[r] = max(T[r], T[l] + 1).
+        for r in range(1, len(nums)):
+            for l in range(r):
+                if nums[l] < nums[r]:
+                    T[r] = max(T[r], T[l] + 1)
 
         # Return max elements of table as LIS. 
         return max(T)
