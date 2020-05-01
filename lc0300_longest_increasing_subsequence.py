@@ -50,7 +50,7 @@ class SolutionRecur(object):
         return self._LIS(nums, cur_max, start, end)
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     def lengthOfLIS(self, nums):
         """Length of LIS by dynamic programming.
         :type nums: List[int]
@@ -125,7 +125,7 @@ def main():
     print 'By recur: {}'.format(time.time() - start_time)
 
     start_time = time.time()   
-    print SolutionDp().lengthOfLIS(nums)
+    print SolutionDP().lengthOfLIS(nums)
     print 'By DP: {}'.format(time.time() - start_time)
 
     start_time = time.time()   

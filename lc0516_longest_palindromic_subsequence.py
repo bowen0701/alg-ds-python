@@ -87,7 +87,7 @@ class SolutionMemo(object):
         return self._LPS(s, l, r, T)
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     def longestPalindromeSubseq(self, s):
         """
         :type s: str
@@ -118,13 +118,13 @@ def main():
     s = "bbbab"
     print SolutionRecur().longestPalindromeSubseq(s)
     print SolutionMemo().longestPalindromeSubseq(s)
-    print SolutionDp().longestPalindromeSubseq(s)
+    print SolutionDP().longestPalindromeSubseq(s)
 
     # Output: 2.
     s = "cbbd"
     print SolutionRecur().longestPalindromeSubseq(s)
     print SolutionMemo().longestPalindromeSubseq(s)
-    print SolutionDp().longestPalindromeSubseq(s)
+    print SolutionDP().longestPalindromeSubseq(s)
 
 
 if __name__ == '__main__':
