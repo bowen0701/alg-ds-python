@@ -60,6 +60,37 @@ class SolutionRecur(object):
         return self._LCS(text1, text2, n1, n2)
 
 
+class SolutionMemo(object):
+    def _LCS(self, text1, text2, n1, n2, T):
+        # Base case.
+        if n1 == 0 or n2 == 0:
+            return 0
+
+        if T[n1][n2]:
+            return T[n1][n2]
+
+        if text1[n1 - 1] == text2[n2 - 1]:
+            T[n1][n2] = self._LCS(text1, text2, n1 - 1, n2 - 1, T) + 1
+        else:
+            T[n1][n2] = max(self._LCS(text1, text2, n1 - 1, n2, T),
+                            self._LCS(text1, text2, n1, n2 - 1, T))
+        return T[n1][n2]
+
+    def longestCommonSubsequence(self, text1, text2):
+        """
+        :type text1: str
+        :type text2: str
+        :rtype: int
+
+        Time complexity: O(n1*n2).
+        Space complexity: O(n1*n2).
+        """
+        # Apply top-down recursion with memoization.
+        n1, n2 = len(text1), len(text2)
+        T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
+        return self._LCS(text1, text2, n1, n2, T)
+
+
 class SolutionDP(object):
     def longestCommonSubsequence(self, text1, text2):
         """
@@ -94,18 +125,21 @@ def main():
     text1 = "abcde"
     text2 = "ace" 
     print SolutionRecur().longestCommonSubsequence(text1, text2)
+    print SolutionMemo().longestCommonSubsequence(text1, text2)
     print SolutionDP().longestCommonSubsequence(text1, text2)
 
     # Ans: 3
     text1 = "abc"
     text2 = "abc"
     print SolutionRecur().longestCommonSubsequence(text1, text2)
+    print SolutionMemo().longestCommonSubsequence(text1, text2)
     print SolutionDP().longestCommonSubsequence(text1, text2)
 
     # Ans: 0
     text1 = "abc"
     text2 = "def"
     print SolutionRecur().longestCommonSubsequence(text1, text2)
+    print SolutionMemo().longestCommonSubsequence(text1, text2)
     print SolutionDP().longestCommonSubsequence(text1, text2)
 
 
