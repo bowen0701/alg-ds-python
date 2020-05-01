@@ -45,8 +45,9 @@ class SolutionLeftRightMaxPathDownSumRecur(object):
         left_max_down_sum = max(0, self._maxPathDownSum(root.left))
         right_max_down_sum = max(0, self._maxPathDownSum(root.right))
 
-        self.max_path_sum = max(self.max_path_sum, 
-                                left_max_down_sum + root.val + right_max_down_sum)
+        self.max_path_sum = max(
+            left_max_down_sum + root.val + right_max_down_sum,
+            self.max_path_sum)
 
         # Return max path down sum from left or right, including root values.
         return root.val + max(left_max_down_sum, right_max_down_sum)
