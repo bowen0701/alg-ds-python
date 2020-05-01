@@ -45,10 +45,51 @@ class SolutionRecur(object):
         Time complexity: O(2^n).
         Space complexity: O(n^2).
         """
-        # Apply top-down recursion starting from left.
+        # Apply top-down recursion starting from start index.
         cur_idx = 0
         prev_max = -float('inf')
         return self._LIS(nums, cur_idx, prev_max)
+
+
+class SolutionMemo(object):
+    def _LIS(self, nums, prev_idx, cur_idx, prev_max, T):
+        # Base case.
+        if cur_idx == len(nums):
+            return 0
+
+        if T[prev_idx + 1][cur_idx] >= 0:
+            return T[prev_idx + 1][cur_idx]
+
+        # LIS is 1 + LIS including nums[cur_idx+1:], 
+        # if nums[cur_idx] is bigger than prev_max.
+        lis_in = 0
+        if nums[cur_idx] > prev_max:
+            lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1, nums[cur_idx], T)
+
+        # LIS of nums[1:n], excluding nums[0].
+        lis_ex = self._LIS(nums, prev_idx, cur_idx + 1, prev_max, T)
+
+        T[prev_idx + 1][cur_idx] = max(lis_in, lis_ex)
+        return T[prev_idx + 1][cur_idx]
+
+    def lengthOfLIS(self, nums):
+        """Length of LIS by recursion.
+
+        Time limit exceeded.
+
+        Time complexity: O(2^n).
+        Space complexity: O(n^2).
+        """
+        # Apply top-down recursion with memoization, starting from start index.
+        cur_idx = 0
+        prev_idx = -1
+        prev_max = -float('inf')
+
+        # Create memoization table T with init -inf, where T[i] is the result
+        # with nums[i] as the previous element considered in LIS or not.
+        n = len(nums)
+        T = [[-float('inf')] * n for _ in range(n + 1)]
+        return self._LIS(nums, prev_idx, cur_idx, prev_max, T)
 
 
 class SolutionDP(object):
@@ -124,6 +165,30 @@ def main():
     start_time = time.time()
     print SolutionRecur().lengthOfLIS(nums)
     print 'By recur: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionMemo().lengthOfLIS(nums)
+    print 'By memo: {}'.format(time.time() - start_time)
+
+    start_time = time.time()   
+    print SolutionDP().lengthOfLIS(nums)
+    print 'By DP: {}'.format(time.time() - start_time)
+
+    start_time = time.time()   
+    print SolutionBinarySearch().lengthOfLIS(nums)
+    print 'By binary search: {}'.format(time.time() - start_time)
+
+
+    # Output: 20.
+    nums = range(20)
+
+    start_time = time.time()
+    print SolutionRecur().lengthOfLIS(nums)
+    print 'By recur: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print SolutionMemo().lengthOfLIS(nums)
+    print 'By memo: {}'.format(time.time() - start_time)
 
     start_time = time.time()   
     print SolutionDP().lengthOfLIS(nums)
