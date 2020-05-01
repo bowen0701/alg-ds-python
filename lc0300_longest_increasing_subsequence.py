@@ -21,19 +21,19 @@ Follow up: Could you improve it to O(n*logn) time complexity?
 
 
 class SolutionRecur(object):
-    def _LIS(self, nums, start, cur_max):
+    def _LIS(self, nums, cur_idx, prev_max):
         # Base case.
-        if start == len(nums):
+        if cur_idx == len(nums):
             return 0
 
-        # LIS is 1 + LIS including nums[start+1:], 
-        # if nums[start] is bigger than cur_max.
+        # LIS is 1 + LIS including nums[cur_idx+1:], 
+        # if nums[cur_idx] is bigger than prev_max.
         lis_in = 0
-        if nums[start] > cur_max:
-            lis_in = 1 + self._LIS(nums, start + 1, nums[start])
+        if nums[cur_idx] > prev_max:
+            lis_in = 1 + self._LIS(nums, cur_idx + 1, nums[cur_idx])
 
         # LIS of nums[1:n], excluding nums[0].
-        lis_ex = self._LIS(nums, start + 1, cur_max)
+        lis_ex = self._LIS(nums, cur_idx + 1, prev_max)
 
         return max(lis_in, lis_ex)
 
@@ -46,9 +46,9 @@ class SolutionRecur(object):
         Space complexity: O(n^2).
         """
         # Apply top-down recursion starting from left.
-        start = 0
-        cur_max = -float('inf')
-        return self._LIS(nums, start, cur_max)
+        cur_idx = 0
+        prev_max = -float('inf')
+        return self._LIS(nums, cur_idx, prev_max)
 
 
 class SolutionDP(object):
