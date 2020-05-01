@@ -178,7 +178,6 @@ def main():
     print SolutionBinarySearch().lengthOfLIS(nums)
     print 'By binary search: {}'.format(time.time() - start_time)
 
-
     # Output: 20.
     nums = range(20)
 
