@@ -44,25 +44,21 @@ class SolutionCusumCountDict(object):
         """
         from collections import defaultdict
 
-        # Create a dict: cusum->count.
+        # Create a dict: cusum->count, with init: 0->1.
         cusum_count_d = defaultdict(int)
+        cusum_count_d[0] = 1
+
         result = 0
         cusum = 0
         
         for num in nums:
-            # Compute cumulative sum.
             cusum += num
 
-            # If cusum equals k, then increment result by 1.
-            if cusum == k:
-                result += 1
+            # If cusum - k exists in cusum counts, 
+            # subarray from (cusum - k) to "current" cusum equals k.
+            result += cusum_count_d[cusum - k]
 
-            # If cusum - k exists in cusum counts,
-            # the subarray from (cusum - k) to "current" cusum equals k.
-            if cusum - k in cusum_count_d:
-                result += cusum_count_d[cusum - k]
-
-            # Save cusum to cusum counts.
+            # Increment cusum's count.
             cusum_count_d[cusum] += 1
 
         return result
