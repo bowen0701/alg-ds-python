@@ -108,8 +108,8 @@ class SolutionDP(object):
         # Init all elements to 1, since LIS of each num is at least 1.
         T = [1] * len(nums)
 
-        # Apply two pointer method: for each r, check all l < r; 
-        # if num l is smaller than num r, set T[r] = max(T[r], T[l] + 1).
+        # Apply two pointer method: for each r, check if num[l] < num[r], 
+        # update T[r] = max(T[l] + 1) for all such l.
         for r in range(1, len(nums)):
             for l in range(r):
                 if nums[l] < nums[r]:
@@ -132,27 +132,27 @@ class SolutionBinarySearch(object):
         if not nums:
             return 0
 
-        # tails stores the smallest tail of all increasing subsequences
-        # with length i+1 in tails[i].
-        tails = [0] * len(nums)
-        lis = 0
+        # Store the smallest tails T of all increasing subsequences
+        # with length i+1 in T[i].
+        T = [0] * len(nums)
+        length = 0
  
-        # If n is larger than all tails, append it and increase the size by 1.
-        # Further, if tails[i-1] < n <= tails[i], update tails[i].
+        # If n is larger than all smallest tails, append it and increase length by 1.
+        # If not, find the biggest i - 1 s.t. T[i-1] < n <= T[i and update T[i].
         for n in nums:
-            # Use binary search to find the correct tail for new item.
-            left, right = 0, lis
+            # Use binary search to find the correct tail index for new item.
+            left, right = 0, length
             while left < right:
                 mid = left + (right - left) // 2
-                if tails[mid] < n:
+                if T[mid] < n:
                     left = mid + 1
                 else:
                     right = mid
 
-            tails[left] = n
-            lis = max(left + 1, lis)
+            T[left] = n
+            length = max(left + 1, length)
 
-        return lis
+        return length
 
 
 def main():
