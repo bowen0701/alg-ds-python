@@ -34,6 +34,32 @@ Constraints:
 """
 
 
+class SolutionRecur(object):
+    def _LCS(self, text1, text2, n1, n2):
+        # Base case.
+        if n1 == 0 or n2 == 0:
+            return 0
+
+        if text1[n1 - 1] == text2[n2 - 1]:
+            return self._LCS(text1, text2, n1 - 1, n2 - 1) + 1
+        else:
+            return max(self._LCS(text1, text2, n1 - 1, n2),
+                       self._LCS(text1, text2, n1, n2 - 1))
+
+    def longestCommonSubsequence(self, text1, text2):
+        """
+        :type text1: str
+        :type text2: str
+        :rtype: int
+
+        Time complexity: O(3^(n1+n2)).
+        Space complexity: O(n1+n2).
+        """
+        # Apply top-down recursion. 
+        n1, n2 = len(text1), len(text2)
+        return self._LCS(text1, text2, n1, n2)
+
+
 class SolutionDP(object):
     def longestCommonSubsequence(self, text1, text2):
         """
@@ -44,7 +70,7 @@ class SolutionDP(object):
         Time complexity: O(n1*n2), where ni is the length of texti.
         Space complexity: O(n1*n2).
         """
-        # By bottom-up dynamic programming.
+        # Apply bottom-up dynamic programming.
         n1, n2 = len(text1), len(text2)
 
         # Create memoization table: n1xn2.
@@ -67,16 +93,19 @@ def main():
     # Ans: 3.
     text1 = "abcde"
     text2 = "ace" 
+    print SolutionRecur().longestCommonSubsequence(text1, text2)
     print SolutionDP().longestCommonSubsequence(text1, text2)
 
     # Ans: 3
     text1 = "abc"
     text2 = "abc"
+    print SolutionRecur().longestCommonSubsequence(text1, text2)
     print SolutionDP().longestCommonSubsequence(text1, text2)
 
     # Ans: 0
     text1 = "abc"
     text2 = "def"
+    print SolutionRecur().longestCommonSubsequence(text1, text2)
     print SolutionDP().longestCommonSubsequence(text1, text2)
 
 
