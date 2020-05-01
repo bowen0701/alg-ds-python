@@ -52,7 +52,7 @@ class SolutionRecur(object):
 
 
 class SolutionMemo(object):
-    def _LIS(self, nums, prev_idx, cur_idx, prev_max, T):
+    def _LIS(self, nums, prev_idx, cur_idx, T):
         # Base case.
         if cur_idx == len(nums):
             return 0
@@ -63,11 +63,11 @@ class SolutionMemo(object):
         # LIS is 1 + LIS including nums[cur_idx+1:], 
         # if nums[cur_idx] is bigger than prev_max.
         lis_in = 0
-        if nums[cur_idx] > prev_max:
-            lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1, nums[cur_idx], T)
+        if prev_idx < 0 or nums[cur_idx] > nums[prev_idx]:
+            lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1, T)
 
         # LIS of nums[1:n], excluding nums[0].
-        lis_ex = self._LIS(nums, prev_idx, cur_idx + 1, prev_max, T)
+        lis_ex = self._LIS(nums, prev_idx, cur_idx + 1, T)
 
         T[prev_idx + 1][cur_idx] = max(lis_in, lis_ex)
         return T[prev_idx + 1][cur_idx]
@@ -83,13 +83,12 @@ class SolutionMemo(object):
         # Apply top-down recursion with memoization, starting from start index.
         cur_idx = 0
         prev_idx = -1
-        prev_max = -float('inf')
 
         # Create memoization table T with init -inf, where T[i] is the result
         # with nums[i] as the previous element considered in LIS or not.
         n = len(nums)
         T = [[-float('inf')] * n for _ in range(n + 1)]
-        return self._LIS(nums, prev_idx, cur_idx, prev_max, T)
+        return self._LIS(nums, prev_idx, cur_idx, T)
 
 
 class SolutionDP(object):
