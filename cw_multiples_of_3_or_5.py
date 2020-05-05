@@ -14,11 +14,20 @@ Note: If the number is a multiple of both 3 and 5, only count it once.
 
 
 def solution(number):
-    pass
+    """
+    Time complexity: O(n), where n is number.
+    Space complexity: O(1).
+    """
+    result = 0
+    for n in range(1, number):
+        if n % 3 == 0 or n % 5 == 0:
+            result += n
+    return result
 
 
 def main():
-    pass
+    assert solution(10) == 23
+    assert solution(16) == 60
 
 
 if __name__ == '__main__':
