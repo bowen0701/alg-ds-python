@@ -47,8 +47,28 @@ def consecutive_ducks1(n):
     return False
 
 
+def consecutive_ducks2(n):
+    """
+    Time complexity: O(1).
+    Space complexity: O(1).
+    """
+    # Edge case.
+    if n == 2:
+        return False
+
+    # Check if n is odd, then it can be expressed.
+    if n % 2 == 1:
+        return True
+
+    # Check if n is power of two, then it cannot be expressed.
+    if n & (n - 1) == 0:
+        return False
+
+    return True
+
+
 def main():    
-    consecutive_ducks = consecutive_ducks1
+    consecutive_ducks = consecutive_ducks2
 
     assert consecutive_ducks(3984309891) == True
     assert consecutive_ducks(10) == True
