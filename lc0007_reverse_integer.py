@@ -27,7 +27,8 @@ class SolutionNegativeOverflow(object):
         # Since x is 32-bit integer, -2^31 <= x <= 2^31 - 1.
         x_str = str(x)
         if x < 0:
-            x_rev = int(x_str[::-1][-1] + x_str[::-1][:-1])
+            x_str_rev = x_str[::-1]
+            x_rev = int(x_str_rev[-1] + x_str_rev[:-1])
         else:
             x_rev = int(x_str[::-1])
 
@@ -55,7 +56,7 @@ class SolutionModIntegerDivIter(object):
         else:
             is_neg = False
 
-        # Create reversed integer.
+        # Create reversed integer by x mod 10.
         x_rev = 0
         while x:
             x_rev = x_rev * 10 + x % 10
