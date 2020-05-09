@@ -66,12 +66,12 @@ class SolutionRecurNaive(object):
 class SolutionRecurPointer(object):
     def _recur(self, word1, word2, i1, i2):
         # If word1 and word2 are empty strings.
-        if i1 == len(word1) and i2 == len(word2):
+        if i1 == self.n1 and i2 == self.n2:
             return 0
 
         # If one of word1 and word2 is empty string.
-        if i1 == len(word1) or i2 == len(word2):
-            return len(word1) - i1 or len(word2) - i2
+        if i1 == self.n1 or i2 == self.n2:
+            return self.n1 - i1 or self.n2 - i2
 
         if word1[i1] == word2[i2]:
             # If 1st chars are equal, edit the remaining words. 
@@ -93,19 +93,20 @@ class SolutionRecurPointer(object):
         Space complexity: O(n1*n2).
         """
         # Apply top-down recursion with two pointers.
-        i1, i2 = 0, 0
-        return self._recur(word1, word2, i1, i2)
+        self.n1, self.n2 = len(word1), len(word2)
+        idx1, idx2 = 0, 0
+        return self._recur(word1, word2, idx1, idx2)
 
 
 class SolutionMemo(object):
     def _recur(self, word1, word2, i1, i2, T):
         # If word1 and word2 are empty strings.
-        if i1 == len(word1) and i2 == len(word2):
+        if i1 == self.n1 and i2 == self.n2:
             return 0
 
         # If one of word1 and word2 is empty string.
-        if i1 == len(word1) or i2 == len(word2):
-            return len(word1) - i1 or len(word2) - i2
+        if i1 == self.n1 or i2 == self.n2:
+            return self.n1 - i1 or self.n2 - i2
 
         # Check memo table.
         if T.get((i1, i2)):
@@ -133,12 +134,15 @@ class SolutionMemo(object):
         Space complexity: O(n1*n2).
         """
         # Apply top-down recursion with two pointers by memoization.
+        self.n1, self.n2 = len(word1), len(word2)
         i1, i2 = 0, 0
-        T = {}
+
+        # Use a dict T:(i1, i2)->dist for word1[:i1] & word2[:i2].
+        T = dict()
         return self._recur(word1, word2, i1, i2, T)
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     def minDistance(self, word1, word2):
         """
         :type word1: str
@@ -148,17 +152,16 @@ class SolutionDp(object):
         Time complexity: O(n1*n2).
         Space complexity: O(n1*n2).
         """
-        # Apply dynamic programming with table T.
+        # Apply DP with table T:(i1, i2)->dist for word1[:i1] & word2[:i2].
         n1, n2 = len(word1), len(word2)
-
         T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
 
+        # Fill T for word1 = ''.
         for j in range(n2 + 1):
-            # If word1 = ''.
             T[0][j] = j
 
+        # Fill T for word2 = ''.
         for i in range(n1 + 1):
-            # If word2 = ''.
             T[i][0] = i
 
         for i in range(1, n1 + 1):
@@ -167,7 +170,7 @@ class SolutionDp(object):
                     # If chars i & j are equal, ignore them & use up-left.
                     T[i][j] = T[i - 1][j - 1]
                 else:
-                    # If not: 1 + insert (up), delete (left) and replace (up-left).
+                    # If not: 1 + insert (left), delete (up) and replace (up-left).
                     T[i][j] = 1 + min(T[i][j - 1], T[i - 1][j], T[i - 1][j - 1])
 
         return T[-1][-1]
@@ -193,7 +196,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By DP: ', SolutionDp().minDistance(word1, word2)
+    print 'By DP: ', SolutionDP().minDistance(word1, word2)
     print 'Time:', time.time() - start_time
 
     # Ans: 5.
@@ -213,7 +216,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'By DP: ', SolutionDp().minDistance(word1, word2)
+    print 'By DP: ', SolutionDP().minDistance(word1, word2)
     print 'Time:', time.time() - start_time
 
 
