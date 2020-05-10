@@ -11,8 +11,8 @@ def bubble_sort(nums):
     Time complexity: O(n^2).
     Space complexity: O(1).
     """
-    # Starting at pos i <= n-1, swapping (nums[j], nums[j + 1]), j=0,...,i-1, 
-    # if order is not correct
+    # Starting at pos i <= n-1, swapping (nums[j], nums[j+1]), j=0,...,i-1, 
+    # if order is not correct.
     for i in reversed(range(1, len(nums))):
         for j in range(i):
             if nums[j] > nums[j + 1]:
@@ -31,19 +31,19 @@ def bubble_sort_early_stop(nums):
     is_sorted = False
 
     # Next max position.
-    max_i = len(nums) - 1
+    i_max = len(nums) - 1
     
-    while not is_sorted and max_i > 0:
+    while not is_sorted and i_max > 0:
         is_sorted = True
 
         # Scan nums before next max pos, swap num pair if order is not correct.
-        for i in range(max_i):
+        for i in range(i_max):
             if nums[i] > nums[i + 1]:
                 is_sorted = False
                 nums[i], nums[i + 1] = nums[i + 1], nums[i]
 
         # Decrement to get next max position.
-        max_i -= 1
+        i_max -= 1
 
 
 def main():
