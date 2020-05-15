@@ -4,7 +4,7 @@ from __future__ import division
 
 
 def bubble_sort(nums):
-    """Bubble Sort algortihm.
+    """Bubble sort algortihm.
 
     The list is sorted in place.
 
