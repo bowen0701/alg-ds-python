@@ -4,7 +4,7 @@ from __future__ import division
 
 
 def insertion_sort(nums):
-    """Insertion Sort algortihm.
+    """Insertion sort algortihm.
 
     Time complexity: O(n^2).
     Space complexity: O(1).
