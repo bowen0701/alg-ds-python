@@ -4,13 +4,13 @@ from __future__ import division
 
 
 def selection_sort(nums):
-    """Selection Sort algortihm.
+    """Selection sort algortihm.
 
     Time complexity: O(n^2).
     Space complexity: O(1).
     """
-    # Start from the last num, select next max num to swap.  
-    for i in reversed(range(len(nums))):
+    # Start from pos=n-1,..1, select next max num to swap with its num.  
+    for i in reversed(range(1, len(nums))):
         i_max = 0
         for j in range(1, i + 1):
             if nums[j] > nums[i_max]:
