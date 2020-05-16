@@ -28,6 +28,9 @@ class SolutionConvertStr(object):
         """
         :type x: int
         :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         x_str = str(x)
         return x_str == x_str[::-1]
