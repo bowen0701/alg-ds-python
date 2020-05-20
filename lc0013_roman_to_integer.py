@@ -55,8 +55,8 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 class Solution(object):
     def __init__(self):
-    	# Create a Roman to int dictionary.
-    	self.roman2int_d = {
+        # Create a Roman to int dictionary.
+        self.roman2int_d = {
             'I': 1,
             'V': 5,
             'X': 10,
@@ -67,26 +67,26 @@ class Solution(object):
         }
 
     def numeral_to_int(self, i, rn):
-    	# If rn is I, X or C, check its next rn.
-    	# If the rn and its next rn do not specify an number,
-    	# just add rn's int to integer; if yes, substract int from integer.
-    	if rn == 'I':
-    		if i + 1 < len(self.s) and self.s[i + 1] in ['V', 'X']:
-    			return -self.roman2int_d[rn]
-    		else:
-    			return self.roman2int_d[rn]
-    	elif rn == 'X':
-    		if i + 1 < len(self.s) and self.s[i + 1] in ['L', 'C']:
-    			return -self.roman2int_d[rn]
-    		else:
-    			return self.roman2int_d[rn]
-    	elif rn == 'C':
-    		if i + 1 < len(self.s) and self.s[i + 1] in ['D', 'M']:
-    			return -self.roman2int_d[rn]
-    		else:
-    			return self.roman2int_d[rn]
-    	else:
-    		return self.roman2int_d[rn]
+        # If rn is I, X or C, check its next rn.
+        # If the rn and its next rn do not specify an number,
+        # just add rn's int to integer; if yes, substract int from integer.
+        if rn == 'I':
+            if i + 1 < len(self.s) and self.s[i + 1] in ['V', 'X']:
+                return -self.roman2int_d[rn]
+            else:
+                return self.roman2int_d[rn]
+        elif rn == 'X':
+            if i + 1 < len(self.s) and self.s[i + 1] in ['L', 'C']:
+                return -self.roman2int_d[rn]
+            else:
+                return self.roman2int_d[rn]
+        elif rn == 'C':
+            if i + 1 < len(self.s) and self.s[i + 1] in ['D', 'M']:
+                return -self.roman2int_d[rn]
+            else:
+                return self.roman2int_d[rn]
+        else:
+            return self.roman2int_d[rn]
 
     def romanToInt(self, s):
         """
@@ -101,7 +101,7 @@ class Solution(object):
 
         # For each Roman numeral rn, get its int value and add to integer.
         for i, rn in enumerate(s):
-        	integer += self.numeral_to_int(i, rn)
+            integer += self.numeral_to_int(i, rn)
 
         return integer
 
