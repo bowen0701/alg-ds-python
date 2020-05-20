@@ -1,6 +1,8 @@
 """Leetcode 13. Roman to Integer
 Easy
 
+URL: https://leetcode.com/problems/roman-to-integer/
+
 Roman numerals are represented by seven different symbols: 
 I, V, X, L, C, D and M.
 
@@ -53,19 +55,7 @@ Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
 
-class Solution(object):
-    def __init__(self):
-        # Create a Roman to int dictionary.
-        self.roman2int_d = {
-            'I': 1,
-            'V': 5,
-            'X': 10,
-            'L': 50,
-            'C': 100,
-            'D': 500,
-            'M': 1000
-        }
-
+class SolutionSubtractRules(object):
     def numeral_to_int(self, i, rn):
         # If rn is I, X or C, check its next rn.
         # If the rn and its next rn do not specify an number,
@@ -97,30 +87,40 @@ class Solution(object):
         Space complexity: O(1), which is the size of roman to integer dict.
         """
         self.s = s
-        integer = 0
+
+        # Create a Roman to int dictionary.
+        self.roman2int_d = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
 
         # For each Roman numeral rn, get its int value and add to integer.
+        integer = 0
         for i, rn in enumerate(s):
             integer += self.numeral_to_int(i, rn)
-
         return integer
 
 
 def main():
     s = 'III'  # Output: 3.
-    print Solution().romanToInt(s)
+    print SolutionSubtractRules().romanToInt(s)
 
     s = 'IV'  # Output: 4.
-    print Solution().romanToInt(s)
+    print SolutionSubtractRules().romanToInt(s)
 
     s = 'IX'  # Output: 9.
-    print Solution().romanToInt(s)
+    print SolutionSubtractRules().romanToInt(s)
 
     s = 'LVIII'  # Output: 58.
-    print Solution().romanToInt(s)
+    print SolutionSubtractRules().romanToInt(s)
 
     s = 'MCMXCIV'  # Output: 1994.
-    print Solution().romanToInt(s)
+    print SolutionSubtractRules().romanToInt(s)
 
 
 if __name__ == '__main__':
