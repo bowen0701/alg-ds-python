@@ -56,27 +56,14 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
 
 class SolutionSubtractRules(object):
-    def numeral_to_int(self, i, rn):
-        # If rn is I, X or C, check its next rn.
-        # If the rn and its next rn do not specify an number,
-        # just add rn's int to integer; if yes, substract int from integer.
-        if rn == 'I':
-            if i + 1 < len(self.s) and self.s[i + 1] in ['V', 'X']:
-                return -self.roman2int_d[rn]
-            else:
-                return self.roman2int_d[rn]
-        elif rn == 'X':
-            if i + 1 < len(self.s) and self.s[i + 1] in ['L', 'C']:
-                return -self.roman2int_d[rn]
-            else:
-                return self.roman2int_d[rn]
-        elif rn == 'C':
-            if i + 1 < len(self.s) and self.s[i + 1] in ['D', 'M']:
-                return -self.roman2int_d[rn]
-            else:
-                return self.roman2int_d[rn]
+    def _get_roman_to_value(self, i, roman):
+        # If roman is I, X or C, check its next roman to decide subtract or add.
+        if ((roman == 'I' and self.s[i + 1] in ['V', 'X'])
+            or (roman == 'X' and self.s[i + 1] in ['L', 'C'])
+            or (roman == 'C' and self.s[i + 1] in ['D', 'M'])):
+            return -self.roman2int_d[roman]
         else:
-            return self.roman2int_d[rn]
+            return self.roman2int_d[roman]
 
     def romanToInt(self, s):
         """
@@ -87,8 +74,9 @@ class SolutionSubtractRules(object):
         Space complexity: O(1), which is the size of roman to integer dict.
         """
         self.s = s
+        n = len(self.s)
 
-        # Create a Roman to int dictionary.
+        # Create a dict:roman->int.
         self.roman2int_d = {
             'I': 1,
             'V': 5,
@@ -101,8 +89,11 @@ class SolutionSubtractRules(object):
 
         # For each Roman numeral rn, get its int value and add to integer.
         integer = 0
-        for i, rn in enumerate(s):
-            integer += self.numeral_to_int(i, rn)
+        for i, roman in enumerate(s):
+            if i < n - 1:
+                integer += self._get_roman_to_value(i, roman)
+            else:
+                integer += self.roman2int_d[roman]
         return integer
 
 
