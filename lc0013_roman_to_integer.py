@@ -87,31 +87,79 @@ class SolutionSubtractRules(object):
             'M': 1000
         }
 
-        # For each Roman numeral rn, get its int value and add to integer.
-        integer = 0
+        # For each roman, get its value by rules and add it to result.
+        result = 0
         for i, roman in enumerate(s):
             if i < n - 1:
-                integer += self._get_roman_to_value(i, roman)
+                result += self._get_roman_to_value(i, roman)
             else:
-                integer += self.roman2int_d[roman]
-        return integer
+                result += self.roman2int_d[roman]
+        return result
+
+
+class SolutionLeftBigger(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+
+        Time complexity: O(n), where n is the length of s.
+        Space complexity: O(1), which is the size of roman to integer dict.
+        """
+        n = len(s)
+
+        # Create a dict:roman->int.
+        roman2int_d = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+
+        # Check if right's int is bigger, subtract, o.w. add to result.
+        result = 0
+        for i in range(n - 1):
+            if roman2int_d[s[i]] < roman2int_d[s[i + 1]]:
+                result -= roman2int_d[s[i]]
+            else:
+                result += roman2int_d[s[i]]
+        result += roman2int_d[s[n - 1]]
+        return result
 
 
 def main():
+    import time
+
+    print 'By SolutionSubtractRules:'
+    start_time = time.time()
     s = 'III'  # Output: 3.
     print SolutionSubtractRules().romanToInt(s)
-
     s = 'IV'  # Output: 4.
     print SolutionSubtractRules().romanToInt(s)
-
     s = 'IX'  # Output: 9.
     print SolutionSubtractRules().romanToInt(s)
-
     s = 'LVIII'  # Output: 58.
     print SolutionSubtractRules().romanToInt(s)
-
     s = 'MCMXCIV'  # Output: 1994.
     print SolutionSubtractRules().romanToInt(s)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    print 'By SolutionLeftBigger:'
+    start_time = time.time()
+    s = 'III'  # Output: 3.
+    print SolutionLeftBigger().romanToInt(s)
+    s = 'IV'  # Output: 4.
+    print SolutionLeftBigger().romanToInt(s)
+    s = 'IX'  # Output: 9.
+    print SolutionLeftBigger().romanToInt(s)
+    s = 'LVIII'  # Output: 58.
+    print SolutionLeftBigger().romanToInt(s)
+    s = 'MCMXCIV'  # Output: 1994.
+    print SolutionLeftBigger().romanToInt(s)
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
