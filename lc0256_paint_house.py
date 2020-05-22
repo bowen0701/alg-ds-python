@@ -47,18 +47,6 @@ class SolutionMinTheOtherTwoDp(object):
         return min(costs[-1])
 
 
-class SolutionReplace(object):
-    def minCost(self, costs):
-        """
-        :type costs: List[List[int]]
-        :rtype: int
-
-        Time complexity: O(??).
-        Space complexity: O(??).
-        """
-        pass
-
-
 def main():
     # Output: 10
     costs = [[17,2,17],

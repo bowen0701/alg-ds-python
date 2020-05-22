@@ -130,6 +130,18 @@ class SolutionLeftBigger(object):
         return result
 
 
+class SolutionReplace(object):
+    def minCost(self, costs):
+        """
+        :type costs: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(??).
+        Space complexity: O(??).
+        """
+        pass
+
+
 def main():
     import time
 
