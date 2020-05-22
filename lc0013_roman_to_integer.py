@@ -61,9 +61,9 @@ class SolutionSubtractRules(object):
         if ((roman == 'I' and self.s[i + 1] in ['V', 'X'])
             or (roman == 'X' and self.s[i + 1] in ['L', 'C'])
             or (roman == 'C' and self.s[i + 1] in ['D', 'M'])):
-            return -self.roman2int_d[roman]
+            return -self.roman_int_d[roman]
         else:
-            return self.roman2int_d[roman]
+            return self.roman_int_d[roman]
 
     def romanToInt(self, s):
         """
@@ -77,7 +77,7 @@ class SolutionSubtractRules(object):
         n = len(self.s)
 
         # Create a dict:roman->int.
-        self.roman2int_d = {
+        self.roman_int_d = {
             'I': 1,
             'V': 5,
             'X': 10,
@@ -93,7 +93,7 @@ class SolutionSubtractRules(object):
             if i < n - 1:
                 result += self._get_roman_to_value(i, roman)
             else:
-                result += self.roman2int_d[roman]
+                result += self.roman_int_d[roman]
         return result
 
 
@@ -109,7 +109,7 @@ class SolutionLeftBigger(object):
         n = len(s)
 
         # Create a dict:roman->int.
-        roman2int_d = {
+        roman_int_d = {
             'I': 1,
             'V': 5,
             'X': 10,
@@ -122,11 +122,11 @@ class SolutionLeftBigger(object):
         # Check if right's int is bigger, subtract, o.w. add to result.
         result = 0
         for i in range(n - 1):
-            if roman2int_d[s[i]] < roman2int_d[s[i + 1]]:
-                result -= roman2int_d[s[i]]
+            if roman_int_d[s[i]] < roman_int_d[s[i + 1]]:
+                result -= roman_int_d[s[i]]
             else:
-                result += roman2int_d[s[i]]
-        result += roman2int_d[s[n - 1]]
+                result += roman_int_d[s[i]]
+        result += roman_int_d[s[n - 1]]
         return result
 
 
@@ -136,14 +136,32 @@ class SolutionReplace(object):
         :type s: str
         :rtype: int
 
-        Time complexity: O(n), where n is the length of s.
-        Space complexity: O(n), which is the size of roman to integer dict.
+        Time complexity: O(n^2), where n is the length of s.
+        Space complexity: O(n).
         """
+        # Replace chars by rules:
         # - I can be placed before V (5) and X (10) to make 4 and 9. 
         # - X can be placed before L (50) and C (100) to make 40 and 90. 
         # - C can be placed before D (500) and M (1000) to make 400 and 900.
-        s = (s.replace('IV', 'IIII').replace('IX', 'IIIII'))
-
+        s = (s.replace('IV', 'IIII').replace('IX', 'IIIIIIIII')
+              .replace('XL', 'XXXX').replace('XC', 'XXXXXXXXX')
+              .replace('CD', 'CCCC').replace('CM', 'CCCCCCCCC'))
+        
+        # Create a dict:roman->int.
+        roman_int_d = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        n = len(s)
+        result = 0
+        for i in range(n):
+            result += roman_int_d[s[i]]
+        return result
 
 
 def main():
@@ -175,6 +193,20 @@ def main():
     print SolutionLeftBigger().romanToInt(s)
     s = 'MCMXCIV'  # Output: 1994.
     print SolutionLeftBigger().romanToInt(s)
+    print 'Time: {}'.format(time.time() - start_time)
+
+    print 'By SolutionReplace:'
+    start_time = time.time()
+    s = 'III'  # Output: 3.
+    print SolutionReplace().romanToInt(s)
+    s = 'IV'  # Output: 4.
+    print SolutionReplace().romanToInt(s)
+    s = 'IX'  # Output: 9.
+    print SolutionReplace().romanToInt(s)
+    s = 'LVIII'  # Output: 58.
+    print SolutionReplace().romanToInt(s)
+    s = 'MCMXCIV'  # Output: 1994.
+    print SolutionReplace().romanToInt(s)
     print 'Time: {}'.format(time.time() - start_time)
 
 
