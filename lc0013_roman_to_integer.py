@@ -131,13 +131,13 @@ class SolutionLeftBigger(object):
 
 
 class SolutionReplace(object):
-    def minCost(self, costs):
+    def romanToInt(self, s):
         """
-        :type costs: List[List[int]]
+        :type s: str
         :rtype: int
 
-        Time complexity: O(??).
-        Space complexity: O(??).
+        Time complexity: O(n), where n is the length of s.
+        Space complexity: O(1), which is the size of roman to integer dict.
         """
         pass
 
