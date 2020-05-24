@@ -72,16 +72,37 @@ class SolutionMemo(object):
         return self._climb_stairs(cost, n, T)
 
 
+class SolutionDP(object):
+    def minCostClimbingStairs(self, cost):
+        """
+        :type cost: List[int]
+        :rtype: int
+
+        Note: Time limit exceeded.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        n = len(cost)
+        T = [0] * (n + 1)
+        for i in range(2, n + 1):
+            T[i] = min(T[i - 1] + cost[i - 1], 
+                       T[i - 2] + cost[i - 2])
+        return T[-1]
+
+
 def main():
     # Output: 15
     cost = [10, 15, 20]
     print SolutionRecur().minCostClimbingStairs(cost)
     print SolutionMemo().minCostClimbingStairs(cost)
+    print SolutionDP().minCostClimbingStairs(cost)
 
     # Output: 6
     cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
     print SolutionRecur().minCostClimbingStairs(cost)
     print SolutionMemo().minCostClimbingStairs(cost)
+    print SolutionDP().minCostClimbingStairs(cost)
 
 
 if __name__ == '__main__':
