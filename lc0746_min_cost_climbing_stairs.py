@@ -24,17 +24,35 @@ Note:
 - Every cost[i] will be an integer in the range [0, 999].
 """
 
-class Solution(object):
+class SolutionRecur(object):
+    def _climb_stairs(self, cost, n):
+        if n <= 1:
+            return 0
+        return min(self._climb_stairs(cost, n - 1) + cost[n - 1],
+                   self._climb_stairs(cost, n - 2) + cost[n - 2])
+
     def minCostClimbingStairs(self, cost):
         """
         :type cost: List[int]
         :rtype: int
+
+        Note: Time limit exceeded.
+
+        Time complexity: O(2^n).
+        Space complexity: O(n).
         """
-        pass
+        n = len(cost)
+        return self._climb_stairs(cost, n)
 
 
 def main():
-    pass
+    # Output: 15
+    cost = [10, 15, 20]
+    print SolutionRecur().minCostClimbingStairs(cost)
+
+    # Output: 6
+    cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
+    print SolutionRecur().minCostClimbingStairs(cost)
 
 
 if __name__ == '__main__':
