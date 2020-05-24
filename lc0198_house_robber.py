@@ -83,7 +83,7 @@ class SolutionMemo(object):
         return self._recurMemo(nums, len(nums) - 1, T)
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     def rob(self, nums):
         """
         :type nums: List[int]
@@ -148,14 +148,14 @@ def main():
     nums = [1,2,3,1]
     print SolutionRecur().rob(nums)
     print SolutionMemo().rob(nums)
-    print SolutionDp().rob(nums)
+    print SolutionDP().rob(nums)
     print SolutionIter().rob(nums)
 
     # Outpyt: 12.
     nums = [2,7,9,3,1]
     print SolutionRecur().rob(nums) 
     print SolutionMemo().rob(nums)
-    print SolutionDp().rob(nums)
+    print SolutionDP().rob(nums)
     print SolutionIter().rob(nums)
 
 

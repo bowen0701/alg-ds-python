@@ -56,7 +56,7 @@ class SolutionMemo(object):
         return self._uniquePathsRecur(m, n, path)
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     """Unique paths by Dynamic Programming."
 
     Time complexity: O(mn).
@@ -112,7 +112,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
     
     start_time = time.time()
-    print 'By DP:', SolutionDp().uniquePaths(m, n)
+    print 'By DP:', SolutionDP().uniquePaths(m, n)
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()

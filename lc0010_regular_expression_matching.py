@@ -52,7 +52,7 @@ p = "mis*is*p*."
 Output: false
 """
 
-class SolutionDp(object):
+class SolutionDP(object):
     def isMatch(self, s, p):
         """
         :type s: str
@@ -106,27 +106,27 @@ def main():
     s = "aa"
     p = "a"
     # Output: false.
-    print SolutionDp().isMatch(s, p)
+    print SolutionDP().isMatch(s, p)
 
     s = "aa"
     p = "a*"
     # Output: true.
-    print SolutionDp().isMatch(s, p)
+    print SolutionDP().isMatch(s, p)
 
     s = "ab"
     p = ".*"
     # Output: true.
-    print SolutionDp().isMatch(s, p)
+    print SolutionDP().isMatch(s, p)
 
     s = "aab"
     p = "c*a*b"
     # Output: true.
-    print SolutionDp().isMatch(s, p)
+    print SolutionDP().isMatch(s, p)
 
     s = "mississippi"
     p = "mis*is*p*."
     # Output: false.
-    print SolutionDp().isMatch(s, p)
+    print SolutionDP().isMatch(s, p)
 
 
 if __name__ == '__main__':

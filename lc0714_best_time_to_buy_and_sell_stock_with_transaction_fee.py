@@ -28,7 +28,7 @@ Note:
 - 0 <= fee < 50000.
 """
 
-class SolutionDp(object):
+class SolutionDP(object):
     def maxProfit(self, prices, fee):
         """
         :type prices: List[int]
@@ -94,7 +94,7 @@ def main():
     # Output: 8
     prices = [1, 3, 2, 8, 4, 9]
     fee = 2
-    print SolutionDp().maxProfit(prices, fee)
+    print SolutionDP().maxProfit(prices, fee)
 
     prices = [1,3,7,5,10,3]
     fee = 3

@@ -133,7 +133,7 @@ class SolutionMemo(object):
         return self._decodeRecur(s, n, T)
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     def numDecodings(self, s):
         """
         :type s: str
@@ -229,7 +229,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDp().numDecodings(s))
+    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
@@ -253,7 +253,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDp().numDecodings(s))
+    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()

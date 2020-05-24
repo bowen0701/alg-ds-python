@@ -98,7 +98,7 @@ class SolutionMemo(object):
         return self._coin_change_memo(coins, amount, T)
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     def coinChange(self, coins, amount):
         """Change fewest #coins by bottom-up dynamic programming.
 
@@ -176,7 +176,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDp().coinChange(coins, amount))
+    print 'By DP: {}'.format(SolutionDP().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
@@ -197,7 +197,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDp().coinChange(coins, amount))
+    print 'By DP: {}'.format(SolutionDP().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()

@@ -15,7 +15,7 @@ Output: 2
 Explanation: 13 = 4 + 9.
 """
 
-class SolutionDp(object):
+class SolutionDP(object):
     def numSquares(self, n):
         """
         :type n: int
@@ -56,10 +56,10 @@ def main():
     import time
 
     n = 12
-    print SolutionDp().numSquares(n)
+    print SolutionDP().numSquares(n)
 
     n = 13
-    print SolutionDp().numSquares(n)
+    print SolutionDP().numSquares(n)
 
 
 if __name__ == '__main__':

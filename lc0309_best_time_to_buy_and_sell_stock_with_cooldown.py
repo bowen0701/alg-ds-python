@@ -17,7 +17,7 @@ Output: 3
 Explanation: transactions = [buy, sell, cooldown, buy, sell]
 """
 
-class SolutionDp(object):
+class SolutionDP(object):
     def maxProfit(self, prices):
         """
         :type prices: List[int]
@@ -76,7 +76,7 @@ class SolutionIter(object):
 def main():
     # Output: 3
     prices = [1,2,3,0,2]
-    print SolutionDp().maxProfit(prices)
+    print SolutionDP().maxProfit(prices)
     print SolutionIter().maxProfit(prices)
 
 

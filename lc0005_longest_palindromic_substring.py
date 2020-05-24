@@ -35,7 +35,7 @@ class SolutionBrute(object):
         return lps
 
 
-class SolutionDp(object):
+class SolutionDP(object):
     def longestPalindrome(self, s):
         """
         :type s: str
@@ -124,7 +124,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionDp().longestPalindrome(s)))
+    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
@@ -138,7 +138,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionDp().longestPalindrome(s)))
+    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
@@ -152,7 +152,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP: {}'.format(SolutionDp().longestPalindrome(s)))
+    print('By DP: {}'.format(SolutionDP().longestPalindrome(s)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()

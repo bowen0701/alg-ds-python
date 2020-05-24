@@ -27,7 +27,7 @@ Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
 Output: false
 """
 
-class SolutionDp(object):
+class SolutionDP(object):
     def wordBreak(self, s, wordDict):
         """
         :type s: str
@@ -95,25 +95,25 @@ def main():
     # Ans: True
     s = "leetcode"
     wordDict = ["leet", "code"]
-    print SolutionDp().wordBreak(s, wordDict)
+    print SolutionDP().wordBreak(s, wordDict)
     print SolutionDp2().wordBreak(s, wordDict)
 
     # Ans: True
     s = "applepenapple"
     wordDict = ["apple", "pen"]
-    print SolutionDp().wordBreak(s, wordDict)
+    print SolutionDP().wordBreak(s, wordDict)
     print SolutionDp2().wordBreak(s, wordDict)
 
     # Ans: False
     s = "catsandog"
     wordDict = ["cats", "dog", "sand", "and", "cat"]
-    print SolutionDp().wordBreak(s, wordDict)
+    print SolutionDP().wordBreak(s, wordDict)
     print SolutionDp2().wordBreak(s, wordDict)
 
     # Ans: True
     s = "aaaaaaa"
     wordDict = ["aaaa","aaa"]
-    print SolutionDp().wordBreak(s, wordDict)
+    print SolutionDP().wordBreak(s, wordDict)
     print SolutionDp2().wordBreak(s, wordDict)
 
 

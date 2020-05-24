@@ -15,7 +15,7 @@ If you have figured out the O(n) solution, try coding another solution using
 the divide and conquer approach, which is more subtle.
 """
 
-class SolutionDp(object):
+class SolutionDP(object):
     def maxSubArray(self, nums):
         """
         :type nums: List[int]
@@ -62,7 +62,7 @@ class SolutionIter(object):
 def main():
     # Output: 6.
     nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-    print SolutionDp().maxSubArray(nums)
+    print SolutionDP().maxSubArray(nums)
     print SolutionIter().maxSubArray(nums)
 
 
