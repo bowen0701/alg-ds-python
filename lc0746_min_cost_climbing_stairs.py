@@ -41,6 +41,7 @@ class SolutionRecur(object):
         Time complexity: O(2^n).
         Space complexity: O(n).
         """
+        # Apply top-down DP by recursion.
         n = len(cost)
         return self._climb_stairs(cost, n)
 
@@ -67,6 +68,7 @@ class SolutionMemo(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Apply top-down DP by recursion with memoization.
         n = len(cost)
         T = [0] * (n + 1)
         return self._climb_stairs(cost, n, T)
@@ -83,6 +85,7 @@ class SolutionDP(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Apply bottom-up DP.
         n = len(cost)
         T = [0] * (n + 1)
         for i in range(2, n + 1):
@@ -102,6 +105,7 @@ class SolutionIter(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        # Apply bottom-up iteration.
         n = len(cost)
         a, b = 0, 0
         for i in range(2, n + 1):

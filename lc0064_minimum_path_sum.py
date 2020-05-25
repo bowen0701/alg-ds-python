@@ -45,6 +45,7 @@ class SolutionRecur(object):
           - n is the lenght of cols.
         Space complexity: O(m+n).
         """
+        # Apply top-down DP by recursion.
         r, c = len(grid) - 1, len(grid[0]) - 1
         return self._pathSum(grid, r, c)
 
@@ -60,11 +61,10 @@ class SolutionDPUpdate(object):
           - n is the lenght of cols.
         Space complexity: O(1).
         """
-        # Base case.
+        # Apply bottom-up DP.
         if not grid or not grid[0]:
             return 0
 
-        # Apply DP to get min path sum of every entry.
         n_rows, n_cols = len(grid), len(grid[0])
         for r in range(n_rows):
             for c in range(n_cols):
