@@ -43,11 +43,48 @@ class SolutionRecur(object):
         Time complexity: O(2^(m+n)).
           - m is the length of rows.
           - n is the lenght of cols.
-        Space complexity: O(m+n).
+        Space complexity: O(m*n).
         """
         # Apply top-down DP by recursion.
         r, c = len(grid) - 1, len(grid[0]) - 1
         return self._pathSum(grid, r, c)
+
+
+class SolutionMemo(object):
+    def _pathSum(self, grid, r, c, T):
+        # Check if top-left entry.
+        if r == 0 and c == 0:
+            return grid[r][c]
+
+        if T[r][c]:
+            return T[r][c]
+
+        if r == 0:
+            # Check if the 1st row.
+            T[r][c] = grid[r][c] + self._pathSum(grid, r, c - 1, T)
+        elif c == 0:
+            # Check if the 1st col.
+            T[r][c] = grid[r][c] + self._pathSum(grid, r - 1, c, T)
+        else:
+            # Return entry + min(up, left).
+            T[r][c] = grid[r][c] + min(self._pathSum(grid, r - 1, c, T), 
+                                       self._pathSum(grid, r, c - 1, T))
+        return T[r][c]
+
+    def minPathSum(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(m*n).
+          - m is the number of rows.
+          - n is the number of cols.
+        Space complexity: O(m*n).
+        """
+        # Apply top-down DP by recursion with memoization.
+        n_rows, n_cols = len(grid), len(grid[0])
+        T = [[0] * n_cols for _ in range(n_rows)]
+        return self._pathSum(grid, n_rows - 1, n_cols - 1, T)
 
 
 class SolutionDPUpdate(object):
@@ -57,8 +94,8 @@ class SolutionDPUpdate(object):
         :rtype: int
 
         Time complexity: O(m*n),
-          - m is the length of rows.
-          - n is the lenght of cols.
+          - m is the number of rows.
+          - n is the number of cols.
         Space complexity: O(1).
         """
         # Apply bottom-up DP.
@@ -89,6 +126,7 @@ def main():
       [4,2,1]
     ]
     print SolutionRecur().minPathSum(grid)
+    print SolutionMemo().minPathSum(grid)
     print SolutionDPUpdate().minPathSum(grid)
 
 
