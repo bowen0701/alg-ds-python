@@ -19,7 +19,37 @@ Output: 7
 Explanation: Because the path 1->3->1->1->1 minimizes the sum.
 """
 
-class SolutionDpUpdate(object):
+class SolutionRecur(object):
+    def _pathSum(self, grid, r, c):
+        # Check if top-left entry.
+        if r == 0 and c == 0:
+            return grid[r][c]
+
+        # Check if the 1st row or 1st col.
+        if r == 0:
+            return grid[r][c] + self._pathSum(grid, r, c - 1)
+        if c == 0:
+            return grid[r][c] + self._pathSum(grid, r - 1, c)
+
+        # Return entry + min(up, left).
+        return grid[r][c] + min(self._pathSum(grid, r - 1, c), 
+                                self._pathSum(grid, r, c - 1))
+
+    def minPathSum(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(2^(m+n)).
+          - m is the length of rows.
+          - n is the lenght of cols.
+        Space complexity: O(m+n).
+        """
+        r, c = len(grid) - 1, len(grid[0]) - 1
+        return self._pathSum(grid, r, c)
+
+
+class SolutionDPUpdate(object):
     def minPathSum(self, grid):
         """
         :type grid: List[List[int]]
@@ -31,7 +61,7 @@ class SolutionDpUpdate(object):
         Space complexity: O(1).
         """
         # Base case.
-        if not grid:
+        if not grid or not grid[0]:
             return 0
 
         # Apply DP to get min path sum of every entry.
@@ -58,7 +88,8 @@ def main():
       [1,5,1],
       [4,2,1]
     ]
-    print SolutionDpUpdate().minPathSum(grid)
+    print SolutionRecur().minPathSum(grid)
+    print SolutionDPUpdate().minPathSum(grid)
 
 
 if __name__ == '__main__':
