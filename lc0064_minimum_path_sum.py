@@ -87,6 +87,41 @@ class SolutionMemo(object):
         return self._pathSum(grid, n_rows - 1, n_cols - 1, T)
 
 
+class SolutionDP(object):
+    def minPathSum(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(m*n),
+          - m is the number of rows.
+          - n is the number of cols.
+        Space complexity: O(m*n).
+        """
+        # Apply bottom-up DP.
+        if not grid or not grid[0]:
+            return 0
+
+        # Use table T to memorize intermediate results.
+        n_rows, n_cols = len(grid), len(grid[0])
+        T = [[0] * n_cols for _ in range(n_rows)]
+
+        # Update T's top-left and 1st row & col entries.
+        T[0][0] = grid[0][0]
+
+        for c in range(1, n_cols):
+            T[0][c] = grid[0][c] + T[0][c - 1]
+        for r in range(1, n_rows):
+            T[r][0] = grid[r][0] + T[r - 1][0]
+
+        # Update T's middle entries by grid + min(up, left).
+        for r in range(1, n_rows):
+            for c in range(1, n_cols):
+                    T[r][c] += grid[r][c] + min(T[r][c - 1], T[r - 1][c])
+
+        return T[-1][-1]
+
+
 class SolutionDPUpdate(object):
     def minPathSum(self, grid):
         """
@@ -127,6 +162,7 @@ def main():
     ]
     print SolutionRecur().minPathSum(grid)
     print SolutionMemo().minPathSum(grid)
+    print SolutionDP().minPathSum(grid)
     print SolutionDPUpdate().minPathSum(grid)
 
 
