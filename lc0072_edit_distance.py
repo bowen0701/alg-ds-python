@@ -136,7 +136,7 @@ class SolutionMemo(object):
         self.n1, self.n2 = len(word1), len(word2)
         i1, i2 = 0, 0
 
-        # Use a table T:(i1, i2)->dist for word1[:i1] & word2[:i2].
+        # Use a table T[i1][i2] for dist for word1[:i1] & word2[:i2].
         T = [[0] * self.n2 for _ in range(self.n1)]
         return self._editRecur(word1, word2, i1, i2, T)
 
@@ -151,26 +151,26 @@ class SolutionDP(object):
         Time complexity: O(n1*n2).
         Space complexity: O(n1*n2).
         """
-        # Apply DP with table T:(i1, i2)->dist for word1[:i1] & word2[:i2].
+        # Use a table T[i1][i2] for dist for word1[:i1] & word2[:i2].
         n1, n2 = len(word1), len(word2)
         T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
 
         # Fill T for word1 = ''.
-        for j in range(n2 + 1):
-            T[0][j] = j
+        for c in range(n2 + 1):
+            T[0][c] = c
 
         # Fill T for word2 = ''.
-        for i in range(n1 + 1):
-            T[i][0] = i
+        for r in range(n1 + 1):
+            T[r][0] = r
 
-        for i in range(1, n1 + 1):
-            for j in range(1, n2 + 1):
-                if word1[i - 1] == word2[j - 1]:
+        for r in range(1, n1 + 1):
+            for c in range(1, n2 + 1):
+                if word1[r - 1] == word2[c - 1]:
                     # If chars i & j are equal, ignore them & use up-left.
-                    T[i][j] = T[i - 1][j - 1]
+                    T[r][c] = T[r - 1][c - 1]
                 else:
                     # If not: 1 + insert (left), delete (up) and replace (up-left).
-                    T[i][j] = 1 + min(T[i][j - 1], T[i - 1][j], T[i - 1][j - 1])
+                    T[r][c] = 1 + min(T[r][c - 1], T[r - 1][c], T[r - 1][c - 1])
 
         return T[-1][-1]
 
