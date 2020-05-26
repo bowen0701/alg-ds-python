@@ -17,24 +17,10 @@ Output: 2
 Explanation:
 1   (0 0 0 1)
 4   (0 1 0 0)
-       v   v
 
 The above arrows point to positions where the corresponding bits 
 are different.
 """
-
-class SolutionBinCount(object):
-    def hammingDistance(self, x, y):
-        """
-        :type x: int
-        :type y: int
-        :rtype: int
-
-        Time complexity: O(1).
-        Space complexity: O(1).
-        """
-        return bin(x ^ y).count('1')
-
 
 class SolutionModeTwoIter(object):
     def hammingDistance(self, x, y):
@@ -52,13 +38,24 @@ class SolutionModeTwoIter(object):
             result += (x % 2) ^ (y % 2)
             x >>= 1
             y >>= 1
-
         return result
+
+class SolutionBinCountOne(object):
+    def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+
+        Time complexity: O(1).
+        Space complexity: O(1).
+        """
+        return bin(x ^ y).count('1')
 
 
 def main():
-    print SolutionBinCount().hammingDistance(1, 4)
     print SolutionModeTwoIter().hammingDistance(1, 4)
+    print SolutionBinCountOne().hammingDistance(1, 4)
 
 
 if __name__ == '__main__':
