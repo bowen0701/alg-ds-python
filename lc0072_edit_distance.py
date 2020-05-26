@@ -31,7 +31,7 @@ exection -> execution (insert 'u')
 """
 
 class SolutionRecurNaive(object):
-    def _recur(self, word1, word2):
+    def _editRecur(self, word1, word2):
         # If word1 and word2 are empty strings.
         if not word1 and not word2:
             return 0
@@ -42,12 +42,12 @@ class SolutionRecurNaive(object):
 
         if word1[0] == word2[0]:
             # If 1st chars are equal, edit the remaining words. 
-            return self._recur(word1[1:], word2[1:])
+            return self._editRecur(word1[1:], word2[1:])
         else:
             # If not, recursively get min of insert, delete, and replace.
-            insert = 1 + self._recur(word1, word2[1:])
-            delete = 1 + self._recur(word1[1:], word2)
-            replace = 1 + self._recur(word1[1:], word2[1:])
+            insert = 1 + self._editRecur(word1, word2[1:])
+            delete = 1 + self._editRecur(word1[1:], word2)
+            replace = 1 + self._editRecur(word1[1:], word2[1:])
             return min(insert, delete, replace)
 
     def minDistance(self, word1, word2):
@@ -59,12 +59,12 @@ class SolutionRecurNaive(object):
         Time complexity: O((n1+n2)*3^(n1+n2)).
         Space complexity: O((n1*n2)^2).
         """
-        # Apply top-down simple recursion.
-        return self._recur(word1, word2)
+        # Apply top-down DP by recursion.
+        return self._editRecur(word1, word2)
 
 
 class SolutionRecurPointer(object):
-    def _recur(self, word1, word2, i1, i2):
+    def _editRecur(self, word1, word2, i1, i2):
         # If word1 and word2 are empty strings.
         if i1 == self.n1 and i2 == self.n2:
             return 0
@@ -75,12 +75,12 @@ class SolutionRecurPointer(object):
 
         if word1[i1] == word2[i2]:
             # If 1st chars are equal, edit the remaining words. 
-            return self._recur(word1, word2, i1 + 1, i2 + 1)
+            return self._editRecur(word1, word2, i1 + 1, i2 + 1)
         else:
             # If not, recursively get min of insert, delete, and replace.
-            insert = 1 + self._recur(word1, word2, i1, i2 + 1)
-            delete = 1 + self._recur(word1, word2, i1 + 1, i2)
-            replace = 1 + self._recur(word1, word2, i1 + 1, i2 + 1)
+            insert = 1 + self._editRecur(word1, word2, i1, i2 + 1)
+            delete = 1 + self._editRecur(word1, word2, i1 + 1, i2)
+            replace = 1 + self._editRecur(word1, word2, i1 + 1, i2 + 1)
             return min(insert, delete, replace)
 
     def minDistance(self, word1, word2):
@@ -94,12 +94,12 @@ class SolutionRecurPointer(object):
         """
         # Apply top-down recursion with two pointers.
         self.n1, self.n2 = len(word1), len(word2)
-        idx1, idx2 = 0, 0
-        return self._recur(word1, word2, idx1, idx2)
+        i1, i2 = 0, 0
+        return self._editRecur(word1, word2, i1, i2)
 
 
 class SolutionMemo(object):
-    def _recur(self, word1, word2, i1, i2, T):
+    def _editRecur(self, word1, word2, i1, i2, T):
         # If word1 and word2 are empty strings.
         if i1 == self.n1 and i2 == self.n2:
             return 0
@@ -109,20 +109,19 @@ class SolutionMemo(object):
             return self.n1 - i1 or self.n2 - i2
 
         # Check memo table.
-        if T.get((i1, i2)):
-            return T[(i1, i2)]
+        if T[i1][i2]:
+            return T[i1][i2]
 
         if word1[i1] == word2[i2]:
             # If 1st chars are equal, edit the remaining words.
-            T[(i1, i2)] = self._recur(word1, word2, i1 + 1, i2 + 1, T)
+            T[i1][i2] = self._editRecur(word1, word2, i1 + 1, i2 + 1, T)
         else:
             # If not, recursively get min of insert, delete, and replace.
-            insert = 1 + self._recur(word1, word2, i1, i2 + 1, T)
-            delete = 1 + self._recur(word1, word2, i1 + 1, i2, T)
-            replace = 1 + self._recur(word1, word2, i1 + 1, i2 + 1, T)
-            T[(i1, i2)] = min(insert, delete, replace)
-
-        return T[(i1, i2)]
+            insert = 1 + self._editRecur(word1, word2, i1, i2 + 1, T)
+            delete = 1 + self._editRecur(word1, word2, i1 + 1, i2, T)
+            replace = 1 + self._editRecur(word1, word2, i1 + 1, i2 + 1, T)
+            T[i1][i2] = min(insert, delete, replace)
+        return T[i1][i2]
 
     def minDistance(self, word1, word2):
         """
@@ -133,13 +132,13 @@ class SolutionMemo(object):
         Time complexity: O(n1*n2).
         Space complexity: O(n1*n2).
         """
-        # Apply top-down recursion with two pointers by memoization.
+        # Apply top-down DP with recursion in two pointers with memoization.
         self.n1, self.n2 = len(word1), len(word2)
         i1, i2 = 0, 0
 
-        # Use a dict T:(i1, i2)->dist for word1[:i1] & word2[:i2].
-        T = dict()
-        return self._recur(word1, word2, i1, i2, T)
+        # Use a table T:(i1, i2)->dist for word1[:i1] & word2[:i2].
+        T = [[0] * self.n2 for _ in range(self.n1)]
+        return self._editRecur(word1, word2, i1, i2, T)
 
 
 class SolutionDP(object):
