@@ -37,13 +37,12 @@ class SolutionIter(object):
         # Accumulate prefic starting from empty string.
         prefix = ''
 
-        # Choose string 0 as the baseline, and iteratively check other strings.
-        for pos, c in enumerate(strs[0]):
-            for j in range(1, len(strs)):
+        # Choose string 0 as the baseline, and iterate through other strings.
+        for j, c in enumerate(strs[0]):
+            for i in range(1, len(strs)):
                 # Check if position is out of boundary or not matched. 
-                if pos >= len(strs[j]) or c != strs[j][pos]:
+                if j >= len(strs[i]) or c != strs[i][j]:
                     return prefix
-
             prefix += c
 
         return prefix
