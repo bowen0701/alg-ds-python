@@ -34,14 +34,14 @@ class SolutionIter(object):
         if not strs:
             return ''
 
-        # Accumulate prefic starting from empty string.
+        # Accumulate prefix starting from empty string.
         prefix = ''
 
         # Choose string 0 as the baseline, and iterate through other strings.
-        for j, c in enumerate(strs[0]):
-            for i in range(1, len(strs)):
+        for i, c in enumerate(strs[0]):
+            for k in range(1, len(strs)):
                 # Check if position is out of boundary or not matched. 
-                if j >= len(strs[i]) or c != strs[i][j]:
+                if i >= len(strs[k]) or c != strs[k][i]:
                     return prefix
             prefix += c
 
