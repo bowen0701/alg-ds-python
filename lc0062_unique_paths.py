@@ -19,41 +19,41 @@ Output: 3
 class SolutionRecur(object):
     """Unique paths by Recursion."
 
-    Time complexity: O(2^((m - 1) * (n - 1))).
-    Space complexity: O(mn).
+    Time complexity: O(2^(m*n)).
+    Space complexity: O(m*n).
     """
     def uniquePaths(self, m, n):
         if m == 1 or n == 1:
             return 1
 
-        # Recursively trace paths from left and up.
+        # Recursively trace paths from up and left.
         return self.uniquePaths(m - 1, n) + self.uniquePaths(m, n - 1)
 
 
 class SolutionMemo(object):
     """Unique paths by top-down dynamic programming w/ memoization."
 
-    Time complexity: O(mn.
-    Space complexity: O(mn).
+    Time complexity: O(m*n).
+    Space complexity: O(m*n).
     """  
-    def _uniquePathsRecur(self, m, n, path):
-        if path[m][n]:
-            return path[m][n]
+    def _uniquePathsRecur(self, m, n, T):
+        if T[m][n]:
+            return T[m][n]
 
         if m == 1 or n == 1:
-            # Base cases: Set the 1st row or col to 1.
-            path[m][n] = 1
+            # Base cases: set the 1st row or col to 1.
+            T[m][n] = 1
         else:
-            # For other rows/cols, backtrack from left and up.
-            path[m][n] = (self._uniquePathsRecur(m - 1, n, path) + 
-                          self._uniquePathsRecur(m, n - 1, path))
+            # For other rows/cols, backtrack from up and left.
+            T[m][n] = (self._uniquePathsRecur(m - 1, n, T) + 
+                       self._uniquePathsRecur(m, n - 1, T))
 
-        return path[m][n]
+        return T[m][n]
 
     def uniquePaths(self, m, n):
-        # Use path for memoization.
-        path = [[0] * (n + 1) for _ in range(m + 1)]
-        return self._uniquePathsRecur(m, n, path)
+        # Use T for memoization.
+        T = [[0] * (n + 1) for _ in range(m + 1)]
+        return self._uniquePathsRecur(m, n, T)
 
 
 class SolutionDP(object):
@@ -63,39 +63,35 @@ class SolutionDP(object):
     Space complexity: O(mn).
     """
     def uniquePaths(self, m, n):
-        # Use path for memoization.
-        path = [[0] * n for _ in range(m)]
+        # Use T for memoization.
+        T = [[0] * n for _ in range(m)]
 
-        # Set the 0th row to 1.
-        for j in range(n):
-            path[0][j] = 1
+        # Set the 1st row/col to 1.
+        for c in range(n):
+            T[0][c] = 1
+        for r in range(m):
+            T[r][0] = 1
 
-        # Set the 0th col to 1.
-        for i in range(m):
-            path[i][0] = 1
+        # For other rows/cols, trace from up and lefts.
+        for r in range(1, m):
+            for c in range(1, n):
+                T[r][c] = T[r - 1][c] + T[r][c - 1]
 
-        # For other rows/cols, trace from left and up.
-        for i in range(1, m):
-            for j in range(1, n):
-                path[i][j] = path[i - 1][j] + path[i][j - 1]
-
-        return path[-1][-1]
+        return T[-1][-1]
 
 
-class SolutionDp2(object):
+class SolutionDP2(object):
     """Unique paths by extended Dynamic Programming."
 
     Time complexity: O(mn).
     Space complexity: O(n).
     """
     def uniquePaths(self, m, n):
-        path = [1] * n
-
-        for i in range(1, m):
-            for j in range(1, n):
-                path[j] += path[j - 1]
-
-        return path[-1]
+        T = [1] * n
+        for r in range(1, m):
+            for c in range(1, n):
+                T[c] += T[c - 1]
+        return T[-1]
 
 
 def main():
@@ -116,7 +112,7 @@ def main():
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP2:', SolutionDp2().uniquePaths(m, n)
+    print 'By DP2:', SolutionDP2().uniquePaths(m, n)
     print 'Time: {}'.format(time.time() - start_time)
 
 
