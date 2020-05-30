@@ -59,8 +59,8 @@ class SolutionMemo(object):
 class SolutionDP(object):
     """Unique paths by Dynamic Programming."
 
-    Time complexity: O(mn).
-    Space complexity: O(mn).
+    Time complexity: O(m*n).
+    Space complexity: O(m*n).
     """
     def uniquePaths(self, m, n):
         # Use T for memoization.
@@ -83,7 +83,7 @@ class SolutionDP(object):
 class SolutionDP2(object):
     """Unique paths by extended Dynamic Programming."
 
-    Time complexity: O(mn).
+    Time complexity: O(m*n).
     Space complexity: O(n).
     """
     def uniquePaths(self, m, n):
