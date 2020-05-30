@@ -18,10 +18,11 @@ class MinimumEditDistance(object):
 	Example:
 	Input: string1 = "intention", string2 = "execution"
 	Output: 5
-	inte*ntion
-	*execution
-	----------
-	dss is
+	i n t e * n t i o n
+	| | | | | | | | | |
+	* e x e c u t i o n
+	--------------------
+	d s s   i s
 	"""
 	pass
 
