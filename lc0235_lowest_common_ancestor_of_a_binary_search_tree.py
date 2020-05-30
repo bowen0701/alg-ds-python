@@ -86,7 +86,6 @@ class SolutionIter(object):
                 root = root.right
             else:
                 break
-
         return root
 
 
