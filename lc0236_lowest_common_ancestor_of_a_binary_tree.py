@@ -65,15 +65,15 @@ class SolutionPreorderRecur(object):
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
-        # p & q are not in both subtrees.
+        # If p & q are not in two subtrees.
         if not left and not right:
             return None
 
-        # p and q are in left and right subtrees.
+        # If p and q are in both left and right subtrees.
         if left and right:
             return root
 
-        # Otherwise, p or q is in subtree.
+        # Otherwise, p or q is in the same subtree.
         return left or right
 
 
@@ -89,10 +89,10 @@ class SolutionChildParentDictPreorderIter(object):
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
         # Use dict: child->parent.
-        child_parent_d = {}
+        child_parent_d = dict()
         child_parent_d[root] = None
 
-        # Apply iterative preorder traversal to find p & q's parents.
+        # Apply iterative preorder traversal to find all of p & q's parents.
         stack = [root]
         while p not in child_parent_d or q not in child_parent_d:
             current = stack.pop()
@@ -114,7 +114,6 @@ class SolutionChildParentDictPreorderIter(object):
         # Then reversely traverse q's parents until meet one of p's parents.
         while q not in ancestors:
             q = child_parent_d[q]
-
         return q
 
 
