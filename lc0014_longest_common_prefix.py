@@ -34,18 +34,18 @@ class SolutionIter(object):
         if not strs:
             return ''
 
-        # Accumulate prefix starting from empty string.
-        prefix = ''
+        # Use prefix list to append predix chars.
+        prefix_ls = []
 
-        # Choose string 0 as the baseline, and iterate through other strings.
+        # Choose string 0 as the base string, and iterate through other strings.
         for i, c in enumerate(strs[0]):
             for k in range(1, len(strs)):
                 # Check if position is out of boundary or not matched. 
                 if i >= len(strs[k]) or c != strs[k][i]:
-                    return prefix
-            prefix += c
+                    return ''.join(prefix_ls)
+            prefix_ls.append(c)
 
-        return prefix
+        return ''.join(prefix_ls)
 
 
 def main():
