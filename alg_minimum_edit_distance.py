@@ -28,7 +28,8 @@ class MinimumEditDistance(object):
 	"""
 	def __init__(self, distance_type="Levenshtein"):
 		if distance_type not in ["Levenshtein", "Standard"]:
-			raise ValueError("Input `distance_type` should be 'Levenshtein'/'Standard'")
+			raise ValueError(
+				"Input arg `distance_type` should be 'Levenshtein'/'Standard'")
 		self._distance_type = distance_type
 
 		# Insert/delete with cost from left/up.
