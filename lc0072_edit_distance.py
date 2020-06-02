@@ -166,7 +166,7 @@ class SolutionDP(object):
         for r in range(1, n1 + 1):
             for c in range(1, n2 + 1):
                 if word1[r - 1] == word2[c - 1]:
-                    # If chars i & j are equal, ignore them & use up-left.
+                    # If chars r & c are equal, ignore them & use up-left.
                     T[r][c] = T[r - 1][c - 1]
                 else:
                     # If not: 1 + insert (left), delete (up) and replace (up-left).
