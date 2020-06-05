@@ -10,10 +10,9 @@ Return the minimum, maximum, mean, median, and mode of the sample respectively,
 as an array of floating point numbers.  The mode is guaranteed to be unique.
 
 (Recall that the median of a sample is:
-
-The middle element, if the elements of the sample were sorted and the number of
+- The middle element, if the elements of the sample were sorted and the number of
 elements is odd;
-The average of the middle two elements, if the elements of the sample were
+- The average of the middle two elements, if the elements of the sample were
 sorted and the number of elements is even.)
 
 Example 1:
