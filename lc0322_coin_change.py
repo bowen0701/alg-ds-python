@@ -26,7 +26,9 @@ class SolutionRecur(object):
     def coinChange(self, coins, amount):
         """Change fewest #coins by recursion.
 
-        Time complexity: O(c^a), where c is number of coins, and a is amount.
+        Time complexity: O(c^a), where 
+          - c is number of coins
+          - a is amount.
         Space complexity: O(c).
         """
         # Base cases.
@@ -38,14 +40,12 @@ class SolutionRecur(object):
         min_coins = float('inf')
 
         for c in coins:
-            # Not changeable.
-            if c > amount:
-                continue
-
-            extra_coins = self.coinChange(coins, amount - c)
-            if extra_coins < 0:
-                continue
-            min_coins = min(1 + extra_coins, min_coins)
+            # Check if changeable.
+            if c <= amount:
+                extra_coins = self.coinChange(coins, amount - c)
+                if extra_coins < 0:
+                    continue
+                min_coins = min(1 + extra_coins, min_coins)
 
         if min_coins != float('inf'):
             return min_coins
@@ -54,7 +54,7 @@ class SolutionRecur(object):
 
 
 class SolutionMemo(object):
-    def _coin_change_memo(self, coins, amount, T):
+    def _coin_change_recur(self, coins, amount, T):
         """Helper function for coin_change_memo()."""
         # Base cases.
         if amount < 0:
@@ -63,21 +63,18 @@ class SolutionMemo(object):
             return 0
 
         # Apply memoization.
-        if T[amount] > 0:
+        if T[amount]:
             return T[amount]
 
-        # Get fewest num with iterating coins by recursion.
         min_coins = float('inf')
 
         for c in coins:
-            # Not changeable.
-            if c > amount:
-                continue
-
-            extra_coins = self._coin_change_memo(coins, amount - c, T)
-            if extra_coins < 0:
-                continue
-            min_coins = min(1 + extra_coins, min_coins)
+            # Check if changeable.
+            if c <= amount:
+                extra_coins = self._coin_change_recur(coins, amount - c, T)
+                if extra_coins < 0:
+                    continue
+                min_coins = min(1 + extra_coins, min_coins)
 
         if min_coins != float('inf'):
             T[amount] = min_coins
@@ -95,7 +92,7 @@ class SolutionMemo(object):
         Space complexity: O(a).
         """
         T = [0] * (amount + 1)
-        return self._coin_change_memo(coins, amount, T)
+        return self._coin_change_recur(coins, amount, T)
 
 
 class SolutionDP(object):
@@ -109,17 +106,17 @@ class SolutionDP(object):
         n = len(coins)
         T = [[float('inf')] * (amount + 1) for _ in range(n)]
 
-        # For amount 0, set T[i][0] equal 0.
+        # For amount 0, set coin change equal 0.
         for i in range(n):
             T[i][0] = 0
 
         for a in range(1, amount + 1):
             for i in range(n):
                 if coins[i] <= a:
-                    # If coin i is included: to change or not to change.
+                    # If coin i can be includedd: to change or not to change.
                     T[i][a] = min(1 + T[i][a - coins[i]], T[i - 1][a])
                 else:
-                    # If coin i is not included, use previous #coins.
+                    # If not, use previous #coins.
                     T[i][a] = T[i - 1][a]
 
         if T[-1][-1] != float('inf'):
@@ -128,7 +125,7 @@ class SolutionDP(object):
             return -1
 
 
-class SolutionDpEarlyStop(object):
+class SolutionDPEarlyStop(object):
     def coinChange(self, coins, amount):
         """Change fewest #coins by bottom-up dynamic programming.
 
@@ -142,13 +139,13 @@ class SolutionDpEarlyStop(object):
 
         T = [float('inf')] * (amount + 1)
 
-        # For amount 0, set num of coints to 0.
+        # For amount 0, set coin change to 0.
         T[0] = 0
 
         for a in range(1, amount + 1):
             for i in range(len(coins)):
                 if coins[i] <= a:
-                    # If coin i is included: to change or not to change.
+                    # If coin i can be includedd: to change or not to change.
                     T[a] = min(1 + T[a - coins[i]], T[a])
                 else:
                     # Early stop.
@@ -181,7 +178,7 @@ def main():
 
     start_time = time.time()
     print 'By DP w/ early stop: {}'.format(
-        SolutionDpEarlyStop().coinChange(coins, amount))
+        SolutionDPEarlyStop().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
     # Ans: -1.
@@ -202,7 +199,7 @@ def main():
 
     start_time = time.time()
     print 'By DP w/ early stop: {}'.format(
-        SolutionDpEarlyStop().coinChange(coins, amount))
+        SolutionDPEarlyStop().coinChange(coins, amount))
     print 'Time: {}'.format(time.time() - start_time)
 
 
