@@ -10,20 +10,23 @@ def geometric_series_recur(n, r):
     Time complexity: O(n).
     Space complexity: O(n)
     """
+    # Base case.
     if n == 0:
         return 1
+
     return pow(r, n) + geometric_series_recur(n - 1, r)
 
 
-def _geometric_series_memo(n, r, s):
-    if s[n]:
-        return s[n]
-
+def _geometric_series_memo(n, r, T):
+    # Base case.
     if n == 0:
-        s[n] = 1
-    else:
-        s[n] = pow(r, n) + _geometric_series_memo(n - 1, r, s)
-    return s[n]
+        return 1
+
+    if T[n]:
+        return T[n]
+
+    T[n] = pow(r, n) + _geometric_series_memo(n - 1, r, T)
+    return T[n]
 
 
 def geometric_series_memo(n, r):
@@ -32,8 +35,8 @@ def geometric_series_memo(n, r):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    s = [None for _ in range(n + 1)]
-    return _geometric_series_memo(n, r, s)
+    T = [0 for _ in range(n + 1)]
+    return _geometric_series_memo(n, r, T)
 
 
 def geometric_series_dp(n, r):
@@ -42,14 +45,14 @@ def geometric_series_dp(n, r):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    s = [None for x in range(n + 1)]
-    s[0] = 1
+    T = [0 for x in range(n + 1)]
+    T[0] = 1
     for k in range(1, n + 1):
-        s[k] = pow(r, k) + s[k - 1]
-    return s[n]
+        T[k] = pow(r, k) + T[k - 1]
+    return T[n]
 
 
-def geometric_series_dp2(n, r):
+def geometric_series_iter(n, r):
     """Geometric series by bottom-up DP w/ optimized space.
 
     Time complexity: O(n).
@@ -86,7 +89,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By optimized DP: {}'.format(geometric_series_dp2(63, 2)))
+    print('By optimized DP: {}'.format(geometric_series_iter(63, 2)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
