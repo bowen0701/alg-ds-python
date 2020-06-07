@@ -21,7 +21,7 @@ Explanation: Because the path 1->3->1->1->1 minimizes the sum.
 
 class SolutionRecur(object):
     def _pathSum(self, grid, r, c):
-        # Check if top-left entry.
+        # Base case: top-left entry.
         if r == 0 and c == 0:
             return grid[r][c]
 
@@ -52,7 +52,7 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def _pathSum(self, grid, r, c, T):
-        # Check if top-left entry.
+        # Base case: top-left entry.
         if r == 0 and c == 0:
             return grid[r][c]
 

@@ -11,6 +11,7 @@ from __future__ import print_function
 
 def _change_recur(amount, coins, n):
     """Helper function for num_coin_changes_recur()."""
+    # Base cases.
     if amount < 0:
         return 0
     if amount == 0:
@@ -38,6 +39,7 @@ def num_coin_changes_recur(amount, coins):
 
 def _change_memo(amount, coins, T, n):
     """Helper function for num_coin_changes_memo()."""
+    # Base cases.
     if amount < 0:
         return 0
     if amount == 0:
