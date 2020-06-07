@@ -108,15 +108,15 @@ class SolutionDP(object):
 
         # Update T's top-left and 1st row & col entries.
         T[0][0] = grid[0][0]
-        for r in range(1, n_rows):
-            T[r][0] = grid[r][0] + T[r - 1][0]
         for c in range(1, n_cols):
             T[0][c] = grid[0][c] + T[0][c - 1]
+        for r in range(1, n_rows):
+            T[r][0] = grid[r][0] + T[r - 1][0]
 
         # Update T's middle entries by grid + min(up, left).
         for r in range(1, n_rows):
             for c in range(1, n_cols):
-                    T[r][c] += grid[r][c] + min(T[r][c - 1], T[r - 1][c])
+                    T[r][c] += grid[r][c] + min(T[r - 1][c], T[r][c - 1])
 
         return T[-1][-1]
 
@@ -137,9 +137,10 @@ class SolutionDPUpdate(object):
             return 0
 
         n_rows, n_cols = len(grid), len(grid[0])
+
+        # Update grid entry by itself + min(up, left).
         for r in range(n_rows):
             for c in range(n_cols):
-                # Update grid entry by itself + min(up, left).
                 if r == 0 and c == 0:
                     continue
                 elif r == 0 and c > 0:
