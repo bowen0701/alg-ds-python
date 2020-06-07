@@ -27,8 +27,10 @@ Note:
 
 class SolutionRecur(object):
     def _climb_stairs(self, cost, n):
+        # Edge cases with no cost.s
         if n <= 1:
             return 0
+
         return min(self._climb_stairs(cost, n - 1) + cost[n - 1],
                    self._climb_stairs(cost, n - 2) + cost[n - 2])
 
@@ -49,6 +51,7 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def _climb_stairs(self, cost, n, T):
+        # Edge cases with no cost.
         if n <= 1:
             return 0
 
@@ -84,6 +87,8 @@ class SolutionDP(object):
         """
         # Apply bottom-up DP.
         n = len(cost)
+
+        # Use DP table with zero cost at indices 0 & 1.
         T = [0] * (n + 1)
         for i in range(2, n + 1):
             T[i] = min(T[i - 1] + cost[i - 1], 
