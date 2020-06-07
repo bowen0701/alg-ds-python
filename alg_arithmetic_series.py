@@ -11,19 +11,21 @@ def arithmetic_series_recur(n):
     Time complexity: O(n).
     Space complexity: O(n)
     """
+    # Base case.
     if n <= 1:
         return n
     return n + arithmetic_series_recur(n - 1)
 
 
 def _arithmetic_series_memo(n, s):
+    # Base case.
+    if n <= 1:
+        return n
+
     if s[n]:
         return s[n]
 
-    if n <= 1:
-        s[n] = n
-    else:
-        s[n] = n + _arithmetic_series_memo(n - 1, s)
+    s[n] = n + _arithmetic_series_memo(n - 1, s)
     return s[n]
 
 
@@ -33,7 +35,7 @@ def arithmetic_series_memo(n):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    s = [None for _ in range(n + 1)]
+    s = [0 for _ in range(n + 1)]
     return _arithmetic_series_memo(n, s)
 
 
@@ -43,7 +45,7 @@ def arithmetic_series_dp(n):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    s = [None for _ in range(n + 1)]
+    s = [0 for _ in range(n + 1)]
     s[0] = 0
     s[1] = 1
     for k in range(2, n + 1):
