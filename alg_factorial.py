@@ -18,21 +18,23 @@ def factorial_recur(n):
     - Time complexity: O(n)
     - Space complexity: O(n).
     """
+    # Base case.
     if n <= 1:
         return 1
-    else:
-        return n * factorial_recur(n - 1)
+
+    return n * factorial_recur(n - 1)
 
 
-def _factorial_memo(n, f):
-    if f[n]:
-        return f[n]
-
+def _factorial_memo(n, T):
+    # Base case.
     if n <= 1:
-        f[n] = 1
-    else:
-        f[n] = n * _factorial_memo(n - 1, f)
-    return f[n]
+        return 1
+
+    if T[n]:
+        return T[n]
+
+    T[n] = n * _factorial_memo(n - 1, T)
+    return T[n]
 
 
 def factorial_memo(n):
@@ -41,8 +43,8 @@ def factorial_memo(n):
     - Time complexity: O(n)
     - Space complexity: O(n).
     """
-    f = [None for _ in range(n + 1)]
-    return _factorial_memo(n, f)
+    T = [0 for _ in range(n + 1)]
+    return _factorial_memo(n, T)
 
 
 def factorial_dp(n):
@@ -51,14 +53,13 @@ def factorial_dp(n):
     - Time complexity: O(n).
     - Space complexity: O(n).
     """
-    f = [None for _ in range(n + 1)]
-    f[0] = 1
-    f[1] = 1
-
+    T = [0 for _ in range(n + 1)]
+    T[0] = 1
+    T[1] = 1
     for k in range(2, n + 1):
-        f[k] = k * f[k - 1]
+        T[k] = k * T[k - 1]
 
-    return f[n]
+    return T[n]
 
 
 def factorial_iter(n):
@@ -67,10 +68,10 @@ def factorial_iter(n):
     - Time complexity: O(n).
     - Space complexity: O(1).
     """
-    fn = 1
+    f = 1
     for k in range(2, n + 1):
-        fn *= k 
-    return fn
+        f *= k 
+    return f
 
 
 def main():
