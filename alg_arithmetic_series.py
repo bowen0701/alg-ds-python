@@ -17,16 +17,16 @@ def arithmetic_series_recur(n):
     return n + arithmetic_series_recur(n - 1)
 
 
-def _arithmetic_series_memo(n, s):
+def _arithmetic_series_memo(n, T):
     # Base case.
     if n <= 1:
         return n
 
-    if s[n]:
-        return s[n]
+    if T[n]:
+        return T[n]
 
-    s[n] = n + _arithmetic_series_memo(n - 1, s)
-    return s[n]
+    T[n] = n + _arithmetic_series_memo(n - 1, T)
+    return T[n]
 
 
 def arithmetic_series_memo(n):
@@ -35,8 +35,8 @@ def arithmetic_series_memo(n):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    s = [0 for _ in range(n + 1)]
-    return _arithmetic_series_memo(n, s)
+    T = [0 for _ in range(n + 1)]
+    return _arithmetic_series_memo(n, T)
 
 
 def arithmetic_series_dp(n):
@@ -45,15 +45,15 @@ def arithmetic_series_dp(n):
     Time complexity: O(n).
     Space complexity: O(n)
     """
-    s = [0 for _ in range(n + 1)]
-    s[0] = 0
-    s[1] = 1
+    T = [0 for _ in range(n + 1)]
+    T[0] = 0
+    T[1] = 1
     for k in range(2, n + 1):
-        s[k] = k + s[k - 1]
-    return s[n]
+        T[k] = k + T[k - 1]
+    return T[n]
 
 
-def arithmetic_series_dp2(n):
+def arithmetic_series_iter(n):
     """Arithmetic series by bottom-up DP w/ optimized space.
 
     Time complexity: O(n).
@@ -90,7 +90,7 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By optimized DP: {}'.format(arithmetic_series_dp2(100)))
+    print('By iteration: {}'.format(arithmetic_series_iter(100)))
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
