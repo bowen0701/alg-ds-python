@@ -37,17 +37,16 @@ class SolutionMemo(object):
     Space complexity: O(m*n).
     """  
     def _uniquePathsRecur(self, m, n, T):
+        # Base cases: set the 1st row/col to 1.
+        if m == 1 or n == 1:
+            return 1
+
         if T[m][n]:
             return T[m][n]
 
-        if m == 1 or n == 1:
-            # Base cases: set the 1st row or col to 1.
-            T[m][n] = 1
-        else:
-            # For other rows/cols, backtrack from up and left.
-            T[m][n] = (self._uniquePathsRecur(m - 1, n, T) + 
-                       self._uniquePathsRecur(m, n - 1, T))
-
+        # For other rows/cols, backtrack from up and left.
+        T[m][n] = (self._uniquePathsRecur(m - 1, n, T) + 
+                   self._uniquePathsRecur(m, n - 1, T))
         return T[m][n]
 
     def uniquePaths(self, m, n):
