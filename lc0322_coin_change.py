@@ -109,14 +109,14 @@ class SolutionDP(object):
         for i in range(n):
             T[i][0] = 0
 
-        for a in range(1, amount + 1):
+        for j in range(1, amount + 1):
             for i in range(n):
-                if coins[i] <= a:
+                if coins[i] <= j:
                     # If coin i can be includedd: to change or not to change.
-                    T[i][a] = min(1 + T[i][a - coins[i]], T[i - 1][a])
+                    T[i][j] = min(1 + T[i][j - coins[i]], T[i - 1][j])
                 else:
                     # If not, use previous #coins.
-                    T[i][a] = T[i - 1][a]
+                    T[i][j] = T[i - 1][j]
 
         if T[-1][-1] < float('inf'):
             return T[-1][-1]
@@ -141,11 +141,11 @@ class SolutionDPEarlyStop(object):
         # For amount 0, set coin change to 0.
         T[0] = 0
 
-        for a in range(1, amount + 1):
+        for j in range(1, amount + 1):
             for i in range(len(coins)):
-                if coins[i] <= a:
+                if coins[i] <= j:
                     # If coin i can be included: to change or not to change.
-                    T[a] = min(1 + T[a - coins[i]], T[a])
+                    T[j] = min(1 + T[j - coins[i]], T[j])
                 else:
                     # Early stop.
                     break
@@ -160,7 +160,7 @@ def main():
     import time
 
     # Ans: 3.
-    coins = [1, 2, 5]
+    coins = [1, 5, 2]
     amount = 11
 
     start_time = time.time()
