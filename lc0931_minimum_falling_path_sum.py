@@ -105,6 +105,37 @@ class SolutionMemo(object):
         return min_sum
 
 
+class SolutionDP(object):
+    def minFallingPathSum(self, A):
+        """
+        :type A: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(n^2), where n is the number of rows of A.
+        Space complexity: O(n^2).
+        """
+        # Apply bottom-up DP, starting from the 1st row.
+        # Edge case.
+        if not A or not A[0]:
+            return 0
+
+        n = len(A)
+
+        # Use a table T for memorizing the intermediate results.
+        T = [[float('inf')] * n for _ in range(n)]
+
+        # Initialize the 1st row.
+        for j in range(n):
+            T[0][j] = A[0][j]
+
+        for i in range(1, n):
+            for j in range(n):
+                for k in range(j - 1, j + 2, 1):
+                    if 0 <= k < n:
+                        T[i][j] = min(T[i][j], A[i][j] + T[i - 1][k])
+        return min(T[-1])
+
+
 def main():
     import time
 
@@ -121,6 +152,10 @@ def main():
     print 'Memo: {}'.format(SolutionMemo().minFallingPathSum(A))
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'DP: {}'.format(SolutionDP().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
+
     # Output: -66
     A = [[-80,-13,22],
          [ 83, 94,-5],
@@ -132,6 +167,10 @@ def main():
 
     start_time = time.time()
     print 'Memo: {}'.format(SolutionMemo().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'DP: {}'.format(SolutionDP().minFallingPathSum(A))
     print 'Time: {}'.format(time.time() - start_time)
 
 
