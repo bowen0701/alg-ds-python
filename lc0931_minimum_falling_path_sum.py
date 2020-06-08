@@ -42,6 +42,9 @@ class SolutionRecur(object):
         """
         :type A: List[List[int]]
         :rtype: int
+
+        Time complexity: O(n*3^n), where n is the number of rows of A.
+        Space complexity: O(n).
         """
         # Edge case.
         if not A or not A[0]:
