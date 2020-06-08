@@ -23,15 +23,14 @@ The falling path with the smallest sum is [1,4,7], so the answer is 12.
 
 class SolutionRecur(object):
     def _fallingPathSumRecur(self, A, r, c):
-        n = len(A)
-
-        # If arrives at the 1st row, return its value.
+        # If at the 1st row, return its value.
         if r == 0:
             return A[r][c]
 
+        n = len(A)
         min_sum = float('inf')
-        for j in range(n):
-            if j - r <= 1:
+        for j in range(c - 1, c + 2, 1):
+            if 0 <= j < n:
                 min_sum = min(
                     min_sum, 
                     A[r][c] + self._fallingPathSumRecur(A, r - 1, j)
@@ -44,7 +43,7 @@ class SolutionRecur(object):
         :rtype: int
 
         Time complexity: O(n*3^n), where n is the number of rows of A.
-        Space complexity: O(n).
+        Space complexity: O(n^2).
         """
         # Apply top-down recursion starting from the last row.
         # Edge case.
@@ -60,18 +59,80 @@ class SolutionRecur(object):
         return min_sum
 
 
+class SolutionMemo(object):
+    def _fallingPathSumRecur(self, A, r, c, T):
+        # Base case: if at the 1st row, return its value.
+        if r == 0:
+            return A[r][c]
+
+        # Check memo table.
+        if T[r][c]:
+            return T[r][c]
+
+        n = len(A)
+        min_sum = float('inf')
+        for j in range(c - 1, c + 2, 1):
+            if 0 <= j < n:
+                min_sum = min(
+                    min_sum, 
+                    A[r][c] + self._fallingPathSumRecur(A, r - 1, j, T)
+                )
+        T[r][c] = min_sum
+        return T[r][c]
+
+    def minFallingPathSum(self, A):
+        """
+        :type A: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(n^2), where n is the number of rows of A.
+        Space complexity: O(n^2).
+        """
+        # Apply top-down recursion with memoization, starting from the last row.
+        # Edge case.
+        if not A or not A[0]:
+            return 0
+
+        n = len(A)
+
+        # Use a table T for memorizing the intermediate results.
+        T = [[0] * n for _ in range(n)]
+
+        # Iterate through the last row to update min sum.
+        min_sum = float('inf')
+        for c in range(n):
+            min_sum = min(min_sum, self._fallingPathSumRecur(A, n - 1, c, T))
+        return min_sum
+
+
 def main():
+    import time
+
     # Output: 12
     A = [[1,2,3],
          [4,5,6],
          [7,8,9]]
-    print SolutionRecur().minFallingPathSum(A)
 
-    # Output: 6
-    A = [[1,2,3,4],
-         [5,2,7,8],
-         [9,9,3,9]]
-    print SolutionRecur().minFallingPathSum(A)
+    start_time = time.time()
+    print 'Recur: {}'.format(SolutionRecur().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'Memo: {}'.format(SolutionMemo().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    # Output: -66
+    A = [[-80,-13,22],
+         [ 83, 94,-5],
+         [ 73,-48,61]]
+
+    start_time = time.time()
+    print 'Recur: {}'.format(SolutionRecur().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'Memo: {}'.format(SolutionMemo().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
 
 
 if __name__ == '__main__':
