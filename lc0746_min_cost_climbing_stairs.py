@@ -51,10 +51,11 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def _climb_stairs(self, cost, n, T):
-        # Edge cases: no cost.
+        # Base cases: no cost.
         if n <= 1:
             return 0
 
+        # Check memo table.
         if T[n]:
             return T[n]
 

@@ -66,6 +66,7 @@ class SolutionMemo(object):
         if n1 == 0 or n2 == 0:
             return 0
 
+        # Check memo table.
         if T[n1][n2]:
             return T[n1][n2]
 

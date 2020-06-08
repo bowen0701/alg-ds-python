@@ -103,6 +103,7 @@ class SolutionMemo(object):
         if s[start] == '0':
             return 0
 
+        # Check memo table.
         if T[k]:
             return T[k]
 

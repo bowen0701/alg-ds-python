@@ -30,6 +30,7 @@ Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and
 
 class SolutionRecur(object):
     def _recur(self, nums, n):
+        # Base case.
         if n < 0:
             return 0
 
@@ -55,9 +56,11 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def _recurMemo(self, nums, n, T):
+        # Base case.
         if n < 0:
             return 0
 
+        # Check memo table.
         if T[n]:
             return T[n]
 

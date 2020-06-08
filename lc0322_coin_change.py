@@ -62,7 +62,7 @@ class SolutionMemo(object):
         if amount == 0:
             return 0
 
-        # Apply memoization.
+        # Check memo table.
         if T[amount]:
             return T[amount]
 
