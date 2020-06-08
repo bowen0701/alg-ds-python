@@ -94,10 +94,6 @@ class SolutionRecur(object):
 class SolutionMemo(object):
     def _decodeRecur(self, s, k, T):
         """Recursively check the last k chars."""
-        # Check the memo result.
-        if T[k]:
-            return T[k]
-
         # Base case.
         if k == 0:
             return 1
@@ -106,6 +102,9 @@ class SolutionMemo(object):
         start = len(s) - k
         if s[start] == '0':
             return 0
+
+        if T[k]:
+            return T[k]
 
         # If valid, decode the remaining (k - 1) chars.
         result = self._decodeRecur(s, k - 1, T)
