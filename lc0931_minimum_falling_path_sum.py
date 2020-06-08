@@ -7,7 +7,7 @@ Given a square array of integers A, we want the minimum sum of a falling
 path through A.
 
 A falling path starts at any element in the first row, and chooses one
-element from each row.  The next row's choice must be in a column that is
+element from each row. The next row's choice must be in a column that is
 different from the previous row's column by at most one.
 
 Example 1:
@@ -21,17 +21,52 @@ The possible falling paths are:
 The falling path with the smallest sum is [1,4,7], so the answer is 12.
 """
 
-class Solution(object):
+class SolutionRecur(object):
+    def _fallingPathSumRecur(self, A, r, c):
+        n = len(A)
+
+        # If arrives at the 1st row, return its value.
+        if r == 0:
+            return A[r][c]
+
+        min_sum = float('inf')
+        for j in range(n):
+            if j - r <= 1:
+                min_sum = min(
+                    min_sum, 
+                    A[r][c] + self._fallingPathSumRecur(A, r - 1, j)
+                )
+        return min_sum
+
     def minFallingPathSum(self, A):
         """
         :type A: List[List[int]]
         :rtype: int
         """
-        pass
+        # Edge case.
+        if not A or not A[0]:
+            return 0
+
+        # Apply top-down recursion with iterating through the last row.
+        n = len(A)
+        min_sum = float('inf')
+        for c in range(n):
+            min_sum = min(min_sum, self._fallingPathSumRecur(A, n - 1, c))
+        return min_sum
 
 
 def main():
-    pass
+    # Output: 12
+    A = [[1,2,3],
+         [4,5,6],
+         [7,8,9]]
+    print SolutionRecur().minFallingPathSum(A)
+
+    # Output: 6
+    A = [[1,2,3,4],
+         [5,2,7,8],
+         [9,9,3,9]]
+    print SolutionRecur().minFallingPathSum(A)
 
 
 if __name__ == '__main__':
