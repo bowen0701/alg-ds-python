@@ -28,13 +28,10 @@ class SolutionRecur(object):
             return A[r][c]
 
         n = len(A)
-        min_sum = float('inf')
-        for j in range(c - 1, c + 2, 1):
-            if 0 <= j < n:
-                min_sum = min(
-                    min_sum, 
-                    A[r][c] + self._fallingPathSumRecur(A, r - 1, j)
-                )
+        min_sum = (A[r][c]
+                   + min(self._fallingPathSumRecur(A, r - 1, max(0, c - 1)),
+                         self._fallingPathSumRecur(A, r - 1, c),
+                         self._fallingPathSumRecur(A, r - 1, min(n - 1, c + 1))))
         return min_sum
 
     def minFallingPathSum(self, A):
@@ -70,14 +67,10 @@ class SolutionMemo(object):
             return T[r][c]
 
         n = len(A)
-        min_sum = float('inf')
-        for j in range(c - 1, c + 2, 1):
-            if 0 <= j < n:
-                min_sum = min(
-                    min_sum, 
-                    A[r][c] + self._fallingPathSumRecur(A, r - 1, j, T)
-                )
-        T[r][c] = min_sum
+        T[r][c] = (A[r][c]
+                   + min(self._fallingPathSumRecur(A, r - 1, max(0, c - 1), T),
+                         self._fallingPathSumRecur(A, r - 1, c, T),
+                         self._fallingPathSumRecur(A, r - 1, min(n - 1, c + 1), T)))
         return T[r][c]
 
     def minFallingPathSum(self, A):
@@ -130,10 +123,35 @@ class SolutionDP(object):
 
         for i in range(1, n):
             for j in range(n):
-                for k in range(j - 1, j + 2, 1):
-                    if 0 <= k < n:
-                        T[i][j] = min(T[i][j], A[i][j] + T[i - 1][k])
+                T[i][j] = (A[i][j] 
+                           + min(T[i - 1][max(0, j - 1)], 
+                                 T[i - 1][j], 
+                                 T[i - 1][min(n - 1, j + 1)]))
         return min(T[-1])
+
+
+class SolutionDPOptim(object):
+    def minFallingPathSum(self, A):
+        """
+        :type A: List[List[int]]
+        :rtype: int
+
+        Time complexity: O(n^2), where n is the number of rows of A.
+        Space complexity: O(1).
+        """
+        # Apply bottom-up DP, starting from the 1st row.
+        # Edge case.
+        if not A or not A[0]:
+            return 0
+
+        n = len(A)
+
+        for i in range(1, n):
+            for j in range(n):
+                A[i][j] += min(A[i - 1][max(0, j - 1)], 
+                               A[i - 1][j], 
+                               A[i - 1][min(n - 1, j + 1)])
+        return min(A[-1])
 
 
 def main():
@@ -156,6 +174,10 @@ def main():
     print 'DP: {}'.format(SolutionDP().minFallingPathSum(A))
     print 'Time: {}'.format(time.time() - start_time)
 
+    start_time = time.time()
+    print 'DP optim: {}'.format(SolutionDPOptim().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
+
     # Output: -66
     A = [[-80,-13,22],
          [ 83, 94,-5],
@@ -171,6 +193,10 @@ def main():
 
     start_time = time.time()
     print 'DP: {}'.format(SolutionDP().minFallingPathSum(A))
+    print 'Time: {}'.format(time.time() - start_time)
+
+    start_time = time.time()
+    print 'DP optim: {}'.format(SolutionDPOptim().minFallingPathSum(A))
     print 'Time: {}'.format(time.time() - start_time)
 
 
