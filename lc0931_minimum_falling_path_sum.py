@@ -46,12 +46,14 @@ class SolutionRecur(object):
         Time complexity: O(n*3^n), where n is the number of rows of A.
         Space complexity: O(n).
         """
+        # Apply top-down recursion starting from the last row.
         # Edge case.
         if not A or not A[0]:
             return 0
 
-        # Apply top-down recursion with iterating through the last row.
         n = len(A)
+
+        # Iterate through the last row to update min sum.
         min_sum = float('inf')
         for c in range(n):
             min_sum = min(min_sum, self._fallingPathSumRecur(A, n - 1, c))
