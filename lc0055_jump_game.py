@@ -35,7 +35,7 @@ class SolutionGreedy(object):
         reach = 0
 
         for i in range(len(nums)):
-            # Index i is not reachable.
+            # Check if index i is not reachable.
             if reach < i:
                 return False
 
