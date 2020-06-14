@@ -22,6 +22,30 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
 jump length is 0, which makes it impossible to reach the last index.
 """
 
+
+class SolutionDP(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        # Apply bottom-up DP with memo table T, where T[i] = True means reachable.
+        n = len(nums)
+        T = [False] * n
+        T[0] = True
+
+        # Check if i is reachable from some reachable j.
+        for i in range(1, n):
+            for j in range(i, -1, -1):
+                if i - j <= nums[j] and T[j]:
+                    T[i] = True
+                    break
+        return T[-1]
+
+
 class SolutionGreedy(object):
     def canJump(self, nums):
         """
@@ -31,11 +55,12 @@ class SolutionGreedy(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
+        # Apply greedy approach with early stopping.
         # Create max reachable index.
         reach = 0
 
         for i in range(len(nums)):
-            # Check if index i is not reachable.
+            # Check if ifndex i is not reachable.
             if reach < i:
                 return False
 
@@ -46,13 +71,29 @@ class SolutionGreedy(object):
 
 
 def main():
+    import time
+
     # Ans: True
     nums = [2,3,1,1,4]
-    print SolutionGreedy().canJump(nums)
+
+    start_time = time.time()
+    print 'DP:', SolutionDP().canJump(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'DP:', SolutionGreedy().canJump(nums)
+    print 'Time:', time.time() - start_time
 
     # Ans: False
     nums = [3,2,1,0,4]
-    print SolutionGreedy().canJump(nums)
+
+    start_time = time.time()
+    print 'DP:', SolutionDP().canJump(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'DP:', SolutionGreedy().canJump(nums)
+    print 'Time:', time.time() - start_time
 
 
 if __name__ == '__main__':
