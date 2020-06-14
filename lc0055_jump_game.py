@@ -37,7 +37,7 @@ class SolutionDP(object):
         T = [False] * n
         T[0] = True
 
-        # Check if i is reachable from some reachable j.
+        # Iterate through i from left to check if reachable from some reachable j.
         for i in range(1, n):
             for j in range(i, -1, -1):
                 if i - j <= nums[j] and T[j]:
