@@ -107,12 +107,10 @@ class SolutionIter(object):
 
 def show(head):
     ls = []
-
     current = head
     while current:
         ls.append(current.val)
         current = current.next
-    
     print ls
 
 
