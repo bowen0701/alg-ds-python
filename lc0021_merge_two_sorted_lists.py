@@ -105,13 +105,13 @@ class SolutionIter(object):
         return pre_head.next
 
 
-def show(head):
-    ls = []
-    current = head
+def show(ls):
+    result = []
+    current = ls
     while current:
-        ls.append(current.val)
+        result.append(current.val)
         current = current.next
-    print ls
+    print result
 
 
 def main():
