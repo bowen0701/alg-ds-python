@@ -15,6 +15,8 @@ def insertion_sort(nums):
         for j in range(i, -1, -1):
             if j > 0 and nums[j - 1] > nums[j]:
                 nums[j - 1], nums[j] = nums[j], nums[j - 1]
+            else:
+                break
 
 
 def main():
