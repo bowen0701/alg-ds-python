@@ -32,12 +32,12 @@ class SolutionDP(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Apply bottom-up DP with memo table T, where T[i] = True means reachable.
+        # Apply bottom-up DP with table T, where T[i]=True means reachable.
         n = len(nums)
         T = [False] * n
         T[0] = True
 
-        # Iterate through i from left to check if reachable from some reachable j.
+        # Iterate from left to check if reachable from previous reachable.
         for i in range(1, n):
             for j in range(i, -1, -1):
                 if i - j <= nums[j] and T[j]:
@@ -56,15 +56,15 @@ class SolutionGreedy(object):
         Space complexity: O(1).
         """
         # Apply greedy approach with early stopping.
-        # Create max reachable index.
+        # Denote max reachable index by reach.
         reach = 0
 
+        # Iterate from left to check if index i is not reachable.
         for i in range(len(nums)):
-            # Check if ifndex i is not reachable.
             if reach < i:
                 return False
 
-            # Update reach by taking max of itself and i+nums[i].
+            # Update reach by max of itself & max reach from i.
             reach = max(reach, i + nums[i])
 
         return True
