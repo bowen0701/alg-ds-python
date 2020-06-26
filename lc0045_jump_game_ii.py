@@ -31,11 +31,11 @@ class SolutionDPGreedy(object):
         """
         n = len(nums)
 
-        # Create table T, where T[i] is min number of jumps to reach i.
+        # Apply DP with table T, where T[i] is min jumps to reach i.
         T = [n] * n
         T[0] = 0
 
-        # For each index i, loop to update T[reach+1] ~ T[i+nums[i]].
+        # Iterate through from left to update T[reach+1] ~ T[i+nums[i]].
         reach = 0
         for i in range(n):
             for j in range(reach + 1, min(i + nums[i], n - 1) + 1):
@@ -66,12 +66,12 @@ class SolutionBFSGreedy1(object):
             if reach >= n - 1:
                 break
 
-            # Update jump if prev_reach is behind current index.
+            # Update result if prev_reach is behind current index.
             if prev_reach < i:
                 result += 1
                 prev_reach = reach
 
-            # Update reach with current index and jump.
+            # Update reach with max jump from current index.
             reach = max(reach, i + nums[i])
 
         return result
@@ -97,7 +97,7 @@ class SolutionBFSGreedy2(object):
             if cur_reach >= n - 1:
                 break
 
-            # Update reach with current index and jump.
+            # Update result with max jump from current index.
             reach = max(reach, i + nums[i])
 
             # If i reaches cur_reach, trigger another jump and update cur_reach.
