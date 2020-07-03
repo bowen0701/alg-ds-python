@@ -46,7 +46,7 @@ class SolutionDPGreedy(object):
         return T[-1]
 
 
-class SolutionBFSGreedy1(object):
+class SolutionBFSPrevReachGreedy(object):
     def jump(self, nums):
         """
         :type nums: List[int]
@@ -77,7 +77,7 @@ class SolutionBFSGreedy1(object):
         return result
 
 
-class SolutionBFSGreedy2(object):
+class SolutionBFSCurReachGreedy(object):
     def jump(self, nums):
         """
         :type nums: List[int]
@@ -112,14 +112,14 @@ def main():
     # Outpout: 2
     nums = [2,3,1,1,4]
     print SolutionDPGreedy().jump(nums)
-    print SolutionBFSGreedy1().jump(nums)
-    print SolutionBFSGreedy2().jump(nums)
+    print SolutionBFSPrevReachGreedy().jump(nums)
+    print SolutionBFSCurReachGreedy().jump(nums)
 
     # Outpout: 2
     nums = [7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]
     print SolutionDPGreedy().jump(nums)
-    print SolutionBFSGreedy1().jump(nums)
-    print SolutionBFSGreedy2().jump(nums)
+    print SolutionBFSPrevReachGreedy().jump(nums)
+    print SolutionBFSCurReachGreedy().jump(nums)
 
 
 if __name__ == '__main__':
