@@ -39,7 +39,7 @@ class SolutionDP(object):
 
         # Iterate from left to check if reachable from previous reachable.
         for r in range(1, n):
-            for l in range(r, -1, -1):
+            for l in range(r - 1, -1, -1):
                 if r - l <= nums[l] and T[l]:
                     T[r] = True
                     break
@@ -56,7 +56,7 @@ class SolutionGreedy(object):
         Space complexity: O(1).
         """
         # Apply greedy approach with early stopping.
-        # Use reach to denote max reachable index.
+        # Set reach for max reachable index.
         reach = 0
 
         # Iterate from left to check if index i is not reachable.
@@ -64,7 +64,7 @@ class SolutionGreedy(object):
             if reach < i:
                 return False
 
-            # Update reach by max of itself & max reach from i.
+            # Greedily ipdate max reach.
             reach = max(reach, i + nums[i])
 
         return True
