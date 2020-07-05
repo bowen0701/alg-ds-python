@@ -35,13 +35,13 @@ class SolutionDPGreedy(object):
         T = [n] * n
         T[0] = 0
 
-        # Iterate through from left to update T[reach+1] ~ T[i+nums[i]].
+        # Iterate through from left to update T[reach+1],..., T[i+nums[i]].
         reach = 0
-        for i in range(n):
-            for j in range(reach + 1, min(i + nums[i], n - 1) + 1):
-                T[j] = min(T[j], T[i] + 1)
+        for l in range(n):
+            for r in range(reach + 1, min(l + nums[l], n - 1) + 1):
+                T[r] = min(T[r], T[l] + 1)
 
-            reach = max(reach, i + nums[i])
+            reach = max(reach, l + nums[l])
 
         return T[-1]
 
@@ -66,7 +66,7 @@ class SolutionBFSPrevReachGreedy(object):
             if reach >= n - 1:
                 break
 
-            # Update result if prev_reach is behind current index.
+            # Update result if prev_reach is behind current index i.
             if prev_reach < i:
                 result += 1
                 prev_reach = reach
@@ -97,7 +97,7 @@ class SolutionBFSCurReachGreedy(object):
             if cur_reach >= n - 1:
                 break
 
-            # Update result with max jump from current index.
+            # Update result with max jump from current index i.
             reach = max(reach, i + nums[i])
 
             # If i reaches cur_reach, trigger another jump and update cur_reach.
