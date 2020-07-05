@@ -56,7 +56,7 @@ class SolutionGreedy(object):
         Space complexity: O(1).
         """
         # Apply greedy approach with early stopping.
-        # Denote max reachable index by reach.
+        # Use reach to denote max reachable index.
         reach = 0
 
         # Iterate from left to check if index i is not reachable.
