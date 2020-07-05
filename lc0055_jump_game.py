@@ -38,10 +38,10 @@ class SolutionDP(object):
         T[0] = True
 
         # Iterate from left to check if reachable from previous reachable.
-        for i in range(1, n):
-            for j in range(i, -1, -1):
-                if i - j <= nums[j] and T[j]:
-                    T[i] = True
+        for r in range(1, n):
+            for l in range(r, -1, -1):
+                if r - l <= nums[l] and T[l]:
+                    T[r] = True
                     break
         return T[-1]
 
