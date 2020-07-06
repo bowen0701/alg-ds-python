@@ -24,24 +24,29 @@ jump length is 0, which makes it impossible to reach the last index.
 
 
 class SolutionRecur(object):
-    def jumpRecur(self, start, end, nums):
+    def jumpRecur(self, start, nums):
+        n = len(nums)
+
         # Base case.
-        if start == end:
+        if start == n - 1:
             return True
 
+        # Iterate through jumps to check if reachable from any jump.
         for jump in range(1, nums[start] + 1):
-            if self.jumpRecur(start + jump, end, nums):
+            if start + jump <= n - 1 and self.jumpRecur(start + jump, nums):
                 return True
         return False
 
     def canJump(self, nums):
         """
         :type nums: List[int]
-        :rtype: bool
+        :rtype: boole
+
+        Time complexity: O(2^n), where n is the length of nums.
+        Space complexity: O(n).
         """
-        n = len(nums)
-        start, end = 0, n - 1
-        return self.jumpRecur(start, end, nums)
+        start = 0
+        return self.jumpRecur(start, nums)
 
 
 class SolutionDP(object):
