@@ -23,6 +23,27 @@ jump length is 0, which makes it impossible to reach the last index.
 """
 
 
+class SolutionRecur(object):
+    def jumpRecur(self, start, end, nums):
+        # Base case.
+        if start == end:
+            return True
+
+        for jump in range(1, nums[start] + 1):
+            if self.jumpRecur(start + jump, end, nums):
+                return True
+        return False
+
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        n = len(nums)
+        start, end = 0, n - 1
+        return self.jumpRecur(start, end, nums)
+
+
 class SolutionDP(object):
     def canJump(self, nums):
         """
@@ -37,7 +58,7 @@ class SolutionDP(object):
         T = [False] * n
         T[0] = True
 
-        # Iterate from left to check if reachable from previous reachable.
+        # Iterate through nums to check reachable from previous reachable index.
         for r in range(1, n):
             for l in range(r - 1, -1, -1):
                 if r - l <= nums[l] and T[l]:
@@ -59,12 +80,12 @@ class SolutionGreedy(object):
         # Set reach for max reachable index.
         reach = 0
 
-        # Iterate from left to check if index i is not reachable.
+        # Iterate through nums to check if index i is not reachable.
         for i in range(len(nums)):
             if reach < i:
                 return False
 
-            # Greedily ipdate max reach.
+            # Greedily update max reach.
             reach = max(reach, i + nums[i])
 
         return True
@@ -77,6 +98,10 @@ def main():
     nums = [2,3,1,1,4]
 
     start_time = time.time()
+    print 'Recur:', SolutionRecur().canJump(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
     print 'DP:', SolutionDP().canJump(nums)
     print 'Time:', time.time() - start_time
 
@@ -86,6 +111,10 @@ def main():
 
     # Ans: False
     nums = [3,2,1,0,4]
+
+    start_time = time.time()
+    print 'Recur:', SolutionRecur().canJump(nums)
+    print 'Time:', time.time() - start_time
 
     start_time = time.time()
     print 'DP:', SolutionDP().canJump(nums)
