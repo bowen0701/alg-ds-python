@@ -20,6 +20,7 @@ Note:
 You can assume that you can always reach the last index.
 """
 
+
 class SolutionDPGreedy(object):
     def jump(self, nums):
         """
