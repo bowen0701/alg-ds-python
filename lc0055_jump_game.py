@@ -172,7 +172,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'DP:', SolutionGreedy().canJump(nums)
+    print 'Greedy:', SolutionGreedy().canJump(nums)
     print 'Time:', time.time() - start_time
 
     # Ans: False
@@ -195,7 +195,7 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
-    print 'DP:', SolutionGreedy().canJump(nums)
+    print 'Greedy:', SolutionGreedy().canJump(nums)
     print 'Time:', time.time() - start_time
 
 
