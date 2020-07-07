@@ -49,6 +49,39 @@ class SolutionRecur(object):
         return self.jumpRecur(start, nums)
 
 
+class SolutionMemo(object):
+    def jumpRecur(self, start, nums, T):
+        n = len(nums)
+
+        # Base case.
+        if start == n - 1:
+            return True
+
+        if T[start]:
+            return T[start]
+
+        # Iterate through jumps to check if reachable from any jump.
+        for jump in range(1, nums[start] + 1):
+            if start + jump <= n - 1:
+                T[start + jump] = self.jumpRecur(start + jump, nums, T)
+                if T[start + jump]:
+                    return T[start + jump]
+        T[start] = False
+        return T[start]
+
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: boole
+
+        Time complexity: O(n^2), where n is the length of nums.
+        Space complexity: O(2n)=O(n).
+        """
+        start = 0
+        T = [None] * len(nums)
+        return self.jumpRecur(start, nums, T)
+
+
 class SolutionDP(object):
     def canJump(self, nums):
         """
@@ -107,6 +140,10 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
+    print 'Memo:', SolutionMemo().canJump(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
     print 'DP:', SolutionDP().canJump(nums)
     print 'Time:', time.time() - start_time
 
@@ -119,6 +156,10 @@ def main():
 
     start_time = time.time()
     print 'Recur:', SolutionRecur().canJump(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'Memo:', SolutionMemo().canJump(nums)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
