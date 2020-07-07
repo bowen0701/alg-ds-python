@@ -78,11 +78,32 @@ class SolutionMemo(object):
         Space complexity: O(2n)=O(n).
         """
         start = 0
-        T = [None] * len(nums)
+        T = [False] * len(nums)
         return self.jumpRecur(start, nums, T)
 
 
 class SolutionDP(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+
+        Time complexity: O(n^2).
+        Space complexity: O(n).
+        """
+        # Apply bottom-up DP with table T, where T[i]=True means reachable.
+        n = len(nums)
+        T = [False] * n
+        T[0] = True
+
+        # Iterate through jumps to check if reachable from any jump.
+        for start in range(n):
+            for jump in range(1, nums[start] + 1):
+                if start + jump <= n - 1 and T[start]:
+                    T[start + jump] = True
+        return T[-1]
+
+class SolutionDP2(object):
     def canJump(self, nums):
         """
         :type nums: List[int]
@@ -114,8 +135,7 @@ class SolutionGreedy(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Apply greedy approach with early stopping.
-        # Set reach for max reachable index.
+        # Apply greedy approach for max reach with early stopping.
         reach = 0
 
         # Iterate through nums to check if index i is not reachable.
@@ -148,6 +168,10 @@ def main():
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
+    print 'DP2:', SolutionDP2().canJump(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
     print 'DP:', SolutionGreedy().canJump(nums)
     print 'Time:', time.time() - start_time
 
@@ -164,6 +188,10 @@ def main():
 
     start_time = time.time()
     print 'DP:', SolutionDP().canJump(nums)
+    print 'Time:', time.time() - start_time
+
+    start_time = time.time()
+    print 'DP2:', SolutionDP2().canJump(nums)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
