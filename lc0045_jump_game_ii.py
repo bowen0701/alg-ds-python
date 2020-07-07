@@ -33,7 +33,7 @@ class SolutionDPGreedy(object):
         n = len(nums)
 
         # Apply DP with table T, where T[i] is min jumps to reach i.
-        T = [n] * n
+        T = list(range(n))
         T[0] = 0
 
         # Iterate through from left to update T[reach+1],..., T[i+nums[i]].
