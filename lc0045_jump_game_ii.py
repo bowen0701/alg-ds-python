@@ -60,22 +60,22 @@ class SolutionBFSPrevReachGreedy(object):
 
         # Apply greedy algorithm to check index i in prev_reach and reach.
         prev_reach, reach = -1, 0
-        result = 0
+        n_jumps = 0
 
         for i in range(n):
             # Check if reached last index already.
             if reach >= n - 1:
                 break
 
-            # Update result if prev_reach is behind current index i.
+            # Update n_jumps if prev_reach is behind current index i.
             if prev_reach < i:
-                result += 1
+                n_jumps += 1
                 prev_reach = reach
 
             # Update reach with max jump from current index.
             reach = max(reach, i + nums[i])
 
-        return result
+        return n_jumps
 
 
 class SolutionBFSCurReachGreedy(object):
@@ -91,22 +91,22 @@ class SolutionBFSCurReachGreedy(object):
 
         # Apply greedy algorithm to check index i in cur_reach and reach.
         cur_reach, reach = 0, 0
-        result = 0
+        n_jumps = 0
 
         for i in range(n - 1):
             # Break if reaches last index.
             if cur_reach >= n - 1:
                 break
 
-            # Update result with max jump from current index i.
+            # Update n_jumps with max jump from current index i.
             reach = max(reach, i + nums[i])
 
             # If i reaches cur_reach, trigger another jump and update cur_reach.
             if i == cur_reach:
-                result += 1
+                n_jumps += 1
                 cur_reach = reach
 
-        return result
+        return n_jumps
 
 
 def main():
