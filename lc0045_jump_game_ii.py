@@ -36,7 +36,7 @@ class SolutionDPGreedy(object):
         T = list(range(n))
         T[0] = 0
 
-        # Iterate through from left to update T[reach+1],..., T[i+nums[i]].
+        # Iterate through to update T[reach+1],..., T[i+nums[i]].
         reach = 0
         for l in range(n):
             for r in range(reach + 1, min(l + nums[l], n - 1) + 1):
