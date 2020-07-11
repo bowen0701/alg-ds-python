@@ -45,8 +45,13 @@ class SolutionStoneJumpDictDP(object):
         Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
+        # Edge cases.
         if stones[1] != 1:
             return False
+
+        for i in range(3, len(stones)):
+            if stones[i] > stones[i - 1] * 2:
+                return False
 
         # Apply DP with dict: stone->set(steps), with 1st jump in 1 unit.
         stone_jumps_d = {stone: set() for stone in stones}
@@ -76,6 +81,7 @@ class SolutionPositionJumpStacksDP(object):
         Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
+        # Edge cases.
         if stones[1] != 1:
             return False
 
