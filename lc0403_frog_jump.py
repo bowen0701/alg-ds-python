@@ -42,30 +42,27 @@ class SolutionStoneJumpDictDP(object):
         :type stones: List[int]
         :rtype: bool
 
-        Apply DP with cache for stone->set(steps).
-
         Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
-        # Since 1st jump must be 1 unit.
         if stones[1] != 1:
             return False
 
-        # Cache stone's steps by dict, with 1st jump in 1 unit.
-        stone_jumps = {stone: set() for stone in stones}
-        stone_jumps[1].add(1)
+        # Apply DP with dict: stone->set(steps), with 1st jump in 1 unit.
+        stone_jumps_d = {stone: set() for stone in stones}
+        stone_jumps_d[1].add(1)
 
         for i, stone in enumerate(stones):
-            # i is up to n - 2 since it is the last start of destination.
+            # i is up to n - 2 since it is the last jump start.
             if i <= len(stones) - 2:
-                for j in stone_jumps[stone]:
+                for j in stone_jumps_d[stone]:
                     for jump in [j - 1, j, j + 1]:
                         # Check if next jump is on a stone.
-                        if jump > 0 and stone + jump in stone_jumps:
-                            stone_jumps[stone + jump].add(jump)
+                        if jump > 0 and stone + jump in stone_jumps_d:
+                            stone_jumps_d[stone + jump].add(jump)
 
-        # Return if there are jumps on the last stone.
-        return bool(stone_jumps[stones[-1]])
+        # Return True if there are jumps on the last stone.
+        return bool(stone_jumps_d[stones[-1]])
 
 
 class SolutionPositionJumpStacksDP(object):
