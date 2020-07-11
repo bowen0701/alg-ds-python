@@ -54,12 +54,14 @@ class SolutionStoneJumpDictDP(object):
 
         for i, stone in enumerate(stones):
             # i is up to n - 2 since it is the last jump start.
-            if i <= len(stones) - 2:
-                for j in stone_jumps_d[stone]:
-                    for jump in [j - 1, j, j + 1]:
-                        # Check if next jump is on a stone.
-                        if jump > 0 and stone + jump in stone_jumps_d:
-                            stone_jumps_d[stone + jump].add(jump)
+            if i == len(stones) - 1:
+                continue
+
+            for jump in stone_jumps_d[stone]:
+                for next_jump in [jump - 1, jump, jump + 1]:
+                    # Check if next jump is on a stone.
+                    if next_jump > 0 and stone + next_jump in stone_jumps_d:
+                        stone_jumps_d[stone + next_jump].add(next_jump)
 
         # Return True if there are jumps on the last stone.
         return bool(stone_jumps_d[stones[-1]])
@@ -71,37 +73,38 @@ class SolutionPositionJumpStacksDP(object):
         :type stones: List[int]
         :rtype: bool
 
-        Apply DP with cache for positions and jumps.
-
         Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
+        if stones[1] != 1:
+            return False
+
         for i in range(3, len(stones)):
             if stones[i] > stones[i - 1] * 2:
                 return False
 
-        # Convert stones to set for quickly check position.
+        # Use stone set for quickly check position.
         stones_set = set(stones)
 
         # Track positions and jumps, with initial jump = 0 due to 1st jump.
-        positions = [0]
-        jumps = [0]
+        position_stack = [0]
+        jump_stack = [0]
 
-        while positions:
-            position = positions.pop()
-            jump = jumps.pop()
+        while position_stack:
+            position = position_stack.pop()
+            jump = jump_stack.pop()
             next_jumps = [jump - 1, jump, jump + 1]
 
-            for j in next_jumps:
-                if j <= 0:
+            for next_jump in next_jumps:
+                if next_jump <= 0:
                     continue
 
-                next_position = position + j
+                next_position = position + next_jump
                 if next_position == stones[-1]:
                     return True
                 elif next_position in stones_set:
-                    positions.append(next_position)
-                    jumps.append(j)
+                    position_stack.append(next_position)
+                    jump_stack.append(next_jump)
 
         return False
 
