@@ -60,7 +60,7 @@ class SolutionStoneJumpDictDP(object):
         for i, stone in enumerate(stones):
             # i is up to n - 2 since it is the last jump start.
             if i == len(stones) - 1:
-                continue
+                break
 
             for jump in stone_jumps_d[stone]:
                 for next_jump in [jump - 1, jump, jump + 1]:
