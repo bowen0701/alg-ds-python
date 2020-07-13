@@ -47,7 +47,10 @@ Note:
 """
 
 
-class Solution(object):
+class SolutionRecur(object):
+    def _mincostRecur(self, start, days, costs):
+        pass
+
     def mincostTickets(self, days, costs):
         """
         :type days: List[int]
