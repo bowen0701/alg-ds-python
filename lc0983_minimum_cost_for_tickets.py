@@ -47,6 +47,35 @@ Note:
 """
 
 
+class SolutionCalendarDaysRecur(object):
+    def mincostRecur(self, i, days_set, costs):
+        print('i:', i)
+        # Base case.
+        if i == 0:
+            return 0
+
+        if i not in days_set:
+            return self.mincostRecur(i - 1, days_set, costs)
+        else:
+            return min(self.mincostRecur(i - 1, days_set, costs) + costs[0],
+                       self.mincostRecur(max(i - 7, 0), days_set, costs) + costs[1],
+                       self.mincostRecur(max(i - 30, 0), days_set, costs) + costs[2])
+
+    def mincostTickets(self, days, costs):
+        """
+        :type days: List[int]
+        :type costs: List[int]
+        :rtype: int
+
+        Time complexity: O(3^365).
+        Spae complexity: O(365).
+        """
+        # Apply top-down recursion.
+        self.n_calendar_days = 365
+        days_set = set(days)
+        return self.mincostRecur(self.n_calendar_days, days_set, costs)
+
+
 class SolutionCalendarDaysDP(object):
     def mincostTickets(self, days, costs):
         """
@@ -78,11 +107,13 @@ def main():
     # Output: 11
     days = [1,4,6,7,8,20]
     costs = [2,7,15]
+    print SolutionCalendarDaysRecur().mincostTickets(days, costs)
     print SolutionCalendarDaysDP().mincostTickets(days, costs)
 
     # Output: 17
     days = [1,2,3,4,5,6,7,8,9,10,30,31]
     costs = [2,7,15]
+    print SolutionCalendarDaysRecur().mincostTickets(days, costs)
     print SolutionCalendarDaysDP().mincostTickets(days, costs)
 
 
