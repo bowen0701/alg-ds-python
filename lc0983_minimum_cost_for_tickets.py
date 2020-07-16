@@ -66,6 +66,8 @@ class SolutionCalendarDaysRecur(object):
         :type costs: List[int]
         :rtype: int
 
+        Note: Time limit exceeded.
+
         Time complexity: O(3^365).
         Spae complexity: O(365)=O(1).
         """
