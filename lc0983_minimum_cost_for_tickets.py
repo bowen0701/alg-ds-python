@@ -137,6 +137,22 @@ class SolutionCalendarDaysDP(object):
         return T[n_calendar_days]
 
 
+class SolutionTravelDaysRecur(object):
+    def mincostTickets(self, days, costs):
+        """
+        :type days: List[int]
+        :type costs: List[int]
+        :rtype: int
+
+        Note: Time limit exceeded.
+
+        Time complexity: O(3^365).
+        Spae complexity: O(365)=O(1).
+        """
+        # TODO: Implement top-down recursion.
+        pass
+
+
 def main():
     # Output: 11
     days = [1,4,6,7,8,20]
