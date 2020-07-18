@@ -63,6 +63,7 @@ class SolutionBinarySearchTwice(object):
                 left = mid
 
         res[1] = right
+
         return res
 
 
