@@ -47,7 +47,7 @@ Note:
 """
 
 
-class SolutionCalendarDaysRecur(object):
+class SolutionTravelDaysRecur(object):
     def mincostRecur(self, i, days_set, costs):
         # Base case.
         if i == 0:
@@ -68,16 +68,15 @@ class SolutionCalendarDaysRecur(object):
 
         Note: Time limit exceeded.
 
-        Time complexity: O(3^365).
-        Spae complexity: O(365)=O(1).
+        Time complexity: O(3^n), , where n is the biggest travel day.
+        Spae complexity: O(n)=O(1).
         """
-        # Apply top-down recursion.
-        self.n_calendar_days = 365
+        # Apply top-down recursion for travel days.
         days_set = set(days)
-        return self.mincostRecur(self.n_calendar_days, days_set, costs)
+        return self.mincostRecur(days[-1], days_set, costs)
 
 
-class SolutionCalendarDaysMemo(object):
+class SolutionTravelDaysMemo(object):
     def mincostRecur(self, i, days_set, costs, T):
         # Base case.
         if i == 0:
@@ -100,73 +99,57 @@ class SolutionCalendarDaysMemo(object):
         :type costs: List[int]
         :rtype: int
 
-        Time complexity: O(365)=O(1).
-        Spae complexity: O(365)=O(1).
+        Time complexity: O(n)=O(1), where n is the biggest travel day.
+        Spae complexity: O(n)=O(1).
         """
-        # Apply top-down recursion with memoization.
-        self.n_calendar_days = 365
+        # Apply top-down recursion with memoization for travel days.
+        n_days = days[-1]
         days_set = set(days)
-        T = [0] * (self.n_calendar_days + 1)
-        return self.mincostRecur(self.n_calendar_days, days_set, costs, T)
+        T = [0] * (n_days + 1)
+        return self.mincostRecur(n_days, days_set, costs, T)
 
 
-class SolutionCalendarDaysDP(object):
+class SolutionTravelDaysDP(object):
     def mincostTickets(self, days, costs):
         """
         :type days: List[int]
         :type costs: List[int]
         :rtype: int
 
-        Time complexity: O(365)=O(1).
-        Spae complexity: O(365)=O(1).
+        Time complexity: O(n)=O(1), where n is the biggest travel day.
+        Spae complexity: O(n)=O(1).
         """
-        # Apply bottom-up DP.
-        n_calendar_days = 365
+        # Apply bottom-up DP for travel days.
+        n_days = days[-1]
         days_set = set(days)
 
-        # Use table T to track min cost for all calendar days. 
-        T = [0] * (n_calendar_days + 1)
+        # Use table T to track min cost for all travel days. 
+        T = [0] * (n_days + 1)
         
-        for i in range(1, n_calendar_days + 1):
+        for i in range(1, n_days + 1):
             if i not in days_set:
                 T[i] = T[i - 1]
             else:
                 T[i] = min(T[i - 1] + costs[0],
                            T[max(i - 7, 0)] + costs[1],
                            T[max(i - 30, 0)] + costs[2])
-        return T[n_calendar_days]
-
-
-class SolutionTravelDaysRecur(object):
-    def mincostTickets(self, days, costs):
-        """
-        :type days: List[int]
-        :type costs: List[int]
-        :rtype: int
-
-        Note: Time limit exceeded.
-
-        Time complexity: O(3^365).
-        Spae complexity: O(365)=O(1).
-        """
-        # TODO: Implement top-down recursion.
-        pass
+        return T[-1]
 
 
 def main():
     # Output: 11
     days = [1,4,6,7,8,20]
     costs = [2,7,15]
-    print SolutionCalendarDaysRecur().mincostTickets(days, costs)
-    print SolutionCalendarDaysMemo().mincostTickets(days, costs)
-    print SolutionCalendarDaysDP().mincostTickets(days, costs)
+    print SolutionTravelDaysRecur().mincostTickets(days, costs)
+    print SolutionTravelDaysMemo().mincostTickets(days, costs)
+    print SolutionTravelDaysDP().mincostTickets(days, costs)
 
     # Output: 17
     days = [1,2,3,4,5,6,7,8,9,10,30,31]
     costs = [2,7,15]
-    print SolutionCalendarDaysRecur().mincostTickets(days, costs)
-    print SolutionCalendarDaysMemo().mincostTickets(days, costs)
-    print SolutionCalendarDaysDP().mincostTickets(days, costs)
+    print SolutionTravelDaysRecur().mincostTickets(days, costs)
+    print SolutionTravelDaysMemo().mincostTickets(days, costs)
+    print SolutionTravelDaysDP().mincostTickets(days, costs)
 
 
 if __name__ == '__main__':
