@@ -35,11 +35,11 @@ class SolutionIter(object):
         """
         from collections import deque
 
-        # Normalize a and b to equal size by padding 0's to shorer one.
+        # Normalize a and b to equal length by padding 0's to shorer one.
         a, b = self._padding(a, b)
 
         # Add binary from backward if not out of boundary or exists carry.
-        sum_arr = deque([])
+        sum_deq = deque([])
         carry = 0
         i = len(a) - 1
 
@@ -51,10 +51,10 @@ class SolutionIter(object):
 
             carry, val = val // 2, val % 2
 
-            sum_arr.appendleft(str(val))
+            sum_deq.appendleft(str(val))
             i -= 1
         
-        return ''.join(list(sum_arr))
+        return ''.join(list(sum_deq))
 
 
 def main():
