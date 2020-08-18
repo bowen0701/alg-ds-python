@@ -59,6 +59,7 @@ class SolutionMinMaxRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
+        # Check if current val is in range (min, max).
         min_val, max_val = -float('inf'), float('inf')
         return self._isValidBSTRecur(root, min_val, max_val)
 
@@ -72,6 +73,7 @@ class SolutionMinMaxIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
+        # Check if current val is in range (min, max).
         if not root:
             return True
 
@@ -94,7 +96,6 @@ class SolutionMinMaxIter(object):
 
 class SolutionInorderRecur(object):
     def _isValidBSTRecur(self, root):
-        # Apply inorder traversal to check values in an increasing fashion.
         if not root:
             return True
  
@@ -102,7 +103,7 @@ class SolutionInorderRecur(object):
         if not self._isValidBSTRecur(root.left):
             return False
 
-        # Compare root with its previous.
+        # Check if root val < previous val.
         if self.previous and self.previous.val >= root.val:
             return False
 
@@ -123,6 +124,7 @@ class SolutionInorderRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
+        # Check if inorder traversal sees values in an increasing fashion.
         self.previous = None
         return self._isValidBSTRecur(root)
 
@@ -136,25 +138,26 @@ class SolutionInorderIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
+        # Check if inorder traversal sees values in an increasing fashion.
         if not root:
             return True
 
         previous = None
         current = root
 
-        # Start inorder traversal in an increasing fashion.
+        # Use stack for inorder traversal.
         stack = []
 
         while current or stack:
             while current:
-                # If current exists, push to stack and visit left node.
+                # If current exists, push to stack and visit leftmost node.
                 stack.append(current)
                 current = current.left
 
             # If current does not exist, pop stack as current.
             current = stack.pop()
 
-            # Check whether previous->node is increasing.
+            # Check if current val < previous val.
             if previous and previous.val >= current.val:
                 return False
 
@@ -192,7 +195,7 @@ def main():
     start_time = time.time()
     print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
-
+    print '---'
 
     # Input: [5,1,4,null,null,3,6]
     #    5
@@ -222,6 +225,7 @@ def main():
     start_time = time.time()
     print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
+    print '---'
 
     # Input: [10,5,15,null,null,6,20]
     #      10
@@ -251,6 +255,7 @@ def main():
     start_time = time.time()
     print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
+    print '---'
 
     # Input:
     #      10
