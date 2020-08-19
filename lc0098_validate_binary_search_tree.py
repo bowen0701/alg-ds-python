@@ -161,7 +161,7 @@ class SolutionInorderIter(object):
             if previous and previous.val >= current.val:
                 return False
 
-            # Update current and previous by inorder traversal.
+            # Update previous and current.
             previous = current
             current = current.right
 
