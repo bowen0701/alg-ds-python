@@ -38,18 +38,18 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionMinMaxRecur(object):
-    def _isValidBSTRecur(self, root, min_val, max_val):
+class SolutionMinMaxPreorderRecur(object):
+    def _preorderRecur(self, root, min_val, max_val):
         if not root:
             return True
         
-        # Validate root's val
+        # Validate root's val.
         if root.val <= min_val or root.val >= max_val:
             return False
 
         # Validate left and right subtrees.
-        return (self._isValidBSTRecur(root.left, min_val, root.val) and
-                self._isValidBSTRecur(root.right, root.val, max_val))
+        return (self._preorderRecur(root.left, min_val, root.val) and
+                self._preorderRecur(root.right, root.val, max_val))
 
     def isValidBST(self, root):
         """
@@ -59,12 +59,13 @@ class SolutionMinMaxRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        # Check if current val is in range (min, max).
+        # Check if current val is in range (min, max),
+        # by recursive preorder traversal.
         min_val, max_val = -float('inf'), float('inf')
-        return self._isValidBSTRecur(root, min_val, max_val)
+        return self._preorderRecur(root, min_val, max_val)
 
 
-class SolutionMinMaxIter(object):
+class SolutionMinMaxPreorderIter(object):
     def isValidBST(self, root):
         """
         :type root: TreeNode
@@ -73,11 +74,11 @@ class SolutionMinMaxIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        # Check if current val is in range (min, max).
         if not root:
             return True
 
-        # Use stack for DFS.
+        # Check if current val is in range (min, max),
+        # by iteratives preorder traversal with stack.
         min_val, max_val = -float('inf'), float('inf')
         stack = [(root, min_val, max_val)]
 
@@ -94,13 +95,13 @@ class SolutionMinMaxIter(object):
         return True
 
 
-class SolutionInorderRecur(object):
-    def _isValidBSTRecur(self, root):
+class SolutionIncreasingInorderRecur(object):
+    def _inorderRecur(self, root):
         if not root:
             return True
  
         # Traverse left tree.
-        if not self._isValidBSTRecur(root.left):
+        if not self._inorderRecur(root.left):
             return False
 
         # Check if root val < previous val.
@@ -111,7 +112,7 @@ class SolutionInorderRecur(object):
         self.previous = root
 
         # Traverse right tree.
-        if not self._isValidBSTRecur(root.right):
+        if not self._inorderRecur(root.right):
             return False
 
         return True
@@ -124,12 +125,12 @@ class SolutionInorderRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        # Check if inorder traversal sees values in an increasing fashion.
+        # Check if inorder traversal visits values in an increasing fashion.
         self.previous = None
-        return self._isValidBSTRecur(root)
+        return self._inorderRecur(root)
 
 
-class SolutionInorderIter(object):
+class SolutionIncreasingInorderIter(object):
     def isValidBST(self, root):
         """
         :type root: TreeNode
@@ -138,14 +139,14 @@ class SolutionInorderIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided tree.
         """
-        # Check if inorder traversal sees values in an increasing fashion.
+        # Check if inorder traversal visits values in an increasing fashion.
         if not root:
             return True
 
         previous = None
         current = root
 
-        # Use stack for inorder traversal.
+        # Use stack for iterative inorder traversal.
         stack = []
 
         while current or stack:
@@ -181,19 +182,23 @@ def main():
     root.right = TreeNode(3)
 
     start_time = time.time()
-    print 'By MinMaxRecur: {}'.format(SolutionMinMaxRecur().isValidBST(root))
+    print 'By MinMaxPreorderRecur: {}'.format(
+        SolutionMinMaxPreorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
+    print 'By MinMaxPreorderIter: {}'.format(
+        SolutionMinMaxPreorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
+    print 'By IncreasingInorderRecur: {}'.format(
+        SolutionIncreasingInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
+    print 'By IncreasingInorderIter: {}'.format(
+        SolutionIncreasingInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
     print '---'
 
@@ -211,19 +216,23 @@ def main():
     root.right.right = TreeNode(6)
 
     start_time = time.time()
-    print 'By MinMaxRecur: {}'.format(SolutionMinMaxRecur().isValidBST(root))
+    print 'By MinMaxPreorderRecur: {}'.format(
+        SolutionMinMaxPreorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
+    print 'By MinMaxPreorderIter: {}'.format(
+        SolutionMinMaxPreorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
+    print 'By IncreasingInorderRecur: {}'.format(
+        SolutionIncreasingInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
+    print 'By IncreasingInorderIter: {}'.format(
+        SolutionIncreasingInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
     print '---'
 
@@ -241,19 +250,23 @@ def main():
     root.right.right = TreeNode(20)
 
     start_time = time.time()
-    print 'By MinMaxRecur: {}'.format(SolutionMinMaxRecur().isValidBST(root))
+    print 'By MinMaxPreorderRecur: {}'.format(
+        SolutionMinMaxPreorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
+    print 'By MinMaxPreorderIter: {}'.format(
+        SolutionMinMaxPreorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
+    print 'By IncreasingInorderRecur: {}'.format(
+        SolutionIncreasingInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
+    print 'By IncreasingInorderIter: {}'.format(
+        SolutionIncreasingInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
     print '---'
 
@@ -275,19 +288,23 @@ def main():
     root.right.left.right = TreeNode(14)
 
     start_time = time.time()
-    print 'By MinMaxRecur: {}'.format(SolutionMinMaxRecur().isValidBST(root))
+    print 'By MinMaxPreorderRecur: {}'.format(
+        SolutionMinMaxPreorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By MinMaxIter: {}'.format(SolutionMinMaxIter().isValidBST(root))
+    print 'By MinMaxPreorderIter: {}'.format(
+        SolutionMinMaxPreorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderRecur: {}'.format(SolutionInorderRecur().isValidBST(root))
+    print 'By IncreasingInorderRecur: {}'.format(
+        SolutionIncreasingInorderRecur().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
     start_time = time.time()
-    print 'By InorderIter: {}'.format(SolutionInorderIter().isValidBST(root))
+    print 'By IncreasingInorderIter: {}'.format(
+        SolutionIncreasingInorderIter().isValidBST(root))
     print 'Time: {}'.format(time.time() - start_time)
 
 
