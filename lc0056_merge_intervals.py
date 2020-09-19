@@ -31,43 +31,45 @@ class SolutionBruteForce(object):
         # Sort by interval's start.
         intervals = sorted(intervals)
 
+        # Iterate through intervals to merge them into result.
         result = [intervals[0]]
 
         for i in range(1, len(intervals)):
             is_merged = False
-            # Iterative check all merged intervals. If updated, breack for loop.
+
             for j in range(len(result)):
                 if (result[j][0] <= intervals[i][0] <= result[j][1] and 
                     intervals[i][1] > result[j][1]):
-                    # interval's left is in merged i, but its right is not.
+                    # interval i's left is in result j, but its right is not.
                     result[j][1] = intervals[i][1]
                     is_merged = True
                     break
                 elif (intervals[i][0] < result[j][0] and
                       result[j][0] <= intervals[i][1] <= result[j][1]):
-                    # interval's right is in merged i, but its left is not.
+                    # interval i's right is in result j, but its left is not.
                     result[j][0] = intervals[i][0]
                     is_merged = True
                     break
                 elif (result[j][0] <= intervals[i][0] <= result[j][1] and
                       result[j][0] <= intervals[i][1] <= result[j][1]):
-                    # interval is in merged.
+                    # interval i is in result i.
                     is_merged = True
                     break
                 elif (intervals[i][0] < result[j][0] and
                       intervals[i][1] > result[j][1]):
-                    # interval contains merged.
+                    # interval i contains result j.
                     result[j] = intervals[i]
                     is_merged = True
                     break
 
+            # If interval is not merged, append to result.
             if not is_merged:
                 result.append(intervals[i])
 
         return result
 
 
-class SolutionSortStartAppendOrUpdateEnd(object):
+class SolutionAppendIntervalOrUpdateEnd(object):
     def merge(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -87,10 +89,10 @@ class SolutionSortStartAppendOrUpdateEnd(object):
         
         for i in range(1, len(intervals)):
             if intervals[i][0] > result[-1][1]:
-                # If interval is not overlapped with the last, append interval.
+                # If interval i is not overlapped with last result, append it.
                 result.append(intervals[i])
             else:
-                # If overlapped, update the result's end.
+                # If overlapped, update result's end.
                 result[-1][1] = max(intervals[i][1], result[-1][1])
 
         return result
@@ -99,7 +101,7 @@ class SolutionSortStartAppendOrUpdateEnd(object):
 def main():
     import time
 
-    print 'By naive:'
+    print 'By brute force:'
     start_time = time.time()
 
     # Ans: [[1,6],[8,10],[15,18]]
@@ -110,7 +112,7 @@ def main():
     intervals = [[1,4], [4,5]]
     print SolutionBruteForce().merge(intervals)
 
-    # Ans: [[0, 4]]
+    # Ans: [[0,4]]
     intervals = [[1,4], [0,4]]
     print SolutionBruteForce().merge(intervals)
 
@@ -118,34 +120,34 @@ def main():
     intervals = [[1,4], [0,5]]
     print SolutionBruteForce().merge(intervals)
 
-    # Ans: [[1, 10]]
+    # Ans: [[1,10]]
     intervals = [[2,3], [4,5], [6,7], [8,9], [1,10]]
     print SolutionBruteForce().merge(intervals)
 
     print 'Time: {}'.format(time.time() - start_time)
 
-    print 'By checking the last:'
+    print 'By appending interval or updating end:'
     start_time = time.time()
 
     # Ans: [[1,6],[8,10],[15,18]]
     intervals = [[1,3], [2,6], [8,10], [15,18]]
-    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
+    print SolutionAppendIntervalOrUpdateEnd().merge(intervals)
 
     # Ans: [[1,5]]
     intervals = [[1,4], [4,5]]
-    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
+    print SolutionAppendIntervalOrUpdateEnd().merge(intervals)
 
-    # Ans: [[0, 4]]
+    # Ans: [[0,4]]
     intervals = [[1,4], [0,4]]
-    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
+    print SolutionAppendIntervalOrUpdateEnd().merge(intervals)
 
     # Ans: [[0,5]]
     intervals = [[1,4], [0,5]]
-    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
+    print SolutionAppendIntervalOrUpdateEnd().merge(intervals)
 
-    # Ans: [[1, 10]]
+    # Ans: [[1,10]]
     intervals = [[2,3], [4,5], [6,7], [8,9], [1,10]]
-    print SolutionSortStartAppendOrUpdateEnd().merge(intervals)
+    print SolutionAppendIntervalOrUpdateEnd().merge(intervals)
 
     print 'Time: {}'.format(time.time() - start_time)
 
