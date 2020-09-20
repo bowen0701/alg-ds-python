@@ -38,17 +38,17 @@ class SolutionBruteForce(object):
         if not prices:
             return 0
 
-        max_profit = 0
-
         n = len(prices)
+
+        # Iterate through price pairs (i, j), i < j, to update max profit.
+        profit = 0
 
         for i in range(n - 1):
             for j in range(i + 1, n):
-                # Keep updating max profit for each pair i & j.
-                if prices[j] - prices[i] > max_profit:
-                    max_profit = prices[j] - prices[i]
+                if prices[j] - prices[i] > profit:
+                    profit = prices[j] - prices[i]
 
-        return max_profit
+        return profit
 
 
 class SolutionBinarySearch(object):
@@ -120,11 +120,12 @@ class SolutionIter(object):
 
 def main():
     import time
+
     # Ans: 5
     prices = [7,1,5,3,6,4]
 
     start_time = time.time()
-    print 'By naive:', SolutionBruteForce().maxProfit(prices)
+    print 'By brute force:', SolutionBruteForce().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
@@ -139,7 +140,7 @@ def main():
     prices = [6,1,3,2,4,7]
 
     start_time = time.time()
-    print 'By naive:', SolutionBruteForce().maxProfit(prices)
+    print 'By brute force:', SolutionBruteForce().maxProfit(prices)
     print 'Time:', time.time() - start_time
 
     start_time = time.time()
