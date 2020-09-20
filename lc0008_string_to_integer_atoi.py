@@ -64,6 +64,7 @@ class Solution(object):
         # Remove front & back spaces. 
         ls = list(s.strip())
 
+        # Edge case.
         if len(ls) == 0:
             return 0
 
@@ -76,7 +77,7 @@ class Solution(object):
         if ls[0] in ['-', '+']:
             del ls[0]
 
-        # Iteratively get unsigned atoi if char is digit.
+        # Iterate through unsigned atoi if char is digit.
         i = 0
         unsigned_atoi = 0
 
@@ -86,7 +87,7 @@ class Solution(object):
 
         atoi = sign * unsigned_atoi
 
-        # Convert atoi if it is out of integer range.
+        # Truncate atoi if it is out of integer range.
         return max(-pow(2,31), (min(atoi, pow(2, 31) - 1)))
 
 
@@ -107,7 +108,7 @@ def main():
     print(Solution().myAtoi(s))
 
     s = ' '
-    print(Solution().myAtoi(s))    
+    print(Solution().myAtoi(s))
 
 
 if __name__ == '__main__':
