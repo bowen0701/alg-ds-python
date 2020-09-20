@@ -52,28 +52,20 @@ class SolutionBruteForce(object):
 
 
 class SolutionBinarySearch(object):
-    def _binarySearch(self, prices, i, j):
+    def _binarySearch(self, prices, left, right):
         # Only one date, thus cannot buy and then sell.
-        if i == j:
+        if left == right:
             return 0
 
         # Compute profits in left and right subarrays.
-        mid = i + (j - i) // 2
+        mid = left + (right - left) // 2
 
-        left_profit = self._binarySearch(prices, i, mid)
-        right_profit = self._binarySearch(prices, mid + 1, j)
+        left_profit = self._binarySearch(prices, left, mid)
+        right_profit = self._binarySearch(prices, mid + 1, right)
 
         # Compute crossmax for buying in left and selling in right.
-        left_min = prices[i]
-        for a in range(i + 1, mid + 1):
-            if prices[a] < left_min:
-                left_min = prices[a]
-
-        right_max = prices[mid + 1]
-        for b in range(mid + 2, j + 1):
-            if prices[b] > right_max:
-                right_max = prices[b]
-        
+        left_min = min(prices[left:(mid+1)])
+        right_max = max(prices[(mid+1):(right+1)])
         cross_profit = max(0, right_max - left_min)
 
         return max(left_profit, right_profit, cross_profit)
