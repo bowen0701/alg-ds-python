@@ -1,7 +1,7 @@
 from __future__ import print_function
 from ds_queue import Queue
 
-def pass_hot_potato(name_ls, num):
+def pass_hot_potato(names, num):
 	"""Pass hot potato.
 
 	A hot potato is sequentially passed to ones in a queue line.
@@ -11,7 +11,7 @@ def pass_hot_potato(name_ls, num):
 	"""
 	name_queue = Queue()
 
-	for name in name_ls:
+	for name in names:
 		name_queue.enqueue(name)
 
 	while name_queue.size() > 1:
@@ -24,11 +24,11 @@ def pass_hot_potato(name_ls, num):
 
 
 def main():
-	name_ls = ['Bowen', 'Bowen1', 'Bowen2']
+	names = ['Bowen', 'Bowen1', 'Bowen2']
 	num = 5
-	print(name_ls)
+	print(names)
 	print('num: {}'.format(num))
-	print(pass_hot_potato(name_ls, num))
+	print(pass_hot_potato(names, num))
 
 
 if __name__ == '__main__':

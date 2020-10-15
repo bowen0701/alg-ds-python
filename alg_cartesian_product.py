@@ -25,10 +25,10 @@ class CartesianProduct(object):
             result = self._product_two(result, repeated_nums[r])
         return result
 
-    def product(self, nums_ls):
-        result = nums_ls[0]
-        for r in range(1, len(nums_ls)):
-            result = self._product_two(result, nums_ls[r])
+    def product(self, nums):
+        result = nums[0]
+        for r in range(1, len(nums)):
+            result = self._product_two(result, nums[r])
             return result
 
 
@@ -37,8 +37,8 @@ def main():
     repeat = 2
     print CartesianProduct().repeated_product(nums, repeat)
 
-    nums_ls = [[1, 2, 3], [4, 5]]
-    print CartesianProduct().product(nums_ls)
+    nums = [[1, 2, 3], [4, 5]]
+    print CartesianProduct().product(nums)
 
 
 if __name__ == '__main__':

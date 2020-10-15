@@ -37,15 +37,15 @@ def get_first_next_vertex(next_vertices):
             return vertex
     return None
 
-def traverse_dfs(path_ls, current_vertex, 
+def traverse_dfs(paths, current_vertex, 
                  adjacency_dict, total_squares, sorted_func=None):
     """Depth First Search traverse."""
     # Including the current square, if we have visited all squares,
     # just return the whole path as the solution.
-    if len(path_ls) + 1 == total_squares:
-        return path_ls + [current_vertex]
+    if len(paths) + 1 == total_squares:
+        return paths + [current_vertex]
 
-    legal_vertices = adjacency_dict[current_vertex] - set(path_ls)
+    legal_vertices = adjacency_dict[current_vertex] - set(paths)
     if not legal_vertices:
         # No legal neighbor vertices, so dead end.
         return False
@@ -54,7 +54,7 @@ def traverse_dfs(path_ls, current_vertex,
     next_vertices = sorted(legal_vertices, sorted_func)
     return get_first_next_vertex(
         traverse_dfs(
-            path_ls + [current_vertex], vertex,
+            paths + [current_vertex], vertex,
             adjacency_dict, total_squares, sorted_func=sorted_func)
         for vertex in next_vertices)
 
@@ -62,12 +62,12 @@ def knight_tour_dfs(board_size, sorted_func=None):
     adjacency_dict = build_knight_tour_graph(board_size)
     total_squares = board_size * board_size
     
-    path_ls = get_first_next_vertex(
+    paths = get_first_next_vertex(
         traverse_dfs(
             [], start_vertex, 
             adjacency_dict, total_squares, sorted_func=sorted_func)
         for start_vertex in adjacency_dict)
-    return path_ls
+    return paths
 
 
 def main():
@@ -75,8 +75,8 @@ def main():
     adjacency_dict = build_knight_tour_graph(board_size)
     print(adjacency_dict)
 
-    path_ls = knight_tour_dfs(board_size, sorted_func=None)
-    print('path_ls: {}'.format(path_ls))
+    paths = knight_tour_dfs(board_size, sorted_func=None)
+    print('paths: {}'.format(paths))
 
 if __name__ == '__main__':
     main()

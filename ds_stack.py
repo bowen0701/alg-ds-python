@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-class StackLs(object):
+class Stack(object):
     """Stack using list."""
     def __init__(self):
         self.items = []
@@ -28,13 +28,13 @@ class StackLs(object):
 
 
 class ListNode(object):
-    """List Node for StackLl class."""
+    """List Node for Stack_LL class."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class StackLl(object):
+class Stack_LL(object):
     """Stack using linked list.
 
     Stack: Top->Node2->Node1->None.
@@ -84,9 +84,9 @@ class StackLl(object):
 
 
 def main():
-    # Initiate Stack instance by StackLs() or StackLl().
-    # s = StackLs()
-    s = StackLl()
+    # Initiate Stack instance by Stack() or Stack_LL().
+    # s = Stack()
+    s = Stack_LL()
     print('Is empty: {}'.format(s.is_empty()))
 
     s.push('dog')

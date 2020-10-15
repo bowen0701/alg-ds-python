@@ -70,10 +70,10 @@ class SolutionDFSRecurUpdate(object):
 
 
 class SolutionDFSIterUpdate(object):
-    def _get_tovisit_ls(self, v_start, grid):
+    def _get_tovisits(self, v_start, grid):
         r, c = v_start
 
-        tovisit_ls = []
+        tovisits = []
 
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
@@ -81,9 +81,9 @@ class SolutionDFSIterUpdate(object):
             if (0 <= r_next < len(grid) and 
                 0 <= c_next < len(grid[0]) and
                 grid[r_next][c_next] == 1):
-                tovisit_ls.append((r_next, c_next))
+                tovisits.append((r_next, c_next))
 
-        return tovisit_ls
+        return tovisits
 
     def _dfs(self, r, c, grid):
         grid[r][c] = 0
@@ -94,10 +94,10 @@ class SolutionDFSIterUpdate(object):
 
         while stack:
             # Get to-visit nodes from the top of stack.
-            tovisit_ls = self._get_tovisit_ls(stack[-1], grid)
+            tovisits = self._get_tovisits(stack[-1], grid)
 
-            if tovisit_ls:
-                for r_next, c_next in tovisit_ls:
+            if tovisits:
+                for r_next, c_next in tovisits:
                     grid[r_next][c_next] = 0
                     area += 1
                     stack.append((r_next, c_next))

@@ -187,18 +187,18 @@ class SolutionDFSRecurUpdateReturn(object):
 
 
 class SolutionDFSIterVisit(object):
-    def _get_tovisit_ls(self, v_start, grid):
+    def _get_tovisits(self, v_start, grid):
         (r, c) = v_start
-        tovisit_ls = []
+        tovisits = []
 
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             if (0 <= r_next < len(grid) and 0 <= c_next < len(grid[0]) and
                 grid[r_next][c_next] == '1'):
-                tovisit_ls.append((r_next, c_next))
+                tovisits.append((r_next, c_next))
 
-        return tovisit_ls
+        return tovisits
 
     def _get_visited_ls(self, visited_d):
         return [k for (k, v) in visited_d.items() if v is True]
@@ -210,11 +210,11 @@ class SolutionDFSIterVisit(object):
         stack = [(r, c)]
 
         while stack:
-            tovisit_ls = self._get_tovisit_ls(stack[-1], grid)
+            tovisits = self._get_tovisits(stack[-1], grid)
             visited_ls = self._get_visited_ls(visited_d)
 
-            if set(tovisit_ls) - set(visited_ls):
-                for v_neighbor in tovisit_ls:
+            if set(tovisits) - set(visited_ls):
+                for v_neighbor in tovisits:
                     if v_neighbor not in visited_ls:
                         # Mark (r_next, c_next) as visited.
                         (r_next, c_next) = v_neighbor
@@ -249,18 +249,18 @@ class SolutionDFSIterVisit(object):
 
 
 class SolutionDFSIterUpdate(object):
-    def _get_tovisit_ls(self, v_start, grid):
+    def _get_tovisits(self, v_start, grid):
         (r, c) = v_start
-        tovisit_ls = []
+        tovisits = []
 
         # Visit up, down, left and right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             if (0 <= r_next < len(grid) and 0 <= c_next < len(grid[0]) and
                 grid[r_next][c_next] == '1'):
-                tovisit_ls.append((r_next, c_next))
+                tovisits.append((r_next, c_next))
 
-        return tovisit_ls
+        return tovisits
 
     def _dfs(self, r, c, grid):
         # Update (r, c) as visited.
@@ -270,10 +270,10 @@ class SolutionDFSIterUpdate(object):
         stack = [(r, c)]
 
         while stack:
-            tovisit_ls = self._get_tovisit_ls(stack[-1], grid)
+            tovisits = self._get_tovisits(stack[-1], grid)
 
-            if tovisit_ls:
-                for v_neighbor in tovisit_ls:
+            if tovisits:
+                for v_neighbor in tovisits:
                     # Mark (r_next, c_next) as visited.
                     (r_next, c_next) = v_neighbor
                     grid[r_next][c_next] = '0'

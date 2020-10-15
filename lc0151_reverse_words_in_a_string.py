@@ -33,9 +33,9 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        w_split_ls = s.split(' ')
-        w_strip_ls = [w for w in w_split_ls if w != '']
-        w_reverse_ls = w_strip_ls[::-1]
+        w_split = s.split(' ')
+        w_strip = [w for w in w_split if w != '']
+        w_reverse_ls = w_strip[::-1]
         s_reverse = ' '.join(w_reverse_ls)
         return s_reverse
 

@@ -58,12 +58,12 @@ def _dfs(graph_adj_d):
 
 def _decrease_postvisit_vertices(postvisited_d):
     tr_postvisited_d = {postvisited_d[k]: k for k in postvisited_d.keys()}
-    dec_postvisited_ls = []
+    dec_postvisits = []
 
     for pv in reversed(sorted(tr_postvisited_d.keys())):
-        dec_postvisited_ls.append(tr_postvisited_d[pv])
+        dec_postvisits.append(tr_postvisited_d[pv])
 
-    return dec_postvisited_ls
+    return dec_postvisits
 
 
 def strongly_connected_components(graph_adj_d):

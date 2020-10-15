@@ -13,9 +13,9 @@ def eval_postfix(postfix_str):
     """
     operand_stack = Stack()
     
-    token_ls = postfix_str.split()
+    tokens = postfix_str.split()
 
-    for token in token_ls:
+    for token in tokens:
         if token in '0123456789':
             operand_stack.push(int(token))
         else:

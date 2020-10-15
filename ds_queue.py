@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-class QueueLs(object):
+class Queue(object):
     """Queue using list."""
     def __init__(self):
         self.items = []
@@ -28,13 +28,13 @@ class QueueLs(object):
 
 
 class ListNode(object):
-    """List Node for QueueLl class."""
+    """List Node for Queue_LL class."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class QueueLl(object):
+class Queue_LL(object):
     """Queue using linked list.
 
     Queue: Head->Node1->Node2->Tail
@@ -94,9 +94,9 @@ class QueueLl(object):
 
 
 def main():
-    # Initiate Queue instance by QueueLs() or QueueLl().
-    # q = QueueLs()
-    q = QueueLl()
+    # Initiate Queue instance by Queue() or Queue_LL().
+    # q = Queue()
+    q = Queue_LL()
     print('Is empty: {}'.format(q.is_empty()))
 
     q.enqueue('dog')

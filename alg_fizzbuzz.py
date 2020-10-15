@@ -19,8 +19,8 @@ def fizzbuzz(n):
 
 def main():
 	n = 100
-	fizzbuzz_ls = fizzbuzz(n)
-	print(fizzbuzz_ls)
+	fizzbuzzes = fizzbuzz(n)
+	print(fizzbuzzes)
 
 
 if __name__ == '__main__':

@@ -28,11 +28,11 @@ def _dfs_visit(v, dag_adj_d, visited_d,
 
 def _decrease_postvisit_vertices(postvisited_d):
     tr_postvisited_d = {postvisited_d[k]: k for k in postvisited_d.keys()}
-    dec_postvisited_ls = []
+    dec_postvisits = []
     for pv in reversed(sorted(tr_postvisited_d.keys())):
         # Arrange DAG vertices in decreasing postvisited id.
-        dec_postvisited_ls.append(tr_postvisited_d[pv])
-    return dec_postvisited_ls
+        dec_postvisits.append(tr_postvisited_d[pv])
+    return dec_postvisits
 
 
 def topological_sort(dag_adj_d):
@@ -55,9 +55,9 @@ def topological_sort(dag_adj_d):
             _dfs_visit(v, dag_adj_d, visited_d,
                        previsited_d, postvisited_d, clock)
 
-    dec_postvisited_ls = _decrease_postvisit_vertices(postvisited_d)
+    dec_postvisits = _decrease_postvisit_vertices(postvisited_d)
 
-    return dec_postvisited_ls
+    return dec_postvisits
 
 
 def main():
