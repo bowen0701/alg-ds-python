@@ -84,11 +84,11 @@ class CodecHash:
             ord_sum += w * ord(c)
 
         # Continue hashing and appending resulting char to code until hash equals 0.
-        code_ls = []
-        while ord_sum and len(code_ls) < self.code_size:
+        codes = []
+        while ord_sum and len(codes) < self.code_size:
             ord_sum, c = ord_sum // self.base_size, ord_sum % self.base_size
-            code_ls.append(self.base[c])
-        code = ''.join(code_ls)
+            codes.append(self.base[c])
+        code = ''.join(codes)
 
         self.code2urls[code] = longUrl
         return self.tiny_predix + code

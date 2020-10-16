@@ -31,18 +31,18 @@ class SolutionSortIter(object):
         Space complexity: O(n).
         """
         # Sort s & t.
-        s_ls = list(s)
-        t_ls = list(t)
-        s_ls.sort()
-        t_ls.sort()
+        s_ = list(s)
+        t_ = list(t)
+        s_.sort()
+        t_.sort()
 
         # Iterate through s's chars to check mismatch.
-        for i, c in enumerate(s_ls):
-            if c != t_ls[i]:
-                return t_ls[i]
+        for i, c in enumerate(s_):
+            if c != t_[i]:
+                return t_[i]
 
         # If no mismatch, then the t's last char is the diff one.
-        return t_ls[-1]
+        return t_[-1]
 
 
 class SolutionCharCountDict(object):

@@ -44,13 +44,13 @@ class SolutionMapDictIter(object):
             '9': '6'
         }
 
-        mapped_num_ls = []
+        mapped_nums = []
         for n in rev_num:
             if n in map_d:
-                mapped_num_ls.append(map_d[n])
+                mapped_nums.append(map_d[n])
             else:
-                mapped_num_ls.append(' ')
-        mapped_num = ''.join(mapped_num_ls)
+                mapped_nums.append(' ')
+        mapped_num = ''.join(mapped_nums)
 
         # Check if strobogrammatic.
         return mapped_num == num

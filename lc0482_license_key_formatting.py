@@ -51,24 +51,24 @@ class SolutionReverseIter(object):
         len_nodashes = len(S_nodashes)
 
         # Reversely iterate through no-dashed list, concat to string until K chars.
-        str_ls = [''] * (len_nodashes // K + (len_nodashes % K > 0))
+        strs = [''] * (len_nodashes // K + (len_nodashes % K > 0))
 
-        cur_idx = len(str_ls) - 1
+        cur_idx = len(strs) - 1
         cur_counter = 0
 
         for i in range(len_nodashes - 1, -1, -1):
             if cur_counter < K:
                 # Still concat the current string.
-                str_ls[cur_idx] = S_nodashes[i] + str_ls[cur_idx]
+                strs[cur_idx] = S_nodashes[i] + strs[cur_idx]
                 cur_counter += 1
             else:
                 # Start concating the next string.
                 cur_idx -= 1
-                str_ls[cur_idx] = S_nodashes[i] + str_ls[cur_idx]
+                strs[cur_idx] = S_nodashes[i] + strs[cur_idx]
                 cur_counter = 1
 
         # Concat list's strings with -.
-        return '-'.join(str_ls)
+        return '-'.join(strs)
 
 
 class SolutionForwardIterK(object):
@@ -93,15 +93,15 @@ class SolutionForwardIterK(object):
             end_idx = K
 
         # Get the 1st part.
-        str_ls = [S_nodashes[:end_idx]]
+        strs = [S_nodashes[:end_idx]]
 
         # Iteratively append K chars at a time.
         while end_idx < len_nodashes:
-            str_ls.append(S_nodashes[end_idx:end_idx+K])
+            strs.append(S_nodashes[end_idx:end_idx+K])
             end_idx += K
 
         # Concat list's strings with -.
-        return '-'.join(str_ls)
+        return '-'.join(strs)
 
 
 def main():

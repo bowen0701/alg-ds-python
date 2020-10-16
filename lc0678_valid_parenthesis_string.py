@@ -77,10 +77,10 @@ class SolutionBruteForce(object):
             return s == '*'
 
         # Enumerate all strings with '*' replaced by, '(', '', ')'.
-        s_lst = self._enumerate(s)
+        s_list = self._enumerate(s)
 
         # Iterate through list to check if there is one valid.
-        for si in s_lst:
+        for si in s_list:
             if self._is_valid(si):
                 return True
         return False

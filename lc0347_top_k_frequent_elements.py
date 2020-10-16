@@ -39,12 +39,12 @@ class Solution(object):
             num_freq_d[n] += 1
 
         # Sort num->freq dict by freq. 
-        sorted_num_freq_ls = sorted(num_freq_d.items(),
-                                    key=lambda x: x[1],
-                                    reverse=True)
+        sorted_num_freqs = sorted(num_freq_d.items(),
+                                  key=lambda x: x[1],
+                                  reverse=True)
 
         # Take the top k num.
-        topk_nums = [num for (num, freq) in sorted_num_freq_ls[:k]]
+        topk_nums = [num for (num, freq) in sorted_num_freqs[:k]]
         return topk_nums
 
 
