@@ -55,22 +55,23 @@ class SolutionOpenCloseDict(object):
         stack = []
 
         for c in s:
-            # If c is open bracket, push to stack.
+            # If c is open parenthesis, push to stack.
             if c in open_set:
                 stack.append(c)
                 continue
 
-            # If c in close bracket, pop element from stack and check match.
+            # If c in close bracket.
             if c in close_set:
-                # If no open bracket in stack, we have non-matched close one.
+                # Check if there is still open parenthesis.
                 if not stack:
                     return False
 
+                # If yes, pop & compare open parenthesis and current char.
                 open_c = stack.pop()
                 if open_close_d[open_c] != c:
                     return False
 
-        # Check whether there is non-matched open bracket left.
+        # Check if there is still open remaining.
         if not stack:
             return True
         else:
