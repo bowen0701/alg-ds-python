@@ -10,27 +10,29 @@ def valid_parentheses(s):
         '[': ']',
         '{': '}'
     }
+    open_set = set('([{')
+    close_set = set(')]}')
 
     # Use stack to collect open parentheses.
     stack = []
 
     for c in s:
-        if c in '([{':
+        if c in open_set:
             # If c is open parenthesis, push to stack.
             stack.append(c)
             continue
         
-        if c in ')]}':
+        if c in close_set:
             # Check if there is still open parenthesis.
             if not stack:
                 return False
 
-            # If yes, compare open parenthesis and current char.
+            # If yes, pop & compare open parenthesis and current char.
             open_c = stack.pop()
             if c != open_close_d[open_c]:
                 return False
 
-    # Finally check if there is open remaining.
+    # Check if there is still open remaining.
     if not stack:
         return True
     else:
