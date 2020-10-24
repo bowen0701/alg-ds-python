@@ -1,17 +1,18 @@
-from __future__ import print_function
+from __future__ import absolute_import
 from __future__ import division
+from __future__ import print_function
 
 from ds_stack import Stack
 from ds_binary_tree import BinaryTree
 
 
 def build_parse_tree(fp_exp):
-    fp_ls = fp_exp.split()
+    fps = fp_exp.split()
     par_stack = Stack()
     parse_tree = BinaryTree('')
     par_stack.push(parse_tree)
     current_tree = parse_tree
-    for i in fp_ls:
+    for i in fps:
         if i == '(':
             current_tree.insert_left('')
             par_stack.push(current_tree)
