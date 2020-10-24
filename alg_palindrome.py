@@ -1,7 +1,4 @@
-"""Palindrome: a string that read the same forward and backward.
-
-For example: radar, madam.
-"""
+"""Palindrome: a string that read the same forwards and backwards."""
 
 from __future__ import absolute_import
 from __future__ import division
