@@ -46,7 +46,7 @@ class SolutionSortBacktrack(object):
           - n! is for permutation.
         Space complexity: O(n*n!).
         """
-        # Sort to further avoid duplicates.
+        # Sort to avoid duplicates.
         nums.sort()
 
         result = []
