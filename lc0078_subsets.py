@@ -61,7 +61,8 @@ class SolutionBFS(object):
         # Apply DFS.
         result = [[]]
         for n in nums:
-            # Accumulate result: [[], [1], [2], [1, 2], [3], [1, 3], [1, 2, 3]].
+            # For nums = [n1, n2, n3], accumulate result:
+            # [[], [n1], [n2], [n1, n2], [n3], [n1, n3], [n1, n2, n3]].
             result += [res + [n] for res in result]
         return result
 
