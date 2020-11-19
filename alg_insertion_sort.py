@@ -9,8 +9,8 @@ def insertion_sort(nums):
     Time complexity: O(n^2).
     Space complexity: O(1).
     """
-    # Starting at pos i >= 1, swap (num[j-1], num[j]), for j=i,i-1,...,1,
-    # if order is not correct. 
+    # Starting from i>=1, 
+    # swap (num[j-1], num[j]) if not sorted, for j=i,...,1.
     for i in range(1, len(nums)):
         for j in range(i, -1, -1):
             if j > 0 and nums[j - 1] > nums[j]:
