@@ -31,7 +31,6 @@ as shown above.
 class Solution(object):
     def _is_valid(self, queens):
         """Check current queen position is valid among previous queens."""
-        # Start from the latest queen.
         cur_row, cur_col = len(queens) - 1, queens[-1]
 
         # Check any queens can attack the current queen.
