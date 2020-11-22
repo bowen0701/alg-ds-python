@@ -38,7 +38,7 @@ class Solution(object):
             col_diff = abs(cur_col - col)
             row_diff = abs(cur_row - row)
 
-            # Check two queens are in the same column or diagonal.
+            # If two queens are in the same column or diagonal.
             if col_diff == 0 or col_diff == row_diff:
                 return False
 
