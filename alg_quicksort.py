@@ -4,7 +4,7 @@ from __future__ import division
 
 
 def quicksort_lc(nums):
-    """Quick sort algortihm by recursion with list comprehension.
+    """Quick sort algorithm by recursion with list comprehension.
 
     Procedure:
       - Pick a pivot which ideally is a median pf the list.
@@ -58,7 +58,7 @@ def _quicksort_recur(nums, left, right):
 
 
 def quicksort_ip(nums):
-    """Quick sort algortihm with recursion.
+    """Quick sort algorithm by recursion in place.
 
     Time complexity: O(n*logn).
     Space complexity: O(1).
