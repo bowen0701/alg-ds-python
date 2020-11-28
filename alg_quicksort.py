@@ -15,16 +15,18 @@ def quicksort_lc(nums):
     Time complexity: O(n*logn).
     Space complexity: O(n).
     """
+    # Base case.
     if len(nums) <= 1:
         return nums
 
+    # Use middle num as pivot to collect small, middle & large numbers.
     pivot = nums[len(nums) // 2]
+    smalls = [x for x in nums if x < pivot]
+    middles = [x for x in nums if x == pivot]
+    larges = [x for x in nums if x > pivot]
 
-    small_nums = [x for x in nums if x < pivot]
-    mid_nums = [x for x in nums if x == pivot]
-    large_nums = [x for x in nums if x > pivot]
-
-    return quicksort_lc(small_nums) + mid_nums + quicksort_lc(large_nums)
+    # Concat small, middle & large numbers.
+    return quicksort_lc(smalls) + middles + quicksort_lc(larges)
 
 
 def _partition(nums, left, right, mid):
