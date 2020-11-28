@@ -3,8 +3,32 @@ from __future__ import print_function
 from __future__ import division
 
 
+def quicksort_lc(nums):
+    """Quick sort algortihm by recursion with list comprehension.
+
+    Procedure:
+      - Pick a pivot which ideally is a median pf the list.
+      - Arrange half elements which are smaller than pivot to left,
+        and the other half ones that are bigger than pivot to right.
+      - Then to each half, recursively apply quick sort.
+
+    Time complexity: O(n*logn).
+    Space complexity: O(n).
+    """
+    if len(nums) <= 1:
+        return nums
+
+    pivot = nums[len(nums) // 2]
+
+    small_nums = [x for x in nums if x < pivot]
+    mid_nums = [x for x in nums if x == pivot]
+    large_nums = [x for x in nums if x > pivot]
+
+    return quicksort_lc(small_nums) + mid_nums + quicksort_lc(large_nums)
+
+
 def _partition(nums, left, right, mid):
-    """Helper function for quicksort_raw() to get partition point."""
+    """Helper function for quicksort() to get partition point."""
     pivot = nums[mid]
 
     while left <= right:
@@ -27,7 +51,7 @@ def _partition(nums, left, right, mid):
 
 
 def _quicksort_recur(nums, left, right):
-    """Helper function for quicksort_raw() by recursion."""
+    """Helper function for quicksort() by recursion."""
     if left < right:
         mid = left + (right - left) // 2
         partition = _partition(nums, left, right, mid)
@@ -35,38 +59,14 @@ def _quicksort_recur(nums, left, right):
         _quicksort_recur(nums, partition + 1, right)
 
 
-def quicksort_raw(nums):
-    """Raw quick sort algortihm with recursion.
+def quicksort(nums):
+    """Quick sort algortihm with recursion.
 
     Time complexity: O(n*logn).
     Space complexity: O(n).
     """
     _quicksort_recur(nums, 0, len(nums) - 1)
     return nums
-
-
-def quicksort(nums):
-    """Quick sort algortihm by recursion with list comprehension.
-
-    Procedure:
-      - Pick a pivot which ideally is a median pf the list.
-      - Arrange half elements which are smaller than pivot to left,
-        and the other half ones that are bigger than pivot to right.
-      - Then to each half, recursively apply quicksort().
-
-    Time complexity: O(n*logn).
-    Space complexity: O(n).
-    """
-    if len(nums) <= 1:
-        return nums
-
-    pivot = nums[len(nums) // 2]
-
-    small_nums = [x for x in nums if x < pivot]
-    mid_nums = [x for x in nums if x == pivot]
-    large_nums = [x for x in nums if x > pivot]
-
-    return quicksort(small_nums) + mid_nums + quicksort(large_nums)
 
 
 def main():
@@ -76,8 +76,8 @@ def main():
     nums = range(100)
     random.shuffle(nums)
     start_time = time.time()
-    print(quicksort_raw(nums))
-    print('Time for quick sort by "raw" recursion: {}'
+    print(quicksort_lc(nums))
+    print('Time for quick sort by recursion w/ list comprehension: {}'
           .format(time.time() - start_time))
 
     nums = range(100)
