@@ -29,36 +29,32 @@ def quicksort_lc(nums):
     return quicksort_lc(smalls) + middles + quicksort_lc(larges)
 
 
-def _partition(nums, left, right, mid):
-    """Helper function for quicksort() to get partition point."""
-    pivot = nums[mid]
+def _partition(nums, left, right):
+    """Util for quicksort() to rearrange nums in place."""
+    # Use right number as pivot.
+    right_num = nums[right]
 
-    while left <= right:
-        while nums[left] < pivot:
-            # Find left element which is bigger than pivot.
-            left += 1
+    # Rearrange numbers w.r.t. pivot: 
+    # - For left <= k <= i: nums[k] <= pivot,
+    # - For i+1 <= k <= j-1: nums[k] > pivot,
+    # - For k = right: nums[k] = pivot.
+    i = left - 1
+    for j in range(left, right):
+        if nums[j] <= right_num:
+            i += 1
+            nums[i], nums[j] = nums[j], nums[i]
 
-        while nums[right] > pivot:
-            # Find right element which is smaller than pivot.
-            right -= 1
-
-        if left <= right:
-            # If "bigger" left element is on left side of "smaller" right,
-            # swap the two elements, and then keep moving.
-            nums[right], nums[left] = nums[left], nums[right]
-            left += 1
-            right -= 1
-
-    return left
+    # Swap num[i+1] and pivot, to rearrange to correct order.
+    nums[i + 1], nums[right] = nums[right], nums[i + 1]
+    return i + 1
 
 
 def _quicksort_recur(nums, left, right):
-    """Helper function for quicksort() by recursion."""
+    """Util for quicksort() by recursion."""
     if left < right:
-        mid = left + (right - left) // 2
-        partition = _partition(nums, left, right, mid)
-        _quicksort_recur(nums, left, partition - 1)
-        _quicksort_recur(nums, partition + 1, right)
+        mid = _partition(nums, left, right)
+        _quicksort_recur(nums, left, mid - 1)
+        _quicksort_recur(nums, mid + 1, right)
 
 
 def quicksort(nums):
@@ -67,6 +63,10 @@ def quicksort(nums):
     Time complexity: O(n*logn).
     Space complexity: O(n).
     """
+    # Base case.
+    if len(nums) <= 1:
+        return nums
+
     _quicksort_recur(nums, 0, len(nums) - 1)
     return nums
 
