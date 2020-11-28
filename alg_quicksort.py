@@ -3,29 +3,6 @@ from __future__ import print_function
 from __future__ import division
 
 
-def quicksort(nums):
-    """Quick sort algortihm by recursion with list comprehension.
-
-    Procedure:
-      - Pick a pivot which ideally is a median pf the list.
-      - Arrange half elements which are smaller than pivot to left,
-        and the other half ones that are bigger than pivot to right.
-      - Then to each half, recursively apply quicksort().
-    
-    Time complexity: O(n*logn).
-    Space complexity: O(n).
-    """
-    if len(nums) <= 1:
-        return nums
-    pivot = nums[len(nums) // 2]
-
-    small_nums = [x for x in nums if x < pivot]
-    mid_nums = [x for x in nums if x == pivot]
-    large_nums = [x for x in nums if x > pivot]
-
-    return quicksort(small_nums) + mid_nums + quicksort(large_nums)
-
-
 def _partition(nums, left, right, mid):
     """Helper function for quicksort_raw() to get partition point."""
     pivot = nums[mid]
@@ -68,22 +45,46 @@ def quicksort_raw(nums):
     return nums
 
 
+def quicksort(nums):
+    """Quick sort algortihm by recursion with list comprehension.
+
+    Procedure:
+      - Pick a pivot which ideally is a median pf the list.
+      - Arrange half elements which are smaller than pivot to left,
+        and the other half ones that are bigger than pivot to right.
+      - Then to each half, recursively apply quicksort().
+
+    Time complexity: O(n*logn).
+    Space complexity: O(n).
+    """
+    if len(nums) <= 1:
+        return nums
+
+    pivot = nums[len(nums) // 2]
+
+    small_nums = [x for x in nums if x < pivot]
+    mid_nums = [x for x in nums if x == pivot]
+    large_nums = [x for x in nums if x > pivot]
+
+    return quicksort(small_nums) + mid_nums + quicksort(large_nums)
+
+
 def main():
     import time
     import random
 
-    # nums = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     nums = range(100)
     random.shuffle(nums)
-
-    start_time = time.time()
-    print(quicksort(nums))
-    print('Time for quick sort by recursion: {}'
-          .format(time.time() - start_time))
-
     start_time = time.time()
     print(quicksort_raw(nums))
     print('Time for quick sort by "raw" recursion: {}'
+          .format(time.time() - start_time))
+
+    nums = range(100)
+    random.shuffle(nums)
+    start_time = time.time()
+    print(quicksort(nums))
+    print('Time for quick sort by recursion: {}'
           .format(time.time() - start_time))
 
 
