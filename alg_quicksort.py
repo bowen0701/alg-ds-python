@@ -57,11 +57,11 @@ def _quicksort_recur(nums, left, right):
         _quicksort_recur(nums, mid + 1, right)
 
 
-def quicksort(nums):
+def quicksort_ip(nums):
     """Quick sort algortihm with recursion.
 
     Time complexity: O(n*logn).
-    Space complexity: O(n).
+    Space complexity: O(1).
     """
     # Base case.
     if len(nums) <= 1:
@@ -79,14 +79,14 @@ def main():
     random.shuffle(nums)
     start_time = time.time()
     print(quicksort_lc(nums))
-    print('Time for quick sort by recursion w/ list comprehension: {}'
+    print('Time for quick sort by list comprehension: {}'
           .format(time.time() - start_time))
 
     nums = range(100)
     random.shuffle(nums)
     start_time = time.time()
-    print(quicksort(nums))
-    print('Time for quick sort by recursion: {}'
+    print(quicksort_ip(nums))
+    print('Time for quick sort in place: {}'
           .format(time.time() - start_time))
 
 
