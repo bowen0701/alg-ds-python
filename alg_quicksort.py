@@ -30,7 +30,7 @@ def quicksort_lc(nums):
 
 
 def _partition(nums, left, right):
-    """Util for quicksort() to rearrange nums in place."""
+    """Util method for quicksort_ip() to rearrange nums in place."""
     # Use right number as pivot.
     right_num = nums[right]
 
@@ -50,7 +50,7 @@ def _partition(nums, left, right):
 
 
 def _quicksort_recur(nums, left, right):
-    """Util for quicksort() by recursion."""
+    """Util method for quicksort_ip() by recursion."""
     if left < right:
         mid = _partition(nums, left, right)
         _quicksort_recur(nums, left, mid - 1)
@@ -68,7 +68,6 @@ def quicksort_ip(nums):
         return nums
 
     _quicksort_recur(nums, 0, len(nums) - 1)
-    return nums
 
 
 def main():
@@ -85,7 +84,8 @@ def main():
     nums = range(100)
     random.shuffle(nums)
     start_time = time.time()
-    print(quicksort_ip(nums))
+    quicksort_ip(nums)
+    print(nums)
     print('Time for quick sort in place: {}'
           .format(time.time() - start_time))
 
