@@ -28,7 +28,6 @@ def merge_sort_recur(nums):
     
     # Sort the 1st & 2nd halves respectively and merge them.
     mid = len(nums) // 2
-
     nums1 = merge_sort_recur(nums[:mid])
     nums2 = merge_sort_recur(nums[mid:])
     return _merge_sorted_lists_recur(nums1, nums2)
@@ -71,7 +70,6 @@ def merge_sort_iter(nums):
     
     # Sort the 1st & 2nd halves respectively and merge them.
     mid = len(nums) // 2
-
     nums1 = merge_sort_iter(nums[:mid])
     nums2 = merge_sort_iter(nums[mid:])
     return _merge_sorted_lists_iter(nums1, nums2)
