@@ -3,16 +3,18 @@ from __future__ import print_function
 from __future__ import division
 
 
-def _merge_sorted_lists_recur(nums1, nums2):
+def _merge_sorted_lists_recur(sorted_nums1, sorted_nums2):
     """Merge two sorted lists by recusion."""
-    if not nums1 or not nums2:
-        return nums1 or nums2
+    if not sorted_nums1 or not sorted_nums2:
+        return sorted_nums1 or sorted_nums2
 
     # Merge two lists one element by one element.
-    if nums1[0] <= nums2[0]:
-        return [nums1[0]] + _merge_sorted_lists_recur(nums1[1:], nums2)
+    if sorted_nums1[0] <= sorted_nums2[0]:
+        return ([sorted_nums1[0]] + 
+                _merge_sorted_lists_recur(sorted_nums1[1:], sorted_nums2))
     else:
-        return [nums2[0]] + _merge_sorted_lists_recur(nums1, nums2[1:])
+        return ([sorted_nums2[0]] + 
+                _merge_sorted_lists_recur(sorted_nums1, sorted_nums2[1:]))
 
 
 def merge_sort_recur(nums):
@@ -28,30 +30,30 @@ def merge_sort_recur(nums):
     
     # Sort the 1st & 2nd halves respectively and merge them.
     mid = len(nums) // 2
-    nums1 = merge_sort_recur(nums[:mid])
-    nums2 = merge_sort_recur(nums[mid:])
-    return _merge_sorted_lists_recur(nums1, nums2)
+    sorted_nums1 = merge_sort_recur(nums[:mid])
+    sorted_nums2 = merge_sort_recur(nums[mid:])
+    return _merge_sorted_lists_recur(sorted_nums1, sorted_nums2)
 
 
-def _merge_sorted_lists_iter(nums1, nums2):
+def _merge_sorted_lists_iter(sorted_nums1, sorted_nums2):
     """Merge two sorted lists by iteration."""
     # Apply two pointer method.
     i, j = 0, 0
     result = []
 
-    for _ in range(len(nums1) + len(nums2)):
-        if i < len(nums1) and j < len(nums2):
-            if nums1[i] <= nums2[j]:
-                result.append(nums1[i])
+    for _ in range(len(sorted_nums1) + len(sorted_nums2)):
+        if i < len(sorted_nums1) and j < len(sorted_nums2):
+            if sorted_nums1[i] <= sorted_nums2[j]:
+                result.append(sorted_nums1[i])
                 i += 1
             else:
-                result.append(nums2[j])
+                result.append(sorted_nums2[j])
                 j += 1      
-        elif i < len(nums1) and j >= len(nums2):
-            result.extend(nums1[i:])
+        elif i < len(sorted_nums1) and j >= len(sorted_nums2):
+            result.extend(sorted_nums1[i:])
             break
-        elif i >= len(nums1) and j < len(nums2):
-            result.extend(nums2[j:])
+        elif i >= len(sorted_nums1) and j < len(sorted_nums2):
+            result.extend(sorted_nums2[j:])
             break
 
     return result
@@ -70,9 +72,9 @@ def merge_sort_iter(nums):
     
     # Sort the 1st & 2nd halves respectively and merge them.
     mid = len(nums) // 2
-    nums1 = merge_sort_iter(nums[:mid])
-    nums2 = merge_sort_iter(nums[mid:])
-    return _merge_sorted_lists_iter(nums1, nums2)
+    sorted_nums1 = merge_sort_iter(nums[:mid])
+    sorted_nums2 = merge_sort_iter(nums[mid:])
+    return _merge_sorted_lists_iter(sorted_nums1, sorted_nums2)
 
 
 def main():
