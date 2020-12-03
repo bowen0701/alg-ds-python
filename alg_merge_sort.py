@@ -74,6 +74,7 @@ def merge_sort_iter(nums):
     nums2 = merge_sort_iter(nums[mid:])
     return _merge_sorted_lists_iter(nums1, nums2)
 
+
 def main():
     import time
     import random
