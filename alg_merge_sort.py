@@ -25,7 +25,7 @@ def merge_sort_recur(nums):
     Time complexity: O(n*logn).
     Space complexity: O(n).
     """
-    if len(nums) == 1:
+    if len(nums) <= 1:
         return nums
     
     # Sort the 1st & 2nd halves respectively and merge them.
@@ -67,7 +67,7 @@ def merge_sort_iter(nums):
     Time complexity: O(n*logn).
     Space complexity: O(n).
     """
-    if len(nums) == 1:
+    if len(nums) <= 1:
         return nums
     
     # Sort the 1st & 2nd halves respectively and merge them.
