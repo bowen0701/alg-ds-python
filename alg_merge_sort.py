@@ -8,7 +8,7 @@ def _merge_sorted_lists_recur(sorted_nums1, sorted_nums2):
     if not sorted_nums1 or not sorted_nums2:
         return sorted_nums1 or sorted_nums2
 
-    # Merge two lists one element by one element.
+    # Merge two lists one by one element.
     if sorted_nums1[0] <= sorted_nums2[0]:
         return ([sorted_nums1[0]] + 
                 _merge_sorted_lists_recur(sorted_nums1[1:], sorted_nums2))
