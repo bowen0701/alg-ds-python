@@ -21,7 +21,7 @@ class LinkedList(object):
       - show()
       - prepend(data)
       - append(data)
-      - delete_with_data(data)
+      - delete_node(data)
       - insert(pos, data)
       - pop(pos)
       - search(data)
@@ -57,12 +57,12 @@ class LinkedList(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        a_list = []
+        ll = []
         current = self.head
         while current:
-            a_list.append(current.data)
+            ll.append(current.data)
             current = current.next
-        print(a_list)
+        print(ll)
 
 
     def prepend(self, data):
@@ -94,7 +94,7 @@ class LinkedList(object):
         current.next = Node(data)
         return None
 
-    def delete_with_data(self, data):
+    def delete_node(self, data):
         """Remove data from list, if existed.
 
         If pos is None, then pop the last item.
@@ -222,56 +222,56 @@ class LinkedList(object):
 
 
 def main():
-    a_list = LinkedList()
-    a_list.append(31)
-    a_list.append(77)
-    a_list.append(17)
-    a_list.append(93)
-    a_list.append(26)
-    a_list.append(54)
-    a_list.show()
+    ll = LinkedList()
+    ll.append(31)
+    ll.append(77)
+    ll.append(17)
+    ll.append(93)
+    ll.append(26)
+    ll.append(54)
+    ll.show()
 
-    a_list = LinkedList()
-    a_list.prepend(31)
-    a_list.prepend(77)
-    a_list.prepend(17)
-    a_list.prepend(93)
-    a_list.prepend(26)
-    a_list.prepend(54)
-    a_list.show()
-    print('Is empty: {}'.format(a_list.is_empty()))
-    print('Size: {}'.format(a_list.size()))
+    ll = LinkedList()
+    ll.prepend(31)
+    ll.prepend(77)
+    ll.prepend(17)
+    ll.prepend(93)
+    ll.prepend(26)
+    ll.prepend(54)
+    ll.show()
+    print('Is empty: {}'.format(ll.is_empty()))
+    print('Size: {}'.format(ll.size()))
 
     print('Append 45:')
-    a_list.append(45)
-    print('Size: {}'.format(a_list.size()))
-    a_list.show()
+    ll.append(45)
+    print('Size: {}'.format(ll.size()))
+    ll.show()
 
     print('Delete non-existed 100:')
-    a_list.delete_with_data(100)
-    a_list.show()
+    ll.delete_node(100)
+    ll.show()
 
     print('Delete 31:')
-    a_list.delete_with_data(31)
-    a_list.show()
+    ll.delete_node(31)
+    ll.show()
 
     print('Delete 45:')
-    a_list.delete_with_data(45)
-    a_list.show()
+    ll.delete_node(45)
+    ll.show()
 
     print('Insert 27 at pos 3:')
-    a_list.insert(3, 27)
-    a_list.show()
+    ll.insert(3, 27)
+    ll.show()
 
     print('Pop pos 3:')
-    a_list.pop(3)
-    a_list.show()
+    ll.pop(3)
+    ll.show()
 
-    print('Search non-existed 100: {}'.format(a_list.search(100)))
-    print('Search 93: {}'.format(a_list.search(93)))
+    print('Search non-existed 100: {}'.format(ll.search(100)))
+    print('Search 93: {}'.format(ll.search(93)))
 
-    print('Index non-existed 100: {}'.format(a_list.index(100)))
-    print('Index 93: {}'.format(a_list.index(93)))
+    print('Index non-existed 100: {}'.format(ll.index(100)))
+    print('Index 93: {}'.format(ll.index(93)))
 
 
 if __name__ == '__main__':
