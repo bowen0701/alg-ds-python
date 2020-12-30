@@ -104,6 +104,7 @@ class LinkedList(object):
         """
         if not self.head:
             return None
+
         if self.head.data == data:
             # Skip deleted node.
             self.head = self.head.next
