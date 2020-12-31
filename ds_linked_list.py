@@ -126,10 +126,12 @@ class LinkedList(object):
         Time complexity = O(pos).
         Space complexity: O(1).
         """
+        # Edge case.
         if not self.head and pos > 0:
             print('Cannot insert to empty list.')
             return None
 
+        # Two pointer method: previous + current.
         current = self.head
         previous = None
         counter = 0
