@@ -158,11 +158,15 @@ class LinkedList(object):
         Time complexity: O(pos).
         Space complexity: O(1).
         """
+        # Edge case for no head.
         if not self.head:
             return None
+
+        # When no input for pos, set to tail position.
         if not pos:
             pos = self.size() - 1
 
+        # Two pointer method: previous & current.
         current = self.head
         previous = None
         counter = 0
