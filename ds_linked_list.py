@@ -229,15 +229,6 @@ class LinkedList(object):
 
 def main():
     ll = LinkedList()
-    ll.append(31)
-    ll.append(77)
-    ll.append(17)
-    ll.append(93)
-    ll.append(26)
-    ll.append(54)
-    ll.show()
-
-    ll = LinkedList()
     ll.prepend(31)
     ll.prepend(77)
     ll.prepend(17)
