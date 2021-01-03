@@ -212,20 +212,19 @@ class LinkedList(object):
             return None
 
         current = self.head
-        is_found = False
         counter = 0
 
-        while not is_found and current.next:
+        while current.next:
             if current.data == data:
-                is_found = True
+                return counter
             else:
                 current = current.next
                 counter += 1
-        
-        if not is_found:
-            counter = None
 
-        return counter
+        if current.data == data:
+            return counter
+        else:
+            return None
 
 
 def main():
