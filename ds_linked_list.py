@@ -97,8 +97,6 @@ class LinkedList(object):
     def delete_node(self, data):
         """Remove data from list, if existed.
 
-        If pos is None, then pop the last item.
-
         Time complexity: O(n).
         Space complexity: O(1).
         """
