@@ -61,7 +61,7 @@ class SolutionRecur(object):
         :rtype: ListNode
 
         Time complexity: O(n1+n2), where ni is the length of list i.
-        Space complexity: O(logn1+logn2).
+        Space complexity: O(n1+n2).
         """
         if not l1 or not l2:
             return l1 or l2
