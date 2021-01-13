@@ -28,6 +28,7 @@ class SolutionSortAll(object):
         Time complexity: O((n1+n2)*log(n1+n2)), where ni is the length of list i.
         Space complexity: O((n1+n2)).
         """
+        # Edge cases: list1 or list2 is empty.
         if not l1 or not l2:
             return l1 or l2
 
@@ -63,9 +64,11 @@ class SolutionRecur(object):
         Time complexity: O(n1+n2), where ni is the length of list i.
         Space complexity: O(n1+n2).
         """
+        # Edge cases: list1 or list2 is empty.
         if not l1 or not l2:
             return l1 or l2
 
+        # Recusively append next node to the smaller node. 
         if l1.val < l2.val:
             l1.next = self.mergeTwoLists(l1.next, l2)
             return l1
@@ -84,9 +87,11 @@ class SolutionIter(object):
         Time complexity: O(n1+n2), where ni is the length of list i.
         Space complexity: O(1).
         """
+        # Edge cases: list1 or list2 is empty.
         if not l1 or not l2:
             return l1 or l2
 
+        # Iteratively append smaller node to the tail. 
         pre_head = ListNode(None)
         current = pre_head
 
