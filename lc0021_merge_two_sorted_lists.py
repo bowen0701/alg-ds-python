@@ -105,6 +105,7 @@ class SolutionIter(object):
 
             current = current.next
 
+        # Append the remaining node.
         current.next = l1 or l2
 
         return pre_head.next
