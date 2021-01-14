@@ -91,7 +91,7 @@ class SolutionIter(object):
         if not l1 or not l2:
             return l1 or l2
 
-        # Iteratively append smaller node to the tail. 
+        # Iteratively append smaller node to the tail when both exist.
         pre_head = ListNode(None)
         current = pre_head
 
