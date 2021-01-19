@@ -104,16 +104,16 @@ def main():
     q.enqueue(8.4)
 
     print('Show: {}'.format(q.show()))
+    print('Size: {}'.format(q.size()))
+    print('Is empty: {}'.format(q.is_empty()))
     print('Peek: {}'.format(q.peek()))
-    print('Is empty: {}'.format(q.is_empty()))
-    print('Size: {}'.format(q.size()))
 
     print('Dequeue: {}'.format(q.dequeue()))
     print('Dequeue: {}'.format(q.dequeue()))
 
     print('Is empty: {}'.format(q.is_empty()))
-    print('Size: {}'.format(q.size()))
     print('Show: {}'.format(q.show()))
+    print('Size: {}'.format(q.size()))
 
 
 if __name__ == '__main__':
