@@ -102,10 +102,9 @@ def main():
     q.enqueue('dog')
     q.enqueue(4)
     q.enqueue(8.4)
-
+    print('Is empty: {}'.format(q.is_empty()))
     print('Show: {}'.format(q.show()))
     print('Size: {}'.format(q.size()))
-    print('Is empty: {}'.format(q.is_empty()))
     print('Peek: {}'.format(q.peek()))
 
     print('Dequeue: {}'.format(q.dequeue()))
