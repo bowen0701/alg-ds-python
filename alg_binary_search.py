@@ -4,32 +4,26 @@ from __future__ import division
 
 
 def binary_search_recur(sorted_nums, target):
-    """Binary search for sorted list by recursion.
+    """Binary search in sorted list by recursion.
 
     Time complexity: O(logn).
     Space complexity: O(max(n, logn))=O(n).
     """
     if len(sorted_nums) == 0:
         return False
-    else:
-        mid = len(sorted_nums) // 2
 
-        if sorted_nums[mid] == target:
-            return True
-        elif sorted_nums[mid] < target:
-            return binary_search_recur(sorted_nums[(mid + 1):], target)
-        else:
-            return binary_search_recur(sorted_nums[:mid], target)
+    mid = len(sorted_nums) // 2
+
+    if sorted_nums[mid] == target:
+        return True
+    elif sorted_nums[mid] < target:
+        return binary_search_recur(sorted_nums[(mid + 1):], target)
+    else:
+        return binary_search_recur(sorted_nums[:mid], target)
 
 
 def binary_search_two_pointers_recur(sorted_nums, target, left, right):
-    """Binary search for sorted list by recursion w/ two pointer method.
-
-    Note: It performs faster than binary_search_recur().
-    
-    Time complexity: O(logn).
-    Space complexity: O(logn).
-    """
+    """Util for binary_search_feast_recur()."""
     if left > right:
         return False
 
@@ -45,12 +39,29 @@ def binary_search_two_pointers_recur(sorted_nums, target, left, right):
             sorted_nums, target, left, mid - 1)
 
 
+def binary_search_fast_recur(sorted_nums, target):
+    """Binary search in sorted list by recursion w/ two pointer method.
+
+    Time complexity: O(logn).
+    Space complexity: O(logn).
+    """
+    if len(sorted_nums) == 0:
+        return False
+
+    left, right = 0, len(sorted_nums) - 1
+    return binary_search_two_pointers_recur(
+        sorted_nums, target, left, right)
+
+
 def binary_search_iter(sorted_nums, target):
-    """Binary search for sorted list by iteration.
+    """Binary search in sorted list by iteration.
 
     Time complexity: O(logn).
     Space complexity: O(1).
     """
+    if len(sorted_nums) == 0:
+        return False
+
     left, right = 0, len(sorted_nums) - 1
 
     while left < right:
@@ -80,11 +91,11 @@ def main():
 
     start_time = time.time()
     start_time = time.time()
-    print('By recursion: {}'.format(binary_search_recur(sorted_nums, target)))
+    print('By recur: {}'.format(binary_search_recur(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
     start_time = time.time()
-    print('By fast recursion: {}'.format(
-          binary_search_two_pointers_recur(sorted_nums, target, 0, len(sorted_nums) - 1)))
+    print('By fast recur: {}'.format(
+          binary_search_fast_recur(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
     print('By iteration: {}'.format(binary_search_iter(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
@@ -93,11 +104,11 @@ def main():
     target = -1
 
     start_time = time.time()
-    print('By recursion: {}'.format(binary_search_recur(sorted_nums, target)))
+    print('By recur: {}'.format(binary_search_recur(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
     start_time = time.time()
-    print('By fast recursion: {}'.format(
-          binary_search_two_pointers_recur(sorted_nums, target, 0, len(sorted_nums) - 1)))
+    print('By fast recur: {}'.format(
+          binary_search_fast_recur(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
     print('By iteration: {}'.format(binary_search_iter(sorted_nums, target)))
     print('Time: {}'.format(time.time() - start_time))
