@@ -9,9 +9,11 @@ def binary_search_recur(sorted_nums, target):
     Time complexity: O(logn).
     Space complexity: O(max(n, logn))=O(n).
     """
+    # Edge case.
     if len(sorted_nums) == 0:
         return False
 
+    # Compare middle number and recursively search left or right part.
     mid = len(sorted_nums) // 2
 
     if sorted_nums[mid] == target:
@@ -24,9 +26,11 @@ def binary_search_recur(sorted_nums, target):
 
 def binary_search_two_pointers_recur(sorted_nums, target, left, right):
     """Util for binary_search_feast_recur()."""
+    # Edge case.
     if left > right:
         return False
 
+    # Compare middle number and recursively search left or right part.
     mid = left + (right - left) // 2
 
     if sorted_nums[mid] == target:
@@ -45,6 +49,7 @@ def binary_search_fast_recur(sorted_nums, target):
     Time complexity: O(logn).
     Space complexity: O(logn).
     """
+    # Edge case.
     if len(sorted_nums) == 0:
         return False
 
@@ -59,9 +64,11 @@ def binary_search_iter(sorted_nums, target):
     Time complexity: O(logn).
     Space complexity: O(1).
     """
+    # Edge case.
     if len(sorted_nums) == 0:
         return False
 
+    # Compare middle number and iteratively search left or right part.
     left, right = 0, len(sorted_nums) - 1
 
     while left < right:
@@ -74,7 +81,7 @@ def binary_search_iter(sorted_nums, target):
         else:
             right = mid - 1
 
-    # Final check for left = right.
+    # Final check when left = right.
     if sorted_nums[left] == target:
         return True
     else:
