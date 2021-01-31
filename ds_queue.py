@@ -2,29 +2,31 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import division
 
+from collections import deque
+
 
 class Queue(object):
     """Queue using list."""
     def __init__(self):
-        self.items = []
+        self.queue = deque([])
 
     def is_empty(self):
-        return self.items == []
+        return self.queue == deque([])
 
     def peek(self):
-        return self.items[-1]
+        return self.queue[-1]
 
     def enqueue(self, item):
-        self.items.insert(0, item)
+        self.queue.appendleft(item)
 
     def dequeue(self):
-        return self.items.pop()
+        return self.queue.pop()
     
     def size(self):
-        return len(self.items)
+        return len(self.queue)
 
     def show(self):
-        return self.items
+        return list(self.queue)
 
 
 class ListNode(object):
@@ -95,10 +97,8 @@ class Queue_LL(object):
 
 def main():
     # Initiate Queue instance by Queue() or Queue_LL().
-    # q = Queue()
-    q = Queue_LL()
+    q = Queue()
     print('Is empty: {}'.format(q.is_empty()))
-
     q.enqueue('dog')
     q.enqueue(4)
     q.enqueue(8.4)
@@ -106,10 +106,23 @@ def main():
     print('Show: {}'.format(q.show()))
     print('Size: {}'.format(q.size()))
     print('Peek: {}'.format(q.peek()))
-
     print('Dequeue: {}'.format(q.dequeue()))
     print('Dequeue: {}'.format(q.dequeue()))
+    print('Is empty: {}'.format(q.is_empty()))
+    print('Show: {}'.format(q.show()))
+    print('Size: {}'.format(q.size()))
 
+    q = Queue_LL()
+    print('Is empty: {}'.format(q.is_empty()))
+    q.enqueue('dog')
+    q.enqueue(4)
+    q.enqueue(8.4)
+    print('Is empty: {}'.format(q.is_empty()))
+    print('Show: {}'.format(q.show()))
+    print('Size: {}'.format(q.size()))
+    print('Peek: {}'.format(q.peek()))
+    print('Dequeue: {}'.format(q.dequeue()))
+    print('Dequeue: {}'.format(q.dequeue()))
     print('Is empty: {}'.format(q.is_empty()))
     print('Show: {}'.format(q.show()))
     print('Size: {}'.format(q.size()))
