@@ -6,25 +6,25 @@ from __future__ import division
 class Stack(object):
     """Stack using list."""
     def __init__(self):
-        self.items = []
+        self.stack = []
 
     def is_empty(self):
-        return self.items == []
+        return self.stack == []
 
     def peek(self):
-        return self.items[-1]
+        return self.stack[-1]
 
     def push(self, item):
-        self.items.append(item)
+        self.stack.append(item)
 
     def pop(self):
-        return self.items.pop()
+        return self.stack.pop()
 
     def size(self):
-        return len(self.items)
+        return len(self.stack)
 
     def show(self):
-        return self.items
+        return self.stack
 
 
 class ListNode(object):
