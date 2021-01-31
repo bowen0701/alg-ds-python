@@ -85,22 +85,32 @@ class Stack_LL(object):
 
 def main():
     # Initiate Stack instance by Stack() or Stack_LL().
-    # s = Stack()
-    s = Stack_LL()
+    s = Stack()
     print('Is empty: {}'.format(s.is_empty()))
-
     s.push('dog')
     s.push(4)
     s.push(8.4)
-
     print('Show: {}'.format(s.show()))
     print('Peek: {}'.format(s.peek()))
     print('Is empty: {}'.format(s.is_empty()))
     print('Size: {}'.format(s.size()))
-
     print('Pop: {}'.format(s.pop()))
     print('Pop: {}'.format(s.pop()))
+    print('Is empty: {}'.format(s.is_empty()))
+    print('Size: {}'.format(s.size()))
+    print('Show: {}'.format(s.show()))
 
+    s = Stack_LL()
+    print('Is empty: {}'.format(s.is_empty()))
+    s.push('dog')
+    s.push(4)
+    s.push(8.4)
+    print('Show: {}'.format(s.show()))
+    print('Peek: {}'.format(s.peek()))
+    print('Is empty: {}'.format(s.is_empty()))
+    print('Size: {}'.format(s.size()))
+    print('Pop: {}'.format(s.pop()))
+    print('Pop: {}'.format(s.pop()))
     print('Is empty: {}'.format(s.is_empty()))
     print('Size: {}'.format(s.size()))
     print('Show: {}'.format(s.show()))
