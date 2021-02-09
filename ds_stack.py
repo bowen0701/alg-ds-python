@@ -28,13 +28,13 @@ class Stack(object):
 
 
 class ListNode(object):
-    """List Node for Stack_LL class."""
+    """List Node for StackLL class."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class Stack_LL(object):
+class StackLL(object):
     """Stack using linked list.
 
     Stack: Top->Node2->Node1->None.
@@ -99,7 +99,7 @@ def main():
     print('Size: {}'.format(s.size()))
     print('Show: {}'.format(s.show()))
 
-    s = Stack_LL()
+    s = StackLL()
     print('Is empty: {}'.format(s.is_empty()))
     s.push('dog')
     s.push(4)
