@@ -84,7 +84,6 @@ class Stack_LL(object):
 
 
 def main():
-    # Initiate Stack instance by Stack() or Stack_LL().
     s = Stack()
     print('Is empty: {}'.format(s.is_empty()))
     s.push('dog')
