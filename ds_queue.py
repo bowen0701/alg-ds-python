@@ -36,7 +36,7 @@ class ListNode(object):
         self.next = None
 
 
-class Queue_LL(object):
+class QueueLL(object):
     """Queue using linked list.
 
     Queue: Head->Node1->Node2->Tail
@@ -96,7 +96,6 @@ class Queue_LL(object):
 
 
 def main():
-    # Initiate Queue instance by Queue() or Queue_LL().
     q = Queue()
     print('Is empty: {}'.format(q.is_empty()))
     q.enqueue('dog')
@@ -112,7 +111,7 @@ def main():
     print('Show: {}'.format(q.show()))
     print('Size: {}'.format(q.size()))
 
-    q = Queue_LL()
+    q = QueueLL()
     print('Is empty: {}'.format(q.is_empty()))
     q.enqueue('dog')
     q.enqueue(4)
