@@ -4,7 +4,10 @@ from __future__ import division
 
 
 def _merge_sorted_lists_recur(sorted_nums1, sorted_nums2):
-    """Merge two sorted lists by recusion."""
+    """Helper method for merge_sort_recur().
+
+    Merge two sorted lists by recusion.
+    """
     if not sorted_nums1 or not sorted_nums2:
         return sorted_nums1 or sorted_nums2
 
@@ -36,7 +39,10 @@ def merge_sort_recur(nums):
 
 
 def _merge_sorted_lists_iter(sorted_nums1, sorted_nums2):
-    """Merge two sorted lists by iteration."""
+    """Helper method for merge_sort_iter().
+
+    Merge two sorted lists by iteration.
+    """
     # Apply two pointer method.
     i, j = 0, 0
     result = []
