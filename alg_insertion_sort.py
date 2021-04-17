@@ -6,6 +6,8 @@ from __future__ import division
 def insertion_sort(nums):
     """Insertion sort algortihm.
 
+    It's an in-place sorting, without extra space needed.
+
     Time complexity: O(n^2).
     Space complexity: O(1).
     """
