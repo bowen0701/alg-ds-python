@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-def _merge_sorted_lists_recur(sorted_nums1, sorted_nums2):
+def _merge_sorted_nums_recur(sorted_nums1, sorted_nums2):
     """Helper method for merge_sort_recur().
 
     Merge two sorted lists by recusion.
@@ -14,31 +14,13 @@ def _merge_sorted_lists_recur(sorted_nums1, sorted_nums2):
     # Merge two lists one by one element.
     if sorted_nums1[0] <= sorted_nums2[0]:
         return ([sorted_nums1[0]] + 
-                _merge_sorted_lists_recur(sorted_nums1[1:], sorted_nums2))
+                _merge_sorted_nums_recur(sorted_nums1[1:], sorted_nums2))
     else:
         return ([sorted_nums2[0]] + 
-                _merge_sorted_lists_recur(sorted_nums1, sorted_nums2[1:]))
+                _merge_sorted_nums_recur(sorted_nums1, sorted_nums2[1:]))
 
 
-def merge_sort_recur(nums):
-    """Merge sort algorithm by divide and conquer.
-
-    Merge sorted list by recursion.
-
-    Time complexity: O(n*logn).
-    Space complexity: O(n).
-    """
-    if len(nums) <= 1:
-        return nums
-    
-    # Sort the 1st & 2nd halves respectively and merge them.
-    mid = len(nums) // 2
-    sorted_nums1 = merge_sort_recur(nums[:mid])
-    sorted_nums2 = merge_sort_recur(nums[mid:])
-    return _merge_sorted_lists_recur(sorted_nums1, sorted_nums2)
-
-
-def _merge_sorted_lists_iter(sorted_nums1, sorted_nums2):
+def _merge_sorted_nums_iter(sorted_nums1, sorted_nums2):
     """Helper method for merge_sort_iter().
 
     Merge two sorted lists by iteration.
@@ -65,7 +47,7 @@ def _merge_sorted_lists_iter(sorted_nums1, sorted_nums2):
     return result
 
 
-def merge_sort_iter(nums):
+def merge_sort(nums, merge=_merge_sorted_nums_iter):
     """Merge sort algorithm by divide and conquer.
 
     Merge sorted list by iteration with two pointers.
@@ -78,24 +60,29 @@ def merge_sort_iter(nums):
     
     # Sort the 1st & 2nd halves respectively and merge them.
     mid = len(nums) // 2
-    sorted_nums1 = merge_sort_iter(nums[:mid])
-    sorted_nums2 = merge_sort_iter(nums[mid:])
-    return _merge_sorted_lists_iter(sorted_nums1, sorted_nums2)
+    sorted_nums1 = merge_sort(nums[:mid])
+    sorted_nums2 = merge_sort(nums[mid:])
+    return merge(sorted_nums1, sorted_nums2)
 
 
 def main():
     import time
     import random
 
-    nums = range(100)
+    nums = list(range(100))
     random.shuffle(nums)
 
     start_time = time.time()
-    print('By recur: {}'.format(merge_sort_recur(nums)))
+    print('Merge sort by recur meger: {}'.format(
+        merge_sort(nums, merge=_merge_sorted_nums_recur)))
     print('Time: {}'.format(time.time() - start_time))
 
+    nums = list(range(100))
+    random.shuffle(nums)
+
     start_time = time.time()
-    print('By iter: {}'.format(merge_sort_iter(nums)))
+    print('Merge sort by iter merge: {}'.format(
+        merge_sort(nums, merge=_merge_sorted_nums_iter)))
     print('Time: {}'.format(time.time() - start_time))
 
 
