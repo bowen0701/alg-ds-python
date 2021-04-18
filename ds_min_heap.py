@@ -61,7 +61,7 @@ class MinHeap(object):
 
         Start from the level-1 nodes from leaves down to level-log(n) (= 1) node.
 
-        Time cmplexity: O(n*log(n)) via simple analysis. Actually O(n).
+        Time cmplexity: O(n) (note: tight bound)
         Space complexity: O(1).
         """
         self.A.extend(A)
