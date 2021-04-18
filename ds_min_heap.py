@@ -19,8 +19,9 @@ class MinHeap(object):
     Min-heap property: A[i] <= A[child(i)].
 
     Applications: min heaps with attributes
-      - Dijkstra's Algorithm.
-      - Prim's Minimum Spanning Tree Algorithm.
+      - Priority Queue data structure
+      - Dijkstra's algorithm
+      - Prim's Minimum Spanning Tree algorithm
     """
     def __init__(self):
         # Add extra before real root for left/right node computation.
