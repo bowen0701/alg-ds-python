@@ -133,7 +133,7 @@ def main():
     print('The remaining:')
     max_pq.show()
 
-    print('Build max heap from unordered list [1, 3, 5, 7]:')
+    print('Build max heap from unordered list:')
     max_pq = MaxHeap()
     max_pq.build([1, 3, 5, 7, 9, 11])
     max_pq.show()

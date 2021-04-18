@@ -14,7 +14,7 @@ def right(i):
 
 
 class MinHeap(object):
-    """Min heap implmentation of Priority Queue.
+    """Min Heap data structure.
 
     Min-heap property: A[i] <= A[child(i)].
 
@@ -33,6 +33,41 @@ class MinHeap(object):
 
     def get_min(self):
         return self.A[1]
+
+    def heapify(self, i):
+        """Min heapify in a bottom-up manner by recursion.
+
+        Time complexity: O(log(i)).
+        Space complexity: O(1).
+        """
+        l = left(i)
+        r = right(i)
+
+        # Get min index from node i and its two child nodes.
+        if l <= self.size and self.A[l] < self.A[i]:
+            min_i = l
+        else:
+            min_i = i
+        if r <= self.size and self.A[r] < self.A[min_i]:
+            min_i = r
+
+        # If node i is not min, swap node i and node min_i.
+        if min_i != i:
+            self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
+            self.heapify(min_i)
+
+    def build(self, A):
+        """Build min heap from unordered nums.
+
+        Start from the level-1 nodes from leaves down to level-log(n) (= 1) node.
+
+        Time cmplexity: O(n*log(n)) via simple analysis. Actually O(n).
+        Space complexity: O(1).
+        """
+        self.A.extend(A)
+        self.size = len(A)
+        for i in range(self.size // 2, 0, -1):
+            self.heapify(i)
 
     def _heapify_up(self, i):
         """Min heapify up by iteration.
@@ -56,28 +91,6 @@ class MinHeap(object):
         self.size += 1
         self._heapify_up(self.size)
 
-    def _heapify_down(self, i):
-        """Min heapify down by recursion.
-
-        Time complexity: O(log(i)).
-        Space complexity: O(1).
-        """
-        l = left(i)
-        r = right(i)
-
-        # Get min index from node i and its two child nodes.
-        if l <= self.size and self.A[l] < self.A[i]:
-            min_i = l
-        else:
-            min_i = i
-        if r <= self.size and self.A[r] < self.A[min_i]:
-            min_i = r
-
-        # If node i is not min, swap node i and node min_i.
-        if min_i != i:
-            self.A[i], self.A[min_i] = self.A[min_i], self.A[i]
-            self._heapify_down(min_i)
-
     def extract_min(self):
         """Extract min.
 
@@ -99,24 +112,9 @@ class MinHeap(object):
         else:
             # Insert the last to root, then heapify down.
             self.A[1] = last
-            self._heapify_down(1)
+            self.heapify(1)
 
         return minimum
-
-    def build(self, arr):
-        """Build min heap from unordered array.
-
-        Start from the level-1 nodes from leaves back to level-log(n) node.
-        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
-        n is the number of nodes including the root one, heapify down them.
-
-        Time cmplexity: O(n*log(n)) via simple analysis. Actually O(n).
-        Space complexity: O(1).
-        """
-        self.A.extend(arr)
-        self.size = len(arr)
-        for i in reversed(range(1, (self.size + 1) // 2 + 1)):
-            self._heapify_down(i)
 
 
 def main():
@@ -137,9 +135,9 @@ def main():
     print('- The remaining:')
     min_pq.show()
 
-    print('Build min heap from unordered list [7, 5, 3, 1]:')
+    print('Build min heap from unordered list:')
     min_pq = MinHeap()
-    min_pq.build([7, 5, 3, 1])
+    min_pq.build([1, 3, 5, 7, 9, 11])
     min_pq.show()
 
 
