@@ -14,7 +14,7 @@ def right(i):
 
 
 class MaxHeap(object):
-    """Max heap implementation of Priority Queue.
+    """Max Heap data structure.
 
     Max-heap property: A[i] >= A[child(i)].
 
@@ -30,6 +30,42 @@ class MaxHeap(object):
 
     def get_max(self):
         return self.A[1]
+
+    def heapify(self, i):
+        """Max heapify in a bottom-up manner by recursion.
+
+        Time complexity: O(log(i)).
+        Space complexity: O(1).
+        """
+        l = left(i)
+        r = right(i)
+
+        # Get max index from node i and its two child nodes.
+        if l <= self.size and self.A[l] > self.A[i]:
+            max_i = l
+        else:
+            max_i = i
+        if r <= self.size and self.A[r] > self.A[max_i]:
+            max_i = r
+
+        # If node i is not max, swap node i and node max_i.
+        if max_i != i:
+            self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
+            self.heapify(max_i)
+
+    def build(self, A):
+        """Build max heap from unordered nums.
+
+        Start from the level-1 nodes from leaves down to level-log(n) (= 1) node.
+
+        Time cmplexity: O(n*log(n)) via simple analysis. Actually O(n).
+        Space complexity: O(1).
+        """
+        self.A.extend(A)
+        self.size = len(A)
+        # for i in reversed(range(1, (self.size + 1) // 2 + 1)):
+        for i in range(self.size // 2, 0, -1):
+            self.heapify(i)
 
     def _heapify_up(self, i):
         """Max heapify up by iteration.
@@ -53,28 +89,6 @@ class MaxHeap(object):
         self.size += 1
         self._heapify_up(self.size)
 
-    def _heapify_down(self, i):
-        """Max heapify down by recursion.
-
-        Time complexity: O(log(i)).
-        Space complexity: O(1).
-        """
-        l = left(i)
-        r = right(i)
-
-        # Get max index from node i and its two child nodes.
-        if l <= self.size and self.A[l] > self.A[i]:
-            max_i = l
-        else:
-            max_i = i
-        if r <= self.size and self.A[r] > self.A[max_i]:
-            max_i = r
-
-        # If node i is not max, swap node i and node max_i.
-        if max_i != i:
-            self.A[i], self.A[max_i] = self.A[max_i], self.A[i]
-            self._heapify_down(max_i)
-
     def extract_max(self):
         """Extract max.
 
@@ -96,24 +110,9 @@ class MaxHeap(object):
         else:
             # Insert the last to root, then heapify down.
             self.A[1] = last
-            self._heapify_down(1)
+            self.heapify(1)
 
         return maximum
-
-    def build(self, arr):
-        """Build max heap from unordered array.
-
-        Start from the level-1 nodes from leaves back to level-log(n) node.
-        Specifically, node (n/2), node (n/2 - 1), ..., node 1, where
-        n is the number of nodes including the root one, heapify down them.
-
-        Time cmplexity: O(n*log(n)) via simple analysis. Actually O(n).
-        Space complexity: O(1).
-        """
-        self.A.extend(arr)
-        self.size = len(arr)
-        for i in reversed(range(1, (self.size + 1) // 2 + 1)):
-            self._heapify_down(i)
 
 
 def main():
@@ -136,7 +135,7 @@ def main():
 
     print('Build max heap from unordered list [1, 3, 5, 7]:')
     max_pq = MaxHeap()
-    max_pq.build([1, 3, 5, 7])
+    max_pq.build([1, 3, 5, 7, 9, 11])
     max_pq.show()
 
 
