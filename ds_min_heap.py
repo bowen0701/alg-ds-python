@@ -14,7 +14,7 @@ def right(i):
 
 
 class MinHeap(object):
-    """Min Heap implmentation of Priority Queue.
+    """Min heap implmentation of Priority Queue.
 
     Min-heap property: A[parent(i)] <= A[i], i = left, right.
     """
