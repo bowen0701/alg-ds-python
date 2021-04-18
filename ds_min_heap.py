@@ -16,7 +16,11 @@ def right(i):
 class MinHeap(object):
     """Min heap implmentation of Priority Queue.
 
-    Min-heap property: A[i] <= A[chile(i)].
+    Min-heap property: A[i] <= A[child(i)].
+
+    Applications: min heaps with attributes
+      - Dijkstra's Algorithm.
+      - Prim's Minimum Spanning Tree Algorithm.
     """
     def __init__(self):
         # Add extra before real root for left/right node computation.
