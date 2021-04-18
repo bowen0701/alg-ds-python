@@ -16,7 +16,7 @@ def right(i):
 class MinHeap(object):
     """Min heap implmentation of Priority Queue.
 
-    Min-heap property: A[parent(i)] <= A[i], i = left, right.
+    Min-heap property: A[i] <= A[chile(i)].
     """
     def __init__(self):
         # Add extra before real root for left/right node computation.

@@ -16,7 +16,7 @@ def right(i):
 class MaxHeap(object):
     """Max heap implementation of Priority Queue.
 
-    Max-heap property: A[parent(i)] >= A[i], i = left, right.
+    Max-heap property: A[i] >= A[child(i)].
 
     Application: Heapsort Algorithm.
     """

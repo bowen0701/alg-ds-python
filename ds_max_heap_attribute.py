@@ -16,7 +16,7 @@ def right(i):
 class MaxHeapAttribute(object):
     """Max heap with attribute implementation of Priority Queue.
 
-    Max-heap property: A[parent(i)][0] >= A[i][0], i = left, right.
+    Max-heap property: A[i][0] >= A[child(i)][0].
     """
     def __init__(self):
         # Add extra before real root for left/right node computation.

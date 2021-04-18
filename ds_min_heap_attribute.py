@@ -16,7 +16,7 @@ def right(i):
 class MinHeapAttribute(object):
     """Min heap with attribute implmentation of Priority Queue.
 
-    Min-heap property: A[parent(i)][0] <= A[i][0], i = left, right.
+    Min-heap property: A[i][0] <= A[child(i)][0].
 
     Applications:
       - Dijkstra's Algorithm.
