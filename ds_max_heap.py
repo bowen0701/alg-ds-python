@@ -117,26 +117,26 @@ class MaxHeap(object):
 
 def main():
     print('Max Heap by inserting 1, 3, 5, 7:')
-    max_pq = MaxHeap()
-    max_pq.insert(1)
-    max_pq.insert(3)
-    max_pq.insert(5)
-    max_pq.insert(7)
-    max_pq.show() 
+    max_heap = MaxHeap()
+    max_heap.insert(1)
+    max_heap.insert(3)
+    max_heap.insert(5)
+    max_heap.insert(7)
+    max_heap.show() 
 
     print('Get max:')
-    print(max_pq.get_max())
+    print(max_heap.get_max())
 
     print('Extract max:')
-    _max = max_pq.extract_max()
-    print(_max)
+    maximum = max_heap.extract_max()
+    print(maximum)
     print('The remaining:')
-    max_pq.show()
+    max_heap.show()
 
     print('Build max heap from unordered list:')
-    max_pq = MaxHeap()
-    max_pq.build([1, 3, 5, 7, 9, 11])
-    max_pq.show()
+    max_heap = MaxHeap()
+    max_heap.build([1, 3, 5, 7, 9, 11])
+    max_heap.show()
 
 
 if __name__ == '__main__':

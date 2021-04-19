@@ -119,26 +119,26 @@ class MinHeap(object):
 
 def main():
     print('Min heap by inserting 7, 5, 3, 1:')
-    min_pq = MinHeap()
-    min_pq.insert(7)
-    min_pq.insert(5)
-    min_pq.insert(3)
-    min_pq.insert(1)
-    min_pq.show()
+    min_heap = MinHeap()
+    min_heap.insert(7)
+    min_heap.insert(5)
+    min_heap.insert(3)
+    min_heap.insert(1)
+    min_heap.show()
 
     print('Get min key:')
-    print(min_pq.get_min())
+    print(min_heap.get_min())
 
     print('Extract min key:')
-    _min = min_pq.extract_min()
-    print('- Min: {}'.format(_min))
+    minimum = min_heap.extract_min()
+    print('- Min: {}'.format(minimum))
     print('- The remaining:')
-    min_pq.show()
+    min_heap.show()
 
     print('Build min heap from unordered list:')
-    min_pq = MinHeap()
-    min_pq.build([1, 3, 5, 7, 9, 11])
-    min_pq.show()
+    min_heap = MinHeap()
+    min_heap.build([1, 3, 5, 7, 9, 11])
+    min_heap.show()
 
 
 if __name__ == '__main__':
