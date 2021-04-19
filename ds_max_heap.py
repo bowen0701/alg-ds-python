@@ -18,7 +18,9 @@ class MaxHeap(object):
 
     Max-heap property: A[i] >= A[child(i)].
 
-    Application: Heapsort Algorithm.
+    Application: 
+      - Heapsort algorithm
+      - Max Priority Queue data structure
     """
     def __init__(self):
         # Add extra before real root for left/right node computation.
@@ -67,72 +69,8 @@ class MaxHeap(object):
         for i in range(self.size // 2, 0, -1):
             self.heapify(i)
 
-    def _heapify_up(self, i):
-        """Max heapify up by iteration.
-
-        Time complexity: O(log(i)).
-        Space complexity: O(1).
-        """
-        # For node i, check if it's bigger than parent. If yes, swap them.
-        while i > 1 and self.A[parent(i)] < self.A[i]:
-            self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
-            i = parent(i)
-
-    def insert(self, new_key):
-        """insert new key to heap.
-
-        Time complexity: O(logn).
-        Space complexity: O(1).
-        """
-        # Append new key to the end of the list, then heapify up.
-        self.A.append(new_key)
-        self.size += 1
-        self._heapify_up(self.size)
-
-    def extract_max(self):
-        """Extract max.
-
-        Time complexity: O(logn).
-        Space complexity: O(1).
-        """
-        if self.size < 1:
-            raise ValueError('Heap underflow.')
-
-        maximum = self.A[1]
-
-        # Pop the last node and insert to max, then perform heapify down. 
-        last = self.A.pop()
-        self.size -= 1
-
-        if self.size < 1:
-            # The last element is maximum.
-            pass
-        else:
-            # Insert the last to root, then heapify down.
-            self.A[1] = last
-            self.heapify(1)
-
-        return maximum
-
 
 def main():
-    print('Max Heap by inserting 1, 3, 5, 7:')
-    max_heap = MaxHeap()
-    max_heap.insert(1)
-    max_heap.insert(3)
-    max_heap.insert(5)
-    max_heap.insert(7)
-    max_heap.show() 
-
-    print('Get max:')
-    print(max_heap.get_max())
-
-    print('Extract max:')
-    maximum = max_heap.extract_max()
-    print(maximum)
-    print('The remaining:')
-    max_heap.show()
-
     print('Build max heap from unordered list:')
     max_heap = MaxHeap()
     max_heap.build([1, 3, 5, 7, 9, 11])
