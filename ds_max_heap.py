@@ -62,6 +62,7 @@ class MaxHeap(object):
         Time cmplexity: O(n) (tight bound, although looks like nlog(n)).
         Space complexity: O(1).
         """
+        self.A = [0]
         self.A.extend(A)
         self.size = len(A)
 
