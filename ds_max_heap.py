@@ -35,7 +35,7 @@ class MaxHeap(object):
         return self.A[1]
 
     def heapify(self, i):
-        """Max heapify in a bottom-up manner by recursion.
+        """Max heapify in a top-down manner by recursion.
 
         Time complexity: O(log(i)).
         Space complexity: O(1).
@@ -57,16 +57,14 @@ class MaxHeap(object):
             self.heapify(max_i)
 
     def build(self, A):
-        """Build max heap from unordered nums.
+        """Build max heap bottom-up from unordered numbers.
 
-        Start from the level-1 nodes from leaves down to level-log(n) (= 1) node.
-
-        Time cmplexity: O(n) (note: tight bound)
+        Time cmplexity: O(n) (tight bound, although looks like nlog(n)).
         Space complexity: O(1).
         """
         self.A.extend(A)
         self.size = len(A)
-        # for i in reversed(range(1, (self.size + 1) // 2 + 1)):
+        # Reversely start from level-1 nodes from leaves up to level-log(n) (= 1) node.
         for i in range(self.size // 2, 0, -1):
             self.heapify(i)
 
