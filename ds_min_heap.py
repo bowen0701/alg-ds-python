@@ -20,6 +20,9 @@ class MinHeap(object):
 
     Applications:
       - Min Priority Queue data structure
+      - Event-driven simulator
+      - Dijkstra's algorithm
+      - Prim's Minimum Spanning Tree algorithm
     """
     def __init__(self):
         # Add extra before real root for left/right node computation.
@@ -33,7 +36,7 @@ class MinHeap(object):
         return self.A[1]
 
     def heapify(self, i):
-        """Min heapify in a bottom-up manner by recursion.
+        """Min heapify in a top-down manner by recursion.
 
         Time complexity: O(log(i)).
         Space complexity: O(1).
@@ -55,23 +58,90 @@ class MinHeap(object):
             self.heapify(min_i)
 
     def build(self, A):
-        """Build min heap from unordered nums.
+        """Build min heap bottom-up from unordered numbers.
 
-        Start from the level-1 nodes from leaves down to level-log(n) (= 1) node.
-
-        Time cmplexity: O(n) (note: tight bound)
+        Time cmplexity: O(n) (tight bound, although looks like nlog(n)).
         Space complexity: O(1).
         """
+        self.A = [0]
         self.A.extend(A)
         self.size = len(A)
+
+        # Reversely start from level-1 nodes from leaves up to level-log(n) (= 1) node.
         for i in range(self.size // 2, 0, -1):
             self.heapify(i)
+
+    def extract_min(self):
+        """Extract min.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        if self.size < 1:
+            raise ValueError('Heap underflow.')
+
+        minimum = self.A[1]
+
+        # Pop the last node and insert to min, then perform heapify down. 
+        last = self.A.pop()
+        self.size -= 1
+
+        if self.size < 1:
+            pass
+        else:
+            self.A[1] = last
+            self.heapify(1)
+
+        return minimum
+
+    def decrease_key(self, i, key):
+        """Decrease key.
+
+        Time complexity: O(log(n)).
+        Space complexity: O(1).
+        """
+        if self.A[i] < key:
+            raise ValueError(f"new key {key} is larger than current key {i}")
+
+        # For node i, check if it's smaller than parent. If yes, swap them.
+        self.A[i] = key
+        while i > 1 and self.A[parent(i)] > self.A[i]:
+            self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
+            i = parent(i)
+
+    def insert(self, key):
+        """Insert key to heap.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        # Add to the tree a new leaf whose key is inf.
+        self.size += 1
+        self.A.append(float('inf'))
+        self.decrease_key(self.size, key)
 
 
 def main():
     print('Build min heap from unordered list:')
     min_heap = MinHeap()
     min_heap.build([1, 3, 5, 7, 9, 11])
+    min_heap.show()
+
+    print('Min heap by inserting 7, 5, 3, 1:')
+    min_heap = MinHeap()
+    min_heap.insert(7)
+    min_heap.insert(5)
+    min_heap.insert(3)
+    min_heap.insert(1)
+    min_heap.show()
+
+    print('Get min key:')
+    print(min_heap.get_min())
+
+    print('Extract max:')
+    minimum = min_heap.extract_min()
+    print(minimum)
+    print('The remaining:')
     min_heap.show()
 
 
