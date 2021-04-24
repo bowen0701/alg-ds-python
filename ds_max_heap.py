@@ -21,6 +21,7 @@ class MaxHeap(object):
     Application: 
       - Heapsort algorithm
       - Max Priority Queue data structure
+      - Job scheduler (by prirority)
     """
     def __init__(self):
         # Add extra before real root for left/right node computation.
@@ -69,11 +70,77 @@ class MaxHeap(object):
         for i in range(self.size // 2, 0, -1):
             self.heapify(i)
 
+    def extract_max(self):
+        """Extract max.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        if self.size < 1:
+            raise ValueError('Heap underflow.')
+
+        maximum = self.A[1]
+
+        # Pop the last node and insert to max, then perform heapify. 
+        last = self.A.pop()
+        self.size -= 1
+
+        if self.size < 1:
+            pass
+        else:
+            self.A[1] = last
+            self.heapify(1)
+
+        return maximum
+
+    def increase_key(self, i, key):
+        """Increase key.
+
+        Time complexity: O(log(n)).
+        Space complexity: O(1).
+        """
+        if self.A[i] > key:
+            raise ValueError(f"new key {key} is smaller than current key {i}")
+
+        # For node i, check if it's bigger than parent. If yes, swap them.
+        self.A[i] = key
+        while i > 1 and self.A[parent(i)] < self.A[i]:
+            self.A[i], self.A[parent(i)] = self.A[parent(i)], self.A[i]
+            i = parent(i)
+
+    def insert(self, key):
+        """Insert key.
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        # Add to the tree a new leaf whose key is -inf.
+        self.size += 1
+        self.A.append(-float('inf'))
+        self.increase_key(self.size, key)
+
 
 def main():
     print('Build max heap from unordered list:')
     max_heap = MaxHeap()
     max_heap.build([1, 3, 5, 7, 9, 11])
+    max_heap.show()
+
+    print('Max Heap by inserting 1, 3, 5, 7:')
+    max_heap = MaxHeap()
+    max_heap.insert(1)
+    max_heap.insert(3)
+    max_heap.insert(5)
+    max_heap.insert(7)
+    max_heap.show() 
+
+    print('Get max:')
+    print(max_heap.get_max())
+
+    print('Extract max:')
+    maximum = max_heap.extract_max()
+    print(maximum)
+    print('The remaining:')
     max_heap.show()
 
 
