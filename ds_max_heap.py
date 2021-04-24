@@ -64,6 +64,7 @@ class MaxHeap(object):
         """
         self.A.extend(A)
         self.size = len(A)
+
         # Reversely start from level-1 nodes from leaves up to level-log(n) (= 1) node.
         for i in range(self.size // 2, 0, -1):
             self.heapify(i)
