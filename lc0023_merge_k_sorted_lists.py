@@ -16,6 +16,9 @@ Input:
 Output: 1->1->2->3->4->4->5->6
 """
 
+import heapq
+
+
 # Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, val):
@@ -150,6 +153,16 @@ class SolutionMergeTwoIter(object):
         return lists[0]
 
 
+# Update the definition for singly-linked list.
+class ListNode(object):
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+    def __lt__(self, other):
+        return self.val < other.val
+
+
 class SolutionMinHeap(object):
     def mergeKLists(self, lists):
         """
@@ -161,14 +174,12 @@ class SolutionMinHeap(object):
           - k is the length of lists.
         Space complexity: O(k).
         """
-        # Use min heap to collect nodes.
-        import heapq
-
+        # Edge case.
         if not lists:
             return None
 
-        # Just add lists's heads to min heap.
-        minheap = [(head.val, head) for head in lists if head]
+        # Use min heap to collect list nodes.
+        minheap = lists.copy()
         heapq.heapify(minheap)
 
         pre_head = ListNode(None)
@@ -176,13 +187,13 @@ class SolutionMinHeap(object):
 
         # Pop min heap's head and link that min node to list.
         while minheap:
-            _, node = heapq.heappop(minheap)
+            node = heapq.heappop(minheap)
             current.next = node
             current = current.next
 
             # If min heap's head has a next, push to min heap.
             if current.next:
-                heapq.heappush(minheap, (current.next.val, current.next))
+                heapq.heappush(minheap, current.next)
 
         return pre_head.next
 
@@ -195,7 +206,7 @@ def show(head):
         ls.append(current.val)
         current = current.next
 
-    print ls
+    print(ls)
 
 
 def main():
@@ -219,11 +230,11 @@ def main():
 
     lists = [head1, head2, head3]
 
-    print 'By all sort:'
+    print('By all sort:')
     head = SolutionAllSort().mergeKLists(lists)
     show(head)
 
-    print 'By merge two with recursion:'
+    print('By merge two with recursion:')
     head1 = ListNode(1)
     head1.next = ListNode(4)
     head1.next.next = ListNode(5)
@@ -240,7 +251,7 @@ def main():
     head = SolutionMergeTwoRecur().mergeKLists(lists)
     show(head)
 
-    print 'By merge two with iteration:'
+    print('By merge two with iteration:')
     head1 = ListNode(1)
     head1.next = ListNode(4)
     head1.next.next = ListNode(5)
@@ -257,7 +268,7 @@ def main():
     head = SolutionMergeTwoIter().mergeKLists(lists)
     show(head)
 
-    print 'By min heap:'
+    print('By min heap:')
     head1 = ListNode(1)
     head1.next = ListNode(4)
     head1.next.next = ListNode(5)
