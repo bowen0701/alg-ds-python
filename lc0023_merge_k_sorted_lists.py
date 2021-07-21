@@ -140,9 +140,8 @@ class SolutionMergeTwoIter(object):
 
         n = len(lists)
 
-        # When there are at least two lists, merge them.
+        # For each pair of leftmost & rightmost lists, merge them to the former.
         while n > 1:
-            # Merge each pair of leftmost & rightmost lists to the former.
             for i in range(n // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[n - 1 - i])
 
