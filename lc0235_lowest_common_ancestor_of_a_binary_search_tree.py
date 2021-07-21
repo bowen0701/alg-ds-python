@@ -58,10 +58,13 @@ class SolutionRecur(object):
         Space complexity: O(logn) or O(n).
         """
         if p.val < root.val and q.val < root.val:
+            # If both p & q are in left tree.
             return self.lowestCommonAncestor(root.left, p, q)
         elif p.val > root.val and q.val > root.val:
+            # If both p & q are in right tree.
             return self.lowestCommonAncestor(root.right, p, q)
         else:
+            # If p and q are in different trees, their ancestor is root.
             return root
 
 
@@ -81,10 +84,13 @@ class SolutionIter(object):
         """
         while root:
             if p.val < root.val and q.val < root.val:
+                # If both p & q are in left tree, update root to left.
                 root = root.left
             elif p.val > root.val and q.val > root.val:
+                # If both p & q are in right tree, update root to right.
                 root = root.right
             else:
+                # If p & q are in different trees, found ancestor as root.
                 break
         return root
 
