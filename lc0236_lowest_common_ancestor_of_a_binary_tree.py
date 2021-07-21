@@ -54,6 +54,8 @@ class SolutionPreorderRecur(object):
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
         # Apply recursive Preorder Traversal: root->left->right.
+
+        # Edge case.
         if not root:
             return None
 
@@ -61,15 +63,15 @@ class SolutionPreorderRecur(object):
         if root is p or root is q:
             return root
 
-        # Visit left & right recursively in left and right subtrees.
+        # Recursively find LCA by visiting left & right subtrees.
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
-        # If p & q are not in two subtrees.
+        # If p & q are not in two subtrees, then no LCAs.
         if not left and not right:
             return None
 
-        # If p and q are in both left and right subtrees.
+        # If p & q are in left & right subtrees separately, then LCA is root.
         if left and right:
             return root
 
@@ -92,12 +94,12 @@ class SolutionChildParentDictPreorderIter(object):
         child_parent_d = dict()
         child_parent_d[root] = None
 
-        # Apply iterative preorder traversal to find all of p & q's parents.
+        # Iteratively preorder traverse to collect all of p & q's parents.
         stack = [root]
         while p not in child_parent_d or q not in child_parent_d:
             current = stack.pop()
 
-            # Visit right and then left since we use stack with FILO.
+            # Visit right and then left since use stack with FILO.
             if current.right:
                 child_parent_d[current.right] = current
                 stack.append(current.right)
@@ -105,7 +107,7 @@ class SolutionChildParentDictPreorderIter(object):
                 child_parent_d[current.left] = current
                 stack.append(current.left)
 
-        # Use set to reversely collect p's ancestors.
+        # Use set to collect p's ancestors reversely.
         ancestors = set()
         while p:
             ancestors.add(p)
