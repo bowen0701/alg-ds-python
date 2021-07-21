@@ -83,6 +83,7 @@ class SolutionMergeTwoRecur(object):
         Time complexity: O(nk*logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
+          - nk/2 in each run, logk runs.
         Space complexity: O(logk).
         """
         if not lists:
@@ -133,6 +134,7 @@ class SolutionMergeTwoIter(object):
         Time complexity: O(nk*logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
+          - nk/2 in each run, logk runs.
         Space complexity: O(1).
         """
         if not lists:
@@ -170,6 +172,7 @@ class SolutionMinHeap(object):
         Time complexity: O(nk*logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
+          - nk nodes to connect, logk for heap push.
         Space complexity: O(k).
         """
         # Edge case.
