@@ -61,6 +61,17 @@ class SolutionAllSort(object):
 
 
 class SolutionMergeTwoToFirst(object):
+    def _merge2Lists(self, l1, l2):
+        if not l1 or not l2:
+            return l1 or l2
+
+        if l1.val <= l2.val:
+            l1.next = self._merge2Lists(l1.next, l2)
+            return l1
+        else:
+            l2.next = self._merge2Lists(l1, l2.next)
+            return l2
+
     def mergeKLists(self, lists):
         """
         :type lists: List[ListNode]
@@ -68,10 +79,16 @@ class SolutionMergeTwoToFirst(object):
 
         Merge two lists to the first.
 
-        Time complexity: ??
-        Space complexity: ??
+        Time complexity: O(k^2n)
+        Space complexity: O(kn)
         """
-        pass
+        n = len(lists)
+
+        # Merge two lists to the first.
+        for i in range(1, n):
+            lists[0] = self._merge2Lists(lists[0], lists[i])
+
+        return lists[0]
 
 
 class SolutionMergeTwoRecur(object):
@@ -232,6 +249,7 @@ def main():
     #   2->6
     # ]
     # Output: 1->1->2->3->4->4->5->6
+    print('By all sort:')
     head1 = ListNode(1)
     head1.next = ListNode(4)
     head1.next.next = ListNode(5)
@@ -245,8 +263,24 @@ def main():
 
     lists = [head1, head2, head3]
 
-    print('By all sort:')
     head = SolutionAllSort().mergeKLists(lists)
+    show(head)
+
+    print('By merge two to the first:')
+    head1 = ListNode(1)
+    head1.next = ListNode(4)
+    head1.next.next = ListNode(5)
+
+    head2 = ListNode(1)
+    head2.next = ListNode(3)
+    head2.next.next = ListNode(4)
+
+    head3 = ListNode(2)
+    head3.next = ListNode(6)
+
+    lists = [head1, head2, head3]
+
+    head = SolutionMergeTwoToFirst().mergeKLists(lists)
     show(head)
 
     print('By merge two with recursion:')
