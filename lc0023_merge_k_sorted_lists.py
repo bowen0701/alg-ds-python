@@ -60,6 +60,20 @@ class SolutionAllSort(object):
         return pre_head.next
 
 
+class SolutionMergeTwoToFirst(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+
+        Merge two lists to the first.
+
+        Time complexity: ??
+        Space complexity: ??
+        """
+        pass
+
+
 class SolutionMergeTwoRecur(object):
     def _merge2Lists(self, l1, l2):
         """Merge two sorted lists recursively."""
