@@ -80,7 +80,9 @@ class SolutionMergeTwoToFirst(object):
         Merge two lists to the first.
 
         Time complexity: O(k^2n)
-        Space complexity: O(kn)
+          - n is the max number of nodes in one list.
+          - k is the length of lists.
+        Space complexity: O(n*logk)
         """
         n = len(lists)
 
@@ -115,7 +117,7 @@ class SolutionMergeTwoRecur(object):
           - n is the max number of nodes in one list.
           - k is the length of lists.
           - nk/2 in each run, logk runs.
-        Space complexity: O(logk).
+        Space complexity: O(n*logk).
         """
         if not lists:
             return None
