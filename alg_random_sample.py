@@ -109,11 +109,20 @@ class SampleBiasedCoinWithFairCoin(object):
         if 1 / p != int(1 / p):
             raise ValueError("p must be an rational number 1 / k.")
 
-        self.n_cases = int(1 / p)
-        self.n_coins = int(math.ceil(math.log(self.n_cases, 2)))
+        self.p = p
+        self.is_constructed = False
 
-        # Iterate the possible results of flipping coins.
+    def construct(self):
+        """Construct possible flips based on the number of coins needed."""
+        if self.is_constructed:
+            return None
+
+        # Compute the number of coins needed and obtain possible flips.
+        self.n_cases = int(1 / self.p)
+        self.n_coins = int(math.ceil(math.log(self.n_cases, 2)))
         self.possible_flips = list(itertools.product([0, 1], repeat=self.n_coins))
+
+        self.is_constructed = True
 
     def sample(self):
         """Sample biased coin.
@@ -123,6 +132,8 @@ class SampleBiasedCoinWithFairCoin(object):
         - the (last) n_cases - 1 case, return failures;
         - the rest cases, retry.
         """
+        self.construct()
+
         # Convert to tuple due to tuples in itertools's product ouput.
         flips = tuple([random.randint(0, 1) for _ in range(self.n_coins)])
 
