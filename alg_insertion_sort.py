@@ -14,7 +14,7 @@ def insertion_sort(nums):
     # Starting from i>=1, 
     # swap (num[j-1], num[j]) if not sorted, for j=i,...,1.
     for i in range(1, len(nums)):
-        for j in range(i, -1, -1):
+        for j in reversed(range(i + 1)):
             if j > 0 and nums[j - 1] > nums[j]:
                 nums[j - 1], nums[j] = nums[j], nums[j - 1]
             else:
