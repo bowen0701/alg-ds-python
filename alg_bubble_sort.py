@@ -11,7 +11,7 @@ def bubble_sort(nums):
     Time complexity: O(n^2).
     Space complexity: O(1).
     """
-    # Swap pairs, if not sorted, to put max numbers at pos n-1,...,1.
+    # Swap pairs, if not sorted, to put next max numbers at pos n-1,...,1.
     for i in reversed(range(1, len(nums))):
         for j in range(i):
             if nums[j] > nums[j + 1]:
