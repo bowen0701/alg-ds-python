@@ -11,7 +11,7 @@ import itertools
 
 class SampleUniformDiscrete(object):
     def __init__(self, values):
-        """Sample from discrete values from uniform prbabilities.
+        """Sample uniform discrete values.
 
         Apply the Probability Integral Transform for uniform discrete r.v.,
           [x_1, ..., x_n] with probs 1/n:
@@ -33,9 +33,9 @@ class SampleUniformDiscrete(object):
         return self.values[i]
 
 
-class SampleGeneralDiscrete(object):
+class SampleNonUniformDiscrete(object):
     def __init__(self, values, probs, n_bins=1000):
-        """Sampling discrete numbers with general probabilities.
+        """Sampling non-uniform discrete numbers.
 
         - For r.v.'s with unequal probs, preprocess to "uniform" r.v. with uniform probabilies.
           Specifically, preprocess [x_1, x_2, ...] with [p_1, p_2, ...] to
@@ -161,7 +161,7 @@ def main():
     # Output: should be close to 0.7
     values = [0, 1, 2]
     probs = [0.5, 0.3, 0.2]
-    sample_discrete = SampleGeneralDiscrete(values, probs)
+    sample_discrete = SampleNonUniformDiscrete(values, probs)
 
     samples = [None] * n_sim
     for i in range(n_sim):
