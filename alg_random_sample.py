@@ -113,7 +113,12 @@ class SampleBiasedCoinWithFairCoin(object):
         self.is_constructed = False
 
     def construct(self):
-        """Construct possible flips based on the number of coins needed."""
+        """Construct possible flips based on the number of coins needed.
+
+        Time complexity: O(2^n), 
+          where n is the number of coins needed based on p.
+        Space complexity: O(2^n).
+        """
         if self.is_constructed:
             return None
 
@@ -131,6 +136,9 @@ class SampleBiasedCoinWithFairCoin(object):
         - the first case in possible flips, return success;
         - the (last) n_cases - 1 case, return failures;
         - the rest cases, retry.
+
+        Time complexity: O(n).
+        Space complexity: O(n).
         """
         self.construct()
 
@@ -151,7 +159,7 @@ class SampleFairCoinWithBiasedCoin(object):
         """Smple fair coin with biased coin having head probility p."""
         self.p = p
 
-    def _sample_biased(self):
+    def sample_biased(self):
         """Sample with biased coin."""
         u = random.uniform(0, 1)
         if u <= self.p:
@@ -167,9 +175,12 @@ class SampleFairCoinWithBiasedCoin(object):
         - The probability of (T, H): (1-p)*p = that of (H, T).
         Thus we obtain "fair" probibilities for these two cases.
         For the rest cases, retry.
+
+        Time complexity: O(1).
+        Space complexity: O(1).
         """
         # Flip two biased coins.
-        two_flips = [self._sample_biased() for _ in range(2)]
+        two_flips = [self.sample_biased() for _ in range(2)]
 
         # Use cases (1, 0) and (0, 1) for fair coin flipping.
         if two_flips == [1, 0]:
