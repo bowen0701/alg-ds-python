@@ -16,6 +16,7 @@ Input:
 Output: 1->1->2->3->4->4->5->6
 """
 
+from typing import List
 import heapq
 
 
@@ -27,7 +28,7 @@ class ListNode(object):
 
 
 class SolutionAllSort(object):
-    def mergeKLists(self, lists):
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         :type lists: List[ListNode]
         :rtype: ListNode
@@ -61,7 +62,7 @@ class SolutionAllSort(object):
 
 
 class SolutionMergeTwoToFirst(object):
-    def _merge2Lists(self, l1, l2):
+    def _merge2Lists(self, l1: ListNode, l2: ListNode):
         if not l1 or not l2:
             return l1 or l2
 
@@ -72,7 +73,7 @@ class SolutionMergeTwoToFirst(object):
             l2.next = self._merge2Lists(l1, l2.next)
             return l2
 
-    def mergeKLists(self, lists):
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         :type lists: List[ListNode]
         :rtype: ListNode
@@ -94,7 +95,7 @@ class SolutionMergeTwoToFirst(object):
 
 
 class SolutionMergeTwoRecur(object):
-    def _merge2Lists(self, l1, l2):
+    def _merge2Lists(self, l1: ListNode, l2: ListNode):
         """Merge two sorted lists recursively."""
         if not l1 or not l2:
             return l1 or l2
@@ -106,7 +107,7 @@ class SolutionMergeTwoRecur(object):
             l2.next = self._merge2Lists(l1, l2.next)
             return l2
 
-    def mergeKLists(self, lists):
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         :type lists: List[ListNode]
         :rtype: ListNode
@@ -136,7 +137,7 @@ class SolutionMergeTwoRecur(object):
 
 
 class SolutionMergeTwoIter(object):
-    def _merge2Lists(self, l1, l2):
+    def _merge2Lists(self, l1: ListNode, l2: ListNode):
         """Merge two sorted lists iteratively."""
         if not l1 or not l2:
             return l1 or l2
@@ -159,7 +160,7 @@ class SolutionMergeTwoIter(object):
         return pre_head.next
 
 
-    def mergeKLists(self, lists):
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         :type lists: List[ListNode]
         :rtype: ListNode
@@ -186,18 +187,10 @@ class SolutionMergeTwoIter(object):
         return lists[0]
 
 
-# Update the definition for singly-linked list.
-class ListNode(object):
-    def __init__(self, val):
-        self.val = val
-        self.next = None
-
-    def __lt__(self, other):
-        return self.val < other.val
-
-
 class SolutionMinHeap(object):
-    def mergeKLists(self, lists):
+    ListNode.__lt__ = lambda self, other: self.val < other.val
+
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         :type lists: List[ListNode]
         :rtype: ListNode
@@ -213,7 +206,7 @@ class SolutionMinHeap(object):
             return None
 
         # Use min heap to collect list nodes.
-        minheap = lists.copy()
+        minheap = [l for l in lists if l]
         heapq.heapify(minheap)
 
         pre_head = ListNode(None)
@@ -221,8 +214,8 @@ class SolutionMinHeap(object):
 
         # Pop min heap's head and link that min node to list.
         while minheap:
-            node = heapq.heappop(minheap)
-            current.next = node
+            nxt = heapq.heappop(minheap)
+            current.next = nxt
             current = current.next
 
             # If min heap's head has a next, push to min heap.
@@ -232,7 +225,7 @@ class SolutionMinHeap(object):
         return pre_head.next
 
 
-def show(head):
+def show(head: ListNode):
     ls = []
 
     current = head
@@ -333,6 +326,19 @@ def main():
 
     lists = [head1, head2, head3]
 
+    head = SolutionMinHeap().mergeKLists(lists)
+    show(head)
+
+    print('For edge case:')
+    lists = [None, None]
+    head = SolutionAllSort().mergeKLists(lists)
+    show(head)
+    head = SolutionMergeTwoToFirst().mergeKLists(lists)
+    show(head)
+    head = SolutionMergeTwoRecur().mergeKLists(lists)
+    show(head)
+    head = SolutionMergeTwoIter().mergeKLists(lists)
+    show(head)
     head = SolutionMinHeap().mergeKLists(lists)
     show(head)
 
