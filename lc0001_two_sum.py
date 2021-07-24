@@ -15,8 +15,11 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 """
 
+from typing import List
+
+
 class SolutionNumPosDictIter(object):
-    def twoSum(self, nums, target):
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
         """
         :type nums: List[int]
         :type target: int
@@ -25,18 +28,16 @@ class SolutionNumPosDictIter(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        num_pos_d = {}
-        for i, n in enumerate(nums):
-            if target - n in num_pos_d:
-                return [num_pos_d[target - n], i]
-            else:
-                num_pos_d[n] = i
-        return []
+        num_idx_d = dict()
+        for i, num in enumerate(nums):
+            if target - num in num_idx_d:
+                return [num_idx_d[target - num], i]
+            num_idx_d[num] = i
 
 
 def main():
     # Output: [0, 1].
-    print SolutionNumPosDictIter().twoSum([2, 7, 11, 15], 9)
+    print(SolutionNumPosDictIter().twoSum([2, 7, 11, 15], 9))
 
 
 if __name__ == '__main__':
