@@ -10,63 +10,90 @@ import itertools
 
 
 class SampleUniformDiscrete(object):
-    def __init__(self, values):
+    def __init__(self, vals):
         """Sample uniform discrete values.
 
         Apply the Probability Integral Transform for uniform discrete r.v.,
-          [x_1, ..., x_n] with probs 1/n:
-        X = int(n*U) + 1, where U ~ Uniform(0, 1).
+          [x_0, ..., x_{n-1}] with probs 1/n:
+        X = int(n*U), where U ~ Uniform(0, 1).
 
         Args:
-          values: A list. Values from which we want to sample.
+          vals: A list. Values from which we want to sample.
+
+        Time complexity: O(1).
+        Space complexity: O(n), where n is the number of input values.
         """
-        self.n = len(values)
-        self.values = values
+        self.n = len(vals)
+        self.vals = vals
 
     def sample(self):
-        """Sample from values with probs."""
+        """Sample values in uniform probabilities.
+
+        Time complexity: O(1).
+        Space complexity: O(n).
+        """
         # Sample a r.v. from Uniform(0, 1).
         u = random.uniform(0, 1)
-
-        # Get index = int(n*u) since index starts from 0.
         i = int(self.n * u)
-        return self.values[i]
+        return self.vals[i]
 
 
 class SampleNonUniformDiscrete(object):
-    def __init__(self, values, probs, n_bins=1000):
+    def __init__(self, vals, probs, n_bins=int(1e4)):
         """Sampling non-uniform discrete numbers.
 
-        - For r.v.'s with unequal probs, preprocess to "uniform" r.v. with uniform probabilies.
-          Specifically, preprocess [x_1, x_2, ...] with [p_1, p_2, ...] to
-          duplicated values [x_1, x_1, ..., x_2, x_2, ...] with frequencies based on probs.
-        - Then apply the Probability Integral Transform for uniform discrete r.v.'s,
-          [x_1, ..., x_m] with probs 1/m:
-          X = int(m*U) + 1, where U ~ Uniform(0, 1).
+        For r.v.'s with non-uniform probs, preprocess to "uniform" r.v.
+        See https://www.keithschwarz.com/darts-dice-coins/
+        - Specifically, preprocess [x_0, x_1, ...] with [p_0, p_1, ...] to
+          repeated values [x_0, x_0, x_1, x_1, ...] with frequencies proportional to probs.
+        - Apply the Probability Integral Transform for uniform discrete r.v.'s,
+          [x_0, ..., x_m] with probs 1/m, where m = number of total repeated values:
+          X = int(m*U), where U ~ Uniform(0, 1).
 
         Args:
-          values: A list. Values from which we want to sample.
+          vals: A list. Values from which we want to sample.
           probs: A list. Sampling probabilities for values. Default: None.
           n_bins: A int. Bin number to duplicate values for uniform r.v. Default: 1000.
         """
+        # Simulate non-uniform values by uniform values
+        self.vals = vals
+        self.probs = probs
         self.n_bins = n_bins
+        self.is_constructed = False
 
-        # Duplicate values by the corresponding binned freqs.
-        binned_freqs = [int(round(self.n_bins * p)) for p in probs]
-        binned_values_ls = [[v] * f for v, f in zip(values, binned_freqs)]
-        binned_values = [v for ls in binned_values_ls for v in ls]
+    def construct(self):
+        """Construct repeated values based probabilites for "uniform" r.v.
+        
+        Time complexity: O(nb),
+          - n: number of values.
+          - b: number of bins.
+        Space complexity: O(nb).
+        """
+        # Construct only for the 1st call.
+        if self.is_constructed:
+            return None;
 
-        self.n = len(binned_values)
-        self.values = binned_values
+        # Construct repeated values with corresponding binned freqs.
+        binned_freqs = [int(round(self.n_bins * p)) for p in self.probs]
+        binned_vals_ls = [[v] * f for v, f in zip(self.vals, binned_freqs)]
+        binned_vals = [v for ls in binned_vals_ls for v in ls]
+
+        self.is_constructed = True
+        self.n = len(binned_vals)
+        self.binned_vals = binned_vals
 
     def sample(self):
-        """Sample from values with probs."""
+        """Sample non-uniform values with "uniform" probabilities.
+
+        Time complexity: O(1) for infinite calls.
+        Space complexity: O(nb).
+        """
+        self.construct()
+
         # Sample a r.v. from Uniform(0, 1).
         u = random.uniform(0, 1)
-
-        # Get index = int(n*u) since index starts from 0.
         i = int(self.n * u)
-        return self.values[i]
+        return self.binned_vals[i]
 
 
 class SampleBiasedCoinWithFairCoin(object):
@@ -145,26 +172,26 @@ class SampleFairCoinWithBiasedCoin(object):
 def main():
     import numpy as np
 
-    n_sim = 10000
+    n_exp = int(1e5)
 
     # Sample discrete random variable with equal probs.
     # Output: should be close to 0.5
-    values = [0, 1]
-    sample_discrete = SampleUniformDiscrete(values)
+    vals = [0, 1]
+    sample_discrete = SampleUniformDiscrete(vals)
 
-    samples = [None] * n_sim
-    for i in range(n_sim):
+    samples = [None] * n_exp
+    for i in range(n_exp):
         samples[i] = sample_discrete.sample()
     print(np.mean(samples))
 
     # Sample discrete random variable with unequal probs.
     # Output: should be close to 0.7
-    values = [0, 1, 2]
+    vals = [0, 1, 2]
     probs = [0.5, 0.3, 0.2]
-    sample_discrete = SampleNonUniformDiscrete(values, probs)
+    sample_discrete = SampleNonUniformDiscrete(vals, probs)
 
-    samples = [None] * n_sim
-    for i in range(n_sim):
+    samples = [None] * n_exp
+    for i in range(n_exp):
         samples[i] = sample_discrete.sample()
     print(np.mean(samples))
 
@@ -173,8 +200,8 @@ def main():
     p = 1 / 4
     sample_biased_coin = SampleBiasedCoinWithFairCoin(p)
 
-    samples = [None] * n_sim
-    for i in range(n_sim):
+    samples = [None] * n_exp
+    for i in range(n_exp):
         samples[i] = sample_biased_coin.sample()
     print(np.mean(samples))
 
@@ -183,8 +210,8 @@ def main():
     p = 1 / 4
     sample_fair_coin = SampleFairCoinWithBiasedCoin(p)
 
-    samples = [None] * n_sim
-    for i in range(n_sim):
+    samples = [None] * n_exp
+    for i in range(n_exp):
         samples[i] = sample_fair_coin.sample()
     print(np.mean(samples))
 
