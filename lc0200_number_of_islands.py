@@ -24,8 +24,49 @@ Example 2:
 Answer: 3
 """
 
-class SolutionDFSRecurVisit(object):
-    def _dfs(self, r, c, grid, visited_d):
+from typing import List, Tuple, Dict
+
+
+class SolutionDFSUpdateRecur(object):
+    def _dfs(self, r: int, c: int, grid: List[List[str]]):
+        # If visit outside of boundary or water or visited.
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
+            grid[r][c] == '0'):
+            return None
+
+        # Update (r, c) as visited.
+        grid[r][c] = '0'
+
+        # Visit up & down and left & right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_next, c_next in dirs:
+            self._dfs(r_next, c_next, grid)
+
+    def numIslands(self, grid: List[List[str]]) -> int:
+        """Number of islands by recursion.
+
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        if not grid or not grid[0]:
+            return 0
+
+        n_islands = 0
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                # If a land is 1, start DFS visiting.
+                if grid[r][c] == '1':
+                    n_islands += 1
+                    self._dfs(r, c, grid)
+
+        return n_islands
+
+
+class SolutionDFSVisitRecur(object):
+    def _dfs(self, r: int, c: int, 
+             grid: List[List[str]],
+             visited_d: Dict[Tuple[int, int], bool]):
         # If visit outside of boundary or water or visited.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
             grid[r][c] == '0' or visited_d.get((r, c))):
@@ -39,10 +80,8 @@ class SolutionDFSRecurVisit(object):
         for r_next, c_next in dirs:
             self._dfs(r_next, c_next, grid, visited_d)
 
-    def numIslands(self, grid):
+    def numIslands(self, grid: List[List[str]]) -> int:
         """Number of islands by recursion.
-        :type grid: List[List[str]]
-        :rtype: int
 
         Time complexity: O(m*n).
         Space complexity: O(m*n).
@@ -63,131 +102,8 @@ class SolutionDFSRecurVisit(object):
         return n_islands
 
 
-class SolutionDFSRecurVisitReturn(object):
-    def _dfs(self, r, c, grid, visited_d):
-        # If visit outside of boundary or water or visited.
-        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
-            grid[r][c] == '0' or visited_d.get((r, c))):
-            return 0
-
-        # Mark (r, c) as visited.
-        visited_d[(r, c)] = True
-
-        # Count connects by visiting up, down, left & right.
-        n_connects = 1
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            n_connects += self._dfs(r_next, c_next, grid, visited_d)
-
-        return n_connects
-
-    def numIslands(self, grid):
-        """Number of islands by recursion w/ return num of connects.
-        :type grid: List[List[str]]
-        :rtype: int
-
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
-        if not grid or not grid[0]:
-            return 0
-
-        visited_d = {}
-        n_islands = 0
-
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                # If a "new" land is 1, start DFS visiting.
-                if grid[r][c] == '1':
-                    n_connects = self._dfs(r, c, grid, visited_d)
-                    if n_connects > 0:
-                        n_islands += 1
-
-        return n_islands
-
-
-class SolutionDFSRecurUpdate(object):
-    def _dfs(self, r, c, grid):
-        # If visit outside of boundary or water or visited.
-        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
-            grid[r][c] == '0'):
-            return None
-
-        # Update (r, c) as visited.
-        grid[r][c] = '0'
-
-        # Visit up & down and left & right.
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            self._dfs(r_next, c_next, grid)
-
-    def numIslands(self, grid):
-        """Number of islands by recursion.
-        :type grid: List[List[str]]
-        :rtype: int
-
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
-        if not grid or not grid[0]:
-            return 0
-
-        n_islands = 0
-
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                # If a land is 1, start DFS visiting.
-                if grid[r][c] == '1':
-                    n_islands += 1
-                    self._dfs(r, c, grid)
-
-        return n_islands
-
-
-class SolutionDFSRecurUpdateReturn(object):
-    def _dfs(self, r, c, grid):
-        # If visit outside of boundary or water or visited.
-        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
-            grid[r][c] == '0'):
-            return None
-
-        # Update (r, c) as visited.
-        grid[r][c] = '0'
-
-        # Count connects by visiting up, down, left & right.
-        n_connects = 1
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            n_connects += self._dfs(r_next, c_next, grid)
-
-        return n_connects
-
-    def numIslands(self, grid):
-        """Number of islands by recursion w/ return num of connects.
-        :type grid: List[List[str]]
-        :rtype: int
-
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
-        if not grid or not grid[0]:
-            return 0
-
-        n_islands = 0
-
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                # If a "new" land is 1, start DFS visiting.
-                if grid[r][c] == '1':
-                    n_connects = self._dfs(r, c, grid)
-                    if n_connects > 0:
-                        n_islands += 1
-
-        return n_islands
-
-
-class SolutionDFSIterVisit(object):
-    def _get_tovisits(self, v_start, grid):
+class SolutionDFSUpdateIter(object):
+    def _get_tovisits(self, v_start: Tuple[int, int], grid: List[List[str]]):
         (r, c) = v_start
         tovisits = []
 
@@ -200,10 +116,69 @@ class SolutionDFSIterVisit(object):
 
         return tovisits
 
-    def _get_visited_ls(self, visited_d):
+    def _dfs(self, r: int, c: int, grid: List[List[str]]):
+        # Update (r, c) as visited.
+        grid[r][c] = '0'
+
+        # Use stack for iterative DFS.
+        stack = [(r, c)]
+
+        while stack:
+            tovisits = self._get_tovisits(stack[-1], grid)
+
+            if tovisits:
+                for v_neighbor in tovisits:
+                    # Mark (r_next, c_next) as visited.
+                    (r_next, c_next) = v_neighbor
+                    grid[r_next][c_next] = '0'
+                    stack.append((r_next, c_next))
+                    # break for continuing DFS.
+                    break
+            else:
+                # Backtrack by popping stack.
+                stack.pop()
+
+    def numIslands(self, grid: List[List[str]]) -> int:
+        """Number of islands by iteration using stack.
+
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        if not grid or not grid[0]:
+            return 0
+
+        n_islands = 0
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                # If a "new" land is 1, start DFS visiting.
+                if grid[r][c] == '1':
+                    n_islands += 1
+                    self._dfs(r, c, grid)
+
+        return n_islands
+
+
+class SolutionDFSVisitIter(object):
+    def _get_tovisits(self, v_start: Tuple[int, int], grid: List[List[str]]):
+        (r, c) = v_start
+        tovisits = []
+
+        # Visit up, down, left and right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_next, c_next in dirs:
+            if (0 <= r_next < len(grid) and 0 <= c_next < len(grid[0]) and
+                grid[r_next][c_next] == '1'):
+                tovisits.append((r_next, c_next))
+
+        return tovisits
+
+    def _get_visited_ls(self, visited_d: Dict[Tuple[int, int], bool]):
         return [k for (k, v) in visited_d.items() if v is True]
 
-    def _dfs(self, r, c, grid, visited_d):
+    def _dfs(self, r: int, c: int, 
+             grid: List[List[str]], 
+             visited_d: Dict[Tuple[int, int], bool]):
         visited_d[(r, c)] = True
 
         # Use stack for iterative DFS.
@@ -226,7 +201,7 @@ class SolutionDFSIterVisit(object):
                 # Backtrack by popping stack.
                 stack.pop()
 
-    def numIslands(self, grid):
+    def numIslands(self, grid: List[List[str]]) -> int:
         """Number of islands by iteration using stack.
 
         Time complexity: O(m*n).
@@ -248,44 +223,26 @@ class SolutionDFSIterVisit(object):
         return n_islands
 
 
-class SolutionDFSIterUpdate(object):
-    def _get_tovisits(self, v_start, grid):
-        (r, c) = v_start
-        tovisits = []
+class SolutionDFSUpdateReturnConnectsRecur(object):
+    def _dfs(self, r: int, c: int, grid: List[List[str]]):
+        # If visit outside of boundary or water or visited.
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
+            grid[r][c] == '0'):
+            return 0
 
-        # Visit up, down, left and right.
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            if (0 <= r_next < len(grid) and 0 <= c_next < len(grid[0]) and
-                grid[r_next][c_next] == '1'):
-                tovisits.append((r_next, c_next))
-
-        return tovisits
-
-    def _dfs(self, r, c, grid):
         # Update (r, c) as visited.
         grid[r][c] = '0'
 
-        # Use stack for iterative DFS.
-        stack = [(r, c)]
+        # Count connects by visiting up, down, left & right.
+        n_connects = 1
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_next, c_next in dirs:
+            n_connects += self._dfs(r_next, c_next, grid)
 
-        while stack:
-            tovisits = self._get_tovisits(stack[-1], grid)
+        return n_connects
 
-            if tovisits:
-                for v_neighbor in tovisits:
-                    # Mark (r_next, c_next) as visited.
-                    (r_next, c_next) = v_neighbor
-                    grid[r_next][c_next] = '0'
-                    stack.append((r_next, c_next))
-                    # break for continuing DFS.
-                    break
-            else:
-                # Backtrack by popping stack.
-                stack.pop()
-
-    def numIslands(self, grid):
-        """Number of islands by iteration using stack.
+    def numIslands(self, grid: List[List[str]]) -> int:
+        """Number of islands by recursion w/ return num of connects.
 
         Time complexity: O(m*n).
         Space complexity: O(m*n).
@@ -299,13 +256,58 @@ class SolutionDFSIterUpdate(object):
             for c in range(len(grid[0])):
                 # If a "new" land is 1, start DFS visiting.
                 if grid[r][c] == '1':
-                    n_islands += 1
-                    self._dfs(r, c, grid)
+                    n_connects = self._dfs(r, c, grid)
+                    if n_connects > 0:
+                        n_islands += 1
+
+        return n_islands
+
+
+class SolutionDFSVisitReturnConnectsRecur(object):
+    def _dfs(self, r: int, c: int, 
+             grid: List[List[str]], 
+             visited_d: Dict[Tuple[int, int], bool]):
+        # If visit outside of boundary or water or visited.
+        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
+            grid[r][c] == '0' or visited_d.get((r, c))):
+            return 0
+
+        # Mark (r, c) as visited.
+        visited_d[(r, c)] = True
+
+        # Count connects by visiting up, down, left & right.
+        n_connects = 1
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_next, c_next in dirs:
+            n_connects += self._dfs(r_next, c_next, grid, visited_d)
+
+        return n_connects
+
+    def numIslands(self, grid: List[List[str]]) -> int:
+        """Number of islands by recursion w/ return num of connects.
+
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        if not grid or not grid[0]:
+            return 0
+
+        visited_d = {}
+        n_islands = 0
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                # If a "new" land is 1, start DFS visiting.
+                if grid[r][c] == '1':
+                    n_connects = self._dfs(r, c, grid, visited_d)
+                    if n_connects > 0:
+                        n_islands += 1
 
         return n_islands
 
 
 def main():
+    import copy
     import time
 
     # Num of islands = 1.
@@ -315,25 +317,31 @@ def main():
              ['0', '0', '0', '0', '0']]
 
     start_time = time.time()
-    print 'By recur+visit:', SolutionDFSRecurVisit().numIslands(grid1)
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By recur+update:', SolutionDFSUpdateRecur().numIslands(copy.deepcopy(grid1)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By recur+update:', SolutionDFSRecurUpdate().numIslands(grid1)
-    print 'Time: {}'.format(time.time() - start_time)
-
-    grid1 = [['1', '1', '1', '1', '0'],
-             ['1', '1', '0', '1', '0'], 
-             ['1', '1', '0', '0', '0'],
-             ['0', '0', '0', '0', '0']]
+    print('By recur+visit:', SolutionDFSVisitRecur().numIslands(grid1))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionDFSIterVisit().numIslands(grid1)
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By iter+update:', SolutionDFSUpdateIter().numIslands(copy.deepcopy(grid1)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionDFSIterUpdate().numIslands(grid1)
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By iter+visit:', SolutionDFSVisitIter().numIslands(grid1))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By recur+update+return connects:', 
+          SolutionDFSUpdateReturnConnectsRecur().numIslands(copy.deepcopy(grid1)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By recur+visit+return connects:', 
+          SolutionDFSUpdateReturnConnectsRecur().numIslands(grid1))
+    print('Time: {}'.format(time.time() - start_time))
+
 
     # Num of islands = 3.
     grid2 = [['1', '1', '0', '0', '0'],
@@ -342,25 +350,30 @@ def main():
              ['0', '0', '0', '1', '1']]
 
     start_time = time.time()
-    print 'By recur+visit:', SolutionDFSRecurVisit().numIslands(grid2)
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By recur+update:', SolutionDFSUpdateRecur().numIslands(copy.deepcopy(grid2)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By recur+update:', SolutionDFSRecurUpdate().numIslands(grid2)
-    print 'Time: {}'.format(time.time() - start_time)
-
-    grid2 = [['1', '1', '0', '0', '0'],
-             ['1', '1', '0', '0', '0'], 
-             ['0', '0', '1', '0', '0'],
-             ['0', '0', '0', '1', '1']]
+    print('By recur+visit:', SolutionDFSVisitRecur().numIslands(grid2))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionDFSIterVisit().numIslands(grid2)
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By iter+update:', SolutionDFSUpdateIter().numIslands(copy.deepcopy(grid2)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By iter+visit:', SolutionDFSIterUpdate().numIslands(grid2)
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By iter+visit:', SolutionDFSVisitIter().numIslands(grid2))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By recur+update+return connects:', 
+          SolutionDFSUpdateReturnConnectsRecur().numIslands(copy.deepcopy(grid2)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By recur+visit+return connects:', 
+          SolutionDFSUpdateReturnConnectsRecur().numIslands(grid2))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
