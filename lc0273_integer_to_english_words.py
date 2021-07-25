@@ -24,8 +24,11 @@ Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven
 Thousand Eight Hundred Ninety One"
 """
 
+from typing import List
+
+
 class SolutionLessThan20TensPowersOfThousandsRecur(object):
-    def _wordsRecur(self, num):
+    def _getWordsRecur(self, num: int) -> List[str]:
         # Return empty array for exact matched case.
         if not num:
             return []
@@ -34,20 +37,23 @@ class SolutionLessThan20TensPowersOfThousandsRecur(object):
             return [self.lessThan20[num - 1]]
 
         if num < 100:
-            return [self.tens[num // 10 - 1]] + self._wordsRecur(num % 10)
+            return [self.tens[num // 10 - 1]] + self._getWordsRecur(num % 10)
 
         if num < 1000:
-            return [self.lessThan20[num // 100 - 1]] + ['Hundred'] + self._wordsRecur(num % 100)
+            return ([self.lessThan20[num // 100 - 1]] 
+                     + ['Hundred'] 
+                     + self._getWordsRecur(num % 100))
 
-        for p, w in enumerate(self.powersOfThousand, start=1):
+        for p, word in enumerate(self.powersOfThousand, start=1):
             # Convert top-bottom by finding the largest power of thousand.
             if num < 1000 ** (p + 1):
-                return self._wordsRecur(num // (1000 ** p)) + [w] + self._wordsRecur(num % (1000 ** p))
+                return (self._getWordsRecur(num // (1000 ** p)) 
+                        + [word] 
+                        + self._getWordsRecur(num % (1000 ** p)))
 
-    def numberToWords(self, num):
+    def numberToWords(self, num: int) -> str:
         """
-        :type num: int
-        :rtype: str
+        Use < 20, 10s, 1000^p to get words recursively.
 
         Time complexity: O(1).
         Space complexity: O(1).
@@ -63,29 +69,27 @@ class SolutionLessThan20TensPowersOfThousandsRecur(object):
                      'Sixty', 'Seventy', 'Eighty', 'Ninety']
         self.powersOfThousand = ['Thousand', 'Million', 'Billion']
 
-        words = self._wordsRecur(num)
-
-        # Strip extra spaces due to exact match.
+        words = self._getWordsRecur(num)
         return ' '.join(words)
 
 
 def main():
     # Output: "One Hundred Twenty Three"
     num = 123
-    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
+    print(SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num))
 
     # Output: "Twelve Thousand Three Hundred Forty Five"
     num = 12345
-    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
+    print(SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num))
 
     # Output: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
     num = 1234567
-    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
+    print(SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num))
 
     # Output: "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven 
     #          Thousand Eight Hundred Ninety One"
     num = 1234567891
-    print SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num)
+    print(SolutionLessThan20TensPowersOfThousandsRecur().numberToWords(num))
 
 
 if __name__ == '__main__':
