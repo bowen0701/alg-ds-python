@@ -16,7 +16,7 @@ Your function should return 0 when the reversed integer overflows.
 """
 
 class SolutionNegativeOverflow(object):
-    def reverse(self, x):
+    def reverse(self, x: int) -> int:
         """
         :type x: int
         :rtype: int
@@ -41,7 +41,7 @@ class SolutionNegativeOverflow(object):
 
 
 class SolutionModIntegerDivIter(object):
-    def reverse(self, x):
+    def reverse(self, x: int) -> int:
         """
         :type x: int
         :rtype: int
@@ -73,14 +73,14 @@ class SolutionModIntegerDivIter(object):
 
 
 def main():
-    print SolutionNegativeOverflow().reverse(123)
-    print SolutionModIntegerDivIter().reverse(123)
+    print(SolutionNegativeOverflow().reverse(123))
+    print(SolutionModIntegerDivIter().reverse(123))
 
-    print SolutionNegativeOverflow().reverse(-123)
-    print SolutionModIntegerDivIter().reverse(-123)
+    print(SolutionNegativeOverflow().reverse(-123))
+    print(SolutionModIntegerDivIter().reverse(-123))
 
-    print SolutionNegativeOverflow().reverse(-pow(2, 31))
-    print SolutionModIntegerDivIter().reverse(-pow(2, 31))
+    print(SolutionNegativeOverflow().reverse(-pow(2, 31)))
+    print(SolutionModIntegerDivIter().reverse(-pow(2, 31)))
 
 
 if __name__ == '__main__':
