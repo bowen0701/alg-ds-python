@@ -20,6 +20,9 @@ height balanced BST:
  -10  5
 """
 
+from typing import List
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, val):
@@ -29,13 +32,10 @@ class TreeNode(object):
 
 
 class SolutionPreorderRecur(object):
-    def sortedArrayToBST(self, nums):
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         """
-        :type nums: List[int]
-        :rtype: TreeNode
-
         Time complexity: O(n).
-        Space complexity: O(logn).
+        Space complexity: O(n).
         """
         if not nums:
             return None
@@ -52,7 +52,7 @@ class SolutionPreorderRecur(object):
 
 
 class SolutionPreorderRecurTwoPointers(object):
-    def _preorderRecur(self, nums, left, right):
+    def _preorderRecur(self, nums: List[int], left: int, right: int) -> TreeNode:
         if left > right:
             return None
 
@@ -65,11 +65,8 @@ class SolutionPreorderRecurTwoPointers(object):
 
         return root
 
-    def sortedArrayToBST(self, nums):
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         """
-        :type nums: List[int]
-        :rtype: TreeNode
-
         Time complexity: O(n).
         Space complexity: O(logn).
         """
@@ -82,7 +79,7 @@ class SolutionPreorderRecurTwoPointers(object):
 
 
 class SolutionInorderRecurTwoPointers(object):
-    def _inorderRecur(self, nums, left, right):
+    def _inorderRecur(self, nums: List[int], left: int, right: int) -> TreeNode:
         if left > right:
             return None
 
@@ -96,11 +93,8 @@ class SolutionInorderRecurTwoPointers(object):
 
         return root
 
-    def sortedArrayToBST(self, nums):
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         """
-        :type nums: List[int]
-        :rtype: TreeNode
-
         Time complexity: O(n).
         Space complexity: O(logn).
         """
@@ -116,19 +110,19 @@ def main():
     nums = [-10, -3, 0, 5, 9]
 
     root = SolutionPreorderRecur().sortedArrayToBST(nums)
-    print (root.val,
-           root.left.val, root.right.val,
-           root.left.right.val, root.right.right.val)
+    print(root.val,
+          root.left.val, root.right.val,
+          None, root.left.right.val, None, root.right.right.val)
 
     root = SolutionPreorderRecurTwoPointers().sortedArrayToBST(nums)
-    print (root.val,
-           root.left.val, root.right.val,
-           root.left.right.val, root.right.right.val)
+    print(root.val,
+          root.left.val, root.right.val,
+          None, root.left.right.val, None, root.right.right.val)
 
     root = SolutionInorderRecurTwoPointers().sortedArrayToBST(nums)
-    print (root.val,
-           root.left.val, root.right.val,
-           root.left.right.val, root.right.right.val)
+    print(root.val,
+          root.left.val, root.right.val,
+          None, root.left.right.val, None, root.right.right.val)
 
 
 if __name__ == '__main__':
