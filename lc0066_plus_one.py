@@ -23,12 +23,12 @@ Output: [4,3,2,2]
 Explanation: The array represents the integer 4321.
 """
 
-class Solution(object):
-    def plusOne(self, digits):
-        """
-        :type digits: List[int]
-        :rtype: List[int]
+from typing import List
 
+
+class Solution(object):
+    def plusOne(self, digits: List[int]) -> List[int]:
+        """
         Time complexity: O(n), where n is the length of digits.
         Space complexity: O(n), for worse case of total carry.
         """
@@ -47,19 +47,19 @@ class Solution(object):
 def main():
     # Ans: [1,2,4]
     digits = [1,2,3]
-    print Solution().plusOne(digits)
+    print(Solution().plusOne(digits))
 
     # Ans: [4,3,2,2] 
     digits = [4,3,2,1]
-    print Solution().plusOne(digits)
+    print(Solution().plusOne(digits))
 
     # Ans: [3, 0]
     digits = [2, 9]
-    print Solution().plusOne(digits)
+    print(Solution().plusOne(digits))
 
     # Ans: [1, 0, 0]
     digits = [9, 9]
-    print Solution().plusOne(digits)
+    print(Solution().plusOne(digits))
 
 
 if __name__ == '__main__':
