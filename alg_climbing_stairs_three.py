@@ -14,8 +14,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import List
 
-def climbing_stairs_three_recur(steps):
+
+def climbing_stairs_three_recur(steps: int) -> int:
     """Staircase by top-down recursion.
 
     Time complexity: O(3^n).
@@ -32,7 +34,7 @@ def climbing_stairs_three_recur(steps):
             climbing_stairs_three_recur(steps - 3))
 
 
-def _climbing_stairs_three_memo(steps, T):
+def _climbing_stairs_three_memo(steps: int, T: List[int]) -> int:
     if steps < 0:
         return 0
 
@@ -48,7 +50,7 @@ def _climbing_stairs_three_memo(steps, T):
     return T[steps]
 
 
-def climbing_stairs_three_memo(steps):
+def climbing_stairs_three_memo(steps: int) -> int:
     """Staircase by top-down memoization.
 
     Time complexity: O(n).
@@ -58,7 +60,7 @@ def climbing_stairs_three_memo(steps):
     return _climbing_stairs_three_memo(steps, T)
 
 
-def climbing_stairs_three_dp(steps):
+def climbing_stairs_three_dp(steps: int) -> int:
     """Staircase by bottom-up dynamic programming.
 
     Time complexity: O(n).
@@ -70,11 +72,11 @@ def climbing_stairs_three_dp(steps):
     T[2] = 2
     
     for s in range(3, steps + 1):
-        M[s] = M[s - 1] + M[s - 2] + M[s - 3]
-    return M[steps]
+        T[s] = T[s - 1] + T[s - 2] + T[s - 3]
+    return T[steps]
 
 
-def climbing_stairs_three_iter(steps):
+def climbing_stairs_three_iter(steps: int) -> int:
     """Staircase by bottom-up iteration w/ optimized space.
 
     Time complexity: O(n).
