@@ -25,8 +25,11 @@ Note:
 - Every cost[i] will be an integer in the range [0, 999].
 """
 
+from typing import List
+
+
 class SolutionRecur(object):
-    def _climb_stairs(self, cost, n):
+    def _climb_stairs(self, cost: List[int], n: int) -> int:
         # Base cases: no cost.
         if n <= 1:
             return 0
@@ -34,11 +37,8 @@ class SolutionRecur(object):
         return min(self._climb_stairs(cost, n - 1) + cost[n - 1],
                    self._climb_stairs(cost, n - 2) + cost[n - 2])
 
-    def minCostClimbingStairs(self, cost):
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
         """
-        :type cost: List[int]
-        :rtype: int
-
         Note: Time limit exceeded.
 
         Time complexity: O(2^n).
@@ -50,7 +50,7 @@ class SolutionRecur(object):
 
 
 class SolutionMemo(object):
-    def _climb_stairs(self, cost, n, T):
+    def _climb_stairs(self, cost: List[int], n: int, T: List[int]) -> int:
         # Base cases: no cost.
         if n <= 1:
             return 0
@@ -63,11 +63,8 @@ class SolutionMemo(object):
                    self._climb_stairs(cost, n - 2, T) + cost[n - 2])
         return T[n]
 
-    def minCostClimbingStairs(self, cost):
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
         """
-        :type cost: List[int]
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
@@ -78,11 +75,8 @@ class SolutionMemo(object):
 
 
 class SolutionDP(object):
-    def minCostClimbingStairs(self, cost):
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
         """
-        :type cost: List[int]
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
@@ -98,11 +92,8 @@ class SolutionDP(object):
 
 
 class SolutionIter(object):
-    def minCostClimbingStairs(self, cost):
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
         """
-        :type cost: List[int]
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(1).
         """
@@ -117,17 +108,17 @@ class SolutionIter(object):
 def main():
     # Output: 15
     cost = [10, 15, 20]
-    print SolutionRecur().minCostClimbingStairs(cost)
-    print SolutionMemo().minCostClimbingStairs(cost)
-    print SolutionDP().minCostClimbingStairs(cost)
-    print SolutionIter().minCostClimbingStairs(cost)
+    print(SolutionRecur().minCostClimbingStairs(cost))
+    print(SolutionMemo().minCostClimbingStairs(cost))
+    print(SolutionDP().minCostClimbingStairs(cost))
+    print(SolutionIter().minCostClimbingStairs(cost))
 
     # Output: 6
     cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
-    print SolutionRecur().minCostClimbingStairs(cost)
-    print SolutionMemo().minCostClimbingStairs(cost)
-    print SolutionDP().minCostClimbingStairs(cost)
-    print SolutionIter().minCostClimbingStairs(cost)
+    print(SolutionRecur().minCostClimbingStairs(cost))
+    print(SolutionMemo().minCostClimbingStairs(cost))
+    print(SolutionDP().minCostClimbingStairs(cost))
+    print(SolutionIter().minCostClimbingStairs(cost))
 
 
 if __name__ == '__main__':
