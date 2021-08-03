@@ -30,9 +30,6 @@ Your solution should be in logarithmic complexity.
 class SolutionBinarySearchIter(object):
     def findPeakElement(self, nums):
         """
-        :type nums: List[int]
-        :rtype: int
-
         Time complexity: O(logn), where n is the length of nums.
         Space complexity: O(1).
         """
