@@ -53,10 +53,6 @@ class SolutionStack(object):
 
     def backspaceCompare(self, s: str, t: str) -> bool:
         """
-        :type S: str
-        :type T: str
-        :rtype: bool
-
         Time complexity: O(m+n), where
           - m: length of S
           - n: length of T.
@@ -92,10 +88,6 @@ class SolutionIterCharBackwards(object):
 
     def backspaceCompare(self, s: str, t: str) -> bool:
         """
-        :type S: str
-        :type T: str
-        :rtype: bool
-
         Time complexity: O(m+n).
         Space complexity: O(1).
         """
