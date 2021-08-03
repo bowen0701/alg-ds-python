@@ -18,12 +18,12 @@ Input: [2,2,1,1,1,2,2]
 Output: 2
 """
 
-class SolutionNumCountDict(object):
-    def majorityElement(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
+from typing import List
 
+
+class SolutionNumCountDict(object):
+    def majorityElement(self, nums: List[int]) -> int:
+        """
         Time complexity: O(n).
         Space complexity: O(n).
         """
@@ -42,11 +42,11 @@ class SolutionNumCountDict(object):
 def main():
     # Output: 3
     nums = [3,2,3]
-    print SolutionNumCountDict().majorityElement(nums)
+    print(SolutionNumCountDict().majorityElement(nums))
 
     # Output: 2
     nums = [2,2,1,1,1,2,2]
-    print SolutionNumCountDict().majorityElement(nums)
+    print(SolutionNumCountDict().majorityElement(nums))
 
 
 if __name__ == '__main__':
