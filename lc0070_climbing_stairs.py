@@ -27,11 +27,8 @@ Explanation: There are three ways to climb to the top.
 """
 
 class SolutionIter(object):
-    def climbStairs(self, n):
+    def climbStairs(self, n: int) -> int:
         """
-        :type n: int
-        :rtype: int
-
         Time complexity: O(n).
         Sapce complexity: O(1).
         """
@@ -50,10 +47,10 @@ class SolutionIter(object):
 
 def main():
     n = 2
-    print SolutionIter().climbStairs(n)
+    print(SolutionIter().climbStairs(n))
 
     n = 3
-    print SolutionIter().climbStairs(n)
+    print(SolutionIter().climbStairs(n))
 
 
 if __name__ == '__main__':
