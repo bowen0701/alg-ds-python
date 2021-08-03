@@ -20,13 +20,10 @@ Explanation:
 'e' is the letter that was added.
 """
 
-class SolutionSortIter(object):
-    def findTheDifference(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
 
+class SolutionSortIter(object):
+    def findTheDifference(self, s: str, t: str) -> str:
+        """
         Time complexity: O(n*logn).
         Space complexity: O(n).
         """
@@ -46,12 +43,8 @@ class SolutionSortIter(object):
 
 
 class SolutionCharCountDict(object):
-    def findTheDifference(self, s, t):
+    def findTheDifference(self, s: str, t: str) -> str:
         """
-        :type s: str
-        :type t: str
-        :rtype: str
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
@@ -74,12 +67,8 @@ class SolutionCharCountDict(object):
 
 
 class SolutionOrdSumDiff(object):
-    def findTheDifference(self, s, t):
+    def findTheDifference(self, s: str, t: str) -> str:
         """
-        :type s: str
-        :type t: str
-        :rtype: str
-
         Time complexity: O(n).
         Space complexity: O(1).
         """
@@ -97,7 +86,7 @@ class SolutionOrdSumDiff(object):
 
 
 class SolutionXOR(object):
-    def findTheDifference(self, s, t):
+    def findTheDifference(self, s: str, t: str) -> str:
         """
         :type s: str
         :type t: str
@@ -123,18 +112,18 @@ def main():
     # Output: e
     s = "abcd"
     t = "abcde"
-    print SolutionSortIter().findTheDifference(s, t)
-    print SolutionCharCountDict().findTheDifference(s, t)
-    print SolutionOrdSumDiff().findTheDifference(s, t)
-    print SolutionXOR().findTheDifference(s, t)
+    print(SolutionSortIter().findTheDifference(s, t))
+    print(SolutionCharCountDict().findTheDifference(s, t))
+    print(SolutionOrdSumDiff().findTheDifference(s, t))
+    print(SolutionXOR().findTheDifference(s, t))
 
     # Output: a
     s = ""
     t = "a"
-    print SolutionSortIter().findTheDifference(s, t)
-    print SolutionCharCountDict().findTheDifference(s, t)
-    print SolutionOrdSumDiff().findTheDifference(s, t)
-    print SolutionXOR().findTheDifference(s, t)
+    print(SolutionSortIter().findTheDifference(s, t))
+    print(SolutionCharCountDict().findTheDifference(s, t))
+    print(SolutionOrdSumDiff().findTheDifference(s, t))
+    print(SolutionXOR().findTheDifference(s, t))
 
 
 if __name__ == '__main__':
