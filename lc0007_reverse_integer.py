@@ -18,9 +18,6 @@ Your function should return 0 when the reversed integer overflows.
 class SolutionNegativeOverflow(object):
     def reverse(self, x: int) -> int:
         """
-        :type x: int
-        :rtype: int
-
         Time complexity: O(n), where n is length of digits.
         Space complexity: O(n).
         """
