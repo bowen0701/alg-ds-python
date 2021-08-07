@@ -27,8 +27,11 @@ Input:
 Output: 2
 """
 
+from typing import List
+
+
 class Solution(object):
-    def uniquePathsWithObstacles(self, obstacleGrid):
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         """Unique paths with obstacles.
 
         Time complexity: O(mn).
@@ -65,13 +68,14 @@ class Solution(object):
 
 
 def main():
+    # Output: 2
     obstacleGrid = [
         [0,0,0],
         [0,1,0],
         [0,0,0]
     ]
     
-    print Solution().uniquePathsWithObstacles(obstacleGrid)
+    print(Solution().uniquePathsWithObstacles(obstacleGrid))
 
 
 if __name__ == '__main__':
