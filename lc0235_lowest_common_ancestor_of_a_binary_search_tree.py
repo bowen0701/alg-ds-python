@@ -44,7 +44,7 @@ class TreeNode(object):
 
 
 class SolutionRecur(object):
-    def lowestCommonAncestor(self, root, p, q):
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         :type root: TreeNode
         :type p: TreeNode
@@ -69,7 +69,7 @@ class SolutionRecur(object):
 
 
 class SolutionIter(object):
-    def lowestCommonAncestor(self, root, p, q):
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         :type root: TreeNode
         :type p: TreeNode
@@ -117,15 +117,15 @@ def main():
     # Output: 6
     p = root.left
     q = root.right
-    print SolutionRecur().lowestCommonAncestor(root, p, q).val
-    print SolutionIter().lowestCommonAncestor(root, p, q).val
+    print(SolutionRecur().lowestCommonAncestor(root, p, q).val)
+    print(SolutionIter().lowestCommonAncestor(root, p, q).val)
 
     # Input: p = 2, q = 4
     # Output: 2
     p = root.left
     q = root.left.right
-    print SolutionRecur().lowestCommonAncestor(root, p, q).val
-    print SolutionIter().lowestCommonAncestor(root, p, q).val
+    print(SolutionRecur().lowestCommonAncestor(root, p, q).val)
+    print(SolutionIter().lowestCommonAncestor(root, p, q).val)
 
 
 if __name__ == '__main__':
