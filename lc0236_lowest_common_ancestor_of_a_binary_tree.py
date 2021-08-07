@@ -43,7 +43,7 @@ class TreeNode(object):
 
 
 class SolutionPreorderRecur(object):
-    def lowestCommonAncestor(self, root, p, q):
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         :type root: TreeNode
         :type p: TreeNode
@@ -53,17 +53,13 @@ class SolutionPreorderRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
-        # Apply recursive Preorder Traversal: root->left->right.
-
         # Edge case.
         if not root:
             return None
 
-        # Vist root: if root is p or q, root is LCA.
+        # Apply recursive Preorder Traversal: root->left->right.
         if root is p or root is q:
             return root
-
-        # Recursively find LCA by visiting left & right subtrees.
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
@@ -80,7 +76,7 @@ class SolutionPreorderRecur(object):
 
 
 class SolutionChildParentDictPreorderIter(object):
-    def lowestCommonAncestor(self, root, p, q):
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         :type root: TreeNode
         :type p: TreeNode
@@ -138,12 +134,12 @@ def main():
     q = root.right
 
     start_time = time.time()
-    print SolutionPreorderRecur().lowestCommonAncestor(root, p, q).val
-    print 'Time for recur: {}'.format(time.time() - start_time)
+    print(SolutionPreorderRecur().lowestCommonAncestor(root, p, q).val)
+    print('Time for recur: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print SolutionChildParentDictPreorderIter().lowestCommonAncestor(root, p, q).val
-    print 'Time for iter: {}'.format(time.time() - start_time)
+    print(SolutionChildParentDictPreorderIter().lowestCommonAncestor(root, p, q).val)
+    print('Time for iter: {}'.format(time.time() - start_time))
 
     # Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
     # Output: 5
@@ -151,12 +147,12 @@ def main():
     q = root.left.right.right
 
     start_time = time.time()
-    print SolutionPreorderRecur().lowestCommonAncestor(root, p, q).val
-    print 'Time for recur: {}'.format(time.time() - start_time)
+    print(SolutionPreorderRecur().lowestCommonAncestor(root, p, q).val)
+    print('Time for recur: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print SolutionChildParentDictPreorderIter().lowestCommonAncestor(root, p, q).val
-    print 'Time for iter: {}'.format(time.time() - start_time)
+    print(SolutionChildParentDictPreorderIter().lowestCommonAncestor(root, p, q).val)
+    print('Time for iter: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
