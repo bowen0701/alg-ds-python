@@ -91,8 +91,7 @@ class SolutionIter(object):
                 root = root.right
             else:
                 # If p & q are in different subtrees, found ancestor as root.
-                break
-        return root
+                return root
 
 
 def main():
