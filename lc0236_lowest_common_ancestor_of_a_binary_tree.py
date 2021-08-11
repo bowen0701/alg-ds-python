@@ -95,7 +95,7 @@ class SolutionChildParentDictPreorderIter(object):
         while p not in child_parent_d or q not in child_parent_d:
             current = stack.pop()
 
-            # Visit right and then left since use stack with FILO.
+            # Visit right -> left since use stack with FILO.
             if current.right:
                 child_parent_d[current.right] = current
                 stack.append(current.right)
