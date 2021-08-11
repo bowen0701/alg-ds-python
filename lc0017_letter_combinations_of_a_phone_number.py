@@ -28,19 +28,19 @@ Although the above answer is in lexicographical order,
 your answer could be in any order you want.
 """
 
+from typing import List
+
+
 class SolutionListComprehension(object):
-    def letterCombinations(self, digits):
+    def letterCombinations(self, digits: str) -> List[str]:
         """
-        :type digits: str
-        :rtype: List[str]
- 
         Time complexity: O(n*m^2)
           - n is the length of digits,
           - m is the mean length of digit's letters, basically 3.
         Space complexity: O(m^n).
         """
         # Create dict:digit->list(letters).
-        dtol_d = {
+        d2l_d = {
             '2': ['a', 'b', 'c'],
             '3': ['d', 'e', 'f'],
             '4': ['g', 'h', 'i'],
@@ -51,48 +51,44 @@ class SolutionListComprehension(object):
             '9': ['w', 'x', 'y', 'z']
         }
         
+        # Edge cases.
         if not digits:
             return []
         if len(digits) == 1:
-            return dtol_d[digits]
+            return d2l_d[digits]
 
-        # Initialize output letters by the 0th digit's letters.
-        letters = dtol_d[digits[0]]
+        # Initialize result by digits's 1st letters.
+        result = d2l_d[digits[0]]
 
-        # Iterate through digits starting from i = 1, 
-        # replace letters by combining letters and letters_i.
+        # Iterate through digits to combine result and letters.
         for i in range(1, len(digits)):
-            letters_i = dtol_d[digits[i]]
-            letters = [m + n for m in letters for n in letters_i]
+            letters_i = d2l_d[digits[i]]
+            result = [m + n for m in result for n in letters_i]
         
-        return letters
+        return result
 
 
 class SolutionDFSRecur(object):
-    def _dfsRecur(self, letters, digits, dtol_d, cur_str, idx):
-        # If idx is out of boundary, complete combination.
-        if idx == len(digits):
-            letters.append(cur_str)
+    def _dfsRecur(self, result, digits, cur_str, i):
+        # If index is out of boundary, complete combination.
+        if i == len(digits):
+            result.append(cur_str)
             return None
 
-        # Iterate through letters at digit i.
-        letters_idx = dtol_d[digits[idx]]
-        for letter in letters_idx:
-            # Apply DFS to append letter and increment index.
-            self._dfsRecur(letters, digits, dtol_d, cur_str + letter, idx + 1)
+        # Iterate through letters to apply DFS.
+        letters_i = self.d2l_d[digits[i]]
+        for l in letters_i:
+            self._dfsRecur(result, digits, cur_str + l, i + 1)
 
-    def letterCombinations(self, digits):
+    def letterCombinations(self, digits: str) -> List[str]:
         """
-        :type digits: str
-        :rtype: List[str]
- 
         Time complexity: O(n*m^2)
           - n is the length of digits,
           - m is the mean length of digit's letters, basically 3.
         Space complexity: O(m^n).
         """
         # Create dict:digit->list(letter).
-        dtol_d = {
+        self.d2l_d = {
             '2': ['a', 'b', 'c'],
             '3': ['d', 'e', 'f'],
             '4': ['g', 'h', 'i'],
@@ -106,14 +102,14 @@ class SolutionDFSRecur(object):
         if not digits:
             return []
         if len(digits) == 1:
-            return dtol_d[digits]
+            return self.d2l_d[digits]
 
         # Apply recursive DFS.
-        letters = []
+        result = []
         cur_str = ''
-        idx = 0
-        self._dfsRecur(letters, digits, dtol_d, cur_str, idx)
-        return letters
+        i = 0
+        self._dfsRecur(result, digits, cur_str, i)
+        return result
 
 
 def main():
@@ -123,12 +119,12 @@ def main():
     digits =  "23"
 
     start_time = time.time()
-    print 'By list comp:', SolutionListComprehension().letterCombinations(digits)
-    print 'Time:', time.time() - start_time
+    print('By list comp:', SolutionListComprehension().letterCombinations(digits))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By BFS recur', SolutionDFSRecur().letterCombinations(digits)
-    print 'Time:', time.time() - start_time
+    print('By BFS recur', SolutionDFSRecur().letterCombinations(digits))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':
