@@ -19,26 +19,16 @@ Note:
 You may assume k is always valid, 1 <= k <= array's length.
 """
 
-class SolutionSelectionSort(object):
-    def findKthLargest(self, nums, k):
+from typing import List
+
+
+class SolutionSort(object):
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-
-        Time complexity: O(nk).
-        Space complexity: O(1).
+        Time complexity: O(n*logn), where n is the length of nums.
+        Space complexity: O(n).
         """
-        n = len(nums)
-
-        # Selection sort from behind: swith max element & last one, and so on.
-        for i in range(n - 1, n - k - 1, -1):
-            max_i = 0
-            for j in range(1, i + 1):
-                if nums[max_i] < nums[j]:
-                    max_i = j
-            nums[max_i], nums[i] = nums[i], nums[max_i]
-
+        nums.sort()
         return nums[-k]
 
 
@@ -57,12 +47,8 @@ class SolutionQuickSort(object):
                 mid_nums +
                 self._quicksort(large_nums))
 
-    def findKthLargest(self, nums, k):
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-
         Time complexity: O(n*logn), where n is the length of nums.
         Space complexity: O(n).
         """
@@ -71,27 +57,28 @@ class SolutionQuickSort(object):
         return sorted_nums[-k]
 
 
-class SolutionSort(object):
-    def findKthLargest(self, nums, k):
+class SolutionSelectionSort(object):
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
+        Time complexity: O(nk).
+        Space complexity: O(1).
+        """
+        n = len(nums)
 
-        Time complexity: O(n*logn), where n is the length of nums.
-        Space complexity: O(n).
-        """
-        nums.sort()
+        # Selection sort from behind: swith max element & last one, and so on.
+        for i in range(n - 1, n - k - 1, -1):
+            max_i = 0
+            for j in range(1, i + 1):
+                if nums[max_i] < nums[j]:
+                    max_i = j
+            nums[max_i], nums[i] = nums[i], nums[max_i]
+
         return nums[-k]
 
 
 class SolutionMinHeap(object):
-    def findKthLargest(self, nums, k):
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-
         Time complexity: O(n*logk).
         Space complexity: O(k).
         """
@@ -99,8 +86,8 @@ class SolutionMinHeap(object):
 
         minheap = []
 
-        for num in nums:
-            heapq.heappush(minheap, num)
+        for n in nums:
+            heapq.heappush(minheap, n)
 
             # Maintain heap size = k.
             if len(minheap) > k:
@@ -110,12 +97,8 @@ class SolutionMinHeap(object):
 
 
 class SolutionSelection(object):
-    def findKthLargest(self, nums, k):
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
@@ -147,24 +130,24 @@ def main():
     k = 2
 
     start_time = time.time()
-    print 'Selection sort:', SolutionSelectionSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Sort:', SolutionSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Quick sort:', SolutionQuickSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Quick sort:', SolutionQuickSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Sort:', SolutionSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Selection sort:', SolutionSelectionSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'MinHeap: ', SolutionMinHeap().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('MinHeap: ', SolutionMinHeap().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Selection: ', SolutionSelection().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Selection: ', SolutionSelection().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     # Input: [3,2,3,1,2,4,5,5,6] and k = 4
     # Output: 4
@@ -172,24 +155,24 @@ def main():
     k = 5
 
     start_time = time.time()
-    print 'Selection sort:', SolutionSelectionSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Sort:', SolutionSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Quick sort:', SolutionQuickSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Quick sort:', SolutionQuickSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Sort:', SolutionSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Selection sort:', SolutionSelectionSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'MinHeap: ', SolutionMinHeap().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('MinHeap: ', SolutionMinHeap().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Selection: ', SolutionSelection().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Selection: ', SolutionSelection().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     # Input: shuffle([0~999]) and k = 5
     # Output: 995
@@ -198,24 +181,24 @@ def main():
     k = 5
 
     start_time = time.time()
-    print 'Selection sort:', SolutionSelectionSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Sort:', SolutionSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Quick sort:', SolutionQuickSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Quick sort:', SolutionQuickSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Sort:', SolutionSort().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Selection sort:', SolutionSelectionSort().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'MinHeap: ', SolutionMinHeap().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('MinHeap: ', SolutionMinHeap().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Selection: ', SolutionSelection().findKthLargest(nums, k)
-    print 'Time:', time.time() - start_time
+    print('Selection: ', SolutionSelection().findKthLargest(nums, k))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':
