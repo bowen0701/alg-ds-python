@@ -123,7 +123,7 @@ def main():
     print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print('By BFS recur', SolutionDFSRecur().letterCombinations(digits))
+    print('By DFS recur', SolutionDFSRecur().letterCombinations(digits))
     print('Time:', time.time() - start_time)
 
 
