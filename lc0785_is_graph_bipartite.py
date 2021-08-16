@@ -83,7 +83,7 @@ class SolutionNodeIdDictDFSRecur(object):
 
         for i in range(len(graph)):
             if i not in node_id_d:
-                # For disconnected node, set setid = 0.
+                # For disconnected node, set set id = 0.
                 node_id_d[i] = 0
 
                 # Start DFS from node i.
