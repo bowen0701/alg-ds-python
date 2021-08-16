@@ -22,32 +22,23 @@ What if the inputs contain unicode characters? How would you adapt your solution
 """
 
 class SolutionCharCount(object):
-    def isAnagram(self, s, t):
+    def isAnagram(self, s: str, t: str) -> bool:
         """
-        :type s: str
-        :type t: str
-        :rtype: bool
-
         Time complexity: O(m+n).
         Space complexity: O(1).
         """
         if len(s) != len(t):
             return False
 
-        # Create lists to collect char a~z's counts.
-        s_char_counts = [0] * 26
-        t_char_counts = [0] * 26
+        # Create list to collect char a~z's counts.
+        char_counts = [0] * 26
 
-        for c in s:
-            idx = ord(c) - ord('a')
-            s_char_counts[idx] += 1
-
-        for c in t:
-            idx = ord(c) - ord('a')
-            t_char_counts[idx] += 1
+        for i in range(len(s)):
+            char_counts[ord(s[i]) - ord('a')] += 1
+            char_counts[ord(t[i]) - ord('a')] -= 1
 
         for i in range(26):
-            if s_char_counts[i] != t_char_counts[i]:
+            if char_counts[i] != 0:
                 return False
 
         return True
@@ -57,12 +48,12 @@ def main():
     # Output: True
     s = "anagram"
     t = "nagaram"
-    print SolutionCharCount().isAnagram(s, t)
+    print(SolutionCharCount().isAnagram(s, t))
 
     # Output: False
     s = "rat"
     t = "car"
-    print SolutionCharCount().isAnagram(s, t)
+    print(SolutionCharCount().isAnagram(s, t))
 
 
 if __name__ == '__main__':
