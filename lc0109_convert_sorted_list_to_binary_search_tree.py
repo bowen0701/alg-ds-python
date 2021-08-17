@@ -20,39 +20,41 @@ which represents the following height balanced BST:
  -10  5
 """
 
+from typing import List, Optional
+
+
 # Definition for singly-linked list.
 class ListNode(object):
-    def __init__(self, val):
+    def __init__(self, val=0, next=None):
         self.val = val
         self.next = None
 
 
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = None
         self.right = None
 
 
 class SolutionConvert2ArrayTwoPointers(object):
-    def _preorderConvert(self, vals, left, right):
+    def _preorder(self, vals: List[int], left: int, right: int):
+        # Base case.
         if left > right:
             return None
 
+        # Preorder traversal: root->left->right.
         mid = left + (right - left) // 2
 
         root = TreeNode(vals[mid])
-        root.left = self._preorderConvert(vals, left, mid - 1)
-        root.right = self._preorderConvert(vals, mid + 1, right)
+        root.left = self._preorder(vals, left, mid - 1)
+        root.right = self._preorder(vals, mid + 1, right)
 
         return root
 
-    def sortedListToBST(self, head):
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
         """
-        :type head: ListNode
-        :rtype: TreeNode
-
         Time complexity: O(n).
         Space complexity: O(logn).
         """
@@ -68,11 +70,16 @@ class SolutionConvert2ArrayTwoPointers(object):
 
         # Apply recursive preorder traversal with two pointer method.
         left, right = 0, len(vals) - 1
-        return self._preorderConvert(vals, left, right)
+        return self._preorder(vals, left, right)
 
 
 class SolutionPreorderSlowFastRecur(object):
-    def preorderSlowFast(self, left, right):
+    def _preorderSlowFast(
+        self, 
+        left: Optional[TreeNode], 
+        right: Optional[TreeNode]
+    ):
+        # Base case.
         if not left or left == right:
             return None
 
@@ -82,54 +89,51 @@ class SolutionPreorderSlowFastRecur(object):
             slow = slow.next
             fast = fast.next.next
 
+        # Preorder traversal: root->left->right.
         root = TreeNode(slow.val)
-        root.left = self.preorderSlowFast(left, slow)
-        root.right = self.preorderSlowFast(slow.next, right)
+        root.left = self._preorderSlowFast(left, slow)
+        root.right = self._preorderSlowFast(slow.next, right)
 
         return root
 
-    def sortedListToBST(self, head):
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
         """
-        :type head: ListNode
-        :rtype: TreeNode
-
         Time complexity: O(nlogn), as for each node, traverse half nodes.
         Space complexity: O(logn).
         """
         # Apply recursive preorder traversal by slow/fast two pointers.
+        # Edge case.
         if not head:
             return None
 
         left, right = head, None
-        return self.preorderSlowFast(left, right)
+        return self._preorderSlowFast(left, right)
 
 
 class SolutionInorderRecur(object):
-    def _inorder(self, left, right):
+    def _inorder(self, left: int, right: int):
+        # Base case.
         if left > right:
             return None
 
+        # Inorder traversal: left->root->right.
         mid = left + (right - left) // 2
 
         root_left = self._inorder(left, mid - 1)
-
         root = TreeNode(self.current.val)
         root.left = root_left
         self.current = self.current.next
-
         root.right = self._inorder(mid + 1, right)
 
         return root
 
-    def sortedListToBST(self, head):
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
         """
-        :type head: ListNode
-        :rtype: TreeNode
-
         Time complexity: O(n).
         Space complexity: O(logn).
         """
         # Apply recursive inorder traversal.
+        # Edge case.
         if not head:
             return None
 
@@ -140,7 +144,7 @@ class SolutionInorderRecur(object):
             size += 1
             current = current.next
 
-        # Attach head to self for memorizing its update.
+        # Attach head to self for memorizing its current node.
         self.current = head
 
         left, right = 0, size - 1
@@ -162,19 +166,19 @@ def main():
     head.next.next.next.next = ListNode(9)
 
     root = SolutionConvert2ArrayTwoPointers().sortedListToBST(head)
-    print (root.val,
-           root.left.val, root.right.val,
-           root.left.right.val, root.right.right.val)
+    print(root.val,
+          root.left.val, root.right.val,
+          root.left.right.val, root.right.right.val)
 
     root = SolutionPreorderSlowFastRecur().sortedListToBST(head)
-    print (root.val,
-           root.left.val, root.right.val,
-           root.left.right.val, root.right.right.val)
+    print(root.val,
+          root.left.val, root.right.val,
+          root.left.right.val, root.right.right.val)
 
     root = SolutionInorderRecur().sortedListToBST(head)
-    print (root.val,
-           root.left.val, root.right.val,
-           root.left.right.val, root.right.right.val)
+    print(root.val,
+          root.left.val, root.right.val,
+          root.left.right.val, root.right.right.val)
 
 
 if __name__ == '__main__':
