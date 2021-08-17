@@ -53,6 +53,7 @@ class SolutionPreorderRecur(object):
 
 class SolutionPreorderRecurTwoPointers(object):
     def _preorderRecur(self, nums: List[int], left: int, right: int) -> TreeNode:
+        # Base case.
         if left > right:
             return None
 
