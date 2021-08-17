@@ -26,6 +26,8 @@ Note:
 You may assume that nums' length >= k-1 and k >= 1.
 """
 
+from typing import List
+
 import heapq
 
 
@@ -34,11 +36,8 @@ class KthLargestSort(object):
 
     Apply naive sorting to obtain the top k largest elements.
     """
-    def __init__(self, k, nums):
+    def __init__(self, k: int, nums: List[int]):
         """
-        :type k: int
-        :type nums: List[int]
-
         Time complexity: O(n*logn), where n is the length of the original nums.
         Space complexity: O(k).
         """
@@ -47,11 +46,8 @@ class KthLargestSort(object):
         self.k = k
         self.topk = nums[:k]
 
-    def add(self, val):
+    def add(self, val: int) -> int:
         """
-        :type val: int
-        :rtype: int
-
         Time complexity: O(k*logk).
         Space complexity: O(k).
         """
@@ -70,11 +66,8 @@ class KthLargestSortAndBinarySearch(object):
     Apply sorting to obtain the top k largest elements, and
     insert new element by binary search in sorted list.
     """
-    def __init__(self, k, nums):
+    def __init__(self, k: int, nums: List[int]):
         """
-        :type k: int
-        :type nums: List[int]
-
         Time complexity: O(n*logn), where n is the length of the original nums.
         Space complexity: O(k).
         """
@@ -82,11 +75,8 @@ class KthLargestSortAndBinarySearch(object):
         self.k = k
         self.topk = nums[:k]
         
-    def add(self, val):
+    def add(self, val: int) -> int:
         """
-        :type val: int
-        :rtype: int
-
         Time complexity: O(logk).
         Space complexity: O(k).
         """
@@ -116,39 +106,33 @@ class KthLargestSortAndBinarySearch(object):
 
 
 class KthLargestHeapq(object):
-    def __init__(self, k, nums):
+    def __init__(self, k: int, nums: List[int]):
         """
-        :type k: int
-        :type nums: List[int]
-
-        Time complexity: O(logk).
-        Space complexity: O(k).
+        Time complexity: O(logn).
+        Space complexity: O(n).
         """
-        self.heap = nums
+        self.minheap = nums
         self.k = k
 
         # Heapify the original nums, and pop min until the len equals to k.
-        heapq.heapify(self.heap)
+        heapq.heapify(self.minheap)
 
-        while len(self.heap) > self.k:
-            heapq.heappop(self.heap)
+        while len(self.minheap) > self.k:
+            heapq.heappop(self.minheap)
 
-    def add(self, val):
+    def add(self, val: int) -> int:
         """
-        :type val: int
-        :rtype: int
-
         Time complexity: O(logk).
         Space complexity: O(1). 
         """
-        if len(self.heap) < self.k:
+        if len(self.minheap) < self.k:
             # If heap size < k, push val to heap and heapify it.
-            heapq.heappush(self.heap, val)
-        elif self.heap[0] < val:
+            heapq.heappush(self.minheap, val)
+        elif self.minheap[0] < val:
             # If heap size = k and min < val, replace (pop & push) min by val.
-            heapq.heapreplace(self.heap, val)
+            heapq.heapreplace(self.minheap, val)
 
-        return self.heap[0]
+        return self.minheap[0]
 
 
 def main():
@@ -162,46 +146,46 @@ def main():
     start_time = time.time()
     obj = KthLargestSort(k, nums)
     # Adding 3 returns 4
-    print obj.add(3)
+    print(obj.add(3))
     # Adding 5 returns 5
-    print obj.add(5)
+    print(obj.add(5))
     # Adding 10 returns 5
-    print obj.add(10)
+    print(obj.add(10))
     # Adding 9 returns 8
-    print obj.add(9)
+    print(obj.add(9))
     # Adding 4 returns 8
-    print obj.add(4)
-    print 'Time by naive sort: {}'.format(time.time() - start_time)
+    print(obj.add(4))
+    print('Time by naive sort: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     obj = KthLargestSortAndBinarySearch(k, nums)
     # Adding 3 returns 4
-    print obj.add(3)
+    print(obj.add(3))
     # Adding 5 returns 5
-    print obj.add(5)
+    print(obj.add(5))
     # Adding 10 returns 5
-    print obj.add(10)
+    print(obj.add(10))
     # Adding 9 returns 8
-    print obj.add(9)
+    print(obj.add(9))
     # Adding 4 returns 8
-    print obj.add(4)
-    print 'Time by sort + binary search: {}'.format(
-        time.time() - start_time)
+    print(obj.add(4))
+    print('Time by sort + binary search: {}'.format(
+          time.time() - start_time))
 
     start_time = time.time()
     obj = KthLargestHeapq(k, nums)
     # Adding 3 returns 4
-    print obj.add(3)
+    print(obj.add(3))
     # Adding 5 returns 5
-    print obj.add(5)
+    print(obj.add(5))
     # Adding 10 returns 5
-    print obj.add(10)
+    print(obj.add(10))
     # Adding 9 returns 8
-    print obj.add(9)
+    print(obj.add(9))
     # Adding 4 returns 8
-    print obj.add(4)
-    print 'Time by heapq: {}'.format(
-        time.time() - start_time)
+    print(obj.add(4))
+    print('Time by heapq: {}'.format(
+          time.time() - start_time))
 
     k = 1
     nums = []
@@ -209,17 +193,17 @@ def main():
     start_time = time.time()
     obj = KthLargestHeapq(k, nums)
     # Adding -3 returns -3
-    print obj.add(-3)
+    print(obj.add(-3))
     # Adding -2 returns -2
-    print obj.add(-2)
+    print(obj.add(-2))
     # Adding -4 returns -2
-    print obj.add(-4)
+    print(obj.add(-4))
     # Adding 0 returns 0
-    print obj.add(0)
+    print(obj.add(0))
     # Adding 4 returns 4
-    print obj.add(4)
-    print 'Time by min heap: {}'.format(
-        time.time() - start_time)
+    print(obj.add(4))
+    print('Time by min heap: {}'.format(
+          time.time() - start_time))
 
 
 if __name__ == '__main__':
