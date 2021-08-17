@@ -35,77 +35,70 @@ you need to find the kth smallest frequently?
 How would you optimize the kthSmallest routine?
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val: Optional[int] = None):
         self.val = val
         self.left = None
         self.right = None
 
 
 class SolutionInorderRecur(object):
-    def _inorderRecur(self, root):
+    def _inorderRecur(self, root: Optional[TreeNode]) -> None:
         # Base case.
         if not root:
             return None
 
-        # Visit left first.
+        # Inorder traversal: left->root->right.
         self._inorderRecur(root.left)
 
-        # Visit root: decrement k to 0 to get the kth smallest value.
         self.k -= 1
         if self.k == 0:
-            self.kth_smallest = root.val
+            self.result = root.val
             return None
 
-        # Visit right.
         self._inorderRecur(root.right)
 
-    def kthSmallest(self, root, k):
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
-
         Time complexity: O(k).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         # Apply recursive inorder traversal.
+        self.result = None
         self.k = k
-        self.kth_smallest = None
         self._inorderRecur(root)
-        return self.kth_smallest
+        return self.result
 
 
 class SolutionInorderIter(object):
-    def kthSmallest(self, root, k):
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
-
         Time complexity: O(k).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Apply iterative inorder traversal.
+        # Apply iterative inorder traversal: left->root->right.
         previous = None
         current = root
 
         stack = []
 
         while current or stack:
-            # Continuously push current to stack and visit left node.
+            # Visit the leftmost node.
             while current:
                 stack.append(current)
                 current = current.left
 
-            # Pop stack as current, decrement k to 0 to get the kth smallest.
+            # Visit its parent.
             current = stack.pop()
             k -= 1
             if k == 0:
                 break
 
-            # Then visit right.
+            # Then visit its right.
             previous = current
             current = current.right
 
@@ -125,9 +118,8 @@ def main():
     root.right = TreeNode(4)
     root.left.right = TreeNode(2)
     k = 1
-
-    print 'By recur: {}'.format(SolutionInorderRecur().kthSmallest(root, k))
-    print 'By iter: {}'.format(SolutionInorderIter().kthSmallest(root, k))
+    print('By recur: {}'.format(SolutionInorderRecur().kthSmallest(root, k)))
+    print('By iter: {}'.format(SolutionInorderIter().kthSmallest(root, k)))
 
     # Input: root = [5,3,6,2,4,null,null,1], k = 3
     #        5
@@ -145,9 +137,8 @@ def main():
     root.left.right = TreeNode(4)
     root.left.left.left = TreeNode(1)
     k = 3
-
-    print 'By recur: {}'.format(SolutionInorderRecur().kthSmallest(root, k))
-    print 'By iter: {}'.format(SolutionInorderIter().kthSmallest(root, k))
+    print('By recur: {}'.format(SolutionInorderRecur().kthSmallest(root, k)))
+    print('By iter: {}'.format(SolutionInorderIter().kthSmallest(root, k)))
 
 
 if __name__ == '__main__':
