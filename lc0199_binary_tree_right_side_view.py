@@ -17,16 +17,19 @@ Explanation:
   5     4       <---
 """
 
+from typing import Optional, List
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val: int = 0):
         self.val = val
         self.left = None
         self.right = None
 
 
 class SolutionLevelTraversalLast(object):
-    def rightSideView(self, root):
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         """
         :type root: TreeNode
         :rtype: List[int]
@@ -40,7 +43,7 @@ class SolutionLevelTraversalLast(object):
         if not root:
             return []
 
-        right_vals = []
+        result = []
 
         # Apply level traversal to collect right side values.
         queue = deque([root])
@@ -50,7 +53,7 @@ class SolutionLevelTraversalLast(object):
             for i in range(size):
                 current = queue.pop()
                 if i == size - 1:
-                    right_vals.append(current.val)
+                    result.append(current.val)
 
                 # Add current's left/right to queue if existed.
                 if current.left:
@@ -58,7 +61,7 @@ class SolutionLevelTraversalLast(object):
                 if current.right:
                     queue.appendleft(current.right)
 
-        return right_vals
+        return result
 
 
 def main():
@@ -75,7 +78,7 @@ def main():
     root.left.right = TreeNode(5)
     root.right.right = TreeNode(4)
 
-    print SolutionLevelTraversalLast().rightSideView(root)
+    print(SolutionLevelTraversalLast().rightSideView(root))
 
 
 if __name__ == '__main__':
