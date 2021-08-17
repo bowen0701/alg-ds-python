@@ -34,11 +34,8 @@ Output: true
 """
 
 class SolutionOpenCloseDict(object):
-    def isValid(self, s):
+    def isValid(self, s: str) -> bool:
         """
-        :type s: str
-        :rtype: bool
-
         Time complexity: O(n), where n is the length of the string.
         Space complexity: O(n).
         """
@@ -67,8 +64,8 @@ class SolutionOpenCloseDict(object):
                     return False
 
                 # If yes, pop & compare open parenthesis and current char.
-                open_c = stack.pop()
-                if open_close_d[open_c] != c:
+                o = stack.pop()
+                if open_close_d[o] != c:
                     return False
 
         # Check if there is still open remaining.
@@ -82,37 +79,37 @@ def main():
     # Input: "()"
     # Output: true
     s = '()'
-    print SolutionOpenCloseDict().isValid(s)
+    print(SolutionOpenCloseDict().isValid(s))
 
     # Input: "()[]{}"
     # Output: true
     s = '()[]{}'
-    print SolutionOpenCloseDict().isValid(s)
+    print(SolutionOpenCloseDict().isValid(s))
 
     # Input: "(]"
     # Output: false
     s = '(]'
-    print SolutionOpenCloseDict().isValid(s)
+    print(SolutionOpenCloseDict().isValid(s))
 
     # Input: "([)]"
     # Output: false
     s = '([)]'
-    print SolutionOpenCloseDict().isValid(s)
+    print(SolutionOpenCloseDict().isValid(s))
 
     # Input: "{[]}"
     # Output: true
     s = '{[]}'
-    print SolutionOpenCloseDict().isValid(s)
+    print(SolutionOpenCloseDict().isValid(s))
 
     # Input: '['
     # Output: False
     s = '['
-    print SolutionOpenCloseDict().isValid(s)
+    print(SolutionOpenCloseDict().isValid(s))
 
     # Input: ']'
     # Output: False
     s = ']'
-    print SolutionOpenCloseDict().isValid(s)
+    print(SolutionOpenCloseDict().isValid(s))
 
 
 if __name__ == '__main__':
