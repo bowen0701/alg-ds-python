@@ -31,9 +31,6 @@ class TreeNode(object):
 class SolutionLevelTraversalLast(object):
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         """
-        :type root: TreeNode
-        :rtype: List[int]
-
         Time complexity: O(n).
         Space complexity: O(n).
         """

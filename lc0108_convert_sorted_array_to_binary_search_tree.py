@@ -20,7 +20,7 @@ height balanced BST:
  -10  5
 """
 
-from typing import List
+from typing import List, Optional
 
 
 # Definition for a binary tree node.
@@ -32,7 +32,7 @@ class TreeNode(object):
 
 
 class SolutionPreorderRecur(object):
-    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
         """
         Time complexity: O(n).
         Space complexity: O(n).
@@ -52,7 +52,7 @@ class SolutionPreorderRecur(object):
 
 
 class SolutionPreorderRecurTwoPointers(object):
-    def _preorderRecur(self, nums: List[int], left: int, right: int) -> TreeNode:
+    def _preorderRecur(self, nums: List[int], left: int, right: int) -> Optional[TreeNode]:
         # Base case.
         if left > right:
             return None
@@ -80,7 +80,7 @@ class SolutionPreorderRecurTwoPointers(object):
 
 
 class SolutionInorderRecurTwoPointers(object):
-    def _inorderRecur(self, nums: List[int], left: int, right: int) -> TreeNode:
+    def _inorderRecur(self, nums: List[int], left: int, right: int) -> Optional[TreeNode]:
         if left > right:
             return None
 
