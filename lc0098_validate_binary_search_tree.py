@@ -41,7 +41,12 @@ class TreeNode(object):
 
 
 class SolutionMinMaxPreorderRecur(object):
-    def _preorderRecur(self, root, min_val: int, max_val: int) -> bool:
+    def _preorder_in_boundary(
+        self, 
+        root: Optional[TreeNode], 
+        min_val: int, 
+        max_val: int
+    ) -> bool:
         # Base case.
         if not root:
             return True
@@ -50,10 +55,10 @@ class SolutionMinMaxPreorderRecur(object):
         if root.val <= min_val or root.val >= max_val:
             return False
 
-        if not self._preorderRecur(root.left, min_val, root.val):
+        if not self._preorder_in_boundary(root.left, min_val, root.val):
             return False
 
-        if not self._preorderRecur(root.right, root.val, max_val):
+        if not self._preorder_in_boundary(root.right, root.val, max_val):
             return False
 
         return True
@@ -65,7 +70,7 @@ class SolutionMinMaxPreorderRecur(object):
         """
         # Recursive preorder traversal to check if current val is in range (min, max),
         min_val, max_val = -float('inf'), float('inf')
-        return self._preorderRecur(root, min_val, max_val)
+        return self._preorder_in_boundary(root, min_val, max_val)
 
 
 class SolutionMinMaxPreorderIter(object):
@@ -99,20 +104,20 @@ class SolutionMinMaxPreorderIter(object):
 
 
 class SolutionIncreasingInorderRecur(object):
-    def _inorderRecur(self, root: Optional[TreeNode]) -> bool:
+    def _inorder_increasing(self, root: Optional[TreeNode]) -> bool:
         # Base case.
         if not root:
             return True
  
         # Inorder traversal: left->root->right.
-        if not self._inorderRecur(root.left):
+        if not self._inorder_increasing(root.left):
             return False
 
         if self.previous and self.previous.val >= root.val:
             return False
         self.previous = root
 
-        if not self._inorderRecur(root.right):
+        if not self._inorder_increasing(root.right):
             return False
 
         return True
@@ -124,7 +129,7 @@ class SolutionIncreasingInorderRecur(object):
         """
         # Check if inorder traversal visits values in an increasing fashion.
         self.previous = None
-        return self._inorderRecur(root)
+        return self._inorder_increasing(root)
 
 
 class SolutionIncreasingInorderIter(object):
