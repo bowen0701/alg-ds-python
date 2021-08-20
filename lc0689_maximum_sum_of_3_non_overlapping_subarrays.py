@@ -27,14 +27,12 @@ Note:
 - k will be between 1 and floor(nums.length / 3).
 """
 
+from typing import List
+
 
 class SolutionLeftRightMaxSumMidIter(object):
-    def maxSumOfThreeSubarrays(self, nums, k):
+    def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
@@ -73,7 +71,7 @@ class SolutionLeftRightMaxSumMidIter(object):
                 right_start_pos[l] = right_start_pos[l + 1]
 
         # Check every possible middle interval and its left/right ones.
-        # Interate through left pos l of middle intervals to update max sum.
+        # Interate through left pos m of middle intervals to update max sum.
         for m in range(k, n - 2 * k + 1):
             l = left_start_pos[m - 1]
             r = right_start_pos[m + k]
@@ -92,12 +90,12 @@ def main():
     # Output: [0, 3, 5]
     nums = [1,2,1,2,6,7,5,1]
     k = 2
-    print SolutionLeftRightMaxSumMidIter().maxSumOfThreeSubarrays(nums, k)
+    print(SolutionLeftRightMaxSumMidIter().maxSumOfThreeSubarrays(nums, k))
 
     # Output: [0,2,4]
     nums = [9,8,7,6,2,2,2,2]
     k = 2
-    print SolutionLeftRightMaxSumMidIter().maxSumOfThreeSubarrays(nums, k)
+    print(SolutionLeftRightMaxSumMidIter().maxSumOfThreeSubarrays(nums, k))
 
 
 if __name__ == '__main__':
