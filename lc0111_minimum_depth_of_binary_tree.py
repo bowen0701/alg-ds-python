@@ -20,20 +20,20 @@ Given binary tree [3,9,20,null,null,15,7],
 return its minimum depth = 2.
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
 
 
 class SolutionRecur(object):
-    def minDepth(self, root):
+    def minDepth(self, root: Optional[TreeNode]) -> int:
         """
-        :type root: TreeNode
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
@@ -41,31 +41,29 @@ class SolutionRecur(object):
         if not root:
             return 0
 
-        # If min depth > 0: 1 + min depth; otherwise: 1 + max depth.
         left_depth = self.minDepth(root.left)
         right_depth = self.minDepth(root.right)
         min_depth = min(left_depth, right_depth)
         if min_depth > 0:
             return 1 + min_depth
         else:
+            # For the case: one of left and right is None.
             return 1 + max(left_depth, right_depth)
 
 
 class SolutionLevelBFS(object):
-    def minDepth(self, root):
+    def minDepth(self, root: Optional[TreeNode]) -> int:
         """
-        :type root: TreeNode
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
         from collections import deque
 
-        # Apply level-traversal BFS with queue.
+        # Edge case.
         if not root:
             return 0
 
+        # Apply level-traversal BFS with queue.
         queue = deque([root])
         depth = 0
 
@@ -80,7 +78,7 @@ class SolutionLevelBFS(object):
                 if current.right:
                     queue.appendleft(current.right)
 
-                # When no child nodes, arrived at leaf.
+                # When no child nodes, arrived at shortest leaf.
                 if not current.left and not current.right:
                     return depth
 
@@ -90,8 +88,8 @@ def main():
     # Output: 2
     root = TreeNode(1)
     root.left = TreeNode(2)
-    print SolutionRecur().minDepth(root)
-    print SolutionLevelBFS().minDepth(root)
+    print(SolutionRecur().minDepth(root))
+    print(SolutionLevelBFS().minDepth(root))
 
     # Tree: [3,9,20,null,null,15,7],
     #     3
@@ -105,8 +103,8 @@ def main():
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)    
-    print SolutionRecur().minDepth(root)
-    print SolutionLevelBFS().minDepth(root)
+    print(SolutionRecur().minDepth(root))
+    print(SolutionLevelBFS().minDepth(root))
 
 
 if __name__ == '__main__':
