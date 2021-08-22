@@ -81,11 +81,11 @@ class Solution(object):
 def main():
     # Output: [[1,0,0],[0,1,0],[1,1,1]]
     A = [[1,1,0],[1,0,1],[0,0,0]]
-    print Solution().flipAndInvertImage(A)
+    print(Solution().flipAndInvertImage(A))
 
     # Output: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
     A = [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
-    print Solution().flipAndInvertImage(A)
+    print(Solution().flipAndInvertImage(A))
 
 
 if __name__ == '__main__':
