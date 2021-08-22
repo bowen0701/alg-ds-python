@@ -34,22 +34,25 @@ Note:
 - p and q are different and both values will exist in the binary tree.
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
 
 
 class SolutionPreorderRecur(object):
-    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    def lowestCommonAncestor(
+        self, 
+        root: Optional[TreeNode], 
+        p: Optional[TreeNode], 
+        q: Optional[TreeNode]
+    ) -> Optional[TreeNode]:
         """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
@@ -57,7 +60,7 @@ class SolutionPreorderRecur(object):
         if not root:
             return None
 
-        # Apply recursive Preorder Traversal: root->left->right.
+        # Preorder traversal: root->left->right.
         if root is p or root is q:
             return root
         left = self.lowestCommonAncestor(root.left, p, q)
@@ -76,21 +79,25 @@ class SolutionPreorderRecur(object):
 
 
 class SolutionChildParentDictPreorderIter(object):
-    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    def lowestCommonAncestor(
+        self, 
+        root: Optional[TreeNode], 
+        p: Optional[TreeNode], 
+        q: Optional[TreeNode]
+    ) -> Optional[TreeNode]:
         """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
+        # Edge case.
+        if not root:
+            return None
+
         # Use dict: child->parent.
         child_parent_d = dict()
         child_parent_d[root] = None
 
-        # Iteratively preorder traverse to collect all of p & q's parents.
+        # Iterative preorder traversal for collecting all of p & q's parents.
         stack = [root]
         while p not in child_parent_d or q not in child_parent_d:
             current = stack.pop()
