@@ -25,7 +25,7 @@ Output:
 
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
@@ -58,6 +58,7 @@ class SolutionBFS(object):
         """
         from collections import deque
 
+        # Edge case.
         if not root:
             return root
 
