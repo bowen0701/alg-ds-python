@@ -46,14 +46,6 @@ class TreeNode(object):
 class SolutionRecur(object):
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-
-        Check both p & q are in the node's left or right subtree. 
-        If not, the node splits p and q, so returh the node.
-
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(logn) or O(n).
         """
@@ -71,14 +63,6 @@ class SolutionRecur(object):
 class SolutionIter(object):
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-
-        Check both p & q are in the node's left or right subtree. 
-        If not, the node splits p and q, so returh the node.
-
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(1).
         """
