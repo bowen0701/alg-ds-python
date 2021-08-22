@@ -53,13 +53,16 @@ Notes:
 - 0 <= A[i][j] <= 1
 """
 
+from typing import List
+
+
 class Solution(object):
-    def flipAndInvertImage(self, A):
+    def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
         """
-        :type A: List[List[int]]
-        :rtype: List[List[int]]
+        Time complexity: O(rc), where r, c is the number of rows, cols, respectively
+        Space complexity: O(1). 
         """
-        # Iterate through each row r to flip and invert.
+        # Iterate through each row.
         for r in range(len(A)):
             # Flip the image horizontally.
             j, k = 0, len(A[r]) - 1
