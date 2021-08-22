@@ -30,7 +30,7 @@ Note:
 from typing import List
 
 
-class SolutionCusumLeftRightMiddleIter(object):
+class SolutionCusumLeftRightMiddleSlidingWindow(object):
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
         """
         Time complexity: O(n).
@@ -90,12 +90,12 @@ def main():
     # Output: [0, 3, 5]
     nums = [1,2,1,2,6,7,5,1]
     k = 2
-    print(SolutionCusumLeftRightMiddleIter().maxSumOfThreeSubarrays(nums, k))
+    print(SolutionCusumLeftRightMiddleSlidingWindow().maxSumOfThreeSubarrays(nums, k))
 
     # Output: [0,2,4]
     nums = [9,8,7,6,2,2,2,2]
     k = 2
-    print(SolutionCusumLeftRightMiddleIter().maxSumOfThreeSubarrays(nums, k))
+    print(SolutionCusumLeftRightMiddleSlidingWindow().maxSumOfThreeSubarrays(nums, k))
 
 
 if __name__ == '__main__':
