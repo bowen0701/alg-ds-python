@@ -88,6 +88,10 @@ class SolutionCusumLeftRightMiddleSlidingWindow(object):
 
 class SolutionLeftMiddleRightSlidingWindows(object):
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
+        """
+        Time complexity: O(n).
+        Space complexity: O(1).
+        """
         n = len(nums)
 
         left_sum, mid_sum, right_sum = (
