@@ -86,16 +86,53 @@ class SolutionCusumLeftRightMiddleSlidingWindow(object):
         return result
 
 
+class SolutionLeftMiddleRightSlidingWindows(object):
+    def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+
+        left_sum, mid_sum, right_sum = (
+            sum(nums[:k]), sum(nums[k:2*k]), sum(nums[2*k:3*k])
+        )
+        
+        max_one_sum, max_two_sum, max_three_sum = (
+            left_sum, left_sum + mid_sum, left_sum + mid_sum + right_sum
+        )
+
+        one_start_poc, two_start_poc, three_start_poc = [0], [0, k], [0, k, 2*k]
+
+        # Slide to keep 3 windows moving and memorize max one & two window sums.
+        for l in range(1, n - 3*k + 1):
+            left_sum += nums[l + k - 1] - nums[l - 1]
+            mid_sum += nums[l + 2*k - 1] - nums[l + k - 1]
+            right_sum += nums[l + 3*k - 1] - nums[l + 2*k - 1]
+
+            if left_sum > max_one_sum:
+                max_one_sum = left_sum
+                one_start_poc = [l]
+
+            if max_one_sum + mid_sum > max_two_sum:
+                max_two_sum = max_one_sum + mid_sum
+                two_start_poc = one_start_poc + [l + k]
+
+            if max_two_sum + right_sum > max_three_sum:
+                max_three_sum = max_two_sum + right_sum
+                three_start_poc = two_start_poc + [l + 2*k]
+
+        return three_start_poc
+
+
 def main():
     # Output: [0, 3, 5]
     nums = [1,2,1,2,6,7,5,1]
     k = 2
     print(SolutionCusumLeftRightMiddleSlidingWindow().maxSumOfThreeSubarrays(nums, k))
+    print(SolutionLeftMiddleRightSlidingWindows().maxSumOfThreeSubarrays(nums, k))
 
     # Output: [0,2,4]
     nums = [9,8,7,6,2,2,2,2]
     k = 2
     print(SolutionCusumLeftRightMiddleSlidingWindow().maxSumOfThreeSubarrays(nums, k))
+    print(SolutionLeftMiddleRightSlidingWindows().maxSumOfThreeSubarrays(nums, k))
 
 
 if __name__ == '__main__':
