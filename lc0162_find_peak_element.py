@@ -27,8 +27,11 @@ Note:
 Your solution should be in logarithmic complexity.
 """
 
-class SolutionBinarySearchIter(object):
-    def findPeakElement(self, nums):
+from typing import List
+
+
+class SolutionBinarySearch(object):
+    def findPeakElement(self, nums: List[int]) -> int:
         """
         Time complexity: O(logn), where n is the length of nums.
         Space complexity: O(1).
@@ -54,15 +57,15 @@ class SolutionBinarySearchIter(object):
 def main():
     # Ans: 2
     nums = [1,2,3,1]
-    print SolutionBinarySearchIter().findPeakElement(nums)
+    print(SolutionBinarySearch().findPeakElement(nums))
 
     # Ans: 1 or 5.
     nums = [1,2,1,3,5,6,4]
-    print SolutionBinarySearchIter().findPeakElement(nums)
+    print(SolutionBinarySearch().findPeakElement(nums))
 
     # Ans: 0
     nums = [2,1]
-    print SolutionBinarySearchIter().findPeakElement(nums)
+    print(SolutionBinarySearch().findPeakElement(nums))
 
 
 if __name__ == '__main__':
