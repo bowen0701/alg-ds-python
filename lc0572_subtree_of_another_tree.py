@@ -38,41 +38,42 @@ Given tree t:
 Return false.
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 
 class SolutionPreorderRecur(object):
-    def _isTreeMatch(self, s, t):
-        if not s or not t:
-            return s is t
-            
-        return (s.val == t.val and 
-                self._isTreeMatch(s.left, t.left) and 
-                self._isTreeMatch(s.right, t.right))
+    def _isTreeMatch(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        # Edge case.
+        if not root or not subRoot:
+            return root is subRoot
 
-    def isSubtree(self, s, t):
+        # Preorder traversal: root->left->right, to check root and left/right tree matches.
+        return (root.val == subRoot.val
+                and self._isTreeMatch(root.left, subRoot.left)
+                and self._isTreeMatch(root.right, subRoot.right))
+
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         """
-        :type s: TreeNode
-        :type t: TreeNode
-        :rtype: bool
-
         Time complexity: O(|s|*|t|), where |s| is the number of nodes in s.
         Space complexity: O(log|s|+log|t|), for balanced tree; 
           O(|s|+|t|) for single sided tree.
         """
-        # Apply preorder traversal to check match.
-        if not s:
+        # Edge case.
+        if not root:
             return False
 
-        # Check if tree matches or is subtree of left or right.
-        return (self._isTreeMatch(s, t) or
-                self.isSubtree(s.left, t) or 
-                self.isSubtree(s.right, t))
+        # Preorder traversal: root->left->right, to check if matches or is subtree of left or right.
+        return (self._isTreeMatch(root, subRoot)
+                or self.isSubtree(root.left, subRoot)
+                or self.isSubtree(root.right, subRoot))
 
 
 def main():
@@ -87,15 +88,15 @@ def main():
     #   / \
     #  1   2
     # Output: True
-    s = TreeNode(3)
-    s.left = TreeNode(4)
-    s.right = TreeNode(5)
-    s.left.left = TreeNode(1)
-    s.left.right = TreeNode(2)
-    t = TreeNode(4)
-    t.left = TreeNode(1)
-    t.right = TreeNode(2)
-    print SolutionPreorderRecur().isSubtree(s, t)
+    root = TreeNode(3)
+    root.left = TreeNode(4)
+    root.right = TreeNode(5)
+    root.left.left = TreeNode(1)
+    root.left.right = TreeNode(2)
+    subRoot = TreeNode(4)
+    subRoot.left = TreeNode(1)
+    subRoot.right = TreeNode(2)
+    print(SolutionPreorderRecur().isSubtree(root, subRoot))
 
     # Given tree s:
     #      3
@@ -110,16 +111,16 @@ def main():
     #   / \
     #  1   2
     # Output: False
-    s = TreeNode(3)
-    s.left = TreeNode(4)
-    s.right = TreeNode(5)
-    s.left.left = TreeNode(1)
-    s.left.right = TreeNode(2)
-    s.left.right.left = TreeNode(0)
-    t = TreeNode(4)
-    t.left = TreeNode(1)
-    t.right = TreeNode(2)
-    print SolutionPreorderRecur().isSubtree(s, t)
+    root = TreeNode(3)
+    root.left = TreeNode(4)
+    root.right = TreeNode(5)
+    root.left.left = TreeNode(1)
+    root.left.right = TreeNode(2)
+    root.left.right.left = TreeNode(0)
+    subRoot = TreeNode(4)
+    subRoot.left = TreeNode(1)
+    subRoot.right = TreeNode(2)
+    print(SolutionPreorderRecur().isSubtree(root, subRoot))
 
 
 if __name__ == '__main__':
