@@ -22,8 +22,6 @@ from typing import List
 class SolutionSortAppendOrMerge(object):
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         """
-        Sort intervals, then append or merge intervals one by one.
-
         Time complexity: O(n*logn).
         Space complexity: O(1).
         """
