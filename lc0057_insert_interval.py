@@ -59,21 +59,20 @@ class SolutionIter(object):
         result = []
 
         for interval in intervals:
-            # If overlapped with the internal, update new's start and end.
+            # If overlapped with current internal, update new's start and end.
             if newInterval[0] <= interval[1] and newInterval[1] >= interval[0]:
                 newInterval[0] = min(newInterval[0], interval[0])
                 newInterval[1] = max(newInterval[1], interval[1])
             else:
-                # If not overlapped.
-                # Further, if the new is ahead of the interval, append the former.
+                # If not, check if new interval is ahead of current, append the former.
                 if not is_inserted and newInterval[0] < interval[0]: 
                     result.append(newInterval)
                     is_inserted = True
 
-                # If not, append the interval to res.           
+                # If not both, append current interval.
                 result.append(interval)
 
-        # If the new is not inserted yet, append it.
+        # If new interval is not inserted yet, append it to the tail.
         if not is_inserted:
             result.append(newInterval)
 
