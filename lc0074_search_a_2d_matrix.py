@@ -30,13 +30,12 @@ target = 13
 Output: false
 """
 
-class SolutionRowSearch(object):
-    def searchMatrix(self, matrix, target):
-        """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
+from typing import List
 
+
+class SolutionRowSearch(object):
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        """
         Time complexity: O(mn), where m is the row number, and n is column number.
         Space complexity: O(1).
         """
@@ -63,12 +62,8 @@ class SolutionRowSearch(object):
 
 
 class SolutionBinarySearch(object):
-    def searchMatrix(self, matrix, target):
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
-
         Time complexity: O(log(mn)).
         Space complexity: O(1).
         """
@@ -101,6 +96,7 @@ class SolutionBinarySearch(object):
 def main():
     import time
 
+    # Output: true
     # Input:
     matrix = [
         [1, 3, 5, 7],
@@ -108,17 +104,17 @@ def main():
         [23, 30, 34, 50]
     ]
     target = 3
-    # Output: true
 
     start_time = time.time()
-    print SolutionRowSearch().searchMatrix(matrix, target)
-    print 'Time for row search:', time.time() - start_time
+    print(SolutionRowSearch().searchMatrix(matrix, target))
+    print('Time for row search:', time.time() - start_time)
 
     start_time = time.time()
-    print SolutionBinarySearch().searchMatrix(matrix, target)
-    print 'Time for binary search:', time.time() - start_time
+    print(SolutionBinarySearch().searchMatrix(matrix, target))
+    print('Time for binary search:', time.time() - start_time)
 
 
+    # Output: false
     # Input:
     matrix = [
         [1,   3,  5,  7],
@@ -126,15 +122,14 @@ def main():
         [23, 30, 34, 50]
     ]
     target = 13
-    # Output: false
 
     start_time = time.time()
-    print SolutionRowSearch().searchMatrix(matrix, target)
-    print 'Time for row search:', time.time() - start_time
+    print(SolutionRowSearch().searchMatrix(matrix, target))
+    print('Time for row search:', time.time() - start_time)
 
     start_time = time.time()
-    print SolutionBinarySearch().searchMatrix(matrix, target)
-    print 'Time for binary search:', time.time() - start_time
+    print(SolutionBinarySearch().searchMatrix(matrix, target))
+    print('Time for binary search:', time.time() - start_time)
 
 
 if __name__ == '__main__':
