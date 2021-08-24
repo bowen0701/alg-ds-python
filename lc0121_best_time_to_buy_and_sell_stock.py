@@ -23,37 +23,37 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max max_profit = 0.
 """
 
-class SolutionBruteForce(object):
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
+from typing import List
 
-        Iterate through each pair of two pointers, update max_profit.
+
+class SolutionBruteForce(object):
+    def maxProfit(self, prices: List[int]) -> int:
+        """
         Note: Time limit exceeded.
 
         Time complexity: O(n^2), where n is the number of prices.
         Space complexity: O(1).
         """
+        # Edge case.
         if not prices:
             return 0
 
         n = len(prices)
 
         # Iterate through price pairs (i, j), i < j, to update max profit.
-        profit = 0
+        result = 0
 
         for i in range(n - 1):
             for j in range(i + 1, n):
-                if prices[j] - prices[i] > profit:
-                    profit = prices[j] - prices[i]
+                if prices[j] - prices[i] > result:
+                    result = prices[j] - prices[i]
 
-        return profit
+        return result
 
 
 class SolutionBinarySearch(object):
-    def _binarySearch(self, prices, left, right):
-        # Only one date, thus cannot buy and then sell.
+    def _binarySearch(self, prices: List[int], left: int, right: int) -> int:
+        # Edge case: only one date.
         if left == right:
             return 0
 
@@ -63,34 +63,30 @@ class SolutionBinarySearch(object):
         left_profit = self._binarySearch(prices, left, mid)
         right_profit = self._binarySearch(prices, mid + 1, right)
 
-        # Compute crossmax for buying in left and selling in right.
+        # Compute cross profit for buying in left and selling in right.
         left_min = min(prices[left:(mid+1)])
         right_max = max(prices[(mid+1):(right+1)])
         cross_profit = max(0, right_max - left_min)
 
         return max(left_profit, right_profit, cross_profit)
 
-    def maxProfit(self, prices):
+    def maxProfit(self, prices: List[int]) -> int:
         """
-        :type prices: List[int]
-        :rtype: int
-
         Time complexity: O(n*logn), where n is the number of prices.
         Space complexity: O(1).
         """
+        # Edge case.
         if not prices:
             return 0
 
+        # Binary search.
         left, right = 0, len(prices) - 1
         return self._binarySearch(prices, left, right)
 
 
 class SolutionIter(object):
-    def maxProfit(self, prices):
+    def maxProfit(self, prices: List[int]) -> int:
         """
-        :type prices: List[int]
-        :rtype: int
-
         Time complexity: O(n), where n is the number of prices.
         Space complexity: O(1).
         """
@@ -101,11 +97,11 @@ class SolutionIter(object):
         min_price = float('inf')
         max_profit = 0
 
-        for i in range(len(prices)):
-            cur_price = prices[i]
-
-            min_price = min(cur_price, min_price)
-            max_profit = max(cur_price - min_price, max_profit)
+        for i, p in enumerate(prices):
+            if p < min_price:
+                min_price = p
+            else:
+                max_profit = max(p - min_price, max_profit)
 
         return max_profit
 
@@ -117,31 +113,31 @@ def main():
     prices = [7,1,5,3,6,4]
 
     start_time = time.time()
-    print 'By brute force:', SolutionBruteForce().maxProfit(prices)
-    print 'Time:', time.time() - start_time
+    print('By brute force:', SolutionBruteForce().maxProfit(prices))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By binary search:', SolutionBinarySearch().maxProfit(prices)
-    print 'Time:', time.time() - start_time
+    print('By binary search:', SolutionBinarySearch().maxProfit(prices))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By iter:', SolutionIter().maxProfit(prices)
-    print 'Time:', time.time() - start_time
+    print('By iter:', SolutionIter().maxProfit(prices))
+    print('Time:', time.time() - start_time)
 
     # Ans: 6
     prices = [6,1,3,2,4,7]
 
     start_time = time.time()
-    print 'By brute force:', SolutionBruteForce().maxProfit(prices)
-    print 'Time:', time.time() - start_time
+    print('By brute force:', SolutionBruteForce().maxProfit(prices))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By binary search:', SolutionBinarySearch().maxProfit(prices)
-    print 'Time:', time.time() - start_time
+    print('By binary search:', SolutionBinarySearch().maxProfit(prices))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By iter:', SolutionIter().maxProfit(prices)
-    print 'Time:', time.time() - start_time
+    print('By iter:', SolutionIter().maxProfit(prices))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':
