@@ -33,7 +33,7 @@ Input: "{[]}"
 Output: true
 """
 
-class SolutionOpenCloseDict(object):
+class SolutionOpenCloseDictOpenStack(object):
     def isValid(self, s: str) -> bool:
         """
         Time complexity: O(n), where n is the length of the string.
@@ -79,37 +79,37 @@ def main():
     # Input: "()"
     # Output: true
     s = '()'
-    print(SolutionOpenCloseDict().isValid(s))
+    print(SolutionOpenCloseDictOpenStack().isValid(s))
 
     # Input: "()[]{}"
     # Output: true
     s = '()[]{}'
-    print(SolutionOpenCloseDict().isValid(s))
+    print(SolutionOpenCloseDictOpenStack().isValid(s))
 
     # Input: "(]"
     # Output: false
     s = '(]'
-    print(SolutionOpenCloseDict().isValid(s))
+    print(SolutionOpenCloseDictOpenStack().isValid(s))
 
     # Input: "([)]"
     # Output: false
     s = '([)]'
-    print(SolutionOpenCloseDict().isValid(s))
+    print(SolutionOpenCloseDictOpenStack().isValid(s))
 
     # Input: "{[]}"
     # Output: true
     s = '{[]}'
-    print(SolutionOpenCloseDict().isValid(s))
+    print(SolutionOpenCloseDictOpenStack().isValid(s))
 
     # Input: '['
     # Output: False
     s = '['
-    print(SolutionOpenCloseDict().isValid(s))
+    print(SolutionOpenCloseDictOpenStack().isValid(s))
 
     # Input: ']'
     # Output: False
     s = ']'
-    print(SolutionOpenCloseDict().isValid(s))
+    print(SolutionOpenCloseDictOpenStack().isValid(s))
 
 
 if __name__ == '__main__':
