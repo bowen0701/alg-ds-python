@@ -19,6 +19,8 @@ Your algorithm should run in O(n^2) complexity.
 Follow up: Could you improve it to O(n*logn) time complexity?
 """
 
+from typing import List
+
 
 class SolutionRecur(object):
     def _LIS(self, nums, cur_idx, prev_max):
@@ -37,7 +39,7 @@ class SolutionRecur(object):
 
         return max(lis_in, lis_ex)
 
-    def lengthOfLIS(self, nums):
+    def lengthOfLIS(self, nums: List[int]) -> int:
         """Length of LIS by recursion.
 
         Time limit exceeded.
@@ -72,8 +74,8 @@ class SolutionMemo(object):
         T[prev_idx + 1][cur_idx] = max(lis_in, lis_ex)
         return T[prev_idx + 1][cur_idx]
 
-    def lengthOfLIS(self, nums):
-        """Length of LIS by recursion.
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        """Length of LIS by recursion with memoization.
 
         Time limit exceeded.
 
@@ -92,11 +94,9 @@ class SolutionMemo(object):
 
 
 class SolutionDP(object):
-    def lengthOfLIS(self, nums):
+    def lengthOfLIS(self, nums: List[int]) -> int:
         """Length of LIS by dynamic programming.
-        :type nums: List[int]
-        :rtype: int
-
+        
         Time complexity: O(n^2), where n is the length of the nums.
         Space complexity: O(n).
         """
@@ -120,11 +120,9 @@ class SolutionDP(object):
 
 
 class SolutionBinarySearch(object):
-    def lengthOfLIS(self, nums):
+    def lengthOfLIS(self, nums: List[int]) -> int:
         """Length of LIS by binary search.
-        :type nums: List[int]
-        :rtype: int
-
+        
         Time complexity: O(n*logn), where n is the length of the nums.
         Space complexity: O(n).
         """
@@ -138,7 +136,7 @@ class SolutionBinarySearch(object):
         length = 0
  
         # If n is larger than all smallest tails, append it and increase length by 1.
-        # If not, find the biggest i - 1 s.t. T[i-1] < n <= T[i and update T[i].
+        # If not, find the biggest i - 1 s.t. T[i-1] < n <= T[i] and update T[i].
         for n in nums:
             # Use binary search to find the correct tail index for new item.
             left, right = 0, length
@@ -162,39 +160,39 @@ def main():
     nums = [10, 9, 2, 5, 3, 7, 101, 18]
 
     start_time = time.time()
-    print SolutionRecur().lengthOfLIS(nums)
-    print 'By recur: {}'.format(time.time() - start_time)
+    print(SolutionRecur().lengthOfLIS(nums))
+    print('By recur: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print SolutionMemo().lengthOfLIS(nums)
-    print 'By memo: {}'.format(time.time() - start_time)
+    print(SolutionMemo().lengthOfLIS(nums))
+    print('By memo: {}'.format(time.time() - start_time))
 
     start_time = time.time()   
-    print SolutionDP().lengthOfLIS(nums)
-    print 'By DP: {}'.format(time.time() - start_time)
+    print(SolutionDP().lengthOfLIS(nums))
+    print('By DP: {}'.format(time.time() - start_time))
 
     start_time = time.time()   
-    print SolutionBinarySearch().lengthOfLIS(nums)
-    print 'By binary search: {}'.format(time.time() - start_time)
+    print(SolutionBinarySearch().lengthOfLIS(nums))
+    print('By binary search: {}'.format(time.time() - start_time))
 
     # Output: 20.
     nums = range(20)
 
     start_time = time.time()
-    print SolutionRecur().lengthOfLIS(nums)
-    print 'By recur: {}'.format(time.time() - start_time)
+    print(SolutionRecur().lengthOfLIS(nums))
+    print('By recur: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print SolutionMemo().lengthOfLIS(nums)
-    print 'By memo: {}'.format(time.time() - start_time)
+    print(SolutionMemo().lengthOfLIS(nums))
+    print('By memo: {}'.format(time.time() - start_time))
 
     start_time = time.time()   
-    print SolutionDP().lengthOfLIS(nums)
-    print 'By DP: {}'.format(time.time() - start_time)
+    print(SolutionDP().lengthOfLIS(nums))
+    print('By DP: {}'.format(time.time() - start_time))
 
     start_time = time.time()   
-    print SolutionBinarySearch().lengthOfLIS(nums)
-    print 'By binary search: {}'.format(time.time() - start_time)
+    print(SolutionBinarySearch().lengthOfLIS(nums))
+    print('By binary search: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
