@@ -1,4 +1,4 @@
-"""LC300. Longest Increasing Subsequence
+"""Leetcode 300. Longest Increasing Subsequence
 Medium
 
 URL: https://leetcode.com/problems/longest-increasing-subsequence/
@@ -23,21 +23,20 @@ from typing import List
 
 
 class SolutionRecur(object):
-    def _LIS(self, nums, cur_idx, prev_max):
+    def _LIS(self, nums: List[int], cur_idx: int, prev_max: int) -> int:
         # Base case.
         if cur_idx == len(nums):
             return 0
 
-        # LIS is 1 + LIS including nums[cur_idx+1:], 
-        # if nums[cur_idx] is bigger than prev_max.
+        # LIS is 1 + LIS including nums[cur_idx], if bigger than prev_max.
         lis_in = 0
         if nums[cur_idx] > prev_max:
             lis_in = 1 + self._LIS(nums, cur_idx + 1, nums[cur_idx])
 
-        # LIS of nums[1:n], excluding nums[0].
-        lis_ex = self._LIS(nums, cur_idx + 1, prev_max)
+        # LIS of nums[cur_idx+1:n], excluding nums[cur_idx].
+        lis_out = self._LIS(nums, cur_idx + 1, prev_max)
 
-        return max(lis_in, lis_ex)
+        return max(lis_in, lis_out)
 
     def lengthOfLIS(self, nums: List[int]) -> int:
         """Length of LIS by recursion.
@@ -54,7 +53,7 @@ class SolutionRecur(object):
 
 
 class SolutionMemo(object):
-    def _LIS(self, nums, prev_idx, cur_idx, T):
+    def _LIS(self, nums: List[int], prev_idx: int, cur_idx: int, T: List[List[int]]) -> int:
         # Base case.
         if cur_idx == len(nums):
             return 0
@@ -62,16 +61,15 @@ class SolutionMemo(object):
         if T[prev_idx + 1][cur_idx] >= 0:
             return T[prev_idx + 1][cur_idx]
 
-        # LIS is 1 + LIS including nums[cur_idx+1:], 
-        # if nums[cur_idx] is bigger than prev_max.
+        # LIS is 1 + LIS including nums[cur_idx], if bigger than prev_max.
         lis_in = 0
         if prev_idx < 0 or nums[cur_idx] > nums[prev_idx]:
             lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1, T)
 
-        # LIS of nums[1:n], excluding nums[0].
-        lis_ex = self._LIS(nums, prev_idx, cur_idx + 1, T)
+        # LIS of nums[cur_idx+1:n], excluding nums[cur_idx].
+        lis_out = self._LIS(nums, prev_idx, cur_idx + 1, T)
 
-        T[prev_idx + 1][cur_idx] = max(lis_in, lis_ex)
+        T[prev_idx + 1][cur_idx] = max(lis_in, lis_out)
         return T[prev_idx + 1][cur_idx]
 
     def lengthOfLIS(self, nums: List[int]) -> int:
@@ -105,17 +103,15 @@ class SolutionDP(object):
             return 0
 
         # Apply bottom-up DP with table T with T[i] denoting LIS up to i.
-        # Init all elements to 1, since LIS of each num is at least 1.
         T = [1] * len(nums)
 
-        # Apply two pointer method: for each r, check if num[l] < num[r], 
-        # update T[r] = max(T[l] + 1) for all such l.
-        for r in range(1, len(nums)):
+        # Apply two pointer method: for each r, check if num[l] < num[r], l < r.
+        for r in range(len(nums)):
             for l in range(r):
-                if nums[l] < nums[r]:
-                    T[r] = max(T[r], T[l] + 1)
+                if nums[l] < nums[r] and T[l] + 1 > T[r]:
+                    T[r] = T[l] + 1
 
-        # Return max elements of table as LIS. 
+        # Return max length.
         return max(T)
 
 
@@ -126,20 +122,19 @@ class SolutionBinarySearch(object):
         Time complexity: O(n*logn), where n is the length of the nums.
         Space complexity: O(n).
         """
-        # Apply binary search with memoization.
+        # Edge case.
         if not nums:
             return 0
 
         # Store the smallest tails T of all increasing subsequences
         # with length i+1 in T[i].
         T = [0] * len(nums)
-        length = 0
+        lis = 0
  
         # If n is larger than all smallest tails, append it and increase length by 1.
-        # If not, find the biggest i - 1 s.t. T[i-1] < n <= T[i] and update T[i].
+        # If not, binary-search to find biggest i - 1 s.t. T[i-1] < n <= T[i], update T[i].
         for n in nums:
-            # Use binary search to find the correct tail index for new item.
-            left, right = 0, length
+            left, right = 0, lis
             while left < right:
                 mid = left + (right - left) // 2
                 if T[mid] < n:
@@ -148,9 +143,9 @@ class SolutionBinarySearch(object):
                     right = mid
 
             T[left] = n
-            length = max(left + 1, length)
+            lis = max(left + 1, lis)
 
-        return length
+        return lis
 
 
 def main():
