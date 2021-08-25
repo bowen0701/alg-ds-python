@@ -25,6 +25,7 @@ class SolutionPopAppend(object):
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Pop 0's and append them.
         left = 0
         right = len(nums) - 1
         while left < right:
@@ -41,13 +42,14 @@ class SolutionUpdate(object):
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Use idx to denote non-zero index.
+        # Two passes: 1st one to move non-zeros to the front.
         idx = 0
         for i in range(len(nums)):
             if nums[i] != 0:
                 nums[idx] = nums[i]
                 idx += 1
 
+        # 2nd pass to update to zeros on the tails.
         for i in range(idx, len(nums)):
             nums[i] = 0
 
