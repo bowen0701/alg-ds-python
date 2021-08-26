@@ -26,7 +26,7 @@ After running your function, the 2D grid should be:
 """
 
 class SolutionDFSRecur(object):
-    def _dfs(self, r, c, distance, rooms):
+    def _dfs(self, r: int, c: int, distance: int, rooms: List[List[int]]) -> None:
         # Base case: out of boundary or had smaller distance.
         if (r < 0 or r >= len(rooms) or c < 0 or c >= len(rooms[0]) or
             rooms[r][c] < distance):
@@ -40,11 +40,8 @@ class SolutionDFSRecur(object):
         for r_next, c_next in dirs:
             self._dfs(r_next, c_next, distance + 1, rooms)
 
-    def wallsAndGates(self, rooms):
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
         """
-        :type rooms: List[List[int]]
-        :rtype: void Do not return anything, modify rooms in-place instead.
-
         Time complexity: O(kmn), where
           - k: number of gates
           - m: number of rows
@@ -68,11 +65,8 @@ class SolutionDFSRecur(object):
 
 
 class SolutionBFSIter(object):
-    def wallsAndGates(self, rooms):
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
         """
-        :type rooms: List[List[int]]
-        :rtype: void Do not return anything, modify rooms in-place instead.
-
         Time complexity: O(kmn), where
           - k: number of gates
           - m: number of rows
@@ -101,7 +95,7 @@ class SolutionBFSIter(object):
             while queue:
                 r, c = queue.pop()
 
-                # Visit gate's neighbors: up/down/left/right in boundary and append queue.
+                # Visit gate's neighbors: up/down/left/right in boundary and append to queue.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
                 for r_next, c_next in dirs:
                     if (0 <= r_next < n_rows and 0 <= c_next < n_cols and
