@@ -58,15 +58,15 @@ class SolutionDFSRecurUpdate(object):
         if not grid or not grid[0]:
             return 0
 
-        max_area = 0
+        result = 0
 
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 if grid[r][c] == 1:
                     area = self._dfs(r, c, grid)
-                    max_area = max(max_area, area)
+                    result = max(result, area)
 
-        return max_area
+        return result
 
 
 class SolutionDFSIterUpdate(object):
