@@ -139,7 +139,7 @@ class SolutionDFSIterUpdate(object):
 
 
 class SolutionBFS:
-    def bfs(self, r: int, c: int, grid: List[List[int]]) -> int:
+    def _bfs(self, r: int, c: int, grid: List[List[int]]) -> int:
         from collections import deque
 
         n_rows, n_cols = len(grid), len(grid[0])
@@ -187,7 +187,7 @@ class SolutionBFS:
         for r in range(n_rows):
             for c in range(n_cols):
                 if grid[r][c] == 1:
-                    area = self.bfs(r, c, grid)
+                    area = self._bfs(r, c, grid)
                     result = max(result, area)
 
         return result

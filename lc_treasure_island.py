@@ -86,8 +86,8 @@ class SolutionBFSSteps(object):
 class SolutionBFSAllSteps(object):
     def treasureIsland(self, grid: List[list[str]]) -> int:
         """
-        Time complexity: O(r*c).
-        Space complexity: O(r*c).
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         from collections import defaultdict
         from collections import deque
