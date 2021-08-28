@@ -25,6 +25,9 @@ After running your function, the 2D grid should be:
 0  -1   3   4
 """
 
+from typing import List
+
+
 class SolutionDFSRecur(object):
     def _dfs(self, r: int, c: int, distance: int, rooms: List[List[int]]) -> None:
         # Base case: out of boundary or had smaller distance.
@@ -87,20 +90,21 @@ class SolutionBFSIter(object):
                  if rooms[r][c] == 0]
 
         # For each gate, start BFS to update neighbors's shorter distances.
-        while gates:
+        for gate in gates:
             # Put one of gates in the queue.
-            gate = gates.pop()
             queue = deque([gate])
 
             while queue:
                 r, c = queue.pop()
 
-                # Visit gate's neighbors: up/down/left/right in boundary and append to queue.
+                # Visit gate's neighbors: up/down/left/right in boundary.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
                 for r_next, c_next in dirs:
                     if (0 <= r_next < n_rows and 0 <= c_next < n_cols and
                         rooms[r][c] + 1 < rooms[r_next][c_next]):
                         rooms[r_next][c_next] = rooms[r][c] + 1
+
+                        # If update the distance, also visit their neighbors.
                         queue.appendleft((r_next, c_next))
 
 
