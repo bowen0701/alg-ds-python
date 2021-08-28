@@ -100,11 +100,14 @@ class SolutionBFSIter(object):
                 # Visit gate's neighbors: up/down/left/right in boundary.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
                 for r_next, c_next in dirs:
-                    if (0 <= r_next < n_rows and 0 <= c_next < n_cols and
-                        rooms[r][c] + 1 < rooms[r_next][c_next]):
-                        rooms[r_next][c_next] = rooms[r][c] + 1
+                    # If out of boundary, skip visiting.
+                    if (r_next < 0 or r_next >= n_rows
+                        or c_next < 0 or c_next >= n_cols):
+                        continue
 
-                        # If update the distance, also visit their neighbors.
+                    # If found short distance, update distance & visit neigghbors.
+                    if rooms[r][c] + 1 < rooms[r_next][c_next]:
+                        rooms[r_next][c_next] = rooms[r][c] + 1
                         queue.appendleft((r_next, c_next))
 
 
