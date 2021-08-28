@@ -34,26 +34,25 @@ Explanation: Route is (0, 0), (0, 1), (1, 1), (2, 1), (2, 0), (3, 0)
 The minimum route takes 5 steps.
 """
 
-class SolutionBFSSteps(object):
-    def treasureIsland(self, grid):
-        """
-        :type logs: List[list[str]]
-        :rtype: int
+from typing import List
 
-        Time complexity: O(r*c).
-        Space complexity: O(r*c).
+
+class SolutionBFSSteps(object):
+    def treasureIsland(self, grid: List[list[str]]) -> int:
+        """
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
         """
         from collections import deque
 
+        # Edge case.
         if not grid or not grid[0]:
             return -1
 
         n_rows, n_cols = len(grid), len(grid[0])
 
-        # Apply BFS using queue for shortest route.
+        # Apply BFS using queue, starting from (0, 0), marked as visited.
         queue = deque([(0, 0)])
-
-        # Update grid to mark (0, 0) as visited.
         grid[0][0] = 'D'
         steps = 0
 
@@ -70,11 +69,12 @@ class SolutionBFSSteps(object):
                         grid[r_next][c_next] == 'D'):
                         continue
 
+                    # If found treasure, return result.
                     if grid[r_next][c_next] == 'X':
                         return steps + 1
                     
+                    # If visit safe area, mark it as visited and visit neighbors.
                     if grid[r_next][c_next] == 'O':
-                        # Update grid to mark as visited.
                         grid[r_next][c_next] = 'D'
                         queue.appendleft((r_next, c_next))
 
@@ -84,36 +84,32 @@ class SolutionBFSSteps(object):
 
 
 class SolutionBFSAllSteps(object):
-    def treasureIsland(self, grid):
+    def treasureIsland(self, grid: List[list[str]]) -> int:
         """
-        :type logs: List[list[str]]
-        :rtype: int
-
         Time complexity: O(r*c).
         Space complexity: O(r*c).
         """
         from collections import defaultdict
         from collections import deque
 
+        # Edge case.
         if not grid or not grid[0]:
             return -1
 
         n_rows, n_cols = len(grid), len(grid[0])
 
-        # Apply BFS using queue for shortest route.
+        # Apply BFS with queue, starting from (0, 0), marked as visited.
         queue = deque([(0, 0)])
-
-        # Update grid to mark (0, 0) as visited.
         grid[0][0] = 'D'
 
-        steps_d = defaultdict(int)
-        steps_d[(0, 0)] = 0
+        pos_steps_d = defaultdict(int)
+        pos_steps_d[(0, 0)] = 0
 
         while queue:
             for _ in range(len(queue)):
                 r, c = queue.pop()
 
-                # Visiting directions.
+                # Visit neighbors: up/down/left/right.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
                 for r_next, c_next in dirs:
                     # If is out of boundary or visited, skip visiting.
@@ -122,21 +118,19 @@ class SolutionBFSAllSteps(object):
                         grid[r_next][c_next] == 'D'):
                         continue
 
+                    # If found treasure, update distance.
                     if grid[r_next][c_next] == 'X':
-                        # Update the desitination's distance.
-                        steps_d[(r_next, c_next)] = steps_d[(r, c)] + 1
+                        pos_steps_d[(r_next, c_next)] = pos_steps_d[(r, c)] + 1
                         break
                     
+                    # If safe area, mark visited and visit neighbors.
                     if grid[r_next][c_next] == 'O':
-                        # Update grid to mark as visited.
                         grid[r_next][c_next] = 'D'
-
-                        # Update the neighbor's distance.
-                        steps_d[(r_next, c_next)] = steps_d[(r, c)] + 1
+                        pos_steps_d[(r_next, c_next)] = pos_steps_d[(r, c)] + 1
                         queue.appendleft((r_next, c_next))
 
-        if steps_d.get((n_rows - 1, 0)):
-            return steps_d[(n_rows - 1, 0)]
+        if pos_steps_d.get((n_rows - 1, 0)):
+            return pos_steps_d[(n_rows - 1, 0)]
         else:
             return -1
 
@@ -147,13 +141,13 @@ def main():
             ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
-    print SolutionBFSSteps().treasureIsland(grid)
+    print(SolutionBFSSteps().treasureIsland(grid))
 
     grid = [['O', 'O', 'O', 'O'],
             ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
-    print SolutionBFSAllSteps().treasureIsland(grid)
+    print(SolutionBFSAllSteps().treasureIsland(grid))
 
 
 if __name__ == '__main__':
