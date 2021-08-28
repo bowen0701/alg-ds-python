@@ -98,7 +98,7 @@ class SolutionBFSIter(object):
                 for _ in range(len(queue)):
                     r, c = queue.pop()
 
-                    # Visit gate's neighbors: up/down/left/right in boundary.
+                    # Visit gate's neighbors: up/down/left/right.
                     dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
                     for r_next, c_next in dirs:
                         # If out of boundary, skip visiting.
