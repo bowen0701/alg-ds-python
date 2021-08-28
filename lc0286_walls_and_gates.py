@@ -95,28 +95,32 @@ class SolutionBFSIter(object):
             queue = deque([gate])
 
             while queue:
-                r, c = queue.pop()
+                for _ in range(len(queue)):
+                    r, c = queue.pop()
 
-                # Visit gate's neighbors: up/down/left/right in boundary.
-                dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-                for r_next, c_next in dirs:
-                    # If out of boundary, skip visiting.
-                    if (r_next < 0 or r_next >= n_rows
-                        or c_next < 0 or c_next >= n_cols):
-                        continue
+                    # Visit gate's neighbors: up/down/left/right in boundary.
+                    dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+                    for r_next, c_next in dirs:
+                        # If out of boundary, skip visiting.
+                        if (r_next < 0 or r_next >= n_rows
+                            or c_next < 0 or c_next >= n_cols):
+                            continue
 
-                    # If found short distance, update distance & visit neigghbors.
-                    if rooms[r][c] + 1 < rooms[r_next][c_next]:
-                        rooms[r_next][c_next] = rooms[r][c] + 1
-                        queue.appendleft((r_next, c_next))
+                        # If found short distance, update distance & visit neigghbors.
+                        if rooms[r][c] + 1 < rooms[r_next][c_next]:
+                            rooms[r_next][c_next] = rooms[r][c] + 1
+                            queue.appendleft((r_next, c_next))
 
 
 def main():
+    import time
+
     # After running your function, the 2D grid should be:
     # 3  -1   0   1
     # 2   2   1  -1
     # 1  -1   2  -1
     # 0  -1   3   4
+    start_time = time.time()
     rooms = [
         [float('inf'), -1, 0, float('inf')],
         [float('inf'), float('inf'), float('inf'), -1],
@@ -124,8 +128,11 @@ def main():
         [0, -1, float('inf'), float('inf')]
     ]
     SolutionDFSRecur().wallsAndGates(rooms)
+    print("SolutionDFSRecur:", time.time() - start_time)
     print(rooms)
 
+
+    start_time = time.time()
     rooms = [
         [float('inf'), -1, 0, float('inf')],
         [float('inf'), float('inf'), float('inf'), -1],
@@ -133,6 +140,7 @@ def main():
         [0, -1, float('inf'), float('inf')]
     ]
     SolutionBFSIter().wallsAndGates(rooms)
+    print("SolutionBFSIter:", time.time() - start_time)
     print(rooms)
 
 
