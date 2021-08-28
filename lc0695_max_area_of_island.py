@@ -34,16 +34,17 @@ from typing import List, Tuple
 
 class SolutionDFSRecurUpdate(object):
     def _dfs(self, r: int, c: int, grid: List[List[int]]) -> int:
-        # Check exit conditions: out of boundaries, in water.
-        if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or 
-            grid[r][c] == 0):
+        # Base case: out of boundary or visited.
+        if (r < 0 or r >= len(grid) 
+            or c < 0 or c >= len(grid[0]) 
+            or grid[r][c] == 0):
             return 0
 
         # Mark (r, c) as visited.
         grid[r][c] = 0
         area = 1
 
-        # Visit 4 directions to accumulate area.
+        # Visit neighbors: top/down/left/right to accumulate area.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             area += self._dfs(r_next, c_next, grid)
@@ -55,13 +56,17 @@ class SolutionDFSRecurUpdate(object):
         Time complexity: O(m*n).
         Space complexity: O(m*n).
         """
+        # Edge case.
         if not grid or not grid[0]:
             return 0
 
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Apply recursive DFS with updating visited grid.
         result = 0
 
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
+        for r in range(n_rows):
+            for c in range(n_cols):
                 if grid[r][c] == 1:
                     area = self._dfs(r, c, grid)
                     result = max(result, area)
@@ -70,34 +75,38 @@ class SolutionDFSRecurUpdate(object):
 
 
 class SolutionDFSIterUpdate(object):
-    def _get_tovisits(self, v_start: Tuple[int, int], grid: List[List[int]]) -> List[Tuple[int, int]]:
+    def _get_to_visits(
+        self, 
+        v_start: Tuple[int, int], 
+        grid: List[List[int]]
+    ) -> List[Tuple[int, int]]:
         r, c = v_start
 
-        tovisits = []
+        to_visits = []
 
-        # Visit up, down, left and right.
+        # Visit neigghbors: top/down/left/right.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             if (0 <= r_next < len(grid) and 
                 0 <= c_next < len(grid[0]) and
                 grid[r_next][c_next] == 1):
-                tovisits.append((r_next, c_next))
+                to_visits.append((r_next, c_next))
 
-        return tovisits
+        return to_visits
 
     def _dfs(self, r: int, c: int, grid: List[List[int]]) -> int:
         grid[r][c] = 0
 
-        # Use stack for DFS.
+        # Apply iterative DFS with stack.
         stack = [(r, c)]
         area = 1
 
         while stack:
             # Get to-visit nodes from the top of stack.
-            tovisits = self._get_tovisits(stack[-1], grid)
+            to_visits = self._get_to_visits(stack[-1], grid)
 
-            if tovisits:
-                for r_next, c_next in tovisits:
+            if to_visits:
+                for r_next, c_next in to_visits:
                     grid[r_next][c_next] = 0
                     area += 1
                     stack.append((r_next, c_next))
@@ -113,18 +122,20 @@ class SolutionDFSIterUpdate(object):
         Time complexity: O(m*n).
         Space complexity: O(m*n).
         """
+        # Edgge case.
         if not grid or not grid[0]:
             return 0
 
-        max_area = 0
+        # Apply iterative DFS with stack.
+        result = 0
 
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 if grid[r][c] == 1:
                     area = self._dfs(r, c, grid)
-                    max_area = max(max_area, area)
+                    result = max(result, area)
 
-        return max_area
+        return result
 
 
 def main():
