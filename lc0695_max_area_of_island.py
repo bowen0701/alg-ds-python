@@ -138,7 +138,64 @@ class SolutionDFSIterUpdate(object):
         return result
 
 
+class SolutionBFS:
+    def bfs(self, r: int, c: int, grid: List[List[int]]) -> int:
+        from collections import deque
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Mark as visited.
+        grid[r][c] = 0
+
+        # Apply BFS with queue.
+        area = 0
+        queue = deque([(r, c)])
+
+        while queue:
+            r, c = queue.pop()
+            area += 1
+
+            # Visit neighboards: top/down/left/down, marked as visited.
+            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+            for r_next, c_next in dirs:
+                # Check out of boundary or visited.
+                if (r_next < 0 or r_next >= n_rows
+                    or c_next < 0 or c_next >= n_cols
+                    or grid[r_next][c_next] == 0):
+                    continue
+
+                # Mark as visited and visit neighbors.
+                grid[r_next][c_next] = 0
+                queue.appendleft((r_next, c_next))
+
+        return area
+
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        """
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        # Edge cases.
+        if not grid or not grid[0]:
+            return 0
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Apply BFS to obtain max area.
+        result = 0
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if grid[r][c] == 1:
+                    area = self.bfs(r, c, grid)
+                    result = max(result, area)
+
+        return result
+
+
 def main():
+    import time
+
     # Output: 6
     grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
             [0,0,0,0,0,0,0,1,1,1,0,0,0],
@@ -148,7 +205,9 @@ def main():
             [0,0,0,0,0,0,0,0,0,0,1,0,0],
             [0,0,0,0,0,0,0,1,1,1,0,0,0],
             [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+    start_time = time.time()
     print(SolutionDFSRecurUpdate().maxAreaOfIsland(grid))
+    print("SolutionDFSRecurUpdate:", time.time() - start_time)
 
     grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
             [0,0,0,0,0,0,0,1,1,1,0,0,0],
@@ -158,14 +217,21 @@ def main():
             [0,0,0,0,0,0,0,0,0,0,1,0,0],
             [0,0,0,0,0,0,0,1,1,1,0,0,0],
             [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+    start_time = time.time()
     print(SolutionDFSIterUpdate().maxAreaOfIsland(grid))
+    print("SolutionDFSIterUpdate:", time.time() - start_time)
 
-    # Output: 0.
-    grid = [[0,0,0,0,0,0,0,0]]
-    print(SolutionDFSRecurUpdate().maxAreaOfIsland(grid))
-
-    grid = [[0,0,0,0,0,0,0,0]]
-    print(SolutionDFSIterUpdate().maxAreaOfIsland(grid))
+    grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,1,1,0,0,0],
+            [0,1,1,0,1,0,0,0,0,0,0,0,0],
+            [0,1,0,0,1,1,0,0,1,0,1,0,0],
+            [0,1,0,0,1,1,0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0,0,0,0,1,0,0],
+            [0,0,0,0,0,0,0,1,1,1,0,0,0],
+            [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+    start_time = time.time()
+    print(SolutionBFS().maxAreaOfIsland(grid))
+    print("SolutionBFS:", time.time() - start_time)
 
 
 if __name__ == '__main__':
