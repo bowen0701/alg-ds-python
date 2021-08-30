@@ -136,18 +136,23 @@ class SolutionBFSAllSteps(object):
 
 
 def main():
+    import copy
+    import time
+
     # Output: 5.
     grid = [['O', 'O', 'O', 'O'],
             ['D', 'O', 'D', 'O'],
             ['O', 'O', 'O', 'O'],
             ['X', 'D', 'D', 'O']]
-    print(SolutionBFSSteps().treasureIsland(grid))
 
-    grid = [['O', 'O', 'O', 'O'],
-            ['D', 'O', 'D', 'O'],
-            ['O', 'O', 'O', 'O'],
-            ['X', 'D', 'D', 'O']]
-    print(SolutionBFSAllSteps().treasureIsland(grid))
+    grid1 = copy.deepcopy(grid)
+    start_time = time.time()
+    print(SolutionBFSSteps().treasureIsland(grid1))
+    print("SolutionBFSSteps time:", time.time() - start_time)
+
+    grid1 = copy.deepcopy(grid)
+    print(SolutionBFSAllSteps().treasureIsland(grid1))
+    print("SolutionBFSAllSteps time:", time.time() - start_time)
 
 
 if __name__ == '__main__':
