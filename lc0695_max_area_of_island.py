@@ -194,6 +194,7 @@ class SolutionBFS:
 
 
 def main():
+    import copy
     import time
 
     # Output: 6
@@ -205,32 +206,20 @@ def main():
             [0,0,0,0,0,0,0,0,0,0,1,0,0],
             [0,0,0,0,0,0,0,1,1,1,0,0,0],
             [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+
+    grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print(SolutionDFSRecurUpdate().maxAreaOfIsland(grid))
+    print(SolutionDFSRecurUpdate().maxAreaOfIsland(grid1))
     print("SolutionDFSRecurUpdate:", time.time() - start_time)
 
-    grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
-            [0,0,0,0,0,0,0,1,1,1,0,0,0],
-            [0,1,1,0,1,0,0,0,0,0,0,0,0],
-            [0,1,0,0,1,1,0,0,1,0,1,0,0],
-            [0,1,0,0,1,1,0,0,1,1,1,0,0],
-            [0,0,0,0,0,0,0,0,0,0,1,0,0],
-            [0,0,0,0,0,0,0,1,1,1,0,0,0],
-            [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+    grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print(SolutionDFSIterUpdate().maxAreaOfIsland(grid))
+    print(SolutionDFSIterUpdate().maxAreaOfIsland(grid1))
     print("SolutionDFSIterUpdate:", time.time() - start_time)
 
-    grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
-            [0,0,0,0,0,0,0,1,1,1,0,0,0],
-            [0,1,1,0,1,0,0,0,0,0,0,0,0],
-            [0,1,0,0,1,1,0,0,1,0,1,0,0],
-            [0,1,0,0,1,1,0,0,1,1,1,0,0],
-            [0,0,0,0,0,0,0,0,0,0,1,0,0],
-            [0,0,0,0,0,0,0,1,1,1,0,0,0],
-            [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+    grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print(SolutionBFS().maxAreaOfIsland(grid))
+    print(SolutionBFS().maxAreaOfIsland(grid1))
     print("SolutionBFS:", time.time() - start_time)
 
 
