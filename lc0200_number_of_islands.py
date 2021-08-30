@@ -306,6 +306,54 @@ class SolutionDFSVisitReturnConnectsRecur(object):
         return n_islands
 
 
+class SolutionBFSUpdate(object):
+    def _bfs(self, r: int, c: int, grid: List[List[int]]):
+        from collections import deque
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Apply BFS with queue.
+        queue = deque([(r, c)])
+
+        # Visit neighbors: top/down/left/down.
+        while queue:
+            r, c = queue.pop()
+
+            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+            for r_next, c_next in dirs:
+                # Check out of boundary or visited.
+                if (r_next < 0 or r_next >= n_rows
+                    or c_next < 0 or c_next >= n_cols
+                    or grid[r_next][c_next] == '0'):
+                    continue
+
+                # Update grid to mark as visited, visit neighbors.
+                grid[r_next][c_next] = '0'
+                queue.appendleft((r_next, c_next))
+
+    def numIslands(self, grid: List[List[str]]) -> int:
+        """Number of islands by recursion w/ return num of connects.
+
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        # Edge cases.
+        if not grid or not grid[0]:
+            return 0
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Apply BFS with queue.
+        result = 0
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if grid[r][c] == '1':
+                    result += 1
+                    self._bfs(r, c, grid)
+
+        return result
+
+
 def main():
     import copy
     import time
@@ -318,33 +366,40 @@ def main():
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+update:', SolutionDFSUpdateRecur().numIslands(grid1))
+    print('By DFS recur + update:', SolutionDFSUpdateRecur().numIslands(grid1))
     print('Time: {}'.format(time.time() - start_time))
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+visit:', SolutionDFSVisitRecur().numIslands(grid1))
+    print('By DFS recur + visit:', SolutionDFSVisitRecur().numIslands(grid1))
     print('Time: {}'.format(time.time() - start_time))
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By iter+update:', SolutionDFSUpdateIter().numIslands(grid1))
+    print('By DFS iter + update:', SolutionDFSUpdateIter().numIslands(grid1))
     print('Time: {}'.format(time.time() - start_time))
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By iter+visit:', SolutionDFSVisitIter().numIslands(grid1))
+    print('By DFS iter + visit:', SolutionDFSVisitIter().numIslands(grid1))
     print('Time: {}'.format(time.time() - start_time))
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+update+return connects:', 
+    print('By DFS recur + update + return connects:', 
           SolutionDFSUpdateReturnConnectsRecur().numIslands(grid1))
     print('Time: {}'.format(time.time() - start_time))
 
+    grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+visit+return connects:', 
+    print('By DFS recur + visit + return connects:', 
           SolutionDFSUpdateReturnConnectsRecur().numIslands(grid1))
+    print('Time: {}'.format(time.time() - start_time))
+
+    grid1 = copy.deepcopy(grid)
+    start_time = time.time()
+    print('By BFS + update:', 
+          SolutionBFSUpdate().numIslands(grid1))
     print('Time: {}'.format(time.time() - start_time))
 
 
@@ -356,34 +411,40 @@ def main():
 
     grid2 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+update:', SolutionDFSUpdateRecur().numIslands(grid2))
+    print('By DFS recur + update:', SolutionDFSUpdateRecur().numIslands(grid2))
     print('Time: {}'.format(time.time() - start_time))
 
     grid2 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+visit:', SolutionDFSVisitRecur().numIslands(grid2))
+    print('By DFS recur + visit:', SolutionDFSVisitRecur().numIslands(grid2))
     print('Time: {}'.format(time.time() - start_time))
 
     grid2 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By iter+update:', SolutionDFSUpdateIter().numIslands(grid2))
+    print('By DFS iter + update:', SolutionDFSUpdateIter().numIslands(grid2))
     print('Time: {}'.format(time.time() - start_time))
 
     grid2 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By iter+visit:', SolutionDFSVisitIter().numIslands(grid2))
+    print('By DFS iter + visit:', SolutionDFSVisitIter().numIslands(grid2))
     print('Time: {}'.format(time.time() - start_time))
 
     grid2 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+update+return connects:', 
+    print('By DFS recur + update + return connects:', 
           SolutionDFSUpdateReturnConnectsRecur().numIslands(grid2))
     print('Time: {}'.format(time.time() - start_time))
 
     grid2 = copy.deepcopy(grid)
     start_time = time.time()
-    print('By recur+visit+return connects:', 
+    print('By DFS recur + visit + return connects:', 
           SolutionDFSUpdateReturnConnectsRecur().numIslands(grid2))
+    print('Time: {}'.format(time.time() - start_time))
+
+    grid2 = copy.deepcopy(grid)
+    start_time = time.time()
+    print('By BFS + update:', 
+          SolutionBFSUpdate().numIslands(grid2))
     print('Time: {}'.format(time.time() - start_time))
 
 
