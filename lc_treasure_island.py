@@ -11,10 +11,9 @@ Other areas are safe to sail in.
 There are other explorers trying to find the treasure.
 So you must figure out a shortest route to the treasure island.
 
-Assume the map area is a two dimensional grid,
-represented by a matrix of characters.
-You must start from the top-left corner of the map and
-can move one block up, down, left or right at a time.
+Assume the map area is a two dimensional grid, represented by a matrix of characters.
+You must start from the top-left corner of the map and can move one block 
+up, down, left or right at a time.
 - The treasure island is marked as 'X' in a block of the matrix.
   'X' will not be at the top-left corner.
 - Any block with dangerous rocks or reefs will be marked as 'D'.
@@ -34,76 +33,80 @@ Explanation: Route is (0, 0), (0, 1), (1, 1), (2, 1), (2, 0), (3, 0)
 The minimum route takes 5 steps.
 """
 
-from typing import List
+from typing import List, Dict, Tuple
 
 
-class SolutionBFSSteps(object):
-    def treasureIsland(self, grid: List[list[str]]) -> int:
-        """
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
+class SolutionBFS(object):
+    def _bfs(self, r: int, c: int, grid: List[List[str]]) -> int:
         from collections import deque
-
-        # Edge case.
-        if not grid or not grid[0]:
-            return -1
 
         n_rows, n_cols = len(grid), len(grid[0])
 
-        # Apply BFS using queue, starting from (0, 0), marked as visited.
-        queue = deque([(0, 0)])
-        grid[0][0] = 'D'
-        steps = 0
+        # Mark (r, c) as visited.
+        grid[r][c] = 'D'
+        distance = 0
+
+        # Apply BFS with queue.
+        queue = deque([(r, c)])
 
         while queue:
             for _ in range(len(queue)):
                 r, c = queue.pop()
 
-                # Visiting directions.
+                # Visiting neighbors: top/down/left/down.
                 dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
                 for r_next, c_next in dirs:
-                    # If is out of boundary or visited, skip visiting.
-                    if (r_next < 0 or r_next >= n_rows or 
-                        c_next < 0 or c_next >= n_cols or
-                        grid[r_next][c_next] == 'D'):
+                    # If is out of boundary or visited.
+                    if (r_next < 0 or r_next >= n_rows
+                        or c_next < 0 or c_next >= n_cols 
+                        or grid[r_next][c_next] == 'D'):
                         continue
 
                     # If found treasure, return result.
                     if grid[r_next][c_next] == 'X':
-                        return steps + 1
+                        return distance + 1
                     
                     # If visit safe area, mark it as visited and visit neighbors.
                     if grid[r_next][c_next] == 'O':
                         grid[r_next][c_next] = 'D'
                         queue.appendleft((r_next, c_next))
 
-            steps += 1
+            distance += 1
 
         return -1
 
 
-class SolutionBFSAllSteps(object):
     def treasureIsland(self, grid: List[list[str]]) -> int:
         """
         Time complexity: O(m*n).
         Space complexity: O(m*n).
         """
-        from collections import defaultdict
-        from collections import deque
-
         # Edge case.
         if not grid or not grid[0]:
             return -1
 
+        # Apply BFS using queue, starting from (0, 0), marked as visited.
+        r, c = 0, 0
+        return self._bfs(r, c, grid)
+
+
+class SolutionBFSAll(object):
+    def _bfs(self, 
+        r: int,
+        c: int,
+        grid: List[List[int]],
+        pos_distance_d: Dict[Tuple[int, int], int]
+    ) -> int:
+        from collections import deque
+
         n_rows, n_cols = len(grid), len(grid[0])
 
-        # Apply BFS with queue, starting from (0, 0), marked as visited.
-        queue = deque([(0, 0)])
-        grid[0][0] = 'D'
+        # Mark as visited.
+        pos_distance_d[(r, c)] = 0
+        grid[r][c] = 'D'
 
-        pos_steps_d = defaultdict(int)
-        pos_steps_d[(0, 0)] = 0
+        # Apply BFS with queue.
+        queue = deque([(r, c)])
 
         while queue:
             for _ in range(len(queue)):
@@ -120,17 +123,37 @@ class SolutionBFSAllSteps(object):
 
                     # If found treasure, update distance.
                     if grid[r_next][c_next] == 'X':
-                        pos_steps_d[(r_next, c_next)] = pos_steps_d[(r, c)] + 1
+                        pos_distance_d[(r_next, c_next)] = pos_distance_d[(r, c)] + 1
                         break
                     
                     # If safe area, mark visited and visit neighbors.
                     if grid[r_next][c_next] == 'O':
                         grid[r_next][c_next] = 'D'
-                        pos_steps_d[(r_next, c_next)] = pos_steps_d[(r, c)] + 1
+                        pos_distance_d[(r_next, c_next)] = pos_distance_d[(r, c)] + 1
                         queue.appendleft((r_next, c_next))
 
-        if pos_steps_d.get((n_rows - 1, 0)):
-            return pos_steps_d[(n_rows - 1, 0)]
+    def treasureIsland(self, grid: List[list[str]]) -> int:
+        """
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        from collections import defaultdict
+
+        # Edge case.
+        if not grid or not grid[0]:
+            return -1
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Collect pos->distance.
+        pos_distance_d = defaultdict(int)
+
+        # Apply BFS with queue, starting from (0, 0), marked as visited.
+        r, c = 0, 0
+        self._bfs(r, c, grid, pos_distance_d)
+
+        if pos_distance_d.get((n_rows - 1, 0)):
+            return pos_distance_d[(n_rows - 1, 0)]
         else:
             return -1
 
@@ -147,12 +170,12 @@ def main():
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print(SolutionBFSSteps().treasureIsland(grid1))
-    print("SolutionBFSSteps time:", time.time() - start_time)
+    print(SolutionBFS().treasureIsland(grid1))
+    print("SolutionBFS time:", time.time() - start_time)
 
     grid1 = copy.deepcopy(grid)
-    print(SolutionBFSAllSteps().treasureIsland(grid1))
-    print("SolutionBFSAllSteps time:", time.time() - start_time)
+    print(SolutionBFSAll().treasureIsland(grid1))
+    print("SolutionBFSAll time:", time.time() - start_time)
 
 
 if __name__ == '__main__':
