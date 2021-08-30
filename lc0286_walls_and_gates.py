@@ -31,8 +31,9 @@ from typing import List
 class SolutionDFSRecur(object):
     def _dfs(self, r: int, c: int, distance: int, rooms: List[List[int]]) -> None:
         # Base case: out of boundary or had smaller distance.
-        if (r < 0 or r >= len(rooms) or c < 0 or c >= len(rooms[0]) or
-            rooms[r][c] < distance):
+        if (r < 0 or r >= len(rooms) 
+            or c < 0 or c >= len(rooms[0]) 
+            or rooms[r][c] < distance):
             return None
 
         # Update the shortest distance.
@@ -67,7 +68,32 @@ class SolutionDFSRecur(object):
             self._dfs(r, c, distance, rooms)
 
 
-class SolutionBFSIter(object):
+class SolutionBFS(object):
+    def _bfs(self, r: int, c: int, rooms: List[List[int]]) -> None:
+        from collections import deque
+
+        n_rows, n_cols = len(rooms), len(rooms[0])
+
+        # Put one of gates in the queue.
+        queue = deque([(r, c)])
+
+        while queue:
+            for _ in range(len(queue)):
+                r, c = queue.pop()
+
+                # Visit gate's neighbors: up/down/left/right.
+                dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+                for r_next, c_next in dirs:
+                    # If out of boundary, skip visiting.
+                    if (r_next < 0 or r_next >= n_rows
+                        or c_next < 0 or c_next >= n_cols):
+                        continue
+
+                    # If found short distance, update distance & visit neigghbors.
+                    if rooms[r][c] + 1 < rooms[r_next][c_next]:
+                        rooms[r_next][c_next] = rooms[r][c] + 1
+                        queue.appendleft((r_next, c_next))
+
     def wallsAndGates(self, rooms: List[List[int]]) -> None:
         """
         Time complexity: O(kmn), where
@@ -76,8 +102,6 @@ class SolutionBFSIter(object):
           - n: number of columns
         Space complexity: O(mn).
         """
-        from collections import deque
-
         # Edge case.
         if not rooms:
             return None
@@ -90,29 +114,12 @@ class SolutionBFSIter(object):
                  if rooms[r][c] == 0]
 
         # For each gate, start BFS to update neighbors's shorter distances.
-        for gate in gates:
-            # Put one of gates in the queue.
-            queue = deque([gate])
-
-            while queue:
-                for _ in range(len(queue)):
-                    r, c = queue.pop()
-
-                    # Visit gate's neighbors: up/down/left/right.
-                    dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-                    for r_next, c_next in dirs:
-                        # If out of boundary, skip visiting.
-                        if (r_next < 0 or r_next >= n_rows
-                            or c_next < 0 or c_next >= n_cols):
-                            continue
-
-                        # If found short distance, update distance & visit neigghbors.
-                        if rooms[r][c] + 1 < rooms[r_next][c_next]:
-                            rooms[r_next][c_next] = rooms[r][c] + 1
-                            queue.appendleft((r_next, c_next))
+        for (r, c) in gates:
+            self._bfs(r, c, rooms)
 
 
 def main():
+    import copy
     import time
 
     # After running your function, the 2D grid should be:
@@ -120,28 +127,24 @@ def main():
     # 2   2   1  -1
     # 1  -1   2  -1
     # 0  -1   3   4
-    start_time = time.time()
     rooms = [
         [float('inf'), -1, 0, float('inf')],
         [float('inf'), float('inf'), float('inf'), -1],
         [float('inf'), -1, float('inf'), -1],
         [0, -1, float('inf'), float('inf')]
     ]
-    SolutionDFSRecur().wallsAndGates(rooms)
+
+    rooms1 = copy.deepcopy(rooms)
+    start_time = time.time()
+    SolutionDFSRecur().wallsAndGates(rooms1)
     print("SolutionDFSRecur:", time.time() - start_time)
-    print(rooms)
+    print(rooms1)
 
-
+    rooms1 = copy.deepcopy(rooms)
     start_time = time.time()
-    rooms = [
-        [float('inf'), -1, 0, float('inf')],
-        [float('inf'), float('inf'), float('inf'), -1],
-        [float('inf'), -1, float('inf'), -1],
-        [0, -1, float('inf'), float('inf')]
-    ]
-    SolutionBFSIter().wallsAndGates(rooms)
-    print("SolutionBFSIter:", time.time() - start_time)
-    print(rooms)
+    SolutionBFS().wallsAndGates(rooms1)
+    print("SolutionBFS:", time.time() - start_time)
+    print(rooms1    )
 
 
 if __name__ == '__main__':
