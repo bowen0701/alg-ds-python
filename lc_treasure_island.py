@@ -36,6 +36,15 @@ The minimum route takes 5 steps.
 from typing import List, Dict, Tuple
 
 
+class SolutionDFSRecur(object):
+    def treasureIsland(self, grid: List[list[str]]) -> int:
+        """
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        pass
+
+
 class SolutionBFS(object):
     def _bfs(self, r: int, c: int, grid: List[List[str]]) -> int:
         from collections import deque
