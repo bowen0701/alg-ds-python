@@ -36,43 +36,6 @@ The minimum route takes 5 steps.
 from typing import List, Dict, Tuple
 
 
-class SolutionDFSRecur(object):
-    def _dfs(self, r: int, c: int, grid: List[list[str]]) -> int:
-        # Apply recursive DFS.
-        n_rows, n_cols = len(grid), len(grid[0])
-
-        # Base case: is out of boundary or visited.
-        if (r < 0 or r >= n_rows
-            or c < 0 or c >= n_cols
-            or grid[r][c] == 'D'):
-            continue
-
-        # Mark (r, c) as visited.
-        grid[r][c] = 'D'
-
-        # TODO: Visit neighbors: top/down/left/down.
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            self._dfs(r_next, c_next, distance + 1, grid)
-            pass
-
-    def treasureIsland(self, grid: List[list[str]]) -> int:
-        """
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
-        # Edge case.
-        if not grid or not grid[0]:
-            return -1
-
-        # Apply recursive DFS given (0, 0).
-        self.result = float('inf')
-        r, c = 0, 0
-        distance = 0
-        self._dfs(r, c, distance, grid)
-        return self.result
-
-
 class SolutionBFS(object):
     def _bfs(self, r: int, c: int, grid: List[List[str]]) -> int:
         from collections import deque
@@ -195,6 +158,55 @@ class SolutionBFSAll(object):
             return -1
 
 
+class SolutionDFSRecur(object):
+    def _dfs(self, r: int, c: int, distance: int, grid: List[list[str]]) -> None:
+        # Apply recursive DFS.
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Base case: is out of boundary or visited.
+        if (r < 0 or r >= n_rows
+            or c < 0 or c >= n_cols
+            or grid[r][c] == 'D'):
+            return None
+
+        # Early stop for larger distance.
+        if distance > self.result:
+            return None
+
+        # If found treasure, return result.
+        if grid[r][c] == 'X':
+            self.result = min(self.result, distance)
+            return None
+
+        # Mark (r, c) as visited.
+        grid[r][c] = 'D'
+
+        # TODO: Visit neighbors: top/down/left/down.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_next, c_next in dirs:
+            self._dfs(r_next, c_next, distance + 1, grid)
+
+    def treasureIsland(self, grid: List[list[str]]) -> int:
+        """
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        # Edge case.
+        if not grid or not grid[0]:
+            return -1
+
+        # Apply recursive DFS given (0, 0).
+        self.result = float('inf')
+        r, c = 0, 0
+        distance = 0
+        self._dfs(r, c, distance, grid)
+        
+        if self.result < float('inf'):
+            return self.result
+        else:
+            return -1
+
+
 def main():
     import copy
     import time
@@ -213,6 +225,10 @@ def main():
     grid1 = copy.deepcopy(grid)
     print(SolutionBFSAll().treasureIsland(grid1))
     print("SolutionBFSAll time:", time.time() - start_time)
+
+    grid1 = copy.deepcopy(grid)
+    print(SolutionDFSRecur().treasureIsland(grid1))
+    print("SolutionDFSRecur time:", time.time() - start_time)
 
 
 if __name__ == '__main__':
