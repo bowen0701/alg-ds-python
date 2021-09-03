@@ -50,7 +50,7 @@ class SolutionBFS(object):
                         continue
 
                     # If found short distance, update distance & visit neigghbors.
-                    if rooms[r][c] + 1 < rooms[r_next][c_next]:
+                    if rooms[r_next][c_next] > rooms[r][c] + 1:
                         rooms[r_next][c_next] = rooms[r][c] + 1
                         queue.appendleft((r_next, c_next))
 
