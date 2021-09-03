@@ -163,19 +163,16 @@ class SolutionDFSRecur(object):
         # Apply recursive DFS.
         n_rows, n_cols = len(grid), len(grid[0])
 
-        # Base case: is out of boundary or visited.
+        # Base case: is out of boundary or visited or have smaller distance.
         if (r < 0 or r >= n_rows
             or c < 0 or c >= n_cols
-            or grid[r][c] == 'D'):
+            or grid[r][c] == 'D'
+            or self.result < distance):
             return None
 
-        # Early stop for larger distance.
-        if distance > self.result:
-            return None
-
-        # If found treasure, return result.
+        # If found treasure, update distance and return result.
         if grid[r][c] == 'X':
-            self.result = min(self.result, distance)
+            self.result = distance
             return None
 
         # Mark (r, c) as visited.
