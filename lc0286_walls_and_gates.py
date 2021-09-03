@@ -80,7 +80,7 @@ class SolutionBFS(object):
 
 class SolutionDFSRecur(object):
     def _dfs(self, r: int, c: int, distance: int, rooms: List[List[int]]) -> None:
-        # Base case: out of boundary or had smaller distance.
+        # Base case: out of boundary, or have smaller distance or hit a wall.
         if (r < 0 or r >= len(rooms) 
             or c < 0 or c >= len(rooms[0]) 
             or rooms[r][c] < distance):
