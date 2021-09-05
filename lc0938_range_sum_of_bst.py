@@ -32,7 +32,30 @@ class TreeNode(object):
         self.right = right
 
 
-class SolutionBFS(object):
+class SolutionPreorder:
+    def _preorder(self, root: Optional[TreeNode], low: int, high: int) -> None:
+        # Base cases: no node or out of boundary.
+        if not root:
+            return None
+
+        # Preorder traversal: root->left->right.
+        if low <= root.val <= high:
+            self.result += root.val
+        self._preorder(root.left, low, high)
+        self._preorder(root.right, low, high)
+
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        """
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
+        """
+        # Apply recursive preorder traversal.
+        self.result = 0
+        self._preorder(root, low, high)
+        return self.result
+
+
+class SolutionBFSLevel(object):
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         """
         Time complexity: O(n).
@@ -64,6 +87,8 @@ class SolutionBFS(object):
 
 
 def main():
+    import time
+
     # Input: root = [10,5,15,3,7,null,18], low = 7, high = 15
     # Output: 32
     root = TreeNode(10)
@@ -74,7 +99,14 @@ def main():
     root.right.right = TreeNode(18)
     low = 7
     high = 15
-    print(SolutionBFS().rangeSumBST(root, low, high))
+
+    start_time = time.time()
+    print(SolutionPreorder().rangeSumBST(root, low, high))
+    print("Preorder:", time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBFSLevel().rangeSumBST(root, low, high))
+    print("BFS Level:", time.time() - start_time)
 
     # Input: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
     # Output: 23
@@ -89,7 +121,14 @@ def main():
     root.left.right.left = TreeNode(6)
     low = 6 
     high = 10
-    print(SolutionBFS().rangeSumBST(root, low, high))
+
+    start_time = time.time()
+    print(SolutionPreorder().rangeSumBST(root, low, high))
+    print("Preorder:", time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBFSLevel().rangeSumBST(root, low, high))
+    print("BFS Level:", time.time() - start_time)
 
 
 if __name__ == '__main__':
