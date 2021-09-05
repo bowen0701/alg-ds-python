@@ -21,52 +21,50 @@ Note:
 - The final answer is guaranteed to be less than 2^31.
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 
 class SolutionBFS(object):
-    def rangeSumBST(self, root, L, R):
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         """
-        :type root: TreeNode
-        :type L: int
-        :type R: int
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
         """
         from collections import deque
 
-        # Apply BFS level-traversal to accumulate sum.
-        range_sum = 0
+        # Apply BFS level-traversal with queue.
+        result = 0
 
         queue = deque([root])
 
         while queue:
             # Level traversal.
-            for i in range(len(queue)):
+            for _ in range(len(queue)):
                 current = queue.pop()
 
                 # Check if node's value is in range.
-                if L <= current.val <= R:
-                    range_sum += current.val
+                if low <= current.val <= high:
+                    result += current.val
 
                 # Push left and right nodes to queue.
-                if current.left and current.val > L:
+                if current.left and current.val > low:
                     queue.appendleft(current.left)
-                if current.right and current.val < R:
+                if current.right and current.val < high:
                     queue.appendleft(current.right)
 
-        return range_sum
+        return result
 
 
 def main():
-    # Input: root = [10,5,15,3,7,null,18], L = 7, R = 15
+    # Input: root = [10,5,15,3,7,null,18], low = 7, high = 15
     # Output: 32
     root = TreeNode(10)
     root.left = TreeNode(5)
@@ -74,12 +72,11 @@ def main():
     root.left.left = TreeNode(3)
     root.left.right = TreeNode(7)
     root.right.right = TreeNode(18)
-    L = 7
-    R = 15
+    low = 7
+    high = 15
+    print(SolutionBFS().rangeSumBST(root, low, high))
 
-    print SolutionBFS().rangeSumBST(root, L, R)
-
-    # Input: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10
+    # Input: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
     # Output: 23
     root = TreeNode(10)
     root.left = TreeNode(5)
@@ -90,10 +87,9 @@ def main():
     root.right.right = TreeNode(18)
     root.left.left.left = TreeNode(1)
     root.left.right.left = TreeNode(6)
-    L = 6 
-    R = 10
-
-    print SolutionBFS().rangeSumBST(root, L, R)
+    low = 6 
+    high = 10
+    print(SolutionBFS().rangeSumBST(root, low, high))
 
 
 if __name__ == '__main__':
