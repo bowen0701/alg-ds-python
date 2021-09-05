@@ -178,7 +178,7 @@ class SolutionDFSRecur(object):
         # Mark (r, c) as visited.
         grid[r][c] = 'D'
 
-        # TODO: Visit neighbors: top/down/left/down.
+        # Visit neighbors: top/down/left/down.
         dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
         for r_next, c_next in dirs:
             self._dfs(r_next, c_next, distance + 1, grid)
