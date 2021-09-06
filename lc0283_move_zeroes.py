@@ -36,21 +36,22 @@ class SolutionPopAppend(object):
                 left += 1
 
 
-class SolutionUpdate(object):
+class SolutionTwoPassesUpdate(object):
     def moveZeroes(self, nums: List[int]) -> None:
         """
         Time complexity: O(n).
         Space complexity: O(1).
         """
-        # Two passes: 1st one to move non-zeros to the front.
-        idx = 0
+        # Two passes. 
+        # 1st pass to move non-zeros to the front.
+        j = 0
         for i in range(len(nums)):
             if nums[i] != 0:
-                nums[idx] = nums[i]
-                idx += 1
+                nums[j] = nums[i]
+                j += 1
 
         # 2nd pass to update to zeros on the tails.
-        for i in range(idx, len(nums)):
+        for i in range(j, len(nums)):
             nums[i] = 0
 
 
@@ -91,10 +92,10 @@ def main():
 
     start_time = time.time()
     nums1 = [0, 1, 0, 3, 12]
-    SolutionUpdate().moveZeroes(nums1)
+    SolutionTwoPassesUpdate().moveZeroes(nums1)
     print(nums1)
     nums2 = [0, 0, 3, 12, 1, 0, 5]
-    SolutionUpdate().moveZeroes(nums2)
+    SolutionTwoPassesUpdate().moveZeroes(nums2)
     print(nums2)
     print('Time for update: {}'.format(time.time() - start_time))
 
