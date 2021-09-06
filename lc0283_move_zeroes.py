@@ -68,7 +68,7 @@ class SolutionTwoPointers(object):
         while nums[i] != 0 and i + 1 < n:
             i += 1
 
-        # Iterate to find the 1st non-zero at the right of i, switch i & j.
+        # Iterate to find the 1st non-zero at i's right, switch i & j.
         j = i + 1
         while j < n:
             while nums[j] == 0 and j + 1 < n:
