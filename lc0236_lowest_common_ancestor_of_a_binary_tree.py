@@ -66,15 +66,15 @@ class SolutionPreorderRecur(object):
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
-        # If p & q are not in two subtrees, then no LCAs.
+        # If p & q are not in two subtrees, no LCA.
         if not left and not right:
             return None
 
-        # If p & q are in left & right subtrees separately, then LCA is root.
+        # If p & q are in left & right subtrees separately, then root is LCA.
         if left and right:
             return root
 
-        # Otherwise, p or q is in the same subtree.
+        # Otherwise, p & q is in the same subtree, so p or q is LCA.
         return left or right
 
 
