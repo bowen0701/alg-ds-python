@@ -93,7 +93,7 @@ class SolutionChildParentDictPreorderIter(object):
         if not root:
             return None
 
-        # Use dict: child->parent.
+        # Create dict: child->parent.
         child_parent_d = dict()
         child_parent_d[root] = None
 
@@ -102,7 +102,7 @@ class SolutionChildParentDictPreorderIter(object):
         while p not in child_parent_d or q not in child_parent_d:
             current = stack.pop()
 
-            # Visit right -> left since use stack with FILO.
+            # Visit right->left because of stack with FILO.
             if current.right:
                 child_parent_d[current.right] = current
                 stack.append(current.right)
@@ -111,13 +111,13 @@ class SolutionChildParentDictPreorderIter(object):
                 stack.append(current.left)
 
         # Use set to collect p's ancestors reversely.
-        ancestors = set()
+        p_ancestors = set()
         while p:
-            ancestors.add(p)
+            p_ancestors.add(p)
             p = child_parent_d[p]
 
         # Then reversely traverse q's parents until meet one of p's parents.
-        while q not in ancestors:
+        while q not in p_ancestors:
             q = child_parent_d[q]
         return q
 
