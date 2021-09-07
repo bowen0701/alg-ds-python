@@ -55,7 +55,7 @@ class SolutionPreorderIter(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Apply iterative preorder traversal with queue.
+        # Edge case.
         if not root:
             return False
 
@@ -65,11 +65,11 @@ class SolutionPreorderIter(object):
         while stack:
             cur, cur_sum = stack.pop()
 
-            # Base case: root-to-leaf path sum matches.
+            # Preorder traversal: root->left->right, to check if root-to-leaf path sum matches.
             if cur.val == cur_sum and not cur.left and not cur.right:
                 return True
 
-            # Append left and right if existed.
+            # Append right->left because stack is LIFO.
             if cur.right:
                 stack.append((cur.right, cur_sum - cur.val))
             if cur.left:
@@ -97,9 +97,14 @@ def main():
     root.left.left.left = TreeNode(7)
     root.left.left.right = TreeNode(2)
     root.right.right.right = TreeNode(1)
+
     targetSum = 22
-    print SolutionPreorderRecur().hasPathSum(root, targetSum)
-    print SolutionPreorderIter().hasPathSum(root, targetSum)
+    print(SolutionPreorderRecur().hasPathSum(root, targetSum))
+    print(SolutionPreorderIter().hasPathSum(root, targetSum))
+
+    targetSum = 21
+    print(SolutionPreorderRecur().hasPathSum(root, targetSum))
+    print(SolutionPreorderIter().hasPathSum(root, targetSum))
 
 
 if __name__ == '__main__':
