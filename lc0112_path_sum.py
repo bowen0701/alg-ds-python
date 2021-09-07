@@ -41,7 +41,7 @@ class SolutionPreorderRecur(object):
         if not root:
             return False
 
-        # Preorder traversal: root->left->right, to check if root-to-leaf path sum matches.
+        # Preorder traversal: root->left->right, to check root-to-leaf path sum.
         if root.val == targetSum and not root.left and not root.right:
             return True
 
@@ -65,7 +65,7 @@ class SolutionPreorderIter(object):
         while stack:
             cur, cur_sum = stack.pop()
 
-            # Preorder traversal: root->left->right, to check if root-to-leaf path sum matches.
+            # Preorder traversal: root->left->right, to check root-to-leaf path sum.
             if cur.val == cur_sum and not cur.left and not cur.right:
                 return True
 
