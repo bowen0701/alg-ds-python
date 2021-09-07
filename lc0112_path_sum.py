@@ -20,44 +20,38 @@ Given the below binary tree and sum = 22,
 return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 
 class SolutionPreorderRecur(object):
-    def hasPathSum(self, root, sum):
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: bool
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Apply recursive preorder traversal.
+        # Base case.
         if not root:
             return False
 
-        # Visit root to check if root-to-leaf path sum is sum.
-        if root.val == sum and not root.left and not root.right:
+        # Preorder traversal: root->left->right, to check if root-to-leaf path sum matches.
+        if root.val == targetSum and not root.left and not root.right:
             return True
 
-        # If not, traverse left and right nodes.
-        return (self.hasPathSum(root.left, sum - root.val) or
-                self.hasPathSum(root.right, sum - root.val))
+        return (self.hasPathSum(root.left, targetSum - root.val) or
+                self.hasPathSum(root.right, targetSum - root.val))
 
 
 class SolutionPreorderIter(object):
-    def hasPathSum(self, root, sum):
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: bool
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
@@ -66,12 +60,12 @@ class SolutionPreorderIter(object):
             return False
 
         # Apply iterative preorder traversal with stack.
-        stack = [(root, sum)]
+        stack = [(root, targetSum)]
 
         while stack:
             cur, cur_sum = stack.pop()
 
-            # Base case: root-to-leaf path sum is sum.
+            # Base case: root-to-leaf path sum matches.
             if cur.val == cur_sum and not cur.left and not cur.right:
                 return True
 
@@ -103,9 +97,9 @@ def main():
     root.left.left.left = TreeNode(7)
     root.left.left.right = TreeNode(2)
     root.right.right.right = TreeNode(1)
-    sum = 22
-    print SolutionPreorderRecur().hasPathSum(root, sum)
-    print SolutionPreorderIter().hasPathSum(root, sum)
+    targetSum = 22
+    print SolutionPreorderRecur().hasPathSum(root, targetSum)
+    print SolutionPreorderIter().hasPathSum(root, targetSum)
 
 
 if __name__ == '__main__':
