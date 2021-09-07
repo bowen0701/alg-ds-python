@@ -24,14 +24,14 @@ from typing import Optional
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderRecur:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         """
         Time complexity: O(n).
@@ -49,7 +49,7 @@ class SolutionPreorderRecur(object):
                 self.hasPathSum(root.right, targetSum - root.val))
 
 
-class SolutionPreorderIter(object):
+class SolutionPreorderIter:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         """
         Time complexity: O(n).
@@ -78,6 +78,28 @@ class SolutionPreorderIter(object):
         return False
 
 
+class SolutionPostorderRecur:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        """
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
+        """
+        # Base case.
+        if not root:
+            return False
+        
+        # Postorder traversal: left->right->root, to check root-to-leaf path sum.
+        left = self.hasPathSum(root.left, targetSum - root.val)
+        right = self.hasPathSum(root.right, targetSum - root.val)
+        if left or right:
+            return True
+        
+        if root.val == targetSum and not root.left and not root.right:
+            return True
+        
+        return False
+
+
 def main():
     # Given the below binary tree and sum = 22,
     #       5
@@ -101,10 +123,12 @@ def main():
     targetSum = 22
     print(SolutionPreorderRecur().hasPathSum(root, targetSum))
     print(SolutionPreorderIter().hasPathSum(root, targetSum))
+    print(SolutionPostorderIter().hasPathSum(root, targetSum))
 
     targetSum = 21
     print(SolutionPreorderRecur().hasPathSum(root, targetSum))
     print(SolutionPreorderIter().hasPathSum(root, targetSum))
+    print(SolutionPostorderIter().hasPathSum(root, targetSum))
 
 
 if __name__ == '__main__':
