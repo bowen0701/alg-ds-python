@@ -123,12 +123,12 @@ def main():
     targetSum = 22
     print(SolutionPreorderRecur().hasPathSum(root, targetSum))
     print(SolutionPreorderIter().hasPathSum(root, targetSum))
-    print(SolutionPostorderIter().hasPathSum(root, targetSum))
+    print(SolutionPostorderRecur().hasPathSum(root, targetSum))
 
     targetSum = 21
     print(SolutionPreorderRecur().hasPathSum(root, targetSum))
     print(SolutionPreorderIter().hasPathSum(root, targetSum))
-    print(SolutionPostorderIter().hasPathSum(root, targetSum))
+    print(SolutionPostorderRecur().hasPathSum(root, targetSum))
 
 
 if __name__ == '__main__':
