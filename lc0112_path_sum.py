@@ -100,6 +100,27 @@ class SolutionPostorderRecur:
         return False
 
 
+class SolutionInorderRecur:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        # Base case.
+        if not root:
+            return False
+
+        # Inorder traversal: left->root->right, to check root-to-leaf path sum.
+        left = self.hasPathSum(root.left, targetSum - root.val)
+        if left:
+            return True
+
+        if root.val == targetSum and not root.left and not root.right:
+            return True
+
+        right = self.hasPathSum(root.right, targetSum - root.val)
+        if right:
+            return True
+
+        return False
+
+
 def main():
     # Given the below binary tree and sum = 22,
     #       5
@@ -124,11 +145,13 @@ def main():
     print(SolutionPreorderRecur().hasPathSum(root, targetSum))
     print(SolutionPreorderIter().hasPathSum(root, targetSum))
     print(SolutionPostorderRecur().hasPathSum(root, targetSum))
+    print(SolutionInorderRecur().hasPathSum(root, targetSum))
 
     targetSum = 21
     print(SolutionPreorderRecur().hasPathSum(root, targetSum))
     print(SolutionPreorderIter().hasPathSum(root, targetSum))
     print(SolutionPostorderRecur().hasPathSum(root, targetSum))
+    print(SolutionInorderRecur().hasPathSum(root, targetSum))
 
 
 if __name__ == '__main__':
