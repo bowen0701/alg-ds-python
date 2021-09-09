@@ -24,16 +24,25 @@ Return:
 ]
 """
 
+from typing import List, Optional
+
+
 # Definition for a binary tree node.
-class TreeNode(object):
-    def __init__(self, val):
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 
-class SolutionPreorderBacktrackingRecur(object):
-    def _findPathsPreorder(self, root, sum, result, temp):
+class SolutionPreorderBacktrackingRecur:
+    def _preorder(
+        self, 
+        root: Optional[TreeNode], 
+        targetSum: int, 
+        result: List[int], 
+        temp: List[int]
+    ) -> None:
         # Base case.
         if not root:
             return None
@@ -41,37 +50,29 @@ class SolutionPreorderBacktrackingRecur(object):
         temp.append(root.val)
 
         # Visit root and append sum with temp's shallow copy.
-        if root.val == sum and not root.left and not root.right:
+        if root.val == targetSum and not root.left and not root.right:
             result.append(temp[:])
             return None
 
         # Visit root's left & right if existed, with temp's shallow copy.
-        self._findPathsPreorder(root.left, sum - root.val, result, temp[:])
-        self._findPathsPreorder(root.right, sum - root.val, result, temp[:])
+        self._preorder(root.left, targetSum - root.val, result, temp[:])
+        self._preorder(root.right, targetSum - root.val, result, temp[:])
 
-    def pathSum(self, root, sum):
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: List[List[int]]
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Apply recursive preorder traversal.
+        # Apply recursive preorder traversal with backtracking.
         result = []
         temp = []
-        self._findPathsPreorder(root, sum, result, temp)
+        self._preorder(root, targetSum, result, temp)
         return result
 
 
-class SolutionPreorderBacktrackingIter(object):
-    def pathSum(self, root, sum):
+class SolutionPreorderBacktrackingIter:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: List[List[int]]
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
@@ -83,7 +84,7 @@ class SolutionPreorderBacktrackingIter(object):
         temp = []
 
         # Apply iterative preorder traversal with stack.
-        stack = [(root, sum, temp)]
+        stack = [(root, targetSum, temp)]
 
         while stack:
             cur, cur_sum, temp = stack.pop()
@@ -129,8 +130,8 @@ def main():
     root.right.right.left = TreeNode(5)
     root.right.right.right = TreeNode(1)
     sum = 22
-    print SolutionPreorderBacktrackingRecur().pathSum(root, sum)
-    print SolutionPreorderBacktrackingIter().pathSum(root, sum)
+    print(SolutionPreorderBacktrackingRecur().pathSum(root, sum))
+    print(SolutionPreorderBacktrackingIter().pathSum(root, sum))
 
 
 if __name__ == '__main__':
