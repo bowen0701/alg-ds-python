@@ -103,6 +103,39 @@ class SolutionPreorderBacktrackingIter:
         return result
 
 
+class SolutionPostorderRecurBacktracking:
+    def _postorder_backtrack(
+        self, 
+        root: Optional[TreeNode],
+        targetSum: int,
+        result: List[List[int]],
+        temp: List[int]
+    ) -> None:
+        # Base case.
+        if not root:
+            return None
+        
+        # Postorder traversal: left->right->root, with temp's shallow copy.
+        temp.append(root.val)
+        
+        self._postorder_backtrack(root.left, targetSum - root.val, result, temp[:])
+        self._postorder_backtrack(root.right, targetSum - root.val, result, temp[:])
+        
+        if root.val == targetSum and not root.left and not root.right:
+            result.append(temp[:])
+            return
+    
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        """
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced tree; O(n) for single sided.
+        """
+        # Apply recursive postorder traversal with backtracking.
+        result = []
+        temp = []
+        self._postorder_backtrack(root, targetSum, result, temp)
+        return result
+
 def main():
     # Binary tree:
     #       5
@@ -128,8 +161,15 @@ def main():
     root.left.left.right = TreeNode(2)
     root.right.right.left = TreeNode(5)
     root.right.right.right = TreeNode(1)
+
     targetSum = 22
     print(SolutionPreorderBacktrackingRecur().pathSum(root, targetSum))
+    print(SolutionPreorderBacktrackingIter().pathSum(root, targetSum))
+    print(SolutionPreorderBacktrackingIter().pathSum(root, targetSum))
+
+    targetSum = 21
+    print(SolutionPreorderBacktrackingRecur().pathSum(root, targetSum))
+    print(SolutionPreorderBacktrackingIter().pathSum(root, targetSum))
     print(SolutionPreorderBacktrackingIter().pathSum(root, targetSum))
 
 
