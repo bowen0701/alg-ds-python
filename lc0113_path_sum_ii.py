@@ -36,7 +36,7 @@ class TreeNode:
 
 
 class SolutionPreorderBacktrackingRecur:
-    def _preorder(
+    def _preorder_backtracking(
         self, 
         root: Optional[TreeNode], 
         targetSum: int, 
@@ -55,8 +55,8 @@ class SolutionPreorderBacktrackingRecur:
             return None
 
         # Visit root's left & right if existed, with temp's shallow copy.
-        self._preorder(root.left, targetSum - root.val, result, temp[:])
-        self._preorder(root.right, targetSum - root.val, result, temp[:])
+        self._preorder_backtracking(root.left, targetSum - root.val, result, temp[:])
+        self._preorder_backtracking(root.right, targetSum - root.val, result, temp[:])
 
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         """
@@ -66,7 +66,7 @@ class SolutionPreorderBacktrackingRecur:
         # Apply recursive preorder traversal with backtracking.
         result = []
         temp = []
-        self._preorder(root, targetSum, result, temp)
+        self._preorder_backtracking(root, targetSum, result, temp)
         return result
 
 
