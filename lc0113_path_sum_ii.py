@@ -40,7 +40,7 @@ class SolutionPreorderBacktrackingRecur:
         self, 
         root: Optional[TreeNode], 
         targetSum: int, 
-        result: List[int], 
+        result: List[List[int]], 
         temp: List[int]
     ) -> None:
         # Base case.
