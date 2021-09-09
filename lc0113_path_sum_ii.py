@@ -36,7 +36,7 @@ class TreeNode:
 
 
 class SolutionPreorderBacktrackingRecur:
-    def _preorder_backtracking(
+    def _preorder_backtrack(
         self, 
         root: Optional[TreeNode], 
         targetSum: int, 
@@ -47,15 +47,15 @@ class SolutionPreorderBacktrackingRecur:
         if not root:
             return None
 
-        # Preorder traversal: root->left->right, with temp's shallow copy.
         temp.append(root.val)
 
+        # Preorder traversal: root->left->right, with temp's shallow copy.
         if root.val == targetSum and not root.left and not root.right:
             result.append(temp[:])
             return None
 
-        self._preorder_backtracking(root.left, targetSum - root.val, result, temp[:])
-        self._preorder_backtracking(root.right, targetSum - root.val, result, temp[:])
+        self._preorder_backtrack(root.left, targetSum - root.val, result, temp[:])
+        self._preorder_backtrack(root.right, targetSum - root.val, result, temp[:])
 
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         """
@@ -65,7 +65,7 @@ class SolutionPreorderBacktrackingRecur:
         # Apply recursive preorder traversal with backtracking.
         result = []
         temp = []
-        self._preorder_backtracking(root, targetSum, result, temp)
+        self._preorder_backtrack(root, targetSum, result, temp)
         return result
 
 
@@ -88,9 +88,9 @@ class SolutionPreorderBacktrackingIter:
         while stack:
             cur, cur_sum, temp = stack.pop()
 
-            # Preorder traversal: root->left->right, with temp's shallow copy.
             temp.append(cur.val)
 
+            # Preorder traversal: root->left->right, with temp's shallow copy.
             if cur.val == cur_sum and not cur.left and not cur.right:
                 result.append(temp[:])
 
