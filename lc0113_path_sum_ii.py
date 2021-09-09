@@ -47,14 +47,13 @@ class SolutionPreorderBacktrackingRecur:
         if not root:
             return None
 
+        # Preorder traversal: root->left->right, with temp's shallow copy.
         temp.append(root.val)
 
-        # Visit root and append sum with temp's shallow copy.
         if root.val == targetSum and not root.left and not root.right:
             result.append(temp[:])
             return None
 
-        # Visit root's left & right if existed, with temp's shallow copy.
         self._preorder_backtracking(root.left, targetSum - root.val, result, temp[:])
         self._preorder_backtracking(root.right, targetSum - root.val, result, temp[:])
 
@@ -76,26 +75,26 @@ class SolutionPreorderBacktrackingIter:
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Edge case.
         if not root:
             return []
 
-        # Apply iterative backtracking with result and temp.
+        # Apply iterative preorder traversal with stack and backtracking.
         result = []
         temp = []
 
-        # Apply iterative preorder traversal with stack.
         stack = [(root, targetSum, temp)]
 
         while stack:
             cur, cur_sum, temp = stack.pop()
 
+            # Preorder traversal: root->left->right, with temp's shallow copy.
             temp.append(cur.val)
 
-            # Visit root to check if root-to-leaf path sum is sum by shallow copy.
             if cur.val == cur_sum and not cur.left and not cur.right:
                 result.append(temp[:])
 
-            # Visit root's left & right if existed by shallow copy.
+            # Append right->left because stack is LIFO.
             if cur.right:
                 stack.append((cur.right, cur_sum - cur.val, temp[:]))
             if cur.left:
@@ -129,9 +128,9 @@ def main():
     root.left.left.right = TreeNode(2)
     root.right.right.left = TreeNode(5)
     root.right.right.right = TreeNode(1)
-    sum = 22
-    print(SolutionPreorderBacktrackingRecur().pathSum(root, sum))
-    print(SolutionPreorderBacktrackingIter().pathSum(root, sum))
+    targetSum = 22
+    print(SolutionPreorderBacktrackingRecur().pathSum(root, targetSum))
+    print(SolutionPreorderBacktrackingIter().pathSum(root, targetSum))
 
 
 if __name__ == '__main__':
