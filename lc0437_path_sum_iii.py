@@ -28,73 +28,74 @@ Return 3. The paths that sum to 8 are:
 3. -3 -> 11
 """
 
+from typing import Optional, Dict
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, val):
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 
 class SolutionLeadPathSumRecur(object):
-    def _leadPathSum(self, root, sum):
+    def _leadPathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         if not root:
             return 0
 
         # Single root val is sum.
-        if root.val == sum:
+        if root.val == targetSum:
             is_root_sum = 1
         else:
             is_root_sum = 0
 
         # Including root val, count path sum leading by left/right node.
         return (is_root_sum
-                + self._leadPathSum(root.left, sum - root.val)
-                + self._leadPathSum(root.right, sum - root.val))
+                + self._leadPathSum(root.left, targetSum - root.val)
+                + self._leadPathSum(root.right, targetSum - root.val))
 
-    def pathSum(self, root, sum):
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: int
-
         Time complexity: O(n*logn), for balanced tree; O(n^2) for single sided.
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
         if not root:
             return 0
         
-        return (self._leadPathSum(root, sum)
-                + self.pathSum(root.left, sum)
-                + self.pathSum(root.right, sum))
+        return (self._leadPathSum(root, targetSum)
+                + self.pathSum(root.left, targetSum)
+                + self.pathSum(root.right, targetSum))
 
 
 class SolutionSumCountDictBacktracking(object):
-    def _backtrack(self, root, sum, sum_count_d, cusum):
+    def _backtrack(
+        self, 
+        root: Optional[TreeNode], 
+        targetSum: int, 
+        sum_count_d: Dict[int, int], 
+        cusum: int
+    ) -> None:
         # Apply DFS in a preorder traversal fashion.
         if not root:
             return None
 
         # Update num of paths if complemented path sum exists.
         cusum += root.val
-        self.n_paths += sum_count_d[cusum - sum]
+        self.n_paths += sum_count_d[cusum - targetSum]
 
         # Update path sum count.
         sum_count_d[cusum] += 1
 
         # DFS for left/right nodes.
-        self._backtrack(root.left, sum, sum_count_d, cusum)
-        self._backtrack(root.right, sum, sum_count_d, cusum)
+        self._backtrack(root.left, targetSum, sum_count_d, cusum)
+        self._backtrack(root.right, targetSum, sum_count_d, cusum)
 
         # Backtrack when switch to another branch.
         sum_count_d[cusum] -= 1
 
-    def pathSum(self, root, sum):
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: int
-
         Time complexity: O(n), as traverse once.
         Space complexity: O(n), as extra space for memoization.
         """
@@ -107,7 +108,7 @@ class SolutionSumCountDictBacktracking(object):
         # Apply DFS with initial current sum 0.
         self.n_paths = 0
         cusum = 0
-        self._backtrack(root, sum, sum_count_d, cusum)
+        self._backtrack(root, targetSum, sum_count_d, cusum)
         return self.n_paths
 
 
@@ -131,8 +132,8 @@ def main():
     root.left.right.right = TreeNode(1)
     sum = 8
 
-    print SolutionLeadPathSumRecur().pathSum(root, sum)
-    print SolutionSumCountDictBacktracking().pathSum(root, sum)
+    print(SolutionLeadPathSumRecur().pathSum(root, sum))
+    print(SolutionSumCountDictBacktracking().pathSum(root, sum))
 
 
 if __name__ == '__main__':
