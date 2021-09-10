@@ -39,7 +39,7 @@ class TreeNode(object):
         self.right = right
 
 
-class SolutionDFSLeadPathSumRecur(object):
+class SolutionPreorderLeadPathSumRecur(object):
     def _leadPathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         # Check path sum leading by root.
         # Base case.
@@ -137,7 +137,7 @@ def main():
     root.left.right.right = TreeNode(1)
     targetSum = 8
 
-    print(SolutionLeadPathSumRecur().pathSum(root, targetSum))
+    print(SolutionPreorderLeadPathSumRecur().pathSum(root, targetSum))
     print(SolutionSumCountDictBacktracking().pathSum(root, targetSum))
 
     # Tree: [5,4,8,11,null,13,4,7,2,null,null,5,1]
@@ -161,7 +161,7 @@ def main():
     root.right.right.right = TreeNode(1)
     targetSum = 22
 
-    print(SolutionLeadPathSumRecur().pathSum(root, targetSum))
+    print(SolutionPreorderLeadPathSumRecur().pathSum(root, targetSum))
     print(SolutionSumCountDictBacktracking().pathSum(root, targetSum))
 
 
