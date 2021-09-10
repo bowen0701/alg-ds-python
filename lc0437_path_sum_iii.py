@@ -39,19 +39,21 @@ class TreeNode(object):
         self.right = right
 
 
-class SolutionLeadPathSumRecur(object):
+class SolutionDFSLeadPathSumRecur(object):
     def _leadPathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        # Check path sum leading by root.
+        # Base case.
         if not root:
             return 0
 
-        # Single root val is sum.
+        # Single root value matches sum.
         if root.val == targetSum:
-            is_root_sum = 1
+            root_path = 1
         else:
-            is_root_sum = 0
+            root_path = 0
 
-        # Including root val, count path sum leading by left/right node.
-        return (is_root_sum
+        # Root path + path sum leading by left/right node.
+        return (root_path
                 + self._leadPathSum(root.left, targetSum - root.val)
                 + self._leadPathSum(root.right, targetSum - root.val))
 
@@ -60,6 +62,8 @@ class SolutionLeadPathSumRecur(object):
         Time complexity: O(n*logn), for balanced tree; O(n^2) for single sided.
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
+        # Check path sum within the tree under root.
+        # Base case.
         if not root:
             return 0
         
@@ -82,7 +86,7 @@ class SolutionSumCountDictBacktracking(object):
 
         # Update num of paths if complemented path sum exists.
         cusum += root.val
-        self.n_paths += sum_count_d[cusum - targetSum]
+        self.result += sum_count_d[cusum - targetSum]
 
         # Update path sum count.
         sum_count_d[cusum] += 1
@@ -106,10 +110,10 @@ class SolutionSumCountDictBacktracking(object):
         sum_count_d[0] = 1
 
         # Apply DFS with initial current sum 0.
-        self.n_paths = 0
+        self.result = 0
         cusum = 0
         self._backtrack(root, targetSum, sum_count_d, cusum)
-        return self.n_paths
+        return self.result
 
 
 def main():
