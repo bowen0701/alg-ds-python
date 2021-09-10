@@ -113,6 +113,7 @@ class SolutionSumCountDictBacktracking(object):
 
 
 def main():
+    # Tree: [10,5,-3,3,2,null,11,3,-2,null,1]
     #       10
     #      /  \
     #     5   -3
@@ -130,10 +131,34 @@ def main():
     root.left.left.left = TreeNode(3)
     root.left.left.right = TreeNode(-2)
     root.left.right.right = TreeNode(1)
-    sum = 8
+    targetSum = 8
 
-    print(SolutionLeadPathSumRecur().pathSum(root, sum))
-    print(SolutionSumCountDictBacktracking().pathSum(root, sum))
+    print(SolutionLeadPathSumRecur().pathSum(root, targetSum))
+    print(SolutionSumCountDictBacktracking().pathSum(root, targetSum))
+
+    # Tree: [5,4,8,11,null,13,4,7,2,null,null,5,1]
+    #       5
+    #      /  \
+    #     4    8
+    #    /    /  \
+    #  11    13   4
+    #  / \       / \
+    # 7   2     5   1
+    # Output: 3
+    root = TreeNode(5)
+    root.left = TreeNode(4)
+    root.right = TreeNode(8)
+    root.left.left = TreeNode(11)
+    root.right.left = TreeNode(13)
+    root.right.right = TreeNode(4)
+    root.left.left.left = TreeNode(7)
+    root.left.left.right = TreeNode(2)
+    root.right.right.left = TreeNode(5)
+    root.right.right.right = TreeNode(1)
+    targetSum = 22
+
+    print(SolutionLeadPathSumRecur().pathSum(root, targetSum))
+    print(SolutionSumCountDictBacktracking().pathSum(root, targetSum))
 
 
 if __name__ == '__main__':
