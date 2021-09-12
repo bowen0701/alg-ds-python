@@ -48,12 +48,12 @@ class SolutionPreorderLeadPathSumRecur(object):
 
         # Single root value matches sum.
         if root.val == targetSum:
-            root_path = 1
+            lead_sum = 1
         else:
-            root_path = 0
+            lead_sum = 0
 
         # Root path + path sum leading by left/right node.
-        return (root_path
+        return (lead_sum
                 + self._leadPathSum(root.left, targetSum - root.val)
                 + self._leadPathSum(root.right, targetSum - root.val))
 
