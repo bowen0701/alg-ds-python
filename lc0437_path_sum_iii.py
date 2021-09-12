@@ -80,18 +80,16 @@ class SolutionSumCountDictBacktracking(object):
         sum_count_d: Dict[int, int], 
         cusum: int
     ) -> None:
-        # Apply DFS in a preorder traversal fashion.
+        # Base case.
         if not root:
             return None
 
-        # Update num of paths if complemented path sum exists.
+        # Preorder traversal with backtracking: root->left->right.
+        # Update result if complemented path sum exists.
         cusum += root.val
         self.result += sum_count_d[cusum - targetSum]
-
-        # Update path sum count.
         sum_count_d[cusum] += 1
 
-        # DFS for left/right nodes.
         self._backtrack(root.left, targetSum, sum_count_d, cusum)
         self._backtrack(root.right, targetSum, sum_count_d, cusum)
 
