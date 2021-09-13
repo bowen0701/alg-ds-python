@@ -72,8 +72,8 @@ class SolutionPreorderLeadPathSumRecur(object):
                 + self.pathSum(root.right, targetSum))
 
 
-class SolutionSumCountDictBacktracking(object):
-    def _backtrack(
+class SolutionSumCountDictPreorderBacktracking(object):
+    def _preorder_backtrack(
         self, 
         root: Optional[TreeNode], 
         targetSum: int, 
@@ -90,8 +90,8 @@ class SolutionSumCountDictBacktracking(object):
         self.result += sum_count_d[cusum - targetSum]
         sum_count_d[cusum] += 1
 
-        self._backtrack(root.left, targetSum, sum_count_d, cusum)
-        self._backtrack(root.right, targetSum, sum_count_d, cusum)
+        self._preorder_backtrack(root.left, targetSum, sum_count_d, cusum)
+        self._preorder_backtrack(root.right, targetSum, sum_count_d, cusum)
 
         # Backtrack when switch to another branch.
         sum_count_d[cusum] -= 1
@@ -110,7 +110,7 @@ class SolutionSumCountDictBacktracking(object):
         # Apply DFS with initial current sum 0.
         self.result = 0
         cusum = 0
-        self._backtrack(root, targetSum, sum_count_d, cusum)
+        self._preorder_backtrack(root, targetSum, sum_count_d, cusum)
         return self.result
 
 
@@ -136,7 +136,7 @@ def main():
     targetSum = 8
 
     print(SolutionPreorderLeadPathSumRecur().pathSum(root, targetSum))
-    print(SolutionSumCountDictBacktracking().pathSum(root, targetSum))
+    print(SolutionSumCountDictPreorderBacktracking().pathSum(root, targetSum))
 
     # Tree: [5,4,8,11,null,13,4,7,2,null,null,5,1]
     #       5
@@ -160,7 +160,7 @@ def main():
     targetSum = 22
 
     print(SolutionPreorderLeadPathSumRecur().pathSum(root, targetSum))
-    print(SolutionSumCountDictBacktracking().pathSum(root, targetSum))
+    print(SolutionSumCountDictPreorderBacktracking().pathSum(root, targetSum))
 
 
 if __name__ == '__main__':
