@@ -56,7 +56,7 @@ class SolutionPreorderRecur(object):
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
         """
-        # Edge case.
+        # Base case.
         if not root:
             return None
 
