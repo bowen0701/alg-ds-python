@@ -51,7 +51,7 @@ class TreeNode(object):
 
 class SolutionPreorderRecur(object):
     def _isTreeMatch(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        # Edge case.
+        # Base case.
         if not root or not subRoot:
             return root is subRoot
 
@@ -66,7 +66,7 @@ class SolutionPreorderRecur(object):
         Space complexity: O(log|s|+log|t|), for balanced tree; 
           O(|s|+|t|) for single sided tree.
         """
-        # Edge case.
+        # Base case.
         if not root:
             return False
 
