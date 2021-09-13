@@ -56,8 +56,10 @@ class SolutionPreorderRecur(object):
             return root is subRoot
 
         # Preorder traversal: root->left->right, to check root and left/right tree matches.
-        return (root.val == subRoot.val
-                and self._isTreeMatch(root.left, subRoot.left)
+        if root.val != subRoot.val:
+            return False
+
+        return (self._isTreeMatch(root.left, subRoot.left)
                 and self._isTreeMatch(root.right, subRoot.right))
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
