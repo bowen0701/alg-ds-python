@@ -30,74 +30,62 @@ Input:     1         1
 Output: false
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
-class TreeNode(object):
-    def __init__(self, val):
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 
 class SolutionPreorderRecur(object):
-    def isSameTree(self, p, q):
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         """
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: bool
-
-        Apply recursive preorder traversal to check same tree.
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        # Check if both root don't exist.
+        # Base cases.
         if not p and not q:
             return True
 
-        # Check if just one of roots exits.
         if not p or not q:
             return False
 
-        # If both exist, check their values are the same. 
+        # Preorder traversal: root->left->right.
         if p.val != q.val:
             return False
 
-        # Recursively check left/right subtrees.
-        return (self.isSameTree(p.left, q.left) and
-                self.isSameTree(p.right, q.right))
+        return (self.isSameTree(p.left, q.left)
+                and self.isSameTree(p.right, q.right))
 
 
 class SolutionPreorderIter(object):
-    def isSameTree(self, p, q):
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         """
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: bool
-
-        Apply iterative preorder traversal to check same tree.
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
+        # Apply iterative preorder traversal with stack.
         stack = [(p, q)]
 
         while stack:
             cur_p, cur_q = stack.pop()
 
-            # Check if both root don't exist, continue, 
-            # since there may be other node pairs to check.
+            # Edge cases.
             if not cur_p and not cur_q:
                 continue
 
-            # Check if just one of roots exits.
             if not cur_p or not cur_q:
                 return False
 
-            # If both exist, check their values are the same. 
+            # Preorder traversal: root->left->right.
             if cur_p.val != cur_q.val:
                 return False
 
-            # Add root's right and then left to stack, since stack is FILO.
+            # Append right->left to stack, since stack is FILO.
             stack.append((cur_p.right, cur_q.right))
             stack.append((cur_p.left, cur_q.left))
 
@@ -116,8 +104,8 @@ def main():
     q = TreeNode(1)
     q.left = TreeNode(2)
     q.right = TreeNode(3)
-    print SolutionPreorderRecur().isSameTree(p, q)
-    print SolutionPreorderIter().isSameTree(p, q)
+    print(SolutionPreorderRecur().isSameTree(p, q))
+    print(SolutionPreorderIter().isSameTree(p, q))
 
     # Input:     1         1
     #           /           \
@@ -128,8 +116,8 @@ def main():
     p.left = TreeNode(2)
     q = TreeNode(1)
     q.right = TreeNode(2)
-    print SolutionPreorderRecur().isSameTree(p, q)    
-    print SolutionPreorderIter().isSameTree(p, q)
+    print(SolutionPreorderRecur().isSameTree(p, q))
+    print(SolutionPreorderIter().isSameTree(p, q))
 
     # Input:     1         1
     #           / \       / \
@@ -142,8 +130,8 @@ def main():
     q = TreeNode(1)
     q.left = TreeNode(1)
     q.right = TreeNode(2)
-    print SolutionPreorderRecur().isSameTree(p, q)
-    print SolutionPreorderIter().isSameTree(p, q)
+    print(SolutionPreorderRecur().isSameTree(p, q))
+    print(SolutionPreorderIter().isSameTree(p, q))
 
     # Input: [10,5,15], [10,5,null,null,15]
     p = TreeNode(10)
@@ -152,8 +140,8 @@ def main():
     q = TreeNode(10)
     q.left = TreeNode(5)
     q.left.right = TreeNode(15)
-    print SolutionPreorderRecur().isSameTree(p, q)
-    print SolutionPreorderIter().isSameTree(p, q)
+    print(SolutionPreorderRecur().isSameTree(p, q))
+    print(SolutionPreorderIter().isSameTree(p, q))
 
 
 if __name__ == '__main__':
