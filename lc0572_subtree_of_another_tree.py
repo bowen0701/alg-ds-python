@@ -71,9 +71,11 @@ class SolutionPreorderRecur(object):
         if not root:
             return False
 
-        # Preorder traversal: root->left->right, to check if matches or is subtree of left or right.
-        return (self._isTreeMatch(root, subRoot)
-                or self.isSubtree(root.left, subRoot)
+        # Preorder traversal: root->left->right, check if matches or subtree of left or right.
+        if self._isTreeMatch(root, subRoot):
+            return True
+
+        return (self.isSubtree(root.left, subRoot)
                 or self.isSubtree(root.right, subRoot))
 
 
