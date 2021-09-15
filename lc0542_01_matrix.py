@@ -34,33 +34,33 @@ Note:
 - The cells are adjacent in only four directions: up, down, left and right.
 """
 
-class SolutionBFS(object):
-    def updateMatrix(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: List[List[int]]
+from typing import List
 
+
+class SolutionBFS(object):
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        """
         Time complexity: O(mn), where
           - m: number of rows
           - n: number of columns
         Space complexity: O(mn).
         """
-        if not matrix or not matrix[0]:
-            return matrix
+        if not mat or not mat[0]:
+            return mat
     
-        n_rows, n_cols = len(matrix), len(matrix[0])
+        n_rows, n_cols = len(mat), len(mat[0])
 
         # Use queue for BFS.
         queue = []
 
         for r in range(n_rows):
             for c in range(n_cols):
-                if matrix[r][c] == 0:
+                if mat[r][c] == 0:
                     # Collect cells with value 0 for exploration.
                     queue.append((r, c))
                 else:
                     # For cell with value != 0, update its distance to inf.
-                    matrix[r][c] = float('inf')
+                    mat[r][c] = float('inf')
 
         # BFS explore from cells with value 0.
         dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
@@ -73,72 +73,69 @@ class SolutionBFS(object):
                 # If out of boundary or does not shorten distance.
                 if (r_next < 0 or r_next >= n_rows or
                     c_next < 0 or c_next >= n_cols or
-                    matrix[r_next][c_next] < matrix[r][c] + 1):
+                    mat[r_next][c_next] < mat[r][c] + 1):
                     continue
 
-                matrix[r_next][c_next] = matrix[r][c] + 1
+                mat[r_next][c_next] = mat[r][c] + 1
                 queue.insert(0, (r_next, c_next))
 
-        return matrix
+        return mat
 
 
 class SolutionDP(object):
-    def updateMatrix(self, matrix):
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
-        :type matrix: List[List[int]]
-        :rtype: List[List[int]]
-
         Time complexity: O(mn), where
           - m: number of rows
           - n: number of columns
         Space complexity: O(1).
         """
-        if not matrix or not matrix[0]:
-            return matrix
+        if not mat or not mat[0]:
+            return mat
 
-        n_rows, n_cols = len(matrix), len(matrix[0])
+        n_rows, n_cols = len(mat), len(mat[0])
 
         # Iterate through all cells from upper left.
         for r in range(n_rows):
             for c in range(n_cols):
-                if matrix[r][c] == 0:
+                if mat[r][c] == 0:
                     continue
 
                 # Check its up & left.
                 if r > 0:
-                    up = matrix[r - 1][c]
+                    up = mat[r - 1][c]
                 else:
                     up = float('inf')
 
                 if c > 0:
-                    left = matrix[r][c - 1]
+                    left = mat[r][c - 1]
                 else:
                     left = float('inf')
 
                 # Update cell by min(up & left).
-                matrix[r][c] = min(up, left) + 1
+                mat[r][c] = min(up, left) + 1
 
         # Iterate through all cells from bottom right, check its down & right.
         for r in range(n_rows - 1, -1, -1):
             for c in range(n_cols -1, -1, -1):
-                if matrix[r][c] == 0:
+                if mat[r][c] == 0:
                     continue
 
                 # Check its down & right.
                 if r < n_rows - 1:
-                    down = matrix[r + 1][c]
+                    down = mat[r + 1][c]
                 else:
                     down = float('inf')
 
                 if c < n_cols - 1:
-                    right = matrix[r][c + 1]
+                    right = mat[r][c + 1]
                 else:
                     right = float('inf')
 
                 # Update cell by min(previous result, min(down & right)).
-                matrix[r][c] = min(matrix[r][c], min(down, right) + 1)
+                mat[r][c] = min(mat[r][c], min(down, right) + 1)
 
-        return matrix
+        return mat
 
 
 def main():
@@ -146,15 +143,15 @@ def main():
     # [[0,0,0],
     #  [0,1,0],
     #  [0,0,0]]
-    matrix = [[0,0,0],
-              [0,1,0],
-              [0,0,0]]
-    print SolutionBFS().updateMatrix(matrix)
+    mat = [[0,0,0],
+           [0,1,0],
+           [0,0,0]]
+    print(SolutionBFS().updateMatrix(mat))
 
-    matrix = [[0,0,0],
-              [0,1,0],
-              [0,0,0]]
-    print SolutionDP().updateMatrix(matrix)
+    mat = [[0,0,0],
+           [0,1,0],
+           [0,0,0]]
+    print(SolutionDP().updateMatrix(mat))
 
     # Output:
     # [[0,0,0],
@@ -163,12 +160,12 @@ def main():
     matrix = [[0,0,0],
               [0,1,0],
               [1,1,1]]
-    print SolutionBFS().updateMatrix(matrix)    
+    print(SolutionBFS().updateMatrix(matrix)    )
 
     matrix = [[0,0,0],
               [0,1,0],
               [1,1,1]]
-    print SolutionDP().updateMatrix(matrix)
+    print(SolutionDP().updateMatrix(matrix))
 
 
 if __name__ == '__main__':
