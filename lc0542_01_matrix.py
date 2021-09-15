@@ -139,6 +139,7 @@ class SolutionDP(object):
 
 
 def main():
+    import copy
     # Output:
     # [[0,0,0],
     #  [0,1,0],
@@ -146,26 +147,18 @@ def main():
     mat = [[0,0,0],
            [0,1,0],
            [0,0,0]]
-    print(SolutionBFS().updateMatrix(mat))
-
-    mat = [[0,0,0],
-           [0,1,0],
-           [0,0,0]]
-    print(SolutionDP().updateMatrix(mat))
+    print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
+    print(SolutionDP().updateMatrix(copy.deepcopy(mat)))
 
     # Output:
     # [[0,0,0],
     #  [0,1,0],
     #  [1,2,1]]
-    matrix = [[0,0,0],
-              [0,1,0],
-              [1,1,1]]
-    print(SolutionBFS().updateMatrix(matrix)    )
-
-    matrix = [[0,0,0],
-              [0,1,0],
-              [1,1,1]]
-    print(SolutionDP().updateMatrix(matrix))
+    mat = [[0,0,0],
+           [0,1,0],
+           [1,1,1]]
+    print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
+    print(SolutionDP().updateMatrix(copy.deepcopy(mat)))
 
 
 if __name__ == '__main__':
