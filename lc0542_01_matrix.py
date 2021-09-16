@@ -45,39 +45,37 @@ class SolutionBFS(object):
           - n: number of columns
         Space complexity: O(mn).
         """
+        # Edge cases.
         if not mat or not mat[0]:
             return mat
     
         n_rows, n_cols = len(mat), len(mat[0])
 
-        # Use queue for BFS.
+        # Collect cells with value 0 as BFS start points.
         queue = []
 
         for r in range(n_rows):
             for c in range(n_cols):
                 if mat[r][c] == 0:
-                    # Collect cells with value 0 for exploration.
                     queue.append((r, c))
                 else:
                     # For cell with value != 0, update its distance to inf.
                     mat[r][c] = float('inf')
 
-        # BFS explore from cells with value 0.
-        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-
+        # BFS: start from value 0 cells, visiting neighbors: up/down/left/right.
         while queue:
             r, c = queue.pop()
-            for dr, dc in dirs:
-                r_next, c_next = r + dr, c + dc
+            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
 
-                # If out of boundary or does not shorten distance.
-                if (r_next < 0 or r_next >= n_rows or
-                    c_next < 0 or c_next >= n_cols or
-                    mat[r_next][c_next] < mat[r][c] + 1):
+            for r_next, c_next in dirs:
+                # Check out of boundary.
+                if (r_next < 0 or r_next >= n_rows 
+                    or c_next < 0 or c_next >= n_cols):
                     continue
 
-                mat[r_next][c_next] = mat[r][c] + 1
-                queue.insert(0, (r_next, c_next))
+                if mat[r_next][c_next] > mat[r][c] + 1:
+                    mat[r_next][c_next] = mat[r][c] + 1
+                    queue.insert(0, (r_next, c_next))
 
         return mat
 
