@@ -67,7 +67,7 @@ class SolutionInorderRecur(object):
         Time complexity: O(k).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
         """
-        # Apply recursive inorder traversal.
+        # Apply recursive inorder traversal because of its increasing property.
         self.result = None
         self.k = k
         self._inorderRecur(root)
