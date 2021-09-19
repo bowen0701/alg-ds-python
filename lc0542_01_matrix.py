@@ -80,7 +80,7 @@ class SolutionBFS(object):
         return mat
 
 
-class SolutionDP(object):
+class SolutionDPTopLeftBottomRight(object):
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
         Time complexity: O(mn), where
@@ -88,12 +88,13 @@ class SolutionDP(object):
           - n: number of columns
         Space complexity: O(1).
         """
+        # Edge cases.
         if not mat or not mat[0]:
             return mat
 
         n_rows, n_cols = len(mat), len(mat[0])
 
-        # Iterate through all cells from upper left.
+        # Iterate through all cells from top left, check its up & left.
         for r in range(n_rows):
             for c in range(n_cols):
                 if mat[r][c] == 0:
@@ -146,7 +147,7 @@ def main():
            [0,1,0],
            [0,0,0]]
     print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
-    print(SolutionDP().updateMatrix(copy.deepcopy(mat)))
+    print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
 
     # Output:
     # [[0,0,0],
@@ -156,7 +157,7 @@ def main():
            [0,1,0],
            [1,1,1]]
     print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
-    print(SolutionDP().updateMatrix(copy.deepcopy(mat)))
+    print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
 
 
 if __name__ == '__main__':
