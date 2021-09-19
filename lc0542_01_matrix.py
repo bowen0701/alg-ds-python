@@ -139,6 +139,8 @@ class SolutionDPTopLeftBottomRight(object):
 
 def main():
     import copy
+    import time
+
     # Output:
     # [[0,0,0],
     #  [0,1,0],
@@ -146,8 +148,14 @@ def main():
     mat = [[0,0,0],
            [0,1,0],
            [0,0,0]]
+
+    start_time = time.time()
     print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
+    print("BFS:", time.time() - start_time)
+
+    start_time = time.time()
     print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
+    print("DP:", time.time() - start_time)
 
     # Output:
     # [[0,0,0],
@@ -156,8 +164,14 @@ def main():
     mat = [[0,0,0],
            [0,1,0],
            [1,1,1]]
+
+    start_time = time.time()
     print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
+    print("BFS:", time.time() - start_time)
+
+    start_time = time.time()
     print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
+    print("DP:", time.time() - start_time)
 
 
 if __name__ == '__main__':
