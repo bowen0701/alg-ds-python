@@ -37,7 +37,7 @@ Note:
 from typing import List
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
         Time complexity: O(mn), where
@@ -80,7 +80,7 @@ class SolutionBFS(object):
         return mat
 
 
-class SolutionDPTopLeftBottomRight(object):
+class SolutionDPTopLeftBottomRight:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
         Time complexity: O(mn), where
