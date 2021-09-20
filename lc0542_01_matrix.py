@@ -80,6 +80,17 @@ class SolutionBFS:
         return mat
 
 
+class SolutionDFSRecur:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        """
+        Time complexity: O(?), where
+          - m: number of rows
+          - n: number of columns
+        Space complexity: O(?).
+        """
+        pass
+
+
 class SolutionDPTopLeftBottomRight:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
