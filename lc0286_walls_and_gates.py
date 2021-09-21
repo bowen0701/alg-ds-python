@@ -63,7 +63,7 @@ class SolutionBFS(object):
         Space complexity: O(mn).
         """
         # Edge case.
-        if not rooms:
+        if not rooms or not rooms[0]:
             return None
 
         # Apply iterative BFS to visit rooms starting from all gates.
@@ -103,7 +103,7 @@ class SolutionDFSRecur(object):
         Space complexity: O(mn), for gates list.
         """
         # Edge case.
-        if not rooms:
+        if not rooms or not rooms[0]:
             return None
         
         # Apply recursive DFS to visit rooms starting from all gates.
