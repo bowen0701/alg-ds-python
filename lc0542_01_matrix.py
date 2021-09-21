@@ -51,7 +51,7 @@ class SolutionBFS:
     
         n_rows, n_cols = len(mat), len(mat[0])
 
-        # Collect 0 cells as BFS start points and update 1 cells to inf.
+        # Collect 0 cells as BFS start points and update 1 cell values to inf.
         queue = []
 
         for r in range(n_rows):
@@ -88,7 +88,23 @@ class SolutionDFSRecur:
           - n: number of columns
         Space complexity: O(?).
         """
-        pass
+        # Edge cases.
+        if not mat or not mat[0]:
+            return mat
+
+        n_rows, n_cols = len(mat), len(mat[0])
+
+        # Collect 0 cells as DFS start points and update 1 cell values to inf.
+        zero_cells = []
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if mat[r][c] == 0:
+                    zero_cells.append((r, c))
+                else:
+                    mat[r][c] = float('inf')
+
+        # TODO: continue impl.
 
 
 class SolutionDPTopLeftBottomRight:
