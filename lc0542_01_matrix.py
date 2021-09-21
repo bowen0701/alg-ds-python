@@ -51,7 +51,7 @@ class SolutionBFS:
     
         n_rows, n_cols = len(mat), len(mat[0])
 
-        # Collect cells with value 0 as BFS start points.
+        # Collect 0 cells as BFS start points and update 1 cells to inf.
         queue = []
 
         for r in range(n_rows):
@@ -105,7 +105,7 @@ class SolutionDPTopLeftBottomRight:
 
         n_rows, n_cols = len(mat), len(mat[0])
 
-        # Iterate through all cells from top left, check its up & left.
+        # Iterate through from top left, check up & left to update its value.
         for r in range(n_rows):
             for c in range(n_cols):
                 if mat[r][c] == 0:
@@ -125,7 +125,7 @@ class SolutionDPTopLeftBottomRight:
                 # Update cell by min(up & left).
                 mat[r][c] = min(up, left) + 1
 
-        # Iterate through all cells from bottom right, check its down & right.
+        # Iterate through from bottom right, check down & right to update its value.
         for r in range(n_rows - 1, -1, -1):
             for c in range(n_cols -1, -1, -1):
                 if mat[r][c] == 0:
@@ -142,7 +142,7 @@ class SolutionDPTopLeftBottomRight:
                 else:
                     right = float('inf')
 
-                # Update cell by min(previous result, min(down & right)).
+                # Update value by min(previous value, min(down & right)).
                 mat[r][c] = min(mat[r][c], min(down, right) + 1)
 
         return mat
