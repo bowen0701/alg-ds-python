@@ -85,7 +85,7 @@ class SolutionBFS(object):
         if not grid or not grid[0]:
             return -1
 
-        # Apply BFS using queue, given (0, 0) and marked it as visited.
+        # Apply BFS using queue from start point (0, 0).
         r, c = 0, 0
         return self._bfs(r, c, grid)
 
@@ -148,7 +148,7 @@ class SolutionBFSAll(object):
         # Collect pos->distance.
         pos_distance_d = defaultdict(int)
 
-        # Apply BFS with queue, given (0, 0) and marked it as visited.
+        # Apply BFS with queue from start point (0, 0).
         r, c = 0, 0
         self._bfs(r, c, grid, pos_distance_d)
 
@@ -192,7 +192,7 @@ class SolutionDFSRecur(object):
         if not grid or not grid[0]:
             return -1
 
-        # Apply recursive DFS given (0, 0).
+        # Apply recursive DFS from start point (0, 0).
         self.result = float('inf')
         r, c = 0, 0
         distance = 0
