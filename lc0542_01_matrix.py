@@ -73,6 +73,7 @@ class SolutionBFS:
                     or c_next < 0 or c_next >= n_cols):
                     continue
 
+                # Update distance if find shorter.
                 if mat[r_next][c_next] > mat[r][c] + 1:
                     mat[r_next][c_next] = mat[r][c] + 1
                     queue.insert(0, (r_next, c_next))
@@ -104,7 +105,7 @@ class SolutionDFSRecur:
                 else:
                     mat[r][c] = float('inf')
 
-        # TODO: continue impl.
+        # TODO: Iterate through start points and update distance to them.
 
 
 class SolutionDPTopLeftBottomRight:
@@ -121,7 +122,7 @@ class SolutionDPTopLeftBottomRight:
 
         n_rows, n_cols = len(mat), len(mat[0])
 
-        # Iterate through from top left, check up & left to update its value.
+        # Iterate through from top left, check up & left to update distance.
         for r in range(n_rows):
             for c in range(n_cols):
                 if mat[r][c] == 0:
@@ -138,10 +139,10 @@ class SolutionDPTopLeftBottomRight:
                 else:
                     left = float('inf')
 
-                # Update cell by min(up & left).
+                # Update distance by min(up & left).
                 mat[r][c] = min(up, left) + 1
 
-        # Iterate through from bottom right, check down & right to update its value.
+        # Iterate through from bottom right, check down & right to update distance.
         for r in range(n_rows - 1, -1, -1):
             for c in range(n_cols -1, -1, -1):
                 if mat[r][c] == 0:
@@ -158,7 +159,7 @@ class SolutionDPTopLeftBottomRight:
                 else:
                     right = float('inf')
 
-                # Update value by min(previous value, min(down & right)).
+                # Update distance by min(previous distance, min(down & right)).
                 mat[r][c] = min(mat[r][c], min(down, right) + 1)
 
         return mat
