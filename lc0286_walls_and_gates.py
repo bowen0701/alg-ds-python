@@ -73,7 +73,7 @@ class SolutionBFS(object):
         gates = [(r, c) for r in range(n_rows) for c in range(n_cols)
                  if rooms[r][c] == 0]
 
-        # For each gate, start BFS to update neighbors's shorter distances.
+        # Iterate through gates by BFS to update neighbors's shorter distances.
         for (r, c) in gates:
             self._bfs(r, c, rooms)
 
@@ -113,6 +113,7 @@ class SolutionDFSRecur(object):
         gates = [(r, c) for r in range(n_rows) for c in range(n_cols)
                  if rooms[r][c] == 0]
 
+        # Iterate through gates to update distance to gate.
         for (r, c) in gates:
             distance = 0
             self._dfs(r, c, distance, rooms)
