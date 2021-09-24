@@ -83,8 +83,19 @@ class SolutionBFS:
 
 class SolutionDFSRecur:
     def _dfs(self, r: int, c: int, distance: int, mat: List[List[int]]) -> None:
-        # TODO
-        pass
+        # Base cases: out of boundary or longer distance.
+        if (r < 0 or r >= len(mat)
+            or c < 0 or c >= len(mat[0])
+            or mat[r][c] < distance):
+            return None 
+
+        # Update the shortest distance.
+        mat[r][c] = distance
+
+        # Apply recursive DFS: visit up/down/left/right.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for (r_next, c_next) in dirs:
+            self._dfs(r_next, c_next, distance + 1, mat)
 
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
@@ -192,6 +203,10 @@ def main():
     print("BFS:", time.time() - start_time)
 
     start_time = time.time()
+    print(SolutionDFSRecur().updateMatrix(copy.deepcopy(mat)))
+    print("DFS:", time.time() - start_time)
+
+    start_time = time.time()
     print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
     print("DP:", time.time() - start_time)
 
@@ -206,6 +221,10 @@ def main():
     start_time = time.time()
     print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
     print("BFS:", time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionDFSRecur().updateMatrix(copy.deepcopy(mat)))
+    print("DFS:", time.time() - start_time)
 
     start_time = time.time()
     print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
