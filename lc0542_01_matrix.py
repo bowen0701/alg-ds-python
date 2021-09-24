@@ -82,6 +82,10 @@ class SolutionBFS:
 
 
 class SolutionDFSRecur:
+    def _dfs(self, r: int, c: int, distance: int, mat: List[List[int]]) -> None:
+        # TODO
+        pass
+
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
         Time complexity: O(?), where
@@ -105,7 +109,13 @@ class SolutionDFSRecur:
                 else:
                     mat[r][c] = float('inf')
 
-        # TODO: Iterate through start points and update distance to them.
+        # Iterate through start points and update distance to them.
+        for (r, c) in zero_cells:
+            distance = 0
+            self._dfs(r, c, distance, mat)
+
+        return mat
+
 
 
 class SolutionDPTopLeftBottomRight:
