@@ -99,10 +99,10 @@ class SolutionDFSRecur:
 
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         """
-        Time complexity: O(?), where
+        Time complexity: O(m*n), where
           - m: number of rows
           - n: number of columns
-        Space complexity: O(?).
+        Space complexity: O(m*n).
         """
         # Edge cases.
         if not mat or not mat[0]:
