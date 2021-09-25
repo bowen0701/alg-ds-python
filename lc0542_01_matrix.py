@@ -87,7 +87,7 @@ class SolutionDFSRecur:
         if (r < 0 or r >= len(mat)
             or c < 0 or c >= len(mat[0])
             or mat[r][c] < distance):
-            return None 
+            return None
 
         # Update the shortest distance.
         mat[r][c] = distance
