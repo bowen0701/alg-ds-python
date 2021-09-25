@@ -121,7 +121,7 @@ class SolutionBFSAll(object):
                         grid[r_next][c_next] == 'D'):
                         continue
 
-                    # If found treasure, update distance.
+                    # If found treasure, update distance and break to go to next start point.
                     if grid[r_next][c_next] == 'X':
                         pos_distance_d[(r_next, c_next)] = pos_distance_d[(r, c)] + 1
                         break
@@ -170,7 +170,7 @@ class SolutionDFSRecur(object):
             or self.result < distance):
             return None
 
-        # If found treasure, update distance and return result.
+        # If found treasure, update distance and return.
         if grid[r][c] == 'X':
             self.result = distance
             return None
