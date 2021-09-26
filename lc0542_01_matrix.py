@@ -144,7 +144,7 @@ class SolutionDPTopLeftBottomRight:
 
         n_rows, n_cols = len(mat), len(mat[0])
 
-        # Iterate through from top left, check up & left to update distance.
+        # Iterate through from top-left, check up & left to update distance.
         for r in range(n_rows):
             for c in range(n_cols):
                 if mat[r][c] == 0:
@@ -164,7 +164,7 @@ class SolutionDPTopLeftBottomRight:
                 # Update distance by min(up & left).
                 mat[r][c] = min(up, left) + 1
 
-        # Iterate through from bottom right, check down & right to update distance.
+        # Iterate through from bottom-right, check down & right to update distance.
         for r in range(n_rows - 1, -1, -1):
             for c in range(n_cols -1, -1, -1):
                 if mat[r][c] == 0:
