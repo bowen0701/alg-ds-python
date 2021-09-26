@@ -37,50 +37,6 @@ Note:
 from typing import List
 
 
-class SolutionBFS:
-    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-        """
-        Time complexity: O(mn), where
-          - m: number of rows
-          - n: number of columns
-        Space complexity: O(mn).
-        """
-        # Edge cases.
-        if not mat or not mat[0]:
-            return mat
-    
-        n_rows, n_cols = len(mat), len(mat[0])
-
-        # Collect 0 cells as BFS start points and update 1 cell values to inf.
-        queue = []
-
-        for r in range(n_rows):
-            for c in range(n_cols):
-                if mat[r][c] == 0:
-                    queue.append((r, c))
-                else:
-                    # For cell with value != 0, update its distance to inf.
-                    mat[r][c] = float('inf')
-
-        # BFS: start from value 0 cells, visiting neighbors: up/down/left/right.
-        while queue:
-            r, c = queue.pop()
-            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-
-            for r_next, c_next in dirs:
-                # Check out of boundary.
-                if (r_next < 0 or r_next >= n_rows 
-                    or c_next < 0 or c_next >= n_cols):
-                    continue
-
-                # Update distance if find shorter.
-                if mat[r_next][c_next] > mat[r][c] + 1:
-                    mat[r_next][c_next] = mat[r][c] + 1
-                    queue.insert(0, (r_next, c_next))
-
-        return mat
-
-
 class SolutionDFSRecur:
     def _dfs(self, r: int, c: int, distance: int, mat: List[List[int]]) -> None:
         # Base cases: out of boundary or longer distance.
@@ -127,6 +83,51 @@ class SolutionDFSRecur:
 
         return mat
 
+
+class SolutionBFS:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        """
+        Time complexity: O(mn), where
+          - m: number of rows
+          - n: number of columns
+        Space complexity: O(mn).
+        """
+        from collections import deque
+
+        # Edge cases.
+        if not mat or not mat[0]:
+            return mat
+
+        n_rows, n_cols = len(mat), len(mat[0])
+
+        # Collect 0 cells as BFS start points and update 1 cell values to inf.
+        queue = deque([])
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if mat[r][c] == 0:
+                    queue.appendleft((r, c))
+                else:
+                    # For cell with value != 0, update its distance to inf.
+                    mat[r][c] = float('inf')
+
+        # BFS: start from value 0 cells, visiting neighbors: up/down/left/right.
+        while queue:
+            r, c = queue.pop()
+            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+
+            for r_next, c_next in dirs:
+                # Check out of boundary.
+                if (r_next < 0 or r_next >= n_rows
+                    or c_next < 0 or c_next >= n_cols):
+                    continue
+
+                # Update distance if find shorter.
+                if mat[r_next][c_next] > mat[r][c] + 1:
+                    mat[r_next][c_next] = mat[r][c] + 1
+                    queue.appendleft((r_next, c_next))
+
+        return mat
 
 
 class SolutionDPTopLeftBottomRight:
@@ -199,12 +200,12 @@ def main():
            [0,0,0]]
 
     start_time = time.time()
-    print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
-    print("BFS:", time.time() - start_time)
-
-    start_time = time.time()
     print(SolutionDFSRecur().updateMatrix(copy.deepcopy(mat)))
     print("DFS:", time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
+    print("BFS:", time.time() - start_time)
 
     start_time = time.time()
     print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
@@ -219,12 +220,12 @@ def main():
            [1,1,1]]
 
     start_time = time.time()
-    print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
-    print("BFS:", time.time() - start_time)
-
-    start_time = time.time()
     print(SolutionDFSRecur().updateMatrix(copy.deepcopy(mat)))
     print("DFS:", time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBFS().updateMatrix(copy.deepcopy(mat)))
+    print("BFS:", time.time() - start_time)
 
     start_time = time.time()
     print(SolutionDPTopLeftBottomRight().updateMatrix(copy.deepcopy(mat)))
