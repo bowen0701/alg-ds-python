@@ -24,7 +24,7 @@ from typing import List
 
 class SolutionRecur(object):
     def _LIS(self, nums: List[int], cur_idx: int, prev_max: int) -> int:
-        # Base case: index out of boundary.
+        # Base case: current index out of boundary.
         if cur_idx == len(nums):
             return 0
 
@@ -54,7 +54,7 @@ class SolutionRecur(object):
 
 class SolutionMemo(object):
     def _LIS(self, nums: List[int], prev_idx: int, cur_idx: int, T: List[List[int]]) -> int:
-        # Base case.
+        # Base case: current index out of boundary.
         if cur_idx == len(nums):
             return 0
 
@@ -77,15 +77,13 @@ class SolutionMemo(object):
 
         Time limit exceeded.
 
-        Time complexity: O(2^n).
+        Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
-        # Apply top-down recursion with memoization, starting from start index.
-        cur_idx = 0
-        prev_idx = -1
+        # Apply top-down recursion with memoization, starting from left index.
+        prev_idx, cur_idx = -1, 0
 
-        # Create memoization table T with init -inf, where T[i] is the result
-        # with nums[i] as the previous element considered in LIS or not.
+        # Use memoization table T where T[i][j] is LIS from index j with previous chosen index i.
         n = len(nums)
         T = [[-float('inf')] * n for _ in range(n + 1)]
         return self._LIS(nums, prev_idx, cur_idx, T)
