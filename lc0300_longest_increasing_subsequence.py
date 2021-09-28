@@ -24,7 +24,7 @@ from typing import List
 
 class SolutionRecur(object):
     def _LIS(self, nums: List[int], cur_idx: int, prev_max: int) -> int:
-        # Base case.
+        # Base case: index out of boundary.
         if cur_idx == len(nums):
             return 0
 
@@ -46,7 +46,7 @@ class SolutionRecur(object):
         Time complexity: O(2^n).
         Space complexity: O(n^2).
         """
-        # Apply top-down recursion starting from start index.
+        # Apply top-down recursion starting from left index.
         cur_idx = 0
         prev_max = -float('inf')
         return self._LIS(nums, cur_idx, prev_max)
