@@ -58,8 +58,8 @@ class SolutionMemo(object):
         if cur_idx == len(nums):
             return 0
 
-        if T[prev_idx + 1][cur_idx] >= 0:
-            return T[prev_idx + 1][cur_idx]
+        if T[prev_idx][cur_idx] >= 0:
+            return T[prev_idx][cur_idx]
 
         # LIS is 1 + LIS including nums[cur_idx], if bigger than prev_max.
         lis_in = 0
@@ -69,8 +69,8 @@ class SolutionMemo(object):
         # LIS of nums[cur_idx+1:n], excluding nums[cur_idx].
         lis_out = self._LIS(nums, prev_idx, cur_idx + 1, T)
 
-        T[prev_idx + 1][cur_idx] = max(lis_in, lis_out)
-        return T[prev_idx + 1][cur_idx]
+        T[prev_idx][cur_idx] = max(lis_in, lis_out)
+        return T[prev_idx][cur_idx]
 
     def lengthOfLIS(self, nums: List[int]) -> int:
         """Length of LIS by recursion with memoization.
@@ -85,7 +85,7 @@ class SolutionMemo(object):
 
         # Use memoization table T where T[i][j] is LIS from index j with previous chosen index i.
         n = len(nums)
-        T = [[-float('inf')] * n for _ in range(n + 1)]
+        T = [[-float('inf')] * n for _ in range(n)]
         return self._LIS(nums, prev_idx, cur_idx, T)
 
 
