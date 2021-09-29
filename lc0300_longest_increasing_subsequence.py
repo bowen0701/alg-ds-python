@@ -101,10 +101,12 @@ class SolutionDP(object):
             return 0
 
         # Apply bottom-up DP with table T with T[i] denoting LIS up to i.
-        T = [1] * len(nums)
+        n = len(nums)
+
+        T = [1] * n
 
         # Apply two pointer method: for each r, check if num[l] < num[r], l < r.
-        for r in range(len(nums)):
+        for r in range(n):
             for l in range(r):
                 if nums[l] < nums[r] and T[l] + 1 > T[r]:
                     T[r] = T[l] + 1
