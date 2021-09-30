@@ -39,8 +39,7 @@ class SolutionRecur(object):
         return max(lis_in, lis_out)
 
     def lengthOfLIS(self, nums: List[int]) -> int:
-        """Length of LIS by recursion.
-
+        """
         Time limit exceeded.
 
         Time complexity: O(2^n).
@@ -73,8 +72,7 @@ class SolutionMemo(object):
         return T[prev_idx][cur_idx]
 
     def lengthOfLIS(self, nums: List[int]) -> int:
-        """Length of LIS by recursion with memoization.
-
+        """
         Time limit exceeded.
 
         Time complexity: O(n^2).
@@ -91,8 +89,7 @@ class SolutionMemo(object):
 
 class SolutionDP(object):
     def lengthOfLIS(self, nums: List[int]) -> int:
-        """Length of LIS by dynamic programming.
-        
+        """
         Time complexity: O(n^2), where n is the length of the nums.
         Space complexity: O(n).
         """
@@ -117,8 +114,7 @@ class SolutionDP(object):
 
 class SolutionBinarySearch(object):
     def lengthOfLIS(self, nums: List[int]) -> int:
-        """Length of LIS by binary search.
-        
+        """
         Time complexity: O(n*logn), where n is the length of the nums.
         Space complexity: O(n).
         """
