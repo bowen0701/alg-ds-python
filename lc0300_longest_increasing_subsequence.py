@@ -122,15 +122,14 @@ class SolutionBinarySearch(object):
         if not nums:
             return 0
 
-        # Store the smallest tails T of all increasing subsequences
-        # with length i+1 in T[i].
+        # Store the smallest tails T of all increasing subsequences with length i+1 in T[i].
         T = [0] * len(nums)
-        lis = 0
+        result = 0
  
         # If n is larger than all smallest tails, append it and increase length by 1.
         # If not, binary-search to find biggest i - 1 s.t. T[i-1] < n <= T[i], update T[i].
         for n in nums:
-            left, right = 0, lis
+            left, right = 0, result
             while left < right:
                 mid = left + (right - left) // 2
                 if T[mid] < n:
@@ -139,9 +138,9 @@ class SolutionBinarySearch(object):
                     right = mid
 
             T[left] = n
-            lis = max(left + 1, lis)
+            result = max(left + 1, result)
 
-        return lis
+        return result
 
 
 def main():
