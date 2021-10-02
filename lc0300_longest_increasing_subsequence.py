@@ -123,10 +123,6 @@ class SolutionBinarySearch(object):
             return 0
 
         # Store the smallest tails T of all increasing subsequences with len i+1 in T[i]:
-        # Suppose nums = [4,5,6,3].
-        # len = 1: [4], [5], [6], [3] => T[0] = 3
-        # len = 2: [4, 5], [5, 6]     => T[1] = 5
-        # len = 3: [4, 5, 6]          => T[2] = 6
         # (1) If n is larger than all smallest tails, append it and increase length by 1.
         # (2) if T[i-1] < n <= T[i], update T[i]
         # This will maintain the tails invariant. Then the result is just the size.
@@ -135,6 +131,7 @@ class SolutionBinarySearch(object):
  
         for n in nums:
             # Apply binary search to append to the last or update T[i].
+            # [4,5,0,0]
             left, right = 0, size
             while left < right:
                 mid = left + (right - left) // 2
@@ -154,7 +151,7 @@ def main():
     import time
 
     # Output: 4.
-    nums = [10, 9, 2, 5, 3, 7, 101, 18]
+    nums = [10, 9, 2, 5, 3, 7, 101, 6]
 
     start_time = time.time()
     print(SolutionRecur().lengthOfLIS(nums))
@@ -172,8 +169,27 @@ def main():
     print(SolutionBinarySearch().lengthOfLIS(nums))
     print('By binary search: {}'.format(time.time() - start_time))
 
-    # Output: 20.
-    nums = range(20)
+    # Output: 4
+    nums = [0, 1, 0, 3, 2, 3]
+
+    start_time = time.time()
+    print(SolutionRecur().lengthOfLIS(nums))
+    print('By recur: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print(SolutionMemo().lengthOfLIS(nums))
+    print('By memo: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print(SolutionDP().lengthOfLIS(nums))
+    print('By DP: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print(SolutionBinarySearch().lengthOfLIS(nums))
+    print('By binary search: {}'.format(time.time() - start_time))
+
+    # Output: 1
+    nums = [7,7,7,7,7,7,7]
 
     start_time = time.time()
     print(SolutionRecur().lengthOfLIS(nums))
