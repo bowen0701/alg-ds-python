@@ -146,6 +146,35 @@ class SolutionBinarySearchGreedy(object):
         return size
 
 
+class SolutionBinarySearchBisectLeftGreedy(object):
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        """
+        Time complexity: O(n*logn), where n is the length of the nums.
+        Space complexity: O(n).
+        """
+        from bisect import bisect_left
+
+        # Edge case.
+        if not nums:
+            return 0
+
+        # Store the smallest tails T of all increasing subsequences with len i+1 in T[i]:
+        # (1) If n is larger than all smallest tails, append it and increase length by 1.
+        # (2) if T[i-1] < n <= T[i], update T[i]
+        # This will maintain the tails invariant. Then the result is just the size.
+        T = [0] * len(nums)
+        size = 0
+ 
+        for n in nums:
+            # Apply binary search to append to the last or update T[i].
+            left = bisect_left(T, n, lo=0, hi=size)
+            T[left] = n
+
+            size = max(left + 1, size)
+
+        return size
+
+
 def main():
     import time
 
@@ -166,7 +195,11 @@ def main():
 
     start_time = time.time()   
     print(SolutionBinarySearchGreedy().lengthOfLIS(nums))
-    print('By binary search: {}'.format(time.time() - start_time))
+    print('By binary search greedy: {}'.format(time.time() - start_time))
+
+    start_time = time.time()   
+    print(SolutionBinarySearchBisectLeftGreedy().lengthOfLIS(nums))
+    print('By binary search bisect greedy: {}'.format(time.time() - start_time))
 
     # Output: 4
     nums = [0, 1, 0, 3, 2, 3]
@@ -185,7 +218,11 @@ def main():
 
     start_time = time.time()
     print(SolutionBinarySearchGreedy().lengthOfLIS(nums))
-    print('By binary search: {}'.format(time.time() - start_time))
+    print('By binary search greedy: {}'.format(time.time() - start_time))
+
+    start_time = time.time()   
+    print(SolutionBinarySearchBisectLeftGreedy().lengthOfLIS(nums))
+    print('By binary search bisect greedy: {}'.format(time.time() - start_time))
 
     # Output: 1
     nums = [7,7,7,7,7,7,7]
@@ -204,7 +241,11 @@ def main():
 
     start_time = time.time()   
     print(SolutionBinarySearchGreedy().lengthOfLIS(nums))
-    print('By binary search: {}'.format(time.time() - start_time))
+    print('By binary search greedy: {}'.format(time.time() - start_time))
+
+    start_time = time.time()   
+    print(SolutionBinarySearchBisectLeftGreedy().lengthOfLIS(nums))
+    print('By binary search bisect greedy: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
