@@ -131,7 +131,6 @@ class SolutionBinarySearchGreedy(object):
  
         for n in nums:
             # Apply binary search to append to the last or update T[i].
-            # [4,5,0,0]
             left, right = 0, size
             while left < right:
                 mid = left + (right - left) // 2
