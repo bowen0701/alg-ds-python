@@ -112,7 +112,7 @@ class SolutionDP(object):
         return max(T)
 
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearchGreedy(object):
     def lengthOfLIS(self, nums: List[int]) -> int:
         """
         Time complexity: O(n*logn), where n is the length of the nums.
@@ -166,7 +166,7 @@ def main():
     print('By DP: {}'.format(time.time() - start_time))
 
     start_time = time.time()   
-    print(SolutionBinarySearch().lengthOfLIS(nums))
+    print(SolutionBinarySearchGreedy().lengthOfLIS(nums))
     print('By binary search: {}'.format(time.time() - start_time))
 
     # Output: 4
@@ -185,7 +185,7 @@ def main():
     print('By DP: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print(SolutionBinarySearch().lengthOfLIS(nums))
+    print(SolutionBinarySearchGreedy().lengthOfLIS(nums))
     print('By binary search: {}'.format(time.time() - start_time))
 
     # Output: 1
@@ -204,7 +204,7 @@ def main():
     print('By DP: {}'.format(time.time() - start_time))
 
     start_time = time.time()   
-    print(SolutionBinarySearch().lengthOfLIS(nums))
+    print(SolutionBinarySearchGreedy().lengthOfLIS(nums))
     print('By binary search: {}'.format(time.time() - start_time))
 
 
