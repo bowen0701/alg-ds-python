@@ -225,7 +225,7 @@ def main():
     print('By binary search bisect greedy: {}'.format(time.time() - start_time))
 
     # Output: 1
-    nums = [7,7,7,7,7,7,7]
+    nums = [7, 7, 7, 7, 7, 7, 7]
 
     start_time = time.time()
     print(SolutionRecur().lengthOfLIS(nums))
