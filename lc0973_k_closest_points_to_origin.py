@@ -42,54 +42,54 @@ class SolutionMaxHeap(object):
         """
         import heapq
 
-        # Use maxheap with "negative" distances since heapq is min heap.
-        negdist_point_maxhq = []
+        # Use maxheap with "negative" distance since heapq is min heap.
+        negdistance_point_maxhq = []
 
-        negdists = [-(p[0] ** 2 + p[1] ** 2) for p in points]
-        negdists_points = zip(negdists, points)
+        negdistances = [-(p[0] ** 2 + p[1] ** 2) for p in points]
+        negdistances_points = zip(negdistances, points)
 
-        for (nd, pt) in negdists_points:
-            heapq.heappush(negdist_point_maxhq, (nd, pt))
+        for (nd, pt) in negdistances_points:
+            heapq.heappush(negdistance_point_maxhq, (nd, pt))
 
             # Keep K points in maxheap.
-            if len(negdist_point_maxhq) > k:
-                heapq.heappop(negdist_point_maxhq)
+            if len(negdistance_point_maxhq) > k:
+                heapq.heappop(negdistance_point_maxhq)
 
-        k_points = [pt for (nd, pt) in negdist_point_maxhq]
+        k_points = [pt for (nd, pt) in negdistance_point_maxhq]
         return k_points
 
 
 class SolutionSelection(object):
-    def _select(self, dists: List[int], k: int) -> int:
-        # Select smaller & larger distances by pivot distance.
-        n = len(dists)
-        pivot_dist = dists[n // 2]
+    def _select(self, distances: List[int], k: int) -> int:
+        # Select smaller & larger distance by pivot distanceance.
+        n = len(distances)
+        pivot_distance = distances[n // 2]
 
-        small_dist = [d for d in dists if d < pivot_dist]
-        mid_dist = [d for d in dists if d == pivot_dist]
-        large_dist = [d for d in dists if d > pivot_dist]
+        small_distance = [d for d in distances if d < pivot_distance]
+        mid_distance = [d for d in distances if d == pivot_distance]
+        large_distance = [d for d in distances if d > pivot_distance]
 
-        n_smalls = len(small_dist)
-        n_mids = len(mid_dist)
+        n_smalls = len(small_distance)
+        n_mids = len(mid_distance)
 
         if k <= n_smalls:
-            return self._select(small_dist, k)
+            return self._select(small_distance, k)
         elif n_smalls < k <= n_smalls + n_mids:
-            return pivot_dist
+            return pivot_distance
         else:
-            return self._select(large_dist, k - n_smaller - n_mids)
+            return self._select(large_distance, k - n_smaller - n_mids)
 
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
         """
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        dists = [p[0] ** 2 + p[1] ** 2 for p in points]
-        k_dist = self._select(dists, k)
+        distances = [p[0] ** 2 + p[1] ** 2 for p in points]
+        k_distance = self._select(distances, k)
 
         k_points = []
-        for (d, p) in zip(dists, points):
-            if d <= k_dist:
+        for (d, p) in zip(distances, points):
+            if d <= k_distance:
                 # For fast list append.
                 k_points += p,
         
