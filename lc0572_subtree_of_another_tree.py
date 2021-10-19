@@ -48,7 +48,7 @@ class TreeNode(object):
         self.right = right
 
 
-class SolutionPreorderSubtreeTreeMatchRecur(object):
+class SolutionPreorderSubtreeTreeMatchRecur:
     def _isTreeMatch(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         # Base case.
         if not root or not subRoot:
@@ -78,6 +78,15 @@ class SolutionPreorderSubtreeTreeMatchRecur(object):
 
         return (self.isSubtree(root.left, subRoot)
                 or self.isSubtree(root.right, subRoot))
+
+
+class SolutionTreeSerializationStringSearchKmp:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        """
+        Time complexity
+        Space complexity
+        """
+        pass
 
 
 def main():
