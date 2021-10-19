@@ -23,23 +23,24 @@ For the purpose of this problem, we will return 0 when needle is an empty string
 This is consistent to C's strstr() and Java's indexOf().
 """
 
-class Solution(object):
-    def strStr(self, haystack, needle):
+class SolutionSlidingWindowMatch(object):
+    def strStr(self, haystack: str, needle: str) -> int:
         """
-        :type haystack: str
-        :type needle: str
-        :rtype: int
-
         Time complexity: O(n*m), where 
           - n is the length of haystack,
           - m is the length of needle.
         Space complexity: O(m).
         """
+        # Edge cases.
         if not needle:
             return 0
 
+        if not haystack:
+            return -1
+
         len_haystack, len_needle = len(haystack), len(needle)
 
+        # Iteratively starting from the left, match sliding windows.
         for i in range(len_haystack - len_needle + 1):
             if haystack[i:(i+len_needle)] == needle:
                 return i
@@ -50,11 +51,11 @@ class Solution(object):
 def main():
     haystack = "hello"
     needle = "ll"
-    print Solution().strStr(haystack, needle)
+    print SolutionSlidingWindowMatch().strStr(haystack, needle)
 
     haystack = "aaaaa"
     needle = "bba"
-    print Solution().strStr(haystack, needle)
+    print SolutionSlidingWindowMatch().strStr(haystack, needle)
 
 
 if __name__ == '__main__':
