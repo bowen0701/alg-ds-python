@@ -71,7 +71,7 @@ class SolutionPreorderSubtreeTreeMatchRecur:
         if not root:
             return False
 
-        # Check tree match first    : if yes return True, if not, start checking left/right subtrees.
+        # Check tree match first: if yes return True, if not, start checking left/right subtrees.
         # Preorder traversal: root->left->right, check if matches or subtree of left or right.
         if self._isTreeMatch(root, subRoot):
             return True
