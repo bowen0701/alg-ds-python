@@ -23,7 +23,7 @@ For the purpose of this problem, we will return 0 when needle is an empty string
 This is consistent to C's strstr() and Java's indexOf().
 """
 
-class SolutionSlidingWindowMatch(object):
+class SolutionSlidingWindowMatch:
     def strStr(self, haystack: str, needle: str) -> int:
         """
         Time complexity: O(n*m), where 
@@ -46,6 +46,15 @@ class SolutionSlidingWindowMatch(object):
                 return i
 
         return -1
+
+
+class SolutionKmp:
+    def strStr(self, haystack: str, needle: str) -> int:
+        """
+        Time complexity
+        Space complexity
+        """
+        pass
 
 
 def main():
