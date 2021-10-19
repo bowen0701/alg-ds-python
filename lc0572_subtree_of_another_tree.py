@@ -48,7 +48,7 @@ class TreeNode(object):
         self.right = right
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderSubtreeTreeMatchRecur(object):
     def _isTreeMatch(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         # Base case.
         if not root or not subRoot:
@@ -71,6 +71,7 @@ class SolutionPreorderRecur(object):
         if not root:
             return False
 
+        # Check tree match first    : if yes return True, if not, start checking left/right subtrees.
         # Preorder traversal: root->left->right, check if matches or subtree of left or right.
         if self._isTreeMatch(root, subRoot):
             return True
@@ -99,7 +100,7 @@ def main():
     subRoot = TreeNode(4)
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
-    print(SolutionPreorderRecur().isSubtree(root, subRoot))
+    print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
 
     # Given tree s:
     #      3
@@ -123,7 +124,7 @@ def main():
     subRoot = TreeNode(4)
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
-    print(SolutionPreorderRecur().isSubtree(root, subRoot))
+    print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
 
 
 if __name__ == '__main__':
