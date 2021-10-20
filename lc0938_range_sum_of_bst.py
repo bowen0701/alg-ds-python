@@ -55,7 +55,7 @@ class SolutionPreorderBT:
         return self.result
 
 
-class SolutionBFSLevelBT(object):
+class SolutionBFSLevelBT:
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         """
         Time complexity: O(n).
@@ -84,6 +84,15 @@ class SolutionBFSLevelBT(object):
                     queue.appendleft(current.right)
 
         return result
+
+
+class SolutionBST:
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        """
+        Time complexity: O(n).
+        Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
+        """
+        pass
 
 
 def main():
