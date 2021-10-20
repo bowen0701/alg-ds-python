@@ -31,7 +31,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionDFSRecur(object):
     def minDepth(self, root: Optional[TreeNode]) -> int:
         """
         Time complexity: O(n).
@@ -41,14 +41,20 @@ class SolutionRecur(object):
         if not root:
             return 0
 
-        left_depth = self.minDepth(root.left)
-        right_depth = self.minDepth(root.right)
-        min_depth = min(left_depth, right_depth)
-        if min_depth > 0:
-            return 1 + min_depth
-        else:
-            # For the case: one of left and right is None.
-            return 1 + max(left_depth, right_depth)
+        # Edge case: no child node.
+        if not root.left and not root.right:
+            return 1 
+
+        # If no left node, start from root to check min depth of right node.
+        if not root.left:
+            return 1 + self.minDepth(root.right)
+
+        # If no right node, start from root to check min depth of left node.
+        if not root.right:
+            return 1 + self.minDepth(root.left)
+
+        # If both left & right nodes exist, start from root to check min depth of both.
+        return 1 + min(self.minDepth(root.left), self.minDepth(root.right))
 
 
 class SolutionLevelBFS(object):
@@ -88,7 +94,7 @@ def main():
     # Output: 2
     root = TreeNode(1)
     root.left = TreeNode(2)
-    print(SolutionRecur().minDepth(root))
+    print(SolutionDFSRecur().minDepth(root))
     print(SolutionLevelBFS().minDepth(root))
 
     # Tree: [3,9,20,null,null,15,7],
@@ -102,8 +108,8 @@ def main():
     root.left = TreeNode(9)
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
-    root.right.right = TreeNode(7)    
-    print(SolutionRecur().minDepth(root))
+    root.right.right = TreeNode(7)
+    print(SolutionDFSRecur().minDepth(root))
     print(SolutionLevelBFS().minDepth(root))
 
 
