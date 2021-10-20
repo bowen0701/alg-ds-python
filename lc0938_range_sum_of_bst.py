@@ -32,7 +32,7 @@ class TreeNode(object):
         self.right = right
 
 
-class SolutionPreorder:
+class SolutionPreorderBT:
     def _preorder(self, root: Optional[TreeNode], low: int, high: int) -> None:
         # Base cases: no node or out of boundary.
         if not root:
@@ -55,7 +55,7 @@ class SolutionPreorder:
         return self.result
 
 
-class SolutionBFSLevel(object):
+class SolutionBFSLevelBT(object):
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         """
         Time complexity: O(n).
@@ -101,11 +101,11 @@ def main():
     high = 15
 
     start_time = time.time()
-    print(SolutionPreorder().rangeSumBST(root, low, high))
+    print(SolutionPreorderBT().rangeSumBST(root, low, high))
     print("Preorder:", time.time() - start_time)
 
     start_time = time.time()
-    print(SolutionBFSLevel().rangeSumBST(root, low, high))
+    print(SolutionBFSLevelBT().rangeSumBST(root, low, high))
     print("BFS Level:", time.time() - start_time)
 
     # Input: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
@@ -123,11 +123,11 @@ def main():
     high = 10
 
     start_time = time.time()
-    print(SolutionPreorder().rangeSumBST(root, low, high))
+    print(SolutionPreorderBT().rangeSumBST(root, low, high))
     print("Preorder:", time.time() - start_time)
 
     start_time = time.time()
-    print(SolutionBFSLevel().rangeSumBST(root, low, high))
+    print(SolutionBFSLevelBT().rangeSumBST(root, low, high))
     print("BFS Level:", time.time() - start_time)
 
 
