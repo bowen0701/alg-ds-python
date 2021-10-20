@@ -49,6 +49,10 @@ class SolutionPreorderBT:
         Time complexity: O(n).
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
         """
+        # Edge case.
+        if not root: 
+            return 0
+
         # Apply recursive preorder traversal.
         self.result = 0
         self._preorder(root, low, high)
@@ -62,6 +66,10 @@ class SolutionBFSLevelBT:
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
         """
         from collections import deque
+
+        # Edge case.
+        if not root: 
+            return 0
 
         # Apply BFS level-traversal with queue.
         result = 0
