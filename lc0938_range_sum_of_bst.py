@@ -100,7 +100,18 @@ class SolutionBST:
         Time complexity: O(n).
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
         """
-        pass
+        if not root:
+            return 0
+
+        if root.val < low:
+            return self.rangeSumBST(root.right, low, high)
+
+        if root.val > high:
+            return self.rangeSumBST(root.left, low, high)
+
+        return (root.val
+                + self.rangeSumBST(root.left, low, high)
+                + self.rangeSumBST(root.right, low, high))
 
 
 def main():
@@ -119,11 +130,15 @@ def main():
 
     start_time = time.time()
     print(SolutionPreorderBT().rangeSumBST(root, low, high))
-    print("Preorder:", time.time() - start_time)
+    print("Preorder BT:", time.time() - start_time)
 
     start_time = time.time()
     print(SolutionBFSLevelBT().rangeSumBST(root, low, high))
-    print("BFS Level:", time.time() - start_time)
+    print("BFS Level BT:", time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBST().rangeSumBST(root, low, high))
+    print("BST:", time.time() - start_time)
 
     # Input: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
     # Output: 23
@@ -141,11 +156,15 @@ def main():
 
     start_time = time.time()
     print(SolutionPreorderBT().rangeSumBST(root, low, high))
-    print("Preorder:", time.time() - start_time)
+    print("Preorder BT:", time.time() - start_time)
 
     start_time = time.time()
     print(SolutionBFSLevelBT().rangeSumBST(root, low, high))
-    print("BFS Level:", time.time() - start_time)
+    print("BFS Level BT:", time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBST().rangeSumBST(root, low, high))
+    print("BST:", time.time() - start_time)
 
 
 if __name__ == '__main__':
