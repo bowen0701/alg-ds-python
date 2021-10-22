@@ -37,7 +37,7 @@ Given tree t:
 Return false.
 """
 
-from typing import Optional
+from typing import List, Optional
 
 
 # Definition for a binary tree node.
@@ -80,13 +80,89 @@ class SolutionPreorderSubtreeTreeMatchRecur:
                 or self.isSubtree(root.right, subRoot))
 
 
-class SolutionTreeSerializationStringSearchKmp:
+class SolutionTreeSerializationSubstringSearchBruteForce:
+    def _serialize(self, root: Optional[TreeNode], root_chars: List[Optional[int]]) -> None:
+        # Base cases.
+        if not root:
+            root_chars.append('#')
+            return None
+
+        # Apply preorder traversal: root->left->right, to serialize tree.
+        root_chars.append(str(root.val))
+        self._serialize(root.left, root_chars)
+        self._serialize(root.right, root_chars)
+
+    def _substring_search(self, root_chars: List[str], sub_root_chars: List[str]) -> bool:
+        len_root = len(root_chars)
+        len_sub_root = len(sub_root_chars)
+
+        for i in range(len_root - len_sub_root):
+            for j in range(len_sub_root):
+                if root_chars[i + j] != sub_root_chars[j]:
+                    break
+                if j == len_sub_root - 1:
+                    return i
+        return len_root
+
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        """
+        Time complexity: O(m*n + m + n) = O(m*n)
+        Space complexity: O(m + n)
+        """
+        # Edge cases.
+        if not root:
+            return False
+
+        # Apply preorder traversal for tree & subTree serialization.
+        root_chars = []
+        self._serialize(root, root_chars)
+
+        sub_root_chars = []
+        self._serialize(subRoot, sub_root_chars)
+
+        # Apply substring search brute force algorithm.
+        result = self._substring_search(root_chars, sub_root_chars)
+        if result == len(root_chars):
+            return False
+        else:
+            return True
+
+
+class SolutionTreeSerializationSubstringSearchKmp:
+    def serialize(self, root: Optional[TreeNode], root_vals: List[Optional[int]]) -> None:
+        # Base cases.
+        if not root:
+            root_vals.append(None)
+            return None
+
+        # Apply preorder traversal: root->left->right, to serialize tree.
+        root_vals.append(root.val)
+        self.serialize(root.left, root_vals)
+        self.serialize(root.right, root_vals)
+
+    def KMP(self, root_str: str, sub_root_str: str) -> bool:
+        pass
+
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         """
         Time complexity
         Space complexity
         """
-        pass
+        # Edge cases.
+        if not root:
+            return False
+
+        # Apply preorder traversal for tree serialization.
+        root_vals = []
+        self.serialize(root, root_vals)
+        print(f"root_vals: {root_vals}")
+
+        sub_root_vals = []
+        self.serialize(subRoot, sub_root_vals)
+        print(f"sub_root_vals: {sub_root_vals}")
+
+        # Apply KMP algorithm for string matching.
+        return self.KMP(root_vals, sub_root_vals)
 
 
 def main():
@@ -110,6 +186,8 @@ def main():
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
+    print(SolutionTreeSerializationSubstringSearchBruteForce().isSubtree(root, subRoot))
+    # print(SolutionTreeSerializationStringSearchKmp().isSubtree(root, subRoot))
 
     # Given tree s:
     #      3
@@ -134,6 +212,8 @@ def main():
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
+    print(SolutionTreeSerializationSubstringSearchBruteForce().isSubtree(root, subRoot))
+    # print(SolutionTreeSerializationStringSearchKmp().isSubtree(root, subRoot))
 
 
 if __name__ == '__main__':
