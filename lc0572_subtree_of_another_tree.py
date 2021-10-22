@@ -92,7 +92,7 @@ class SolutionTreeSerializationSubstringSearchBruteForce:
         self._serialize(root.left, root_chars)
         self._serialize(root.right, root_chars)
 
-    def _substring_search(self, root_chars: List[str], sub_root_chars: List[str]) -> bool:
+    def _substring_search(self, root_chars: List[str], sub_root_chars: List[str]) -> int:
         len_root = len(root_chars)
         len_sub_root = len(sub_root_chars)
 
@@ -101,7 +101,10 @@ class SolutionTreeSerializationSubstringSearchBruteForce:
                 if root_chars[i + j] != sub_root_chars[j]:
                     break
                 if j == len_sub_root - 1:
+                    # Substring is matched.
                     return i
+
+        # Substring is not matched.
         return len_root
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
@@ -140,7 +143,7 @@ class SolutionTreeSerializationSubstringSearchKmp:
         self.serialize(root.left, root_vals)
         self.serialize(root.right, root_vals)
 
-    def KMP(self, root_str: str, sub_root_str: str) -> bool:
+    def KMP(self, root_chars: str, sub_root_chars: str) -> int:
         pass
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
@@ -153,16 +156,14 @@ class SolutionTreeSerializationSubstringSearchKmp:
             return False
 
         # Apply preorder traversal for tree serialization.
-        root_vals = []
-        self.serialize(root, root_vals)
-        print(f"root_vals: {root_vals}")
+        root_chars = []
+        self.serialize(root, root_chars)
 
-        sub_root_vals = []
-        self.serialize(subRoot, sub_root_vals)
-        print(f"sub_root_vals: {sub_root_vals}")
+        sub_root_chars = []
+        self.serialize(subRoot, sub_root_chars)
 
         # Apply KMP algorithm for string matching.
-        return self.KMP(root_vals, sub_root_vals)
+        result = self.KMP(root_chars, sub_root_chars)
 
 
 def main():
