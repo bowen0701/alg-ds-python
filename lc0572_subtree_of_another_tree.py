@@ -80,7 +80,7 @@ class SolutionPreorderSubtreeTreeMatchRecur:
                 or self.isSubtree(root.right, subRoot))
 
 
-class SolutionTreeSerializationSubstringSearchBruteForce:
+class SolutionTreeSerializationBruteForceSubstringSearch:
     def _serialize(self, root: Optional[TreeNode], root_chars: List[Optional[int]]) -> None:
         # Base cases.
         if not root:
@@ -131,7 +131,7 @@ class SolutionTreeSerializationSubstringSearchBruteForce:
             return True
 
 
-class SolutionTreeSerializationSubstringSearchKmp:
+class SolutionTreeSerializationKMPSubstringSearch:
     def _serialize(self, root: Optional[TreeNode], root_vals: List[Optional[int]]) -> None:
         # Base cases.
         if not root:
@@ -143,7 +143,7 @@ class SolutionTreeSerializationSubstringSearchKmp:
         self._serialize(root.left, root_vals)
         self._serialize(root.right, root_vals)
 
-    def _substring_search_KMP(self, root_strs: str, sub_root_strs: str) -> int:
+    def _KMP_substring_search(self, root_strs: str, sub_root_strs: str) -> int:
         pass
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
@@ -163,7 +163,7 @@ class SolutionTreeSerializationSubstringSearchKmp:
         self._serialize(subRoot, sub_root_strs)
 
         # Apply KMP algorithm for string matching.
-        result = self._substring_search_KMP(root_strs, sub_root_strs)
+        result = self._KMP_substring_search(root_strs, sub_root_strs)
         if result == len(root_strs):
             return False
         else:
@@ -191,8 +191,8 @@ def main():
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
-    print(SolutionTreeSerializationSubstringSearchBruteForce().isSubtree(root, subRoot))
-    # print(SolutionTreeSerializationStringSearchKmp().isSubtree(root, subRoot))
+    print(SolutionTreeSerializationBruteForceSubstringSearch().isSubtree(root, subRoot))
+    # print(SolutionTreeSerializationKMPStringSearch().isSubtree(root, subRoot))
 
     # Given tree s:
     #      3
@@ -217,8 +217,8 @@ def main():
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
-    print(SolutionTreeSerializationSubstringSearchBruteForce().isSubtree(root, subRoot))
-    # print(SolutionTreeSerializationStringSearchKmp().isSubtree(root, subRoot))
+    print(SolutionTreeSerializationBruteForceSubstringSearch().isSubtree(root, subRoot))
+    # print(SolutionTreeSerializationKMPStringSearch().isSubtree(root, subRoot))
 
 
 if __name__ == '__main__':
