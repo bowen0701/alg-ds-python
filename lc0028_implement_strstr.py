@@ -51,6 +51,33 @@ class SolutionSlidingWindowMatch:
         return -1
 
 
+class SolutionKMP:
+    def _kmp_longest_prefix_suffix(self, needle: str) -> List[int]:
+        n_needle = len(needle)
+        T = [0]
+
+    def _kmp_substring_search(self, haystack: str, needle: str) -> bool:
+        # Edge case.
+        if not needle:
+            return False
+
+        n_haystack, n_needle = len(haystack), len(needle)
+
+        # TODO: continue implementation for KMP substring search.
+        return -1
+
+    def strStr(self, haystack: str, needle: str) -> int:
+        """
+        Time complexity
+        Space complexity
+        """
+        result = self._kmp_substring_search(haystack, needle)
+        if result < len(haystack):
+            return result
+        else:
+            return -1
+
+
 def main():
     # Output: 2
     haystack = "hello"
