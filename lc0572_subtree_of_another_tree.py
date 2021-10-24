@@ -171,6 +171,8 @@ class SolutionTreeSerializationKMPSubstringSearch:
 
 
 def main():
+    import time
+
     # Given tree s:
     #      3
     #     / \
@@ -190,8 +192,15 @@ def main():
     subRoot = TreeNode(4)
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
+
+    start_time = time.time()
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
+    print(f"PreorderSubtreeTreeMatchRecur: {start_time - time.time()}")
+
+    start_time = time.time()
     print(SolutionTreeSerializationBruteForceSubstringSearch().isSubtree(root, subRoot))
+    print(f"TreeSerializationBruteForceSubstringSearch: {start_time - time.time()}")
+
     # print(SolutionTreeSerializationKMPStringSearch().isSubtree(root, subRoot))
 
     # Given tree s:
@@ -216,8 +225,15 @@ def main():
     subRoot = TreeNode(4)
     subRoot.left = TreeNode(1)
     subRoot.right = TreeNode(2)
+
+    start_time = time.time()
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
+    print(f"PreorderSubtreeTreeMatchRecur: {start_time - time.time()}")
+
+    start_time = time.time()
     print(SolutionTreeSerializationBruteForceSubstringSearch().isSubtree(root, subRoot))
+    print(f"TreeSerializationBruteForceSubstringSearch: {start_time - time.time()}")
+
     # print(SolutionTreeSerializationKMPStringSearch().isSubtree(root, subRoot))
 
 
