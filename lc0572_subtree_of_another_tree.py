@@ -93,19 +93,19 @@ class SolutionTreeSerializationBruteForceSubstringSearch:
         self._serialize(root.right, root_chars)
 
     def _substring_search(self, root_strs: List[str], sub_root_strs: List[str]) -> int:
-        len_root = len(root_strs)
-        len_sub_root = len(sub_root_strs)
+        n_root = len(root_strs)
+        n_sub_root = len(sub_root_strs)
 
-        for i in range(len_root - len_sub_root):
-            for j in range(len_sub_root):
+        for i in range(n_root - n_sub_root):
+            for j in range(n_sub_root):
                 if root_strs[i + j] != sub_root_strs[j]:
                     break
-                if j == len_sub_root - 1:
+                if j == n_sub_root - 1:
                     # Substring is matched.
                     return i
 
         # Substring is not matched.
-        return len_root
+        return n_root
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         """
@@ -143,7 +143,7 @@ class SolutionTreeSerializationKMPSubstringSearch:
         self._serialize(root.left, root_vals)
         self._serialize(root.right, root_vals)
 
-    def _KMP_substring_search(self, root_strs: str, sub_root_strs: str) -> int:
+    def _kmp_substring_search(self, root_strs: str, sub_root_strs: str) -> int:
         pass
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
