@@ -20,13 +20,12 @@ Your algorithm's time complexity must be better than O(n log n),
 where n is the array's size.
 """
 
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
+from typing import List
 
+
+class SolutionNumberFreqSort(object):
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        """
         Time complexity: O(n*logn), where n is the number of nums.
         Space complexity: O(n).
         """
@@ -39,9 +38,9 @@ class Solution(object):
             num_freq_d[n] += 1
 
         # Sort num->freq dict by freq. 
-        sorted_num_freqs = sorted(num_freq_d.items(),
-                                  key=lambda x: x[1],
-                                  reverse=True)
+        sorted_num_freqs = sorted(
+            num_freq_d.items(), key=lambda x: x[1], reverse=True
+        )
 
         # Take the top k num.
         topk_nums = [num for (num, freq) in sorted_num_freqs[:k]]
@@ -51,18 +50,18 @@ class Solution(object):
 def main():
     nums = [1, 1, 1, 2, 2, 3]
     k = 2
-    # Should be: [1,2]
-    print Solution().topKFrequent(nums, k)
+    # Output: [1,2]
+    print(SolutionNumberFreqSort().topKFrequent(nums, k))
 
     nums = [1]
     k = 1
-    # Should be: [1]
-    print Solution().topKFrequent(nums, k)
+    # Output: [1]
+    print(SolutionNumberFreqSort().topKFrequent(nums, k))
 
     nums = [3,2,3,1,2,4,5,5,6,7,7,8,2,3,1,1,1,10,11,5,6,2,4,7,8,5,6]
     k = 10
-    # Should be: [1,2,5,3,7,6,4,8,10,11]
-    print Solution().topKFrequent(nums, k)
+    # Output: [1,2,5,3,7,6,4,8,10,11]
+    print(SolutionNumberFreqSort().topKFrequent(nums, k))
 
 
 if __name__ == '__main__':
