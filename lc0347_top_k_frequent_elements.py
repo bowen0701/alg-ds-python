@@ -79,9 +79,12 @@ class SolutionNumberFreqDictMaxHeap(object):
 class SolutionNumberFreqDictMinHeap(object):
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         """
-        Time complexity: O(n*logn), where n is the number of nums.
-        Space complexity: O(n).
+        Time complexity: O(?), where n is the number of nums.
+        Space complexity: O(?).
         """
+        from collection import defaultdict
+        import heapq
+
         pass
 
 
