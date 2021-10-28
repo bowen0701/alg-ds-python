@@ -33,7 +33,27 @@ Output: false
 from typing import List
 
 
-class SolutionRowSearch(object):
+class SolutionBruteForce:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        """
+        Time complexity: O(m*n), where m is the row number, and n is column number.
+        Space complexity: O(1).
+        """
+        # Edge cases.
+        if not matrix or not matrix[0]:
+            return False
+
+        n_rows, n_cols = len(matrix), len(matrix[0])
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if matrix[r][c] == target:
+                    return True
+
+        return False
+
+
+class SolutionRowSearch:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
         Time complexity: O(m+n), where m is the row number, and n is column number.
@@ -61,7 +81,7 @@ class SolutionRowSearch(object):
         return False
 
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearch:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
         Time complexity: O(log(mn)).
@@ -106,6 +126,10 @@ def main():
     target = 3
 
     start_time = time.time()
+    print(SolutionBruteForce().searchMatrix(matrix, target))
+    print('Time for brute force:', time.time() - start_time)
+
+    start_time = time.time()
     print(SolutionRowSearch().searchMatrix(matrix, target))
     print('Time for row search:', time.time() - start_time)
 
@@ -122,6 +146,10 @@ def main():
         [23, 30, 34, 50]
     ]
     target = 13
+
+    start_time = time.time()
+    print(SolutionBruteForce().searchMatrix(matrix, target))
+    print('Time for brute force:', time.time() - start_time)
 
     start_time = time.time()
     print(SolutionRowSearch().searchMatrix(matrix, target))
