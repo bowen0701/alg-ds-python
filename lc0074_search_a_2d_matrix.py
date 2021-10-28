@@ -36,7 +36,7 @@ from typing import List
 class SolutionRowSearch(object):
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
-        Time complexity: O(mn), where m is the row number, and n is column number.
+        Time complexity: O(m+n), where m is the row number, and n is column number.
         Space complexity: O(1).
         """
         if not matrix or not matrix[0]:
