@@ -76,18 +76,18 @@ class SolutionBinarySearch(object):
 
         while left < right:
             mid = left + (right - left) // 2
-            i, j = mid // n_cols, mid % n_cols
+            r, c = mid // n_cols, mid % n_cols
 
-            if matrix[i][j] == target:
+            if matrix[r][c] == target:
                 return True
-            elif matrix[i][j] < target:
+            elif matrix[r][c] < target:
                 left = mid + 1
-            elif matrix[i][j] > target:
+            elif matrix[r][c] > target:
                 right = mid - 1
 
         # Finally check left = right case.
-        i, j = left // n_cols, left % n_cols
-        if matrix[i][j] == target:
+        r, c = left // n_cols, left % n_cols
+        if matrix[r][c] == target:
             return True
         else:
             return False
