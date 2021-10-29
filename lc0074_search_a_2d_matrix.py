@@ -171,6 +171,32 @@ class SolutionBinarySearch:
             return False
 
 
+class SolutionBinarySearch2:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        """
+        Time complexity: O(log(mn)).
+        Space complexity: O(1).
+        """
+        if not matrix or not matrix[0]:
+            return False
+
+        # Perform "special" binary search in 2D matrix.
+        n_rows, n_cols = len(matrix), len(matrix[0])
+        left, right = 0, n_rows * n_cols
+
+        while left < right:
+            mid = left + (right - left) // 2
+            r, c = mid // n_cols, mid % n_cols
+
+            if matrix[r][c] == target:
+                return True
+            elif matrix[r][c] < target:
+                left = mid + 1
+            elif matrix[r][c] > target:
+                right = mid
+
+        return False
+
 def main():
     import time
 
