@@ -81,6 +81,37 @@ class SolutionRowSearch:
         return False
 
 
+class SolutionRowBinarySearch:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        """
+        Time complexity: O(m*log(n)).
+        Space complexity: O(1).
+        """
+        if not matrix or not matrix[0]:
+            return False
+
+        # Perform binary search in rows of 2D matrix.
+        n_rows, n_cols = len(matrix), len(matrix[0])
+        for r in range(n_rows):
+            left, right = 0, n_cols - 1
+
+            while left < right:
+                mid = left + (right - left) // 2
+
+                if matrix[r][mid] == target:
+                    return True
+                elif matrix[r][mid] < target:
+                    left = mid + 1
+                elif matrix[r][mid] > target:
+                    right = mid - 1
+
+            # Finally check left = right case.
+            if matrix[r][left] == target:
+                return True
+
+        return False
+
+
 class SolutionBinarySearch:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
@@ -134,7 +165,11 @@ def main():
     print('Time for row search:', time.time() - start_time)
 
     start_time = time.time()
-    print(SolutionBinarySearch().searchMatrix(matrix, target))
+    print(SolutionRowBinarySearch2().searchMatrix(matrix, target))
+    print('Time for row binary search:', time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBinarySearch2().searchMatrix(matrix, target))
     print('Time for binary search:', time.time() - start_time)
 
 
@@ -156,7 +191,11 @@ def main():
     print('Time for row search:', time.time() - start_time)
 
     start_time = time.time()
-    print(SolutionBinarySearch().searchMatrix(matrix, target))
+    print(SolutionRowBinarySearch2().searchMatrix(matrix, target))
+    print('Time for row binary search:', time.time() - start_time)
+
+    start_time = time.time()
+    print(SolutionBinarySearch2().searchMatrix(matrix, target))
     print('Time for binary search:', time.time() - start_time)
 
 
