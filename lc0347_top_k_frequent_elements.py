@@ -63,15 +63,15 @@ class SolutionNumberFreqDictMaxHeap(object):
             num_freq_d[n] += 1
 
         # Push (freq, num) to max_heap.
-        max_heap = []
+        maxheap = []
 
         for (num, freq) in num_freq_d.items():
-            heapq.heappush(max_heap, (-freq, num))
+            heapq.heappush(maxheap, (-freq, num))
 
         # Pop the first k from max_heap.
         result = []
         for i in range(k):
-            result.append(heapq.heappop(max_heap)[1])
+            result.append(heapq.heappop(maxheap)[1])
 
         return result
 
