@@ -23,7 +23,12 @@ where n is the array's size.
 from typing import List
 
 
-class SolutionNumberFreqDictSort(object):
+class SolutionNubmerFreqDictBruteForce:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        pass
+
+
+class SolutionNumberFreqDictSort:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         """
         Time complexity: O(n*logn), where n is the number of nums.
@@ -47,7 +52,7 @@ class SolutionNumberFreqDictSort(object):
         return topk_nums
 
 
-class SolutionNumberFreqDictMaxHeap(object):
+class SolutionNumberFreqDictMaxHeap:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         """
         Time complexity: O(n*logn), where n is the number of nums.
@@ -76,7 +81,7 @@ class SolutionNumberFreqDictMaxHeap(object):
         return result
 
 
-class SolutionNumberFreqDictMinHeap(object):
+class SolutionNumberFreqDictMinHeap:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         """
         Time complexity: O(n*log(k)), where n is the number of nums.
@@ -100,6 +105,11 @@ class SolutionNumberFreqDictMinHeap(object):
 
         result = [num for (freq, num) in minheap]
         return result
+
+
+class SolutionNumberFreqDictBucketSort:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        pass
 
 
 def main():
