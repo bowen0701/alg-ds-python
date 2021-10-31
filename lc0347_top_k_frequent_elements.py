@@ -79,13 +79,27 @@ class SolutionNumberFreqDictMaxHeap(object):
 class SolutionNumberFreqDictMinHeap(object):
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         """
-        Time complexity: O(?), where n is the number of nums.
-        Space complexity: O(?).
+        Time complexity: O(n*log(k)), where n is the number of nums.
+        Space complexity: O(k).
         """
-        from collection import defaultdict
+        from collections import defaultdict
         import heapq
 
-        pass
+        num_freq_d = defaultdict(int)
+        for n in nums:
+            num_freq_d[n] += 1
+
+        # Push (freq, num) to min heap.
+        minheap = []
+
+        for num, freq in num_freq_d.items():
+            heapq.heappush(minheap, (freq, num))
+
+            if len(minheap) > k:
+                heapq.heappop(minheap)
+
+        result = [num for (freq, num) in minheap]
+        return result
 
 
 def main():
@@ -99,9 +113,13 @@ def main():
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
     print(f"NumberFreqDictSort: {time.time() - start_time}")
 
-    start_time = time.time()    
+    start_time = time.time()
     print(SolutionNumberFreqDictMaxHeap().topKFrequent(nums, k))
     print(f"NumberFreqDictMaxHeap: {time.time() - start_time}")
+
+    start_time = time.time()
+    print(SolutionNumberFreqDictMinHeap().topKFrequent(nums, k))
+    print(f"NumberFreqDictMinHeap: {time.time() - start_time}")
 
     # Output: [1]
     nums = [1]
@@ -111,9 +129,13 @@ def main():
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
     print(f"NumberFreqDictSort: {time.time() - start_time}")
 
-    start_time = time.time()    
+    start_time = time.time()
     print(SolutionNumberFreqDictMaxHeap().topKFrequent(nums, k))
     print(f"NumberFreqDictMaxHeap: {time.time() - start_time}")
+
+    start_time = time.time()
+    print(SolutionNumberFreqDictMinHeap().topKFrequent(nums, k))
+    print(f"NumberFreqDictMinHeap: {time.time() - start_time}")
 
     # Output: [1,2,5,3,7,6,4,8,10,11]
     nums = [3,2,3,1,2,4,5,5,6,7,7,8,2,3,1,1,1,10,11,5,6,2,4,7,8,5,6]
@@ -123,9 +145,13 @@ def main():
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
     print(f"NumberFreqDictSort: {time.time() - start_time}")
 
-    start_time = time.time()    
+    start_time = time.time()
     print(SolutionNumberFreqDictMaxHeap().topKFrequent(nums, k))
     print(f"NumberFreqDictMaxHeap: {time.time() - start_time}")
+
+    start_time = time.time()
+    print(SolutionNumberFreqDictMinHeap().topKFrequent(nums, k))
+    print(f"NumberFreqDictMinHeap: {time.time() - start_time}")
 
 
 if __name__ == '__main__':
