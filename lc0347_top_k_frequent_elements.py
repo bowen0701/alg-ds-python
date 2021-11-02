@@ -87,7 +87,7 @@ class SolutionNumberFreqDictMinHeap:
         Time complexity: O(n*log(k)), where n is the number of nums.
         Space complexity: O(k).
         """
-        from collections import defaultdict
+        from collections import defaultdict, deque
         import heapq
 
         num_freq_d = defaultdict(int)
@@ -103,13 +103,13 @@ class SolutionNumberFreqDictMinHeap:
             if len(minheap) > k:
                 heapq.heappop(minheap)
 
-        result = [num for (freq, num) in minheap]
-        return result
+        # Pop number from minheap and collect result.
+        result = deque([])
+        while minheap:
+            (freq, num) = heapq.heappop(minheap)
+            result.appendleft(num)
 
-
-class SolutionNumberFreqDictBucketSort:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        pass
+        return list(result)
 
 
 def main():
@@ -131,6 +131,10 @@ def main():
     print(SolutionNumberFreqDictMinHeap().topKFrequent(nums, k))
     print(f"NumberFreqDictMinHeap: {time.time() - start_time}")
 
+    start_time = time.time()
+    print(SolutionNumberFreqDictBucketSort().topKFrequent(nums, k))
+    print(f"NumberFreqDictBucketSort: {time.time() - start_time}")
+
     # Output: [1]
     nums = [1]
     k = 1
@@ -147,6 +151,10 @@ def main():
     print(SolutionNumberFreqDictMinHeap().topKFrequent(nums, k))
     print(f"NumberFreqDictMinHeap: {time.time() - start_time}")
 
+    start_time = time.time()
+    print(SolutionNumberFreqDictBucketSort().topKFrequent(nums, k))
+    print(f"NumberFreqDictBucketSort: {time.time() - start_time}")
+
     # Output: [1,2,5,3,7,6,4,8,10,11]
     nums = [3,2,3,1,2,4,5,5,6,7,7,8,2,3,1,1,1,10,11,5,6,2,4,7,8,5,6]
     k = 10
@@ -162,6 +170,10 @@ def main():
     start_time = time.time()
     print(SolutionNumberFreqDictMinHeap().topKFrequent(nums, k))
     print(f"NumberFreqDictMinHeap: {time.time() - start_time}")
+
+    start_time = time.time()
+    print(SolutionNumberFreqDictBucketSort().topKFrequent(nums, k))
+    print(f"NumberFreqDictBucketSort: {time.time() - start_time}")
 
 
 if __name__ == '__main__':
