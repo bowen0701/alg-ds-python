@@ -25,7 +25,32 @@ from typing import List
 
 class SolutionNubmerFreqDictBruteForce:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        pass
+        """
+        Time complexity: O(n*k), where n is the number of nums.
+        Space complexity: O(n).
+        """
+        from collections import defaultdict
+
+        # Create num->freq dict.
+        num_freq_d = defaultdict(int)
+
+        for num in nums:
+            num_freq_d[num] += 1
+
+
+        # Iterate through the whole dict k times to collect result.
+        result = []
+
+        for i in range(k):
+            max_freq, max_freq_num = 0, -float('inf')
+            for num, freq in num_freq_d.items():
+                if freq > max_freq:
+                    max_freq, max_freq_num = freq, num
+
+            result.append(max_freq_num)
+            del num_freq_d[max_freq_num]
+
+        return result
 
 
 class SolutionNumberFreqDictSort:
@@ -151,6 +176,10 @@ def main():
     k = 2
 
     start_time = time.time()
+    print(SolutionNubmerFreqDictBruteForce().topKFrequent(nums, k))
+    print(f"NubmerFreqDictBruteForce: {time.time() - start_time}")
+
+    start_time = time.time()
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
     print(f"NumberFreqDictSort: {time.time() - start_time}")
 
@@ -171,6 +200,10 @@ def main():
     k = 1
 
     start_time = time.time()
+    print(SolutionNubmerFreqDictBruteForce().topKFrequent(nums, k))
+    print(f"NubmerFreqDictBruteForce: {time.time() - start_time}")
+
+    start_time = time.time()
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
     print(f"NumberFreqDictSort: {time.time() - start_time}")
 
@@ -189,6 +222,10 @@ def main():
     # Output: [1,2,5,3,7,6,4,8,10,11]
     nums = [3,2,3,1,2,4,5,5,6,7,7,8,2,3,1,1,1,10,11,5,6,2,4,7,8,5,6]
     k = 10
+
+    start_time = time.time()
+    print(SolutionNubmerFreqDictBruteForce().topKFrequent(nums, k))
+    print(f"NubmerFreqDictBruteForce: {time.time() - start_time}")
 
     start_time = time.time()
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
