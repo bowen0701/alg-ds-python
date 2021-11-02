@@ -112,6 +112,37 @@ class SolutionNumberFreqDictMinHeap:
         return list(result)
 
 
+class SolutionNumberFreqDictBucketSort:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        """
+        Time complexity: O(n), where n is the number of nums.
+        Space complexity: O(n).
+        """
+        from collections import defaultdict
+
+        # Create num->freq dict.
+        num_freq_d = defaultdict(int)
+        for num in nums:
+            num_freq_d[num] += 1
+
+        # Create a buck array with length n + 1.
+        n = len(nums)
+        buckets = [[] for _ in range(n + 1)]
+        for num, freq in num_freq_d.items():
+            buckets[freq].append(num)
+
+        # Get the top k frequent numbers.
+        result = []
+        for i in range(n, -1, -1):
+            for num in buckets[i]:
+                result.append(num)
+
+                if len(result) == k:
+                    return result
+
+        return result
+
+
 def main():
     import time
 
