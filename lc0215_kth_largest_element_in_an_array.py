@@ -32,50 +32,6 @@ class SolutionSort(object):
         return nums[-k]
 
 
-class SolutionQuickSort(object):
-    def _quicksort(self, nums):
-        if len(nums) <= 1:
-            return nums
-
-        pivot = nums[len(nums) // 2]
-
-        small_nums = [x for x in nums if x < pivot]
-        mid_nums = [x for x in nums if x == pivot]
-        large_nums = [x for x in nums if x > pivot]
-
-        return (self._quicksort(small_nums) +
-                mid_nums +
-                self._quicksort(large_nums))
-
-    def findKthLargest(self, nums: List[int], k: int) -> int:
-        """
-        Time complexity: O(n*logn), where n is the length of nums.
-        Space complexity: O(n).
-        """
-        # Apply quick sort and get the element directly.
-        sorted_nums = self._quicksort(nums)
-        return sorted_nums[-k]
-
-
-class SolutionSelectionSort(object):
-    def findKthLargest(self, nums: List[int], k: int) -> int:
-        """
-        Time complexity: O(nk).
-        Space complexity: O(1).
-        """
-        n = len(nums)
-
-        # Selection sort from behind: swith max element & last one, and so on.
-        for i in range(n - 1, n - k - 1, -1):
-            max_i = 0
-            for j in range(1, i + 1):
-                if nums[max_i] < nums[j]:
-                    max_i = j
-            nums[max_i], nums[i] = nums[i], nums[max_i]
-
-        return nums[-k]
-
-
 class SolutionMinHeap(object):
     def findKthLargest(self, nums: List[int], k: int) -> int:
         """
@@ -134,14 +90,6 @@ def main():
     print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print('Quick sort:', SolutionQuickSort().findKthLargest(nums, k))
-    print('Time:', time.time() - start_time)
-
-    start_time = time.time()
-    print('Selection sort:', SolutionSelectionSort().findKthLargest(nums, k))
-    print('Time:', time.time() - start_time)
-
-    start_time = time.time()
     print('MinHeap: ', SolutionMinHeap().findKthLargest(nums, k))
     print('Time:', time.time() - start_time)
 
@@ -156,14 +104,6 @@ def main():
 
     start_time = time.time()
     print('Sort:', SolutionSort().findKthLargest(nums, k))
-    print('Time:', time.time() - start_time)
-
-    start_time = time.time()
-    print('Quick sort:', SolutionQuickSort().findKthLargest(nums, k))
-    print('Time:', time.time() - start_time)
-
-    start_time = time.time()
-    print('Selection sort:', SolutionSelectionSort().findKthLargest(nums, k))
     print('Time:', time.time() - start_time)
 
     start_time = time.time()
@@ -182,14 +122,6 @@ def main():
 
     start_time = time.time()
     print('Sort:', SolutionSort().findKthLargest(nums, k))
-    print('Time:', time.time() - start_time)
-
-    start_time = time.time()
-    print('Quick sort:', SolutionQuickSort().findKthLargest(nums, k))
-    print('Time:', time.time() - start_time)
-
-    start_time = time.time()
-    print('Selection sort:', SolutionSelectionSort().findKthLargest(nums, k))
     print('Time:', time.time() - start_time)
 
     start_time = time.time()
