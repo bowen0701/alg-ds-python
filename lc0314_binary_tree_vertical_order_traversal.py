@@ -79,7 +79,7 @@ class TreeNode(object):
         self.right = None
 
 
-class SolutionOrderValsDictQueue(object):
+class SolutionBFSQueueOrderValsDict(object):
     def verticalOrder(self, root: TreeNode) -> List[List[int]]:
         """
         Time complexity: O(n).
@@ -139,7 +139,7 @@ def main():
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
-    print(SolutionOrderValsDictQueue().verticalOrder(root))
+    print(SolutionBFSQueueOrderValsDict().verticalOrder(root))
 
     #      3
     #     /\
@@ -163,7 +163,7 @@ def main():
     root.left.right = TreeNode(0)
     root.right.left = TreeNode(1)
     root.right.right = TreeNode(7)
-    print(SolutionOrderValsDictQueue().verticalOrder(root))
+    print(SolutionBFSQueueOrderValsDict().verticalOrder(root))
 
     #     3
     #    /\
@@ -192,7 +192,7 @@ def main():
     root.right.right = TreeNode(7)
     root.left.right.right = TreeNode(2)
     root.right.left.left = TreeNode(5)
-    print(SolutionOrderValsDictQueue().verticalOrder(root))
+    print(SolutionBFSQueueOrderValsDict().verticalOrder(root))
 
 
 if __name__ == '__main__':
