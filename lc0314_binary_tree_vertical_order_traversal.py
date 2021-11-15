@@ -68,6 +68,9 @@ Output:
 ]
 """
 
+from typing import List
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, val):
@@ -77,11 +80,8 @@ class TreeNode(object):
 
 
 class SolutionOrderValsDictQueue(object):
-    def verticalOrder(self, root):
+    def verticalOrder(self, root: TreeNode) -> List[List[int]]:
         """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-
         Time complexity: O(n).
         Space complexity: O(n).
         """
