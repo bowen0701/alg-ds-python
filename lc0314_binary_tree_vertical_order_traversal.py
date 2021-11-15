@@ -95,11 +95,16 @@ class SolutionOrderValsDictQueue(object):
         vorder_vals_d = defaultdict(list)
 
         # Use queue to add root and left/right with their orders to dict.
+        min_order, max_order = float('inf'), -float('inf')
+
         queue = deque([(root, 0)])
 
         while queue:
             current, vorder = queue.pop()
             vorder_vals_d[vorder].append(current.val)
+
+            min_order = min(min_order, vorder)
+            max_order = max(max_order, vorder)
 
             if current.left:
                 queue.appendleft((current.left, vorder - 1))
@@ -107,8 +112,11 @@ class SolutionOrderValsDictQueue(object):
                 queue.appendleft((current.right, vorder + 1))
 
         # Return sorted list(node values) based on vertical order.
-        vorder_vals = [vals for vorder, vals in sorted(vorder_vals_d.items())]
-        return vorder_vals
+        result = []
+        for i in range(int(min_order), int(max_order) + 1):
+            result.append(vorder_vals_d[i])
+
+        return result
 
 
 def main():
@@ -130,8 +138,8 @@ def main():
     root.left = TreeNode(9)
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
-    root.right.right = TreeNode(17)
-    print SolutionOrderValsDictQueue().verticalOrder(root)
+    root.right.right = TreeNode(7)
+    print(SolutionOrderValsDictQueue().verticalOrder(root))
 
     #      3
     #     /\
@@ -155,7 +163,7 @@ def main():
     root.left.right = TreeNode(0)
     root.right.left = TreeNode(1)
     root.right.right = TreeNode(7)
-    print SolutionOrderValsDictQueue().verticalOrder(root)
+    print(SolutionOrderValsDictQueue().verticalOrder(root))
 
     #     3
     #    /\
@@ -184,7 +192,7 @@ def main():
     root.right.right = TreeNode(7)
     root.left.right.right = TreeNode(2)
     root.right.left.left = TreeNode(5)
-    print SolutionOrderValsDictQueue().verticalOrder(root)
+    print(SolutionOrderValsDictQueue().verticalOrder(root))
 
 
 if __name__ == '__main__':
