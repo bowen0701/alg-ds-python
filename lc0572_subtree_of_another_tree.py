@@ -51,8 +51,11 @@ class TreeNode(object):
 class SolutionPreorderSubtreeTreeMatchRecur:
     def _isTreeMatch(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         # Base case.
-        if not root or not subRoot:
-            return root is subRoot
+        if (root and not subRoot) or (not root and subRoot):
+            return False
+
+        if not root and not subRoot:
+            return True
 
         # Preorder traversal: root->left->right, to check root and left/right tree matches.
         if root.val != subRoot.val:
