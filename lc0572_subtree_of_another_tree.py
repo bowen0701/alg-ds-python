@@ -163,7 +163,7 @@ class SolutionTreeSerializationKMPSubstringSearch:
         self._serialize(subRoot, sub_root_strs)
 
         # Apply KMP algorithm for string matching.
-        result = self._KMP_substring_search(root_strs, sub_root_strs)
+        result = self._kmp_substring_search(root_strs, sub_root_strs)
         if result == len(root_strs):
             return False
         else:
