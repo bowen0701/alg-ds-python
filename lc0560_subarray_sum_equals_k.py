@@ -54,8 +54,7 @@ class SolutionCusumCountDict(object):
         for num in nums:
             cusum += num
 
-            # If cusum - k exists in cusum counts, 
-            # subarray from (cusum - k) to "current" cusum equals k.
+            # If subarray from (cusum - k) to current equals k.
             result += cusum_count_d[cusum - k]
 
             # Increment cusum's count.
