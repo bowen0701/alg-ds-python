@@ -258,7 +258,6 @@ def main():
     print(SolutionDFSRecurUpdate().maxAreaOfIsland(grid1))
     print("SolutionDFSRecurUpdate:", time.time() - start_time)
 
-
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
     print(SolutionDFSRecurVisitedDict().maxAreaOfIsland(grid1))
