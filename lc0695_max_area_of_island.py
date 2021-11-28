@@ -29,7 +29,7 @@ Given the above grid, return 0.
 Note: The length of each dimension in the given grid does not exceed 50.
 """
 
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 
 class SolutionDFSRecurUpdate(object):
@@ -69,6 +69,52 @@ class SolutionDFSRecurUpdate(object):
             for c in range(n_cols):
                 if grid[r][c] == 1:
                     area = self._dfs(r, c, grid)
+                    result = max(result, area)
+
+        return result
+
+
+class SolutionDFSRecurVisitedDict(object):
+    def _dfs(self, r: int, c: int, grid: List[List[int]], visited_d: Dict[Tuple[int, int], bool]) -> int:
+        # Base case: out of boundary or visited.
+        if (r < 0 or r >= len(grid) 
+            or c < 0 or c >= len(grid[0])
+            or visited_d[(r, c)]
+            or grid[r][c] == 0):
+            return 0
+
+        # Mark (r, c) as visited.
+        visited_d[(r, c)] = True
+        area = 1
+
+        # Visit neighbors: top/down/left/right to accumulate area.
+        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+        for r_next, c_next in dirs:
+            area += self._dfs(r_next, c_next, grid, visited_d)
+
+        return area
+
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        """
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        from collections import defaultdict
+
+        # Edge case.
+        if not grid or not grid[0]:
+            return 0
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Apply recursive DFS with a visited grid.
+        visited_d = defaultdict(bool)
+        result = 0
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if grid[r][c] == 1:
+                    area = self._dfs(r, c, grid, visited_d)
                     result = max(result, area)
 
         return result
@@ -211,6 +257,12 @@ def main():
     start_time = time.time()
     print(SolutionDFSRecurUpdate().maxAreaOfIsland(grid1))
     print("SolutionDFSRecurUpdate:", time.time() - start_time)
+
+
+    grid1 = copy.deepcopy(grid)
+    start_time = time.time()
+    print(SolutionDFSRecurVisitedDict().maxAreaOfIsland(grid1))
+    print("SolutionDFSRecurVisitedDict:", time.time() - start_time)
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
