@@ -100,15 +100,19 @@ class SolutionBST:
         Time complexity: O(n).
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
         """
+        # Edge case.
         if not root:
             return 0
 
+        # If root < low, check right subtree.
         if root.val < low:
             return self.rangeSumBST(root.right, low, high)
 
+        # If root > high, check left subtree.
         if root.val > high:
             return self.rangeSumBST(root.left, low, high)
 
+        # If low < root < high, sum root and the results of left/right subtrees.
         return (root.val
                 + self.rangeSumBST(root.left, low, high)
                 + self.rangeSumBST(root.right, low, high))
