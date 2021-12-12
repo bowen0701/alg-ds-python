@@ -190,7 +190,7 @@ class SolutionBFSUpdate:
 
         n_rows, n_cols = len(grid), len(grid[0])
 
-        # Mark as visited.
+        # Mark (r, c) as visited.
         grid[r][c] = 0
 
         # Apply BFS with queue.
@@ -239,6 +239,62 @@ class SolutionBFSUpdate:
         return result
 
 
+class SolutionBFSVisitedDict:
+    def _bfs(self, r: int, c: int, grid: List[List[int]], visited_d: Dict[Tuple[int, int], bool]) -> int:
+        from collections import deque
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Mark (r, c) as visited.
+        visited_d[(r, c)] = True
+
+        # Apply BFS with queue.
+        area = 0
+        queue = deque([(r, c)])
+
+        while queue:
+            r, c = queue.pop()
+            area += 1
+
+            # Visit neighboards: top/down/left/down, marked as visited.
+            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+            for r_next, c_next in dirs:
+                if (r_next < 0 or r_next >= n_rows
+                    or c_next < 0 or c_next >= n_cols
+                    or visited_d[(r_next, c_next)]
+                    or grid[r_next][c_next] == 0):
+                    continue
+
+                visited_d[(r_next, c_next)] = True
+                queue.appendleft((r_next, c_next))
+
+        return area
+
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        """
+        Time complexity: O(m*n).
+        Space complexity: O(m*n).
+        """
+        from collections import defaultdict
+
+        # Edge cases.
+        if not grid or not grid[0]:
+            return 0
+
+        n_rows, n_cols = len(grid), len(grid[0])
+
+        # Apply BFS with visited dict to obtain max area.
+        visited_d = defaultdict(bool)
+        result = 0
+
+        for r in range(n_rows):
+            for c in range(n_cols):
+                if grid[r][c] == 1:
+                    result = max(result, self._bfs(r, c, grid, visited_d))
+
+        return result
+
+
 def main():
     import copy
     import time
@@ -272,6 +328,11 @@ def main():
     start_time = time.time()
     print(SolutionBFSUpdate().maxAreaOfIsland(grid1))
     print("SolutionBFSUpdate:", time.time() - start_time)
+
+    grid1 = copy.deepcopy(grid)
+    start_time = time.time()
+    print(SolutionBFSVisitedDict().maxAreaOfIsland(grid1))
+    print("SolutionBFSVisitedDict:", time.time() - start_time)
 
 
 if __name__ == '__main__':
