@@ -184,7 +184,7 @@ class SolutionDFSRecurVisitedDict(object):
         return result
 
 
-class SolutionBFS:
+class SolutionBFSUpdate:
     def _bfs(self, r: int, c: int, grid: List[List[int]]) -> int:
         from collections import deque
 
@@ -270,8 +270,8 @@ def main():
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print(SolutionBFS().maxAreaOfIsland(grid1))
-    print("SolutionBFS:", time.time() - start_time)
+    print(SolutionBFSUpdate().maxAreaOfIsland(grid1))
+    print("SolutionBFSUpdate:", time.time() - start_time)
 
 
 if __name__ == '__main__':
