@@ -17,11 +17,8 @@ Output: "bb"
 """
 
 class SolutionBrute(object):
-    def longestPalindrome(self, s):
+    def longestPalindrome(self, s: str) -> str:
         """
-        :type s: str
-        :rtype: str
-
         Time complexity: O(n^3).
         Space complexity: O(n).
         """
@@ -36,11 +33,8 @@ class SolutionBrute(object):
 
 
 class SolutionDP(object):
-    def longestPalindrome(self, s):
+    def longestPalindrome(self, s: str) -> str:
         """
-        :type s: str
-        :rtype: str
-
         Apply dynamic programming with botton-up memoization,
         but track longest palindrom.
 
@@ -80,11 +74,8 @@ class SolutionDP(object):
 
 
 class SolutionIter(object):
-    def longestPalindrome(self, s):
+    def longestPalindrome(self, s: str) -> str:
         """
-        :type s: str
-        :rtype: str
-
         Apply iteration.
 
         Time complexity: O(n^2).
@@ -97,18 +88,18 @@ class SolutionIter(object):
         max_len = 1
 
         # If we increase s by 1 character, we could only increase LPS by 2 or 1.
-        for i in range(1, len(s)):
+        for j in range(1, len(s)):
             # Increase LPS by 2: check start's left and end's right.
-            if (i - max_len >= 1 and 
-                s[(i - max_len - 1):(i + 1)] == s[(i - max_len - 1):(i + 1)][::-1]):
-                start = i - max_len - 1
+            if (j - max_len >= 1 and 
+                s[(j - max_len - 1):(j + 1)] == s[(j - max_len - 1):(j + 1)][::-1]):
+                start = j - max_len - 1
                 max_len += 2
                 continue
 
             # Increase LPS by 1: check end's right only.
-            if (i - max_len >= 0 and 
-                s[(i - max_len):(i + 1)] == s[(i - max_len):(i + 1)][::-1]):
-                start = i - max_len
+            if (j - max_len >= 0 and 
+                s[(j - max_len):(j + 1)] == s[(j - max_len):(j + 1)][::-1]):
+                start = j - max_len
                 max_len += 1
 
         return s[start:(start + max_len)]
