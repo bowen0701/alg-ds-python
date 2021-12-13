@@ -66,9 +66,8 @@ class SolutionPreorderSubtreeTreeMatchRecur:
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         """
-        Time complexity: O(|s|*|t|), where |s| is the number of nodes in s.
-        Space complexity: O(log|s|+log|t|), for balanced tree; 
-          O(|s|+|t|) for single sided tree.
+        Time complexity: O(m*n), where m, n is the number of nodes in T and S.
+        Space complexity: O(logm+logn), for balanced tree, O(m+n) for single sided tree.
         """
         # Base case.
         if not root:
