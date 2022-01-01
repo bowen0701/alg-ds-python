@@ -26,7 +26,7 @@ This is consistent to C's strstr() and Java's indexOf().
 from typing import List
 
 
-class SolutionSlidingWindowMatch:
+class SolutionBruteForce:
     def strStr(self, haystack: str, needle: str) -> int:
         """
         Time complexity: O(n*m), where 
@@ -52,42 +52,96 @@ class SolutionSlidingWindowMatch:
 
 
 class SolutionKMP:
-    def _kmp_longest_prefix_suffix(self, needle: str) -> List[int]:
+    def _kmp_preprocess(self, needle: str) -> List[int]:
         n_needle = len(needle)
-        T = [0]
 
-    def _kmp_substring_search(self, haystack: str, needle: str) -> bool:
-        # Edge case.
-        if not needle:
-            return False
+        # Preprosss needle to get lps which indicates longest proper prefix which is also suffix:
+        # Specifically, for each sub-pattern needle[0:i], where i = 0 to m-1, 
+        # lps[i] stores length of the maximum matching proper prefix which is also a suffix.
+        lps = [0] * n_needle
 
-        n_haystack, n_needle = len(haystack), len(needle)
+        length = 0
+        j = 1
 
-        # TODO: continue implementation for KMP substring search.
-        return -1
+        while j < n_needle:
+            if needle[j] == needle[length]:
+                length += 1
+                lps[j] = length
+                j += 1
+            elif length:
+                length = lps[length - 1]
+            else:
+                lps[j] = 0
+                j += 1
+
+        return lps
 
     def strStr(self, haystack: str, needle: str) -> int:
         """
-        Time complexity
-        Space complexity
+        Time complexity: O(n + m)
+          - n is the length of haystack,
+          - m is the length of needle.
+        Space complexity: O(m).
         """
-        result = self._kmp_substring_search(haystack, needle)
-        if result < len(haystack):
-            return result
-        else:
-            return -1
+        # Apply KMP (Knuth, Morris & Pratt) pattern searching algorithm.
+
+        # Edge case.
+        if not needle:
+            return 0
+
+        n_haystack, n_needle = len(haystack), len(needle)
+
+        # Get KMP longest prefix suffix.
+        lps = self._kmp_preprocess(needle)
+
+        # Use a value from lps[] to decide the next characters to be matched:
+        # Specifically, When we see a mismatch, we know that characters needle[0:j-1] match with haystack[i-j:i-1].
+        # We also know lps[j-1] is count of characters of needle[0:j-1] that are both proper prefix and suffix.
+        i = j = 0
+        while i < n_haystack:
+            if haystack[i] == needle[j]:
+                i += 1
+                j += 1
+
+            if j == n_needle:
+                return i - j
+            elif i < n_haystack and haystack[i] != needle[j]:
+                # Mismatch after j matches.
+                if j != 0:
+                    j = lps[j - 1]
+                else:
+                    i += 1
+
+        return -1
 
 
 def main():
+    import time
+
     # Output: 2
     haystack = "hello"
     needle = "ll"
-    print(SolutionSlidingWindowMatch().strStr(haystack, needle))
+
+    start_time = time.time()
+    print(SolutionBruteForce().strStr(haystack, needle))
+    print(f"Time for brute force: {time.time() - start_time}")
+
+    start_time = time.time()
+    print(SolutionKMP().strStr(haystack, needle))
+    print(f"Time for KMP: {time.time() - start_time}")
 
     # Output: -1
     haystack = "aaaaa"
     needle = "bba"
-    print(SolutionSlidingWindowMatch().strStr(haystack, needle))
+
+    start_time = time.time()
+    print(SolutionBruteForce().strStr(haystack, needle))
+    print(f"Time for brute force: {time.time() - start_time}")
+
+    start_time = time.time()
+    print(SolutionKMP().strStr(haystack, needle))
+    print(f"Time for KMP: {time.time() - start_time}")
+
 
 
 if __name__ == '__main__':
