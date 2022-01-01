@@ -21,13 +21,13 @@ def knapsack(val, wt, wt_cap):
     max_val = 0
     total_wt = 0
 
-    for vw, v, w in sorted_vals_per_wts:
+    for val_per_wt, v, w in sorted_vals_per_wts:
         if total_wt + w <= wt_cap:
             total_wt += w
             max_val += v
         else:
             wt_remain = (wt_cap - total_wt)
-            max_val += vw * wt_remain
+            max_val += val_per_wt * wt_remain
             break
     return max_val
 
