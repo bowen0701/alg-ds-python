@@ -134,42 +134,94 @@ class SolutionTreeSerializationBruteForceSubstringSearch:
 
 
 class SolutionTreeSerializationKMPSubstringSearch:
-    def _serialize(self, root: Optional[TreeNode], root_vals: List[Optional[int]]) -> None:
+    def _serialize(self, root: Optional[TreeNode], root_vals: List[str]) -> None:
+        """
+        Time complexity: O(n), where n is the number of nodes in tree.
+        Space complexity: O(n).
+        """
         # Base cases.
         if not root:
-            root_vals.append(None)
+            root_vals.append("#")
             return None
 
         # Apply preorder traversal: root->left->right, to serialize tree.
-        root_vals.append(root.val)
+        root_vals.append(str(root.val))
         self._serialize(root.left, root_vals)
         self._serialize(root.right, root_vals)
 
-    def _kmp_substring_search(self, root_strs: str, sub_root_strs: str) -> int:
-        pass
+    def _kmp_preprocess(self, subroot_strs: List[str]) -> List[int]:
+        """
+        Time complexity: O(m), where m is the number of nodes in subtree.
+        Space complexity: O(m).
+        """
+        m = len(subroot_strs)
+
+        lps = [0] * m
+
+        length = 0
+        j = 1
+
+        while j < m:
+            if subroot_strs[j] == subroot_strs[length]:
+                length += 1
+                lps[j] = length
+                j += 1
+            elif length:
+                length = lps[length - 1]
+            else:
+                lps[j] = 0
+                j += 1
+
+        return lps
+
+    def _kmp_substring_search(self, root_strs: str, subroot_strs: str) -> int:
+        """
+        Time complexity: O(n + m).
+        Space complexity: O(m), where m is the number of nodes in subtree. 
+        """
+        # Edge case.
+        if not subroot_strs:
+            return False
+
+        n, m = len(root_strs), len(subroot_strs)
+
+        # KMP preprocess to get the longest prefix suffix.
+        lps = self._kmp_preprocess(subroot_strs)
+
+        # KMP substring search.
+        i = j = 0
+        while i < n:
+            if root_strs[i] == subroot_strs[j]:
+                i += 1
+                j += 1
+
+            if j == m:
+                return True
+            elif i < n and root_strs[i] != subroot_strs[j]:
+                # Mismatch after j matches.
+                if j != 0:
+                    j = lps[j - 1]
+                else:
+                    i += 1
+
+        return False
 
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         """
-        Time complexity
-        Space complexity
+        Time complexity: O(m + n).
+        Space complexity: O(m + n).
         """
         # Edge cases.
         if not root:
             return False
 
         # Apply preorder traversal for tree serialization.
-        root_strs = []
+        root_strs, subroot_strs = [], []
         self._serialize(root, root_strs)
+        self._serialize(subRoot, subroot_strs)
 
-        sub_root_strs = []
-        self._serialize(subRoot, sub_root_strs)
-
-        # Apply KMP algorithm for string matching.
-        result = self._kmp_substring_search(root_strs, sub_root_strs)
-        if result == len(root_strs):
-            return False
-        else:
-            return True
+        # Apply KMP algorithm for string matching; see Leetcode 28. Implement strStr().
+        return self._kmp_substring_search(root_strs, subroot_strs)
 
 
 def main():
@@ -197,13 +249,15 @@ def main():
 
     start_time = time.time()
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
-    print(f"PreorderSubtreeTreeMatchRecur: {start_time - time.time()}")
+    print(f"PreorderSubtreeTreeMatchRecur: {time.time() - start_time}")
 
     start_time = time.time()
     print(SolutionTreeSerializationBruteForceSubstringSearch().isSubtree(root, subRoot))
-    print(f"TreeSerializationBruteForceSubstringSearch: {start_time - time.time()}")
+    print(f"TreeSerializationBruteForceSubstringSearch: {time.time() - start_time}")
 
-    # print(SolutionTreeSerializationKMPStringSearch().isSubtree(root, subRoot))
+    start_time = time.time()
+    print(SolutionTreeSerializationKMPSubstringSearch().isSubtree(root, subRoot))
+    print(f"TreeSerializationKMPSubstringSearch: {time.time() - start_time}")
 
     # Given tree s:
     #      3
@@ -230,13 +284,15 @@ def main():
 
     start_time = time.time()
     print(SolutionPreorderSubtreeTreeMatchRecur().isSubtree(root, subRoot))
-    print(f"PreorderSubtreeTreeMatchRecur: {start_time - time.time()}")
+    print(f"PreorderSubtreeTreeMatchRecur: {time.time() - start_time}")
 
     start_time = time.time()
     print(SolutionTreeSerializationBruteForceSubstringSearch().isSubtree(root, subRoot))
-    print(f"TreeSerializationBruteForceSubstringSearch: {start_time - time.time()}")
+    print(f"TreeSerializationBruteForceSubstringSearch: {time.time() - start_time}")
 
-    # print(SolutionTreeSerializationKMPStringSearch().isSubtree(root, subRoot))
+    start_time = time.time()
+    print(SolutionTreeSerializationKMPSubstringSearch().isSubtree(root, subRoot))
+    print(f"TreeSerializationKMPSubstringSearch: {time.time() - start_time}")
 
 
 if __name__ == '__main__':
