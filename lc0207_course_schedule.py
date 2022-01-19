@@ -30,13 +30,12 @@ Note:
 - You may assume that there are no duplicate edges in the input prerequisites.
 """
 
-class SolutionBFSTopologicalSort(object):
-    def canFinish(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
+from typing import List
 
+
+class SolutionBFSTopologicalSort(object):
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        """
         Time complexity: O(|V|+|E|), where
           - |V|: number of vertices, i.e. courses.
           - |E|: number of edges.
@@ -65,13 +64,13 @@ class SolutionBFSTopologicalSort(object):
             course = queue.pop()
             numCourses -= 1
 
-            for nxt in prereq_courses_d[course]:
+            for nxt_course in prereq_courses_d[course]:
                 # Decrement number of prerequisites of next course.
-                n_prereqs[nxt] -= 1
+                n_prereqs[nxt_course] -= 1
 
                 # If no more prerequisites, add to queue as course candidate.
-                if n_prereqs[nxt] == 0:
-                    queue.appendleft(nxt)
+                if n_prereqs[nxt_course] == 0:
+                    queue.appendleft(nxt_course)
 
         return numCourses == 0
 
@@ -80,17 +79,17 @@ def main():
     # Output: true
     numCourses = 2
     prerequisites = [[1,0]]
-    print SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites)
+    print(SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites))
 
     # Output: false
     numCourses = 2
     prerequisites = [[1,0],[0,1]]
-    print SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites)
+    print(SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites))
 
     # Output: false
     numCourses = 3
     prerequisites = [[1,0],[2,1],[0,2]]
-    print SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites)
+    print(SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites))
 
 
 if __name__ == '__main__':
