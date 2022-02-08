@@ -45,7 +45,7 @@ class SolutionBFSTopologicalSort(object):
         from collections import defaultdict
         from collections import deque
 
-        # Collect dict:prereq->list(courses) & courses's indegrees n_prereqs.
+        # Build course graph by dict:prereq->list(courses) & courses's indegrees.
         prereq_courses_d = defaultdict(list)
         n_prereqs = [0] * numCourses
 
@@ -53,7 +53,7 @@ class SolutionBFSTopologicalSort(object):
             prereq_courses_d[prereq].append(course)
             n_prereqs[course] += 1
 
-        # Create a queue for courses w/o prereq so that they can be taken.
+        # Create a queue for courses w/o prereq so they can be taken immediately.
         queue = deque()
         for course in range(numCourses):
             if n_prereqs[course] == 0:
@@ -64,11 +64,12 @@ class SolutionBFSTopologicalSort(object):
             course = queue.pop()
             numCourses -= 1
 
+            # Take prereq's next courses after taking prereq.
             for nxt_course in prereq_courses_d[course]:
-                # Decrement number of prerequisites of next course.
+                # Decrement number of prerequisites of next course as prereq was taken.
                 n_prereqs[nxt_course] -= 1
 
-                # If no more prerequisites, add to queue as course candidate.
+                # If no more prereq, add next course to queue to start taking it.
                 if n_prereqs[nxt_course] == 0:
                     queue.appendleft(nxt_course)
 
