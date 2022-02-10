@@ -32,112 +32,6 @@ Note: The length of each dimension in the given grid does not exceed 50.
 from typing import Dict, List, Tuple
 
 
-class SolutionDFSRecurUpdate(object):
-    def _dfs(self, r: int, c: int, grid: List[List[int]]) -> int:
-        # Base case: out of boundary or visited.
-        if (r < 0 or r >= len(grid) 
-            or c < 0 or c >= len(grid[0]) 
-            or grid[r][c] == 0):
-            return 0
-
-        # Mark (r, c) as visited.
-        grid[r][c] = 0
-        area = 1
-
-        # Visit neighbors: top/down/left/right to accumulate area.
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            area += self._dfs(r_next, c_next, grid)
-
-        return area
-
-    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        """
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
-        # Edge case.
-        if not grid or not grid[0]:
-            return 0
-
-        n_rows, n_cols = len(grid), len(grid[0])
-
-        # Apply recursive DFS with updating visited grid.
-        result = 0
-
-        for r in range(n_rows):
-            for c in range(n_cols):
-                if grid[r][c] == 1:
-                    area = self._dfs(r, c, grid)
-                    result = max(result, area)
-
-        return result
-
-
-class SolutionDFSIterUpdate(object):
-    def _get_to_visits(
-        self, 
-        v_start: Tuple[int, int], 
-        grid: List[List[int]]
-    ) -> List[Tuple[int, int]]:
-        r, c = v_start
-
-        to_visits = []
-
-        # Visit neigghbors: top/down/left/right.
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            if (0 <= r_next < len(grid) and 
-                0 <= c_next < len(grid[0]) and
-                grid[r_next][c_next] == 1):
-                to_visits.append((r_next, c_next))
-
-        return to_visits
-
-    def _dfs(self, r: int, c: int, grid: List[List[int]]) -> int:
-        grid[r][c] = 0
-
-        # Apply iterative DFS with stack.
-        stack = [(r, c)]
-        area = 1
-
-        while stack:
-            # Get to-visit nodes from the top of stack.
-            to_visits = self._get_to_visits(stack[-1], grid)
-
-            if to_visits:
-                for r_next, c_next in to_visits:
-                    grid[r_next][c_next] = 0
-                    area += 1
-                    stack.append((r_next, c_next))
-                    # Break to continue DFS.
-                    break
-            else:
-                stack.pop()
-
-        return area
-
-    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        """
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
-        # Edgge case.
-        if not grid or not grid[0]:
-            return 0
-
-        # Apply iterative DFS with stack.
-        result = 0
-
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                if grid[r][c] == 1:
-                    area = self._dfs(r, c, grid)
-                    result = max(result, area)
-
-        return result
-
-
 class SolutionDFSRecurVisitedDict(object):
     def _dfs(self, r: int, c: int, grid: List[List[int]], visited_d: Dict[Tuple[int, int], bool]) -> int:
         # Base case: out of boundary or visited.
@@ -179,61 +73,6 @@ class SolutionDFSRecurVisitedDict(object):
             for c in range(n_cols):
                 if grid[r][c] == 1:
                     area = self._dfs(r, c, grid, visited_d)
-                    result = max(result, area)
-
-        return result
-
-
-class SolutionBFSUpdate:
-    def _bfs(self, r: int, c: int, grid: List[List[int]]) -> int:
-        from collections import deque
-
-        n_rows, n_cols = len(grid), len(grid[0])
-
-        # Mark (r, c) as visited.
-        grid[r][c] = 0
-
-        # Apply BFS with queue.
-        area = 0
-        queue = deque([(r, c)])
-
-        while queue:
-            r, c = queue.pop()
-            area += 1
-
-            # Visit neighboards: top/down/left/down, marked as visited.
-            dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-            for r_next, c_next in dirs:
-                # Check out of boundary or visited.
-                if (r_next < 0 or r_next >= n_rows
-                    or c_next < 0 or c_next >= n_cols
-                    or grid[r_next][c_next] == 0):
-                    continue
-
-                # Mark as visited and visit neighbors.
-                grid[r_next][c_next] = 0
-                queue.appendleft((r_next, c_next))
-
-        return area
-
-    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        """
-        Time complexity: O(m*n).
-        Space complexity: O(m*n).
-        """
-        # Edge cases.
-        if not grid or not grid[0]:
-            return 0
-
-        n_rows, n_cols = len(grid), len(grid[0])
-
-        # Apply BFS to obtain max area.
-        result = 0
-
-        for r in range(n_rows):
-            for c in range(n_cols):
-                if grid[r][c] == 1:
-                    area = self._bfs(r, c, grid)
                     result = max(result, area)
 
         return result
@@ -311,23 +150,8 @@ def main():
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
-    print(SolutionDFSRecurUpdate().maxAreaOfIsland(grid1))
-    print("SolutionDFSRecurUpdate:", time.time() - start_time)
-
-    grid1 = copy.deepcopy(grid)
-    start_time = time.time()
-    print(SolutionDFSIterUpdate().maxAreaOfIsland(grid1))
-    print("SolutionDFSIterUpdate:", time.time() - start_time)
-
-    grid1 = copy.deepcopy(grid)
-    start_time = time.time()
     print(SolutionDFSRecurVisitedDict().maxAreaOfIsland(grid1))
     print("SolutionDFSRecurVisitedDict:", time.time() - start_time)
-
-    grid1 = copy.deepcopy(grid)
-    start_time = time.time()
-    print(SolutionBFSUpdate().maxAreaOfIsland(grid1))
-    print("SolutionBFSUpdate:", time.time() - start_time)
 
     grid1 = copy.deepcopy(grid)
     start_time = time.time()
