@@ -33,7 +33,7 @@ Note:
 from typing import List
 
 
-class SolutionPrereqCoursesDFS(object):
+class SolutionPrereqCoursesDFS:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
         Time complexity: O(|V|+|E|), where
@@ -44,7 +44,7 @@ class SolutionPrereqCoursesDFS(object):
         pass
 
 
-class SolutionBFSTopologicalSort(object):
+class SolutionBFSTopologicalSort:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
         Time complexity: O(|V|+|E|), where
