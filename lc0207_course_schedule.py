@@ -44,7 +44,7 @@ class SolutionPrereqCoursesDFS:
         pass
 
 
-class SolutionBFSTopologicalSort:
+class SolutionPrereqCoursesBFSTopologicalSort:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
         Time complexity: O(|V|+|E|), where
@@ -91,17 +91,17 @@ def main():
     # Output: true
     numCourses = 2
     prerequisites = [[1,0]]
-    print(SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites))
+    print(SolutionPrereqCoursesBFSTopologicalSort().canFinish(numCourses, prerequisites))
 
     # Output: false
     numCourses = 2
     prerequisites = [[1,0],[0,1]]
-    print(SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites))
+    print(SolutionPrereqCoursesBFSTopologicalSort().canFinish(numCourses, prerequisites))
 
     # Output: false
     numCourses = 3
     prerequisites = [[1,0],[2,1],[0,2]]
-    print(SolutionBFSTopologicalSort().canFinish(numCourses, prerequisites))
+    print(SolutionPrereqCoursesBFSTopologicalSort().canFinish(numCourses, prerequisites))
 
 
 if __name__ == '__main__':
