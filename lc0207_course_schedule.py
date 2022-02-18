@@ -30,10 +30,30 @@ Note:
 - You may assume that there are no duplicate edges in the input prerequisites.
 """
 
-from typing import List
+from typing import Dict, List
 
 
 class SolutionPrereqCoursesDFS:
+    def _has_cycle_dfs(self, course: int, states: List[int], prereq_courses_d: Dict[int, List[int]]) -> bool:
+        # If the course completed visiting
+        if states[course] == 1:
+            return False
+
+        # If the course is being process: detected cycle.
+        if states[course] == -1:
+            return True
+
+        # The course is not visited at all, start processing by recursive DFS.
+        states[course] = -1
+
+        for next_course in prereq_courses_d[course]:
+            if self._has_cycle_dfs(next_course, states, prereq_courses_d):
+                return True
+
+        # If no cycle was detected, completed visiting.
+        states[course] = 1
+        return False
+
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
         Time complexity: O(|V|+|E|), where
@@ -41,7 +61,25 @@ class SolutionPrereqCoursesDFS:
           - |E|: number of edges.
         Space complexity: O(|V|).
         """
-        pass
+        from collections import defaultdict
+
+        # Build graph by dict: prereq->list(courses).
+        prereq_courses_d = defaultdict(list)
+
+        for course, prereq in prerequisites:
+            prereq_courses_d[prereq].append(course)
+
+        # Traverse graph to detect cycle using course state:
+        # - state: 0, not visited at all, default state
+        # - state: -1, being processed 
+        # - state: 1, completed visiting
+        states = [0] * numCourses
+
+        for course in range(numCourses):
+            if self._has_cycle_dfs(course, states, prereq_courses_d):
+                return False
+
+        return True
 
 
 class SolutionPrereqCoursesBFSTopologicalSort:
@@ -56,7 +94,7 @@ class SolutionPrereqCoursesBFSTopologicalSort:
         from collections import defaultdict
         from collections import deque
 
-        # Build course graph by dict:prereq->list(courses) & courses's indegrees.
+        # Build graph by dict: prereq->list(courses) & courses's indegrees.
         prereq_courses_d = defaultdict(list)
         n_prereqs = [0] * numCourses
 
@@ -92,16 +130,19 @@ def main():
     numCourses = 2
     prerequisites = [[1,0]]
     print(SolutionPrereqCoursesBFSTopologicalSort().canFinish(numCourses, prerequisites))
+    print(SolutionPrereqCoursesDFS().canFinish(numCourses, prerequisites))
 
     # Output: false
     numCourses = 2
     prerequisites = [[1,0],[0,1]]
     print(SolutionPrereqCoursesBFSTopologicalSort().canFinish(numCourses, prerequisites))
+    print(SolutionPrereqCoursesDFS().canFinish(numCourses, prerequisites))
 
     # Output: false
     numCourses = 3
     prerequisites = [[1,0],[2,1],[0,2]]
     print(SolutionPrereqCoursesBFSTopologicalSort().canFinish(numCourses, prerequisites))
+    print(SolutionPrereqCoursesDFS().canFinish(numCourses, prerequisites))
 
 
 if __name__ == '__main__':
