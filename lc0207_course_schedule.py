@@ -33,6 +33,17 @@ Note:
 from typing import List
 
 
+class SolutionPrereqCoursesDFS(object):
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        """
+        Time complexity: O(|V|+|E|), where
+          - |V|: number of vertices, i.e. courses.
+          - |E|: number of edges.
+        Space complexity: O(|V|).
+        """
+        pass
+
+
 class SolutionBFSTopologicalSort(object):
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
