@@ -29,7 +29,7 @@ Constraints:
 - All the characters of order are unique.
 """
 
-class Solution:
+class SolutionCharFreqDict:
     def customSortString(self, order: str, s: str) -> str:
         """
         Time complexity: O(m + n).
@@ -63,12 +63,12 @@ def main():
     # Output: "cbad"
     order = "cba"
     s = "abcd"
-    print(Solution().customSortString(order, s))
+    print(SolutionCharFreqDict().customSortString(order, s))
 
     # Output: "cbad"
     order = "cbafg"
     s = "abcd"
-    print(Solution().customSortString(order, s))
+    print(SolutionCharFreqDict().customSortString(order, s))
 
 
 if __name__ == "__main__":
