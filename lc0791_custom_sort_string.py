@@ -11,7 +11,6 @@ More specifically, if a character x occurs before a character y in order, then x
 Return any permutation of s that satisfies this property.
 
 Example 1:
-
 Input: order = "cba", s = "abcd"
 Output: "cbad"
 Explanation: 
@@ -32,11 +31,44 @@ Constraints:
 
 class Solution:
     def customSortString(self, order: str, s: str) -> str:
-        pass
+        """
+        Time complexity: O(m + n).
+        Space complexity: O(m).
+        """
+        # Iterate through s to build dict: char->freq.
+        from collections import defaultdict
+
+        char_freq_d = defaultdict(int)
+
+        for char in s:
+            char_freq_d[char] += 1
+
+        # Iterate through order to concat result and pop completed char->freq.
+        result = []
+        for char in order:
+            for _ in range(char_freq_d[char]):
+                result.append(char)
+
+            del char_freq_d[char]
+
+        # Iterate through dict's remaining char->freq to concat result.
+        for char, freq in char_freq_d.items():
+            for _ in range(freq):
+                result.append(char)
+
+        return ''.join(result)
 
 
 def main():
-    pass
+    # Output: "cbad"
+    order = "cba"
+    s = "abcd"
+    print(Solution().customSortString(order, s))
+
+    # Output: "cbad"
+    order = "cbafg"
+    s = "abcd"
+    print(Solution().customSortString(order, s))
 
 
 if __name__ == "__main__":
