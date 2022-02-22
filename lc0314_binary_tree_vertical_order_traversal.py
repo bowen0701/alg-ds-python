@@ -80,7 +80,12 @@ class TreeNode(object):
 
 
 class SolutionPreorderRecurOrderValsDict:
-    def _preorder_recur(self, root: TreeNode, vorder_vals_d: Dict[int, List], vorder: int):
+    def _preorder_recur(
+        self, 
+        root: TreeNode, 
+        vorder_vals_d: Dict[int, List], 
+        vorder: int
+    ) -> None:
         # Edge case.
         if not root:
             return
