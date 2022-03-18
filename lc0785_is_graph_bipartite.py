@@ -44,29 +44,29 @@ Note:
   graph[j].
 """
 
+from typing import Dict, List
+
+
 class SolutionNodeIdDictDFSRecur(object):
-    def _dfs(self, i, graph, node_id_d):
+    def _dfs(self, i: int, graph: List[List[int]], node_setid_d: Dict[int, int]) -> bool:
         for j in graph[i]:
-            if j in node_id_d:
-                # If connected nodes have the same id.
-                if node_id_d[j] == node_id_d[i]:
+            if j in node_setid_d:
+                # If connected nodes have the same setid: contradict bipartite def.
+                if node_setid_d[j] == node_setid_d[i]:
                     return False
             else:
-                # If not, set j to diff id. 
-                node_id_d[j] = 1 - node_id_d[i]
+                # If not, set j to different setid. 
+                node_setid_d[j] = 1 - node_setid_d[i]
 
                 # Continue DFS from node j.
-                is_bipartite = self._dfs(j, graph, node_id_d)
+                is_bipartite = self._dfs(j, graph, node_setid_d)
                 if not is_bipartite:
                     return False
 
         return True
 
-    def isBipartite(self, graph):
+    def isBipartite(self, graph: List[List[int]]) -> bool:
         """
-        :type graph: List[List[int]]; a adjacency matrix.
-        :rtype: bool
-
         Apply recursive DFS through connected nodes to add to different sets.
 
         Time complexity: O(|V|+|E|), where
@@ -78,16 +78,16 @@ class SolutionNodeIdDictDFSRecur(object):
         if len(graph) <= 2:
             return True
 
-        # Use dict: node->id={0,1}, where id is the set id.
-        node_id_d = dict()
+        # Create dict: node->setid={0,1}
+        node_setid_d = dict()
 
         for i in range(len(graph)):
-            if i not in node_id_d:
-                # For disconnected node, set set id = 0.
-                node_id_d[i] = 0
+            if i not in node_setid_d:
+                # For disconnected node, set setid = 0.
+                node_setid_d[i] = 0
 
                 # Start DFS from node i.
-                is_bipartite = self._dfs(i, graph, node_id_d)
+                is_bipartite = self._dfs(i, graph, node_setid_d)
 
                 if not is_bipartite:
                     # If one node cannot be added, return False.
@@ -100,12 +100,12 @@ def main():
     # Input: [[1,3], [0,2], [1,3], [0,2]]
     # Output: true
     graph = [[1,3], [0,2], [1,3], [0,2]]
-    print SolutionNodeIdDictDFSRecur().isBipartite(graph)
+    print(SolutionNodeIdDictDFSRecur().isBipartite(graph))
 
     # Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
     # Output: true
     graph = [[1,2,3], [0,2], [0,1,3], [0,2]]
-    print SolutionNodeIdDictDFSRecur().isBipartite(graph)
+    print(SolutionNodeIdDictDFSRecur().isBipartite(graph))
 
 
 if __name__ == '__main__':
