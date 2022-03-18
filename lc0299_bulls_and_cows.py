@@ -42,7 +42,7 @@ Constraints:
 from collections import defaultdict
 
 
-class Solution:
+class CharFreqDictSolution:
     def getHint(self, secret: str, guess: str) -> str:
         """
         Time complexity: O(n).
@@ -75,12 +75,12 @@ def main():
     # Output: "1A3B"
     secret = "1807"
     guess = "7810"
-    print(Solution().getHint(secret, guess))
+    print(CharFreqDictSolution().getHint(secret, guess))
 
     # Output: "1A1B"
     secret = "1123"
     guess = "0111"
-    print(Solution().getHint(secret, guess))
+    print(CharFreqDictSolution().getHint(secret, guess))
 
 
 if __name__ == "__main__":
