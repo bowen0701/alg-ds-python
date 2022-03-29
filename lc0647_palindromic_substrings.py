@@ -19,45 +19,43 @@ Output: 6
 Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
 """
 
-class SolutionCenterExpandTwoPointers(object):
-    def _extendPalindrome(self, left, right, s):
-        while left >= 0 and right < len(s) and s[left] == s[right]:
-            self.n_pals += 1
+class SolutionCenterExpandTwoPointers:
+    def _expandPalindrome(self, left: int, right: int, s: str) -> None:
+        while left >= 0 and right < len(s):
+            # Stop expanding to two sides.
+            if s[left] != s[right]:
+                break
 
             # Expand to two sides to check bigger palindrome.
+            self.result += 1
             left -= 1
             right += 1
 
-    def countSubstrings(self, s):
+    def countSubstrings(self, s: str) -> int: 
         """
-        :type s: str
-        :rtype: int
-
         Expand palindrome from center with two pointers.
 
         Time complexity: O(n^2).
         Space complexity: O(1).
         """
-        self.n_pals = 0
+        self.result = 0
 
         for i in range(len(s)):
-            # Extend palindrome of odd length.
-            self._extendPalindrome(i, i, s)
+            # Expand palindrome of odd and even length.
+            self._expandPalindrome(i, i, s)
+            self._expandPalindrome(i, i + 1, s)
 
-            # Extend palindrome of even length.
-            self._extendPalindrome(i, i + 1, s)
-
-        return self.n_pals
+        return self.result
 
 
 def main():
     # Output: 3.
     s = "abc"
-    print SolutionCenterExpandTwoPointers().countSubstrings(s)
+    print(SolutionCenterExpandTwoPointers().countSubstrings(s))
 
     # Output: 6.
     s = "aaa"
-    print SolutionCenterExpandTwoPointers().countSubstrings(s)
+    print(SolutionCenterExpandTwoPointers().countSubstrings(s))
 
 
 if __name__ == '__main__':
