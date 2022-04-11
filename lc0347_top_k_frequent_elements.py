@@ -37,7 +37,6 @@ class SolutionNubmerFreqDictBruteForce:
         for num in nums:
             num_freq_d[num] += 1
 
-
         # Iterate through the whole dict k times to collect result.
         result = []
 
