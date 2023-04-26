@@ -21,13 +21,46 @@ Constraints:
 - 10^9 <= nums[i] <= 10^9
 """
 
-class Solution:
+from typing import List
+
+
+class SolutionLeftRight:
     def longestConsecutive(self, nums: List[int]) -> int:
-        pass
+        # Edge case.
+        if not nums:
+            return 0
+
+        # Iterate through nums to check its consecutive lefts & rights to get the length.
+        nums_set = set(nums)
+        result = 1
+
+        for n in nums:
+            if n not in nums_set:
+                continue
+            
+            nums_set.remove(n)
+
+            left, right = n - 1, n + 1
+            while left in nums_set:
+                nums_set.remove(left)
+                left -= 1
+            while right in nums_set:
+                nums_set.remove(right)
+                right += 1
+
+            result = max(result, right - left - 1)
+
+        return result
 
 
 def main():
-    pass
+    # Output: 4
+    nums = [100,4,200,1,3,2]
+    print(SolutionLeftRight().longestConsecutive(nums))
+
+    # Output: 9
+    nums = [0,3,7,2,5,8,4,6,0,1]
+    print(SolutionLeftRight().longestConsecutive(nums))
 
 
 if __name__ == "__main__":
