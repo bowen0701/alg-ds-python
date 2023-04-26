@@ -24,7 +24,7 @@ Constraints:
 from typing import List
 
 
-class SolutionLeftRight:
+class SolutionLeftRightIncrements:
     def longestConsecutive(self, nums: List[int]) -> int:
         # Edge case.
         if not nums:
@@ -56,11 +56,11 @@ class SolutionLeftRight:
 def main():
     # Output: 4
     nums = [100,4,200,1,3,2]
-    print(SolutionLeftRight().longestConsecutive(nums))
+    print(SolutionLeftRightIncrements().longestConsecutive(nums))
 
     # Output: 9
     nums = [0,3,7,2,5,8,4,6,0,1]
-    print(SolutionLeftRight().longestConsecutive(nums))
+    print(SolutionLeftRightIncrements().longestConsecutive(nums))
 
 
 if __name__ == "__main__":
