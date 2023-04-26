@@ -53,14 +53,37 @@ class SolutionLeftRightIncrements:
         return result
 
 
+class SolutionLeftToRightIncrements:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        # Edge case.
+        if not nums:
+            return 0
+
+        # Iterate through nums to check if reached the start of the streak (i.e. the leftmost).
+        nums_set = set(nums)
+        result = 1
+
+        for n in nums:
+            if n - 1 not in nums_set:
+                nxt = n + 1
+                while nxt in nums_set:
+                    nxt += 1
+                
+                result = max(result, nxt - n)
+        
+        return result
+
+
 def main():
     # Output: 4
     nums = [100,4,200,1,3,2]
     print(SolutionLeftRightIncrements().longestConsecutive(nums))
+    print(SolutionLeftToRightIncrements().longestConsecutive(nums))
 
     # Output: 9
     nums = [0,3,7,2,5,8,4,6,0,1]
     print(SolutionLeftRightIncrements().longestConsecutive(nums))
+    print(SolutionLeftToRightIncrements().longestConsecutive(nums))
 
 
 if __name__ == "__main__":
