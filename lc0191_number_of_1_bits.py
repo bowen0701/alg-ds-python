@@ -36,7 +36,7 @@ Follow up:
 If this function is called many times, how would you optimize it?
 """
 
-class SolutionBitReprIter:
+class SolutionBitsReprIter:
     def hammingWeight(self, n: int) -> int:
         """
         Time complexity: O(32) = O(1).
@@ -52,7 +52,7 @@ class SolutionBitReprIter:
         return sum(bits)
 
 
-class SolutionBitIter:
+class SolutionBitsIter:
     def hammingWeight(self, n: int) -> int:
         """
         Time complexity: O(32) = O(1).
@@ -62,6 +62,19 @@ class SolutionBitIter:
         while n:
             result += n & 1
             n >>= 1
+        return result
+
+
+class SolutionBitsDropLowestSetBit:
+    def hammingWeight(self, n: int) -> int:
+        """
+        Time complexity: O(k) = O(1), where k is the number of bits.
+        Space complexity: O(1).
+        """
+        result = 0
+        while n:
+            result += 1
+            n &= (n - 1)
         return result
 
 
@@ -77,20 +90,23 @@ class SolutionBin:
 def main():
     # Output: 3
     n = 0b00000000000000000000000000001011
-    print(SolutionBitReprIter().hammingWeight(n))
-    print(SolutionBitIter().hammingWeight(n))
+    print(SolutionBitsReprIter().hammingWeight(n))
+    print(SolutionBitsIter().hammingWeight(n))
+    print(SolutionBitsDropLowestSetBit().hammingWeight(n))
     print(SolutionBin().hammingWeight(n))
 
     # Output: 1
     n = 0b00000000000000000000000010000000
-    print(SolutionBitReprIter().hammingWeight(n))
-    print(SolutionBitIter().hammingWeight(n))
+    print(SolutionBitsReprIter().hammingWeight(n))
+    print(SolutionBitsIter().hammingWeight(n))
+    print(SolutionBitsDropLowestSetBit().hammingWeight(n))
     print(SolutionBin().hammingWeight(n))
 
     # Output: 31
     n = 0b11111111111111111111111111111101
-    print(SolutionBitReprIter().hammingWeight(n))
-    print(SolutionBitIter().hammingWeight(n))
+    print(SolutionBitsReprIter().hammingWeight(n))
+    print(SolutionBitsIter().hammingWeight(n))
+    print(SolutionBitsDropLowestSetBit().hammingWeight(n))
     print(SolutionBin().hammingWeight(n))
 
 
