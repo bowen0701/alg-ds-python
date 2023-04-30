@@ -42,14 +42,14 @@ class SolutionIter(object):
         :type n: int
         :rtype: int
 
-        Time complexity: O(1).
-        Space complexity: O(1).
+        Time complexity: O(32) = O(1).
+        Space complexity: O(32) = O(1).
         """
         bits = [0] * 32
         pos = 31
         while n:
-            bits[pos] = n % 2
-            n = n // 2
+            bits[pos] = n & 1
+            n >>= 1
             pos -= 1
 
         return sum(bits)
@@ -68,9 +68,20 @@ class SolutionBin(object):
 
 
 def main():
-    n = 11
-    print SolutionIter().hammingWeight(n)
-    print SolutionBin().hammingWeight(n)
+    # Output: 3
+    n = 0b00000000000000000000000000001011
+    print(SolutionIter().hammingWeight(n))
+    print(SolutionBin().hammingWeight(n))
+
+    # Output: 1
+    n = 0b00000000000000000000000010000000
+    print(SolutionIter().hammingWeight(n))
+    print(SolutionBin().hammingWeight(n))
+
+    # Output: 31
+    n = 0b11111111111111111111111111111101
+    print(SolutionIter().hammingWeight(n))
+    print(SolutionBin().hammingWeight(n))
 
 
 if __name__ == '__main__':
