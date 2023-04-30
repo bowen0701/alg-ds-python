@@ -36,12 +36,9 @@ Follow up:
 If this function is called many times, how would you optimize it?
 """
 
-class SolutionBitReprIter(object):
-    def hammingWeight(self, n):
+class SolutionBitReprIter:
+    def hammingWeight(self, n: int):
         """
-        :type n: int
-        :rtype: int
-
         Time complexity: O(32) = O(1).
         Space complexity: O(32) = O(1).
         """
@@ -55,12 +52,22 @@ class SolutionBitReprIter(object):
         return sum(bits)
 
 
-class SolutionBin(object):
-    def hammingWeight(self, n):
+class SolutionBitIter:
+    def hammingWeight(self, n: int):
         """
-        :type n: int
-        :rtype: int
+        Time complexity: O(32) = O(1).
+        Space complexity: O(1).
+        """
+        result = 0
+        while n:
+            result += n & 1
+            n >>= 1
+        return result
 
+
+class SolutionBin:
+    def hammingWeight(self, n: int):
+        """
         Time complexity: O(1).
         Space complexity: O(1).
         """
@@ -71,16 +78,19 @@ def main():
     # Output: 3
     n = 0b00000000000000000000000000001011
     print(SolutionBitReprIter().hammingWeight(n))
+    print(SolutionBitIter().hammingWeight(n))
     print(SolutionBin().hammingWeight(n))
 
     # Output: 1
     n = 0b00000000000000000000000010000000
     print(SolutionBitReprIter().hammingWeight(n))
+    print(SolutionBitIter().hammingWeight(n))
     print(SolutionBin().hammingWeight(n))
 
     # Output: 31
     n = 0b11111111111111111111111111111101
-    print(SolutionIter().hammingWeight(n))
+    print(SolutionBitReprIter().hammingWeight(n))
+    print(SolutionBitIter().hammingWeight(n))
     print(SolutionBin().hammingWeight(n))
 
 
