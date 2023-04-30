@@ -37,7 +37,7 @@ If this function is called many times, how would you optimize it?
 """
 
 class SolutionBitReprIter:
-    def hammingWeight(self, n: int):
+    def hammingWeight(self, n: int) -> int:
         """
         Time complexity: O(32) = O(1).
         Space complexity: O(32) = O(1).
@@ -53,7 +53,7 @@ class SolutionBitReprIter:
 
 
 class SolutionBitIter:
-    def hammingWeight(self, n: int):
+    def hammingWeight(self, n: int) -> int:
         """
         Time complexity: O(32) = O(1).
         Space complexity: O(1).
@@ -66,7 +66,7 @@ class SolutionBitIter:
 
 
 class SolutionBin:
-    def hammingWeight(self, n: int):
+    def hammingWeight(self, n: int) -> int:
         """
         Time complexity: O(1).
         Space complexity: O(1).
