@@ -74,6 +74,7 @@ class SolutionBitsDropLowestSetBit:
         result = 0
         while n:
             result += 1
+            # Drop the lowest set bit.
             n &= (n - 1)
         return result
 

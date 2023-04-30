@@ -10,7 +10,7 @@ from __future__ import division
 
 
 class BitsIter:
-    def parity_bits(self, n: int) -> int:
+    def bits_parity(self, n: int) -> int:
         """
         Time complexity: O(64) = O(1).
         Space complexity: O(1).
@@ -23,7 +23,7 @@ class BitsIter:
 
 
 class BitsDropLowestSetBit:
-    def parity_bits(self, n: int) -> int:
+    def bits_parity(self, n: int) -> int:
         """
         Time complexity: O(k) = O(1), where k is the number of bits.
         Space complexity: O(1).
@@ -33,20 +33,33 @@ class BitsDropLowestSetBit:
             result ^= 1
             # Drop the lowest set bit.
             n &= (n - 1)
-        return result 
+        return result
 
+
+class BitsCache:
+    def __init__(self, cache_size: int = 16):
+        pass
+
+    def bits_parity(self, n: int) -> int:
+        """
+        Time complexity: O(n/l) = O(1), where 
+          - n is the binary word size; and 
+          - l is the width of the words for cache.
+        Space complexity: O(2^l).
+        """
+        pass
 
 
 def main():
     # Output: 1
     n = 0b1011
-    print(BitsIter().parity_bits(n))
-    print(BitsDropLowestSetBit().parity_bits(n))
+    print(BitsIter().bits_parity(n))
+    print(BitsDropLowestSetBit().bits_parity(n))
 
     # Output: 0
     n = 0b10001000
-    print(BitsIter().parity_bits(n))
-    print(BitsDropLowestSetBit().parity_bits(n))
+    print(BitsIter().bits_parity(n))
+    print(BitsDropLowestSetBit().bits_parity(n))
 
 
 if __name__ == "__main__":
