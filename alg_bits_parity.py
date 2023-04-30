@@ -69,18 +69,35 @@ class BitsCache:
         )
 
 
+class BitsWordLevelXOR:
+    def bits_parity(self, n: int) -> int:
+        """
+        Time complexity: O(1)
+        Space complexity: O(1).
+        """
+        n ^= (n >> 32)
+        n ^= (n >> 16)
+        n ^= (n >> 8)
+        n ^= (n >> 4)
+        n ^= (n >> 2)
+        n ^= (n >> 1)
+        return n & 0b1
+
+
 def main():
     # Output: 1
     n = 0b1011
     print(BitsIter().bits_parity(n))
     print(BitsDropLowestSetBit().bits_parity(n))
     print(BitsCache().bits_parity(n))
+    print(BitsWordLevelXOR().bits_parity(n))
 
     # Output: 0
     n = 0b10001000
     print(BitsIter().bits_parity(n))
     print(BitsDropLowestSetBit().bits_parity(n))
     print(BitsCache().bits_parity(n))
+    print(BitsWordLevelXOR().bits_parity(n))
 
 
 if __name__ == "__main__":
