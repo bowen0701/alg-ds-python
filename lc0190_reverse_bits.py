@@ -29,43 +29,48 @@ Note:
   signed integer -3 and the output represents the signed integer -1073741825.
 """
 
-class SolutionIter:
-    # @param n, an integer
-    # @return an integer
-    # Time complexity: O(1).
-    # Space complexity: O(1)
-    def reverseBits(self, n):
+class SolutionBitsReprIter:
+    """
+    Time complexity: O(1).
+    Space complexity: O(1).
+    """
+    def reverseBits(self, n: int) -> int:
+        # Convert n to bits array.
         bits = [0] * 32
-        i = 0
-
+        i = 31
         while n:
-            bits[i] = n % 2
-            n /= 2
-            i += 1
+            bits[i] = n & 1
+            n >>= 1
+            i -= 1
 
-        res = 0
-        for i in range(32):
-            res = res * 2 + bits[i]
-
-        return res
+        # Traverse from back of bits array to accumulate result.
+        result = 0
+        for i in range(-1, -33, -1):
+            result = (result << 1) + bits[i]
+        return result
 
 
 class SolutionBin:
-    # @param n, an integer
-    # @return an integer
-    # Time complexity: O(1).
-    # Space complexity: O(1)
-    def reverseBits(self, n):
+    """
+    Time complexity: O(1).
+    Space complexity: O(1).
+    """
+    def reverseBits(self, n: int) -> int:
         # Pad zeros before bin_n to 32 bits, reverse it, and convert to int.
         bin_n = bin(n)[2:]
         return int(('0' * (32 - len(bin_n)) + bin_n)[::-1], 2)
 
 
 def main():
-    # Ans: 964176192
-    n = 43261596
-    print SolutionIter().reverseBits(n)
+    # Output: 964176192 (0b00111001011110000010100101000000)
+    n = 0b00000010100101000001111010011100
+    print(SolutionBitsReprIter().reverseBits(n))
+    print(SolutionBin().reverseBits(n))
 
+    # Output: 3221225471 (10111111111111111111111111111111)
+    n = 0b11111111111111111111111111111101
+    print(SolutionBitsReprIter().reverseBits(n))
+    print(SolutionBin().reverseBits(n))
 
 
 if __name__ == '__main__':
