@@ -43,11 +43,11 @@ class SolutionBitsReprIter:
         Space complexity: O(32) = O(1).
         """
         bits = [0] * 32
-        pos = 31
+        i = 31
         while n:
-            bits[pos] = n & 1
+            bits[i] = n & 1
             n >>= 1
-            pos -= 1
+            i -= 1
 
         return sum(bits)
 
