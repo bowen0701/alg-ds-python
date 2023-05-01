@@ -31,10 +31,14 @@ Note:
 
 class SolutionBitsReprIter:
     """
-    Time complexity: O(1).
-    Space complexity: O(1).
+    Time complexity: O(32) = O(1).
+    Space complexity: O(32) = O(1).
     """
     def reverseBits(self, n: int) -> int:
+        # Edge case.
+        if not n:
+            return 0
+
         # Convert n to bits array.
         bits = [0] * 32
         i = 31
@@ -50,12 +54,34 @@ class SolutionBitsReprIter:
         return result
 
 
+class SolutionBitsIter:
+    """
+    Time complexity: O(32) = O(1).
+    Space complexity: O(32) = O(1).
+    """
+    def reverseBits(self, n: int) -> int:
+        # Edge case.
+        if not n:
+            return 0
+
+        # Iteratively apply bit AND to lsb and left shift result.
+        result = 0
+        for i in range(32):
+            result = (result << 1) + (n & 1)
+            n >>= 1
+        return result
+
+
 class SolutionBin:
     """
     Time complexity: O(1).
     Space complexity: O(1).
     """
     def reverseBits(self, n: int) -> int:
+        # Edge case.
+        if not n:
+            return 0
+
         # Pad zeros before bin_n to 32 bits, reverse it, and convert to int.
         bin_n = bin(n)[2:]
         return int(('0' * (32 - len(bin_n)) + bin_n)[::-1], 2)
@@ -65,11 +91,13 @@ def main():
     # Output: 964176192 (0b00111001011110000010100101000000)
     n = 0b00000010100101000001111010011100
     print(SolutionBitsReprIter().reverseBits(n))
+    print(SolutionBitsIter().reverseBits(n))
     print(SolutionBin().reverseBits(n))
 
     # Output: 3221225471 (10111111111111111111111111111111)
     n = 0b11111111111111111111111111111101
     print(SolutionBitsReprIter().reverseBits(n))
+    print(SolutionBitsIter().reverseBits(n))
     print(SolutionBin().reverseBits(n))
 
 
