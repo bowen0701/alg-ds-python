@@ -8,6 +8,11 @@ from typing import Tuple
 
 
 def swap_by_bit_xor(x: float, y: float) -> Tuple[float, float]:
+    """Swap 2 numbers by bit XOR operation.
+    
+    - Time complexity: O(1)
+    - Space complexity: O(1).
+    """
     x = x ^ y
     y = x ^ y
     x = x ^ y
@@ -15,6 +20,11 @@ def swap_by_bit_xor(x: float, y: float) -> Tuple[float, float]:
 
 
 def swap_by_tuple(x: float, y: float) -> Tuple[float, float]:
+    """Swap 2 numbers by Python tuple swap.
+    
+    - Time complexity: O(1)
+    - Space complexity: O(1).
+    """
     x, y = y, x
     return x, y
 
