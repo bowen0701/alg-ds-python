@@ -9,8 +9,8 @@ from __future__ import print_function
 from __future__ import division
 
 
-class BitsIter:
-    def bits_parity(self, n: int) -> int:
+class BiParityIter:
+    def bit_parity(self, n: int) -> int:
         """
         Time complexity: O(64) = O(1).
         Space complexity: O(1).
@@ -22,8 +22,8 @@ class BitsIter:
         return result
 
 
-class BitsDropLowestSetBit:
-    def bits_parity(self, n: int) -> int:
+class BitParityDropLowestSetBit:
+    def bit_parity(self, n: int) -> int:
         """
         Time complexity: O(k) = O(1), where k is the number of bits.
         Space complexity: O(1).
@@ -36,7 +36,7 @@ class BitsDropLowestSetBit:
         return result
 
 
-class BitsCache:
+class BitParityCache:
     def __init__(self, cache_size: int = 16):
         # Cache parity for all numbers between 0 - 2^cache_size.
         self.precomputed_parity = dict()
@@ -52,7 +52,7 @@ class BitsCache:
             n &= (n - 1)
         return result
 
-    def bits_parity(self, n: int, cache_size: int = 16) -> int:
+    def bit_parity(self, n: int, cache_size: int = 16) -> int:
         """
         Time complexity: O(n/l) = O(1), where 
           - n is the binary word size; and 
@@ -69,8 +69,8 @@ class BitsCache:
         )
 
 
-class BitsWordLevelXOR:
-    def bits_parity(self, n: int) -> int:
+class BitParityWordLevelXOR:
+    def bit_parity(self, n: int) -> int:
         """
         Time complexity: O(1)
         Space complexity: O(1).
@@ -87,17 +87,17 @@ class BitsWordLevelXOR:
 def main():
     # Output: 1
     n = 0b1011
-    print(BitsIter().bits_parity(n))
-    print(BitsDropLowestSetBit().bits_parity(n))
-    print(BitsCache().bits_parity(n))
-    print(BitsWordLevelXOR().bits_parity(n))
+    print(BitParityIter().bit_parity(n))
+    print(BitParityDropLowestSetBit().bit_parity(n))
+    print(BitParityCache().bit_parity(n))
+    print(BitParityWordLevelXOR().bit_parity(n))
 
     # Output: 0
     n = 0b10001000
-    print(BitsIter().bits_parity(n))
-    print(BitsDropLowestSetBit().bits_parity(n))
-    print(BitsCache().bits_parity(n))
-    print(BitsWordLevelXOR().bits_parity(n))
+    print(BitParityIter().bit_parity(n))
+    print(BitParityDropLowestSetBit().bit_parity(n))
+    print(BitParityCache().bit_parity(n))
+    print(BitParityWordLevelXOR().bit_parity(n))
 
 
 if __name__ == "__main__":
