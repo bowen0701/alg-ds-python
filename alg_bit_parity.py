@@ -25,7 +25,7 @@ class BitParityIter:
 class BitParityDropLowestSetBit:
     def bit_parity(self, n: int) -> int:
         """
-        Time complexity: O(k) = O(1), where k is the number of bits.
+        Time complexity: O(k) = O(1), where k is the number of bits set to 1.
         Space complexity: O(1).
         """
         result = 0
@@ -72,7 +72,7 @@ class BitParityCache:
 class BitParityWordLevelXOR:
     def bit_parity(self, n: int) -> int:
         """
-        Time complexity: O(1)
+        Time complexity: O(logn)
         Space complexity: O(1).
         """
         n ^= (n >> 32)
