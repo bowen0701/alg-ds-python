@@ -9,7 +9,7 @@ from __future__ import print_function
 from __future__ import division
 
 
-class BiParityIter:
+class BitParityIter:
     def bit_parity(self, n: int) -> int:
         """
         Time complexity: O(64) = O(1).
@@ -39,9 +39,9 @@ class BitParityDropLowestSetBit:
 class BitParityCache:
     def __init__(self, cache_size: int = 16):
         # Cache parity for all numbers between 0 - 2^cache_size.
-        self.precomputed_parity = dict()
+        self.cached_parity = dict()
         for n in range(2 ** cache_size):
-            self.precomputed_parity[n] = self._precompute_bits_parity(n)
+            self.cached_parity[n] = self._precompute_bits_parity(n)
 
     def _precompute_bits_parity(self, n: int) -> int:
         # Helper function for precomputing bits parity.
@@ -62,10 +62,10 @@ class BitParityCache:
         # Actually bit_mask = 2 ** cache_size - 1.
         bit_mask = 0xFFFF
         return (
-            self.precomputed_parity[n >> (3 * cache_size)] ^
-            self.precomputed_parity[(n >> (2 * cache_size)) & bit_mask] ^
-            self.precomputed_parity[(n >> cache_size) & bit_mask] ^
-            self.precomputed_parity[n & bit_mask]
+            self.cached_parity[n >> (3 * cache_size)] ^
+            self.cached_parity[(n >> (2 * cache_size)) & bit_mask] ^
+            self.cached_parity[(n >> cache_size) & bit_mask] ^
+            self.cached_parity[n & bit_mask]
         )
 
 
