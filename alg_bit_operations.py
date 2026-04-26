@@ -148,19 +148,18 @@ class BitOperations:
 
         Usage:
             BitOperations.bit_parity(x, method="auto")
-
-        Behavior:
-            - small x (< 2^64) -> builtin
-            - sparse pattern -> drop method
         """
         registry = cls.REGISTRIES["parity"]
 
+        # Small x (< 2^64) -> builtin
         if x < (1 << 64):
             return registry["builtin"](x)
 
+        # If sparse pattern (power of 2): parity 
         if x > 0 and (x & (x - 1) == 0):
             return 1
 
+        # Fallback to drop method
         return registry["drop"](x)
 
     @staticmethod
@@ -169,8 +168,10 @@ class BitOperations:
         Propagate rightmost set bit to all lower bits.
 
         Usage:
-            BitOperations.bit_right_propagate(0b101000)
-            # -> 0b101111
+            BitOperations.bit_right_propagate(0b00101100)
+            # ->      x = 0b00101100 = 44
+            #       x-1 = 0b00101011: int.from_bytes([x-1], signed=True) = 43
+            # x | (x-1) = 0b00101111
         """
         if x == 0:
             return 0
@@ -179,11 +180,15 @@ class BitOperations:
     @staticmethod
     def bit_isolate_lowest_set_bit(x: int) -> int:
         """
-        Extract lowest set bit.
+        Extract lowest set bit by x & -x.
+        Note: -x = ~x + 1
 
         Usage:
-            BitOperations.bit_isolate_lowest_set_bit(0b101100)
-            # -> 0b000100
+            BitOperations.bit_isolate_lowest_set_bit(0b00101100)
+            # ->      x = 0b00101100 = 44
+            #        ~x = 0b11010011
+            # -x = ~x+1 = 0b11010100: int.from_bytes([~x+1], signed=True) = -44
+            #    x & -x = 0b00000100
         """
         return x & -x
 
@@ -193,8 +198,10 @@ class BitOperations:
         Remove lowest set bit.
 
         Usage:
-            BitOperations.bit_remove_lowest_set_bit(0b101100)
-            # -> 0b101000
+            BitOperations.bit_remove_lowest_set_bit(0b00101100)
+            # ->      x = 0b00101100 = 44
+            #       x-1 = 0b00101011: int.from_bytes([x-1], signed=True) = 43
+            # x & (x-1) = 0b00101000
         """
         return x & (x - 1)
 
@@ -205,7 +212,15 @@ class BitOperations:
 
         Usage:
             BitOperations.bit_is_power_of_two(8)   # True
+            # BitOperations.bit_remove_lowest_set_bit(0b00001000)
+            # ->      x = 0b00001000 = 8
+            #       x-1 = 0b00000111: int.from_bytes([x-1], signed=True) = 7
+            # x & (x-1) = 0b00000000
             BitOperations.bit_is_power_of_two(10)  # False
+            # BitOperations.bit_remove_lowest_set_bit(0b00001010)
+            # ->      x = 0b00001010 = 10
+            #       x-1 = 0b00001001: int.from_bytes([x-1], signed=True) = 9
+            # x & (x-1) = 0b00001000 = 8 != 0 -> not power of 2
         """
         return x > 0 and (x & (x - 1)) == 0
 
