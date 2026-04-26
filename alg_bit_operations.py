@@ -150,7 +150,7 @@ class BitOperations:
             BitOperations.bit_parity(x, method="auto")
 
         Behavior:
-            - small n (< 2^64) -> builtin
+            - small x (< 2^64) -> builtin
             - sparse pattern -> drop method
         """
         registry = cls.REGISTRIES["parity"]
@@ -229,6 +229,14 @@ def main():
         assert BitOperations.bit_parity(x, method="xor") == expected
         assert BitOperations.bit_parity(x, method="builtin") == expected
         assert BitOperations.bit_parity(x, method="auto") == expected
+
+    # Test custom registration using the decorator (as shown in docstrings)
+    @register_bitop("parity", "custom")
+    def my_parity(x: int) -> int:
+        return bin(x).count("1") % 2
+
+    assert BitOperations.bit_parity(0b1011, method="custom") == 1
+    assert BitOperations.bit_parity(0b1010, method="custom") == 0
 
     assert BitOperations.bit_right_propagate(0b01010000) == 0b01011111
     assert BitOperations.bit_right_propagate(0b01010010) == 0b01010011
