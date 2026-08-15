@@ -104,6 +104,52 @@ class TimeMapBinarySearchGet:
             return ''
 
 
+class TimeMapBisectRightGet:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        from collections import defaultdict
+
+        self.key_timestamps = defaultdict(list)
+        self.key_values = defaultdict(list)
+
+    def set(self, key, value, timestamp):
+        """
+        :type key: str
+        :type value: str
+        :type timestamp: int
+        :rtype: None
+
+        Time complexity: O(1).
+        Space complexity: O(n), where n is the number of stored key-values.
+        """
+        self.key_timestamps[key].append(timestamp)
+        self.key_values[key].append(value)
+
+    def get(self, key, timestamp):
+        """
+        :type key: str
+        :type timestamp: int
+        :rtype: str
+
+        Time complexity: O(logn), where n is the number of stored key-values.
+        Space complexity: O(n).
+        """
+        from bisect import bisect_right
+
+        if key not in self.key_timestamps:
+            return ''
+
+        # bisect_right finds the first position with timestamp > query.
+        # The value at position idx-1 is the latest with timestamp <= query.
+        idx = bisect_right(self.key_timestamps[key], timestamp)
+        if idx == 0:
+            return ''
+        return self.key_values[key][idx - 1]
+
+
 def main():
     timemap = TimeMapBinarySearchGet()
     timemap.set("foo", "bar", 1)
@@ -114,6 +160,25 @@ def main():
     print(timemap.get("foo", 5))  # Output: 'bar2'
 
     timemap = TimeMapBinarySearchGet()
+    timemap.set("love", "high", 10)
+    timemap.set("love", "low", 20)
+    print(timemap.get("love", 5))   # Output: ''
+    print(timemap.get("love", 10))  # Output: 'high'
+    print(timemap.get("love", 15))  # Output: 'high'
+    print(timemap.get("love", 20))  # Output: 'low'
+    print(timemap.get("love", 25))  # Output: 'low'
+
+    print()
+
+    timemap = TimeMapBisectRightGet()
+    timemap.set("foo", "bar", 1)
+    print(timemap.get("foo", 1))  # Output: 'bar'
+    print(timemap.get("foo", 3))  # Output: 'bar'
+    timemap.set("foo", "bar2", 4)
+    print(timemap.get("foo", 4))  # Output: 'bar2'
+    print(timemap.get("foo", 5))  # Output: 'bar2'
+
+    timemap = TimeMapBisectRightGet()
     timemap.set("love", "high", 10)
     timemap.set("love", "low", 20)
     print(timemap.get("love", 5))   # Output: ''

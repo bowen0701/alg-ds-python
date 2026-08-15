@@ -67,6 +67,30 @@ class SolutionBinarySearchTwice:
         return res
 
 
+class SolutionBisectLeftRight:
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+
+        Time complexity: O(logn), where n is the length of nums.
+        Space complexity: O(1).
+        """
+        from bisect import bisect_left, bisect_right
+
+        if not nums:
+            return [-1, -1]
+
+        left = bisect_left(nums, target)
+        right = bisect_right(nums, target) - 1
+
+        if left <= right and left < len(nums) and nums[left] == target:
+            return [left, right]
+
+        return [-1, -1]
+
+
 def main():
     # Ans: [3,4]
     nums = [5,7,7,8,8,10]
@@ -77,6 +101,18 @@ def main():
     nums = [5,7,7,8,8,10]
     target = 6
     print(SolutionBinarySearchTwice().searchRange(nums, target))
+
+    print()
+
+    # Ans: [3,4]
+    nums = [5,7,7,8,8,10]
+    target = 8
+    print(SolutionBisectLeftRight().searchRange(nums, target))
+
+    # Ans: [-1,-1]
+    nums = [5,7,7,8,8,10]
+    target = 6
+    print(SolutionBisectLeftRight().searchRange(nums, target))
 
 
 if __name__ == '__main__':

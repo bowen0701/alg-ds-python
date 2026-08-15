@@ -105,6 +105,37 @@ class KthLargestSortAndBinarySearch:
         return self.topk[-1]
 
 
+class KthLargestSortAndBisect:
+    """Kth Largest Element in a Stream
+
+    Apply sorting to obtain the top k largest elements, and
+    insert new element by bisect.insort in ascending sorted list.
+    """
+    def __init__(self, k: int, nums: List[int]):
+        """
+        Time complexity: O(n*logn), where n is the length of the original nums.
+        Space complexity: O(k).
+        """
+        sorted_nums = sorted(nums)
+        self.k = k
+        self.topk = sorted_nums[-k:] if len(sorted_nums) >= k else sorted_nums[:]
+
+    def add(self, val: int) -> int:
+        """
+        Time complexity: O(logk) for bisect + O(k) for insert.
+        Space complexity: O(k).
+        """
+        from bisect import insort
+
+        if len(self.topk) < self.k:
+            insort(self.topk, val)
+        elif val > self.topk[0]:
+            self.topk.pop(0)
+            insort(self.topk, val)
+
+        return self.topk[0]
+
+
 class KthLargestHeapq:
     def __init__(self, k: int, nums: List[int]):
         """
@@ -185,6 +216,21 @@ def main():
     # Adding 4 returns 8
     print(obj.add(4))
     print('Time by heapq: {}'.format(
+          time.time() - start_time))
+
+    start_time = time.time()
+    obj = KthLargestSortAndBisect(k, [4, 5, 8, 2])
+    # Adding 3 returns 4
+    print(obj.add(3))
+    # Adding 5 returns 5
+    print(obj.add(5))
+    # Adding 10 returns 5
+    print(obj.add(10))
+    # Adding 9 returns 8
+    print(obj.add(9))
+    # Adding 4 returns 8
+    print(obj.add(4))
+    print('Time by sort + bisect: {}'.format(
           time.time() - start_time))
 
     k = 1

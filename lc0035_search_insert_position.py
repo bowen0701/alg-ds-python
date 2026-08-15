@@ -50,6 +50,20 @@ class SolutionBinarySearch:
             return left + 1
 
 
+class SolutionBisectLeft:
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+
+        Time complexity: O(logn).
+        Space complexity: O(1).
+        """
+        from bisect import bisect_left
+        return bisect_left(nums, target)
+
+
 def main():
     # Output: 2
     nums = [1,3,5,6]
@@ -70,6 +84,28 @@ def main():
     nums = [1,3,5,6]
     target = 0
     print(SolutionBinarySearch().searchInsert(nums, target))
+
+    print()
+
+    # Output: 2
+    nums = [1,3,5,6]
+    target = 5
+    print(SolutionBisectLeft().searchInsert(nums, target))
+
+    # Output: 1
+    nums = [1,3,5,6]
+    target = 2
+    print(SolutionBisectLeft().searchInsert(nums, target))
+
+    # Output: 4
+    nums = [1,3,5,6]
+    target = 7
+    print(SolutionBisectLeft().searchInsert(nums, target))
+
+    # Output: 0
+    nums = [1,3,5,6]
+    target = 0
+    print(SolutionBisectLeft().searchInsert(nums, target))
 
 
 if __name__ == '__main__':
