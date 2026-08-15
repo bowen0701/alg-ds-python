@@ -45,12 +45,9 @@ class SolutionDict:
         # Since L(U) needs to be complemented by R(D), vice versa,
         # use a dict to count the number of different directions,
         # and check balances of U & D and L & R.
-        from collections import defaultdict
+        from collections import Counter
 
-        dirs_d = defaultdict(int)
-
-        for c in moves:
-            dirs_d[c] += 1
+        dirs_d = Counter(moves)
 
         if dirs_d['U'] == dirs_d['D'] and dirs_d['L'] == dirs_d['R']:
             return True

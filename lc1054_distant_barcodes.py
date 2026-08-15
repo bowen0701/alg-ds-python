@@ -31,12 +31,10 @@ class SolutionDictSort:
         Time complexity: O(n*logn).
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Use dict to count barcode's number.
-        barcode_num_d = defaultdict(int)
-        for b in barcodes:
-            barcode_num_d[b] += 1
+        barcode_num_d = Counter(barcodes)
 
         # Starting from pos 0, fill barcodes at even positions.
         # Then starting from position 1, odd position.
@@ -66,12 +64,10 @@ class SolutionDictMost:
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Use dict to count barcode's number.
-        barcode_num_d = defaultdict(int)
-        for b in barcodes:
-            barcode_num_d[b] += 1
+        barcode_num_d = Counter(barcodes)
 
         # Get the most popular barcode.
         most_b, most_n = 0, 0

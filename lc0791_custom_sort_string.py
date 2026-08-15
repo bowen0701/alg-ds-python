@@ -36,12 +36,9 @@ class SolutionCharFreqDict:
         Space complexity: O(m).
         """
         # Iterate through s to build dict: char->freq.
-        from collections import defaultdict
+        from collections import Counter
 
-        char_freq_d = defaultdict(int)
-
-        for char in s:
-            char_freq_d[char] += 1
+        char_freq_d = Counter(s)
 
         # Iterate through order to concat result and pop completed char->freq.
         result = []

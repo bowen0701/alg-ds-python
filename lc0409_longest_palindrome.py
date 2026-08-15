@@ -27,15 +27,13 @@ class SolutionDictDoubleEvenOneOdd:
         Time complexity: O(n), where n is the length of string s.
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         if len(s) <= 1:
             return len(s)
 
         # Create dict: letter->count.
-        letter_count_d = defaultdict(int)
-        for l in s:
-            letter_count_d[l] += 1
+        letter_count_d = Counter(s)
 
         # Compute how many letters occur in even times.
         pal_len, odd = 0, 0

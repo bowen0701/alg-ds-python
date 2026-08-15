@@ -29,18 +29,16 @@ class SolutionCharCountMaxHeap:
         Time complexity: O(n*log26) = O(n).
         Space complexity: O(1).
         """
-        from collections import defaultdict
+        from collections import Counter
         import heapq
 
         # Create char counts in S.
-        char_count_d = defaultdict(int)
-        for char in S:
-            char_count_d[char] += 1
+        char_count_d = Counter(S)
 
         # To get the most frequent char, push (count, char) into max heap.
         # Specifically, push (-count, char) into min heap.
         max_hq = []
-        for char, count in char_count_d.items()
+        for char, count in char_count_d.items():
             heapq.heappush(max_hq, (-count, char))
 
         # Create previous char and its negative count.

@@ -41,16 +41,14 @@ class SolutionSmallerNumCountDict:
         Time complexity: O(max(n1, n2)).
         Space complexity: O(max(n1, n2)).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Convert smaller nums to nums1.
         if len(nums1) > len(nums2):
             nums1, nums2 = nums2, nums1
 
         # Create smaller nums to dict: n1->count.
-        nums1_count_d = defaultdict(int)
-        for n1 in nums1:
-            nums1_count_d[n1] += 1
+        nums1_count_d = Counter(nums1)
 
         # Collect n2 in nums1_count_d with char count > 0.
         result = []

@@ -42,15 +42,13 @@ class SolutionCharFreqDict:
         Time complexity: O(n*logn), where n is the length of s.
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         if not s:
             return ''
 
         # Use a dict to collect chars's frequencies.
-        char_freqs = defaultdict(int)
-        for c in s:
-            char_freqs[c] += 1
+        char_freqs = Counter(s)
 
         # Sort dict by values.
         sorted_char_freqs = sorted(char_freqs.items(), 

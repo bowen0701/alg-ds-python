@@ -36,19 +36,14 @@ class SolutionTwoNumCountDicts:
         Space complexity: O(n1+n2).
         """
         # Use dict to collect number counts.
-        from collections import defaultdict
+        from collections import Counter
 
         if not nums1 or not nums2:
             return []
 
         # Create dict: num->count for two nums.
-        nums1_count_d = defaultdict(int)
-        nums2_count_d = defaultdict(int)
-
-        for n1 in nums1:
-            nums1_count_d[n1] += 1
-        for n2 in nums2:
-            nums2_count_d[n2] += 1
+        nums1_count_d = Counter(nums1)
+        nums2_count_d = Counter(nums2)
 
         # Obtain intersection set of number count keys.
         unique_nums1 = set(nums1_count_d.keys())
@@ -79,15 +74,13 @@ class SolutionNumCountDict:
         Space complexity: O(n1).
         """
         # Use dict to collect number counts.
-        from collections import defaultdict
+        from collections import Counter
 
         if not nums1 or not nums2:
             return []
 
         # Collect nums1's number->count.
-        nums1_count_d= defaultdict(int)
-        for n1 in nums1:
-            nums1_count_d[n1] += 1
+        nums1_count_d = Counter(nums1)
 
         # Iterate through nums1, if number is in nums2 and decrement its count.
         intersect = []

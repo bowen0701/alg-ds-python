@@ -41,16 +41,14 @@ class SolutionNumCountDict:
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
         
         # Edge case.
         if len(arr) == 1:
             return 0
         
         # Create a dict:number->count.
-        num_count_d = defaultdict(int)
-        for num in arr:
-            num_count_d[num] += 1
+        num_count_d = Counter(arr)
         
         result = 0
         for num, count in num_count_d.items():

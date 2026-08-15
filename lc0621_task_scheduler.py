@@ -35,13 +35,11 @@ class SolutionTaskCountDictMaxHeap:
         Time complexity: O(m), where m is the length of tasks.
         Space complexity: O(m).
         """
-        from collections import defaultdict
+        from collections import Counter
         import heapq
 
         # Create dict: task->count.
-        task_count_d = defaultdict(int)
-        for t in tasks:
-            task_count_d[t] += 1
+        task_count_d = Counter(tasks)
 
         # Push tasks/counts into max heap (min heap with negative keys).
         negcount_minheap = [-c for c in task_count_d.values()]

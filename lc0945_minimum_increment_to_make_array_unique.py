@@ -36,15 +36,13 @@ class SolutionBruteForce:
         Time complexity: O(n^2), where n is A's length.
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         if not A:
             return 0
 
         # Create a dict:number->count.
-        num_count_d = defaultdict(int)
-        for num in A:
-            num_count_d[num] += 1
+        num_count_d = Counter(A)
 
         # While exists repeated numbers, move number by incrementing it.
         moves = 0

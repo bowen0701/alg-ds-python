@@ -28,11 +28,9 @@ class SolutionDict:
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
-        num_counts = defaultdict(int)
-        for n in nums:
-            num_counts[n] += 1
+        num_counts = Counter(nums)
 
         for n, count in num_counts.items():
             if count == 1:

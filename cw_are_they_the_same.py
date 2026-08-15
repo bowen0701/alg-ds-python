@@ -40,20 +40,16 @@ or None or nothing (except in Haskell, Elixir, C++, Rust, R, Shell, PureScript).
 
 
 def comp_dict(a1, a2):
-    from collections import defaultdict
+    from collections import Counter
 
     # Edge cases.
     if a1 is None or a2 is None:
         return False
 
     # Create dict:a1->count & dict:a2->count.
-    a1_squared_count_d = defaultdict(int)
-    for i in a1:
-        a1_squared_count_d[i ** 2] += 1
+    a1_squared_count_d = Counter(i ** 2 for i in a1)
 
-    a2_count_d = defaultdict(int)
-    for i in a2:
-        a2_count_d[i] += 1
+    a2_count_d = Counter(a2)
 
     # Iterate through a2 numbers to check its existence and count match.
     for i, count in a2_count_d.items():

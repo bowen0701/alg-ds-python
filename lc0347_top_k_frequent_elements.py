@@ -29,13 +29,10 @@ class SolutionNubmerFreqDictBruteForce:
         Time complexity: O(n*k), where n is the number of nums.
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Create num->freq dict.
-        num_freq_d = defaultdict(int)
-
-        for num in nums:
-            num_freq_d[num] += 1
+        num_freq_d = Counter(nums)
 
         # Iterate through the whole dict k times to collect result.
         result = []
@@ -58,13 +55,10 @@ class SolutionNumberFreqDictSort:
         Time complexity: O(n*logn), where n is the number of nums.
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Create num->freq dict.
-        num_freq_d = defaultdict(int)
-
-        for n in nums:
-            num_freq_d[n] += 1
+        num_freq_d = Counter(nums)
 
         # Sort num->freq dict by freq. 
         sorted_num_freqs = sorted(
@@ -82,14 +76,11 @@ class SolutionNumberFreqDictMaxHeap:
         Time complexity: O(n*logn), where n is the number of nums.
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
         import heapq
 
         # Create num->freq dict.
-        num_freq_d = defaultdict(int)
-
-        for n in nums:
-            num_freq_d[n] += 1
+        num_freq_d = Counter(nums)
 
         # Push (freq, num) to max_heap.
         maxheap = []
@@ -111,12 +102,10 @@ class SolutionNumberFreqDictMinHeap:
         Time complexity: O(n*log(k)), where n is the number of nums.
         Space complexity: O(n+k).
         """
-        from collections import defaultdict, deque
+        from collections import Counter, deque
         import heapq
 
-        num_freq_d = defaultdict(int)
-        for n in nums:
-            num_freq_d[n] += 1
+        num_freq_d = Counter(nums)
 
         # Push (freq, num) to min heap.
         minheap = []
@@ -142,12 +131,10 @@ class SolutionNumberFreqDictBucketSort:
         Time complexity: O(n), where n is the number of nums.
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Create num->freq dict.
-        num_freq_d = defaultdict(int)
-        for num in nums:
-            num_freq_d[num] += 1
+        num_freq_d = Counter(nums)
 
         # Create a buck array with length n + 1.
         n = len(nums)

@@ -47,12 +47,10 @@ class SolutionDict:
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Create a dict:num->freq.
-        num_freq_d = defaultdict(int)
-        for num in arr:
-            num_freq_d[num] += 1
+        num_freq_d = Counter(arr)
 
         # Iterate through dict keys to collect lucky nums.
         lucky_nums = []

@@ -23,7 +23,7 @@ Follow up:
 - Could you come up with a one-pass algorithm using only constant space?
 """
 
-from collections import defaultdict
+from collections import Counter
 
 
 class SolutionCount:
@@ -35,9 +35,7 @@ class SolutionCount:
         Time complexity: O(n), where n is the number of nums.
         Space complexity: O(n).
         """
-        d = defaultdict(int)
-        for n in nums:
-            d[n] += 1
+        d = Counter(nums)
 
         for i, _ in enumerate(nums):
             if i < d[0]:

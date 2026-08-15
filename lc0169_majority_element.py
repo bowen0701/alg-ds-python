@@ -27,15 +27,13 @@ class SolutionNumCountDict:
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Create dict:number->count.
-        num_count_d = defaultdict(int)
+        num_count_d = Counter(nums)
 
-        for n in nums:
-            num_count_d[n] += 1
-
-            if num_count_d[n] > len(nums) // 2:
+        for n, count in num_count_d.items():
+            if count > len(nums) // 2:
                 return n
 
 

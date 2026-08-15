@@ -23,16 +23,13 @@ def duplicate_encode(word):
     Time complexity: O(n).
     Space complexity: O(n).
     """
-    from collections import defaultdict
+    from collections import Counter
 
     # Convert word to lower case.
     word_lower = word.lower()
 
     # Create a dict to accumulate char numbers.
-    char_nums = defaultdict(int)
-
-    for c in word_lower:
-        char_nums[c] += 1
+    char_nums = Counter(word_lower)
 
     # Create a duplicate encoder based on char number dict.
     encoder = [''] * len(word)

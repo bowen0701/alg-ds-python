@@ -26,12 +26,9 @@ def find_uniq(arr):
     Time complexity: O(n).
     Space complexity: O(1).
     """
-    from collections import defaultdict
+    from collections import Counter
 
-    num_counts = defaultdict(int)
-
-    for num in arr:
-        num_counts[num] += 1
+    num_counts = Counter(arr)
 
     for num, count in num_counts.items():
         if count == 1:

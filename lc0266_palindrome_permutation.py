@@ -27,15 +27,13 @@ class SolutionOneOddCharCounts:
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         if not s:
             return True
 
         # Count char counts; palindrome permutation only has one odd char count.
-        char_counts = defaultdict(int)
-        for c in s:
-            char_counts[c] += 1
+        char_counts = Counter(s)
 
         n_odd_chars = 0
         for k, v in char_counts.items():

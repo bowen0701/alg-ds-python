@@ -29,12 +29,10 @@ class SolutionCharCountDictTwoPointers:
           - n: lenght of t.
         Space complexity: O(m+n).
         """
-        from collections import defaultdict
+        from collections import Counter
 
         # Use dict to collect t's char->count.
-        t_char_count_d = defaultdict(int)
-        for c in t:
-            t_char_count_d[c] += 1
+        t_char_count_d = Counter(t)
 
         # Track min left & len, and t_counter.
         min_left = 0
