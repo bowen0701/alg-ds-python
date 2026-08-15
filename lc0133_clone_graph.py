@@ -126,6 +126,7 @@ class SolutionNodeCopyDictDFSIter:
         node_copy_d = defaultdict()
         node_copy_d[node] = copy
 
+        # Apply iterative DFS with stack.
         stack = [node]
 
         while stack:
