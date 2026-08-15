@@ -29,7 +29,7 @@ Input: 701
 Output: "ZY"
 """
 
-class SolutionRemStack(object):
+class SolutionRemStack:
     def convertToTitle(self, n):
         """
         :type n: int

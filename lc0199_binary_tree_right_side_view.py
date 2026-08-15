@@ -21,14 +21,14 @@ from typing import Optional, List
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val: int = 0):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionLevelTraversalLast(object):
+class SolutionLevelTraversalLast:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         """
         Time complexity: O(n).

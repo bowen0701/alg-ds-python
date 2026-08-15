@@ -19,7 +19,7 @@ Your algorithm should run in linear runtime complexity.
 Could you implement it using only constant extra space complexity?
 """
 
-class SolutionGauss(object):
+class SolutionGauss:
     def missingNumber(self, nums):
         """
         :type nums: List[int]

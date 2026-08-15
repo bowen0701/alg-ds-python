@@ -36,7 +36,7 @@ Note:
 - String S is non-empty.
 """
 
-class SolutionReverseIter(object):
+class SolutionReverseIter:
     def licenseKeyFormatting(self, S, K):
         """
         :type S: str
@@ -71,7 +71,7 @@ class SolutionReverseIter(object):
         return '-'.join(strs)
 
 
-class SolutionForwardIterK(object):
+class SolutionForwardIterK:
     def licenseKeyFormatting(self, S, K):
         """
         :type S: str

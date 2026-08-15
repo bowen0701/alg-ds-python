@@ -18,7 +18,7 @@ Note:
 The vowels does not include the letter "y".
 """
 
-class SolutionReversedVowelPosDict(object):
+class SolutionReversedVowelPosDict:
     def reverseVowels(self, s):
         """
         :type s: str
@@ -57,7 +57,7 @@ class SolutionReversedVowelPosDict(object):
         return ''.join(s_list)
 
 
-class SolutionSwapTwoPointers(object):
+class SolutionSwapTwoPointers:
     def reverseVowels(self, s):
         """
         :type s: str

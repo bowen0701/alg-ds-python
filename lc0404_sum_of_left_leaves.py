@@ -16,14 +16,14 @@ Return 24.
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def sumOfLeftLeaves(self, root):
         """
         :type root: TreeNode
@@ -42,7 +42,7 @@ class SolutionRecur(object):
             return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
 
 
-class SolutionIter(object):
+class SolutionIter:
     def sumOfLeftLeaves(self, root):
         """
         :type root: TreeNode

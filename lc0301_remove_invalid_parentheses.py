@@ -21,7 +21,7 @@ Input: ")("
 Output: [""]
 """
 
-class SolutionTwoPointersDfsRecur(object):
+class SolutionTwoPointersDfsRecur:
     def _removeDfs(self, s, result, last_i, last_j, pars):
         # Increment open / decrement close counter until ')' are more.
         counter = 0

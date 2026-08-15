@@ -15,7 +15,7 @@ Note: The length of temperatures will be in the range [1, 30000]. Each
 temperature will be an integer in the range [30, 100].
 """
 
-class SolutionBrute(object):
+class SolutionBrute:
     def dailyTemperatures(self, T):
         """
         :type T: List[int]
@@ -35,7 +35,7 @@ class SolutionBrute(object):
         return days
 
 
-class SolutionStack(object):
+class SolutionStack:
     def dailyTemperatures(self, T):
         """
         :type T: List[int]

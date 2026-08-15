@@ -22,7 +22,7 @@ s = "3[a2[c]]", return "accaccacc".
 s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 """
 
-class SolutionStringRepeatedTimesStackIter(object):
+class SolutionStringRepeatedTimesStackIter:
     def decodeString(self, s):
         """
         :type s: str

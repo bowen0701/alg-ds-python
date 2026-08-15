@@ -15,7 +15,7 @@ return 2.
 Note: You may assume the string contain only lowercase letters.
 """
 
-class SolutionDict(object):
+class SolutionDict:
     def firstUniqChar(self, s):
         """
         :type s: str

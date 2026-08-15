@@ -32,7 +32,7 @@ Note:
 - 1 <= people[i] <= limit <= 30000
 """
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def numRescueBoats(self, people, limit):
         """
         :type people: List[int]

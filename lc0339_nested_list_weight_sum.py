@@ -25,7 +25,7 @@ Explanation: One 1 at depth 1, one 4 at depth 2, and one 6 at depth 3;
 # This is the interface that allows for creating nested lists.
 # You should not implement it, or speculate about its implementation
 # """
-#class NestedInteger(object):
+#class NestedInteger:
 #    def __init__(self, value=None):
 #        """
 #        If value is not specified, initializes an empty list.
@@ -64,7 +64,7 @@ Explanation: One 1 at depth 1, one 4 at depth 2, and one 6 at depth 3;
 #        :rtype List[NestedInteger]
 #        """
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def _dfs(self, item, depth):
         if item.isInteger():
             return item.getInteger() * depth
@@ -92,7 +92,7 @@ class SolutionDFSRecur(object):
         return depth_sum
 
 
-class SolutionLevelBFS(object):
+class SolutionLevelBFS:
     def depthSum(self, nestedList):
         """
         :type nestedList: List[NestedInteger]

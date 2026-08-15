@@ -27,7 +27,7 @@ Output: true
 Explanation: We can replace '0' with '1' to get t.
 """
 
-class SolutionOneLengthDiff(object):
+class SolutionOneLengthDiff:
     def _one_replace(self, s, t):
         # Iterate through s, check how many chars are different.
         n_replaced = 0

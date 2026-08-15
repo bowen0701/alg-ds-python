@@ -1,4 +1,4 @@
-class Deque(object):
+class Deque:
     """Deque class.
 
     It consists of 6 operations:

@@ -24,14 +24,14 @@ from typing import List, Optional
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderRecur:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
         """
         Time complexity: O(n).
@@ -51,7 +51,7 @@ class SolutionPreorderRecur(object):
         return root
 
 
-class SolutionPreorderRecurTwoPointers(object):
+class SolutionPreorderRecurTwoPointers:
     def _preorderRecur(self, nums: List[int], left: int, right: int) -> Optional[TreeNode]:
         # Base case.
         if left > right:
@@ -79,7 +79,7 @@ class SolutionPreorderRecurTwoPointers(object):
         return self._preorderRecur(nums, left, right)
 
 
-class SolutionInorderRecurTwoPointers(object):
+class SolutionInorderRecurTwoPointers:
     def _inorderRecur(self, nums: List[int], left: int, right: int) -> Optional[TreeNode]:
         if left > right:
             return None

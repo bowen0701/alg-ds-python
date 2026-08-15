@@ -30,7 +30,7 @@ Note:
 """
 
 # Definition for a Node.
-class Node(object):
+class Node:
     def __init__(self, val, left, right, next):
         self.val = val
         self.left = left
@@ -38,7 +38,7 @@ class Node(object):
         self.next = next
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderRecur:
     def _preorder(self, root):
         if root and root.left:
             # Connect left to its direct right.

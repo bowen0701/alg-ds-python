@@ -14,7 +14,7 @@ Note:
   integer directly.
 """
 
-class SolutionPaddingAddBackwardIter(object):
+class SolutionPaddingAddBackwardIter:
     def _padding(self, num1, num2):
         n1, n2 = len(num1), len(num2)
         if n1 < n2:

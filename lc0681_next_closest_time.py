@@ -25,7 +25,7 @@ Explanation: It may be assumed that the returned time is next day's time since
 it is smaller than the input time numerically.
 """
 
-class SolutionMinutesToFullDayMinutes(object):
+class SolutionMinutesToFullDayMinutes:
     def nextClosestTime(self, time):
         """
         @param time: the given time

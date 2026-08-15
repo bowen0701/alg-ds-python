@@ -21,7 +21,7 @@ Output: 2
 from typing import List
 
 
-class SolutionNumCountDict(object):
+class SolutionNumCountDict:
     def majorityElement(self, nums: List[int]) -> int:
         """
         Time complexity: O(n).

@@ -16,7 +16,7 @@ Output:
 ]
 """
 
-class SolutionSortBacktrack(object):
+class SolutionSortBacktrack:
     def _backtrack(self, result, temp, is_used, nums):
         if len(temp) == len(nums):
             # Once a permutation is completed, shallow copy it to result.

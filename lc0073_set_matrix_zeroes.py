@@ -40,7 +40,7 @@ Follow up:
 - Could you devise a constant space solution?
 """
 
-class SolutionCopy(object):
+class SolutionCopy:
     def setZeroes(self, matrix):
         """
         :type matrix: List[List[int]]
@@ -64,7 +64,7 @@ class SolutionCopy(object):
                         matrix[i][c] = 0
 
 
-class SolutionZeroRowsCols(object):
+class SolutionZeroRowsCols:
     def setZeroes(self, matrix):
         """
         :type matrix: List[List[int]]
@@ -97,7 +97,7 @@ class SolutionZeroRowsCols(object):
                     matrix[i][c] = 0
 
 
-class SolutionOptimSpace(object):
+class SolutionOptimSpace:
     def setZeroes(self, matrix):
         """
         :type matrix: List[List[int]]

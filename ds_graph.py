@@ -1,4 +1,4 @@
-class Vertex(object):
+class Vertex:
 	"""Vertex class.
 
     It uses a dict to keep track of the vertices which it's connected.
@@ -26,7 +26,7 @@ class Vertex(object):
 		return self.connect_dict.get(new_nb, None)
 
 
-class Graph(object):
+class Graph:
     """Graph class.
 
     It contains a dict to map vertex name to vertex objects.

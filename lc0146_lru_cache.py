@@ -34,7 +34,7 @@ param_1 = obj.get(key)
 obj.put(key, value)
 """
 
-class Node(object):
+class Node:
     def __init__(self, key, value):
         self.key = key
         self.value = value
@@ -42,7 +42,7 @@ class Node(object):
         self.next = None
 
 
-class LRUCache(object):
+class LRUCache:
     def __init__(self, capacity):
         """Least Recently Used (LRU) cache.
 

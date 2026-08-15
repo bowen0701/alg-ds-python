@@ -23,14 +23,14 @@ Output: 4
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionValMinDiffBST(object):
+class SolutionValMinDiffBST:
     def closestValue(self, root: TreeNode, target: int) -> int:
         """
         Time complexity: O(logn).

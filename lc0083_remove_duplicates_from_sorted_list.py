@@ -16,13 +16,13 @@ Output: 1->2->3
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionCurrentNextIter(object):
+class SolutionCurrentNextIter:
     def deleteDuplicates(self, head):
         """
         :type head: ListNode

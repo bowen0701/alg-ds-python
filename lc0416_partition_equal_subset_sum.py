@@ -22,7 +22,7 @@ Output: false
 Explanation: The array cannot be partitioned into equal sum subsets.
 """
 
-class SolutionIndexSumFoundDpMemo(object):
+class SolutionIndexSumFoundDpMemo:
     def partition(self, idx, cur_sum, idxsum_found_d, nums, total):
         if (idx, cur_sum) in idxsum_found_d:
             return idxsum_found_d[(idx, cur_sum)]

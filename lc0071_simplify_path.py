@@ -45,7 +45,7 @@ Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
 """
 
-class SolutionCurrentStack(object):
+class SolutionCurrentStack:
     def simplifyPath(self, path):
         """
         :type path: str

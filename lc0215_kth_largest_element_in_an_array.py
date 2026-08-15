@@ -22,7 +22,7 @@ You may assume k is always valid, 1 <= k <= array's length.
 from typing import List
 
 
-class SolutionSort(object):
+class SolutionSort:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         """
         Time complexity: O(n*logn), where n is the length of nums.
@@ -32,7 +32,7 @@ class SolutionSort(object):
         return nums[-k]
 
 
-class SolutionMinHeap(object):
+class SolutionMinHeap:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         """
         Time complexity: O(n*logk).
@@ -52,7 +52,7 @@ class SolutionMinHeap(object):
         return minheap[0]
 
 
-class SolutionSelection(object):
+class SolutionSelection:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         """
         Time complexity: O(n).

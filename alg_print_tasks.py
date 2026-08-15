@@ -2,7 +2,7 @@ import numpy as np
 from ds_queue import Queue
 
 
-class Printer(object):
+class Printer:
     """A printer class."""
     def __init__(self, pages_per_minute):
         self.page_rate = pages_per_minute
@@ -27,7 +27,7 @@ class Printer(object):
             new_task.get_pages() / (self.page_rate / 60))
 
 
-class Task(object):
+class Task:
     """Task class."""
     def __init__(self, time):
         self.timestamp = time

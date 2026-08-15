@@ -20,7 +20,7 @@ Input: 218
 Output: false
 """
 
-class SolutionIter(object):
+class SolutionIter:
     def isPowerOfTwo(self, n):
         """
         :type n: int

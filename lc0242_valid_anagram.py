@@ -21,7 +21,7 @@ Follow up:
 What if the inputs contain unicode characters? How would you adapt your solution to such case?
 """
 
-class SolutionCharCount(object):
+class SolutionCharCount:
     def isAnagram(self, s: str, t: str) -> bool:
         """
         Time complexity: O(m+n).

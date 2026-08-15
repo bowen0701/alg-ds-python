@@ -43,7 +43,7 @@ rotate the input matrix in-place such that it becomes:
 """
 
 
-class SolutionReverseSwapAlongDiagonal(object):
+class SolutionReverseSwapAlongDiagonal:
     def rotate(self, matrix):
         """
         :type matrix: List[List[int]]

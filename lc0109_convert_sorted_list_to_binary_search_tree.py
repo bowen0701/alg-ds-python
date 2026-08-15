@@ -24,21 +24,21 @@ from typing import List, Optional
 
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = None
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionConvert2ArrayTwoPointers(object):
+class SolutionConvert2ArrayTwoPointers:
     def _preorder(self, vals: List[int], left: int, right: int) -> Optional[TreeNode]:
         # Base case.
         if left > right:
@@ -73,7 +73,7 @@ class SolutionConvert2ArrayTwoPointers(object):
         return self._preorder(vals, left, right)
 
 
-class SolutionPreorderSlowFastRecur(object):
+class SolutionPreorderSlowFastRecur:
     def _preorderSlowFast(
         self, 
         left: Optional[TreeNode], 
@@ -110,7 +110,7 @@ class SolutionPreorderSlowFastRecur(object):
         return self._preorderSlowFast(left, right)
 
 
-class SolutionInorderRecur(object):
+class SolutionInorderRecur:
     def _inorder(self, left: int, right: int) -> Optional[TreeNode]:
         # Base case.
         if left > right:

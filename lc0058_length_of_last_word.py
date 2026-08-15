@@ -16,7 +16,7 @@ Input: "Hello World"
 Output: 5
 """
 
-class SolutionStripSplit(object):
+class SolutionStripSplit:
     def lengthOfLastWord(self, s):
         """
         :type s: str

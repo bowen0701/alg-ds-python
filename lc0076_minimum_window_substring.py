@@ -17,7 +17,7 @@ Note:
   unique minimum window in S.
 """
 
-class SolutionCharCountDictTwoPointers(object):
+class SolutionCharCountDictTwoPointers:
     def minWindow(self, s, t):
         """
         :type s: str

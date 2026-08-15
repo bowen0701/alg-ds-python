@@ -30,7 +30,7 @@ Constraints:
 - Answers within 10^-5 of the true value will be accepted as correct.
 """
 
-class Solution(object):
+class Solution:
     def _selectKth(self, k, counts):
         cusum = 0
         for i in range(len(counts)):

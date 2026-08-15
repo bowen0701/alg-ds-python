@@ -17,7 +17,7 @@ Output: 0
 Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
 """
 
-class SolutionDP(object):
+class SolutionDP:
     def maxProduct(self, nums):
         """
         :type nums: List[int]
@@ -48,7 +48,7 @@ class SolutionDP(object):
         return global_max_prod
 
 
-class SolutionIter(object):
+class SolutionIter:
     def maxProduct(self, nums):
         """
         :type nums: List[int]

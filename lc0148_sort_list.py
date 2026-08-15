@@ -15,13 +15,13 @@ Output: -1->0->3->4->5
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionMergeSortRecur(object):
+class SolutionMergeSortRecur:
     def _merge_sorted_lists(self, l1, l2):
         if not l1 and not l2:
             return None
@@ -80,7 +80,7 @@ class SolutionMergeSortRecur(object):
         return self._merge_sorted_lists(l1, l2)
 
 
-class SolutionMergeSortIterBottomUp(object):
+class SolutionMergeSortIterBottomUp:
     def _get_length(self, head):
         """Get list length."""
         length = 0

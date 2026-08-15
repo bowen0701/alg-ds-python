@@ -42,7 +42,7 @@ Note:
 """
 
 
-class SolutionStartStackIter(object):
+class SolutionStartStackIter:
     def exclusiveTime(self, n, logs):
         """
         :type n: int

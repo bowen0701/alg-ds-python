@@ -21,7 +21,7 @@ Input: numerator = 2, denominator = 3
 Output: "0.(6)"
 """
 
-class SolutionRemainderPositionDict(object):
+class SolutionRemainderPositionDict:
     def fractionToDecimal(self, numerator, denominator):
         """
         :type numerator: int

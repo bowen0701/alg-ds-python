@@ -28,7 +28,7 @@ After running your function, the 2D grid should be:
 from typing import List
 
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def _dfs(self, r: int, c: int, distance: int, rooms: List[List[int]]) -> None:
         # Base case: out of boundary, or have smaller distance or hit a wall.
         if (r < 0 or r >= len(rooms) 
@@ -69,7 +69,7 @@ class SolutionDFSRecur(object):
             self._dfs(r, c, distance, rooms)
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def _bfs(self, r: int, c: int, rooms: List[List[int]]) -> None:
         from collections import deque
 

@@ -34,7 +34,7 @@ Note:
 from typing import List
 
 
-class SolutionMaxHeap(object):
+class SolutionMaxHeap:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
         """
         Time complexity: O(n*logk).
@@ -59,7 +59,7 @@ class SolutionMaxHeap(object):
         return k_points
 
 
-class SolutionSelection(object):
+class SolutionSelection:
     def _select(self, distances: List[int], k: int) -> int:
         # Select smaller & larger distance by pivot distanceance.
         n = len(distances)

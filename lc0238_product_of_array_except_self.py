@@ -20,7 +20,7 @@ space complexity analysis.)
 from typing import List
 
 
-class SolutionLeftRightProducts(object):
+class SolutionLeftRightProducts:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         """
         :type nums: List[int]
@@ -58,7 +58,7 @@ class SolutionLeftRightProducts(object):
         return result
 
 
-class SolutionLeftRightProductsOptim(object):
+class SolutionLeftRightProductsOptim:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         """
         :type nums: List[int]

@@ -33,7 +33,7 @@ It ends up two "moves" to the left of the origin.
 We return false because it is not at the origin at the end of its moves.
 """
 
-class SolutionDict(object):
+class SolutionDict:
     def judgeCircle(self, moves):
         """
         :type moves: str
@@ -58,7 +58,7 @@ class SolutionDict(object):
             return False
 
 
-class SolutionTwoCounters(object):
+class SolutionTwoCounters:
     def judgeCircle(self, moves):
         """
         :type moves: str

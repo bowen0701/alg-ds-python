@@ -1,4 +1,4 @@
-class Histogram(object):
+class Histogram:
     def __init__(self, x, n_bins):
         """Histogram with bin counters.
 

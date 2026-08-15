@@ -21,7 +21,7 @@ Output:
 One possible longest palindromic subsequence is "bb".
 """
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _LPS(self, s, l, r):
         # Base case.
         if l > r:
@@ -52,7 +52,7 @@ class SolutionRecur(object):
         return self._LPS(s, l, r)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _LPS(self, s, l, r, T):
         # Base case.
         if l > r:
@@ -90,7 +90,7 @@ class SolutionMemo(object):
         return self._LPS(s, l, r, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def longestPalindromeSubseq(self, s):
         """
         :type s: str

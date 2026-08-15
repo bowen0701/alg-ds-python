@@ -51,7 +51,7 @@ Constraints:
 """
 
 
-class SolutionDPGreedy(object):
+class SolutionDPGreedy:
     def minTaps(self, n, ranges):
         """
         :type n: int
@@ -76,7 +76,7 @@ class SolutionDPGreedy(object):
             return -1
 
 
-class SolutionSortStartPrevEndAndEndGreedy(object):
+class SolutionSortStartPrevEndAndEndGreedy:
     def minTaps(self, n, ranges):
         """
         :type n: int

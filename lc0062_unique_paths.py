@@ -18,7 +18,7 @@ Output: 3
 
 from typing import List
 
-class SolutionRecur(object):
+class SolutionRecur:
     """Unique paths by Recursion.
 
     Time complexity: O(2^(m*n)).
@@ -32,7 +32,7 @@ class SolutionRecur(object):
         return self.uniquePaths(m - 1, n) + self.uniquePaths(m, n - 1)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     """Unique paths by top-down dynamic programming w/ memoization.
 
     Time complexity: O(m*n).
@@ -57,7 +57,7 @@ class SolutionMemo(object):
         return self._uniquePathsRecur(m - 1, n - 1, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     """Unique paths by bottom-up dynamic programming.
 
     Time complexity: O(m*n).
@@ -81,7 +81,7 @@ class SolutionDP(object):
         return T[-1][-1]
 
 
-class SolutionDP2(object):
+class SolutionDP2:
     """Unique paths by dynamic programming w/ optimized space."
 
     Time complexity: O(m*n).

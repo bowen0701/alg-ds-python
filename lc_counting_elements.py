@@ -32,7 +32,7 @@ Constraints:
 """
 
     
-class SolutionNumCountDict(object):
+class SolutionNumCountDict:
     def countElements(self, arr):
         """
         :type arr: List[int]

@@ -32,7 +32,7 @@ Note: The length of each dimension in the given grid does not exceed 50.
 from typing import Dict, List, Tuple
 
 
-class SolutionDFSRecurVisitedDict(object):
+class SolutionDFSRecurVisitedDict:
     def _dfs(self, r: int, c: int, grid: List[List[int]], visited_d: Dict[Tuple[int, int], bool]) -> int:
         # Base case: out of boundary or visited.
         if (r < 0 or r >= len(grid) 

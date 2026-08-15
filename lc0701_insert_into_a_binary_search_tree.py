@@ -36,14 +36,14 @@ This tree is also valid:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def insertIntoBST(self, root, val):
         """
         :type root: TreeNode
@@ -67,7 +67,7 @@ class SolutionRecur(object):
         return root
 
 
-class SolutionIter(object):
+class SolutionIter:
     def insertIntoBST(self, root, val):
         """
         :type root: TreeNode

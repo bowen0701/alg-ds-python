@@ -18,7 +18,7 @@ Output: [[0,1],[1,0]]
 Explanation: The palindromes are ["battab","tabbat"]
 """
 
-class SolutionWordPosDictPrefixSuffixPalindrome(object):
+class SolutionWordPosDictPrefixSuffixPalindrome:
     def _isPalindrom(self, word):
         return word == word[::-1]
 

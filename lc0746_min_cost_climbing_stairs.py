@@ -28,7 +28,7 @@ Note:
 from typing import List
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _climb_stairs(self, cost: List[int], n: int) -> int:
         # Base cases: no cost.
         if n <= 1:
@@ -49,7 +49,7 @@ class SolutionRecur(object):
         return self._climb_stairs(cost, n)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _climb_stairs(self, cost: List[int], n: int, T: List[int]) -> int:
         # Base cases: no cost.
         if n <= 1:
@@ -74,7 +74,7 @@ class SolutionMemo(object):
         return self._climb_stairs(cost, n, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         """
         Time complexity: O(n).
@@ -91,7 +91,7 @@ class SolutionDP(object):
         return T[-1]
 
 
-class SolutionIter(object):
+class SolutionIter:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         """
         Time complexity: O(n).

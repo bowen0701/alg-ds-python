@@ -18,7 +18,7 @@ Explanation: T is "aa" which its length is 2.
 """
 
 
-class SolutionTwoPointerCharCountDictIter(object):
+class SolutionTwoPointerCharCountDictIter:
     def lengthOfLongestSubstringKDistinct(self, s, k):
         """
         :type s: str

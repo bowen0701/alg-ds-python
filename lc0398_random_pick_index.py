@@ -21,7 +21,7 @@ solution.pick(3);
 solution.pick(1);
 """
 
-class SolutionNumPosDictRandomSample(object):
+class SolutionNumPosDictRandomSample:
     def __init__(self, nums):
         """
         :type nums: List[int]

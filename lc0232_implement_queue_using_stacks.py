@@ -27,7 +27,7 @@ Notes:
   operations will be called on an empty queue).
 """
 
-class MyQueueByTwoStacks(object):
+class MyQueueByTwoStacks:
     def __init__(self):
         """
         Initialize your data structure here.

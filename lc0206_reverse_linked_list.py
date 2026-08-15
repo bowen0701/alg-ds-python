@@ -15,13 +15,13 @@ Could you implement both?
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionStack(object):
+class SolutionStack:
     def reverseList(self, head):
         """
         :type head: ListNode
@@ -50,7 +50,7 @@ class SolutionStack(object):
         return pre_head.next
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _reverse(self, head, previous):
         if not head:
             return previous
@@ -77,7 +77,7 @@ class SolutionRecur(object):
         return self._reverse(head, previous)
 
 
-class SolutionIter(object):
+class SolutionIter:
     def reverseList(self, head):
         """
         :type head: ListNode

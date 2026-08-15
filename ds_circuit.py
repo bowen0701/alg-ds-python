@@ -1,4 +1,4 @@
-class LogicGate(object):
+class LogicGate:
     """Logic gate class."""
     def __init__(self, label):
         self.label = label
@@ -107,7 +107,7 @@ class NotGate(UnaryGate):
             return 1
 
 
-class Connector(object):
+class Connector:
     """A connector class."""
     def __init__(self, fgate, tgate):
         self.fromgate = fgate

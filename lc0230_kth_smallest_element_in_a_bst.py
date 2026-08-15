@@ -39,14 +39,14 @@ from typing import Optional
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val: Optional[int] = None):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionInorderRecur(object):
+class SolutionInorderRecur:
     def _inorderRecur(self, root: Optional[TreeNode]) -> None:
         # Base case.
         if not root:
@@ -74,7 +74,7 @@ class SolutionInorderRecur(object):
         return self.result
 
 
-class SolutionInorderIter(object):
+class SolutionInorderIter:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         """
         Time complexity: O(k).

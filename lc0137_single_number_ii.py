@@ -19,7 +19,7 @@ Input: [0,1,0,1,0,1,99]
 Output: 99
 """
 
-class SolutionDict(object):
+class SolutionDict:
     def singleNumber(self, nums):
         """
         :type nums: List[int]
@@ -39,7 +39,7 @@ class SolutionDict(object):
                 return n
 
 
-class SolutionSumDivide(object):
+class SolutionSumDivide:
     def singleNumber(self, nums):
         """
         :type nums: List[int]

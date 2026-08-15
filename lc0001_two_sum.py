@@ -18,7 +18,7 @@ return [0, 1].
 from typing import List
 
 
-class SolutionNumPosDictIter(object):
+class SolutionNumPosDictIter:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         """
         :type nums: List[int]

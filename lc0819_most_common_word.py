@@ -35,7 +35,7 @@ Note:
 - Words only consist of letters, never apostrophes or other punctuation symbols.
 """
 
-class SolutionDict(object):
+class SolutionDict:
     def mostCommonWord(self, paragraph, banned):
         """
         :type paragraph: str

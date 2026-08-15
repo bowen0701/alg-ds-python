@@ -55,7 +55,7 @@ Note:
 - The given board size is always 9x9.
 """
 
-class Solution(object):
+class Solution:
     def isValidSudoku(self, board):
         """
         :type board: List[List[str]]

@@ -29,7 +29,7 @@ Explanation: One 1 at depth 3, one 4 at depth 2, and one 6 at depth 1;
 # This is the interface that allows for creating nested lists.
 # You should not implement it, or speculate about its implementation
 # """
-#class NestedInteger(object):
+#class NestedInteger:
 #    def __init__(self, value=None):
 #        """
 #        If value is not specified, initializes an empty list.
@@ -68,7 +68,7 @@ Explanation: One 1 at depth 3, one 4 at depth 2, and one 6 at depth 1;
 #        :rtype List[NestedInteger]
 #        """
 
-class SolutionLevelBFS(object):
+class SolutionLevelBFS:
     def depthSumInverse(self, nestedList):
         """
         :type nestedList: List[NestedInteger]

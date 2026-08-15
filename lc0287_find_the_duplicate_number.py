@@ -24,7 +24,7 @@ Note:
   repeated more than once.
 """
 
-class SolutionBrute(object):
+class SolutionBrute:
     def findDuplicate(self, nums):
         """
         :type nums: List[int]
@@ -43,7 +43,7 @@ class SolutionBrute(object):
                     return nums[j]
 
 
-class SolutionDict(object):
+class SolutionDict:
     def findDuplicate(self, nums):
         """
         :type nums: List[int]
@@ -62,7 +62,7 @@ class SolutionDict(object):
                 return n
 
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearch:
     def findDuplicate(self, nums):
         """
         :type nums: List[int]

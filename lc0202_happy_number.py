@@ -22,7 +22,7 @@ Explanation:
 1^2 + 0^2 + 0^2 = 1
 """
 
-class SolutionSumSquaresSet(object):
+class SolutionSumSquaresSet:
     def _compute_sum_squares(self, n: int) -> int:
         ss = 0
         while n > 0:

@@ -26,7 +26,7 @@ Explanation: The array represents the integer 4321.
 from typing import List
 
 
-class Solution(object):
+class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
         """
         Time complexity: O(n), where n is the length of digits.

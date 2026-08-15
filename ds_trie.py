@@ -1,4 +1,4 @@
-class Node(object):
+class Node:
     """Node class for Trie class."""
     def __init__(self):
         # Each node has a children dict of char->node.
@@ -6,7 +6,7 @@ class Node(object):
         self.word = None
 
 
-class Trie(object):
+class Trie:
     """Trie class.
 
     Methods:

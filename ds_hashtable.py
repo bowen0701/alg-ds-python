@@ -1,4 +1,4 @@
-class HashTable(object):
+class HashTable:
     """HashTable with Open Addressing method for collision."""
     def __init__(self, size, is_weighted=False):
         self.size = size

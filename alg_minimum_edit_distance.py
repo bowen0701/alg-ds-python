@@ -1,4 +1,4 @@
-class MinimumEditDistance(object):
+class MinimumEditDistance:
 	"""Minimum Edit Distance (Levenshtein) with Backtrace.
 
 	Given two strings, find the minimum number of operations required to 

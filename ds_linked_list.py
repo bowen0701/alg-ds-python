@@ -1,14 +1,14 @@
 from numpy import inf
 
 
-class Node(object):
+class Node:
     """Node class as building block for linked list."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class LinkedList(object):
+class LinkedList:
     """Singly linked list class.
 
     Operations include the following:

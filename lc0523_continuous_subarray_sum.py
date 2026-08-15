@@ -24,7 +24,7 @@ Note:
 """
 
 
-class SolutionModCumsumPosDictIter(object):
+class SolutionModCumsumPosDictIter:
     def checkSubarraySum(self, nums, k):
         """
         :type nums: List[int]

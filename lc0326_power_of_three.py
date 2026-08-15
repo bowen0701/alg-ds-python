@@ -25,7 +25,7 @@ Follow up:
 Could you do it without using any loop / recursion?
 """
 
-class SolutionWhile(object):
+class SolutionWhile:
     def isPowerOfThree(self, n):
         """
         :type n: int
@@ -42,7 +42,7 @@ class SolutionWhile(object):
         return n == 1
 
 
-class SolutionLog10(object):
+class SolutionLog10:
     def isPowerOfThree(self, n):
         """
         :type n: int

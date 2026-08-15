@@ -29,13 +29,13 @@ Note:
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def deleteNode(self, node):
         """
         :type node: ListNode
@@ -58,7 +58,7 @@ class SolutionTwoPointers(object):
         previous.next = None
 
 
-class SolutionChangeValNext(object):
+class SolutionChangeValNext:
     def deleteNode(self, node):
         """
         :type node: ListNode

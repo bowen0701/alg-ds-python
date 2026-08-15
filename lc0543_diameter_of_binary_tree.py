@@ -21,14 +21,14 @@ edges between them.
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionPathDepthRecur(object):
+class SolutionPathDepthRecur:
     def _pathDepth(self, root):
         if not root:
             return 0

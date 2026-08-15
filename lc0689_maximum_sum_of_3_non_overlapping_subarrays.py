@@ -30,7 +30,7 @@ Note:
 from typing import List
 
 
-class SolutionCusumLeftRightMiddleSlidingWindow(object):
+class SolutionCusumLeftRightMiddleSlidingWindow:
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
         """
         Time complexity: O(n).
@@ -86,7 +86,7 @@ class SolutionCusumLeftRightMiddleSlidingWindow(object):
         return result
 
 
-class SolutionLeftMiddleRightSlidingWindows(object):
+class SolutionLeftMiddleRightSlidingWindows:
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
         """
         Time complexity: O(n).

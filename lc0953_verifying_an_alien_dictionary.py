@@ -37,7 +37,7 @@ Constraints:
 - All characters in words[i] and order are English lowercase letters.
 """
 
-class SolutionCharOrderDicPrevCurCharOrder(object):
+class SolutionCharOrderDicPrevCurCharOrder:
     def _is_not_ordered(self, w_prev, w_cur):
         min_len = min(len(w_prev), len(w_cur))
 

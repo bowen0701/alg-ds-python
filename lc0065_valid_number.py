@@ -32,7 +32,7 @@ However, here is a list of characters that can be in a valid decimal number:
 Of course, the context of these characters also matters in the input.
 """
 
-class SolutionIfDigitMinusPlusDotEIter(object):
+class SolutionIfDigitMinusPlusDotEIter:
     def isNumber(self, s):
         """
         :type s: str

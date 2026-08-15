@@ -41,7 +41,7 @@ Output:
 []
 """
 
-class SolutionDPBacktrackDFS(object):
+class SolutionDPBacktrackDFS:
     def _check_word_break(self, s, wordDict):
         # Apply DP with T, where T[i] denotes s[:i] is segmented.
         n = len(s)

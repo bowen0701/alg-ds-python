@@ -50,7 +50,7 @@ Constraints:
 
 
 # BinaryMatrix's API interface.
-class BinaryMatrix(object):
+class BinaryMatrix:
     def __init__(self, mat):
         self.mat = mat
         self.shape = [len(self.mat), len(self.mat[0])]
@@ -69,7 +69,7 @@ class BinaryMatrix(object):
         return self.shape
 
 
-class SolutionBinarySearchRows(object):
+class SolutionBinarySearchRows:
     def _binarySearchRow(self, row, binaryMatrix):
         nrows, ncols = binaryMatrix.dimensions()
         left_col, right_col = 0, ncols - 1
@@ -119,7 +119,7 @@ class SolutionBinarySearchRows(object):
             return min_col
 
 
-class SolutionLeftDownMove(object):
+class SolutionLeftDownMove:
     def leftMostColumnWithOne(self, binaryMatrix):
         """
         :type binaryMatrix: BinaryMatrix

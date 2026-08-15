@@ -17,7 +17,7 @@ Input: [4,1,2,1,2]
 Output: 4
 """
 
-class SolutionNumCountDict(object):
+class SolutionNumCountDict:
     def singleNumber(self, nums):
         """Lonely integer by naive dictionary.
         :type nums: List[int]
@@ -37,7 +37,7 @@ class SolutionNumCountDict(object):
                 return num
 
 
-class SolutionBit(object):
+class SolutionBit:
     def singleNumber(self, nums):
         """Lonely integer by bit operation.
         :type nums: List[int]

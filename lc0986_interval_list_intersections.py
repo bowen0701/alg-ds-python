@@ -28,7 +28,7 @@ NOTE: input types have been changed on April 15, 2019. Please reset to default
 code definition to get new method signature.
 """
 
-class SolutionTwoPointersOverlap(object):
+class SolutionTwoPointersOverlap:
     def intervalIntersection(self, A, B):
         """
         :type A: List[List[int]]

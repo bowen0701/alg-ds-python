@@ -40,7 +40,7 @@ for (int i = 0; i < len; i++) {
 }
 """
 
-class SolutionPointer(object):
+class SolutionPointer:
     def removeElement(self, nums, val):
         """
         :type nums: List[int]

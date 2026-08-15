@@ -72,7 +72,7 @@ from typing import List, Dict
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None

@@ -27,7 +27,7 @@ Thousand Eight Hundred Ninety One"
 from typing import List
 
 
-class SolutionLessThan20TensPowersOfThousandsRecur(object):
+class SolutionLessThan20TensPowersOfThousandsRecur:
     def _getWordsRecur(self, num: int) -> List[str]:
         # Return empty array for exact matched case.
         if not num:

@@ -36,7 +36,7 @@ Constraints:
 - 1 <= rating[i] <= 10^5
 """
 
-class SolutionBruteForce(object):
+class SolutionBruteForce:
     def numTeams(self, rating):
         """
         :type rating: List[int]
@@ -61,7 +61,7 @@ class SolutionBruteForce(object):
         return result
 
 
-class SolutionLeftRightGreaterLess(object):
+class SolutionLeftRightGreaterLess:
     def numTeams(self, rating):
         """
         :type rating: List[int]

@@ -22,14 +22,14 @@ return its zigzag level order traversal as:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def zigzagLevelOrder(self, root):
         """
         :type root: TreeNode

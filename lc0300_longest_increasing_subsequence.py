@@ -22,7 +22,7 @@ Follow up: Could you improve it to O(n*logn) time complexity?
 from typing import List
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _LIS(self, nums: List[int], cur_idx: int, prev_max: int) -> int:
         # Base case: current index out of boundary.
         if cur_idx == len(nums):
@@ -51,7 +51,7 @@ class SolutionRecur(object):
         return self._LIS(nums, cur_idx, prev_max)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _LIS(self, nums: List[int], prev_idx: int, cur_idx: int, T: List[List[int]]) -> int:
         # Base case: current index out of boundary.
         if cur_idx == len(nums):
@@ -87,7 +87,7 @@ class SolutionMemo(object):
         return self._LIS(nums, prev_idx, cur_idx, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def lengthOfLIS(self, nums: List[int]) -> int:
         """
         Time complexity: O(n^2), where n is the length of the nums.
@@ -112,7 +112,7 @@ class SolutionDP(object):
         return max(T)
 
 
-class SolutionBinarySearchGreedy(object):
+class SolutionBinarySearchGreedy:
     def lengthOfLIS(self, nums: List[int]) -> int:
         """
         Time complexity: O(n*logn), where n is the length of the nums.
@@ -146,7 +146,7 @@ class SolutionBinarySearchGreedy(object):
         return size
 
 
-class SolutionBinarySearchBisectLeftGreedy(object):
+class SolutionBinarySearchBisectLeftGreedy:
     def lengthOfLIS(self, nums: List[int]) -> int:
         """
         Time complexity: O(n*logn), where n is the length of the nums.

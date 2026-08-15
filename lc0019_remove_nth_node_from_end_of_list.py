@@ -18,13 +18,13 @@ Could you do this in one pass?
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionTwoPassesGetSize(object):
+class SolutionTwoPassesGetSize:
     def removeNthFromEnd(self, head, n):
         """
         :type head: ListNode
@@ -66,7 +66,7 @@ class SolutionTwoPassesGetSize(object):
         return head
 
 
-class SolutionOnePass(object):
+class SolutionOnePass:
     def removeNthFromEnd(self, head, n):
         """
         :type head: ListNode

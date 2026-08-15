@@ -20,7 +20,7 @@ Note:
 - The input array may contain duplicates, so ascending order here means <=.
 """
 
-class SolutionSortTwoPoinsters(object):
+class SolutionSortTwoPoinsters:
     def findUnsortedSubarray(self, nums):
         """
         :type nums: List[int]
@@ -47,7 +47,7 @@ class SolutionSortTwoPoinsters(object):
         return j - (i - 1)
 
 
-class SolutionMinRHSMaxLHS(object):
+class SolutionMinRHSMaxLHS:
     def findUnsortedSubarray(self, nums):
         """
         :type nums: List[int]

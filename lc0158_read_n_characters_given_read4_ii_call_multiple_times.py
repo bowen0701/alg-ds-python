@@ -78,7 +78,7 @@ Note:
 - It is guaranteed that in a given test case the same buffer buf is called by read.
 """
 
-class SolutionPreviousSizeIdxBuffer(object):
+class SolutionPreviousSizeIdxBuffer:
     def __init__(self):
         self.prev_size = 0
         self.prev_idx = 0

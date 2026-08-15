@@ -15,7 +15,7 @@ Input: [[7,10],[2,4]]
 Output: true
 """
 
-class SolutionSortStart(object):
+class SolutionSortStart:
     def canAttendMeetings(self, intervals):
         """
         :type intervals: List[List[int]]

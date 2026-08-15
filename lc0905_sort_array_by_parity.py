@@ -18,7 +18,7 @@ Note:
 - 0 <= A[i] <= 5000
 """
 
-class SolutionTwoArrays(object):
+class SolutionTwoArrays:
     def sortArrayByParity(self, A):
         """
         Collect even and odd numbers in two arrays, and then concat them.
@@ -41,7 +41,7 @@ class SolutionTwoArrays(object):
         return evens
 
 
-class SolutionEvenPointer(object):
+class SolutionEvenPointer:
     def sortArrayByParity(self, A):
         """
         Use even index to switch even and odd numbers.

@@ -8,7 +8,7 @@ TRIED = '.'
 OBSTACLE = '+'
 DEAD_END = '-'
 
-class Maze(object):
+class Maze:
     def __init__(self, maze_filename):
         rows_in_maze = 0
         cols_in_maze = 0

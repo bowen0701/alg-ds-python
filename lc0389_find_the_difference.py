@@ -21,7 +21,7 @@ Explanation:
 """
 
 
-class SolutionSortIter(object):
+class SolutionSortIter:
     def findTheDifference(self, s: str, t: str) -> str:
         """
         Time complexity: O(n*logn).
@@ -42,7 +42,7 @@ class SolutionSortIter(object):
         return t_[-1]
 
 
-class SolutionCharCountDict(object):
+class SolutionCharCountDict:
     def findTheDifference(self, s: str, t: str) -> str:
         """
         Time complexity: O(n).
@@ -66,7 +66,7 @@ class SolutionCharCountDict(object):
                 char_count_d[c] -= 1
 
 
-class SolutionOrdSumDiff(object):
+class SolutionOrdSumDiff:
     def findTheDifference(self, s: str, t: str) -> str:
         """
         Time complexity: O(n).
@@ -85,7 +85,7 @@ class SolutionOrdSumDiff(object):
         return chr(ord_sum_diff)
 
 
-class SolutionXOR(object):
+class SolutionXOR:
     def findTheDifference(self, s: str, t: str) -> str:
         """
         :type s: str

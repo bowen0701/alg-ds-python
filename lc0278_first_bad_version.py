@@ -30,7 +30,7 @@ def isBadVersion(version):
     return VERSION_FAILURES[version - 1]
 
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearch:
     def firstBadVersion(self, n):
         """
         :type n: int

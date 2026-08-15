@@ -15,13 +15,13 @@ Output: 1->2->2->4->3->5
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionTwoLists(object):
+class SolutionTwoLists:
     def partition(self, head, x):
         """
         :type head: ListNode

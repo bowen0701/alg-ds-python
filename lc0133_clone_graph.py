@@ -31,13 +31,13 @@ Note:
 """
 
 # Definition for a Node.
-class Node(object):
+class Node:
     def __init__(self, val, neighbors):
         self.val = val
         self.neighbors = neighbors
 
 
-class SolutionNodeCopyDictBFS(object):
+class SolutionNodeCopyDictBFS:
     def cloneGraph(self, node):
         """
         :type node: Node
@@ -83,7 +83,7 @@ class SolutionNodeCopyDictBFS(object):
         return copy
 
 
-class SolutionNodeCopyDictDFSRecur(object):
+class SolutionNodeCopyDictDFSRecur:
     def _dfs(self, node, node_copy_d):
         for neighbor in node.neighbors:
             if neighbor not in node_copy_d:
@@ -127,7 +127,7 @@ class SolutionNodeCopyDictDFSRecur(object):
         return copy
 
 
-class SolutionNodeCopyDictDFSIter(object):
+class SolutionNodeCopyDictDFSIter:
     def cloneGraph(self, node):
         """
         :type node: Node

@@ -32,7 +32,7 @@ A solution set is:
 """
 
 
-class SolutionBacktrack(object):
+class SolutionBacktrack:
     def _backtrack(self, result, temp, start, target, candidates):
         if target < 0:
             # No way to further combine numbers.

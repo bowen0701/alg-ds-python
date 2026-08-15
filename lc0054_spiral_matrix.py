@@ -25,7 +25,7 @@ Input:
 Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 """
 
-class SolutionUpDownLeftDown(object):
+class SolutionUpDownLeftDown:
     def spiralOrder(self, matrix):
         """
         :type matrix: List[List[int]]

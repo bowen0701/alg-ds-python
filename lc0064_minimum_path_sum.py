@@ -19,7 +19,7 @@ Output: 7
 Explanation: Because the path 1->3->1->1->1 minimizes the sum.
 """
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _pathSum(self, grid, r, c):
         # Base case: top-left entry.
         if r == 0 and c == 0:
@@ -50,7 +50,7 @@ class SolutionRecur(object):
         return self._pathSum(grid, r, c)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _pathSum(self, grid, r, c, T):
         # Base case: top-left entry.
         if r == 0 and c == 0:
@@ -87,7 +87,7 @@ class SolutionMemo(object):
         return self._pathSum(grid, n_rows - 1, n_cols - 1, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def minPathSum(self, grid):
         """
         :type grid: List[List[int]]
@@ -121,7 +121,7 @@ class SolutionDP(object):
         return T[-1][-1]
 
 
-class SolutionDPUpdate(object):
+class SolutionDPUpdate:
     def minPathSum(self, grid):
         """
         :type grid: List[List[int]]

@@ -25,7 +25,7 @@ Output: 3
 Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 """
 
-class SolutionRecurNaive(object):
+class SolutionRecurNaive:
     def numDecodings(self, s):
         """
         :type s: str
@@ -55,7 +55,7 @@ class SolutionRecurNaive(object):
         return n_ways
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _decodeRecur(self, s, k):
         """Recursively decode the last k chars."""
         # Base case.
@@ -91,7 +91,7 @@ class SolutionRecur(object):
         return self._decodeRecur(s, n)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _decodeRecur(self, s, k, T):
         """Recursively check the last k chars."""
         # Base case.
@@ -133,7 +133,7 @@ class SolutionMemo(object):
         return self._decodeRecur(s, n, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def numDecodings(self, s):
         """
         :type s: str
@@ -171,7 +171,7 @@ class SolutionDP(object):
         return T[-1]
 
 
-class SolutionIter(object):
+class SolutionIter:
     def numDecodings(self, s):
         """
         :type s: str

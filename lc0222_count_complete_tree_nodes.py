@@ -22,14 +22,14 @@ Output: 6
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderRecur:
     def _preorderRecur(self, root):
         if not root:
             return None
@@ -52,7 +52,7 @@ class SolutionPreorderRecur(object):
         return self.n_nodes
 
 
-class SolutionPreorderIter(object):
+class SolutionPreorderIter:
     def countNodes(self, root):
         """
         :type root: TreeNode
@@ -80,7 +80,7 @@ class SolutionPreorderIter(object):
         return n_nodes
 
 
-class SolutionLevelorderIter(object):
+class SolutionLevelorderIter:
     def countNodes(self, root):
         """
         :type root: TreeNode
@@ -107,7 +107,7 @@ class SolutionLevelorderIter(object):
         return n_nodes
 
 
-class SolutionLeftRightDepths(object):
+class SolutionLeftRightDepths:
     def _countLeftDepth(self, root):
         if not root:
             return 0

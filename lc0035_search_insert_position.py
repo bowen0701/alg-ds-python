@@ -25,7 +25,7 @@ Input: [1,3,5,6], 0
 Output: 0
 """
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearch:
     def searchInsert(self, nums, target):
         """
         :type nums: List[int]

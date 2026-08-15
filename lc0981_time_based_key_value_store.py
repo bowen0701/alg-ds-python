@@ -43,7 +43,7 @@ Note:
   (combined) per test case.
 """
 
-class TimeMapBinarySearchGet(object):
+class TimeMapBinarySearchGet:
 
     def __init__(self):
         """

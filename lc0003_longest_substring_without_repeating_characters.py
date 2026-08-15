@@ -24,7 +24,7 @@ Explanation: The answer is "wke", with the length of 3.
   subsequence and not a substring.
 """
 
-class SolutionCharPosDict(object):
+class SolutionCharPosDict:
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str

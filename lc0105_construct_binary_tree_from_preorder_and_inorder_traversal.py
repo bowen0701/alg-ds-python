@@ -19,14 +19,14 @@ Return the following binary tree:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionPreorderFirstInorderRootRecur(object):
+class SolutionPreorderFirstInorderRootRecur:
     def _build(self, pre_start, pre_end, in_start, in_end,
                in_val_pos, preorder, inorder):
         if pre_start > pre_end or in_start > in_end:

@@ -19,7 +19,7 @@ Note:
 - The order of your output does not matter.
 """
 
-class SolutionSortedAnagramDict(object):
+class SolutionSortedAnagramDict:
     def groupAnagrams(self, strs):
         """
         :type strs: List[str]

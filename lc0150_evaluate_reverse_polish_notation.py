@@ -35,7 +35,7 @@ Explanation:
 = 22
 """
 
-class SolutionStack(object):
+class SolutionStack:
     def _arithmetic_ops(self, x1, x2, op):
         if op == '+':
             return x1 + x2

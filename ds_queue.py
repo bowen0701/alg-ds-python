@@ -1,7 +1,7 @@
 from collections import deque
 
 
-class Queue(object):
+class Queue:
     """Queue using list."""
     def __init__(self):
         self.queue = deque([])
@@ -25,14 +25,14 @@ class Queue(object):
         return list(self.queue)
 
 
-class ListNode(object):
+class ListNode:
     """List Node for Queue_LL class."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class QueueLL(object):
+class QueueLL:
     """Queue using linked list.
 
     Queue: Head->Node1->Node2->Tail

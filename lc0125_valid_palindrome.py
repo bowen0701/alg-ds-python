@@ -17,7 +17,7 @@ Input: "race a car"
 Output: false
 """
 
-class SolutionReverse(object):
+class SolutionReverse:
     def isPalindrome(self, s):
         """
         :type s: str
@@ -35,7 +35,7 @@ class SolutionReverse(object):
         return s_converted == s_converted[::-1]
 
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def isPalindrome(self, s):
         """
         :type s: str

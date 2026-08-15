@@ -26,7 +26,7 @@ Explanation: In this case, no transaction is done, i.e. max max_profit = 0.
 from typing import List
 
 
-class SolutionBruteForce(object):
+class SolutionBruteForce:
     def maxProfit(self, prices: List[int]) -> int:
         """
         Note: Time limit exceeded.
@@ -51,7 +51,7 @@ class SolutionBruteForce(object):
         return result
 
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearch:
     def _binarySearch(self, prices: List[int], left: int, right: int) -> int:
         # Edge case: only one date.
         if left == right:
@@ -84,7 +84,7 @@ class SolutionBinarySearch(object):
         return self._binarySearch(prices, left, right)
 
 
-class SolutionIter(object):
+class SolutionIter:
     def maxProfit(self, prices: List[int]) -> int:
         """
         Time complexity: O(n), where n is the number of prices.

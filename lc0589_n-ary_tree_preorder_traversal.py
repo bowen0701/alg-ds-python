@@ -18,13 +18,13 @@ Recursive solution is trivial, could you do it iteratively?
 """
 
 # Definition for a Node.
-class Node(object):
+class Node:
     def __init__(self, val, children):
         self.val = val
         self.children = children
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _preorderRecur(self, root, vals):
         if not root:
             return None
@@ -50,7 +50,7 @@ class SolutionRecur(object):
         return vals
 
 
-class SolutionIter(object):
+class SolutionIter:
     def preorder(self, root):
         """
         :type root: Node

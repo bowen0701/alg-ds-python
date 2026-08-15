@@ -18,13 +18,13 @@ Could you do it in O(n) time and O(1) space?
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionStack(object):
+class SolutionStack:
     def isPalindrome(self, head):
         """
         :type head: ListNode
@@ -50,7 +50,7 @@ class SolutionStack(object):
         return True
 
 
-class SolutionSlowFastReverse2nd(object):
+class SolutionSlowFastReverse2nd:
     def isPalindrome(self, head):
         """
         :type head: ListNode

@@ -28,7 +28,7 @@ Constraints:
 """
 
 
-class SolutionNaiveBFS(object):
+class SolutionNaiveBFS:
     def minKnightMoves(self, x, y):
         """
         :type x: int
@@ -70,7 +70,7 @@ class SolutionNaiveBFS(object):
             step += 1
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def minKnightMoves(self, x, y):
         """
         :type x: int

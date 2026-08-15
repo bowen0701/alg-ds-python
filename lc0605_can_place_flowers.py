@@ -25,7 +25,7 @@ Note:
 - n is a non-negative integer which won't exceed the input array size.
 """
 
-class SolutionIter(object):
+class SolutionIter:
     def canPlaceFlowers(self, flowerbed, n):
         """
         :type flowerbed: List[int]

@@ -18,7 +18,7 @@ Explanation:
 One longest palindrome that can be built is "dccaccd", whose length is 7.
 """
 
-class SolutionDictDoubleEvenOneOdd(object):
+class SolutionDictDoubleEvenOneOdd:
     def longestPalindrome(self, s):
         """
         :type s: str

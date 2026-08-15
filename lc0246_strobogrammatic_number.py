@@ -20,7 +20,7 @@ Output: false
 """
 
 
-class SolutionMapDictIter(object):
+class SolutionMapDictIter:
     def isStrobogrammatic(self, num):
         """
         :type num: str
@@ -56,7 +56,7 @@ class SolutionMapDictIter(object):
         return mapped_num == num
 
 
-class SolutionTwoPointersIter(object):
+class SolutionTwoPointersIter:
     def isStrobogrammatic(self, num):
         """
         :type num: str

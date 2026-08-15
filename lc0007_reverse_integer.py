@@ -15,7 +15,7 @@ The input is assumed to be a 32-bit signed integer.
 Your function should return 0 when the reversed integer overflows.
 """
 
-class SolutionNegativeOverflow(object):
+class SolutionNegativeOverflow:
     def reverse(self, x: int) -> int:
         """
         Time complexity: O(n), where n is length of digits.
@@ -37,7 +37,7 @@ class SolutionNegativeOverflow(object):
         return x_rev
 
 
-class SolutionModIntegerDivIter(object):
+class SolutionModIntegerDivIter:
     def reverse(self, x: int) -> int:
         """
         :type x: int

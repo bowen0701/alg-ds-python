@@ -22,7 +22,7 @@ Explanation: The square root of 8 is 2.82842..., and since
              the decimal part is truncated, 2 is returned.
 """
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearch:
     def mySqrt(self, x):
         """
         :type x: int

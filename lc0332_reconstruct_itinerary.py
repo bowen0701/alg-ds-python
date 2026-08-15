@@ -27,7 +27,7 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
              But it is larger in lexical order.
 """
 
-class SolutionDfsRecur(object):
+class SolutionDfsRecur:
     def _build_graph(self, tickets, graph):
         # Append airport in lexical order.
         for (departure, arrival) in sorted(tickets):
@@ -68,7 +68,7 @@ class SolutionDfsRecur(object):
         return itinerary
 
 
-class SolutionDfsIter(object):
+class SolutionDfsIter:
     def _build_graph(self, tickets, graph):
         # Append airport in lexical order.
         for (departure, arrival) in sorted(tickets):

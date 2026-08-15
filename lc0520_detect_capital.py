@@ -25,7 +25,7 @@ Note: The input will be a non-empty word consisting of uppercase and lowercase
 latin letters.
 """
 
-class SolutionCapitalCount(object):
+class SolutionCapitalCount:
     def detectCapitalUse(self, word):
         """
         :type word: str

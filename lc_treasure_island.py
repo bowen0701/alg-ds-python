@@ -36,7 +36,7 @@ The minimum route takes 5 steps.
 from typing import List, Dict, Tuple
 
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def _dfs(self, r: int, c: int, distance: int, grid: List[list[str]]) -> None:
         # Apply recursive DFS.
         n_rows, n_cols = len(grid), len(grid[0])
@@ -82,7 +82,7 @@ class SolutionDFSRecur(object):
             return -1
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def _bfs(self, r: int, c: int, grid: List[List[str]]) -> int:
         from collections import deque
 
@@ -136,7 +136,7 @@ class SolutionBFS(object):
         return self._bfs(r, c, grid)
 
 
-class SolutionBFSAll(object):
+class SolutionBFSAll:
     def _bfs(self, 
         r: int,
         c: int,

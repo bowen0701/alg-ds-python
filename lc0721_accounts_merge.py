@@ -40,7 +40,7 @@ Note:
 - The length of accounts[i][j] will be in the range [1, 30].
 """
 
-class SolutionEmailAccountidsDictDfsRecur(object):
+class SolutionEmailAccountidsDictDfsRecur:
     def _dfs(self, aid, emails, accounts, email_aids_d, visited_aids):
         visited_aids.add(aid)
 
@@ -89,7 +89,7 @@ class SolutionEmailAccountidsDictDfsRecur(object):
         return result
 
 
-class SolutionEmailParentUnionFind(object):
+class SolutionEmailParentUnionFind:
     def _union(self, i, j):
         i = self._find(i)
         j = self._find(j)

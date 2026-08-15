@@ -16,7 +16,7 @@ For example, given n = 3, a solution set is:
 ]
 """
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _parenthesisRecur(self, n_opens, n_closes, result, temp):
         if n_opens == 0 and n_closes == 0:
             # If there are no left/right parentheses, append temp.

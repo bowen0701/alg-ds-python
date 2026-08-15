@@ -55,7 +55,7 @@ Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
 
-class SolutionSubtractRules(object):
+class SolutionSubtractRules:
     def _get_roman_to_value(self, i, roman):
         # If roman is I, X or C, check its next roman to decide subtract or add.
         if ((roman == 'I' and self.s[i + 1] in ['V', 'X'])
@@ -97,7 +97,7 @@ class SolutionSubtractRules(object):
         return result
 
 
-class SolutionLeftBigger(object):
+class SolutionLeftBigger:
     def romanToInt(self, s):
         """
         :type s: str
@@ -130,7 +130,7 @@ class SolutionLeftBigger(object):
         return result
 
 
-class SolutionReplace(object):
+class SolutionReplace:
     def romanToInt(self, s):
         """
         :type s: str

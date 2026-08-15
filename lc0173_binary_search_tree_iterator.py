@@ -33,14 +33,14 @@ Note:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class BSTIteratorCurrentStackInorderIter(object):
+class BSTIteratorCurrentStackInorderIter:
 
     def __init__(self, root):
         """

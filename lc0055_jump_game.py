@@ -23,7 +23,7 @@ jump length is 0, which makes it impossible to reach the last index.
 """
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def jumpRecur(self, start, nums):
         n = len(nums)
 
@@ -49,7 +49,7 @@ class SolutionRecur(object):
         return self.jumpRecur(start, nums)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def jumpRecur(self, start, nums, T):
         n = len(nums)
 
@@ -82,7 +82,7 @@ class SolutionMemo(object):
         return self.jumpRecur(start, nums, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def canJump(self, nums):
         """
         :type nums: List[int]
@@ -103,7 +103,7 @@ class SolutionDP(object):
                     T[start + jump] = True
         return T[-1]
 
-class SolutionDP2(object):
+class SolutionDP2:
     def canJump(self, nums):
         """
         :type nums: List[int]
@@ -126,7 +126,7 @@ class SolutionDP2(object):
         return T[-1]
 
 
-class SolutionGreedy(object):
+class SolutionGreedy:
     def canJump(self, nums):
         """
         :type nums: List[int]

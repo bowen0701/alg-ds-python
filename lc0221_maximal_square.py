@@ -16,7 +16,7 @@ Output: 4
 """
 
 
-class SolutionDPSquare(object):
+class SolutionDPSquare:
     def maximalSquare(self, matrix):
         """
         :type matrix: List[List[str]]
@@ -47,7 +47,7 @@ class SolutionDPSquare(object):
         return size * size
 
 
-class SolutionDPTwoRows(object):
+class SolutionDPTwoRows:
     def maximalSquare(self, matrix):
         """
         :type matrix: List[List[str]]
@@ -83,7 +83,7 @@ class SolutionDPTwoRows(object):
         return size * size
 
 
-class SolutionDPOneRow(object):
+class SolutionDPOneRow:
     def maximalSquare(self, matrix):
         """
         :type matrix: List[List[str]]

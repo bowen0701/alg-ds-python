@@ -29,7 +29,7 @@ Note:
 The string size will be in the range [1, 100].
 """
 
-class SolutionBruteForce(object):
+class SolutionBruteForce:
     def _enumerate(self, s):
         """Enumerate s by replacing '*' by '(', '', & ')'."""
         s_set = set()
@@ -86,7 +86,7 @@ class SolutionBruteForce(object):
         return False
 
 
-class SolutionMinMaxCloseCount(object):
+class SolutionMinMaxCloseCount:
     def checkValidString(self, s):
         """
         :type s: str

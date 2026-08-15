@@ -25,14 +25,14 @@ Bonus points if you could solve it both recursively and iteratively.
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def isMirror(self, left, right):
         # Check left & right nodes's symmetry.
         if not left and not right:
@@ -64,7 +64,7 @@ class SolutionRecur(object):
         return self.isMirror(root.left, root.right)
 
 
-class SolutionIter(object):
+class SolutionIter:
     def isSymmetric(self, root):
         """
         :type root: TreeNode

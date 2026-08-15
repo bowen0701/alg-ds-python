@@ -42,7 +42,7 @@ import random
 import bisect
 
 
-class SolutionSelection(object):
+class SolutionSelection:
     def _select_mth_smallest(self, sub_nums: List[int], k: int) -> int:
         # Randomly select a num in sub array as pivot.
         pivot_idx = random.choice(range(len(sub_nums)))
@@ -95,7 +95,7 @@ class SolutionSelection(object):
         return result
 
 
-class SolutionSortAndBinarySearch(object):
+class SolutionSortAndBinarySearch:
     def _binary_search(self, sorted_window: List[int], k: int, x: int):
         # Apply binary search to get the left index.
         left = 0
@@ -140,7 +140,7 @@ class SolutionSortAndBinarySearch(object):
         return result
 
 
-class SolutionSortBisect(object):
+class SolutionSortBisect:
     def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
         """
         Time complexity: O(k*logk + n*(logk+k)) = O(n*k).

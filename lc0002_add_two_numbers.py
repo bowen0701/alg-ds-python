@@ -19,13 +19,13 @@ Explanation: 342 + 465 = 807.
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class Solution(object):
+class Solution:
     def addTwoNumbers(self, l1, l2):
         """
         :type l1: ListNode

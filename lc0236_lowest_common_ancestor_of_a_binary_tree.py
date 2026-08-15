@@ -38,14 +38,14 @@ from typing import Optional
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderRecur:
     def lowestCommonAncestor(
         self, 
         root: Optional[TreeNode], 
@@ -78,7 +78,7 @@ class SolutionPreorderRecur(object):
         return left or right
 
 
-class SolutionChildParentDictPreorderIter(object):
+class SolutionChildParentDictPreorderIter:
     def lowestCommonAncestor(
         self, 
         root: Optional[TreeNode], 

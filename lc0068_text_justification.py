@@ -64,7 +64,7 @@ Output:
 ]
 """
 
-class Solution(object):
+class Solution:
     def _insertSpaceWord(self, w):
         # Append 1 space and next word to the line words.
         self.line_words.append(' ')

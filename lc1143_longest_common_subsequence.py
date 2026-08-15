@@ -36,7 +36,7 @@ Constraints:
 from typing import List
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _lcs_recur(self, text1: str, text2: str, n1: int, n2: int) -> int:
         # Base case.
         if n1 == 0 or n2 == 0:
@@ -59,7 +59,7 @@ class SolutionRecur(object):
         return self._lcs_recur(text1, text2, n1, n2)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _lcs_memo(self, text1: str, text2: str, n1: int, n2: int, T: List[List[int]]) -> int:
         # Base case.
         if n1 == 0 or n2 == 0:
@@ -90,7 +90,7 @@ class SolutionMemo(object):
         return self._lcs_memo(text1, text2, n1, n2, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         """
         Time complexity: O(n1*n2), where ni is the length of texti.

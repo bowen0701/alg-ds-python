@@ -41,7 +41,7 @@ Note:
 - If M[i][j] = 1, then M[j][i] = 1.
 """
 
-class SolutionDFS(object):
+class SolutionDFS:
     def _dfs(self, i, M, visited):
         for neighbor, edge in enumerate(M[i]):
             if edge == 1 and neighbor not in visited:

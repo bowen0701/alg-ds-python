@@ -38,7 +38,7 @@ Constraints:
 """
 
 
-class SolutionStackAppendValidChars(object):
+class SolutionStackAppendValidChars:
     def minRemoveToMakeValid(self, s):
         """
         :type s: str

@@ -38,7 +38,7 @@ Can you solve it in O(N) time and O(1) space?
 from typing import List, Tuple
 
 
-class SolutionStack(object):
+class SolutionStack:
     def _add_stack(self, s: str) -> List[str]:
         stack = []
 
@@ -66,7 +66,7 @@ class SolutionStack(object):
         return s_stack == t_stack
 
 
-class SolutionIterCharBackwards(object):
+class SolutionIterCharBackwards:
     def _getChar(self, s: str, pos: int) -> Tuple[str, int]:
         char = ''
         n_backspaces = 0

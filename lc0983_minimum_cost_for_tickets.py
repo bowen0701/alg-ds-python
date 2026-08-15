@@ -47,7 +47,7 @@ Note:
 """
 
 
-class SolutionTravelDaysRecur(object):
+class SolutionTravelDaysRecur:
     def mincostRecur(self, i, days_set, costs):
         # Base case.
         if i == 0:
@@ -76,7 +76,7 @@ class SolutionTravelDaysRecur(object):
         return self.mincostRecur(days[-1], days_set, costs)
 
 
-class SolutionTravelDaysMemo(object):
+class SolutionTravelDaysMemo:
     def mincostRecur(self, i, days_set, costs, T):
         # Base case.
         if i == 0:
@@ -109,7 +109,7 @@ class SolutionTravelDaysMemo(object):
         return self.mincostRecur(n_days, days_set, costs, T)
 
 
-class SolutionTravelDaysDP(object):
+class SolutionTravelDaysDP:
     def mincostTickets(self, days, costs):
         """
         :type days: List[int]

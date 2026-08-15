@@ -28,7 +28,7 @@ Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and
              Total amount you can rob = 2 + 9 + 1 = 12.
 """
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _recur(self, nums, n):
         # Base case.
         if n < 0:
@@ -54,7 +54,7 @@ class SolutionRecur(object):
         return self._recur(nums, len(nums) - 1)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _recurMemo(self, nums, n, T):
         # Base case.
         if n < 0:
@@ -86,7 +86,7 @@ class SolutionMemo(object):
         return self._recurMemo(nums, len(nums) - 1, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def rob(self, nums):
         """
         :type nums: List[int]
@@ -117,7 +117,7 @@ class SolutionDP(object):
         return T[-1]
 
 
-class SolutionIter(object):
+class SolutionIter:
     def rob(self, nums):
         """
         :type nums: List[int]

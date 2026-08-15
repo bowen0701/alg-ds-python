@@ -19,7 +19,7 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5
 """
 
-class SolutionSelect(object):
+class SolutionSelect:
     def _findKth(self, nums1, nums2, k):
         # Base cases for the divide-and-conquer method.
         if not nums1:

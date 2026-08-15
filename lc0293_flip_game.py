@@ -22,7 +22,7 @@ Output:
 Note: If there is no valid move, return an empty list [].
 """
 
-class SolutionCheckCharAndNeighborIter(object):
+class SolutionCheckCharAndNeighborIter:
     def generatePossibleNextMoves(self, s):
         """
         :type s: str

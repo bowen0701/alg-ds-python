@@ -18,7 +18,7 @@ Note:
 - The result can be in any order.
 """
 
-class SolutionBuiltIn(object):
+class SolutionBuiltIn:
     def intersection(self, nums1, nums2):
         """
         :type nums1: List[int]
@@ -31,7 +31,7 @@ class SolutionBuiltIn(object):
         return list(set(nums1).intersection(set(nums2)))
 
 
-class SolutionSmallerNumCountDict(object):
+class SolutionSmallerNumCountDict:
     def intersection(self, nums1, nums2):
         """
         :type nums1: List[int]

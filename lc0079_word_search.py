@@ -22,7 +22,7 @@ Given word = "SEE", return true.
 Given word = "ABCB", return false.
 """
 
-class SolutionDfsBacktrackRecur(object):
+class SolutionDfsBacktrackRecur:
     def _dfsBracktrackRecur(self, i, j, board, word, pos, visited_d):
         # If there are no letters, complete search.
         if pos == len(word):

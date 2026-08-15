@@ -29,7 +29,7 @@ Note:
 sx, sy, tx, ty will all be integers in the range [1, 10^9].
 """
 
-class SolutionTopDownRecur(object):
+class SolutionTopDownRecur:
     def reachingPoints(self, sx, sy, tx, ty):
         """
         :type sx: int
@@ -56,7 +56,7 @@ class SolutionTopDownRecur(object):
                 self.reachingPoints(sx, sx + sy, tx, ty))
 
 
-class SolutionBottomUpRecur(object):
+class SolutionBottomUpRecur:
     def _recur(self, sx, sy, tx, ty):
         if tx == sx and ty == sy:
             return True
@@ -97,7 +97,7 @@ class SolutionBottomUpRecur(object):
         return self._recur(sx, sy, tx, ty)
 
 
-class SolutionBottomUpIter(object):
+class SolutionBottomUpIter:
     def reachingPoints(self, sx, sy, tx, ty):
         """
         :type sx: int

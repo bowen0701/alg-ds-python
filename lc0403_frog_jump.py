@@ -36,7 +36,7 @@ Return false. There is no way to jump to the last stone as
 the gap between the 5th and 6th stone is too large.
 """
 
-class SolutionStoneJumpDictDP(object):
+class SolutionStoneJumpDictDP:
     def canCross(self, stones):
         """
         :type stones: List[int]
@@ -72,7 +72,7 @@ class SolutionStoneJumpDictDP(object):
         return bool(stone_jumps_d[stones[-1]])
 
 
-class SolutionPositionJumpStacksDP(object):
+class SolutionPositionJumpStacksDP:
     def canCross(self, stones):
         """
         :type stones: List[int]

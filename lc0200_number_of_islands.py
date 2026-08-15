@@ -27,7 +27,7 @@ Answer: 3
 from typing import List, Tuple, Dict
 
 
-class SolutionDFSUpdateRecur(object):
+class SolutionDFSUpdateRecur:
     def _dfs(self, r: int, c: int, grid: List[List[str]]):
         # If visit outside of boundary or water or visited.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
@@ -63,7 +63,7 @@ class SolutionDFSUpdateRecur(object):
         return n_islands
 
 
-class SolutionDFSVisitRecur(object):
+class SolutionDFSVisitRecur:
     def _dfs(self, r: int, c: int, 
              grid: List[List[str]],
              visited_d: Dict[Tuple[int, int], bool]):
@@ -102,7 +102,7 @@ class SolutionDFSVisitRecur(object):
         return n_islands
 
 
-class SolutionDFSUpdateIter(object):
+class SolutionDFSUpdateIter:
     def _get_tovisits(self, v_start: Tuple[int, int], grid: List[List[str]]):
         (r, c) = v_start
         tovisits = []
@@ -159,7 +159,7 @@ class SolutionDFSUpdateIter(object):
         return n_islands
 
 
-class SolutionDFSVisitIter(object):
+class SolutionDFSVisitIter:
     def _get_tovisits(self, v_start: Tuple[int, int], grid: List[List[str]]):
         (r, c) = v_start
         tovisits = []
@@ -223,7 +223,7 @@ class SolutionDFSVisitIter(object):
         return n_islands
 
 
-class SolutionDFSUpdateReturnConnectsRecur(object):
+class SolutionDFSUpdateReturnConnectsRecur:
     def _dfs(self, r: int, c: int, grid: List[List[str]]):
         # If visit outside of boundary or water or visited.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
@@ -263,7 +263,7 @@ class SolutionDFSUpdateReturnConnectsRecur(object):
         return n_islands
 
 
-class SolutionDFSVisitReturnConnectsRecur(object):
+class SolutionDFSVisitReturnConnectsRecur:
     def _dfs(self, r: int, c: int, 
              grid: List[List[str]], 
              visited_d: Dict[Tuple[int, int], bool]):
@@ -306,7 +306,7 @@ class SolutionDFSVisitReturnConnectsRecur(object):
         return n_islands
 
 
-class SolutionBFSUpdate(object):
+class SolutionBFSUpdate:
     def _bfs(self, r: int, c: int, grid: List[List[int]]):
         from collections import deque
 

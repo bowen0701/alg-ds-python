@@ -53,13 +53,13 @@ Notes:
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionSet(object):
+class SolutionSet:
     def getIntersectionNode(self, headA, headB):
         """
         :type headA, headB: ListNode
@@ -89,7 +89,7 @@ class SolutionSet(object):
         return None
 
 
-class SolutionTwoPointersTraverseSwap(object):
+class SolutionTwoPointersTraverseSwap:
     def getIntersectionNode(self, headA, headB):
         """
         :type headA, headB: ListNode

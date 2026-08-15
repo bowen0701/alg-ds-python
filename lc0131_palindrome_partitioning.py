@@ -17,7 +17,7 @@ Output:
 ]
 """
 
-class SolutionBacktrack(object):
+class SolutionBacktrack:
     def _backtrack(self, result, temp, s, start):
         if start == len(s):
             # Use shallow copy.

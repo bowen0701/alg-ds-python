@@ -30,7 +30,7 @@ Your solution should be in logarithmic complexity.
 from typing import List
 
 
-class SolutionBinarySearch(object):
+class SolutionBinarySearch:
     def findPeakElement(self, nums: List[int]) -> int:
         """
         Time complexity: O(logn), where n is the length of nums.

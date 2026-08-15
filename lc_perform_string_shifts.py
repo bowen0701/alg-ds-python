@@ -37,7 +37,7 @@ Constraints:
 - 0 <= shift[i][1] <= 100
 """
 
-class SolutionAccumShiftsModeLength(object):
+class SolutionAccumShiftsModeLength:
     def stringShift(self, s, shift):
         """
         :type s: str

@@ -23,7 +23,7 @@ Output: false
 from typing import List
 
 
-class SolutionNumIdxDict(object):
+class SolutionNumIdxDict:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
         """
         :type nums: List[int]

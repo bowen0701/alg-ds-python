@@ -26,7 +26,7 @@ Note:
 - Could you do it in-place with O(1) extra space?
 """
 
-class SolutionCopy(object):
+class SolutionCopy:
     def rotate(self, nums, k):
         """
         :type nums: List[int]
@@ -44,7 +44,7 @@ class SolutionCopy(object):
         nums[:] = nums[-k:] + nums[:-k]
 
 
-class SolutionIter(object):
+class SolutionIter:
     def rotate(self, nums, k):
         """
         :type nums: List[int]

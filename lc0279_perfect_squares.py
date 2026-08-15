@@ -15,7 +15,7 @@ Output: 2
 Explanation: 13 = 4 + 9.
 """
 
-class SolutionDP(object):
+class SolutionDP:
     def numSquares(self, n):
         """
         :type n: int

@@ -21,7 +21,7 @@ Note:
 - S will consist of lowercase letters ('a' to 'z') only.
 """
 
-class SolutionCharLastPosDict(object):
+class SolutionCharLastPosDict:
     def partitionLabels(self, S):
         """
         :type S: str

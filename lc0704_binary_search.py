@@ -23,7 +23,7 @@ Note:
 - The value of each element in nums will be in the range [-9999, 9999].
 """
 
-class Solution(object):
+class Solution:
     def search(self, nums, target):
         """
         :type nums: List[int]

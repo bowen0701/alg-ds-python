@@ -29,7 +29,7 @@ Note:
 - 1 <= stones[i] <= 1000
 """
 
-class SolutionMaxHeap(object):
+class SolutionMaxHeap:
     def lastStoneWeight(self, stones):
         """
         :type stones: List[int]

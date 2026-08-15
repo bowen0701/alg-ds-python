@@ -18,7 +18,7 @@ Input: "carerac"
 Output: true
 """
 
-class SolutionOneOddCharCounts(object):
+class SolutionOneOddCharCounts:
     def canPermutePalindrome(self, s):
         """
         :type s: str

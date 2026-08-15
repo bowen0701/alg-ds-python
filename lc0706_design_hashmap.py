@@ -31,7 +31,7 @@ Note:
 - Please do not use the built-in HashMap library.
 """
 
-class MyHashMap(object):
+class MyHashMap:
 
     def __init__(self):
         """

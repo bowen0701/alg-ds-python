@@ -33,7 +33,7 @@ Explanation:
 Note that 'A' and 'a' are treated as two different characters.
 """
 
-class SolutionCharFreqDict(object):
+class SolutionCharFreqDict:
     def frequencySort(self, s):
         """
         :type s: str

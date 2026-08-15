@@ -34,7 +34,7 @@ Input: ropes = [2, 2, 3, 3]
 Output: 20
 """
 
-class SolutionMinHeap(object):
+class SolutionMinHeap:
     def connectSticks(self, sticks):
         """
         :type sticks: List[int]

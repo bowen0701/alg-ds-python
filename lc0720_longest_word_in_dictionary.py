@@ -32,7 +32,7 @@ The length of words will be in the range [1, 1000].
 The length of words[i] will be in the range [1, 30].
 """
 
-class Solution(object):
+class Solution:
     def longestWord(self, words):
         """
         :type words: List[str]
@@ -52,14 +52,14 @@ class Solution(object):
         return longest
 
 
-class Node(object):
+class Node:
     def __init__(self, key=None, word=None):
         self.key = key
         self.word = word
         self.children = {}
 
 
-class SolutionTrie(object):
+class SolutionTrie:
     def __init__(self):
         self.root = Node()
 

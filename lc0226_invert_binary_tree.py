@@ -24,14 +24,14 @@ Output:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionPostorderRecur(object):
+class SolutionPostorderRecur:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         """
         Time complexity: O(n).
@@ -50,7 +50,7 @@ class SolutionPostorderRecur(object):
         return root
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         """
         Time complexity: O(n).

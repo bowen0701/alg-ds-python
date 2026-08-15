@@ -34,14 +34,14 @@ codec.deserialize(codec.serialize(root))
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class CodecHashtagEmptyNodePreorderRecurValueQueue(object):
+class CodecHashtagEmptyNodePreorderRecurValueQueue:
     def _serializePreorderRecur(self, root, vals):
         if not root:
             # Use # to denote empty node.

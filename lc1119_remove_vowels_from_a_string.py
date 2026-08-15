@@ -19,7 +19,7 @@ Note:
 - 1 <= S.length <= 1000
 """
 
-class SolutionSet(object):
+class SolutionSet:
     def removeVowels(self, S):
         """
         :type S: string

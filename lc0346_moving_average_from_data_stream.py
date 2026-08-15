@@ -14,7 +14,7 @@ m.next(3) = (1 + 10 + 3) / 3
 m.next(5) = (10 + 3 + 5) / 3
 """
 
-class MovingAverageQueue(object):
+class MovingAverageQueue:
     def __init__(self, size: int):
         from collections import deque
 

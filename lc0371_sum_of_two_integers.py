@@ -15,7 +15,7 @@ Input: a = -2, b = 3
 Output: 1
 """
 
-class SolutionBit(object):
+class SolutionBit:
     def getSum(self, a, b):
         """
         :type a: int

@@ -44,7 +44,7 @@ Note:
 - 1 <= N <= 10^9
 """
 
-class SolutionPattern(object):
+class SolutionPattern:
     def prisonAfterNDays(self, cells, N):
         """
         :type cells: List[int]

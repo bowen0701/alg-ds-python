@@ -19,7 +19,7 @@ Minimize the total number of operations.
 from typing import List
 
 
-class SolutionPopAppend(object):
+class SolutionPopAppend:
     def moveZeroes(self, nums: List[int]) -> None:
         """
         Time complexity: O(n).
@@ -36,7 +36,7 @@ class SolutionPopAppend(object):
                 left += 1
 
 
-class SolutionTwoPassesUpdate(object):
+class SolutionTwoPassesUpdate:
     def moveZeroes(self, nums: List[int]) -> None:
         """
         Time complexity: O(n).
@@ -55,7 +55,7 @@ class SolutionTwoPassesUpdate(object):
             nums[i] = 0
 
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def moveZeroes(self, nums: List[int]) -> None:
         """
         Time complexity: O(n).

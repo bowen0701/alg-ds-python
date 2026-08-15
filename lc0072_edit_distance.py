@@ -30,7 +30,7 @@ exention -> exection (replace 'n' with 'c')
 exection -> execution (insert 'u')
 """
 
-class SolutionRecurNaive(object):
+class SolutionRecurNaive:
     def _editRecur(self, word1, word2):
         # If word1 and word2 are empty strings.
         if not word1 and not word2:
@@ -63,7 +63,7 @@ class SolutionRecurNaive(object):
         return self._editRecur(word1, word2)
 
 
-class SolutionRecurPointer(object):
+class SolutionRecurPointer:
     def _editRecur(self, word1, word2, i1, i2):
         # If word1 and word2 are empty strings.
         if i1 == self.n1 and i2 == self.n2:
@@ -98,7 +98,7 @@ class SolutionRecurPointer(object):
         return self._editRecur(word1, word2, i1, i2)
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _editRecur(self, word1, word2, i1, i2, T):
         # If word1 and word2 are empty strings.
         if i1 == self.n1 and i2 == self.n2:
@@ -141,7 +141,7 @@ class SolutionMemo(object):
         return self._editRecur(word1, word2, i1, i2, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def minDistance(self, word1, word2):
         """
         :type word1: str

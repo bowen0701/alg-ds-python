@@ -27,7 +27,7 @@ You may assume pattern contains only lowercase letters, and str contains
 lowercase letters separated by a single space.
 """
 
-class Solution(object):
+class Solution:
     def wordPattern(self, pattern, str):
         """
         :type pattern: str

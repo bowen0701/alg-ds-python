@@ -33,7 +33,7 @@ Input: "{[]}"
 Output: true
 """
 
-class SolutionOpenCloseDictOpenStack(object):
+class SolutionOpenCloseDictOpenStack:
     def isValid(self, s: str) -> bool:
         """
         Time complexity: O(n), where n is the length of the string.

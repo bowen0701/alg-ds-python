@@ -33,7 +33,7 @@ Note:
 """
 
 # Definition for a QuadTree node.
-class Node(object):
+class Node:
     def __init__(self, val, isLeaf, topLeft, topRight, bottomLeft, bottomRight):
         self.val = val
         self.isLeaf = isLeaf
@@ -43,7 +43,7 @@ class Node(object):
         self.bottomRight = bottomRight
 
 
-class SolutionAllEqualTopLeftIsLeafRecur(object):
+class SolutionAllEqualTopLeftIsLeafRecur:
     def _isLeaf(self, grid):
         return all([val == grid[0][0]
                    for row in grid for val in row])

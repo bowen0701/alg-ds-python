@@ -21,7 +21,7 @@ All given inputs are in lowercase letters a-z.
 """
 
 
-class SolutionIter(object):
+class SolutionIter:
     def longestCommonPrefix(self, strs):
         """
         :type strs: List[str]

@@ -24,7 +24,7 @@ Explanation: Paint house 0 into blue, paint house 1 into green, paint house 2 in
 Minimum cost: 2 + 5 + 3 = 10.
 """
 
-class SolutionMinTheOtherTwoDp(object):
+class SolutionMinTheOtherTwoDp:
     def minCost(self, costs):
         """
         :type costs: List[List[int]]

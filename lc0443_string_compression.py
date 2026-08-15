@@ -49,7 +49,7 @@ Note:
 - 1 <= len(chars) <= 1000.
 """
 
-class SolutionOldNewTwoPointersRepeat(object):
+class SolutionOldNewTwoPointersRepeat:
     def compress(self, chars):
         """
         :type chars: List[str]

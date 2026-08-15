@@ -30,14 +30,14 @@ Note: The merging process must start from the root nodes of both trees.
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderRecur:
     def mergeTrees(self, t1, t2):
         """
         :type t1: TreeNode
@@ -59,7 +59,7 @@ class SolutionPreorderRecur(object):
         return t1
 
 
-class SolutionPreorderIter(object):
+class SolutionPreorderIter:
     def mergeTrees(self, t1, t2):
         """
         :type t1: TreeNode

@@ -22,7 +22,7 @@ Note:
 A and B will have length at most 100.
 """
 
-class SolutionStringConcatSubstring(object):
+class SolutionStringConcatSubstring:
     def rotateString(self, A, B):
         """
         :type A: str

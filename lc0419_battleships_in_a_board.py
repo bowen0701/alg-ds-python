@@ -29,7 +29,7 @@ Could you do it in one-pass, using only O(1) extra memory and
 without modifying the value of the board?
 """
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def _dfsRecur(self, board, r, c):
         # Check exit condition: out of boundary or empty.
         if (r < 0 or r >= len(board) or c < 0 or c >= len(board[0]) or
@@ -69,7 +69,7 @@ class SolutionDFSRecur(object):
         return count
 
 
-class SolutionCheckFirst(object):
+class SolutionCheckFirst:
     def countBattleships(self, board):
         """
         :type board: List[List[str]]

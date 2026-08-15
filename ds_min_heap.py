@@ -8,7 +8,7 @@ def right(i):
     return 2 * i + 1
 
 
-class MinHeap(object):
+class MinHeap:
     """Min Heap data structure.
 
     Min-heap property: A[i] <= A[child(i)].

@@ -12,13 +12,13 @@ Output: 1->1->2->3->4->4
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionSortAll(object):
+class SolutionSortAll:
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
@@ -54,7 +54,7 @@ class SolutionSortAll(object):
         return pre_head.next
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
@@ -77,7 +77,7 @@ class SolutionRecur(object):
             return l2
 
 
-class SolutionIter(object):
+class SolutionIter:
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode

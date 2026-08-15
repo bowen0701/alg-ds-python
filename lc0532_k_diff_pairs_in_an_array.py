@@ -32,7 +32,7 @@ Note:
 - All the integers in the given input belong to the range: [-1e7, 1e7].
 """
 
-class SolutionNumCountDict(object):
+class SolutionNumCountDict:
     def findPairs(self, nums, k):
         """
         :type nums: List[int]

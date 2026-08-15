@@ -40,7 +40,7 @@ obj = MyCalendar()
 param_1 = obj.book(start,end)
 """
 
-class MyCalendarArray(object):
+class MyCalendarArray:
     def __init__(self):
         self.events = []
 
@@ -63,7 +63,7 @@ class MyCalendarArray(object):
         return True
 
 
-class Node(object):
+class Node:
     def __init__(self, start, end):
         self.start = start
         self.end = end
@@ -71,7 +71,7 @@ class Node(object):
         self.right = None
 
 
-class MyCalendarBST(object):
+class MyCalendarBST:
     def __init__(self):
         self.root = None
 

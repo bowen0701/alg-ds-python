@@ -50,7 +50,7 @@ def knows(i, j):
     return graph[i][j]
 
 
-class SolutionIter(object):
+class SolutionIter:
     def findCelebrity(self, n):
         """
         :type n: int

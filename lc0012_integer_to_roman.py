@@ -52,7 +52,7 @@ Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
 
-class SolutionIntRomanList(object):
+class SolutionIntRomanList:
     def intToRoman(self, num):
         """
         :type num: int

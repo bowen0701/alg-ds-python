@@ -18,7 +18,7 @@ nums2 = [2,5,6],       n = 3
 Output: [1,2,2,3,5,6]
 """
 
-class SolutionTwoPointersFromLast(object):
+class SolutionTwoPointersFromLast:
     def merge(self, nums1, m, nums2, n):
         """
         :type nums1: List[int]

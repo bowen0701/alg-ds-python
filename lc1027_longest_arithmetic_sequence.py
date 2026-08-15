@@ -33,7 +33,7 @@ Note:
 - 0 <= A[i] <= 10000
 """
 
-class SolutionPosDiffLenDp(object):
+class SolutionPosDiffLenDp:
     def longestArithSeqLength(self, A):
         """
         :type A: List[int]

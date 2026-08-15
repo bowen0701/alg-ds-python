@@ -22,7 +22,7 @@ Note:
 - 1 <= barcodes[i] <= 10000
 """
 
-class SolutionDictSort(object):
+class SolutionDictSort:
     def rearrangeBarcodes(self, barcodes):
         """
         :type barcodes: List[int]
@@ -57,7 +57,7 @@ class SolutionDictSort(object):
         return res
 
 
-class SolutionDictMost(object):
+class SolutionDictMost:
     def rearrangeBarcodes(self, barcodes):
         """
         :type barcodes: List[int]

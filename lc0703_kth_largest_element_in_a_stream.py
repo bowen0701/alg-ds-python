@@ -31,7 +31,7 @@ from typing import List
 import heapq
 
 
-class KthLargestSort(object):
+class KthLargestSort:
     """Kth Largest Element in a Stream
 
     Apply naive sorting to obtain the top k largest elements.
@@ -60,7 +60,7 @@ class KthLargestSort(object):
         return self.topk[-1]
 
 
-class KthLargestSortAndBinarySearch(object):
+class KthLargestSortAndBinarySearch:
     """Kth Largest Element in a Stream
 
     Apply sorting to obtain the top k largest elements, and
@@ -105,7 +105,7 @@ class KthLargestSortAndBinarySearch(object):
         return self.topk[-1]
 
 
-class KthLargestHeapq(object):
+class KthLargestHeapq:
     def __init__(self, k: int, nums: List[int]):
         """
         Time complexity: O(logn).

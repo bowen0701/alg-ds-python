@@ -32,14 +32,14 @@ from typing import Optional, Dict
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
 
-class SolutionPreorderLeadPathSumRecur(object):
+class SolutionPreorderLeadPathSumRecur:
     def _leadPathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         # Check path sum leading by root.
         # Base case.
@@ -72,7 +72,7 @@ class SolutionPreorderLeadPathSumRecur(object):
                 + self.pathSum(root.right, targetSum))
 
 
-class SolutionSumCountDictPreorderBacktracking(object):
+class SolutionSumCountDictPreorderBacktracking:
     def _preorder_backtrack(
         self, 
         root: Optional[TreeNode], 

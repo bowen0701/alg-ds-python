@@ -35,7 +35,7 @@ and element with id = 2 from `b` has a value 3.
 These also add up to 10. Therefore, the optimal pairs are [2, 4] and [3, 2].
 """
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def optimizeUtilization(self, max_dist, forwards, returns):
         """
         :type max_dist: Int

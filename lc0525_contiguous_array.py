@@ -22,7 +22,7 @@ Note: The length of the given binary array will not exceed 50,000.
 """
 
 
-class SolutionDiffsumIdxDict(object):
+class SolutionDiffsumIdxDict:
     def findMaxLength(self, nums):
         """
         :type nums: List[int]

@@ -6,7 +6,7 @@ import random
 import itertools
 
 
-class SampleUniformDiscrete(object):
+class SampleUniformDiscrete:
     def __init__(self, vals):
         """Sample uniform discrete values.
 
@@ -35,7 +35,7 @@ class SampleUniformDiscrete(object):
         return self.vals[i]
 
 
-class SampleNonUniformDiscrete(object):
+class SampleNonUniformDiscrete:
     def __init__(self, vals, probs, n_bins=int(1e4)):
         """Sampling non-uniform discrete numbers.
 
@@ -93,7 +93,7 @@ class SampleNonUniformDiscrete(object):
         return self.binned_vals[i]
 
 
-class SampleBiasedCoinWithFairCoin(object):
+class SampleBiasedCoinWithFairCoin:
     def __init__(self, p):
         """Smple biased coin with p = 1/k by fair coin.
 
@@ -151,7 +151,7 @@ class SampleBiasedCoinWithFairCoin(object):
             return self.sample()
 
 
-class SampleFairCoinWithBiasedCoin(object):
+class SampleFairCoinWithBiasedCoin:
     def __init__(self, p):
         """Smple fair coin with biased coin having head probility p."""
         self.p = p

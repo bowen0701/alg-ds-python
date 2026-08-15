@@ -19,7 +19,7 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 from typing import List
 
 
-class SolutionSortAppendOrMerge(object):
+class SolutionSortAppendOrMerge:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         """
         Time complexity: O(n*logn).

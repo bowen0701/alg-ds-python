@@ -29,7 +29,7 @@ Input: "ZY"
 Output: 701
 """
 
-class Solution(object):
+class Solution:
     def titleToNumber(self, s):
         """
         :type s: str

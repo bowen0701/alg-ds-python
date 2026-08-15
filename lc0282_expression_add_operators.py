@@ -29,7 +29,7 @@ Output: []
 """
 
 
-class SolutionBacktrack(object):
+class SolutionBacktrack:
     def _backtrack(self, result, temp, pos, val, prev_val):
         if pos == len(self.num):
             if val == self.target:

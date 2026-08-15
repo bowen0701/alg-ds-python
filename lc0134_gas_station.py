@@ -47,7 +47,7 @@ You cannot travel back to station 2, as it requires 4 unit of gas but you only h
 Therefore, you can't travel around the circuit once no matter where you start.
 """
 
-class SolutionNaiveIter(object):
+class SolutionNaiveIter:
     def canCompleteCircuit(self, gas, cost):
         """
         :type gas: List[int]
@@ -87,7 +87,7 @@ class SolutionNaiveIter(object):
         return -1
 
 
-class SolutionIter(object):
+class SolutionIter:
     def canCompleteCircuit(self, gas, cost):
         """
         :type gas: List[int]

@@ -17,7 +17,7 @@ Input:
 Output: 6
 """
 
-class SolutionEachRowHeightRectangleHistogram(object):
+class SolutionEachRowHeightRectangleHistogram:
     def maximalRectangle(self, matrix):
         """
         View each row as ground with buildings of consecutive 1s on it. 

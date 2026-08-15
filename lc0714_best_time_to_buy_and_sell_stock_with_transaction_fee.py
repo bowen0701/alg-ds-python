@@ -28,7 +28,7 @@ Note:
 - 0 <= fee < 50000.
 """
 
-class SolutionDP(object):
+class SolutionDP:
     def maxProfit(self, prices, fee):
         """
         :type prices: List[int]
@@ -61,7 +61,7 @@ class SolutionDP(object):
         return profit_sells[-1]
 
 
-class SolutionIter(object):
+class SolutionIter:
     def maxProfit(self, prices, fee):
         """
         :type prices: List[int]

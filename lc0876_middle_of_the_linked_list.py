@@ -25,13 +25,13 @@ The number of nodes in the given list will be between 1 and 100
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionFastSlow(object):
+class SolutionFastSlow:
     def middleNode(self, head):
         """
         :type head: ListNode

@@ -31,13 +31,13 @@ Can you solve it using O(1) (i.e. constant) memory?
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionSet(object):
+class SolutionSet:
     def hasCycle(self, head):
         """
         :type head: ListNode
@@ -64,7 +64,7 @@ class SolutionSet(object):
         return False
 
 
-class SolutionSlowFast(object):
+class SolutionSlowFast:
     def hasCycle(self, head):
         """
         :type head: ListNode

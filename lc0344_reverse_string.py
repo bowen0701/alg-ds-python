@@ -20,7 +20,7 @@ Input: ["H","a","n","n","a","h"]
 Output: ["h","a","n","n","a","H"]
 """
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def reverseString(self, s):
         """
         :type s: List[str]

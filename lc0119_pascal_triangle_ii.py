@@ -19,7 +19,7 @@ Follow up:
 Could you optimize your algorithm to use only O(k) extra space?
 """
 
-class Solution(object):
+class Solution:
     def getRow(self, rowIndex):
         """
         :type rowIndex: int

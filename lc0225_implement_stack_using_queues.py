@@ -27,7 +27,7 @@ Notes:
   operations will be called on an empty stack).
 """
 
-class MyStackByTwoQueues(object):
+class MyStackByTwoQueues:
     def __init__(self):
         """
         Initialize your data structure here.

@@ -25,7 +25,7 @@ Note:
 - 0 <= A[i] < 40000
 """
 
-class SolutionBruteForce(object):
+class SolutionBruteForce:
     def minIncrementForUnique(self, A):
         """
         :type A: List[int]
@@ -66,7 +66,7 @@ class SolutionBruteForce(object):
         return moves
 
 
-class SolutionUnionFind(object):
+class SolutionUnionFind:
     def minIncrementForUnique(self, A):
         """
         :type A: List[int]
@@ -99,7 +99,7 @@ class SolutionUnionFind(object):
         return sum(moves)
 
 
-class SolutionSortPrevPlusOne(object):
+class SolutionSortPrevPlusOne:
     def minIncrementForUnique(self, A):
         """
         :type A: List[int]

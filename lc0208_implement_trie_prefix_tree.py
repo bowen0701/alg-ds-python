@@ -25,14 +25,14 @@ param_2 = obj.search(word)
 param_3 = obj.startsWith(prefix)
 """
 
-class Node(object):
+class Node:
     def __init__(self):
         # Each node has a children dict of char->node. 
         self.children = {}
         self.word = None
 
 
-class Trie(object):
+class Trie:
     def __init__(self):
         """
         Initialize your data structure here.

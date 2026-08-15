@@ -27,7 +27,7 @@ For the purpose of this problem, assume that your function returns 2^31 - 1
 when the division result overflows.
 """
 
-class Solution(object):
+class Solution:
     def divide(self, dividend, divisor):
         """
         :type dividend: int

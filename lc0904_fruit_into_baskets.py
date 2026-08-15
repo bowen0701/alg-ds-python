@@ -46,7 +46,7 @@ Note:
 - 0 <= tree[i] < tree.length
 """
 
-class SolutionDictTwoPointers(object):
+class SolutionDictTwoPointers:
     def totalFruit(self, tree):
         """
         :type tree: List[int]

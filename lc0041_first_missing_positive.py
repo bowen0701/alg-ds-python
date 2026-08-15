@@ -21,7 +21,7 @@ Note:
 Your algorithm should run in O(n) time and uses constant extra space.
 """
 
-class SolutionSwapToCorrectPos(object):
+class SolutionSwapToCorrectPos:
     def firstMissingPositive(self, nums):
         """
         :type nums: List[int]

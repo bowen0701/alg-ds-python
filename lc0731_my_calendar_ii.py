@@ -49,7 +49,7 @@ obj = MyCalendarTwo()
 param_1 = obj.book(start,end)
 """
 
-class MyCalendarEventsOverlapsArrays(object):
+class MyCalendarEventsOverlapsArrays:
     def __init__(self):
         self.events = []
         self.overlaps = []

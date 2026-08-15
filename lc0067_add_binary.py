@@ -16,7 +16,7 @@ Input: a = "1010", b = "1011"
 Output: "10101"
 """
 
-class SolutionIter(object):
+class SolutionIter:
     def _padding(self, a, b):
         if len(a) < len(b):
             a = '0' * (len(b) - len(a)) + a

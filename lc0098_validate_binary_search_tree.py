@@ -33,14 +33,14 @@ Explanation: The root node's value is 5 but its right child's value is 4.
 from typing import Optional
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val: Optional[int]):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionMinMaxPreorderRecur(object):
+class SolutionMinMaxPreorderRecur:
     def _preorder_in_boundary(
         self, 
         root: Optional[TreeNode], 
@@ -73,7 +73,7 @@ class SolutionMinMaxPreorderRecur(object):
         return self._preorder_in_boundary(root, min_val, max_val)
 
 
-class SolutionMinMaxPreorderIter(object):
+class SolutionMinMaxPreorderIter:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         """
         Time complexity: O(n).
@@ -103,7 +103,7 @@ class SolutionMinMaxPreorderIter(object):
         return True
 
 
-class SolutionIncreasingInorderRecur(object):
+class SolutionIncreasingInorderRecur:
     def _inorder_increasing(self, root: Optional[TreeNode]) -> bool:
         # Base case.
         if not root:
@@ -132,7 +132,7 @@ class SolutionIncreasingInorderRecur(object):
         return self._inorder_increasing(root)
 
 
-class SolutionIncreasingInorderIter(object):
+class SolutionIncreasingInorderIter:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         """
         Time complexity: O(n).

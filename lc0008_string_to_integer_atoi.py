@@ -55,7 +55,7 @@ Explanation: The number "-91283472332" is out of the range of a 32-bit signed
 integer. Thefore INT_MIN (-2^31) is returned.
 """
 
-class Solution(object):
+class Solution:
     def myAtoi(self, s):
         """
         :type s: str

@@ -34,13 +34,13 @@ Can you solve it without using extra space?
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionSet(object):
+class SolutionSet:
     def detectCycle(self, head):
         """
         :type head: ListNode
@@ -65,7 +65,7 @@ class SolutionSet(object):
         return None
 
 
-class SolutionSlowFast(object):
+class SolutionSlowFast:
     def detectCycle(self, head):
         """
         :type head: ListNode

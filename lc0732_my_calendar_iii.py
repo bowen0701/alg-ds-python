@@ -39,7 +39,7 @@ Note:
 - In calls to MyCalendarThree.book(start, end), start and end are integers in the range [0, 10^9].
 """
 
-class MyCalendarThreeTimeCounterDictSort(object):
+class MyCalendarThreeTimeCounterDictSort:
     def __init__(self):
         from collections import defaultdict
         self.time_counter_d = defaultdict(int)
@@ -69,7 +69,7 @@ class MyCalendarThreeTimeCounterDictSort(object):
         return max_k_events
 
 
-class MyCalendarThreeTimeCountersListInsort(object):
+class MyCalendarThreeTimeCountersListInsort:
     def __init__(self):
         self.time_counters = []
 

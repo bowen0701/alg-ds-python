@@ -21,14 +21,14 @@ return its depth = 3.
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def maxDepth(self, root):
         """
         :type root: TreeNode
@@ -45,7 +45,7 @@ class SolutionDFSRecur(object):
         return 1 + max(left, right)
 
 
-class SolutionLevelBFSIter(object):
+class SolutionLevelBFSIter:
     def maxDepth(self, root):
         """
         :type root: TreeNode

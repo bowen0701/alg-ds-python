@@ -22,7 +22,7 @@ count-and-say sequence.
 Note: Each term of the sequence of integers will be represented as a string.
 """
 
-class Solution(object):
+class Solution:
     def countAndSay(self, n):
         """
         :type n: int

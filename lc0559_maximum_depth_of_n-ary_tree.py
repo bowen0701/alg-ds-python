@@ -22,7 +22,7 @@ Note:
 """
 
 # Definition for a Node.
-class Node(object):
+class Node:
     def __init__(self, val, children):
         """
         :type val: int
@@ -33,7 +33,7 @@ class Node(object):
         self.children = children
 
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def maxDepth(self, root):
         """
         :type root: Node
@@ -55,7 +55,7 @@ class SolutionDFSRecur(object):
         return 1 + child_depth
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def maxDepth(self, root):
         """
         :type root: Node

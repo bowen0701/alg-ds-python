@@ -27,7 +27,7 @@ Note:
 You may assume both s and t have the same length.
 """
 
-class SolutionCharMaps(object):
+class SolutionCharMaps:
     def isIsomorphic(self, s, t):
         """
         :type s: str

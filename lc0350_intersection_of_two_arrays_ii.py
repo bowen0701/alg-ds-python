@@ -25,7 +25,7 @@ Follow up:
 """
 
 
-class SolutionTwoNumCountDicts(object):
+class SolutionTwoNumCountDicts:
     def intersect(self, nums1, nums2):
         """
         :type nums1: List[int]
@@ -68,7 +68,7 @@ class SolutionTwoNumCountDicts(object):
         return intersect
 
 
-class SolutionNumCountDict(object):
+class SolutionNumCountDict:
     def intersect(self, nums1, nums2):
         """
         :type nums1: List[int]

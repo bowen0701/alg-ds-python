@@ -1,4 +1,4 @@
-class Stack(object):
+class Stack:
     """Stack using list."""
     def __init__(self):
         self.stack = []
@@ -22,14 +22,14 @@ class Stack(object):
         return self.stack
 
 
-class ListNode(object):
+class ListNode:
     """List Node for StackLL class."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class StackLL(object):
+class StackLL:
     """Stack using linked list.
 
     Stack: Top->Node2->Node1->None.

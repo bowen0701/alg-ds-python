@@ -28,7 +28,7 @@ Note:
 """
 
 
-class SolutionSlidingWindowMaxKZerosSubarray(object):
+class SolutionSlidingWindowMaxKZerosSubarray:
     def longestOnes(self, A, K):
         """
         :type A: List[int]

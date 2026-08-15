@@ -17,7 +17,7 @@ outputs are in the right-hand column.
 1,1,5 -> 1,5,1
 """
 
-class SolutionDecreasingPivotSwapBiggerReverseRight(object):
+class SolutionDecreasingPivotSwapBiggerReverseRight:
     def nextPermutation(self, nums):
         """
         :type nums: List[int]

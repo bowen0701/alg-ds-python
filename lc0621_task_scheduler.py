@@ -25,7 +25,7 @@ Note:
 - The integer n is in the range [0, 100].
 """
 
-class SolutionTaskCountDictMaxHeap(object):
+class SolutionTaskCountDictMaxHeap:
     def leastInterval(self, tasks, n):
         """
         :type tasks: List[str]

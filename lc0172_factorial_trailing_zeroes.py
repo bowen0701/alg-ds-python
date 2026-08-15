@@ -18,7 +18,7 @@ Explanation: 5! = 120, one trailing zero.
 Note: Your solution should be in logarithmic time complexity.
 """
 
-class Solution(object):
+class Solution:
     def trailingZeroes(self, n):
         """
         :type n: int

@@ -23,7 +23,7 @@ Follow up:
 - Could you come up with a one-pass algorithm using only constant space?
 """
 
-class SolutionCount(object):
+class SolutionCount:
     def sortColors(self, nums):
         """
         :type nums: List[int]
@@ -55,7 +55,7 @@ class SolutionCount(object):
                 nums[i] = 2
 
 
-class SolutionUpdateAll(object):
+class SolutionUpdateAll:
     def sortColors(self, nums):
         """
         :type nums: List[int]

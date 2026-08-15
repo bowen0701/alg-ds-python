@@ -28,14 +28,14 @@ expected output (serialized tree format) as [], not null.
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def searchBST(self, root, val):
         """
         :type root: TreeNode
@@ -57,7 +57,7 @@ class SolutionRecur(object):
             return self.searchBST(root.right, val)
 
 
-class SolutionIter(object):
+class SolutionIter:
     def searchBST(self, root, val):
         """
         :type root: TreeNode

@@ -16,7 +16,7 @@ Input: [1,8,6,2,5,4,8,3,7]
 Output: 49 (= 7 * (8 - 1))
 """
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def maxArea(self, height):
         """
         :type height: List[int]

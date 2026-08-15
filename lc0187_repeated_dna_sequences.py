@@ -15,7 +15,7 @@ Input: s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
 Output: ["AAAAACCCCC", "CCCCCAAAAA"]
 """
 
-class SolutionDict(object):
+class SolutionDict:
     def findRepeatedDnaSequences(self, s):
         """
         :type s: str

@@ -27,7 +27,7 @@ Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
 Output: false
 """
 
-class SolutionDP(object):
+class SolutionDP:
     def wordBreak(self, s, wordDict):
         """
         :type s: str
@@ -59,7 +59,7 @@ class SolutionDP(object):
         return T[-1]
 
 
-class SolutionDp2(object):
+class SolutionDp2:
     def wordBreak(self, s, wordDict):
         """
         :type s: str

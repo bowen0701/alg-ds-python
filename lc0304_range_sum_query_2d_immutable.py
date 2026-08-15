@@ -32,7 +32,7 @@ obj = NumMatrix(matrix)
 param_1 = obj.sumRegion(row1,col1,row2,col2)
 """
 
-class NumMatrixBruteForce(object):
+class NumMatrixBruteForce:
     def __init__(self, matrix):
         """
         :type matrix: List[List[int]]
@@ -62,7 +62,7 @@ class NumMatrixBruteForce(object):
         return sum_region
 
 
-class NumMatrixDP(object):
+class NumMatrixDP:
     def __init__(self, matrix):
         """
         :type matrix: List[List[int]]

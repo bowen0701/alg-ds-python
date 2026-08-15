@@ -21,7 +21,7 @@ Output:
 ]
 """
 
-class SolutionBacktrack(object):
+class SolutionBacktrack:
     def _backtrack(self, result, temp, start, nums):
         # Append shallow copy.
         result.append(temp[:])

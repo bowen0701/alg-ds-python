@@ -21,7 +21,7 @@ The possible falling paths are:
 The falling path with the smallest sum is [1,4,7], so the answer is 12.
 """
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _fallingPathSumRecur(self, A, r, c):
         # If at the 1st row, return its value.
         if r == 0:
@@ -56,7 +56,7 @@ class SolutionRecur(object):
         return min_sum
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _fallingPathSumRecur(self, A, r, c, T):
         # Base case: if at the 1st row, return its value.
         if r == 0:
@@ -98,7 +98,7 @@ class SolutionMemo(object):
         return min_sum
 
 
-class SolutionDP(object):
+class SolutionDP:
     def minFallingPathSum(self, A):
         """
         :type A: List[List[int]]
@@ -130,7 +130,7 @@ class SolutionDP(object):
         return min(T[-1])
 
 
-class SolutionDPOptim(object):
+class SolutionDPOptim:
     def minFallingPathSum(self, A):
         """
         :type A: List[List[int]]

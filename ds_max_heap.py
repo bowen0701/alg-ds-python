@@ -8,7 +8,7 @@ def right(i):
     return 2 * i + 1
 
 
-class MaxHeap(object):
+class MaxHeap:
     """Max Heap data structure.
 
     Max-heap property: A[i] >= A[child(i)].

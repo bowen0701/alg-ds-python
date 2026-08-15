@@ -23,7 +23,7 @@ Given target = 5, return true.
 Given target = 20, return false.
 """
 
-class Solution(object):
+class Solution:
     def searchMatrix(self, matrix, target):
         """
         :type matrix: List[List[int]]

@@ -16,7 +16,7 @@ Input: "cbbd"
 Output: "bb"
 """
 
-class SolutionBrute(object):
+class SolutionBrute:
     def longestPalindrome(self, s: str) -> str:
         """
         Time complexity: O(n^3).
@@ -32,7 +32,7 @@ class SolutionBrute(object):
         return lps
 
 
-class SolutionDP(object):
+class SolutionDP:
     def longestPalindrome(self, s: str) -> str:
         """
         Apply dynamic programming with botton-up memoization,
@@ -73,7 +73,7 @@ class SolutionDP(object):
         return s[start:(start + max_len)]
 
 
-class SolutionIter(object):
+class SolutionIter:
     def longestPalindrome(self, s: str) -> str:
         """
         Apply iteration.

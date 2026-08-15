@@ -18,7 +18,7 @@ Output:
 [5,6]
 """
 
-class SolutionDistinctNumsSet(object):
+class SolutionDistinctNumsSet:
     def findDisappearedNumbers(self, nums):
         """
         :type nums: List[int]
@@ -43,7 +43,7 @@ class SolutionDistinctNumsSet(object):
         return disappeared_nums
 
 
-class SolutionMarkIdxNumNeg(object):
+class SolutionMarkIdxNumNeg:
     def findDisappearedNumbers(self, nums):
         """
         :type nums: List[int]

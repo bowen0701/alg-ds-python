@@ -28,7 +28,7 @@ Y A   H R
 P     I
 """
 
-class Solution(object):
+class Solution:
     def convert(self, s, numRows):
         """
         :type s: str
@@ -50,7 +50,7 @@ class Solution(object):
         return ''.join(zigzag_rows)
 
 
-class SolutionMath(object):
+class SolutionMath:
     def convert(self, s, numRows):
         """
         :type s: str

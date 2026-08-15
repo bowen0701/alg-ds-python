@@ -34,7 +34,7 @@ Note:
 - The value of each color in image[i][j] and newColor will be an integer in [0, 65535].
 """
 
-class SolutionDFSIter(object):
+class SolutionDFSIter:
     def floodFill(self, image, sr, sc, newColor):
         """
         :type image: List[List[int]]

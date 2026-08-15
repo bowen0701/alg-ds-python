@@ -18,14 +18,14 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def _preorderRecur(self, root, vals):
         if not root:
             return None
@@ -48,7 +48,7 @@ class SolutionRecur(object):
         return vals
 
 
-class SolutionIter(object):
+class SolutionIter:
     def preorderTraversal(self, root):
         """
         :type root: TreeNode

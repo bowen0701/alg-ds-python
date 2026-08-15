@@ -1,6 +1,6 @@
 from alg_gcd import compute_gcd
 
-class Fraction(object):
+class Fraction:
     """Fraction class with print, show, add, subtract,
     multiplication, division and equality.
 

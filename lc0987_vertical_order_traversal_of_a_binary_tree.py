@@ -51,14 +51,14 @@ Note:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionOrderValsDictSortedLevelOrderValsDict(object):
+class SolutionOrderValsDictSortedLevelOrderValsDict:
     def verticalTraversal(self, root):
         """
         :type root: TreeNode

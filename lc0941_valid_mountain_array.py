@@ -29,7 +29,7 @@ Note:
 - 0 <= A[i] <= 10000 
 """
 
-class SolutionIter(object):
+class SolutionIter:
     def validMountainArray(self, A):
         """
         :type A: List[int]

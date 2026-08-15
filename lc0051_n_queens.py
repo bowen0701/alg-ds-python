@@ -28,7 +28,7 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle
 as shown above.
 """
 
-class Solution(object):
+class Solution:
     def _is_valid(self, queens):
         """Check current queen position is valid among previous queens."""
         cur_row, cur_col = len(queens) - 1, queens[-1]

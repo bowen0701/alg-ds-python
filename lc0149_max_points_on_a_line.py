@@ -35,7 +35,7 @@ NOTE: input types have been changed on April 15, 2019.
 Please reset to default code definition to get new method signature.
 """
 
-class SolutionGCDLinePointsDict(object):
+class SolutionGCDLinePointsDict:
     def _gcd(self, x, y):
         """Greatest common divisor."""
         if y == 0:

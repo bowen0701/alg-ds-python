@@ -16,7 +16,7 @@ Follow up:
 Could you do it without any loop/recursion in O(1) runtime?
 """
 
-class SolutionIter(object):
+class SolutionIter:
     def addDigits(self, num):
         """
         :type num: int
@@ -40,7 +40,7 @@ class SolutionIter(object):
         return new_num
 
 
-class SolutionDigitRoot(object):
+class SolutionDigitRoot:
     def addDigits(self, num):
         """
         :type num: int

@@ -25,14 +25,14 @@ The tree will have between 1 and 100 nodes.
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionLevelorderOneByOneIter(object):
+class SolutionLevelorderOneByOneIter:
     def isCompleteTree(self, root):
         """
         :type root: TreeNode

@@ -45,7 +45,7 @@ Note:
 - There may be multiple valid order of letters, return any one of them is fine.
 """
 
-class SolutionTopologicalSort(object):
+class SolutionTopologicalSort:
     def _build_graph(self, words):
         from collections import defaultdict
 

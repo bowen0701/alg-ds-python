@@ -34,7 +34,7 @@ Note:
 - -100000 <= A[i] <= 100000
 """
 
-class SolutionTwoBooleans(object):
+class SolutionTwoBooleans:
     def isMonotonic(self, A):
         """
         :type A: List[int]

@@ -36,14 +36,14 @@ Note:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionRecur(object):
+class SolutionRecur:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
@@ -60,7 +60,7 @@ class SolutionRecur(object):
             return root
 
 
-class SolutionIter(object):
+class SolutionIter:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.

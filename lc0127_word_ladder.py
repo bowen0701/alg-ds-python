@@ -38,7 +38,7 @@ Explanation: The endWord "cog" is not in wordList,
 therefore no possible transformation.
 """
 
-class SolutionBfs(object):
+class SolutionBfs:
     def _buildWordsGraph(self, words):
         from collections import defaultdict
         from itertools import product

@@ -30,7 +30,7 @@ Note:
 - logs[i] is guaranteed to have an identifier, and a word after the identifier.
 """
 
-class Solution(object):
+class Solution:
     def reorderLogFiles(self, logs):
         """
         :type logs: List[str]

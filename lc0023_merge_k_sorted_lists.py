@@ -21,13 +21,13 @@ import heapq
 
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionAllSort(object):
+class SolutionAllSort:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         :type lists: List[ListNode]
@@ -61,7 +61,7 @@ class SolutionAllSort(object):
         return pre_head.next
 
 
-class SolutionMergeTwoToFirst(object):
+class SolutionMergeTwoToFirst:
     def _merge2Lists(self, l1: ListNode, l2: ListNode):
         if not l1 or not l2:
             return l1 or l2
@@ -94,7 +94,7 @@ class SolutionMergeTwoToFirst(object):
         return lists[0]
 
 
-class SolutionMergeTwoRecur(object):
+class SolutionMergeTwoRecur:
     def _merge2Lists(self, l1: ListNode, l2: ListNode):
         """Merge two sorted lists recursively."""
         if not l1 or not l2:
@@ -136,7 +136,7 @@ class SolutionMergeTwoRecur(object):
         return lists[0]
 
 
-class SolutionMergeTwoIter(object):
+class SolutionMergeTwoIter:
     def _merge2Lists(self, l1: ListNode, l2: ListNode):
         """Merge two sorted lists iteratively."""
         if not l1 or not l2:
@@ -187,7 +187,7 @@ class SolutionMergeTwoIter(object):
         return lists[0]
 
 
-class SolutionMinHeap(object):
+class SolutionMinHeap:
     ListNode.__lt__ = lambda self, other: self.val < other.val
 
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:

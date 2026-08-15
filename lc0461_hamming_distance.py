@@ -22,7 +22,7 @@ The above arrows point to positions where the corresponding bits
 are different.
 """
 
-class SolutionModeTwoIter(object):
+class SolutionModeTwoIter:
     def hammingDistance(self, x, y):
         """
         :type x: int
@@ -40,7 +40,7 @@ class SolutionModeTwoIter(object):
             y >>= 1
         return result
 
-class SolutionBinCountOne(object):
+class SolutionBinCountOne:
     def hammingDistance(self, x, y):
         """
         :type x: int

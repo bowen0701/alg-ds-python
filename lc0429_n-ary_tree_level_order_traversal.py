@@ -25,13 +25,13 @@ Note:
 """
 
 # Definition for a Node.
-class Node(object):
+class Node:
     def __init__(self, val, children):
         self.val = val
         self.children = children
 
 
-class SolutionBFS(object):
+class SolutionBFS:
     def levelOrder(self, root):
         """
         :type root: Node

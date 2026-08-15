@@ -1,11 +1,11 @@
-class Node(object):
+class Node:
     """Node class as building block for linked list."""
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
-class LinkedListOrdered(object):
+class LinkedListOrdered:
     """Ordered singly linked list class.
 
     Operations include the following:

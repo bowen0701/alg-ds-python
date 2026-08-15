@@ -36,7 +36,7 @@ Note:
 - 2 <= A.length == B.length <= 20000
 """
 
-class SolutionNumCountsCover(object):
+class SolutionNumCountsCover:
     def minDominoRotations(self, A, B):
         """
         :type A: List[int]
@@ -65,7 +65,7 @@ class SolutionNumCountsCover(object):
         return -1
 
 
-class SolutionNumCountsUnion(object):
+class SolutionNumCountsUnion:
     def minDominoRotations(self, A, B):
         """
         :type A: List[int]

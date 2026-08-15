@@ -31,7 +31,7 @@ your answer could be in any order you want.
 from typing import List
 
 
-class SolutionListComprehension(object):
+class SolutionListComprehension:
     def letterCombinations(self, digits: str) -> List[str]:
         """
         Time complexity: O(n*m^2)
@@ -68,7 +68,7 @@ class SolutionListComprehension(object):
         return result
 
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def _dfsRecur(self, result: List[str], digits: str, cur_str: str, i: int) -> None:
         # If index is out of boundary, complete combination.
         if i == len(digits):

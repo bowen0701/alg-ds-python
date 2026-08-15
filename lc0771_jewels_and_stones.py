@@ -24,7 +24,7 @@ Note:
 - The characters in J are distinct.
 """
 
-class SolutionSet(object):
+class SolutionSet:
     def numJewelsInStones(self, J, S):
         """
         :type J: str

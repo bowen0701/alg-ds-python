@@ -52,7 +52,7 @@ p = "mis*is*p*."
 Output: false
 """
 
-class SolutionDP(object):
+class SolutionDP:
     def isMatch(self, s, p):
         """
         :type s: str

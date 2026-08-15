@@ -35,7 +35,7 @@ S.length <= 1000
 S only consists of '(' and ')' characters.
 """
 
-class SolutionStackEmptyIncrementCount(object):
+class SolutionStackEmptyIncrementCount:
     def minAddToMakeValid(self, S):
         """
         :type S: str

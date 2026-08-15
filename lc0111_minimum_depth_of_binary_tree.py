@@ -24,14 +24,14 @@ from typing import Optional
 
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def minDepth(self, root: Optional[TreeNode]) -> int:
         """
         Time complexity: O(n).
@@ -57,7 +57,7 @@ class SolutionDFSRecur(object):
         return 1 + min(self.minDepth(root.left), self.minDepth(root.right))
 
 
-class SolutionLevelBFS(object):
+class SolutionLevelBFS:
     def minDepth(self, root: Optional[TreeNode]) -> int:
         """
         Time complexity: O(n).

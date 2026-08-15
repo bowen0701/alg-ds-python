@@ -1,4 +1,4 @@
-class Node(object):
+class Node:
     """Node class collects helper functions for BinarySearchTree."""
     def __init__(self, val, left=None, right=None, parent=None):
         self.val = val
@@ -7,7 +7,7 @@ class Node(object):
         self.parent = parent
 
 
-class BinarySearchTree(object):
+class BinarySearchTree:
     """Binary search tree class.
 
     Property:

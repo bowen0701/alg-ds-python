@@ -37,13 +37,13 @@ Constraints:
 """
 
 # Definition for a Node.
-class Node(object):
+class Node:
     def __init__(self, val=None, next=None):
         self.val = val
         self.next = next
 
 
-class SolutionTwoPointersIter(object):
+class SolutionTwoPointersIter:
     def insert(self, head, insertVal):
         """
         :type head: Node

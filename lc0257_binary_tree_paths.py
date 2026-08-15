@@ -19,14 +19,14 @@ Explanation: All root-to-leaf paths are: 1->2->5, 1->3
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
 
-class SolutionDFS(object):
+class SolutionDFS:
     def _dfs(self, root, cur_path, paths):
         # Concat root's value.
         cur_path += str(root.val)

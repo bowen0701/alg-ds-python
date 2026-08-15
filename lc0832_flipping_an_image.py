@@ -56,7 +56,7 @@ Notes:
 from typing import List
 
 
-class Solution(object):
+class Solution:
     def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
         """
         Time complexity: O(rc), where r, c is the number of rows, cols, respectively

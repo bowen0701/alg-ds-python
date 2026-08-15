@@ -30,7 +30,7 @@ Output: 2
 from typing import List
 
 
-class Solution(object):
+class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         """Unique paths with obstacles.
 

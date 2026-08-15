@@ -42,7 +42,7 @@ randomSet = randomSet.remove(val)
 randomSet = randomSet.getRandom()
 """
 
-class RandomizedSetNumsAndNumPosDict(object):
+class RandomizedSetNumsAndNumPosDict:
 
     def __init__(self):
         """

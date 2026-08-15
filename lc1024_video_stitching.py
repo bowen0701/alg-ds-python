@@ -53,7 +53,7 @@ Note:
 """
 
 
-class SolutionSortStartDPGreedy(object):
+class SolutionSortStartDPGreedy:
     def videoStitching(self, clips, T):
         """
         :type clips: List[List[int]]
@@ -82,7 +82,7 @@ class SolutionSortStartDPGreedy(object):
             return dp[T]
 
 
-class SolutionDPGreedy(object):
+class SolutionDPGreedy:
     def videoStitching(self, clips, T):
         """
         :type clips: List[List[int]]
@@ -111,7 +111,7 @@ class SolutionDPGreedy(object):
             return dp[T]
 
 
-class SolutionSortStartBFSGreedy(object):
+class SolutionSortStartBFSGreedy:
     def videoStitching(self, clips, T):
         """
         :type clips: List[List[int]]

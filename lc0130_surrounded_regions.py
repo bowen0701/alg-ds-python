@@ -31,7 +31,7 @@ Two cells are connected if they are adjacent cells connected
 horizontally or vertically.
 """
 
-class SolutionDFSRecur(object):
+class SolutionDFSRecur:
     def _dfsRecur(self, r, c, board):
         # Skip the boards and land 'X'.
         if (r <= 0 or r >= len(board) - 1 or

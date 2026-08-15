@@ -21,7 +21,7 @@ You can assume that you can always reach the last index.
 """
 
 
-class SolutionDPGreedy(object):
+class SolutionDPGreedy:
     def jump(self, nums):
         """
         :type nums: List[int]
@@ -47,7 +47,7 @@ class SolutionDPGreedy(object):
         return T[-1]
 
 
-class SolutionBFSPrevReachGreedy(object):
+class SolutionBFSPrevReachGreedy:
     def jump(self, nums):
         """
         :type nums: List[int]
@@ -78,7 +78,7 @@ class SolutionBFSPrevReachGreedy(object):
         return n_jumps
 
 
-class SolutionBFSCurReachGreedy(object):
+class SolutionBFSCurReachGreedy:
     def jump(self, nums):
         """
         :type nums: List[int]

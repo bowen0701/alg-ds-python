@@ -16,7 +16,7 @@ Output: 0
 """
 
 
-class SolutionBruteForce(object):
+class SolutionBruteForce:
     def rangeBitwiseAnd(self, m, n):
         """
         :type m: int
@@ -39,7 +39,7 @@ class SolutionBruteForce(object):
         return result
 
 
-class SolutionCommonPrefixBit(object):
+class SolutionCommonPrefixBit:
     def rangeBitwiseAnd(self, m, n):
         """
         :type m: int

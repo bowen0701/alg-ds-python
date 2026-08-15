@@ -22,7 +22,7 @@ Note:
 You may assume that all words are consist of lowercase letters a-z.
 """
 
-class CharNode(object):
+class CharNode:
     def __init__(self):
         from collections import defaultdict
 
@@ -31,7 +31,7 @@ class CharNode(object):
         self.is_end = False
 
 
-class WordDictionaryTrie(object):
+class WordDictionaryTrie:
 
     def __init__(self):
         """

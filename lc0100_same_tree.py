@@ -41,7 +41,7 @@ class TreeNode:
         self.right = right
 
 
-class SolutionPreorderRecur(object):
+class SolutionPreorderRecur:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         """
         Time complexity: O(n).
@@ -62,7 +62,7 @@ class SolutionPreorderRecur(object):
                 and self.isSameTree(p.right, q.right))
 
 
-class SolutionPreorderIter(object):
+class SolutionPreorderIter:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         """
         Time complexity: O(n).

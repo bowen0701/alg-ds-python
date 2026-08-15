@@ -26,7 +26,7 @@ Explanation: There are three ways to climb to the top.
 - 3. 2 steps + 1 step
 """
 
-class SolutionIter(object):
+class SolutionIter:
     def climbStairs(self, n: int) -> int:
         """
         Time complexity: O(n).

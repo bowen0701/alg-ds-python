@@ -19,7 +19,7 @@ A solution set is:
 ]
 """
 
-class SolutionSortBinarySearch(object):
+class SolutionSortBinarySearch:
     def threeSum(self, nums):
         """
         :type nums: List[int]

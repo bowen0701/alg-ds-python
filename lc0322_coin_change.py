@@ -22,7 +22,7 @@ Note:
 You may assume that you have an infinite number of each kind of coin.
 """
 
-class SolutionRecur(object):
+class SolutionRecur:
     def coinChange(self, coins, amount):
         """Change fewest #coins by recursion.
 
@@ -53,7 +53,7 @@ class SolutionRecur(object):
             return -1
 
 
-class SolutionMemo(object):
+class SolutionMemo:
     def _coin_change_recur(self, coins, amount, T):
         """Helper function for coin_change_memo()."""
         # Base cases.
@@ -94,7 +94,7 @@ class SolutionMemo(object):
         return self._coin_change_recur(coins, amount, T)
 
 
-class SolutionDP(object):
+class SolutionDP:
     def coinChange(self, coins, amount):
         """Change fewest #coins by bottom-up dynamic programming.
 
@@ -124,7 +124,7 @@ class SolutionDP(object):
             return -1
 
 
-class SolutionDPEarlyStop(object):
+class SolutionDPEarlyStop:
     def coinChange(self, coins, amount):
         """Change fewest #coins by bottom-up dynamic programming.
 

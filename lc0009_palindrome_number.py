@@ -23,7 +23,7 @@ Follow up:
 Coud you solve it without converting the integer to a string?
 """
 
-class SolutionConvertStr(object):
+class SolutionConvertStr:
     def isPalindrome(self, x):
         """
         :type x: int

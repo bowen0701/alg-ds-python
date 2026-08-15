@@ -38,7 +38,7 @@ for (int i = 0; i < len; i++) {
 }
 """
 
-class SolutionTailIter(object):
+class SolutionTailIter:
     def removeDuplicates(self, nums):
         """
         :type nums: List[int]

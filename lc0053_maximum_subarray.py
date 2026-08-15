@@ -15,7 +15,7 @@ If you have figured out the O(n) solution, try coding another solution using
 the divide and conquer approach, which is more subtle.
 """
 
-class SolutionDP(object):
+class SolutionDP:
     def maxSubArray(self, nums):
         """
         :type nums: List[int]
@@ -38,7 +38,7 @@ class SolutionDP(object):
         return max_sum
 
 
-class SolutionIter(object):
+class SolutionIter:
     def maxSubArray(self, nums):
         """
         :type nums: List[int]

@@ -38,14 +38,14 @@ Constraints:
 """
 
 # Definition for a Node.
-class Node(object):
+class Node:
     def __init__(self, val, next, random):
         self.val = val
         self.next = next
         self.random = random
 
 
-class SolutionInsertItself(object):
+class SolutionInsertItself:
     def copyRandomList(self, head):
         """
         :type head: Node

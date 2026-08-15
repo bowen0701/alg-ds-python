@@ -13,7 +13,7 @@ Input:  n = 2
 Output: ["11","69","88","96"]
 """
 
-class SolutionInsertMiddleRecur(object):
+class SolutionInsertMiddleRecur:
     def findStrobogrammatic(self, n):
         """
         :type n: int

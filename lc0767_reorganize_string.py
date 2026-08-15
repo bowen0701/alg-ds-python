@@ -20,7 +20,7 @@ Note:
 S will consist of lowercase letters and have length in range [1, 500].
 """
 
-class SolutionCharCountMaxHeap(object):
+class SolutionCharCountMaxHeap:
     def reorganizeString(self, S):
         """
         :type S: str

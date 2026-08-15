@@ -30,7 +30,7 @@ Note:
 - The last four operations won't be called when stack is empty.
 """
 
-class MaxStack(object):
+class MaxStack:
     def __init__(self):
         """
         initialize your data structure here.

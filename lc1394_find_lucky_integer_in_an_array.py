@@ -38,7 +38,7 @@ Constraints:
 """
 
 
-class SolutionDict(object):
+class SolutionDict:
     def findLucky(self, arr):
         """
         :type arr: List[int]

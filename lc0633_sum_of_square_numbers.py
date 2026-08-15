@@ -16,7 +16,7 @@ Input: 3
 Output: False
 """
 
-class SolutionTwoPointers(object):
+class SolutionTwoPointers:
     def judgeSquareSum(self, c):
         """
         :type c: int

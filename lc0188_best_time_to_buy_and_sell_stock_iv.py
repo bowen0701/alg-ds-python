@@ -29,7 +29,7 @@ Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6),
 """
 
 
-class SolutionDP(object):
+class SolutionDP:
     def maxProfit(self, k, prices):
         """
         :type k: int

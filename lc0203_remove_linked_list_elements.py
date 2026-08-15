@@ -11,13 +11,13 @@ Output: 1->2->3->4->5
 """
 
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 
-class SolutionTwoPointersIter(object):
+class SolutionTwoPointersIter:
     def removeElements(self, head, val):
         """
         :type head: ListNode

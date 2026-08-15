@@ -15,7 +15,7 @@ Input: [2,1,5,6,2,3]
 Output: 10
 """
 
-class SolutionIncreasingHeightIdxStack(object):
+class SolutionIncreasingHeightIdxStack:
     def largestRectangleArea(self, heights):
         """
         :type heights: List[int]

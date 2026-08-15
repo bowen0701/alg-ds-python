@@ -27,14 +27,14 @@ Note:
 """
 
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
 
-class SolutionInsertBSTRecur(object):
+class SolutionInsertBSTRecur:
     def _insertBSTRecur(self, val, root):
         new = TreeNode(val)
 
@@ -74,7 +74,7 @@ class SolutionInsertBSTRecur(object):
         return root
 
 
-class SolutionBinarySearchRecur(object):
+class SolutionBinarySearchRecur:
     def _binarySearchRecur(self, left, right):
         import bisect
 

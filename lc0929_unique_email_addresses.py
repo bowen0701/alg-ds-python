@@ -39,7 +39,7 @@ Note:
 - Local names do not start with a '+' character.
 """
 
-class SolutionSplitReplace(object):
+class SolutionSplitReplace:
     def numUniqueEmails(self, emails):
         """
         :type emails: List[str]

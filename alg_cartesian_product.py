@@ -1,6 +1,6 @@
 """Cartesian product."""
 
-class CartesianProduct(object):
+class CartesianProduct:
     def _product_two(self, nums1, nums2):
         two_products = []
 

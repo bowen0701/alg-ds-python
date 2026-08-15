@@ -38,7 +38,7 @@ S contains only uppercase, lowercase and spaces. Exactly one space between each 
 1 <= S.length <= 150.
 """
 
-class SolutionSplitWordList(object):
+class SolutionSplitWordList:
     def toGoatLatin(self, S):
         """
         :type S: str

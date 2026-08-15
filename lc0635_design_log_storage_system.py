@@ -43,7 +43,7 @@ param_2 = obj.retrieve(s, e, gra)
 """
 
 
-class LogSystem(object):
+class LogSystem:
 
     def __init__(self):
         self.logs = []

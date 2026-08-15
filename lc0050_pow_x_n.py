@@ -23,7 +23,7 @@ Note:
 - n is a 32-bit signed integer, within the range [-2^31, 2^31 - 1].
 """
 
-class SolutionBrute(object):
+class SolutionBrute:
     def myPow(self, x, n):
         """
         :type x: float
@@ -49,7 +49,7 @@ class SolutionBrute(object):
         return res
 
 
-class SolutionSelfProductIter(object):
+class SolutionSelfProductIter:
     def myPow(self, x, n):
         """
         :type x: float

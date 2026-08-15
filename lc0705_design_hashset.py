@@ -30,7 +30,7 @@ Note:
 - Please do not use the built-in HashSet library.
 """
 
-class MyHashSet(object):
+class MyHashSet:
 
     def __init__(self):
         """
