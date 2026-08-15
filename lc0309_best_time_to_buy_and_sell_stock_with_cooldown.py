@@ -76,8 +76,8 @@ class SolutionIter(object):
 def main():
     # Output: 3
     prices = [1,2,3,0,2]
-    print SolutionDP().maxProfit(prices)
-    print SolutionIter().maxProfit(prices)
+    print(SolutionDP().maxProfit(prices))
+    print(SolutionIter().maxProfit(prices))
 
 
 if __name__ == '__main__':

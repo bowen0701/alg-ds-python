@@ -71,36 +71,36 @@ def main():
     k = 2
 
     start_time = time.time()
-    print 'Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Output: 3
     nums =  [10, 2, -2, -20, 10]
     k = -10
 
     start_time = time.time()
-    print 'Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Output: 0
     nums = [1]
     k = 0
 
     start_time = time.time()
-    print 'Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Brute force: {}'.format(SolutionBruteForce().subarraySum(nums, k)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Cusum count dict: {}'.format(SolutionCusumCountDict().subarraySum(nums, k)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

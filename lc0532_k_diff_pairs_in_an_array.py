@@ -76,17 +76,17 @@ def main():
     # Output: 2
     nums = [3, 1, 4, 1, 5]
     k = 2
-    print SolutionNumCountDict().findPairs(nums, k)
+    print(SolutionNumCountDict().findPairs(nums, k))
 
     # Output: 4
     nums = [1, 2, 3, 4, 5]
     k = 1
-    print SolutionNumCountDict().findPairs(nums, k)
+    print(SolutionNumCountDict().findPairs(nums, k))
 
     # Output: 1
     nums = [1, 3, 1, 5, 4]
     k = 0
-    print SolutionNumCountDict().findPairs(nums, k)
+    print(SolutionNumCountDict().findPairs(nums, k))
 
 
 if __name__ == '__main__':

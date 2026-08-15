@@ -84,7 +84,7 @@ def main():
       [1,1,1]
     ]
     n = len(graph)
-    print SolutionIter().findCelebrity(n)
+    print(SolutionIter().findCelebrity(n))
     
     # Output: -1.
     graph = [
@@ -93,7 +93,7 @@ def main():
       [0,1,1]
     ]
     n = len(graph)
-    print SolutionIter().findCelebrity(n)
+    print(SolutionIter().findCelebrity(n))
 
 
 if __name__ == '__main__':

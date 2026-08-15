@@ -53,23 +53,23 @@ class SolutionRemStack(object):
 def main():
     # Output: "A"
     n = 1
-    print SolutionRemStack().convertToTitle(n)
+    print(SolutionRemStack().convertToTitle(n))
 
     # Output: "AB"
     n = 28
-    print SolutionRemStack().convertToTitle(n)
+    print(SolutionRemStack().convertToTitle(n))
 
     # Output: "ZY"
     n = 701
-    print SolutionRemStack().convertToTitle(n)
+    print(SolutionRemStack().convertToTitle(n))
 
     # Output: "Z"
     n = 26
-    print SolutionRemStack().convertToTitle(n)
+    print(SolutionRemStack().convertToTitle(n))
 
     # Output: "AZ"
     n = 52
-    print SolutionRemStack().convertToTitle(n)
+    print(SolutionRemStack().convertToTitle(n))
 
 
 if __name__ == '__main__':

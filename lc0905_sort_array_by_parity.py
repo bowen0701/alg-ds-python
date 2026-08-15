@@ -66,8 +66,8 @@ class SolutionEvenPointer(object):
 def main():
     # Output:  [2,4,3,1]
     A =  [3,1,2,4]
-    print SolutionTwoArrays().sortArrayByParity(A)
-    print SolutionEvenPointer().sortArrayByParity(A)
+    print(SolutionTwoArrays().sortArrayByParity(A))
+    print(SolutionEvenPointer().sortArrayByParity(A))
 
 
 if __name__ == '__main__':

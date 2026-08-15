@@ -38,15 +38,15 @@ class SolutionIter(object):
 def main():
     # Output: True
     n = 1
-    print SolutionIter().isPowerOfTwo(n)
+    print(SolutionIter().isPowerOfTwo(n))
 
     # Output: True
     n = 16
-    print SolutionIter().isPowerOfTwo(n)
+    print(SolutionIter().isPowerOfTwo(n))
 
     # Output: False
     n = 218
-    print SolutionIter().isPowerOfTwo(n)
+    print(SolutionIter().isPowerOfTwo(n))
 
 
 if __name__ == '__main__':

@@ -40,11 +40,11 @@ class Solution(object):
 def main():
     # Ans: 0
     n = 3
-    print Solution().trailingZeroes(n)
+    print(Solution().trailingZeroes(n))
 
     # Ans: 6
     n = 25
-    print Solution().trailingZeroes(n)
+    print(Solution().trailingZeroes(n))
 
 
 

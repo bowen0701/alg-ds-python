@@ -98,13 +98,13 @@ def main():
 
     # Output: 2
     val = 2
-    print SolutionRecur().searchBST(root, val).val
-    print SolutionIter().searchBST(root, val).val
+    print(SolutionRecur().searchBST(root, val).val)
+    print(SolutionIter().searchBST(root, val).val)
 
     # Output: None
     val = 5
-    print SolutionRecur().searchBST(root, val)
-    print SolutionIter().searchBST(root, val)
+    print(SolutionRecur().searchBST(root, val))
+    print(SolutionIter().searchBST(root, val))
 
 
 if __name__ == '__main__':

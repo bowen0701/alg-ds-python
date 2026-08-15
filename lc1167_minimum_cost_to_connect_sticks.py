@@ -76,19 +76,19 @@ class SolutionMinHeap(object):
 def main():
     # Ans: 58
     ropes = [8, 4, 6, 12]
-    print SolutionMinHeap().connectSticks(ropes)
+    print(SolutionMinHeap().connectSticks(ropes))
 
     # Ans: 54
     ropes = [20, 4, 8, 2]
-    print SolutionMinHeap().connectSticks(ropes)
+    print(SolutionMinHeap().connectSticks(ropes))
 
     # Ans: 224
     ropes = [1, 2, 5, 10, 35, 89]
-    print SolutionMinHeap().connectSticks(ropes)
+    print(SolutionMinHeap().connectSticks(ropes))
 
     # AnsL 20
     ropes = [2, 2, 3, 3]
-    print SolutionMinHeap().connectSticks(ropes)
+    print(SolutionMinHeap().connectSticks(ropes))
 
 
 if __name__ == '__main__':

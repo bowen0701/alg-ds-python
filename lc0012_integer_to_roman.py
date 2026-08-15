@@ -79,23 +79,23 @@ class SolutionIntRomanList(object):
 def main():
     # Output: "III"
     num = 3
-    print SolutionIntRomanList().intToRoman(num)
+    print(SolutionIntRomanList().intToRoman(num))
 
     # Output: "IV"
     num = 4
-    print SolutionIntRomanList().intToRoman(num)
+    print(SolutionIntRomanList().intToRoman(num))
 
     # Output: "IX"
     num = 9
-    print SolutionIntRomanList().intToRoman(num)
+    print(SolutionIntRomanList().intToRoman(num))
 
     # Output: "LVIII"
     num = 58
-    print SolutionIntRomanList().intToRoman(num)
+    print(SolutionIntRomanList().intToRoman(num))
 
     # Output: "MCMXCIV"
     num = 1994
-    print SolutionIntRomanList().intToRoman(num)
+    print(SolutionIntRomanList().intToRoman(num))
 
 
 if __name__ == '__main__':

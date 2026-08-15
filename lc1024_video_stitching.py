@@ -151,31 +151,31 @@ def main():
     # Output: 3
     clips = [[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]]
     T = 10
-    print SolutionSortStartDPGreedy().videoStitching(clips, T)
-    print SolutionDPGreedy().videoStitching(clips, T)
-    print SolutionSortStartBFSGreedy().videoStitching(clips, T)
+    print(SolutionSortStartDPGreedy().videoStitching(clips, T))
+    print(SolutionDPGreedy().videoStitching(clips, T))
+    print(SolutionSortStartBFSGreedy().videoStitching(clips, T))
 
     # # Output: -1
     clips = [[0,1],[1,2]]
     T = 5
-    print SolutionSortStartDPGreedy().videoStitching(clips, T)
-    print SolutionDPGreedy().videoStitching(clips, T)
-    print SolutionSortStartBFSGreedy().videoStitching(clips, T)
+    print(SolutionSortStartDPGreedy().videoStitching(clips, T))
+    print(SolutionDPGreedy().videoStitching(clips, T))
+    print(SolutionSortStartBFSGreedy().videoStitching(clips, T))
 
     # Output: 3
     clips = [[0,1],[6,8],[0,2],[5,6],[0,4],[0,3],[6,7],[1,3],
              [4,7],[1,4],[2,5],[2,6],[3,4],[4,5],[5,7],[6,9]]
     T = 9
-    print SolutionSortStartDPGreedy().videoStitching(clips, T)
-    print SolutionDPGreedy().videoStitching(clips, T)
-    print SolutionSortStartBFSGreedy().videoStitching(clips, T)
+    print(SolutionSortStartDPGreedy().videoStitching(clips, T))
+    print(SolutionDPGreedy().videoStitching(clips, T))
+    print(SolutionSortStartBFSGreedy().videoStitching(clips, T))
 
     # Output: 2
     clips = [[0,4],[2,8]]
     T = 5
-    print SolutionSortStartDPGreedy().videoStitching(clips, T)
-    print SolutionDPGreedy().videoStitching(clips, T)
-    print SolutionSortStartBFSGreedy().videoStitching(clips, T)
+    print(SolutionSortStartDPGreedy().videoStitching(clips, T))
+    print(SolutionDPGreedy().videoStitching(clips, T))
+    print(SolutionSortStartBFSGreedy().videoStitching(clips, T))
 
 
 if __name__ == '__main__':

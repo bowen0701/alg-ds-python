@@ -121,19 +121,19 @@ def main():
 
     start_time = time.time()
     root = SolutionInsertBSTRecur().bstFromPreorder(preorder)
-    print [root.val, 
+    print([root.val, 
            root.left.val, root.right.val,
            root.left.left.val, root.left.right.val,
-           root.right.left, root.right.right.val]
-    print 'Time for SolutionInsertBSTRecur: {}'.format(time.time() - start_time)
+           root.right.left, root.right.right.val])
+    print('Time for SolutionInsertBSTRecur: {}'.format(time.time() - start_time))
 
     start_time = time.time()
     root = SolutionBinarySearchRecur().bstFromPreorder(preorder)
-    print [root.val, 
+    print([root.val, 
            root.left.val, root.right.val,
            root.left.left.val, root.left.right.val,
-           root.right.left, root.right.right.val]
-    print 'Time for SolutionBinarySearchRecur: {}'.format(time.time() - start_time)
+           root.right.left, root.right.right.val])
+    print('Time for SolutionBinarySearchRecur: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

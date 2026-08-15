@@ -73,12 +73,12 @@ def main():
     nums = [1, 2, 3]
     
     start_time = time.time()
-    print 'Backtracking:', SolutionBacktrack().subsets(nums)
-    print 'Time:', time.time() - start_time
+    print('Backtracking:', SolutionBacktrack().subsets(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'BFS:', SolutionBFS().subsets(nums)
-    print 'Time:', time.time() - start_time
+    print('BFS:', SolutionBFS().subsets(nums))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':

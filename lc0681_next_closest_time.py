@@ -56,11 +56,11 @@ class SolutionMinutesToFullDayMinutes(object):
 def main():
     # Output: "19:39"
     time = "19:34"
-    print SolutionMinutesToFullDayMinutes().nextClosestTime(time)
+    print(SolutionMinutesToFullDayMinutes().nextClosestTime(time))
 
     # Output: "22:22"
     time = "23:59"
-    print SolutionMinutesToFullDayMinutes().nextClosestTime(time)
+    print(SolutionMinutesToFullDayMinutes().nextClosestTime(time))
 
 
 if __name__ == '__main__':

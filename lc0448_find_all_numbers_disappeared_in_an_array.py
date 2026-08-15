@@ -67,8 +67,8 @@ class SolutionMarkIdxNumNeg(object):
 def main():
     # Output: [5,6]
     nums = [4,3,2,7,8,2,3,1]
-    print SolutionDistinctNumsSet().findDisappearedNumbers(nums)
-    print SolutionMarkIdxNumNeg().findDisappearedNumbers(nums)
+    print(SolutionDistinctNumsSet().findDisappearedNumbers(nums))
+    print(SolutionMarkIdxNumNeg().findDisappearedNumbers(nums))
 
 
 if __name__ == '__main__':

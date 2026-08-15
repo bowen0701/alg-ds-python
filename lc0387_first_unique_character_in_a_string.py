@@ -52,15 +52,15 @@ class SolutionDict(object):
 def main():
     # Ans: 0
     s = 'leetcode'
-    print SolutionDict().firstUniqChar(s)
+    print(SolutionDict().firstUniqChar(s))
 
     # Ans: 2
     s = 'loveleetcode'
-    print SolutionDict().firstUniqChar(s)
+    print(SolutionDict().firstUniqChar(s))
 
     # Ans: -1
     s = 'aabbccdd'
-    print SolutionDict().firstUniqChar(s)
+    print(SolutionDict().firstUniqChar(s))
 
 
 if __name__ == '__main__':

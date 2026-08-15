@@ -58,17 +58,17 @@ def main():
     # 1,2,3 -> 1,3,2
     nums = [1,2,3]
     SolutionDecreasingPivotSwapBiggerReverseRight().nextPermutation(nums)
-    print nums
+    print(nums)
 
     # 3,2,1 -> 1,2,3
     nums = [3,2,1]
     SolutionDecreasingPivotSwapBiggerReverseRight().nextPermutation(nums)
-    print nums
+    print(nums)
 
     # 1,1,5 -> 1,5,1
     nums = [1,1,5]
     SolutionDecreasingPivotSwapBiggerReverseRight().nextPermutation(nums)
-    print nums
+    print(nums)
 
 
 if __name__ == '__main__':

@@ -68,12 +68,12 @@ def main():
     # Ans: [1, 1, 4, 2, 1, 1, 0, 0]
   
     start_time = time.time()
-    print 'By brute force: {}'.format(SolutionBrute().dailyTemperatures(T))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By brute force: {}'.format(SolutionBrute().dailyTemperatures(T)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By stack: {}'.format(SolutionStack().dailyTemperatures(T))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By stack: {}'.format(SolutionStack().dailyTemperatures(T)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

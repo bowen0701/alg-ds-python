@@ -149,17 +149,17 @@ class SolutionIter(object):
 def main():
     # Output: 4.
     nums = [1,2,3,1]
-    print SolutionRecur().rob(nums)
-    print SolutionMemo().rob(nums)
-    print SolutionDP().rob(nums)
-    print SolutionIter().rob(nums)
+    print(SolutionRecur().rob(nums))
+    print(SolutionMemo().rob(nums))
+    print(SolutionDP().rob(nums))
+    print(SolutionIter().rob(nums))
 
     # Outpyt: 12.
     nums = [2,7,9,3,1]
-    print SolutionRecur().rob(nums) 
-    print SolutionMemo().rob(nums)
-    print SolutionDP().rob(nums)
-    print SolutionIter().rob(nums)
+    print(SolutionRecur().rob(nums)) 
+    print(SolutionMemo().rob(nums))
+    print(SolutionDP().rob(nums))
+    print(SolutionIter().rob(nums))
 
 
 if __name__ == '__main__':

@@ -83,10 +83,10 @@ def main():
     logsys.put(3, "2016:01:01:00:00:00")
 
     # Output: [1, 2, 3]
-    print logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Year")
+    print(logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Year"))
 
     # Output: [1, 2]
-    print logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Hour")
+    print(logsys.retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Hour"))
 
 
 if __name__ == '__main__':

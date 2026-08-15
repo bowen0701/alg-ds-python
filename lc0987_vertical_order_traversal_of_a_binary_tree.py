@@ -105,7 +105,7 @@ def main():
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
-    print SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root)
+    print(SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root))
 
     # Input: [1,2,3,4,5,6,7]
     # Output: [[4],[2],[1,5,6],[3],[7]]
@@ -116,7 +116,7 @@ def main():
     root.left.right = TreeNode(5)
     root.right.left = TreeNode(6)
     root.right.right = TreeNode(7)
-    print SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root)
+    print(SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root))
 
     # Input: [0,2,1,3,null,null,null,4,5,null,7,6,null,10,8,11,9]
     # Output: [[4,10,11],[3,6,7],[2,5,8,9],[0],[1]]
@@ -135,7 +135,7 @@ def main():
     root.left.left.left.right.right = TreeNode(8)
     root.left.left.right.left.left = TreeNode(11)
     root.left.left.right.left.right = TreeNode(9)
-    print SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root)
+    print(SolutionOrderValsDictSortedLevelOrderValsDict().verticalTraversal(root))
 
 
 if __name__ == '__main__':

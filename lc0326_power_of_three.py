@@ -67,23 +67,23 @@ class SolutionLog10(object):
 def main():
     # Output: True
     n = 27
-    print SolutionWhile().isPowerOfThree(n)
-    print SolutionLog10().isPowerOfThree(n)
+    print(SolutionWhile().isPowerOfThree(n))
+    print(SolutionLog10().isPowerOfThree(n))
 
     # Output: False
     n = 0
-    print SolutionWhile().isPowerOfThree(n)
-    print SolutionLog10().isPowerOfThree(n)
+    print(SolutionWhile().isPowerOfThree(n))
+    print(SolutionLog10().isPowerOfThree(n))
 
     # Output: True
     n = 9
-    print SolutionWhile().isPowerOfThree(n)
-    print SolutionLog10().isPowerOfThree(n)
+    print(SolutionWhile().isPowerOfThree(n))
+    print(SolutionLog10().isPowerOfThree(n))
 
     # Output: False
     n = 45
-    print SolutionWhile().isPowerOfThree(n)
-    print SolutionLog10().isPowerOfThree(n)
+    print(SolutionWhile().isPowerOfThree(n))
+    print(SolutionLog10().isPowerOfThree(n))
 
 
 if __name__ == '__main__':

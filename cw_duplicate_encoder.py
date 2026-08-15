@@ -50,19 +50,19 @@ def duplicate_encode(word):
 def main():
     # "din"      =>  "((("
     word = "din"
-    print duplicate_encode(word)
+    print(duplicate_encode(word))
 
     # "recede"   =>  "()()()"
     word = "recede"
-    print duplicate_encode(word)
+    print(duplicate_encode(word))
 
     # "Success"  =>  ")())())"
     word = "Success"
-    print duplicate_encode(word)
+    print(duplicate_encode(word))
 
     # "(( @"     =>  "))((" 
     word = "(( @"
-    print duplicate_encode(word)
+    print(duplicate_encode(word))
 
 
 if __name__ == '__main__':

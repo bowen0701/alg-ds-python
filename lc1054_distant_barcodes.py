@@ -105,13 +105,13 @@ class SolutionDictMost(object):
 def main():
     # Output: [2,1,2,1,2,1]
     barcodes = [1,1,1,2,2,2]
-    print 'By dict+sort', SolutionDictSort().rearrangeBarcodes(barcodes)
-    print 'By dict+most', SolutionDictMost().rearrangeBarcodes(barcodes)
+    print('By dict+sort', SolutionDictSort().rearrangeBarcodes(barcodes))
+    print('By dict+most', SolutionDictMost().rearrangeBarcodes(barcodes))
 
     # Output: [1,3,1,3,2,1,2,1]
     barcodes = [1,1,1,1,2,2,3,3]
-    print 'By dict+sort', SolutionDictSort().rearrangeBarcodes(barcodes)
-    print 'By dict+most', SolutionDictMost().rearrangeBarcodes(barcodes)
+    print('By dict+sort', SolutionDictSort().rearrangeBarcodes(barcodes))
+    print('By dict+most', SolutionDictMost().rearrangeBarcodes(barcodes))
 
 
 if __name__ == '__main__':

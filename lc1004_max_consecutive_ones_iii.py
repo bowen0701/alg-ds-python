@@ -65,12 +65,12 @@ def main():
     # Output: 6
     A = [1,1,1,0,0,0,1,1,1,1,0]
     K = 2
-    print SolutionSlidingWindowMaxKZerosSubarray().longestOnes(A, K)
+    print(SolutionSlidingWindowMaxKZerosSubarray().longestOnes(A, K))
 
     # Output: 10
     A = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1]
     K = 3
-    print SolutionSlidingWindowMaxKZerosSubarray().longestOnes(A, K)
+    print(SolutionSlidingWindowMaxKZerosSubarray().longestOnes(A, K))
 
 
 if __name__ == '__main__':

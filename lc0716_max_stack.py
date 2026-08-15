@@ -119,22 +119,22 @@ def main():
     max_stack.push(5)
 
     # Output: 5
-    print max_stack.top()
+    print(max_stack.top())
 
     # Output: 5
-    print max_stack.popMax()
+    print(max_stack.popMax())
 
     # Output: 1
-    print max_stack.top()
+    print(max_stack.top())
 
     # Output: 5
-    print max_stack.peekMax()
+    print(max_stack.peekMax())
 
     # Output: 1
-    print max_stack.pop()
+    print(max_stack.pop())
 
     # Output: 5
-    print max_stack.top()
+    print(max_stack.top())
 
 
 if __name__ == '__main__':

@@ -43,7 +43,7 @@ class SolutionBinarySearch(object):
 def main():
     # Output: [1, 2]
     numbers, target = [2,7,11,15], 9
-    print SolutionBinarySearch().twoSum(numbers, target)
+    print(SolutionBinarySearch().twoSum(numbers, target))
 
 
 if __name__ == '__main__':

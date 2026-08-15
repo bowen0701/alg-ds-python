@@ -45,15 +45,15 @@ def main():
 
     # Ans: "blue is sky the".
     s = 'the sky is blue'
-    print Solution().reverseWords(s)
+    print(Solution().reverseWords(s))
 
     # Ans: "world! hello".
     s = '  hello world!  '
-    print Solution().reverseWords(s)
+    print(Solution().reverseWords(s))
 
     # Ans: "example good a".
     s = 'a good   example'
-    print Solution().reverseWords(s)
+    print(Solution().reverseWords(s))
 
 
 if __name__ == '__main__':

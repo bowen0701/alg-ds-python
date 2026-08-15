@@ -47,11 +47,11 @@ class SolutionSet(object):
 def main():
     # Output: "ltcdscmmntyfrcdrs"
     S = 'leetcodeisacommunityforcoders'
-    print SolutionSet().removeVowels(S)
+    print(SolutionSet().removeVowels(S))
 
     # Output: ""
     S = 'aeiou'
-    print SolutionSet().removeVowels(S)
+    print(SolutionSet().removeVowels(S))
 
 
 if __name__ == '__main__':

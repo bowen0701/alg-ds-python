@@ -60,8 +60,8 @@ class SolutionDigitRoot(object):
 
 def main():
     num = 38
-    print SolutionIter().addDigits(num)
-    print SolutionDigitRoot().addDigits(num)
+    print(SolutionIter().addDigits(num))
+    print(SolutionDigitRoot().addDigits(num))
 
 
 if __name__ == '__main__':

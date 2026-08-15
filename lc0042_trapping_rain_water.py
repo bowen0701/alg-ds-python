@@ -56,7 +56,7 @@ class SolutionTwoPointersLeftmaxRightmaxHeights(object):
 
 def main():
     height = [0,1,0,2,1,0,1,3,2,1,2,1]
-    print SolutionTwoPointersLeftmaxRightmaxHeights().trap(height)
+    print(SolutionTwoPointersLeftmaxRightmaxHeights().trap(height))
 
 
 if __name__ == '__main__':

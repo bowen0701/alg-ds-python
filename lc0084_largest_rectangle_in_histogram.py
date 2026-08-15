@@ -53,8 +53,8 @@ class SolutionIncreasingHeightIdxStack(object):
 def main():
     # Output: 10 = 5 * 2.
     heights = [2,1,5,6,2,3]
-    print heights
-    print SolutionIncreasingHeightIdxStack().largestRectangleArea(heights)
+    print(heights)
+    print(SolutionIncreasingHeightIdxStack().largestRectangleArea(heights))
 
 
 if __name__ == '__main__':

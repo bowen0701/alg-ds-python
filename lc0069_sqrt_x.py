@@ -57,16 +57,16 @@ class SolutionBinarySearch(object):
 
 def main():
 	x = 4
-	print SolutionBinarySearch().mySqrt(x)
+	print(SolutionBinarySearch().mySqrt(x))
 
 	x = 8
-	print SolutionBinarySearch().mySqrt(x)
+	print(SolutionBinarySearch().mySqrt(x))
 
 	x = 100
-	print SolutionBinarySearch().mySqrt(x)
+	print(SolutionBinarySearch().mySqrt(x))
 
 	x = 102
-	print SolutionBinarySearch().mySqrt(x)
+	print(SolutionBinarySearch().mySqrt(x))
 
 
 if __name__ == '__main__':

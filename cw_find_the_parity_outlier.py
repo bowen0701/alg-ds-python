@@ -60,15 +60,15 @@ def find_outlier(integers):
 def main():
     # Output: 11.
     integers = [2, 4, 0, 100, 4, 11, 2602, 36]
-    print find_outlier(integers)
+    print(find_outlier(integers))
 
     # Output: 160
     integers = [160, 3, 1719, 19, 11, 13, -21]
-    print find_outlier(integers)
+    print(find_outlier(integers))
 
     # Output: 2175970
     integers = [-7647303, -2670293, 9861423, -8134069, 9044429, -6477399, -7649341, 7689623, 6303953, 1239087, 5674661, 6572153, 2175970, -2144529, 7551097, -7069623, -4450133, 7611367, 632637, -1456711, 7081059, 7833561, -7208763, 8089047, 6067831, -231225]
-    print find_outlier(integers)
+    print(find_outlier(integers))
 
 
 if __name__ == '__main__':

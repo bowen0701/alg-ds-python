@@ -111,7 +111,7 @@ def main():
     bst_recur = SolutionRecur().insertIntoBST(bst_recur, 7)
     bst_recur = SolutionRecur().insertIntoBST(bst_recur, 1)
     bst_recur = SolutionRecur().insertIntoBST(bst_recur, 3)
-    print (bst_recur.val,
+    print(bst_recur.val,
            bst_recur.left.val, bst_recur.right.val,
            bst_recur.left.left.val, bst_recur.left.right.val)
 
@@ -120,7 +120,7 @@ def main():
     bst_iter = SolutionIter().insertIntoBST(bst_iter, 7)
     bst_iter = SolutionIter().insertIntoBST(bst_iter, 1)
     bst_iter = SolutionIter().insertIntoBST(bst_iter, 3)
-    print (bst_iter.val,
+    print(bst_iter.val,
            bst_iter.left.val, bst_iter.right.val,
            bst_iter.left.left.val, bst_iter.left.right.val)
 
@@ -133,10 +133,10 @@ def main():
     1   3 5
     """
     bst_recur = SolutionIter().insertIntoBST(bst_recur, 5)
-    print bst_recur.right.left.val
+    print(bst_recur.right.left.val)
 
     bst_iter = SolutionIter().insertIntoBST(bst_iter, 5)
-    print bst_iter.right.left.val
+    print(bst_iter.right.left.val)
 
 
 if __name__ == '__main__':

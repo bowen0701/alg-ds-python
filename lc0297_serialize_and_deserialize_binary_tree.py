@@ -114,19 +114,19 @@ def main():
 
     codec = CodecHashtagEmptyNodePreorderRecurValueQueue()
     data = codec.serialize(root)
-    print data
+    print(data)
     deserialized_root = codec.deserialize(data)
-    print deserialized_root.val                # 1
-    print deserialized_root.left.val           # 2
-    print deserialized_root.left.left          # None
-    print deserialized_root.left.right         # None
-    print deserialized_root.right.val          # 3
-    print deserialized_root.right.left.val     # 4
-    print deserialized_root.right.right.val    # 5
-    print deserialized_root.right.left.left    # None
-    print deserialized_root.right.left.right   # None
-    print deserialized_root.right.right.left   # None
-    print deserialized_root.right.right.right  # None
+    print(deserialized_root.val)                # 1
+    print(deserialized_root.left.val)           # 2
+    print(deserialized_root.left.left)          # None
+    print(deserialized_root.left.right)         # None
+    print(deserialized_root.right.val)          # 3
+    print(deserialized_root.right.left.val)     # 4
+    print(deserialized_root.right.right.val)    # 5
+    print(deserialized_root.right.left.left)    # None
+    print(deserialized_root.right.left.right)   # None
+    print(deserialized_root.right.right.left)   # None
+    print(deserialized_root.right.right.right)  # None
 
 
 if __name__ == '__main__':

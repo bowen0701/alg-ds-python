@@ -73,7 +73,7 @@ def main():
 
     # Output: ""
     S = "aaab"
-    print SolutionCharCountMaxHeap().reorganizeString(S)
+    print(SolutionCharCountMaxHeap().reorganizeString(S))
 
 
 if __name__ == '__main__':

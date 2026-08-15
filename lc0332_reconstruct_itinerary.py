@@ -119,34 +119,34 @@ def main():
     tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
 
     start_time = time.time()
-    print 'By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets)))
+    print('Time: {}'.format(time.time() - start_time))
     
     start_time = time.time()
-    print 'By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Output: ["JFK", "ATL", "JFK", "SFO", "ATL", "SFO"]
     tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
 
     start_time = time.time()
-    print 'By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets)))
+    print('Time: {}'.format(time.time() - start_time))
     
     start_time = time.time()
-    print 'By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Output: ["JFK","NRT","JFK","KUL"]
     tickets = [["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]
 
     start_time = time.time()
-    print 'By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DFS recur: {}'.format(SolutionDfsRecur().findItinerary(tickets)))
+    print('Time: {}'.format(time.time() - start_time))
     
     start_time = time.time()
-    print 'By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DFS iter: {}'.format(SolutionDfsIter().findItinerary(tickets)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

@@ -58,7 +58,7 @@ class Solution(object):
 
 def main():
     n = 15
-    print Solution().fizzBuzz(n)
+    print(Solution().fizzBuzz(n))
 
 
 if __name__ == '__main__':

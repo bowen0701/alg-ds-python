@@ -63,8 +63,8 @@ class SolutionNumPosDictRandomSample(object):
 def main():
     nums = [1,2,3,3,3]
     obj = SolutionNumPosDictRandomSample(nums)
-    print obj.pick(3)
-    print obj.pick(1)
+    print(obj.pick(3))
+    print(obj.pick(1))
 
 
 if __name__ == '__main__':

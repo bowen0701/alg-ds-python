@@ -53,14 +53,14 @@ class SolutionSortComparator(object):
 def main():
     # Output: "210"
     nums = [10,2]
-    print SolutionSortComparator().largestNumber(nums)
+    print(SolutionSortComparator().largestNumber(nums))
 
     # Output: "9534330"
     nums = [3,30,34,5,9]
-    print SolutionSortComparator().largestNumber(nums)
+    print(SolutionSortComparator().largestNumber(nums))
 
     nums = [0,0]
-    print SolutionSortComparator().largestNumber(nums)    
+    print(SolutionSortComparator().largestNumber(nums))    
 
 
 if __name__ == '__main__':

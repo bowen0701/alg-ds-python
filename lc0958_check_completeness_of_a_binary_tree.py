@@ -71,7 +71,7 @@ def main():
     root.left.left = TreeNode(4)
     root.left.right = TreeNode(5)
     root.right.left = TreeNode(6)
-    print SolutionLevelorderOneByOneIter().isCompleteTree(root)
+    print(SolutionLevelorderOneByOneIter().isCompleteTree(root))
 
     # Input: [1,2,3,4,5,null,7]
     # Output: false
@@ -81,7 +81,7 @@ def main():
     root.left.left = TreeNode(4)
     root.left.right = TreeNode(5)
     root.right.right = TreeNode(7)
-    print SolutionLevelorderOneByOneIter().isCompleteTree(root)
+    print(SolutionLevelorderOneByOneIter().isCompleteTree(root))
 
 
 if __name__ == '__main__':

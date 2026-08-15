@@ -83,7 +83,7 @@ def main():
     root.left.left = TreeNode(6)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
-    print SolutionBFS().levelOrder(root)
+    print(SolutionBFS().levelOrder(root))
 
 
 if __name__ == '__main__':

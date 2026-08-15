@@ -60,7 +60,7 @@ def main():
     #   "++--"
     # ]
     s = '++++'
-    print SolutionCheckCharAndNeighborIter().generatePossibleNextMoves(s)
+    print(SolutionCheckCharAndNeighborIter().generatePossibleNextMoves(s))
 
 
 if __name__ == '__main__':

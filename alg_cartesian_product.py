@@ -35,10 +35,10 @@ class CartesianProduct(object):
 def main():
     nums = [1, 2, 3]
     repeat = 2
-    print CartesianProduct().repeated_product(nums, repeat)
+    print(CartesianProduct().repeated_product(nums, repeat))
 
     nums = [[1, 2, 3], [4, 5]]
-    print CartesianProduct().product(nums)
+    print(CartesianProduct().product(nums))
 
 
 if __name__ == '__main__':

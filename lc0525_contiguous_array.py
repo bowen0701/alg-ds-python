@@ -56,11 +56,11 @@ class SolutionDiffsumIdxDict(object):
 def main():
     # Output: 2
     nums = [0,1]
-    print SolutionDiffsumIdxDict().findMaxLength(nums)
+    print(SolutionDiffsumIdxDict().findMaxLength(nums))
 
     # Output: 2
     nums = [0,1,0]
-    print SolutionDiffsumIdxDict().findMaxLength(nums)
+    print(SolutionDiffsumIdxDict().findMaxLength(nums))
 
 
 if __name__ == '__main__':

@@ -156,7 +156,7 @@ def main():
     # ]
     words = ["This", "is", "an", "example", "of", "text", "justification."]
     maxWidth = 16
-    print Solution().fullJustify(words, maxWidth)
+    print(Solution().fullJustify(words, maxWidth))
 
     # Output:
     # [
@@ -166,7 +166,7 @@ def main():
     # ]
     words = ["What","must","be","acknowledgment","shall","be"]
     maxWidth = 16
-    print Solution().fullJustify(words, maxWidth)
+    print(Solution().fullJustify(words, maxWidth))
 
     # Output:
     # [
@@ -180,7 +180,7 @@ def main():
     words = ["Science","is","what","we","understand","well","enough","to","explain",
              "to","a","computer.","Art","is","everything","else","we","do"]
     maxWidth = 20
-    print Solution().fullJustify(words, maxWidth)
+    print(Solution().fullJustify(words, maxWidth))
 
     # Output: 
     # [
@@ -193,7 +193,7 @@ def main():
     # ]
     words = ["The","important","thing","is","not","to","stop","questioning.","Curiosity","has","its","own","reason","for","existing."]
     maxWidth = 17
-    print Solution().fullJustify(words, maxWidth)
+    print(Solution().fullJustify(words, maxWidth))
 
     # Output:
     # [
@@ -210,7 +210,7 @@ def main():
     #  ]
     words = ["Give","me","my","Romeo;","and,","when","he","shall","die,","Take","him","and","cut","him","out","in","little","stars,","And","he","will","make","the","face","of","heaven","so","fine","That","all","the","world","will","be","in","love","with","night","And","pay","no","worship","to","the","garish","sun."]
     maxWidth = 25
-    print Solution().fullJustify(words, maxWidth)
+    print(Solution().fullJustify(words, maxWidth))
 
 
 if __name__ == '__main__':

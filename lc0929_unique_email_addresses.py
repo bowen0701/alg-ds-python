@@ -72,7 +72,7 @@ def main():
     emails = ["test.email+alex@leetcode.com",
               "test.e.mail+bob.cathy@leetcode.com",
               "testemail+david@lee.tcode.com"]
-    print SolutionSplitReplace().numUniqueEmails(emails)
+    print(SolutionSplitReplace().numUniqueEmails(emails))
 
 
 if __name__ == '__main__':

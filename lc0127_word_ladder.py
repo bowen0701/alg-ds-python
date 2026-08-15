@@ -121,19 +121,19 @@ def main():
     beginWord = "hit"
     endWord = "cog"
     wordList = ["hot","dot","dog","lot","log","cog"]
-    print SolutionBfs().ladderLength(beginWord, endWord, wordList)
+    print(SolutionBfs().ladderLength(beginWord, endWord, wordList))
 
     # Output: 0
     beginWord = "hit"
     endWord = "cog"
     wordList = ["hot","dot","dog","lot","log"]
-    print SolutionBfs().ladderLength(beginWord, endWord, wordList)
+    print(SolutionBfs().ladderLength(beginWord, endWord, wordList))
 
     # Output: 0
     beginWord = "hot"
     endWord = "dog"
     wordList = ["dog"]
-    print SolutionBfs().ladderLength(beginWord, endWord, wordList)
+    print(SolutionBfs().ladderLength(beginWord, endWord, wordList))
 
 
 if __name__ == '__main__':

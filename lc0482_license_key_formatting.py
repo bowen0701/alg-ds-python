@@ -108,14 +108,14 @@ def main():
     # Output: "5F3Z-2E9W"
     S = "5F3Z-2e-9-w"
     K = 4
-    print SolutionReverseIter().licenseKeyFormatting(S, K)
-    print SolutionForwardIterK().licenseKeyFormatting(S, K)
+    print(SolutionReverseIter().licenseKeyFormatting(S, K))
+    print(SolutionForwardIterK().licenseKeyFormatting(S, K))
 
     # Output: "5F3Z-2E9W"
     S = "2-5g-3-J"
     K = 2
-    print SolutionReverseIter().licenseKeyFormatting(S, K)
-    print SolutionForwardIterK().licenseKeyFormatting(S, K)
+    print(SolutionReverseIter().licenseKeyFormatting(S, K))
+    print(SolutionForwardIterK().licenseKeyFormatting(S, K))
 
 
 if __name__ == '__main__':

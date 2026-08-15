@@ -48,7 +48,7 @@ class SolutionRecur(object):
 
 def main():
     n = 3
-    print SolutionRecur().generateParenthesis(n)
+    print(SolutionRecur().generateParenthesis(n))
 
 
 if __name__ == '__main__':

@@ -101,20 +101,20 @@ def main():
     # Output: 2
     A = [2,1,2,4,2,2]
     B = [5,2,6,2,3,2]
-    print SolutionNumCountsCover().minDominoRotations(A, B)
-    print SolutionNumCountsUnion().minDominoRotations(A, B)
+    print(SolutionNumCountsCover().minDominoRotations(A, B))
+    print(SolutionNumCountsUnion().minDominoRotations(A, B))
 
     # Output: -1
     A = [3,5,1,2,3]
     B = [3,6,3,3,4]
-    print SolutionNumCountsCover().minDominoRotations(A, B)
-    print SolutionNumCountsUnion().minDominoRotations(A, B)
+    print(SolutionNumCountsCover().minDominoRotations(A, B))
+    print(SolutionNumCountsUnion().minDominoRotations(A, B))
 
     # Output: 1
     A = [1,5,1,2,3]
     B = [3,3,3,3,4]
-    print SolutionNumCountsCover().minDominoRotations(A, B)
-    print SolutionNumCountsUnion().minDominoRotations(A, B)
+    print(SolutionNumCountsCover().minDominoRotations(A, B))
+    print(SolutionNumCountsUnion().minDominoRotations(A, B))
 
 
 if __name__ == '__main__':

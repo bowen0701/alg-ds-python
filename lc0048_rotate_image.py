@@ -70,7 +70,7 @@ def main():
                [7,8,9]
              ]
     SolutionReverseSwapAlongDiagonal().rotate(matrix)
-    print matrix
+    print(matrix)
 
     matrix = [
                [ 5, 1, 9,11],
@@ -79,7 +79,7 @@ def main():
                [15,14,12,16]
              ]
     SolutionReverseSwapAlongDiagonal().rotate(matrix)
-    print matrix
+    print(matrix)
 
 
 if __name__ == '__main__':

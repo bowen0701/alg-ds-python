@@ -52,11 +52,11 @@ class SolutionIter(object):
 def main():
     # Output: "fl"
     strs = ["flower", "flow", "flight"]
-    print SolutionIter().longestCommonPrefix(strs)
+    print(SolutionIter().longestCommonPrefix(strs))
 
     # Output: ""
     strs = ["dog", "racecar", "car"]
-    print SolutionIter().longestCommonPrefix(strs)
+    print(SolutionIter().longestCommonPrefix(strs))
 
 
 if __name__ == '__main__':

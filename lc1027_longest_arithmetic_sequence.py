@@ -62,15 +62,15 @@ class SolutionPosDiffLenDp(object):
 def main():
     # Output: 4
     A = [3,6,9,12]
-    print SolutionPosDiffCountDp().longestArithSeqLength(A)
+    print(SolutionPosDiffCountDp().longestArithSeqLength(A))
 
     # Output: 3
     A = [9,4,7,2,10]
-    print SolutionPosDiffCountDp().longestArithSeqLength(A)
+    print(SolutionPosDiffCountDp().longestArithSeqLength(A))
 
     # Output: 4
     A = [20,1,15,3,10,5,8]
-    print SolutionPosDiffCountDp().longestArithSeqLength(A)
+    print(SolutionPosDiffCountDp().longestArithSeqLength(A))
 
 
 if __name__ == '__main__':

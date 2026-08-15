@@ -74,12 +74,12 @@ def main():
     # Output: 2
     prices = [2,4,1]
     k = 2
-    print SolutionDP().maxProfit(k, prices)
+    print(SolutionDP().maxProfit(k, prices))
 
     # Output: 7
     prices = [3,2,6,5,0,3]
     k = 2
-    print SolutionDP().maxProfit(k, prices)
+    print(SolutionDP().maxProfit(k, prices))
 
 
 if __name__ == '__main__':

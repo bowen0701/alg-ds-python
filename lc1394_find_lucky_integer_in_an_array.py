@@ -70,23 +70,23 @@ class SolutionDict(object):
 def main():
     # Output: 2
     arr = [2,2,3,4]
-    print SolutionDict().findLucky(arr)
+    print(SolutionDict().findLucky(arr))
 
     # Output: 3
     arr = [1,2,2,3,3,3]
-    print SolutionDict().findLucky(arr)
+    print(SolutionDict().findLucky(arr))
 
     # Output: -1
     arr = [2,2,2,3,3]
-    print SolutionDict().findLucky(arr)
+    print(SolutionDict().findLucky(arr))
     
     # Output: -1
     arr = [5]
-    print SolutionDict().findLucky(arr)
+    print(SolutionDict().findLucky(arr))
     
     # Output: 7
     arr = [7,7,7,7,7,7,7]
-    print SolutionDict().findLucky(arr)
+    print(SolutionDict().findLucky(arr))
 
 
 if __name__ == '__main__':

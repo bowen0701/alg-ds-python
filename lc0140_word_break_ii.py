@@ -111,7 +111,7 @@ def main():
     # ]
     s = "catsanddog"
     wordDict = ["cat", "cats", "and", "sand", "dog"]
-    print SolutionDPBacktrackDFS().wordBreak(s, wordDict)
+    print(SolutionDPBacktrackDFS().wordBreak(s, wordDict))
 
 
 if __name__ == '__main__':

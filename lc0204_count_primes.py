@@ -65,8 +65,8 @@ class SolutionSieve(object):
 
 def main():
     n = 10
-    print SolutionSqrt().countPrimes(n)
-    print SolutionSieve().countPrimes(n)
+    print(SolutionSqrt().countPrimes(n))
+    print(SolutionSieve().countPrimes(n))
 
 
 if __name__ == '__main__':

@@ -85,8 +85,8 @@ def main():
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
-    print SolutionRecur().sumOfLeftLeaves(root)
-    print SolutionIter().sumOfLeftLeaves(root)
+    print(SolutionRecur().sumOfLeftLeaves(root))
+    print(SolutionIter().sumOfLeftLeaves(root))
 
 
 if __name__ == '__main__':

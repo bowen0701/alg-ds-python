@@ -96,18 +96,18 @@ class SolutionSwapTwoPointers(object):
 def main():
     # Output: "holle"
     s = "hello"
-    print SolutionReversedVowelPosDict().reverseVowels(s)
-    print SolutionSwapTwoPointers().reverseVowels(s)
+    print(SolutionReversedVowelPosDict().reverseVowels(s))
+    print(SolutionSwapTwoPointers().reverseVowels(s))
 
     # Output: "leotcede"
     s = "leetcode"
-    print SolutionReversedVowelPosDict().reverseVowels(s)
-    print SolutionSwapTwoPointers().reverseVowels(s)
+    print(SolutionReversedVowelPosDict().reverseVowels(s))
+    print(SolutionSwapTwoPointers().reverseVowels(s))
 
     # Output: "epplA"
     s = "Apple"
-    print SolutionReversedVowelPosDict().reverseVowels(s)
-    print SolutionSwapTwoPointers().reverseVowels(s)
+    print(SolutionReversedVowelPosDict().reverseVowels(s))
+    print(SolutionSwapTwoPointers().reverseVowels(s))
 
 
 if __name__ == '__main__':

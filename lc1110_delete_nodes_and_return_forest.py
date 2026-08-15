@@ -93,7 +93,7 @@ def main():
     root.right.right = TreeNode(7)
     to_delete = [3,5]
     forest_roots = SolutionHasParentPreorderRecur().delNodes(root, to_delete)
-    print [r.val for r in forest_roots]
+    print([r.val for r in forest_roots])
 
 
 if __name__ == '__main__':

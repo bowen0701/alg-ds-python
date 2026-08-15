@@ -75,17 +75,17 @@ def main():
     # Output: True
     flowerbed = [1,0,0,0,1]
     n = 1
-    print SolutionIter().canPlaceFlowers(flowerbed, n)
+    print(SolutionIter().canPlaceFlowers(flowerbed, n))
 
     # Output: False
     flowerbed = [1,0,0,0,1]
     n = 2
-    print SolutionIter().canPlaceFlowers(flowerbed, n)
+    print(SolutionIter().canPlaceFlowers(flowerbed, n))
 
     # Output: True
     flowerbed = [0,0,1]
     n = 1
-    print SolutionIter().canPlaceFlowers(flowerbed, n)
+    print(SolutionIter().canPlaceFlowers(flowerbed, n))
 
 
 if __name__ == '__main__':

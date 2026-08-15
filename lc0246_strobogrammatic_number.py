@@ -95,23 +95,23 @@ class SolutionTwoPointersIter(object):
 def main():
     # Output: true
     num = "69"
-    print SolutionMapDictIter().isStrobogrammatic(num)
-    print SolutionTwoPointersIter().isStrobogrammatic(num)
+    print(SolutionMapDictIter().isStrobogrammatic(num))
+    print(SolutionTwoPointersIter().isStrobogrammatic(num))
 
     # Output: true
     num = "88"
-    print SolutionMapDictIter().isStrobogrammatic(num)
-    print SolutionTwoPointersIter().isStrobogrammatic(num)
+    print(SolutionMapDictIter().isStrobogrammatic(num))
+    print(SolutionTwoPointersIter().isStrobogrammatic(num))
 
     # Output: false
     num = "962"
-    print SolutionMapDictIter().isStrobogrammatic(num)
-    print SolutionTwoPointersIter().isStrobogrammatic(num)
+    print(SolutionMapDictIter().isStrobogrammatic(num))
+    print(SolutionTwoPointersIter().isStrobogrammatic(num))
 
     # Output: false
     num = "2"
-    print SolutionMapDictIter().isStrobogrammatic(num)
-    print SolutionTwoPointersIter().isStrobogrammatic(num)
+    print(SolutionMapDictIter().isStrobogrammatic(num))
+    print(SolutionTwoPointersIter().isStrobogrammatic(num))
 
 
 if __name__ == '__main__':

@@ -59,15 +59,15 @@ class SolutionStringRepeatedTimesStackIter(object):
 def main():
     # s = "3[a]2[bc]", return "aaabcbc".
     s = "3[a]2[bc]"
-    print SolutionStringRepeatedTimesStackIter().decodeString(s)
+    print(SolutionStringRepeatedTimesStackIter().decodeString(s))
 
     # s = "3[a2[c]]", return "accaccacc".
     s = "3[a2[c]]"
-    print SolutionStringRepeatedTimesStackIter().decodeString(s)
+    print(SolutionStringRepeatedTimesStackIter().decodeString(s))
 
     # s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
     s = "2[abc]3[cd]ef"
-    print SolutionStringRepeatedTimesStackIter().decodeString(s)
+    print(SolutionStringRepeatedTimesStackIter().decodeString(s))
 
 
 if __name__ == '__main__':

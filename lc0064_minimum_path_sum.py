@@ -160,10 +160,10 @@ def main():
       [1,5,1],
       [4,2,1]
     ]
-    print SolutionRecur().minPathSum(grid)
-    print SolutionMemo().minPathSum(grid)
-    print SolutionDP().minPathSum(grid)
-    print SolutionDPUpdate().minPathSum(grid)
+    print(SolutionRecur().minPathSum(grid))
+    print(SolutionMemo().minPathSum(grid))
+    print(SolutionDP().minPathSum(grid))
+    print(SolutionDPUpdate().minPathSum(grid))
 
 
 if __name__ == '__main__':

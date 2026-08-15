@@ -114,14 +114,14 @@ def main():
     # MyCalendar.book(15, 25); // returns false
     # MyCalendar.book(20, 30); // returns true
     calendar = MyCalendarArray()
-    print calendar.book(10, 20)
-    print calendar.book(15, 25)
-    print calendar.book(20, 30)
+    print(calendar.book(10, 20))
+    print(calendar.book(15, 25))
+    print(calendar.book(20, 30))
 
     calendar = MyCalendarBST()
-    print calendar.book(10, 20)
-    print calendar.book(15, 25)
-    print calendar.book(20, 30)
+    print(calendar.book(10, 20))
+    print(calendar.book(15, 25))
+    print(calendar.book(20, 30))
 
 
 

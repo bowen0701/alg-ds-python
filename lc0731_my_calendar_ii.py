@@ -86,12 +86,12 @@ def main():
     # MyCalendar.book(5, 10); // returns true
     # MyCalendar.book(25, 55); // returns true
     calendar = MyCalendarEventsOverlapsArrays()
-    print calendar.book(10, 20)
-    print calendar.book(50, 60)
-    print calendar.book(10, 40)
-    print calendar.book(5, 15)
-    print calendar.book(5, 10)
-    print calendar.book(25, 55)
+    print(calendar.book(10, 20))
+    print(calendar.book(50, 60))
+    print(calendar.book(10, 40))
+    print(calendar.book(5, 15))
+    print(calendar.book(5, 10))
+    print(calendar.book(25, 55))
 
 
 if __name__ == '__main__':

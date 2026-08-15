@@ -89,7 +89,7 @@ def main():
     inorder = [9, 3, 15, 20, 7]
     root = SolutionPreorderFirstInorderRootRecur().buildTree(preorder, inorder)
     
-    print (root.val,
+    print(root.val,
            root.left.val, root.right.val,
            root.right.left.val, root.right.right.val)
 

@@ -76,12 +76,12 @@ def main():
     # Ans: 3
     dividend = 10
     divisor = 3
-    print Solution().divide(dividend, divisor)
+    print(Solution().divide(dividend, divisor))
 
     # Ans: -2
     dividend = 7
     divisor = -3
-    print Solution().divide(dividend, divisor)
+    print(Solution().divide(dividend, divisor))
 
 
 if __name__ == '__main__':

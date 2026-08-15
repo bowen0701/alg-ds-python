@@ -50,13 +50,13 @@ class Solution(object):
 
 def main():
     s = 'A'
-    print Solution().titleToNumber(s)
+    print(Solution().titleToNumber(s))
 
     s = 'AB'
-    print Solution().titleToNumber(s)
+    print(Solution().titleToNumber(s))
 
     s = 'ZY'
-    print Solution().titleToNumber(s)
+    print(Solution().titleToNumber(s))
 
 
 if __name__ == '__main__':

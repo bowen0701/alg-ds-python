@@ -57,7 +57,7 @@ def main():
     import time
 
     nums = [2,2,3,4]
-    print SolutionThreePointers().triangleNumber(nums)
+    print(SolutionThreePointers().triangleNumber(nums))
 
 
 if __name__ == '__main__':

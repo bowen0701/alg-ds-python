@@ -52,7 +52,7 @@ class SolutionDict(object):
 def main():
     # Output: ["AAAAACCCCC", "CCCCCAAAAA"]
     s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
-    print SolutionDict().findRepeatedDnaSequences(s)
+    print(SolutionDict().findRepeatedDnaSequences(s))
 
 
 if __name__ == '__main__':

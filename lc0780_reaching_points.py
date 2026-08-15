@@ -124,21 +124,21 @@ class SolutionBottomUpIter(object):
 def main():
     # Output: True
     sx, sy, tx, ty = 1, 1, 3, 5
-    print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
-    print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
-    print SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty)
+    print(SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty))
+    print(SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty))
+    print(SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty))
 
     # Output: False
     sx, sy, tx, ty = 1, 1, 2, 2
-    print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
-    print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
-    print SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty)
+    print(SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty))
+    print(SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty))
+    print(SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty))
 
     # Output: True
     sx, sy, tx, ty = 1, 1, 1, 1
-    print SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty)
-    print SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty)
-    print SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty)
+    print(SolutionTopDownRecur().reachingPoints(sx, sy, tx, ty))
+    print(SolutionBottomUpRecur().reachingPoints(sx, sy, tx, ty))
+    print(SolutionBottomUpIter().reachingPoints(sx, sy, tx, ty))
 
 
 if __name__ == '__main__':

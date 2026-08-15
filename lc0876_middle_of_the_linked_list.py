@@ -55,7 +55,7 @@ def main():
     head.next.next = ListNode(3)
     head.next.next.next = ListNode(4)
     head.next.next.next.next = ListNode(5)
-    print SolutionFastSlow().middleNode(head).val
+    print(SolutionFastSlow().middleNode(head).val)
 
     # Input: [1,2,3,4,5,6]
     # Output: Node 4 from this list (Serialization: [4,5,6])
@@ -65,7 +65,7 @@ def main():
     head.next.next.next = ListNode(4)
     head.next.next.next.next = ListNode(5)
     head.next.next.next.next.next = ListNode(6)
-    print SolutionFastSlow().middleNode(head).val
+    print(SolutionFastSlow().middleNode(head).val)
 
 
 if __name__ == '__main__':

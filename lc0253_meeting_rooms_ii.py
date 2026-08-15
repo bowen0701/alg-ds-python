@@ -82,13 +82,13 @@ class SolutionTimeCounterListInsort(object):
 def main():
     # Output: 2.
     intervals = [[0,30],[5,10],[15,20]]
-    print SolutionSortEndMinHeapEnd().minMeetingRooms(intervals)
-    print SolutionTimeCounterListInsort().minMeetingRooms(intervals)
+    print(SolutionSortEndMinHeapEnd().minMeetingRooms(intervals))
+    print(SolutionTimeCounterListInsort().minMeetingRooms(intervals))
 
     # Output: 1.
     intervals = [[7, 10], [2, 4]]
-    print SolutionSortEndMinHeapEnd().minMeetingRooms(intervals)
-    print SolutionTimeCounterListInsort().minMeetingRooms(intervals)
+    print(SolutionSortEndMinHeapEnd().minMeetingRooms(intervals))
+    print(SolutionTimeCounterListInsort().minMeetingRooms(intervals))
 
 
 if __name__ == '__main__':

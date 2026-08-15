@@ -99,31 +99,31 @@ def main():
     nums = [1, 3, 4, 2, 2]
 
     start_time = time.time()
-    print 'By brute force: {}'.format(SolutionBrute().findDuplicate(nums))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By brute force: {}'.format(SolutionBrute().findDuplicate(nums)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By dict: {}'.format(SolutionDict().findDuplicate(nums))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By dict: {}'.format(SolutionDict().findDuplicate(nums)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By binary search: {}'.format(SolutionBinarySearch().findDuplicate(nums))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By binary search: {}'.format(SolutionBinarySearch().findDuplicate(nums)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Should be 3.
     nums = [3, 1, 3, 4, 2]
 
     start_time = time.time()
-    print 'By brute force: {}'.format(SolutionBrute().findDuplicate(nums))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By brute force: {}'.format(SolutionBrute().findDuplicate(nums)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By dict: {}'.format(SolutionDict().findDuplicate(nums))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By dict: {}'.format(SolutionDict().findDuplicate(nums)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By binary search: {}'.format(SolutionBinarySearch().findDuplicate(nums))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By binary search: {}'.format(SolutionBinarySearch().findDuplicate(nums)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

@@ -61,12 +61,12 @@ def main():
     # Output: "100"
     a = "11"
     b = "1"
-    print SolutionIter().addBinary(a, b)
+    print(SolutionIter().addBinary(a, b))
 
     # Output: "10101"
     a = "1010"
     b = "1011"
-    print SolutionIter().addBinary(a, b)
+    print(SolutionIter().addBinary(a, b))
 
 
 if __name__ == '__main__':

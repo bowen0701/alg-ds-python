@@ -84,34 +84,34 @@ def main():
 
     numRows = 3
     zigzag = Solution().convert(s, numRows)
-    print zigzag
+    print(zigzag)
     assert zigzag == 'PAHNAPLSIIGYIR'
 
     numRows = 4
     zigzag = Solution().convert(s, numRows)
-    print zigzag
+    print(zigzag)
     assert zigzag == 'PINALSIGYAHRPI'
 
     numRows = 3
     zigzag = SolutionMath().convert(s, numRows)
-    print zigzag
+    print(zigzag)
     assert zigzag == 'PAHNAPLSIIGYIR'
 
     numRows = 4
     zigzag = SolutionMath().convert(s, numRows)
-    print zigzag
+    print(zigzag)
     assert zigzag == 'PINALSIGYAHRPI'
 
     s = "PAYPALISHIRING"
 
     numRows = 3
     zigzag = Solution().convert(s, numRows)
-    print zigzag
+    print(zigzag)
     assert zigzag == 'PAHNAPLSIIGYIR'
 
     numRows = 3
     zigzag = SolutionMath().convert(s, numRows)
-    print zigzag
+    print(zigzag)
     assert zigzag == 'PAHNAPLSIIGYIR'
 
 

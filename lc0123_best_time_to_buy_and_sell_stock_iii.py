@@ -70,15 +70,15 @@ class SolutionIter(object):
 def main():
     # Output: 6
     prices = [3,3,5,0,0,3,1,4]
-    print SolutionIter().maxProfit(prices)
+    print(SolutionIter().maxProfit(prices))
 
     # Output: 4
     prices = [1,2,3,4,5]
-    print SolutionIter().maxProfit(prices)
+    print(SolutionIter().maxProfit(prices))
 
     # Output: 0
     prices = [7,6,4,3,1]
-    print SolutionIter().maxProfit(prices)
+    print(SolutionIter().maxProfit(prices))
 
 
 if __name__ == '__main__':

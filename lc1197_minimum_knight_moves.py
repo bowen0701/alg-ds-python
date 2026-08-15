@@ -123,14 +123,14 @@ def main():
     # Output: 1
     x = 2
     y = 1
-    print SolutionNaiveBFS().minKnightMoves(x, y)
-    print SolutionBFS().minKnightMoves(x, y)
+    print(SolutionNaiveBFS().minKnightMoves(x, y))
+    print(SolutionBFS().minKnightMoves(x, y))
 
     # Output: 4
     x = 5
     y = 5
-    print SolutionNaiveBFS().minKnightMoves(x, y)
-    print SolutionBFS().minKnightMoves(x, y)
+    print(SolutionNaiveBFS().minKnightMoves(x, y))
+    print(SolutionBFS().minKnightMoves(x, y))
 
 
 if __name__ == '__main__':

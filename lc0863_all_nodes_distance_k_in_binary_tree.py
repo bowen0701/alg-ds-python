@@ -96,7 +96,7 @@ def main():
     root.left.right.right = TreeNode(4)
     target = root.left
     K = 2
-    print SolutionPreorderParentChildrenUndirectedGraphBFS().distanceK(root, target, K)
+    print(SolutionPreorderParentChildrenUndirectedGraphBFS().distanceK(root, target, K))
 
 
 if __name__ == '__main__':

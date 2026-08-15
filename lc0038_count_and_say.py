@@ -63,7 +63,7 @@ class Solution(object):
 
 def main():
     n = 5
-    print Solution().countAndSay(n)
+    print(Solution().countAndSay(n))
 
 
 if __name__ == '__main__':

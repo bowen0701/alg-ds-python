@@ -96,7 +96,7 @@ def main():
       ['X','O','X','X']
     ]
     SolutionDFSRecur().solve(board)
-    print board
+    print(board)
 
 
 if __name__ == '__main__':

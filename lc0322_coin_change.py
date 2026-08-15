@@ -164,42 +164,42 @@ def main():
     amount = 11
 
     start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By recur: {}'.format(SolutionRecur().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By memo: {}'.format(SolutionMemo().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By memo: {}'.format(SolutionMemo().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DP: {}'.format(SolutionDP().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By DP w/ early stop: {}'.format(
-        SolutionDPEarlyStop().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DP w/ early stop: {}'.format(
+        SolutionDPEarlyStop().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Ans: -1.
     coins = [2]
     amount = 3
 
     start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By recur: {}'.format(SolutionRecur().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By memo: {}'.format(SolutionMemo().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By memo: {}'.format(SolutionMemo().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DP: {}'.format(SolutionDP().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By DP w/ early stop: {}'.format(
-        SolutionDPEarlyStop().coinChange(coins, amount))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DP w/ early stop: {}'.format(
+        SolutionDPEarlyStop().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

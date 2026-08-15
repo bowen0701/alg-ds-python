@@ -112,7 +112,7 @@ def main():
     head.next.next = ListNode(3)
     head.next.next.next = ListNode(4)
     head.next.next.next.next = ListNode(5)
-    print Solution().removeNthFromEnd(head, 2).next.next.next.val
+    print(Solution().removeNthFromEnd(head, 2).next.next.next.val)
 
 
 if __name__ == '__main__':

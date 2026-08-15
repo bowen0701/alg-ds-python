@@ -80,22 +80,22 @@ def main():
     # Output: true
     words = ["hello","leetcode"]
     order = "hlabcdefgijkmnopqrstuvwxyz"
-    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
+    print(SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order))
 
     # Output: false
     words = ["word","world","row"]
     order = "worldabcefghijkmnpqstuvxyz"
-    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
+    print(SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order))
 
     # Output: false
     words = ["apple","app"]
     order = "abcdefghijklmnopqrstuvwxyz"
-    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
+    print(SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order))
 
     # Output: true
     words = ["kuvp","q"]
     order = "ngxlkthsjuoqcpavbfdermiywz"
-    print SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order)
+    print(SolutionCharOrderDicPrevCurCharOrder().isAlienSorted(words, order))
 
 
 if __name__ == '__main__':

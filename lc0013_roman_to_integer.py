@@ -167,47 +167,47 @@ class SolutionReplace(object):
 def main():
     import time
 
-    print 'By SolutionSubtractRules:'
+    print('By SolutionSubtractRules:')
     start_time = time.time()
     s = 'III'  # Output: 3.
-    print SolutionSubtractRules().romanToInt(s)
+    print(SolutionSubtractRules().romanToInt(s))
     s = 'IV'  # Output: 4.
-    print SolutionSubtractRules().romanToInt(s)
+    print(SolutionSubtractRules().romanToInt(s))
     s = 'IX'  # Output: 9.
-    print SolutionSubtractRules().romanToInt(s)
+    print(SolutionSubtractRules().romanToInt(s))
     s = 'LVIII'  # Output: 58.
-    print SolutionSubtractRules().romanToInt(s)
+    print(SolutionSubtractRules().romanToInt(s))
     s = 'MCMXCIV'  # Output: 1994.
-    print SolutionSubtractRules().romanToInt(s)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionSubtractRules().romanToInt(s))
+    print('Time: {}'.format(time.time() - start_time))
 
-    print 'By SolutionLeftBigger:'
+    print('By SolutionLeftBigger:')
     start_time = time.time()
     s = 'III'  # Output: 3.
-    print SolutionLeftBigger().romanToInt(s)
+    print(SolutionLeftBigger().romanToInt(s))
     s = 'IV'  # Output: 4.
-    print SolutionLeftBigger().romanToInt(s)
+    print(SolutionLeftBigger().romanToInt(s))
     s = 'IX'  # Output: 9.
-    print SolutionLeftBigger().romanToInt(s)
+    print(SolutionLeftBigger().romanToInt(s))
     s = 'LVIII'  # Output: 58.
-    print SolutionLeftBigger().romanToInt(s)
+    print(SolutionLeftBigger().romanToInt(s))
     s = 'MCMXCIV'  # Output: 1994.
-    print SolutionLeftBigger().romanToInt(s)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionLeftBigger().romanToInt(s))
+    print('Time: {}'.format(time.time() - start_time))
 
-    print 'By SolutionReplace:'
+    print('By SolutionReplace:')
     start_time = time.time()
     s = 'III'  # Output: 3.
-    print SolutionReplace().romanToInt(s)
+    print(SolutionReplace().romanToInt(s))
     s = 'IV'  # Output: 4.
-    print SolutionReplace().romanToInt(s)
+    print(SolutionReplace().romanToInt(s))
     s = 'IX'  # Output: 9.
-    print SolutionReplace().romanToInt(s)
+    print(SolutionReplace().romanToInt(s))
     s = 'LVIII'  # Output: 58.
-    print SolutionReplace().romanToInt(s)
+    print(SolutionReplace().romanToInt(s))
     s = 'MCMXCIV'  # Output: 1994.
-    print SolutionReplace().romanToInt(s)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionReplace().romanToInt(s))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

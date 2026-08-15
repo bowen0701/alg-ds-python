@@ -64,10 +64,10 @@ def main():
     ]
 
     target = 5   # Should be True.
-    print Solution().searchMatrix(matrix, target)
+    print(Solution().searchMatrix(matrix, target))
 
     target = 20  # Should be False.
-    print Solution().searchMatrix(matrix, target)
+    print(Solution().searchMatrix(matrix, target))
 
 
 if __name__ == '__main__':

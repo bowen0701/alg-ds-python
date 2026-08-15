@@ -119,15 +119,15 @@ class SolutionDP(object):
 def main():
     # Output: 4.
     s = "bbbab"
-    print SolutionRecur().longestPalindromeSubseq(s)
-    print SolutionMemo().longestPalindromeSubseq(s)
-    print SolutionDP().longestPalindromeSubseq(s)
+    print(SolutionRecur().longestPalindromeSubseq(s))
+    print(SolutionMemo().longestPalindromeSubseq(s))
+    print(SolutionDP().longestPalindromeSubseq(s))
 
     # Output: 2.
     s = "cbbd"
-    print SolutionRecur().longestPalindromeSubseq(s)
-    print SolutionMemo().longestPalindromeSubseq(s)
-    print SolutionDP().longestPalindromeSubseq(s)
+    print(SolutionRecur().longestPalindromeSubseq(s))
+    print(SolutionMemo().longestPalindromeSubseq(s))
+    print(SolutionDP().longestPalindromeSubseq(s))
 
 
 if __name__ == '__main__':

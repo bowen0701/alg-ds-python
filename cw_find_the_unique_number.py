@@ -43,11 +43,11 @@ def find_uniq(arr):
 def main():
     # Output: 2
     arr = [ 1, 1, 1, 2, 1, 1 ]
-    print find_uniq(arr)
+    print(find_uniq(arr))
 
     # Output: 0.55
     arr = [ 0, 0, 0.55, 0, 0 ]
-    print find_uniq(arr)
+    print(find_uniq(arr))
 
 
 if __name__ == '__main__':

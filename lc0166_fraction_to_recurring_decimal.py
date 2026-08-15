@@ -83,32 +83,32 @@ def main():
     # Output: "0.5"
     numerator = 1
     denominator = 2
-    print SolutionRemainderPositionDict().fractionToDecimal(
-        numerator, denominator)
+    print(SolutionRemainderPositionDict().fractionToDecimal(
+        numerator, denominator))
 
     # Output: "2"
     numerator = 2
     denominator = 1
-    print SolutionRemainderPositionDict().fractionToDecimal(
-        numerator, denominator)
+    print(SolutionRemainderPositionDict().fractionToDecimal(
+        numerator, denominator))
 
     # Output: "0.(6)"
     numerator = 2
     denominator = 3
-    print SolutionRemainderPositionDict().fractionToDecimal(
-        numerator, denominator)
+    print(SolutionRemainderPositionDict().fractionToDecimal(
+        numerator, denominator))
 
     # Output: "0.(571428)"
     numerator = 4
     denominator = 7
-    print SolutionRemainderPositionDict().fractionToDecimal(
-        numerator, denominator)
+    print(SolutionRemainderPositionDict().fractionToDecimal(
+        numerator, denominator))
 
     # Output: "1.1(6)"
     numerator = 7
     denominator = 6
-    print SolutionRemainderPositionDict().fractionToDecimal(
-        numerator, denominator)
+    print(SolutionRemainderPositionDict().fractionToDecimal(
+        numerator, denominator))
 
 
 if __name__ == '__main__':

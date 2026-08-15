@@ -82,19 +82,19 @@ def main():
     head = SolutionAllEqualTopLeftIsLeafRecur().construct(grid)
 
     # Output: (False, '*')
-    print (head.isLeaf, head.val)
+    print(head.isLeaf, head.val)
 
     # Output: (True, 1)
-    print (head.topLeft.isLeaf, head.topLeft.val)
+    print(head.topLeft.isLeaf, head.topLeft.val)
 
     # Output: (True, 0)
-    print (head.topRight.isLeaf, head.topRight.val)
+    print(head.topRight.isLeaf, head.topRight.val)
     
     # Output: (True, 0)
-    print (head.bottomLeft.isLeaf, head.bottomLeft.val)
+    print(head.bottomLeft.isLeaf, head.bottomLeft.val)
 
     # Output: (True, 1)
-    print (head.bottomRight.isLeaf, head.bottomRight.val)
+    print(head.bottomRight.isLeaf, head.bottomRight.val)
 
 
 if __name__ == '__main__':

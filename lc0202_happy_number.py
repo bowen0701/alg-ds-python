@@ -48,11 +48,11 @@ class SolutionSumSquaresSet(object):
 def main():
     # Output: True.
     n = 19
-    print SolutionSumSquaresSet().isHappy(n)
+    print(SolutionSumSquaresSet().isHappy(n))
 
     # Output: False.
     n = 14
-    print SolutionSumSquaresSet().isHappy(n)
+    print(SolutionSumSquaresSet().isHappy(n))
 
 
 if __name__ == '__main__':

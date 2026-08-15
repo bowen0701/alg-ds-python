@@ -133,13 +133,13 @@ def main():
     cache = LRUCache(2)
     cache.put(1, 1)
     cache.put(2, 2)
-    print 'Returns 1:', cache.get(1)
+    print('Returns 1:', cache.get(1))
     cache.put(3, 3)
-    print 'Returns -1:', cache.get(2)
+    print('Returns -1:', cache.get(2))
     cache.put(4, 4)
-    print 'Returns -1:', cache.get(1)
-    print 'Returns 3:', cache.get(3)
-    print 'Returns 4:', cache.get(4)
+    print('Returns -1:', cache.get(1))
+    print('Returns 3:', cache.get(3))
+    print('Returns 4:', cache.get(4))
 
 
 if __name__ == '__main__':

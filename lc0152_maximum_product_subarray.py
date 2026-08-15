@@ -82,18 +82,18 @@ class SolutionIter(object):
 def main():
     # Output: 6
     nums = [2,3,-2,4]
-    print SolutionDP().maxProduct(nums)
-    print SolutionIter().maxProduct(nums)
+    print(SolutionDP().maxProduct(nums))
+    print(SolutionIter().maxProduct(nums))
 
     # Output: 0
     nums = [-2,0,-1]
-    print SolutionDP().maxProduct(nums)
-    print SolutionIter().maxProduct(nums)
+    print(SolutionDP().maxProduct(nums))
+    print(SolutionIter().maxProduct(nums))
 
     # Output: 24
     nums = [-2,3,-4]
-    print SolutionDP().maxProduct(nums)
-    print SolutionIter().maxProduct(nums)
+    print(SolutionDP().maxProduct(nums))
+    print(SolutionIter().maxProduct(nums))
 
 
 if __name__ == '__main__':

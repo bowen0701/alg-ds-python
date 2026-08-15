@@ -56,10 +56,10 @@ def main():
     import time
 
     n = 12
-    print SolutionDP().numSquares(n)
+    print(SolutionDP().numSquares(n))
 
     n = 13
-    print SolutionDP().numSquares(n)
+    print(SolutionDP().numSquares(n))
 
 
 if __name__ == '__main__':

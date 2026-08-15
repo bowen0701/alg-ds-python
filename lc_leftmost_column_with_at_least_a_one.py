@@ -161,32 +161,32 @@ def main():
     # Output: 0
     mat = [[0,0],[1,1]]
     binaryMatrix = BinaryMatrix(mat)
-    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
-    print SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix)
+    print(SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix))
+    print(SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix))
 
     # Output: 1
     mat = [[0,0],[0,1]]
     binaryMatrix = BinaryMatrix(mat)
-    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
-    print SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix)
+    print(SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix))
+    print(SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix))
 
     # Output: -1
     mat = [[0,0],[0,0]]
     binaryMatrix = BinaryMatrix(mat)
-    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
-    print SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix)
+    print(SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix))
+    print(SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix))
 
     # Output: 1
     mat = [[0,0,0,1],[0,0,1,1],[0,1,1,1]]
     binaryMatrix = BinaryMatrix(mat)
-    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
-    print SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix)
+    print(SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix))
+    print(SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix))
 
     # Output: 2
     mat = [[0,0,0,1],[0,0,1,1],[0,0,1,1]]
     binaryMatrix = BinaryMatrix(mat)
-    print SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix)
-    print SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix)
+    print(SolutionBinarySearchRows().leftMostColumnWithOne(binaryMatrix))
+    print(SolutionLeftDownMove().leftMostColumnWithOne(binaryMatrix))
 
 
 if __name__ == '__main__':

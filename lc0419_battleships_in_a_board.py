@@ -106,21 +106,21 @@ class SolutionCheckFirst(object):
 def main():
     import time
 
-    print 'By DFS recur:'
+    print('By DFS recur:')
     start_time = time.time()
     board = [['X','.','.','X'],
              ['.','.','.','X'],
              ['.','.','.','X']]
-    print SolutionDFSRecur().countBattleships(board)
-    print 'Time:', time.time() - start_time
+    print(SolutionDFSRecur().countBattleships(board))
+    print('Time:', time.time() - start_time)
 
-    print 'By checking the 1st:'
+    print('By checking the 1st:')
     start_time = time.time()
     board = [['X','.','.','X'],
              ['.','.','.','X'],
              ['.','.','.','X']]
-    print SolutionCheckFirst().countBattleships(board)
-    print 'Time:', time.time() - start_time
+    print(SolutionCheckFirst().countBattleships(board))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':

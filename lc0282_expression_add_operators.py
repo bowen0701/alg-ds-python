@@ -92,27 +92,27 @@ def main():
     # Output: ["1+2+3", "1*2*3"] 
     num = "123"
     target = 6
-    print SolutionBacktrack().addOperators(num, target)
+    print(SolutionBacktrack().addOperators(num, target))
 
     # Output: ["2*3+2", "2+3*2"]
     num = "232"
     target = 8
-    print SolutionBacktrack().addOperators(num, target)
+    print(SolutionBacktrack().addOperators(num, target))
 
     # Output: ["1*0+5","10-5"]
     num = "105"
     target = 5
-    print SolutionBacktrack().addOperators(num, target)
+    print(SolutionBacktrack().addOperators(num, target))
 
     # Output: ["0+0", "0-0", "0*0"]
     num = "00"
     target = 0
-    print SolutionBacktrack().addOperators(num, target)
+    print(SolutionBacktrack().addOperators(num, target))
 
     # Output: []
     num = "3456237490"
     target = 9191
-    print SolutionBacktrack().addOperators(num, target)
+    print(SolutionBacktrack().addOperators(num, target))
 
 
 if __name__ == '__main__':

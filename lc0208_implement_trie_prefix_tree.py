@@ -106,14 +106,14 @@ def main():
     trie = Trie();
     trie.insert("apple")
     # Returns True.
-    print trie.search("apple")
+    print(trie.search("apple"))
     # Returns False.
-    print trie.search("app")
+    print(trie.search("app"))
     # Returns True.
-    print trie.startsWith("app")
+    print(trie.startsWith("app"))
     trie.insert("app")
     # Returns True.
-    print trie.search("app")
+    print(trie.search("app"))
 
 
 if __name__ == '__main__':

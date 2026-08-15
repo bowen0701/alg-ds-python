@@ -76,7 +76,7 @@ def main():
     root = TreeNode(1)
     root.left = TreeNode(2)
     root.right = TreeNode(3)
-    print SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root)
+    print(SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root))
 
     # Output: 42
     #  -10
@@ -89,7 +89,7 @@ def main():
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
-    print SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root)
+    print(SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root))
 
 
 if __name__ == '__main__':

@@ -57,7 +57,7 @@ class SolutionBacktrack(object):
 def main():
     # Output = [[2],[1],[1,2,2],[2,2],[1,2],[]]
     nums = [1,2,2]
-    print SolutionBacktrack().subsetsWithDup(nums)
+    print(SolutionBacktrack().subsetsWithDup(nums))
 
 
 if __name__ == '__main__':

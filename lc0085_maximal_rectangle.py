@@ -82,7 +82,7 @@ def main():
         ["1","1","1","1","1"],
         ["1","0","0","1","0"]
     ]
-    print SolutionEachRowHeightRectangleHistogram().maximalRectangle(matrix)
+    print(SolutionEachRowHeightRectangleHistogram().maximalRectangle(matrix))
 
 
 if __name__ == '__main__':

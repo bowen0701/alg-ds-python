@@ -128,12 +128,12 @@ def main():
 
     # t = SolutionPreorderRecur().mergeTrees(t1, t2)
     t = SolutionPreorderIter().mergeTrees(t1, t2)
-    print t.val              # Should be 3
-    print t.left.val         # Should be 4
-    print t.right.val        # Should be 5
-    print t.left.left.val    # Should be 5
-    print t.left.right.val   # Should be 4
-    print t.right.right.val  # Should be 7
+    print(t.val)              # Should be 3
+    print(t.left.val)         # Should be 4
+    print(t.right.val)        # Should be 5
+    print(t.left.left.val)    # Should be 5
+    print(t.left.right.val)   # Should be 4
+    print(t.right.right.val)  # Should be 7
 
 
 if __name__ == '__main__':

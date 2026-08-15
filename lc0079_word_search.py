@@ -86,15 +86,15 @@ def main():
 
     # Given word = "ABCCED", return true.
     word = 'ABCCED'
-    print SolutionDfsBacktrackRecur().exist(board, word)
+    print(SolutionDfsBacktrackRecur().exist(board, word))
 
     # Given word = "SEE", return true.
     word = 'SEE'
-    print SolutionDfsBacktrackRecur().exist(board, word)
+    print(SolutionDfsBacktrackRecur().exist(board, word))
 
     # Given word = "ABCB", return false.
     word = 'ABCB'
-    print SolutionDfsBacktrackRecur().exist(board, word)
+    print(SolutionDfsBacktrackRecur().exist(board, word))
 
 
 if __name__ == '__main__':

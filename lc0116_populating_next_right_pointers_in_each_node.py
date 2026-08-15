@@ -75,13 +75,13 @@ def main():
     
     SolutionPreorderRecur().connect(root)
 
-    print root.next                 # Ans: None
-    print root.left.next.val        # Ans: 3
-    print root.right.next           # Ans: None
-    print root.left.left.next.val   # Ans: 5
-    print root.left.right.next.val  # Ans: 6
-    print root.right.left.next.val  # Ans: 7
-    print root.right.right.next     # Ans: None  
+    print(root.next)                 # Ans: None
+    print(root.left.next.val)        # Ans: 3
+    print(root.right.next)           # Ans: None
+    print(root.left.left.next.val)   # Ans: 5
+    print(root.left.right.next.val)  # Ans: 6
+    print(root.right.left.next.val)  # Ans: 7
+    print(root.right.right.next)     # Ans: None  
 
 
 if __name__ == '__main__':

@@ -51,12 +51,12 @@ def main():
     # Output: 3
     J = "aA"
     S = "aAAbbbb"
-    print SolutionSet().numJewelsInStones(J, S)
+    print(SolutionSet().numJewelsInStones(J, S))
 
     # Output: 0
     J = "z"
     S = "ZZ"
-    print SolutionSet().numJewelsInStones(J, S)
+    print(SolutionSet().numJewelsInStones(J, S))
 
 
 if __name__ == '__main__':

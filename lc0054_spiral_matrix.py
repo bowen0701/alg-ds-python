@@ -72,7 +72,7 @@ def main():
       [ 4, 5, 6 ],
       [ 7, 8, 9 ]
     ]
-    print SolutionUpDownLeftDown().spiralOrder(matrix)
+    print(SolutionUpDownLeftDown().spiralOrder(matrix))
 
     # Should be: [1,2,3,4,8,12,11,10,9,5,6,7].
     matrix = [
@@ -80,7 +80,7 @@ def main():
       [5, 6, 7, 8],
       [9,10,11,12]
     ]
-    print SolutionUpDownLeftDown().spiralOrder(matrix)
+    print(SolutionUpDownLeftDown().spiralOrder(matrix))
 
 
 if __name__ == '__main__':

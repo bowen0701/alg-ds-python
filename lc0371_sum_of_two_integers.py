@@ -45,12 +45,12 @@ def main():
     # Output: 3
     a = 1
     b = 2
-    print SolutionBit().getSum(a, b)
+    print(SolutionBit().getSum(a, b))
 
     # Output: 1
     a = -2
     b = 3
-    print SolutionBit().getSum(a, b)
+    print(SolutionBit().getSum(a, b))
 
 
 if __name__ == '__main__':

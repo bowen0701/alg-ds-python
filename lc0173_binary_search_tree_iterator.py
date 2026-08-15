@@ -95,15 +95,15 @@ def main():
     root.right.right = TreeNode(20)
 
     iterator = BSTIteratorCurrentStackInorderIter(root);
-    print iterator.next()     # return 3
-    print iterator.next()     # return 7
-    print iterator.hasNext()  # return true
-    print iterator.next()     # return 9
-    print iterator.hasNext()  # return true
-    print iterator.next()     # return 15
-    print iterator.hasNext()  # return true
-    print iterator.next()     # return 20
-    print iterator.hasNext()  # return false
+    print(iterator.next())     # return 3
+    print(iterator.next())     # return 7
+    print(iterator.hasNext())  # return true
+    print(iterator.next())     # return 9
+    print(iterator.hasNext())  # return true
+    print(iterator.next())     # return 15
+    print(iterator.hasNext())  # return true
+    print(iterator.next())     # return 20
+    print(iterator.hasNext())  # return false
 
 
 if __name__ == '__main__':

@@ -61,7 +61,7 @@ def main():
     VERSION_FAILURES = [False] * 1000 + [True] * 100
     n = len(VERSION_FAILURES)
     
-    print SolutionBinarySearch().firstBadVersion(n)
+    print(SolutionBinarySearch().firstBadVersion(n))
 
 
 if __name__ == '__main__':

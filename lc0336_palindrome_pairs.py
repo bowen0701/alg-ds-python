@@ -67,15 +67,15 @@ class SolutionWordPosDictPrefixSuffixPalindrome(object):
 def main():
     # Output: [[0,1],[1,0],[3,2],[2,4]] 
     words = ["abcd","dcba","lls","s","sssll"]
-    print SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words)
+    print(SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words))
 
     # Output: [[0,1],[1,0]] 
     words = ["bat","tab","cat"]
-    print SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words)
+    print(SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words))
 
     # Output: [[2,0],[2,1]] 
     words = ["bot","t","to"]
-    print SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words)
+    print(SolutionWordPosDictPrefixSuffixPalindrome().palindromePairs(words))
 
 
 if __name__ == '__main__':

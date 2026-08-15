@@ -41,12 +41,12 @@ def main():
     # Output: ["o","l","l","e","h"]
     s = ["h","e","l","l","o"]
     SolutionTwoPointers().reverseString(s)
-    print s
+    print(s)
 
     # Output: ["h","a","n","n","a","H"]
     s = ["H","a","n","n","a","h"]
     SolutionTwoPointers().reverseString(s)
-    print s
+    print(s)
 
 if __name__ == '__main__':
     main()

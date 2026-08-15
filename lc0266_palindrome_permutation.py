@@ -51,15 +51,15 @@ class SolutionOneOddCharCounts(object):
 def main():
     # Output: false
     s = "code"
-    print SolutionOneOddCharCounts().canPermutePalindrome(s)
+    print(SolutionOneOddCharCounts().canPermutePalindrome(s))
 
     # Output: true
     s = "aab"
-    print SolutionOneOddCharCounts().canPermutePalindrome(s)
+    print(SolutionOneOddCharCounts().canPermutePalindrome(s))
 
     # Output: true
     s = "carerac"
-    print SolutionOneOddCharCounts().canPermutePalindrome(s)
+    print(SolutionOneOddCharCounts().canPermutePalindrome(s))
 
 
 if __name__ == '__main__':

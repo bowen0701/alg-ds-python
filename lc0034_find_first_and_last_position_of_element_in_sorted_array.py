@@ -71,12 +71,12 @@ def main():
     # Ans: [3,4]
     nums = [5,7,7,8,8,10]
     target = 8
-    print SolutionBinarySearchTwice().searchRange(nums, target)
+    print(SolutionBinarySearchTwice().searchRange(nums, target))
 
     # Ans: [-1,-1]
     nums = [5,7,7,8,8,10]
     target = 6
-    print SolutionBinarySearchTwice().searchRange(nums, target)
+    print(SolutionBinarySearchTwice().searchRange(nums, target))
 
 
 if __name__ == '__main__':

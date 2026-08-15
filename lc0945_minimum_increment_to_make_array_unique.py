@@ -124,15 +124,15 @@ class SolutionSortPrevPlusOne(object):
 def main():
     # Output: 1
     A = [1, 2, 2]
-    print SolutionBruteForce().minIncrementForUnique(A)
-    print SolutionUnionFind().minIncrementForUnique(A)
-    print SolutionSortPrevPlusOne().minIncrementForUnique(A)
+    print(SolutionBruteForce().minIncrementForUnique(A))
+    print(SolutionUnionFind().minIncrementForUnique(A))
+    print(SolutionSortPrevPlusOne().minIncrementForUnique(A))
 
     # Output: 6
     A = [3, 2, 1, 2, 1, 7]
-    print SolutionBruteForce().minIncrementForUnique(A)
-    print SolutionUnionFind().minIncrementForUnique(A)
-    print SolutionSortPrevPlusOne().minIncrementForUnique(A)
+    print(SolutionBruteForce().minIncrementForUnique(A))
+    print(SolutionUnionFind().minIncrementForUnique(A))
+    print(SolutionSortPrevPlusOne().minIncrementForUnique(A))
 
 
 if __name__ == '__main__':

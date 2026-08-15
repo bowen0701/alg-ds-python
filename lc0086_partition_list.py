@@ -65,12 +65,12 @@ def main():
     head.next.next.next.next.next = ListNode(2)
     x = 3
     new_head = SolutionTwoLists().partition(head, x)
-    print new_head.val
-    print new_head.next.val
-    print new_head.next.next.val
-    print new_head.next.next.next.val
-    print new_head.next.next.next.next.val
-    print new_head.next.next.next.next.next.val
+    print(new_head.val)
+    print(new_head.next.val)
+    print(new_head.next.next.val)
+    print(new_head.next.next.next.val)
+    print(new_head.next.next.next.next.val)
+    print(new_head.next.next.next.next.next.val)
 
 
 if __name__ == '__main__':

@@ -156,47 +156,47 @@ def main():
     nums = [2,3,1,1,4]
 
     start_time = time.time()
-    print 'Recur:', SolutionRecur().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('Recur:', SolutionRecur().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Memo:', SolutionMemo().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('Memo:', SolutionMemo().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'DP:', SolutionDP().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('DP:', SolutionDP().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'DP2:', SolutionDP2().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('DP2:', SolutionDP2().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Greedy:', SolutionGreedy().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('Greedy:', SolutionGreedy().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     # Ans: False
     nums = [3,2,1,0,4]
 
     start_time = time.time()
-    print 'Recur:', SolutionRecur().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('Recur:', SolutionRecur().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Memo:', SolutionMemo().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('Memo:', SolutionMemo().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'DP:', SolutionDP().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('DP:', SolutionDP().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'DP2:', SolutionDP2().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('DP2:', SolutionDP2().canJump(nums))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'Greedy:', SolutionGreedy().canJump(nums)
-    print 'Time:', time.time() - start_time
+    print('Greedy:', SolutionGreedy().canJump(nums))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':

@@ -52,7 +52,7 @@ def main():
     costs = [[17,2,17],
              [16,16,5],
              [14,3,19]]
-    print SolutionMinTheOtherTwoDp().minCost(costs)
+    print(SolutionMinTheOtherTwoDp().minCost(costs))
 
 
 if __name__ == '__main__':

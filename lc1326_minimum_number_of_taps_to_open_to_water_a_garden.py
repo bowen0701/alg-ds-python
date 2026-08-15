@@ -121,32 +121,32 @@ def main():
     # Output: 1
     n = 5
     ranges = [3,4,1,1,0,0]
-    print SolutionDPGreedy().minTaps(n, ranges)
-    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+    print(SolutionDPGreedy().minTaps(n, ranges))
+    print(SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges))
 
     # Output: -1
     n = 3
     ranges = [0,0,0,0]
-    print SolutionDPGreedy().minTaps(n, ranges)
-    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+    print(SolutionDPGreedy().minTaps(n, ranges))
+    print(SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges))
 
     # Output: 3
     n = 7
     ranges = [1,2,1,0,2,1,0,1]
-    print SolutionDPGreedy().minTaps(n, ranges)
-    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+    print(SolutionDPGreedy().minTaps(n, ranges))
+    print(SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges))
 
     # Output: 2
     n = 8
     ranges = [4,0,0,0,0,0,0,0,4]
-    print SolutionDPGreedy().minTaps(n, ranges)
-    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+    print(SolutionDPGreedy().minTaps(n, ranges))
+    print(SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges))
 
     # Output: 1
     n = 8
     ranges = [4,0,0,0,4,0,0,0,4]
-    print SolutionDPGreedy().minTaps(n, ranges)
-    print SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges)
+    print(SolutionDPGreedy().minTaps(n, ranges))
+    print(SolutionSortStartPrevEndAndEndGreedy().minTaps(n, ranges))
 
 
 if __name__ == '__main__':

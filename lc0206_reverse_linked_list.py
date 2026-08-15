@@ -117,17 +117,17 @@ def main():
 
     # 5->4->3->2->1->NULL
     # Should be 5.
-    print SolutionStack().reverseList(node1).val
-    print SolutionRecur().reverseList(node1).val
-    print SolutionIter().reverseList(node1).val
+    print(SolutionStack().reverseList(node1).val)
+    print(SolutionRecur().reverseList(node1).val)
+    print(SolutionIter().reverseList(node1).val)
     # Should be 4.
-    print SolutionStack().reverseList(node1).next.val
-    print SolutionRecur().reverseList(node1).next.val
-    print SolutionIter().reverseList(node1).next.val
+    print(SolutionStack().reverseList(node1).next.val)
+    print(SolutionRecur().reverseList(node1).next.val)
+    print(SolutionIter().reverseList(node1).next.val)
     # Should be 3.
-    print SolutionStack().reverseList(node1).next.next.val
-    print SolutionRecur().reverseList(node1).next.next.val
-    print SolutionIter().reverseList(node1).next.next.val
+    print(SolutionStack().reverseList(node1).next.next.val)
+    print(SolutionRecur().reverseList(node1).next.next.val)
+    print(SolutionIter().reverseList(node1).next.next.val)
 
 
 if __name__ == '__main__':

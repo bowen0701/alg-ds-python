@@ -73,11 +73,11 @@ def main():
 
 	# Output: 5.
 	std_min_edit_distance = MinimumEditDistance(distance_type="Standard")
-	print std_min_edit_distance.get_distance(str1, str2)
+	print(std_min_edit_distance.get_distance(str1, str2))
 
 	# Output: 8.
 	levenshtein_min_edit_distance = MinimumEditDistance(distance_type="Levenshtein")
-	print levenshtein_min_edit_distance.get_distance(str1, str2)
+	print(levenshtein_min_edit_distance.get_distance(str1, str2))
 
 
 if __name__ == '__main__':

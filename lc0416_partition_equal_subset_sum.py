@@ -66,11 +66,11 @@ class SolutionIndexSumFoundDpMemo(object):
 def main():
     # Output: True
     nums = [1, 5, 11, 5]
-    print SolutionIndexSumFoundDpMemo().canPartition(nums)
+    print(SolutionIndexSumFoundDpMemo().canPartition(nums))
 
     # Output: False
     nums = [1, 2, 3, 5]
-    print SolutionIndexSumFoundDpMemo().canPartition(nums)
+    print(SolutionIndexSumFoundDpMemo().canPartition(nums))
 
 
 if __name__ == '__main__':

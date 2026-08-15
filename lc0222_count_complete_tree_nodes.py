@@ -151,10 +151,10 @@ def main():
     root.left.right = TreeNode(5)
     root.right.left = TreeNode(6)
 
-    print SolutionPreorderRecur().countNodes(root)
-    print SolutionPreorderIter().countNodes(root)
-    print SolutionLevelorderIter().countNodes(root)
-    print SolutionLeftRightDepths().countNodes(root)
+    print(SolutionPreorderRecur().countNodes(root))
+    print(SolutionPreorderIter().countNodes(root))
+    print(SolutionLevelorderIter().countNodes(root))
+    print(SolutionLeftRightDepths().countNodes(root))
 
 
 if __name__ == '__main__':

@@ -74,22 +74,22 @@ def main():
     # Output: true (by insert)
     s = "ab"
     t = "acb"
-    print SolutionOneLengthDiff().isOneEditDistance(s, t)
+    print(SolutionOneLengthDiff().isOneEditDistance(s, t))
 
     # Output: false
     s = "cab" 
     t = "ad"
-    print SolutionOneLengthDiff().isOneEditDistance(s, t)
+    print(SolutionOneLengthDiff().isOneEditDistance(s, t))
 
     # Output: true (by replace)
     s = "1203"
     t = "1213"
-    print SolutionOneLengthDiff().isOneEditDistance(s, t)
+    print(SolutionOneLengthDiff().isOneEditDistance(s, t))
 
     # Output: false
     s = ""
     t = ""
-    print SolutionOneLengthDiff().isOneEditDistance(s, t)
+    print(SolutionOneLengthDiff().isOneEditDistance(s, t))
 
 
 if __name__ == '__main__':

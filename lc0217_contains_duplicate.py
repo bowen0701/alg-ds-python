@@ -44,15 +44,15 @@ class SolutionSet(object):
 def main():
     # Output: True
     nums = [1,2,3,1]
-    print SolutionSet().containsDuplicate(nums)
+    print(SolutionSet().containsDuplicate(nums))
 
     # Output: False
     nums = [1,2,3,4]
-    print SolutionSet().containsDuplicate(nums)
+    print(SolutionSet().containsDuplicate(nums))
 
     # Output: True
     nums = [1,1,1,3,3,4,3,2,4,2]
-    print SolutionSet().containsDuplicate(nums)
+    print(SolutionSet().containsDuplicate(nums))
 
 
 if __name__ == '__main__':

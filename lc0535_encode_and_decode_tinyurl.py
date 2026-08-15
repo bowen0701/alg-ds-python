@@ -108,13 +108,13 @@ def main():
 
     codec = CodecRandom()
     shortUrl = codec.encode(longUrl)
-    print shortUrl
-    print codec.decode(shortUrl)
+    print(shortUrl)
+    print(codec.decode(shortUrl))
 
     codec = CodecHash()
     shortUrl = codec.encode(longUrl)
-    print shortUrl
-    print codec.decode(shortUrl)
+    print(shortUrl)
+    print(codec.decode(shortUrl))
 
 
 if __name__ == '__main__':

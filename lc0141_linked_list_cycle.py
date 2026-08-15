@@ -98,20 +98,20 @@ def main():
     head.next.next = ListNode(0)
     head.next.next.next = ListNode(-4)
     head.next.next.next.next = head.next
-    print SolutionSet().hasCycle(head)
-    print SolutionSlowFast().hasCycle(head)
+    print(SolutionSet().hasCycle(head))
+    print(SolutionSlowFast().hasCycle(head))
 
     # Input: head = [1,2], pos = 0. Output: true
     head = ListNode(1)
     head.next = ListNode(2)
     head.next.next = head
-    print SolutionSet().hasCycle(head)
-    print SolutionSlowFast().hasCycle(head)
+    print(SolutionSet().hasCycle(head))
+    print(SolutionSlowFast().hasCycle(head))
 
     # Input: head = [1], pos = -1. Output: false
     head = ListNode(1)
-    print SolutionSet().hasCycle(head)    
-    print SolutionSlowFast().hasCycle(head)
+    print(SolutionSet().hasCycle(head))    
+    print(SolutionSlowFast().hasCycle(head))
 
 
 if __name__ == '__main__':

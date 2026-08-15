@@ -98,8 +98,8 @@ def main():
     root.children[0].children.append(Node(5, []))
     root.children[0].children.append(Node(6, []))
 
-    print SolutionRecur().postorder(root)
-    print SolutionIter().postorder(root)
+    print(SolutionRecur().postorder(root))
+    print(SolutionIter().postorder(root))
 
 
 if __name__ == '__main__':

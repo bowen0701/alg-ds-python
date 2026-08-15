@@ -78,15 +78,15 @@ class SolutionTwoPointersDfsRecur(object):
 def main():
     # Output: ["()()()", "(())()"]
     s = "()())()"
-    print SolutionTwoPointersDfsRecur().removeInvalidParentheses(s)
+    print(SolutionTwoPointersDfsRecur().removeInvalidParentheses(s))
 
     # Output: ["(a)()()", "(a())()"]
     s = "(a)())()"
-    print SolutionTwoPointersDfsRecur().removeInvalidParentheses(s)
+    print(SolutionTwoPointersDfsRecur().removeInvalidParentheses(s))
 
     # Output: [""]
     s = ")("
-    print SolutionTwoPointersDfsRecur().removeInvalidParentheses(s)
+    print(SolutionTwoPointersDfsRecur().removeInvalidParentheses(s))
 
 
 if __name__ == '__main__':

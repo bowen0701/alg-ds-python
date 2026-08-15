@@ -118,18 +118,18 @@ class SolutionPositionJumpStacksDP(object):
 def main():
     # Output: True
     stones = [0,1,3,5,6,8,12,17]
-    print SolutionStoneJumpDictDP().canCross(stones)
-    print SolutionPositionJumpStacksDP().canCross(stones)
+    print(SolutionStoneJumpDictDP().canCross(stones))
+    print(SolutionPositionJumpStacksDP().canCross(stones))
 
     # Output: False
     stones = [0,1,2,3,4,8,9,11]
-    print SolutionStoneJumpDictDP().canCross(stones)
-    print SolutionPositionJumpStacksDP().canCross(stones)
+    print(SolutionStoneJumpDictDP().canCross(stones))
+    print(SolutionPositionJumpStacksDP().canCross(stones))
 
     # Output: True
     stones = [0,1]
-    print SolutionStoneJumpDictDP().canCross(stones)
-    print SolutionPositionJumpStacksDP().canCross(stones)
+    print(SolutionStoneJumpDictDP().canCross(stones))
+    print(SolutionPositionJumpStacksDP().canCross(stones))
 
 
 if __name__ == '__main__':

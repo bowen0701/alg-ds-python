@@ -78,15 +78,15 @@ class SolutionStack(object):
 def main():
     # Output: 9
     tokens = ["2", "1", "+", "3", "*"]
-    print SolutionStack().evalRPN(tokens)
+    print(SolutionStack().evalRPN(tokens))
 
     # Output: 6
     tokens = ["4", "13", "5", "/", "+"]
-    print SolutionStack().evalRPN(tokens)
+    print(SolutionStack().evalRPN(tokens))
 
     # Output: 22
     tokens = ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
-    print SolutionStack().evalRPN(tokens)
+    print(SolutionStack().evalRPN(tokens))
 
 
 if __name__ == '__main__':

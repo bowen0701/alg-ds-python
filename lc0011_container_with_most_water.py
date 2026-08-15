@@ -48,7 +48,7 @@ class SolutionTwoPointers(object):
 def main():
     # Output: 49 = (8 - 1) * 7
     height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
-    print SolutionTwoPointers().maxArea(height)
+    print(SolutionTwoPointers().maxArea(height))
 
 
 if __name__ == '__main__':

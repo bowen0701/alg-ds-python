@@ -85,7 +85,7 @@ class Solution(object):
 
 def main():
     n = 4
-    print Solution().solveNQueens(n)
+    print(Solution().solveNQueens(n))
 
 
 if __name__ == '__main__':

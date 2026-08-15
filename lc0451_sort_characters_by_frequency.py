@@ -64,15 +64,15 @@ class SolutionCharFreqDict(object):
 def main():
     # Output: eert
     s = "tree"
-    print SolutionCharFreqDict().frequencySort(s)
+    print(SolutionCharFreqDict().frequencySort(s))
 
     # Output: cccaaa
     s = "cccaaa"
-    print SolutionCharFreqDict().frequencySort(s)
+    print(SolutionCharFreqDict().frequencySort(s))
 
     # Output: bbAa
     s = "Aabb"
-    print SolutionCharFreqDict().frequencySort(s)
+    print(SolutionCharFreqDict().frequencySort(s))
 
 
 if __name__ == '__main__':

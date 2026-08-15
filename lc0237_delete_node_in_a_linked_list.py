@@ -82,7 +82,7 @@ def main():
     node = head.next
     # SolutionTwoPointers().deleteNode(node)
     SolutionChangeValNext().deleteNode(node)
-    print head.val, head.next.val, head.next.next.val, head.next.next.next
+    print(head.val, head.next.val, head.next.next.val, head.next.next.next)
 
     # Input: head = [4,5,1,9], node = 1
     # Output: [4,5,9]
@@ -93,7 +93,7 @@ def main():
     node = head.next.next
     # SolutionTwoPointers().deleteNode(node)
     SolutionChangeValNext().deleteNode(node)
-    print head.val, head.next.val, head.next.next.val, head.next.next.next
+    print(head.val, head.next.val, head.next.next.val, head.next.next.next)
 
 
 if __name__ == '__main__':

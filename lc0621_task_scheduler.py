@@ -76,12 +76,12 @@ def main():
     # Output: 8.
     tasks = ["A","A","A","B","B","B"]
     n = 2
-    print SolutionTaskCountDictMaxHeap().leastInterval(tasks, n)
+    print(SolutionTaskCountDictMaxHeap().leastInterval(tasks, n))
 
     # Output: 16.
     tasks = ["A","A","A","A","A","A","B","C","D","E","F","G"]
     n = 2
-    print SolutionTaskCountDictMaxHeap().leastInterval(tasks, n)
+    print(SolutionTaskCountDictMaxHeap().leastInterval(tasks, n))
 
 
 if __name__ == '__main__':

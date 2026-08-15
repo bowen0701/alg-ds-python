@@ -75,12 +75,12 @@ def main():
     # Output: [0, 0, 1, 1, 0, 0, 0, 0]
     cells = [0,1,0,1,1,0,0,1]
     N = 7
-    print SolutionPattern().prisonAfterNDays(cells, N)
+    print(SolutionPattern().prisonAfterNDays(cells, N))
 
     # Output: [0,0,1,1,1,1,1,0]
     cells = [1,0,0,1,0,0,1,0]
     N = 1000000000
-    print SolutionPattern().prisonAfterNDays(cells, N)
+    print(SolutionPattern().prisonAfterNDays(cells, N))
 
 
 if __name__ == '__main__':

@@ -82,12 +82,12 @@ def main():
     # Output: [[1, 7],[1, 2, 5],[2, 6],[1, 1, 6]]
     candidates = [10,1,2,7,6,1,5]
     target = 8
-    print SolutionBacktrack().combinationSum2(candidates, target)
+    print(SolutionBacktrack().combinationSum2(candidates, target))
 
     # Output: [[1, 2, 2],[5]]
     candidates = [2,5,2,1,2]
     target = 5
-    print SolutionBacktrack().combinationSum2(candidates, target)
+    print(SolutionBacktrack().combinationSum2(candidates, target))
 
 
 if __name__ == '__main__':

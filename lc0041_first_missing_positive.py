@@ -50,16 +50,16 @@ class SolutionSwapToCorrectPos(object):
 def main():
     # Output: 3
     nums = [1,2,0]
-    print SolutionSwapToCorrectPos().firstMissingPositive(nums)
+    print(SolutionSwapToCorrectPos().firstMissingPositive(nums))
 
     # Output: 2
     nums = [3,4,-1,1]
-    print nums
-    print SolutionSwapToCorrectPos().firstMissingPositive(nums)
+    print(nums)
+    print(SolutionSwapToCorrectPos().firstMissingPositive(nums))
 
     # # Output: 1
     nums = [7,8,9,11,12]
-    print SolutionSwapToCorrectPos().firstMissingPositive(nums)
+    print(SolutionSwapToCorrectPos().firstMissingPositive(nums))
 
 
 if __name__ == '__main__':

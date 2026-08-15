@@ -102,13 +102,13 @@ def main():
     forwards = [[1, 2], [2, 4], [3, 6]]
     returns = [[1, 2]]
     max_dist = 7
-    print SolutionTwoPointers().optimizeUtilization(max_dist, forwards, returns)
+    print(SolutionTwoPointers().optimizeUtilization(max_dist, forwards, returns))
 
     # Output: [[2, 4], [3, 2]]
     forwards = [[1, 3], [2, 5], [3, 7], [4, 10]]
     returns = [[1, 2], [2, 3], [3, 4], [4, 5]]
     max_dist = 10
-    print SolutionTwoPointers().optimizeUtilization(max_dist, forwards, returns)
+    print(SolutionTwoPointers().optimizeUtilization(max_dist, forwards, returns))
 
 
 if __name__ == '__main__':

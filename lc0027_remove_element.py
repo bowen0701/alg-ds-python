@@ -64,17 +64,17 @@ def main():
     # Output: 2.
     nums = [3,2,2,3]
     val = 3
-    print SolutionPointer().removeElement(nums, val)
+    print(SolutionPointer().removeElement(nums, val))
 
     # Output: 5.
     nums = [0,1,2,2,3,0,4,2]
     val = 2
-    print SolutionPointer().removeElement(nums, val)
+    print(SolutionPointer().removeElement(nums, val))
 
     # Output: 4
     nums = [0,4,4,0,4,4,4,0,2]
     val = 4
-    print SolutionPointer().removeElement(nums, val)
+    print(SolutionPointer().removeElement(nums, val))
 
 
 if __name__ == '__main__':

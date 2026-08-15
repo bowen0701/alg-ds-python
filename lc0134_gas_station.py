@@ -124,14 +124,14 @@ def main():
     # Ans: 3
     gas  = [1,2,3,4,5]
     cost = [3,4,5,1,2]
-    print SolutionNaiveIter().canCompleteCircuit(gas, cost)
-    print SolutionIter().canCompleteCircuit(gas, cost)
+    print(SolutionNaiveIter().canCompleteCircuit(gas, cost))
+    print(SolutionIter().canCompleteCircuit(gas, cost))
 
     # Ans: -1
     gas  = [2,3,4]
     cost = [3,4,3]
-    print SolutionNaiveIter().canCompleteCircuit(gas, cost)
-    print SolutionIter().canCompleteCircuit(gas, cost)
+    print(SolutionNaiveIter().canCompleteCircuit(gas, cost))
+    print(SolutionIter().canCompleteCircuit(gas, cost))
 
 
 if __name__ == '__main__':

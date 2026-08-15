@@ -62,7 +62,7 @@ class SolutionSortBacktrack(object):
 def main():
     # Output: [[1,1,2],[1,2,1],[2,1,1]]
     nums = [1,1,2,4]
-    print SolutionSortBacktrack().permuteUnique(nums)
+    print(SolutionSortBacktrack().permuteUnique(nums))
 
 
 if __name__ == '__main__':

@@ -79,11 +79,11 @@ def main():
     # Output: "BANC"
     s = "ADOBECODEBANC"
     t = "ABC"
-    print SolutionCharCountDictTwoPointers().minWindow(s, t)
+    print(SolutionCharCountDictTwoPointers().minWindow(s, t))
 
     s = "ABBBBBBBBBA"
     t = "AA"
-    print SolutionCharCountDictTwoPointers().minWindow(s, t)
+    print(SolutionCharCountDictTwoPointers().minWindow(s, t))
 
 
 if __name__ == '__main__':

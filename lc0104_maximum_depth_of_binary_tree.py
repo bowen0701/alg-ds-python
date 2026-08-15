@@ -95,8 +95,8 @@ def main():
     root.right.right = TreeNode(7)
     root.right.left.left = TreeNode(15)
 
-    print SolutionDFSRecur().maxDepth(root)   
-    print SolutionLevelBFSIter().maxDepth(root)
+    print(SolutionDFSRecur().maxDepth(root))   
+    print(SolutionLevelBFSIter().maxDepth(root))
 
 
 if __name__ == '__main__':

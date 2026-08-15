@@ -78,13 +78,13 @@ def main():
     M = [[1,1,0],
          [1,1,0],
          [0,0,1]]
-    print SolutionDFS().findCircleNum(M)
+    print(SolutionDFS().findCircleNum(M))
 
     # Output: 1.
     M = [[1,1,0],
          [1,1,1],
          [0,1,1]]
-    print SolutionDFS().findCircleNum(M)
+    print(SolutionDFS().findCircleNum(M))
 
 
 if __name__ == '__main__':

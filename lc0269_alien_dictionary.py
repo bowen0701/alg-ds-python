@@ -143,14 +143,14 @@ def main():
       "ett",
       "rftt"
     ]
-    print SolutionTopologicalSort().alienOrder(words)
+    print(SolutionTopologicalSort().alienOrder(words))
 
     # Output: "zx"
     words = [
       "z",
       "x"
     ]
-    print SolutionTopologicalSort().alienOrder(words)
+    print(SolutionTopologicalSort().alienOrder(words))
 
     # Output: ""
     words = [
@@ -158,7 +158,7 @@ def main():
       "x",
       "z"
     ] 
-    print SolutionTopologicalSort().alienOrder(words)
+    print(SolutionTopologicalSort().alienOrder(words))
 
     # Output: "wertf"
     words = [
@@ -169,7 +169,7 @@ def main():
       "rftt",
       "te"
     ]
-    print SolutionTopologicalSort().alienOrder(words)
+    print(SolutionTopologicalSort().alienOrder(words))
 
 
 if __name__ == '__main__':

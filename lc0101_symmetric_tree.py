@@ -114,8 +114,8 @@ def main():
     root.right.left = TreeNode(4)
     root.right.right = TreeNode(3)
 
-    print SolutionRecur().isSymmetric(root)
-    print SolutionIter().isSymmetric(root)
+    print(SolutionRecur().isSymmetric(root))
+    print(SolutionIter().isSymmetric(root))
 
     # Output: False.
     #     1
@@ -129,8 +129,8 @@ def main():
     root.left.right = TreeNode(3)
     root.right.right = TreeNode(3)
     
-    print SolutionRecur().isSymmetric(root)
-    print SolutionIter().isSymmetric(root)
+    print(SolutionRecur().isSymmetric(root))
+    print(SolutionIter().isSymmetric(root))
 
 
 if __name__ == '__main__':

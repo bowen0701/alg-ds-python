@@ -57,7 +57,7 @@ def main():
     nums2 = [2,5,6]
     n = 3
     SolutionTwoPointersFromLast().merge(nums1, m, nums2, n)
-    print nums1
+    print(nums1)
 
 
 if __name__ == '__main__':

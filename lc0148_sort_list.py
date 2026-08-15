@@ -180,7 +180,7 @@ def main():
     head.next.next.next = ListNode(3)
 
     sorted_head = SolutionMergeSortRecur().sortList(head)
-    print (sorted_head.val, sorted_head.next.val,
+    print(sorted_head.val, sorted_head.next.val,
            sorted_head.next.next.val, 
            sorted_head.next.next.next.val)
 
@@ -190,7 +190,7 @@ def main():
     head.next.next.next = ListNode(3)
 
     sorted_head = SolutionMergeSortIterBottomUp().sortList(head)
-    print (sorted_head.val, sorted_head.next.val,
+    print(sorted_head.val, sorted_head.next.val,
            sorted_head.next.next.val, 
            sorted_head.next.next.next.val)
 

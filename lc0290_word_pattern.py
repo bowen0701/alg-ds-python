@@ -61,27 +61,27 @@ def main():
     pattern = "abba"
     str = "dog cat cat dog"    # Ans: True.
     output = Solution().wordPattern(pattern, str)
-    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+    print('pattern: {0}; str: {1} => {2}'.format(pattern, str, output))
 
     pattern = "abba"
     str = "dog cat cat fish"    # Ans: False.
     output = Solution().wordPattern(pattern, str)
-    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+    print('pattern: {0}; str: {1} => {2}'.format(pattern, str, output))
 
     pattern = "aaaa"
     str = "dog cat cat dog"    # Ans: False.
     output = Solution().wordPattern(pattern, str)
-    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+    print('pattern: {0}; str: {1} => {2}'.format(pattern, str, output))
 
     pattern = "abba"
     str = "dog dog dog dog"    # Ans: False.
     output = Solution().wordPattern(pattern, str)
-    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+    print('pattern: {0}; str: {1} => {2}'.format(pattern, str, output))
 
     pattern = "jquery"
     str = "jquery"    # Ans: False.
     output = Solution().wordPattern(pattern, str)
-    print 'pattern: {0}; str: {1} => {2}'.format(pattern, str, output)
+    print('pattern: {0}; str: {1} => {2}'.format(pattern, str, output))
 
 
 if __name__ == '__main__':

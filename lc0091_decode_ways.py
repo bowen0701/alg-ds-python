@@ -217,48 +217,48 @@ def main():
     s = '12' # Should be 2 = #{(1,2), (12)}.
 
     start_time = time.time()
-    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By recur: {}'.format(SolutionRecur().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By memo: {}'.format(SolutionMemo().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DP: {}'.format(SolutionDP().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By iter: {}'.format(SolutionIter().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By iter: {}'.format(SolutionIter().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
-    print '---'
+    print('---')
 
     s = '226' # Should be 3 = #{(2,2,6), (22,6), (2,26)}
 
     start_time = time.time()
-    print 'By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By naive recur: {}'.format(SolutionRecurNaive().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By recur: {}'.format(SolutionRecur().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By recur: {}'.format(SolutionRecur().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By memo: {}'.format(SolutionMemo().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By memo: {}'.format(SolutionMemo().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By DP: {}'.format(SolutionDP().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By DP: {}'.format(SolutionDP().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'By iter: {}'.format(SolutionIter().numDecodings(s))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('By iter: {}'.format(SolutionIter().numDecodings(s)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

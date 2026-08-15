@@ -74,7 +74,7 @@ def main():
     root.right = TreeNode(3)
     root.left.right = TreeNode(5)
 
-    print SolutionDFS().binaryTreePaths(root)
+    print(SolutionDFS().binaryTreePaths(root))
 
 
 if __name__ == '__main__':

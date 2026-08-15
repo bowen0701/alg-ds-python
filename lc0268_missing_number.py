@@ -37,11 +37,11 @@ class SolutionGauss(object):
 def main():
     # Output: 2.
     nums = [3,0,1]
-    print SolutionGauss().missingNumber(nums)
+    print(SolutionGauss().missingNumber(nums))
 
     # Output: 8.
     nums = [9,6,4,2,3,5,7,0,1]
-    print SolutionGauss().missingNumber(nums)
+    print(SolutionGauss().missingNumber(nums))
 
 if __name__ == '__main__':
     main()

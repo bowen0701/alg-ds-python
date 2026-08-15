@@ -91,7 +91,7 @@ def main():
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
 
-    print SolutionBFS().zigzagLevelOrder(root)
+    print(SolutionBFS().zigzagLevelOrder(root))
 
 
 if __name__ == '__main__':

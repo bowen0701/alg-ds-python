@@ -66,13 +66,13 @@ class SolutionTwoPointers(object):
 def main():
     # Ans: True
     s = "A man, a plan, a canal: Panama"
-    print SolutionReverse().isPalindrome(s)
-    print SolutionTwoPointers().isPalindrome(s)
+    print(SolutionReverse().isPalindrome(s))
+    print(SolutionTwoPointers().isPalindrome(s))
 
     # Ans: False
     s = "0P"
-    print SolutionReverse().isPalindrome(s)
-    print SolutionTwoPointers().isPalindrome(s)
+    print(SolutionReverse().isPalindrome(s))
+    print(SolutionTwoPointers().isPalindrome(s))
 
 
 if __name__ == '__main__':

@@ -89,11 +89,11 @@ def main():
     stack.push(1)
     stack.push(2)
     stack.push(3)
-    print 'top:', stack.top()   # returns 3
-    print 'pop:', stack.pop()   # returns 3
+    print('top:', stack.top())   # returns 3
+    print('pop:', stack.pop())   # returns 3
     stack.push(4)
-    print 'pop:', stack.pop()   # return 4
-    print stack.empty()         # returns False
+    print('pop:', stack.pop())   # return 4
+    print(stack.empty())         # returns False
 
 
 if __name__ == '__main__':

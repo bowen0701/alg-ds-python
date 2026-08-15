@@ -52,12 +52,12 @@ def main():
     # Output: 4
     nums = [-1,0,3,5,9,12]
     target = 9
-    print Solution().search(nums, target)
+    print(Solution().search(nums, target))
 
     # Output: -1
     nums = [-1,0,3,5,9,12]
     target = 2
-    print Solution().search(nums, target)    
+    print(Solution().search(nums, target))    
 
 
 if __name__ == '__main__':

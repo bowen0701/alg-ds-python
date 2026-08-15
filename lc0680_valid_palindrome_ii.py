@@ -81,18 +81,18 @@ class SolutionTwoPointers(object):
 def main():
     # Output: True
     s = 'aba'
-    print SolutionBrute().validPalindrome(s)
-    print SolutionTwoPointers().validPalindrome(s)
+    print(SolutionBrute().validPalindrome(s))
+    print(SolutionTwoPointers().validPalindrome(s))
 
     # Output: True
     s = 'abca'
-    print SolutionBrute().validPalindrome(s)
-    print SolutionTwoPointers().validPalindrome(s)
+    print(SolutionBrute().validPalindrome(s))
+    print(SolutionTwoPointers().validPalindrome(s))
 
     # Output: False
     s = 'aacb'
-    print SolutionBrute().validPalindrome(s)
-    print SolutionTwoPointers().validPalindrome(s)
+    print(SolutionBrute().validPalindrome(s))
+    print(SolutionTwoPointers().validPalindrome(s))
 
 
 if __name__ == '__main__':

@@ -117,13 +117,13 @@ def show(ls):
     while current:
         result.append(current.val)
         current = current.next
-    print result
+    print(result)
 
 
 def main():
     # Input: 1->2->4, 1->3->4
     # Output: 1->1->2->3->4->4
-    print 'By sort:'
+    print('By sort:')
     l1 = ListNode(1)
     l1.next = ListNode(2)
     l1.next.next = ListNode(4)
@@ -135,7 +135,7 @@ def main():
     ls = SolutionSortAll().mergeTwoLists(l1, l2)
     show(ls)
 
-    print 'By recur:'
+    print('By recur:')
     l1 = ListNode(1)
     l1.next = ListNode(2)
     l1.next.next = ListNode(4)
@@ -147,7 +147,7 @@ def main():
     ls = SolutionRecur().mergeTwoLists(l1, l2)
     show(ls)
 
-    print 'By iter:'
+    print('By iter:')
     l1 = ListNode(1)
     l1.next = ListNode(2)
     l1.next.next = ListNode(4)

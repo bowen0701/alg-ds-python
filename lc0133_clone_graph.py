@@ -188,38 +188,38 @@ def main():
     node4.neighbors.append(node1)
     node4.neighbors.append(node3)
 
-    print 'Apply BFS with queue:'
+    print('Apply BFS with queue:')
     node1_copy = SolutionNodeCopyDictBFS().cloneGraph(node1)
-    print node1_copy.neighbors[0].val  # Should be 2.
-    print node1_copy.neighbors[1].val  # Should be 4.
-    print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
-    print node1_copy.neighbors[0].neighbors[1].val  # Should be 3.
-    print node1_copy.neighbors[1].neighbors[0].val  # Should be 1.
-    print node1_copy.neighbors[1].neighbors[1].val  # Should be 3.
-    print node1_copy.neighbors[0].neighbors[1].neighbors[0].val  # Should be 2.
-    print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
+    print(node1_copy.neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[1].val)  # Should be 4.
+    print(node1_copy.neighbors[0].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[0].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[1].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[1].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[1].val)  # Should be 4.
 
-    print 'Apply recursive DFS:'
+    print('Apply recursive DFS:')
     node1_copy = SolutionNodeCopyDictDFSRecur().cloneGraph(node1)
-    print node1_copy.neighbors[0].val  # Should be 2.
-    print node1_copy.neighbors[1].val  # Should be 4.
-    print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
-    print node1_copy.neighbors[0].neighbors[1].val  # Should be 3.
-    print node1_copy.neighbors[1].neighbors[0].val  # Should be 1.
-    print node1_copy.neighbors[1].neighbors[1].val  # Should be 3.
-    print node1_copy.neighbors[0].neighbors[1].neighbors[0].val  # Should be 2.
-    print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
+    print(node1_copy.neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[1].val)  # Should be 4.
+    print(node1_copy.neighbors[0].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[0].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[1].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[1].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[1].val)  # Should be 4.
 
-    print 'Apply iterative DFS:'
+    print('Apply iterative DFS:')
     node1_copy = SolutionNodeCopyDictDFSIter().cloneGraph(node1)
-    print node1_copy.neighbors[0].val  # Should be 2.
-    print node1_copy.neighbors[1].val  # Should be 4.
-    print node1_copy.neighbors[0].neighbors[0].val  # Should be 1.
-    print node1_copy.neighbors[0].neighbors[1].val  # Should be 3.
-    print node1_copy.neighbors[1].neighbors[0].val  # Should be 1.
-    print node1_copy.neighbors[1].neighbors[1].val  # Should be 3.
-    print node1_copy.neighbors[0].neighbors[1].neighbors[0].val  # Should be 2.
-    print node1_copy.neighbors[0].neighbors[1].neighbors[1].val  # Should be 4.
+    print(node1_copy.neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[1].val)  # Should be 4.
+    print(node1_copy.neighbors[0].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[0].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[1].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[1].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[1].val)  # Should be 4.
 
 
 if __name__ == '__main__':

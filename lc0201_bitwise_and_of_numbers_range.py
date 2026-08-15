@@ -67,13 +67,13 @@ class SolutionCommonPrefixBit(object):
 def main():
     # Output: 4
     m, n = 5, 7
-    print SolutionBruteForce().rangeBitwiseAnd(m, n)
-    print SolutionCommonPrefixBit().rangeBitwiseAnd(m, n)
+    print(SolutionBruteForce().rangeBitwiseAnd(m, n))
+    print(SolutionCommonPrefixBit().rangeBitwiseAnd(m, n))
 
     # Output: 0
     m, n = 0, 1
-    print SolutionBruteForce().rangeBitwiseAnd(m, n)
-    print SolutionCommonPrefixBit().rangeBitwiseAnd(m, n)
+    print(SolutionBruteForce().rangeBitwiseAnd(m, n))
+    print(SolutionCommonPrefixBit().rangeBitwiseAnd(m, n))
 
 
 if __name__ == '__main__':

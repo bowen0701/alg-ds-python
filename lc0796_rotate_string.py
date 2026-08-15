@@ -49,13 +49,13 @@ def main():
     # Output: true
     A = 'abcde'
     B = 'cdeab'
-    print SolutionStringConcatSubstring().rotateString(A, B)
+    print(SolutionStringConcatSubstring().rotateString(A, B))
 
     # Input: A = 'abcde', B = 'abced'
     # Output: false
     A = 'abcde'
     B = 'abced'
-    print SolutionStringConcatSubstring().rotateString(A, B)
+    print(SolutionStringConcatSubstring().rotateString(A, B))
 
 
 if __name__ == '__main__':

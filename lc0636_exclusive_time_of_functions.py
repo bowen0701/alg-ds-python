@@ -82,7 +82,7 @@ def main():
     # Output: [3, 4]
     n = 2
     logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
-    print SolutionStartStackIter().exclusiveTime(n, logs)
+    print(SolutionStartStackIter().exclusiveTime(n, logs))
 
 
 if __name__ == '__main__':

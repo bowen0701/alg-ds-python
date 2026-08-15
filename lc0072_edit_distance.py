@@ -183,40 +183,40 @@ def main():
     word2 = "ros"
 
     start_time = time.time()
-    print 'By naive recur:', SolutionRecurNaive().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By naive recur:', SolutionRecurNaive().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By recur w/ pointer:', SolutionRecurPointer().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By recur w/ pointer:', SolutionRecurPointer().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By memo:', SolutionMemo().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By memo:', SolutionMemo().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: ', SolutionDP().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By DP: ', SolutionDP().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
     # Ans: 5.
     word1 = "intention"
     word2 = "execution"
 
     start_time = time.time()
-    print 'By naive recur:', SolutionRecurNaive().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By naive recur:', SolutionRecurNaive().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By recur w/ pointer:', SolutionRecurPointer().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By recur w/ pointer:', SolutionRecurPointer().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By memo:', SolutionMemo().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By memo:', SolutionMemo().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
     start_time = time.time()
-    print 'By DP: ', SolutionDP().minDistance(word1, word2)
-    print 'Time:', time.time() - start_time
+    print('By DP: ', SolutionDP().minDistance(word1, word2))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':

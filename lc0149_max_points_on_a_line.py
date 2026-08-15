@@ -93,11 +93,11 @@ class SolutionGCDLinePointsDict(object):
 def main():
     # Output: 3
     points = [[1,1],[2,2],[3,3]]
-    print SolutionGCDLinePointsDict().maxPoints(points)
+    print(SolutionGCDLinePointsDict().maxPoints(points))
 
     # Output: 4
     points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
-    print SolutionGCDLinePointsDict().maxPoints(points)
+    print(SolutionGCDLinePointsDict().maxPoints(points))
 
 
 if __name__ == '__main__':

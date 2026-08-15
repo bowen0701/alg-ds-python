@@ -54,13 +54,13 @@ class SolutionSumDivide(object):
 def main():
     # Output: 3.
     nums = [2,2,3,2]
-    print SolutionDict().singleNumber(nums)
-    print SolutionSumDivide().singleNumber(nums)
+    print(SolutionDict().singleNumber(nums))
+    print(SolutionSumDivide().singleNumber(nums))
 
     # Output: 99.
     nums = [0,1,0,1,0,1,99]
-    print SolutionDict().singleNumber(nums)
-    print SolutionSumDivide().singleNumber(nums)
+    print(SolutionDict().singleNumber(nums))
+    print(SolutionSumDivide().singleNumber(nums))
 
 
 if __name__ == '__main__':

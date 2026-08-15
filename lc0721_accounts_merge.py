@@ -146,8 +146,8 @@ def main():
                 ["John", "johnnybravo@mail.com"],
                 ["John", "johnsmith@mail.com", "john_newyork@mail.com"],
                 ["Mary", "mary@mail.com"]]
-    print SolutionEmailAccountidsDictDfsRecur().accountsMerge(accounts)
-    print SolutionEmailParentUnionFind().accountsMerge(accounts)
+    print(SolutionEmailAccountidsDictDfsRecur().accountsMerge(accounts))
+    print(SolutionEmailParentUnionFind().accountsMerge(accounts))
 
 
 if __name__ == '__main__':

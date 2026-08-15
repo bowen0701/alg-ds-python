@@ -61,7 +61,7 @@ class SolutionCharLastPosDict(object):
 
 def main():
     S = "ababcbacadefegdehijhklij"
-    print SolutionCharLastPosDict().partitionLabels(S)
+    print(SolutionCharLastPosDict().partitionLabels(S))
 
 
 if __name__ == '__main__':

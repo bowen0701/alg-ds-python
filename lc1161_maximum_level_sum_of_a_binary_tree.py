@@ -89,7 +89,7 @@ def main():
     root.left.left = TreeNode(7)
     root.left.right = TreeNode(-8)
 
-    print SolutionLevelBFS().maxLevelSum(root)
+    print(SolutionLevelBFS().maxLevelSum(root))
 
 
 if __name__ == '__main__':

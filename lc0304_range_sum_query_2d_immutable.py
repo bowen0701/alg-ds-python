@@ -132,33 +132,33 @@ def main():
                [1, 0, 3, 0, 5]
              ]
 
-    print 'By naive:'
+    print('By naive:')
     start_time = time.time()
     num_matrix = NumMatrixBruteForce(matrix)
 
     # sumRegion(2, 1, 4, 3) -> 8
-    print num_matrix.sumRegion(2, 1, 4, 3)
+    print(num_matrix.sumRegion(2, 1, 4, 3))
 
     # sumRegion(1, 1, 2, 2) -> 11
-    print num_matrix.sumRegion(1, 1, 2, 2)
+    print(num_matrix.sumRegion(1, 1, 2, 2))
 
     # sumRegion(1, 2, 2, 4) -> 12
-    print num_matrix.sumRegion(1, 2, 2, 4)
-    print 'Time:', time.time() - start_time
+    print(num_matrix.sumRegion(1, 2, 2, 4))
+    print('Time:', time.time() - start_time)
 
-    print 'By DP:'
+    print('By DP:')
     start_time = time.time()
     num_matrix = NumMatrixDP(matrix)
 
     # sumRegion(2, 1, 4, 3) -> 8
-    print num_matrix.sumRegion(2, 1, 4, 3)
+    print(num_matrix.sumRegion(2, 1, 4, 3))
 
     # sumRegion(1, 1, 2, 2) -> 11
-    print num_matrix.sumRegion(1, 1, 2, 2)
+    print(num_matrix.sumRegion(1, 1, 2, 2))
 
     # sumRegion(1, 2, 2, 4) -> 12
-    print num_matrix.sumRegion(1, 2, 2, 4)
-    print 'Time:', time.time() - start_time
+    print(num_matrix.sumRegion(1, 2, 2, 4))
+    print('Time:', time.time() - start_time)
 
 
 if __name__ == '__main__':

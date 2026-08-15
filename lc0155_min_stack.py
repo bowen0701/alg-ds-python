@@ -97,15 +97,15 @@ def main():
     minStack.push(-3)
 
     # Output: -3.
-    print minStack.getMin()
+    print(minStack.getMin())
 
     minStack.pop()
 
     # Output: 0.
-    print minStack.top()
+    print(minStack.top())
 
     # Returns -2.
-    print minStack.getMin()
+    print(minStack.getMin())
 
 
 if __name__ == '__main__':

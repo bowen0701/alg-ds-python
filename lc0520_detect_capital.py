@@ -49,11 +49,11 @@ class SolutionCapitalCount(object):
 def main():
     # Output: True
     word = 'USA'
-    print SolutionCapitalCount().detectCapitalUse(word)
+    print(SolutionCapitalCount().detectCapitalUse(word))
 
     # Output: False
     word = 'FlaG'
-    print SolutionCapitalCount().detectCapitalUse(word)
+    print(SolutionCapitalCount().detectCapitalUse(word))
 
 
 if __name__ == '__main__':

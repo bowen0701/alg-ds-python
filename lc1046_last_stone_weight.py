@@ -65,7 +65,7 @@ class SolutionMaxHeap(object):
 def main():
     # Output: 1.
     stones = [2,7,4,1,8,1]
-    print SolutionMaxHeap().lastStoneWeight(stones)
+    print(SolutionMaxHeap().lastStoneWeight(stones))
 
 
 if __name__ == '__main__':

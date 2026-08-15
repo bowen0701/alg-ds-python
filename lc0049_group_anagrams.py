@@ -53,7 +53,7 @@ def main():
     #   ["bat"]
     # ]
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-    print SolutionSortedAnagramDict().groupAnagrams(strs)
+    print(SolutionSortedAnagramDict().groupAnagrams(strs))
 
 
 if __name__ == '__main__':

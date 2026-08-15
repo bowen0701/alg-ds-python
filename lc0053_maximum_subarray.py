@@ -62,8 +62,8 @@ class SolutionIter(object):
 def main():
     # Output: 6.
     nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-    print SolutionDP().maxSubArray(nums)
-    print SolutionIter().maxSubArray(nums)
+    print(SolutionDP().maxSubArray(nums))
+    print(SolutionIter().maxSubArray(nums))
 
 
 if __name__ == '__main__':

@@ -100,10 +100,10 @@ def main():
     word_dict.addWord("bad")
     word_dict.addWord("dad")
     word_dict.addWord("mad")
-    print word_dict.search("pad")  # false
-    print word_dict.search("bad")  # true
-    print word_dict.search(".ad")  # true
-    print word_dict.search("b..")  # true
+    print(word_dict.search("pad"))  # false
+    print(word_dict.search("bad"))  # true
+    print(word_dict.search(".ad"))  # true
+    print(word_dict.search("b.."))  # true
 
 
 if __name__ == '__main__':

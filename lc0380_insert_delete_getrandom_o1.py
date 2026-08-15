@@ -117,26 +117,26 @@ def main():
     randomSet = RandomizedSetNumsAndNumPosDict()
 
     # Inserts 1 to the set. Returns true as 1 was inserted successfully.
-    print randomSet.insert(1);
+    print(randomSet.insert(1));
 
     # Returns false as 2 does not exist in the set.
-    print randomSet.remove(2);
+    print(randomSet.remove(2));
 
     # Inserts 2 to the set, returns true. Set now contains [1,2].
-    print randomSet.insert(2);
+    print(randomSet.insert(2));
 
     # getRandom should return either 1 or 2 randomly.
-    print randomSet.getRandom();
+    print(randomSet.getRandom());
 
     # Removes 1 from the set, returns true. Set now contains [2].
-    print randomSet.remove(1);
+    print(randomSet.remove(1));
 
     # 2 was already in the set, so return false.
-    print randomSet.insert(2);
+    print(randomSet.insert(2));
 
     # Since 2 is the only number in the set, getRandom always return 2.
-    print randomSet.getRandom();
-    print randomSet.getRandom();
+    print(randomSet.getRandom());
+    print(randomSet.getRandom());
 
 
 if __name__ == '__main__':

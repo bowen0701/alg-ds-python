@@ -134,9 +134,9 @@ def main():
         ['1','1','1','1','1'],
         ['1','0','0','1','0']
     ]
-    print SolutionDPSquare().maximalSquare(matrix)
-    print SolutionDPTwoRows().maximalSquare(matrix)
-    print SolutionDPOneRow().maximalSquare(matrix)
+    print(SolutionDPSquare().maximalSquare(matrix))
+    print(SolutionDPTwoRows().maximalSquare(matrix))
+    print(SolutionDPOneRow().maximalSquare(matrix))
 
     # Output: 4
     matrix = [
@@ -146,9 +146,9 @@ def main():
         ["1","1","0","1","1"],
         ["0","1","1","1","1"]
     ]
-    print SolutionDPSquare().maximalSquare(matrix)
-    print SolutionDPTwoRows().maximalSquare(matrix)
-    print SolutionDPOneRow().maximalSquare(matrix)
+    print(SolutionDPSquare().maximalSquare(matrix))
+    print(SolutionDPTwoRows().maximalSquare(matrix))
+    print(SolutionDPOneRow().maximalSquare(matrix))
 
 
 if __name__ == '__main__':

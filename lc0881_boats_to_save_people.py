@@ -68,17 +68,17 @@ def main():
     # Output: 1
     people = [1,2]
     limit = 3
-    print SolutionTwoPointers().numRescueBoats(people, limit)
+    print(SolutionTwoPointers().numRescueBoats(people, limit))
 
     # Output: 3
     people = [3,2,2,1]
     limit = 3
-    print SolutionTwoPointers().numRescueBoats(people, limit)
+    print(SolutionTwoPointers().numRescueBoats(people, limit))
 
     # Output: 4
     people = [3,5,3,4]
     limit = 5
-    print SolutionTwoPointers().numRescueBoats(people, limit)
+    print(SolutionTwoPointers().numRescueBoats(people, limit))
 
 
 if __name__ == '__main__':

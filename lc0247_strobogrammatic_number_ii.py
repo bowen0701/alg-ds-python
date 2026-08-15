@@ -61,19 +61,19 @@ class SolutionInsertMiddleRecur(object):
 
 def main():
     n = 0
-    print SolutionInsertMiddleRecur().findStrobogrammatic(n)
+    print(SolutionInsertMiddleRecur().findStrobogrammatic(n))
 
     n = 1
-    print SolutionInsertMiddleRecur().findStrobogrammatic(n)
+    print(SolutionInsertMiddleRecur().findStrobogrammatic(n))
 
     n = 2
-    print SolutionInsertMiddleRecur().findStrobogrammatic(n)
+    print(SolutionInsertMiddleRecur().findStrobogrammatic(n))
 
     n = 3
-    print SolutionInsertMiddleRecur().findStrobogrammatic(n)
+    print(SolutionInsertMiddleRecur().findStrobogrammatic(n))
 
     n = 4
-    print SolutionInsertMiddleRecur().findStrobogrammatic(n)
+    print(SolutionInsertMiddleRecur().findStrobogrammatic(n))
 
 
 if __name__ == '__main__':

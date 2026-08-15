@@ -78,19 +78,19 @@ class SolutionCurrentStack(object):
 def main():
     # Output: "/home/foo"
     path = "/home//foo/"
-    print SolutionCurrentStack().simplifyPath(path)
+    print(SolutionCurrentStack().simplifyPath(path))
 
     # Output: "/c"
     path = "/a/./b/../../c/"
-    print SolutionCurrentStack().simplifyPath(path)
+    print(SolutionCurrentStack().simplifyPath(path))
 
     # Output: "/c"
     path = "/a/../../b/../c//.//"
-    print SolutionCurrentStack().simplifyPath(path)
+    print(SolutionCurrentStack().simplifyPath(path))
 
     # Output: "/a/b/c"
     path = "/a//b////c/d//././/.."
-    print SolutionCurrentStack().simplifyPath(path)
+    print(SolutionCurrentStack().simplifyPath(path))
 
 
 if __name__ == '__main__':

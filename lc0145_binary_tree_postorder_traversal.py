@@ -90,8 +90,8 @@ def main():
     root.right = TreeNode(2)
     root.right.left = TreeNode(3)
 
-    print SolutionRecur().postorderTraversal(root)
-    print SolutionIter().postorderTraversal(root)
+    print(SolutionRecur().postorderTraversal(root))
+    print(SolutionIter().postorderTraversal(root))
 
 
 if __name__ == '__main__':

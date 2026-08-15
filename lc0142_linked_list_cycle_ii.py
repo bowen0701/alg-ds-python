@@ -114,8 +114,8 @@ def main():
     head.next.next = ListNode(-4)
     head.next.next.next = head.next
 
-    print SolutionSet().detectCycle(head).val
-    print SolutionSlowFast().detectCycle(head).val
+    print(SolutionSet().detectCycle(head).val)
+    print(SolutionSlowFast().detectCycle(head).val)
 
     # head = [1,2], pos = 0 (val: 1)
     # Output: 1
@@ -123,16 +123,16 @@ def main():
     head.next = ListNode(2)
     head.next.next = head
 
-    print SolutionSet().detectCycle(head).val
-    print SolutionSlowFast().detectCycle(head).val
+    print(SolutionSet().detectCycle(head).val)
+    print(SolutionSlowFast().detectCycle(head).val)
 
     # head = [1, 2], pos = -1
     # Output: None
     head = ListNode(1)
     head.next = ListNode(2)
 
-    print SolutionSet().detectCycle(head)
-    print SolutionSlowFast().detectCycle(head)
+    print(SolutionSet().detectCycle(head))
+    print(SolutionSlowFast().detectCycle(head))
 
     # head = [-1,-7,7,-4,19,6,-9,-5,-2,-5], pos = 6 (val: -9)
     head = ListNode(-1)
@@ -148,8 +148,8 @@ def main():
     head.next.next.next.next.next.next.next.next.next.next = (
         head.next.next.next.next.next.next)
 
-    print SolutionSet().detectCycle(head).val
-    print SolutionSlowFast().detectCycle(head).val
+    print(SolutionSet().detectCycle(head).val)
+    print(SolutionSlowFast().detectCycle(head).val)
 
 
 if __name__ == '__main__':

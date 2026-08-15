@@ -75,46 +75,46 @@ class SolutionIfDigitMinusPlusDotEIter(object):
 
 def main():
     # "0" => true
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('0')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('0'))
 
     # " 0.1 " => true
-    print SolutionIfDigitMinusPlusDotEIter().isNumber(' 0.1 ')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber(' 0.1 '))
 
     # "abc" => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('abc')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('abc'))
 
     # "1 a" => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('1 a')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('1 a'))
 
     # "2e10" => true
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('2e10')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('2e10'))
 
     # " -90e3   " => true
-    print SolutionIfDigitMinusPlusDotEIter().isNumber(' -90e3   ')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber(' -90e3   '))
 
     # " 1e" => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber(' 1e')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber(' 1e'))
 
     # "e3" => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('e3')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('e3'))
 
     # " 6e-1" => true
-    print SolutionIfDigitMinusPlusDotEIter().isNumber(' 6e-1')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber(' 6e-1'))
 
     # " 99e2.5 " => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber(' 99e2.5 ')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber(' 99e2.5 '))
 
     # "53.5e93" => true
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('53.5e93')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('53.5e93'))
 
     # " --6 " => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber(' --6 ')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber(' --6 '))
 
     # "-+3" => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('-+3')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('-+3'))
 
     # "95a54e53" => false
-    print SolutionIfDigitMinusPlusDotEIter().isNumber('95a54e53')
+    print(SolutionIfDigitMinusPlusDotEIter().isNumber('95a54e53'))
 
 
 if __name__ == '__main__':

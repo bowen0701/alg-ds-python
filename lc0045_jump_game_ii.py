@@ -112,15 +112,15 @@ class SolutionBFSCurReachGreedy(object):
 def main():
     # Outpout: 2
     nums = [2,3,1,1,4]
-    print SolutionDPGreedy().jump(nums)
-    print SolutionBFSPrevReachGreedy().jump(nums)
-    print SolutionBFSCurReachGreedy().jump(nums)
+    print(SolutionDPGreedy().jump(nums))
+    print(SolutionBFSPrevReachGreedy().jump(nums))
+    print(SolutionBFSCurReachGreedy().jump(nums))
 
     # Outpout: 2
     nums = [7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]
-    print SolutionDPGreedy().jump(nums)
-    print SolutionBFSPrevReachGreedy().jump(nums)
-    print SolutionBFSCurReachGreedy().jump(nums)
+    print(SolutionDPGreedy().jump(nums))
+    print(SolutionBFSPrevReachGreedy().jump(nums))
+    print(SolutionBFSCurReachGreedy().jump(nums))
 
 
 if __name__ == '__main__':

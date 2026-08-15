@@ -63,15 +63,15 @@ class SolutionIter(object):
 def main():
     # Output: false
     A = [2,1]
-    print SolutionIter().validMountainArray(A)
+    print(SolutionIter().validMountainArray(A))
 
     # Output: false
     A = [3,5,5]
-    print SolutionIter().validMountainArray(A)
+    print(SolutionIter().validMountainArray(A))
 
     # Output: true
     A = [0,3,2,1]
-    print SolutionIter().validMountainArray(A)
+    print(SolutionIter().validMountainArray(A))
 
 
 if __name__ == '__main__':

@@ -90,7 +90,7 @@ def main():
     nums = [2,0,2,1,1,0]
     # SolutionCount().sortColors(nums)
     SolutionUpdateAll().sortColors(nums)
-    print nums
+    print(nums)
 
 
 if __name__ == '__main__':

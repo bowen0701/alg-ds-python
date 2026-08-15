@@ -67,22 +67,22 @@ def main():
     # Output: true
     s = "egg"
     t = "add"
-    print SolutionCharMaps().isIsomorphic(s, t)
+    print(SolutionCharMaps().isIsomorphic(s, t))
 
     # Output: false
     s = "foo"
     t = "bar"
-    print SolutionCharMaps().isIsomorphic(s, t)
+    print(SolutionCharMaps().isIsomorphic(s, t))
 
     # Output: true
     s = "paper"
     t = "title"
-    print SolutionCharMaps().isIsomorphic(s, t)
+    print(SolutionCharMaps().isIsomorphic(s, t))
 
     # Output: False
     s = "aba"
     t = "baa"
-    print SolutionCharMaps().isIsomorphic(s, t)
+    print(SolutionCharMaps().isIsomorphic(s, t))
 
 
 if __name__ == '__main__':

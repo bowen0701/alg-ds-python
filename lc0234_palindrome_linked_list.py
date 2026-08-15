@@ -99,12 +99,12 @@ def main():
     head.next.next.next = ListNode(1)
 
     start_time = time.time()
-    print 'Stack: {}'.format(SolutionStack().isPalindrome(head))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Stack: {}'.format(SolutionStack().isPalindrome(head)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'Slow/fast: {}'.format(SolutionSlowFastReverse2nd().isPalindrome(head))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Slow/fast: {}'.format(SolutionSlowFastReverse2nd().isPalindrome(head)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # 1->2->3->1: No.
     head = ListNode(1)
@@ -113,12 +113,12 @@ def main():
     head.next.next.next = ListNode(1)
 
     start_time = time.time()
-    print 'Stack: {}'.format(SolutionStack().isPalindrome(head))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Stack: {}'.format(SolutionStack().isPalindrome(head)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'Slow/fast: {}'.format(SolutionSlowFastReverse2nd().isPalindrome(head))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Slow/fast: {}'.format(SolutionSlowFastReverse2nd().isPalindrome(head)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

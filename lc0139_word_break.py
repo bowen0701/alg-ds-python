@@ -95,26 +95,26 @@ def main():
     # Ans: True
     s = "leetcode"
     wordDict = ["leet", "code"]
-    print SolutionDP().wordBreak(s, wordDict)
-    print SolutionDp2().wordBreak(s, wordDict)
+    print(SolutionDP().wordBreak(s, wordDict))
+    print(SolutionDp2().wordBreak(s, wordDict))
 
     # Ans: True
     s = "applepenapple"
     wordDict = ["apple", "pen"]
-    print SolutionDP().wordBreak(s, wordDict)
-    print SolutionDp2().wordBreak(s, wordDict)
+    print(SolutionDP().wordBreak(s, wordDict))
+    print(SolutionDp2().wordBreak(s, wordDict))
 
     # Ans: False
     s = "catsandog"
     wordDict = ["cats", "dog", "sand", "and", "cat"]
-    print SolutionDP().wordBreak(s, wordDict)
-    print SolutionDp2().wordBreak(s, wordDict)
+    print(SolutionDP().wordBreak(s, wordDict))
+    print(SolutionDp2().wordBreak(s, wordDict))
 
     # Ans: True
     s = "aaaaaaa"
     wordDict = ["aaaa","aaa"]
-    print SolutionDP().wordBreak(s, wordDict)
-    print SolutionDp2().wordBreak(s, wordDict)
+    print(SolutionDP().wordBreak(s, wordDict))
+    print(SolutionDp2().wordBreak(s, wordDict))
 
 
 if __name__ == '__main__':

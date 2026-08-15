@@ -57,12 +57,12 @@ def main():
     # Output: 3
     s = "eceba"
     k = 2
-    print SolutionTwoPointerCharCountDictIter().lengthOfLongestSubstringKDistinct(s, k)
+    print(SolutionTwoPointerCharCountDictIter().lengthOfLongestSubstringKDistinct(s, k))
 
     # Output: 2
     s = "aa"
     k = 1
-    print SolutionTwoPointerCharCountDictIter().lengthOfLongestSubstringKDistinct(s, k)
+    print(SolutionTwoPointerCharCountDictIter().lengthOfLongestSubstringKDistinct(s, k))
 
 
 if __name__ == '__main__':

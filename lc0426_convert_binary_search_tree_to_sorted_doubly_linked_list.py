@@ -105,13 +105,13 @@ def main():
     root.left.left = Node(1)
     root.left.right = Node(3)
     dll_head = SolutionInorderIter().treeToDoublyList(root)
-    print dll_head.val  # Output: 1.
-    print dll_head.right.val  # Output: 2.
-    print dll_head.right.right.val  # Output: 3.
-    print dll_head.right.right.right.val  # Output: 4.
-    print dll_head.right.right.right.right.val  # Output: 5.
-    print dll_head.right.right.right.right.right.val  # Output: 1.
-    print dll_head.left.val  # Output: 5.  
+    print(dll_head.val)  # Output: 1.
+    print(dll_head.right.val)  # Output: 2.
+    print(dll_head.right.right.val)  # Output: 3.
+    print(dll_head.right.right.right.val)  # Output: 4.
+    print(dll_head.right.right.right.right.val)  # Output: 5.
+    print(dll_head.right.right.right.right.right.val)  # Output: 1.
+    print(dll_head.left.val)  # Output: 5.  
 
 
 if __name__ == '__main__':

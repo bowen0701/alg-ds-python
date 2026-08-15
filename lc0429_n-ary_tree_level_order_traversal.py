@@ -80,7 +80,7 @@ def main():
     root.children[0].children.append(Node(5, []))
     root.children[0].children.append(Node(6, []))
 
-    print SolutionBFS().levelOrder(root)
+    print(SolutionBFS().levelOrder(root))
 
 
 if __name__ == '__main__':

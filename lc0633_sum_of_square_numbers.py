@@ -42,11 +42,11 @@ class SolutionTwoPointers(object):
 def main():
     # Output: True.
     c = 5
-    print SolutionTwoPointers().judgeSquareSum(c)
+    print(SolutionTwoPointers().judgeSquareSum(c))
 
     # Output: False.
     c = 3
-    print SolutionTwoPointers().judgeSquareSum(c)    
+    print(SolutionTwoPointers().judgeSquareSum(c))    
 
 
 if __name__ == '__main__':

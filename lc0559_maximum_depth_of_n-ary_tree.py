@@ -94,8 +94,8 @@ def main():
     root.children[0].children.append(Node(5, []))
     root.children[0].children.append(Node(6, []))
 
-    print SolutionDFSRecur().maxDepth(root)
-    print SolutionDFSRecur().maxDepth(root)
+    print(SolutionDFSRecur().maxDepth(root))
+    print(SolutionDFSRecur().maxDepth(root))
 
 
 if __name__ == '__main__':

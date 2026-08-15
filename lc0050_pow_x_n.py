@@ -87,18 +87,18 @@ class SolutionSelfProductIter(object):
 def main():
     # Should be 1024.
     x, n = 2.00000, 10
-    print SolutionBrute().myPow(x, n)
-    print SolutionSelfProductIter().myPow(x, n)
+    print(SolutionBrute().myPow(x, n))
+    print(SolutionSelfProductIter().myPow(x, n))
 
     # Should be 9.26100.
     x, n = 2.10000, 3
-    print SolutionBrute().myPow(x, n)
-    print SolutionSelfProductIter().myPow(x, n)
+    print(SolutionBrute().myPow(x, n))
+    print(SolutionSelfProductIter().myPow(x, n))
 
     # Should be 0.25.
     x, n = 2.00000, -2
-    print SolutionBrute().myPow(x, n)
-    print SolutionSelfProductIter().myPow(x, n)
+    print(SolutionBrute().myPow(x, n))
+    print(SolutionSelfProductIter().myPow(x, n))
 
 
 if __name__ == '__main__':

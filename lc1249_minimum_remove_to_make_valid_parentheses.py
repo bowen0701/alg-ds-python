@@ -87,23 +87,23 @@ class SolutionStackAppendValidChars(object):
 def main():
     # Output: "lee(t(c)o)de"
     s = "lee(t(c)o)de)"
-    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+    print(SolutionStackAppendValidChars().minRemoveToMakeValid(s))
 
     # Output: "ab(c)d"
     s = "a)b(c)d"
-    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+    print(SolutionStackAppendValidChars().minRemoveToMakeValid(s))
 
     # Output: ""
     s = "))(("
-    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+    print(SolutionStackAppendValidChars().minRemoveToMakeValid(s))
 
     # Output: "a(b(c)d)"
     s = "(a(b(c)d)"
-    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+    print(SolutionStackAppendValidChars().minRemoveToMakeValid(s))
 
     # Output: "()()"
     s = "())()((("
-    print SolutionStackAppendValidChars().minRemoveToMakeValid(s)
+    print(SolutionStackAppendValidChars().minRemoveToMakeValid(s))
 
 
 if __name__ == '__main__':

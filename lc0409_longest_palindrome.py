@@ -54,10 +54,10 @@ class SolutionDictDoubleEvenOneOdd(object):
 
 def main():
     s = 'abccccdd'  # Ans: 7, since 'dccaccd'.
-    print SolutionDictDoubleEvenOneOdd().longestPalindrome(s)
+    print(SolutionDictDoubleEvenOneOdd().longestPalindrome(s))
 
     s = 'Aa'  # Ans: 1, since 'A'.
-    print SolutionDictDoubleEvenOneOdd().longestPalindrome(s)
+    print(SolutionDictDoubleEvenOneOdd().longestPalindrome(s))
 
 
 if __name__ == '__main__':

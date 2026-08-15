@@ -107,34 +107,34 @@ def main():
     rating = [2,5,3,4,1]
 
     start_time = time.time()
-    print SolutionBruteForce().numTeams(rating)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionBruteForce().numTeams(rating))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print SolutionLeftRightGreaterLess().numTeams(rating)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionLeftRightGreaterLess().numTeams(rating))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Output: 0
     rating = [2,1,3]
 
     start_time = time.time()
-    print SolutionBruteForce().numTeams(rating)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionBruteForce().numTeams(rating))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print SolutionLeftRightGreaterLess().numTeams(rating)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionLeftRightGreaterLess().numTeams(rating))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Output: 4
     rating = [1,2,3,4]
 
     start_time = time.time()
-    print SolutionBruteForce().numTeams(rating)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionBruteForce().numTeams(rating))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print SolutionLeftRightGreaterLess().numTeams(rating)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionLeftRightGreaterLess().numTeams(rating))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

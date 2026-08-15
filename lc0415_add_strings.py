@@ -60,12 +60,12 @@ def main():
     # Output: 807.
     num1 = '342'
     num2 = '465'
-    print SolutionPaddingAddBackwardIter().addStrings(num1, num2)
+    print(SolutionPaddingAddBackwardIter().addStrings(num1, num2))
 
     # Output: 10110.
     num1 = '9999'
     num2 = '111'
-    print SolutionPaddingAddBackwardIter().addStrings(num1, num2)
+    print(SolutionPaddingAddBackwardIter().addStrings(num1, num2))
 
 
 if __name__ == '__main__':

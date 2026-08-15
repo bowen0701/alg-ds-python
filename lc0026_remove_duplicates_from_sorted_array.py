@@ -62,11 +62,11 @@ class SolutionTailIter(object):
 def main():
     # Output: 2.
     nums = [1, 1, 2]
-    print SolutionTailIter().removeDuplicates(nums)
+    print(SolutionTailIter().removeDuplicates(nums))
 
     # Output: 5.
     nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
-    print SolutionTailIter().removeDuplicates(nums)
+    print(SolutionTailIter().removeDuplicates(nums))
 
 
 if __name__ == '__main__':

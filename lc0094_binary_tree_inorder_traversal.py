@@ -92,8 +92,8 @@ def main():
     root.right = TreeNode(2)
     root.right.left = TreeNode(3)
 
-    print 'By recur: {}'.format(SolutionRecur().inorderTraversal(root))
-    print 'By iter: {}'.format(SolutionIter().inorderTraversal(root))
+    print('By recur: {}'.format(SolutionRecur().inorderTraversal(root)))
+    print('By iter: {}'.format(SolutionIter().inorderTraversal(root)))
     
 
 if __name__ == '__main__':

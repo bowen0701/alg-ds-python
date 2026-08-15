@@ -42,7 +42,7 @@ def main():
                      True,  False, False, True ,
                      True,  True,  True,  True ,
                      False, False, True,  True]
-    print count_sheeps(arrayOfSheeps)
+    print(count_sheeps(arrayOfSheeps))
 
 
 if __name__ == '__main__':

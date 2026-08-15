@@ -107,20 +107,20 @@ class TimeMapBinarySearchGet(object):
 def main():
     timemap = TimeMapBinarySearchGet()
     timemap.set("foo", "bar", 1)
-    print timemap.get("foo", 1)  # Output: 'bar'
-    print timemap.get("foo", 3)  # Output: 'bar'
+    print(timemap.get("foo", 1))  # Output: 'bar'
+    print(timemap.get("foo", 3))  # Output: 'bar'
     timemap.set("foo", "bar2", 4)
-    print timemap.get("foo", 4)  # Output: 'bar2'
-    print timemap.get("foo", 5)  # Output: 'bar2'
+    print(timemap.get("foo", 4))  # Output: 'bar2'
+    print(timemap.get("foo", 5))  # Output: 'bar2'
 
     timemap = TimeMapBinarySearchGet()
     timemap.set("love", "high", 10)
     timemap.set("love", "low", 20)
-    print timemap.get("love", 5)   # Output: ''
-    print timemap.get("love", 10)  # Output: 'high'
-    print timemap.get("love", 15)  # Output: 'high'
-    print timemap.get("love", 20)  # Output: 'low'
-    print timemap.get("love", 25)  # Output: 'low'
+    print(timemap.get("love", 5))   # Output: ''
+    print(timemap.get("love", 10))  # Output: 'high'
+    print(timemap.get("love", 15))  # Output: 'high'
+    print(timemap.get("love", 20))  # Output: 'low'
+    print(timemap.get("love", 25))  # Output: 'low'
 
 
 if __name__ == '__main__':

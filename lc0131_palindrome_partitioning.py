@@ -55,7 +55,7 @@ class SolutionBacktrack(object):
 
 def main():
     s = "aab"
-    print SolutionBacktrack().partition(s)
+    print(SolutionBacktrack().partition(s))
 
 
 if __name__ == '__main__':

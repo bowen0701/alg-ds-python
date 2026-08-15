@@ -54,8 +54,8 @@ class SolutionBinCountOne(object):
 
 
 def main():
-    print SolutionModeTwoIter().hammingDistance(1, 4)
-    print SolutionBinCountOne().hammingDistance(1, 4)
+    print(SolutionModeTwoIter().hammingDistance(1, 4))
+    print(SolutionBinCountOne().hammingDistance(1, 4))
 
 
 if __name__ == '__main__':

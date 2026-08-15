@@ -70,11 +70,11 @@ class SolutionSplitWordList(object):
 def main():
     # Output: "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
     S = "I speak Goat Latin"
-    print SolutionSplitWordList().toGoatLatin(S)
+    print(SolutionSplitWordList().toGoatLatin(S))
 
     # Output: "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
     S = "The quick brown fox jumped over the lazy dog"
-    print SolutionSplitWordList().toGoatLatin(S)
+    print(SolutionSplitWordList().toGoatLatin(S))
 
 
 if __name__ == '__main__':

@@ -75,13 +75,13 @@ def main():
     # Output: "cab"
     s = "abc"
     shift = [[0,1],[1,2]]
-    print SolutionAccumShiftsModeLength().stringShift(s, shift)
+    print(SolutionAccumShiftsModeLength().stringShift(s, shift))
 
     # Output: "efgabcd"
     s = "abcdefg"
     shift = [[1,1],[1,1],[0,2],[1,3]]
-    print SolutionAccumShiftsModeLength().stringShift(s, shift)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionAccumShiftsModeLength().stringShift(s, shift))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

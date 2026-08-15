@@ -70,11 +70,11 @@ class SolutionBitShiftNumRhsBytes(object):
 def main():
     # Output: True
     data = [197, 130, 1]
-    print SolutionBitShiftNumRhsBytes().validUtf8(data)
+    print(SolutionBitShiftNumRhsBytes().validUtf8(data))
 
     # Output: False
     data = [235, 140, 4]
-    print SolutionBitShiftNumRhsBytes().validUtf8(data)
+    print(SolutionBitShiftNumRhsBytes().validUtf8(data))
 
 
 if __name__ == '__main__':

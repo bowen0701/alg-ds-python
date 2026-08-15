@@ -67,31 +67,31 @@ def increment_string(strng):
 def main():
     # Output: 'foo1'
     strng = 'foo'
-    print increment_string(strng)
+    print(increment_string(strng))
 
     # Output: 'foobar002'
     strng = 'foobar001'
-    print increment_string(strng)
+    print(increment_string(strng))
 
     # Output: 'foobar2'
     strng = 'foobar1'
-    print increment_string(strng)
+    print(increment_string(strng))
 
     # Output: 'foobar01'
     strng = 'foobar00'
-    print increment_string(strng)
+    print(increment_string(strng))
 
     # Output: 'foobar100'
     strng = 'foobar99'
-    print increment_string(strng)
+    print(increment_string(strng))
 
     # Output: 'foobar100'
     strng = 'foobar099'
-    print increment_string(strng)
+    print(increment_string(strng))
 
     # Output: '1'
     strng = ''
-    print increment_string(strng)
+    print(increment_string(strng))
 
 
 if __name__ == '__main__':

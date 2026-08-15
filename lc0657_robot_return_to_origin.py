@@ -92,27 +92,27 @@ class SolutionTwoCounters(object):
 def main():
     import time
 
-    print 'By dict:'
+    print('By dict:')
     start_time = time.time()
     # Output: True
     moves = "UD"
-    print SolutionDict().judgeCircle(moves)
+    print(SolutionDict().judgeCircle(moves))
 
     # Output: False
     moves = "LL"
-    print SolutionDict().judgeCircle(moves)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionDict().judgeCircle(moves))
+    print('Time: {}'.format(time.time() - start_time))
 
-    print 'By two conters:'
+    print('By two conters:')
     start_time = time.time()
     # Output: True
     moves = "UD"
-    print SolutionTwoCounters().judgeCircle(moves)
+    print(SolutionTwoCounters().judgeCircle(moves))
 
     # Output: False
     moves = "LL"
-    print SolutionTwoCounters().judgeCircle(moves)
-    print 'Time: {}'.format(time.time() - start_time)
+    print(SolutionTwoCounters().judgeCircle(moves))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

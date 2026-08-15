@@ -129,12 +129,12 @@ def main():
     hashSet = MyHashSet()
     hashSet.add(1)
     hashSet.add(2)
-    print hashSet.contains(1)     # returnew_set true
-    print hashSet.contains(3)     # returnew_set false (not found)
+    print(hashSet.contains(1))     # returnew_set true
+    print(hashSet.contains(3))     # returnew_set false (not found)
     hashSet.add(2)
-    print hashSet.contains(2)     # returnew_set true
+    print(hashSet.contains(2))     # returnew_set true
     hashSet.remove(2)
-    print hashSet.contains(2)     # returnew_set false (already removed)
+    print(hashSet.contains(2))     # returnew_set false (already removed)
 
 
 if __name__ == '__main__':

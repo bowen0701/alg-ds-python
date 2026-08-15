@@ -147,7 +147,7 @@ def main():
     # SolutionCopy().setZeroes(matrix)
     SolutionZeroRowsCols().setZeroes(matrix)
     # SolutionOptimSpace().setZeroes(matrix)
-    print matrix
+    print(matrix)
 
 
     matrix = [
@@ -158,7 +158,7 @@ def main():
     # SolutionCopy().setZeroes(matrix)
     SolutionZeroRowsCols().setZeroes(matrix)
     # SolutionOptimSpace().setZeroes(matrix)
-    print matrix
+    print(matrix)
 
 
 if __name__ == '__main__':

@@ -46,8 +46,8 @@ class Solution(object):
 
 def main():
     rowIndex = 3
-    print 'kth row of the Pascal\'s triangle: {}'.format(
-        Solution().getRow(rowIndex))
+    print('kth row of the Pascal\'s triangle: {}'.format(
+        Solution().getRow(rowIndex)))
 
 
 if __name__ == '__main__':

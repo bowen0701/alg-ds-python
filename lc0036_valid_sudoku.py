@@ -104,7 +104,7 @@ def main():
               [".",".",".","4","1","9",".",".","5"],
               [".",".",".",".","8",".",".","7","9"]
             ]
-    print Solution().isValidSudoku(board)    
+    print(Solution().isValidSudoku(board))    
 
     # Ans: False.
     board = [
@@ -118,7 +118,7 @@ def main():
               [".",".",".","4","1","9",".",".","5"],
               [".",".",".",".","8",".",".","7","9"]
             ]
-    print Solution().isValidSudoku(board)    
+    print(Solution().isValidSudoku(board))    
 
 
 if __name__ == '__main__':

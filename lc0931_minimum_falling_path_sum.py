@@ -163,20 +163,20 @@ def main():
          [7,8,9]]
 
     start_time = time.time()
-    print 'Recur: {}'.format(SolutionRecur().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Recur: {}'.format(SolutionRecur().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'Memo: {}'.format(SolutionMemo().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Memo: {}'.format(SolutionMemo().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'DP: {}'.format(SolutionDP().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('DP: {}'.format(SolutionDP().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'DP optim: {}'.format(SolutionDPOptim().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('DP optim: {}'.format(SolutionDPOptim().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
     # Output: -66
     A = [[-80,-13,22],
@@ -184,20 +184,20 @@ def main():
          [ 73,-48,61]]
 
     start_time = time.time()
-    print 'Recur: {}'.format(SolutionRecur().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Recur: {}'.format(SolutionRecur().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'Memo: {}'.format(SolutionMemo().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('Memo: {}'.format(SolutionMemo().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'DP: {}'.format(SolutionDP().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('DP: {}'.format(SolutionDP().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print 'DP optim: {}'.format(SolutionDPOptim().minFallingPathSum(A))
-    print 'Time: {}'.format(time.time() - start_time)
+    print('DP optim: {}'.format(SolutionDPOptim().minFallingPathSum(A)))
+    print('Time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

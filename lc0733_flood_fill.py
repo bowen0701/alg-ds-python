@@ -86,14 +86,14 @@ def main():
              [1,0,1]]
     sr, sc = 1, 1
     newColor = 2
-    print SolutionDFSIter().floodFill(image, sr, sc, newColor)
+    print(SolutionDFSIter().floodFill(image, sr, sc, newColor))
 
     # Output: [[0,0,0],[0,1,1]]
     image = [[0,0,0],
              [0,1,1]]
     sr, sc = 1, 1
     newColor = 1
-    print SolutionDFSIter().floodFill(image, sr, sc, newColor)
+    print(SolutionDFSIter().floodFill(image, sr, sc, newColor))
 
 
 if __name__ == '__main__':

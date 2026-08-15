@@ -92,8 +92,8 @@ class SolutionMinRHSMaxLHS(object):
 def main():
     # Output: 5
     nums = [2, 6, 4, 8, 10, 9, 15]
-    print SolutionSortTwoPoinsters().findUnsortedSubarray(nums)
-    print SolutionMinRHSMaxLHS().findUnsortedSubarray(nums)
+    print(SolutionSortTwoPoinsters().findUnsortedSubarray(nums))
+    print(SolutionMinRHSMaxLHS().findUnsortedSubarray(nums))
 
 
 if __name__ == '__main__':

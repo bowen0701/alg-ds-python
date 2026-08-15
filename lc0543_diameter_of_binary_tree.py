@@ -65,7 +65,7 @@ def main():
     root.right = TreeNode(3)
     root.left.left = TreeNode(4)
     root.left.right = TreeNode(5)
-    print SolutionPathDepthRecur().diameterOfBinaryTree(root)
+    print(SolutionPathDepthRecur().diameterOfBinaryTree(root))
 
 
 if __name__ == '__main__':

@@ -88,7 +88,7 @@ def main():
     head.next.next.next = head    
     insertVal = 2
     new_head = SolutionTwoPointersIter().insert(head, insertVal)
-    print (new_head.val, new_head.next.val, 
+    print(new_head.val, new_head.next.val, 
            new_head.next.next.val, new_head.next.next.next.val,
            new_head.next.next.next.next.val)
 
@@ -97,7 +97,7 @@ def main():
     head = None
     insertVal = 1
     new_head = SolutionTwoPointersIter().insert(head, insertVal)
-    print (new_head.val, new_head.next.val)
+    print(new_head.val, new_head.next.val)
 
     # Input: head = [1]
     # Output: [1,0]
@@ -105,7 +105,7 @@ def main():
     head.next = head
     insertVal = 0
     new_head = SolutionTwoPointersIter().insert(head, insertVal)
-    print (new_head.val, new_head.next.val, new_head.next.next.val)
+    print(new_head.val, new_head.next.val, new_head.next.next.val)
 
     # Input: head = [3,5,1]
     # Output: [3,5,0,1]
@@ -115,7 +115,7 @@ def main():
     head.next.next.next = head
     insertVal = 0
     new_head = SolutionTwoPointersIter().insert(head, insertVal)
-    print (new_head.val, new_head.next.val, 
+    print(new_head.val, new_head.next.val, 
            new_head.next.next.val, new_head.next.next.next.val,
            new_head.next.next.next.next.val)
 

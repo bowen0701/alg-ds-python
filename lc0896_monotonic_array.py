@@ -63,23 +63,23 @@ class SolutionTwoBooleans(object):
 def main():
     # Output: True
     A = [1,2,2,3]
-    print SolutionTwoBooleans().isMonotonic(A)
+    print(SolutionTwoBooleans().isMonotonic(A))
 
     # Output: True
     A = [6,5,4,4]
-    print SolutionTwoBooleans().isMonotonic(A)
+    print(SolutionTwoBooleans().isMonotonic(A))
 
     # Output: False
     A = [1,3,2]
-    print SolutionTwoBooleans().isMonotonic(A)
+    print(SolutionTwoBooleans().isMonotonic(A))
 
     # Output: True
     A = [1,2,4,5]
-    print SolutionTwoBooleans().isMonotonic(A)
+    print(SolutionTwoBooleans().isMonotonic(A))
 
     # Output: True
     A = [1,1,1]
-    print SolutionTwoBooleans().isMonotonic(A)
+    print(SolutionTwoBooleans().isMonotonic(A))
 
 
 if __name__ == '__main__':

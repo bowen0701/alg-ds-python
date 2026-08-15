@@ -85,19 +85,19 @@ class SolutionDictTwoPointers(object):
 def main():
     # Output: 3
     tree = [1,2,1]
-    print SolutionDictTwoPointers().totalFruit(tree)
+    print(SolutionDictTwoPointers().totalFruit(tree))
 
     # Output: 3
     tree = [0,1,2,2]
-    print SolutionDictTwoPointers().totalFruit(tree)
+    print(SolutionDictTwoPointers().totalFruit(tree))
 
     # Output: 4
     tree = [1,2,3,2,2]
-    print SolutionDictTwoPointers().totalFruit(tree)
+    print(SolutionDictTwoPointers().totalFruit(tree))
 
     # Output: 5.
     tree = [3,3,3,1,2,1,1,2,3,3,4]
-    print SolutionDictTwoPointers().totalFruit(tree)    
+    print(SolutionDictTwoPointers().totalFruit(tree))    
 
 
 if __name__ == '__main__':

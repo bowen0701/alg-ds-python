@@ -85,7 +85,7 @@ def main():
     # Output: "ball"
     paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
     banned = ["hit"]
-    print SolutionDict().mostCommonWord(paragraph, banned)
+    print(SolutionDict().mostCommonWord(paragraph, banned))
 
 
 if __name__ == '__main__':

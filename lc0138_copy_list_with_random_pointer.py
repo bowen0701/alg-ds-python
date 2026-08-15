@@ -102,11 +102,11 @@ def main():
     head.next.random = head.next
 
     head_cp = SolutionInsertItself().copyRandomList(head)
-    print head_cp.val              # 1
-    print head_cp.next.val         # 2
-    print head_cp.random.val       # 2
-    print head_cp.next.next        # None
-    print head_cp.next.random.val  # 2
+    print(head_cp.val)              # 1
+    print(head_cp.next.val)         # 2
+    print(head_cp.random.val)       # 2
+    print(head_cp.next.next)        # None
+    print(head_cp.next.random.val)  # 2
 
 
 if __name__ == '__main__':

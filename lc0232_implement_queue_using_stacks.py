@@ -84,9 +84,9 @@ def main():
     queue = MyQueueByTwoStacks()
     queue.push(1)
     queue.push(2)
-    print 'peek:', queue.peek()     # returns 1
-    print 'pop:', queue.pop()       # returns 1
-    print queue.empty()             # returns False
+    print('peek:', queue.peek())     # returns 1
+    print('pop:', queue.pop())       # returns 1
+    print(queue.empty())             # returns False
 
 
 if __name__ == '__main__':

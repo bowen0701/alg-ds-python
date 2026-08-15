@@ -45,11 +45,11 @@ def draw_stairs(n):
 def main():
     # Output: "I\n I\n I" 
     n = 3
-    print draw_stairs(n)
+    print(draw_stairs(n))
 
     # Output: "I\n I\n I\n   I\n    I\n     I\n      I\n       I" 
     n = 7
-    print draw_stairs(n)
+    print(draw_stairs(n))
 
 
 if __name__ == '__main__':

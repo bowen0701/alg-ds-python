@@ -81,12 +81,12 @@ def main():
     # Output: [0, 6]
     s = "cbaebabacd"
     p = "abc"
-    print SolutionCharCountListSlidingWindow().findAnagrams(s, p)
+    print(SolutionCharCountListSlidingWindow().findAnagrams(s, p))
 
     # Output: [0, 1, 2]
     s = "abab"
     p = "ab"
-    print SolutionCharCountListSlidingWindow().findAnagrams(s, p)
+    print(SolutionCharCountListSlidingWindow().findAnagrams(s, p))
 
 
 if __name__ == '__main__':

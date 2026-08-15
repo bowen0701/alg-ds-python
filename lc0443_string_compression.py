@@ -93,21 +93,21 @@ def main():
     # ["a","2","b","2","c","3"]
     chars = ["a","a","b","b","c","c","c"]
     length = SolutionOldNewTwoPointersRepeat().compress(chars)
-    print length, chars[:length]
+    print(length, chars[:length])
 
     # Input: ["a"]
     # Output: Return 1, and the first 1 characters of the input array should be:
     # ["a"]
     chars = ["a"]
     length = SolutionOldNewTwoPointersRepeat().compress(chars)
-    print length, chars[:length]
+    print(length, chars[:length])
 
     # Input: ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
     # Output: Return 4, and the first 4 characters of the input array should be: 
     # ["a","b","1","2"].
     chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
     length = SolutionOldNewTwoPointersRepeat().compress(chars)
-    print length, chars[:length]
+    print(length, chars[:length])
 
 
 if __name__ == '__main__':
