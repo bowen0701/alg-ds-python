@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def minmax_naive(a):
     """Find mix & max in a list by naive algorithm.
 

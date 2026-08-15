@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def quicksort_lc(nums):
     """Quick sort algorithm by recursion with list comprehension.
 

@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 def _lcs_recur(s1, s2, n1, n2):
     """Helper function for longest_common_subsequence_recur()."""
     if n1 == 0 or n2 == 0:  # Base case.

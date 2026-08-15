@@ -4,9 +4,6 @@ Count how many distinct ways you can make change that amount.
 Assume that you have an infinite number of each kind of coin.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 
 def _change_recur(amount, coins, n):

@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def binary_search_recur(sorted_nums, target):
     """Binary search in sorted list by recursion.
 

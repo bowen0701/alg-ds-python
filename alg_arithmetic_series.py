@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 """Arithmetic series: 1 + 2 + 3 + ... + n."""
 
 def arithmetic_series_recur(n):

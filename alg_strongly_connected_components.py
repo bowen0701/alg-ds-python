@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def _reverse_graph(graph_adj_d):
     rev_graph_adj_d = {v: [] for v in graph_adj_d.keys()}
 

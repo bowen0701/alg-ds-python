@@ -9,9 +9,6 @@ In general, a[i][j] is a peak iff
 Similarly for corner cases, a[i][j], i = 0 or m - 1, or j = 0 or n -1.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 
 def _max_1d(nums):

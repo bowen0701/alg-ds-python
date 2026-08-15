@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def _gap_insertion_sort(a_list, start, gap):
     for i in range(start + gap, len(a_list), gap):
         current_value = a_list[i]

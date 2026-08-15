@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 def _dfs(r, c, grid, visited_d):
     if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]):
         return 0

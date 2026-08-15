@@ -1,6 +1,3 @@
-from __future__ import absolute_import, division, print_function
-
-
 class Histogram(object):
     def __init__(self, x, n_bins):
         """Histogram with bin counters.

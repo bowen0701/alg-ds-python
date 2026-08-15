@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 class Node(object):
     """Node class collects helper functions for BinarySearchTree."""
     def __init__(self, val, left=None, right=None, parent=None):

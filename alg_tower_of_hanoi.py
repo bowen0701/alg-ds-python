@@ -1,8 +1,5 @@
 """The tower of Hanoi."""
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
 
 
 def tower_of_hanoi(height, from_pole, to_pole, with_pole, counter):

@@ -3,9 +3,6 @@
 Two strings are anagram if one is simply a rearrangement of the other.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 
 def anagram_iter(s1, s2):

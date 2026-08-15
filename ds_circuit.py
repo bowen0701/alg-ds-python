@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 class LogicGate(object):
     """Logic gate class."""
     def __init__(self, label):

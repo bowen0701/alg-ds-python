@@ -1,7 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 def row_product(arr):
 	nrow, ncol = len(arr), len(arr[0])
 	rprod = [1 for _ in range(ncol)]

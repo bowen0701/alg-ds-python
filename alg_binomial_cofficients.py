@@ -4,9 +4,6 @@ Binomial coefficient of m chooses k:
 C(m, k) = m!/[(m - k)! * k!]
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 
 def binomial_cofficient(m, k):

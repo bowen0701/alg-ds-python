@@ -1,5 +1,3 @@
-from __future__ import print_function
-from __future__ import division
 from ds_stack import Stack
 
 def eval_postfix(postfix_str):

@@ -1,4 +1,3 @@
-from __future__ import print_function
 from alg_gcd import compute_gcd
 
 class Fraction(object):

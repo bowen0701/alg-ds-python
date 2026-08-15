@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 def sqrt_bisect(n, steps=20, epsilon=10**-5):
     """Approximate square root by the bisection method."""
     assert n > 0

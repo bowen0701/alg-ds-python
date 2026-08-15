@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def bfs(graph_adj_d, v_start):
     """Breadth first search (BFS) algorithm in graph G(V, E) 
     with single source by iteration using queue.

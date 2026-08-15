@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def _merge_sorted_nums_recur(sorted_nums1, sorted_nums2):
     """Helper method for merge_sort_recur().
 

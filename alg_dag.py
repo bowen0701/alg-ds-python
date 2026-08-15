@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
-
-
 def _previsit(v, previsited_d, clock):
     clock[0] += 1
     previsited_d[v] = clock[0]

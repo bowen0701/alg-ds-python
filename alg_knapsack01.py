@@ -3,9 +3,6 @@ Given weights and values of n "non-splittable" items, put these items in a
 knapsack of capacity to get the maximum total value in the knapsack. 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 
 def _knapsack01_recur(val, wt, wt_cap, n):

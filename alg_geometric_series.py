@@ -1,7 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 """Geometric series: 1 + r + r^2 + ... + r^(n+1)."""
 
 def geometric_series_recur(n, r):

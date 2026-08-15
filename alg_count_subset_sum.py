@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 def count_subset_sum_recur(arr, total, n):
     """Count subsets given sum by recusrion.
 

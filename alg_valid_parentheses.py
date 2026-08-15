@@ -1,8 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-
 def valid_parentheses(s):
     """Balance parentheses in a string."""
     open_close_d = {

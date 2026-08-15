@@ -15,9 +15,6 @@ Given the integers N and K, return the minimum number of games that
 are necessary for us to play.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
  
 
 def shortest_game(N, K):

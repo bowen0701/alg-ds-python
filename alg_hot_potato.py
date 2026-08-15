@@ -1,4 +1,3 @@
-from __future__ import print_function
 from ds_queue import Queue
 
 def pass_hot_potato(names, num):

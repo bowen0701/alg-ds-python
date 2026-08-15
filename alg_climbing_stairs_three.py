@@ -10,9 +10,6 @@ F(n) = F(n - 1) + F(n - 2) + F(n - 3)
 Remark: This is just like a variant of Fibonacci series.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from typing import List
 

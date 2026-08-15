@@ -7,9 +7,6 @@
 - Fib(n) = Fib(n - 1) + Fib(n - 2)
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import division
 
 
 def fibonacci_recur(n):

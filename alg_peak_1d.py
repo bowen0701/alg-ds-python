@@ -8,9 +8,6 @@ If nums[0] > nums[1], then nums[0] is a peak.
 If nums[n - 2] < nums[n - 1], then nums[n - 1] is a peak.  
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 
 def peak_1d_brute_force(nums):
