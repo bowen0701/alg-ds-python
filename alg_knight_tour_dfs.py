@@ -25,7 +25,7 @@ def _add_edge(adjacency_dict, vertex, move_vertex):
 
 def build_knight_tour_graph(board_size):
     adjacency_dict = defaultdict(set)
-    for row, col in product(xrange(board_size), xrange(board_size)):
+    for row, col in product(range(board_size), range(board_size)):
         for move_row, move_col in _legal_moves_from(row, col, board_size):
             _add_edge(adjacency_dict, (row, col), (move_row, move_col))
     return adjacency_dict

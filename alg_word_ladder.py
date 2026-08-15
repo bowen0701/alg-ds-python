@@ -13,7 +13,7 @@ def _build_word_ladder_graph(words):
     # Create buckets of words that are different by one letter.
     for w in words:
         # For each letter in w, create its bucket.
-        for i in xrange(len(w)):
+        for i in range(len(w)):
             bucket = '{0}_{1}'.format(w[:i], w[i+1:])
             w_neighbors_d[bucket].append(w)
 

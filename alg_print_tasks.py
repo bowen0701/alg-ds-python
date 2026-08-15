@@ -64,7 +64,7 @@ def simulate_print_tasks(num_seconds, pages_per_minute):
 
     waiting_times = []
 
-    for current_second in xrange(num_seconds):
+    for current_second in range(num_seconds):
         if create_print_task():
             task = Task(current_second)
             print_queue.enqueue(task)
@@ -87,7 +87,7 @@ def main():
     pages_per_minute = 5
     print('num_seconds: {0}, pages_per_minute: {1}'
           .format(num_seconds, pages_per_minute))
-    for i in xrange(10):
+    for i in range(10):
         simulate_print_tasks(num_seconds, pages_per_minute)
 
     print('===')
@@ -96,7 +96,7 @@ def main():
     pages_per_minute = 10
     print('num_seconds: {0}, pages_per_minute: {1}'
           .format(num_seconds, pages_per_minute))
-    for i in xrange(10):
+    for i in range(10):
         simulate_print_tasks(num_seconds, pages_per_minute)
 
 

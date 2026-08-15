@@ -15,7 +15,7 @@ def pass_hot_potato(names, num):
 		name_queue.enqueue(name)
 
 	while name_queue.size() > 1:
-		for i in xrange(num):
+		for i in range(num):
 			name_queue.enqueue(name_queue.dequeue())
 
 		name_queue.dequeue()

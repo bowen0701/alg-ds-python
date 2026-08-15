@@ -71,7 +71,7 @@ class Graph(object):
 
 def main():
     g = Graph()
-    for k in xrange(6):
+    for k in range(6):
     	g.add_vertex(k)
     g.vertex_dict
 

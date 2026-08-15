@@ -46,7 +46,7 @@ def bellman_ford(w_graph_d, start_vertex):
 
     # Run through |V| - 1 times, in each iteration update all edges's distances.
     n = len(w_graph_d.keys())
-    for i in xrange(1, n):
+    for i in range(1, n):
         for v in w_graph_d.keys():
             for v_neighbor in w_graph_d[v].keys():
                 distance_d, previous_d = _update_distance(
