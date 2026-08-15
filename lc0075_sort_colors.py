@@ -23,6 +23,9 @@ Follow up:
 - Could you come up with a one-pass algorithm using only constant space?
 """
 
+from collections import defaultdict
+
+
 class SolutionCount:
     def sortColors(self, nums):
         """
@@ -32,19 +35,9 @@ class SolutionCount:
         Time complexity: O(n), where n is the number of nums.
         Space complexity: O(n).
         """
-        d = {}
+        d = defaultdict(int)
         for n in nums:
-            if n in d:
-                d[n] += 1
-            else:
-                d[n] = 1
-
-        if 0 not in d:
-            d[0] = 0
-        if 1 not in d:
-            d[1] = 0
-        if 2 not in d:
-            d[2] = 0
+            d[n] += 1
 
         for i, _ in enumerate(nums):
             if i < d[0]:
