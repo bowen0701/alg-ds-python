@@ -29,7 +29,7 @@ from typing import List, Tuple, Dict
 
 class SolutionDFSUpdateRecur:
     def _dfs(self, r: int, c: int, grid: List[List[str]]):
-        # If visit outside of boundary or water or visited.
+        # Exit if visit outside of boundary or water or visited.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
             grid[r][c] == '0'):
             return None
@@ -67,7 +67,7 @@ class SolutionDFSVisitRecur:
     def _dfs(self, r: int, c: int, 
              grid: List[List[str]],
              visited_d: Dict[Tuple[int, int], bool]):
-        # If visit outside of boundary or water or visited.
+        # Exit if visit outside of boundary or water or visited.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
             grid[r][c] == '0' or visited_d.get((r, c))):
             return None
@@ -120,19 +120,18 @@ class SolutionDFSUpdateIter:
         # Update (r, c) as visited.
         grid[r][c] = '0'
 
-        # Use stack for iterative DFS.
+        # Apply iterative DFS with stack.
         stack = [(r, c)]
 
         while stack:
             tovisits = self._get_tovisits(stack[-1], grid)
 
             if tovisits:
-                for v_neighbor in tovisits:
+                for (r_next, c_next) in tovisits:
                     # Mark (r_next, c_next) as visited.
-                    (r_next, c_next) = v_neighbor
                     grid[r_next][c_next] = '0'
                     stack.append((r_next, c_next))
-                    # break for continuing DFS.
+                    # break for "pure" DFS traversal.
                     break
             else:
                 # Backtrack by popping stack.
@@ -181,7 +180,7 @@ class SolutionDFSVisitIter:
              visited_d: Dict[Tuple[int, int], bool]):
         visited_d[(r, c)] = True
 
-        # Use stack for iterative DFS.
+        # Apply iterative DFS with stack.
         stack = [(r, c)]
 
         while stack:
@@ -195,7 +194,7 @@ class SolutionDFSVisitIter:
                         (r_next, c_next) = v_neighbor
                         visited_d[(r_next, c_next)] = True
                         stack.append((r_next, c_next))
-                        # break for continuing DFS.
+                        # break for "pure" DFS.
                         break
             else:
                 # Backtrack by popping stack.
@@ -225,7 +224,7 @@ class SolutionDFSVisitIter:
 
 class SolutionDFSUpdateReturnConnectsRecur:
     def _dfs(self, r: int, c: int, grid: List[List[str]]):
-        # If visit outside of boundary or water or visited.
+        # Exit if visit outside of boundary or water / visited.
         if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or
             grid[r][c] == '0'):
             return 0
@@ -321,7 +320,7 @@ class SolutionBFSUpdate:
 
             dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
             for r_next, c_next in dirs:
-                # Check out of boundary or visited.
+                # Skip if out of boundary or visited.
                 if (r_next < 0 or r_next >= n_rows
                     or c_next < 0 or c_next >= n_cols
                     or grid[r_next][c_next] == '0'):
@@ -344,14 +343,14 @@ class SolutionBFSUpdate:
         n_rows, n_cols = len(grid), len(grid[0])
 
         # Apply BFS with queue.
-        result = 0
+        n_islands = 0
         for r in range(n_rows):
             for c in range(n_cols):
                 if grid[r][c] == '1':
-                    result += 1
+                    n_islands += 1
                     self._bfs(r, c, grid)
 
-        return result
+        return n_islands
 
 
 def main():
