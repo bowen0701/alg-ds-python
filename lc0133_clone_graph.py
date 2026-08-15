@@ -57,52 +57,6 @@ class Node:
         self.neighbors = neighbors
 
 
-class SolutionNodeCopyDictBFS:
-    def cloneGraph(self, node):
-        """
-        :type node: Node
-        :rtype: Node
-
-        Apply BFS travdersal with a queue on the graph.
-
-        Time complexity: O(|V|+|E|), where
-          - |V|: number of nodes.
-          - |E|: number of edges.
-        Space complexity: O(|V|).
-        """
-        from collections import defaultdict
-        from collections import deque
-
-        # Edge case.
-        if not node:
-            return None
-
-        copy = Node(node.val, [])
-
-        # Create dict: node->copied node, to avoid copying duplicated node.
-        node_copy_d = defaultdict()
-        node_copy_d[node] = copy
-
-        # Apply BFS with queue.
-        queue = deque([node])
-
-        while queue:
-            current = queue.pop()
-
-            for neighbor in current.neighbors:
-                if neighbor not in node_copy_d:
-                    # If current's neighbor is not visited, create a current copy.
-                    neighbor_copy = Node(neighbor.val, [])
-                    node_copy_d[neighbor] = neighbor_copy
-
-                    queue.appendleft(neighbor)
-
-                # Add neighbor's copy to current copy's neighbor.
-                node_copy_d[current].neighbors.append(node_copy_d[neighbor])
-
-        return copy
-
-
 class SolutionNodeCopyDictDFSRecur:
     def _dfs(self, node, node_copy_d):
         for neighbor in node.neighbors:
@@ -190,6 +144,52 @@ class SolutionNodeCopyDictDFSIter:
         return copy
 
 
+class SolutionNodeCopyDictBFS:
+    def cloneGraph(self, node):
+        """
+        :type node: Node
+        :rtype: Node
+
+        Apply BFS travdersal with a queue on the graph.
+
+        Time complexity: O(|V|+|E|), where
+          - |V|: number of nodes.
+          - |E|: number of edges.
+        Space complexity: O(|V|).
+        """
+        from collections import defaultdict
+        from collections import deque
+
+        # Edge case.
+        if not node:
+            return None
+
+        copy = Node(node.val, [])
+
+        # Create dict: node->copied node, to avoid copying duplicated node.
+        node_copy_d = defaultdict()
+        node_copy_d[node] = copy
+
+        # Apply BFS with queue.
+        queue = deque([node])
+
+        while queue:
+            current = queue.pop()
+
+            for neighbor in current.neighbors:
+                if neighbor not in node_copy_d:
+                    # If current's neighbor is not visited, create a current copy.
+                    neighbor_copy = Node(neighbor.val, [])
+                    node_copy_d[neighbor] = neighbor_copy
+
+                    queue.appendleft(neighbor)
+
+                # Add neighbor's copy to current copy's neighbor.
+                node_copy_d[current].neighbors.append(node_copy_d[neighbor])
+
+        return copy
+
+
 def main():
     # Given a graph:
     # 1 -- 2
@@ -208,17 +208,6 @@ def main():
     node4.neighbors.append(node1)
     node4.neighbors.append(node3)
 
-    print('Apply BFS with queue:')
-    node1_copy = SolutionNodeCopyDictBFS().cloneGraph(node1)
-    print(node1_copy.neighbors[0].val)  # Should be 2.
-    print(node1_copy.neighbors[1].val)  # Should be 4.
-    print(node1_copy.neighbors[0].neighbors[0].val)  # Should be 1.
-    print(node1_copy.neighbors[0].neighbors[1].val)  # Should be 3.
-    print(node1_copy.neighbors[1].neighbors[0].val)  # Should be 1.
-    print(node1_copy.neighbors[1].neighbors[1].val)  # Should be 3.
-    print(node1_copy.neighbors[0].neighbors[1].neighbors[0].val)  # Should be 2.
-    print(node1_copy.neighbors[0].neighbors[1].neighbors[1].val)  # Should be 4.
-
     print('Apply recursive DFS:')
     node1_copy = SolutionNodeCopyDictDFSRecur().cloneGraph(node1)
     print(node1_copy.neighbors[0].val)  # Should be 2.
@@ -232,6 +221,17 @@ def main():
 
     print('Apply iterative DFS:')
     node1_copy = SolutionNodeCopyDictDFSIter().cloneGraph(node1)
+    print(node1_copy.neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[1].val)  # Should be 4.
+    print(node1_copy.neighbors[0].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[0].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[1].neighbors[0].val)  # Should be 1.
+    print(node1_copy.neighbors[1].neighbors[1].val)  # Should be 3.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[0].val)  # Should be 2.
+    print(node1_copy.neighbors[0].neighbors[1].neighbors[1].val)  # Should be 4.
+
+    print('Apply BFS with queue:')
+    node1_copy = SolutionNodeCopyDictBFS().cloneGraph(node1)
     print(node1_copy.neighbors[0].val)  # Should be 2.
     print(node1_copy.neighbors[1].val)  # Should be 4.
     print(node1_copy.neighbors[0].neighbors[0].val)  # Should be 1.
