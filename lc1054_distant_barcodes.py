@@ -32,17 +32,23 @@ class SolutionDictSort:
         Space complexity: O(n).
         """
         from collections import Counter
+        import heapq
 
         # Use dict to count barcode's number.
         barcode_num_d = Counter(barcodes)
+
+        # Push (-count, barcode) to max heap (via negation).
+        max_hq = [(-n, b) for b, n in barcode_num_d.items()]
+        heapq.heapify(max_hq)
 
         # Starting from pos 0, fill barcodes at even positions.
         # Then starting from position 1, odd position.
         res = [0] * len(barcodes)
         pos = 0
 
-        for b, n in sorted(barcode_num_d.items(), 
-                           key=lambda x: x[1], reverse=True):
+        while max_hq:
+            neg_n, b = heapq.heappop(max_hq)
+            n = -neg_n
             while n:
                 res[pos] = b
                 pos += 2

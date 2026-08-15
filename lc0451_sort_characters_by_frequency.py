@@ -43,6 +43,7 @@ class SolutionCharFreqDict:
         Space complexity: O(n).
         """
         from collections import Counter
+        import heapq
 
         if not s:
             return ''
@@ -50,13 +51,16 @@ class SolutionCharFreqDict:
         # Use a dict to collect chars's frequencies.
         char_freqs = Counter(s)
 
-        # Sort dict by values.
-        sorted_char_freqs = sorted(char_freqs.items(), 
-                                   key=lambda x: x[1], reverse=True)
+        # Push (-freq, char) to max heap (via negation) and pop in order.
+        max_hq = [(-freq, char) for char, freq in char_freqs.items()]
+        heapq.heapify(max_hq)
 
-        # Convert dict to list with duplicated chars based on frequencies.
-        sorted_chars = [char * freq for (char, freq) in sorted_char_freqs]
-        return ''.join(sorted_chars)
+        result = []
+        while max_hq:
+            neg_freq, char = heapq.heappop(max_hq)
+            result.append(char * (-neg_freq))
+
+        return ''.join(result)
 
 
 def main():

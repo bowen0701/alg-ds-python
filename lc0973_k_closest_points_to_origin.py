@@ -41,22 +41,7 @@ class SolutionMaxHeap:
         Space complexity: O(k).
         """
         import heapq
-
-        # Use maxheap with "negative" distance since heapq is min heap.
-        negdistance_point_maxhq = []
-
-        negdistances = [-(p[0] ** 2 + p[1] ** 2) for p in points]
-        negdistances_points = zip(negdistances, points)
-
-        for (nd, pt) in negdistances_points:
-            heapq.heappush(negdistance_point_maxhq, (nd, pt))
-
-            # Keep K points in maxheap.
-            if len(negdistance_point_maxhq) > k:
-                heapq.heappop(negdistance_point_maxhq)
-
-        k_points = [pt for (nd, pt) in negdistance_point_maxhq]
-        return k_points
+        return heapq.nsmallest(k, points, key=lambda p: p[0] ** 2 + p[1] ** 2)
 
 
 class SolutionSelection:

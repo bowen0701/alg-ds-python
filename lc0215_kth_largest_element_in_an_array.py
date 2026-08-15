@@ -39,17 +39,7 @@ class SolutionMinHeap:
         Space complexity: O(k).
         """
         import heapq
-
-        minheap = []
-
-        for n in nums:
-            heapq.heappush(minheap, n)
-
-            # Maintain heap size = k.
-            if len(minheap) > k:
-                heapq.heappop(minheap)
-
-        return minheap[0]
+        return heapq.nlargest(k, nums)[-1]
 
 
 class SolutionSelection:
