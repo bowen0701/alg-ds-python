@@ -42,10 +42,34 @@ class Solution:
             else:
                 right = mid - 1
 
+        # Check left == right case.
         if nums[left] == target:
             return left
         else:
             return -1
+
+
+class Solution2:
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        # Apply simplified binary search without checking left == right case.
+        left, right = 0, len(nums)
+
+        while left < right:
+            mid = left + (right - left) // 2
+
+            if nums[mid] == target: 
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+
+        return -1
 
 
 def main():
@@ -53,11 +77,13 @@ def main():
     nums = [-1,0,3,5,9,12]
     target = 9
     print(Solution().search(nums, target))
+    print(Solution2().search(nums, target))
 
     # Output: -1
     nums = [-1,0,3,5,9,12]
     target = 2
-    print(Solution().search(nums, target))    
+    print(Solution().search(nums, target))
+    print(Solution2().search(nums, target))
 
 
 if __name__ == '__main__':
