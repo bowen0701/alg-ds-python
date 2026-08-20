@@ -87,7 +87,7 @@ class SolutionChildParentDictPreorderIter:
     ) -> Optional[TreeNode]:
         """
         Time complexity: O(n).
-        Space complexity: O(logn) for balanced tree; O(n) for singly-linked list.
+        Space complexity: O(n).
         """
         # Edge case.
         if not root:
