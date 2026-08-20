@@ -342,7 +342,7 @@ class SolutionBFSUpdate:
                 queue.appendleft((r_next, c_next))
 
     def numIslands(self, grid: List[List[str]]) -> int:
-        """Number of islands by recursion w/ return num of connects.
+        """Number of islands by (iterative) BFS.
 
         Time complexity: O(m*n).
         Space complexity: O(m*n).
