@@ -3,23 +3,31 @@ Medium
 
 URL: https://leetcode.com/problems/coin-change/
 
-You are given coins of different denominations and a total amount of 
-money amount. Write a function to compute the fewest number of coins 
-that you need to make up that amount. 
-If that amount of money cannot be made up by any combination of the 
-coins, return -1.
+You are given an integer array coins representing coins of different denominations 
+and an integer amount representing a total amount of money.
+
+Return the fewest number of coins that you need to make up that amount. 
+If that amount of money cannot be made up by any combination of the coins, return -1.
+
+You may assume that you have an infinite number of each kind of coin.
 
 Example 1:
-Input: coins = [1, 2, 5], amount = 11
-Output: 3 
+Input: coins = [1,2,5], amount = 11
+Output: 3
 Explanation: 11 = 5 + 5 + 1
 
 Example 2:
 Input: coins = [2], amount = 3
 Output: -1
 
-Note:
-You may assume that you have an infinite number of each kind of coin.
+Example 3:
+Input: coins = [1], amount = 0
+Output: 0
+ 
+Constraints:
+- 1 <= coins.length <= 12
+- 1 <= coins[i] <= 231 - 1
+- 0 <= amount <= 104
 """
 
 class SolutionRecur:
@@ -124,16 +132,39 @@ class SolutionDP:
             return -1
 
 
-class SolutionDPEarlyStop:
+class SolutionDP1D:
     def coinChange(self, coins, amount):
-        """Change fewest #coins by bottom-up dynamic programming.
+        """Change fewest #coins by bottom-up DP w/ optimized space.
 
-        Time complexity: O(a*n+n*logn), where 
-          - a is amount, and 
+        Time complexity: O(a*n), where a is amount, and n is number of coins.
+        Space complexity: O(a).
+        """
+        T = [float('inf')] * (amount + 1)
+
+        # For amount 0, set coin change to 0.
+        T[0] = 0
+
+        for j in range(1, amount + 1):
+            for i in range(len(coins)):
+                if coins[i] <= j:
+                    T[j] = min(1 + T[j - coins[i]], T[j])
+
+        if T[-1] < float('inf'):
+            return T[-1]
+        else:
+            return -1
+
+
+class SolutionDP1DEarlyStop:
+    def coinChange(self, coins, amount):
+        """Change fewest #coins by bottom-up DP w/ optimized space & early stop.
+
+        Time complexity: O(a*n+n*logn), where
+          - a is amount, and
           - n is number of coins.
         Space complexity: O(a).
         """
-        # Apply DP with tabular T with early stopping by sorting.
+        # Sort coins to enable early stopping.
         coins = sorted(coins)
 
         T = [float('inf')] * (amount + 1)
@@ -144,10 +175,9 @@ class SolutionDPEarlyStop:
         for j in range(1, amount + 1):
             for i in range(len(coins)):
                 if coins[i] <= j:
-                    # If coin i can be included: to change or not to change.
                     T[j] = min(1 + T[j - coins[i]], T[j])
                 else:
-                    # Early stop.
+                    # Early stop: remaining coins all > j.
                     break
 
         if T[-1] < float('inf'):
@@ -176,8 +206,12 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP w/ early stop: {}'.format(
-        SolutionDPEarlyStop().coinChange(coins, amount)))
+    print('By DP 1D: {}'.format(SolutionDP1D().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By DP 1D w/ early stop: {}'.format(
+        SolutionDP1DEarlyStop().coinChange(coins, amount)))
     print('Time: {}'.format(time.time() - start_time))
 
     # Ans: -1.
@@ -197,8 +231,12 @@ def main():
     print('Time: {}'.format(time.time() - start_time))
 
     start_time = time.time()
-    print('By DP w/ early stop: {}'.format(
-        SolutionDPEarlyStop().coinChange(coins, amount)))
+    print('By DP 1D: {}'.format(SolutionDP1D().coinChange(coins, amount)))
+    print('Time: {}'.format(time.time() - start_time))
+
+    start_time = time.time()
+    print('By DP 1D w/ early stop: {}'.format(
+        SolutionDP1DEarlyStop().coinChange(coins, amount)))
     print('Time: {}'.format(time.time() - start_time))
 
 
