@@ -37,9 +37,9 @@ class SolutionRecur:
             return 0
 
         # To rob or not to rob house n: T[n] = max(nums[n] + T[n-2], T[n-1]).
-        amount_in_n = nums[n] + self._recur(nums, n - 2)
-        amount_ex_n = self._recur(nums, n - 1)
-        return max(amount_in_n, amount_ex_n)
+        amount_in = nums[n] + self._recur(nums, n - 2)
+        amount_ex = self._recur(nums, n - 1)
+        return max(amount_in, amount_ex)
 
     def rob(self, nums):
         """
@@ -67,9 +67,9 @@ class SolutionMemo:
             return T[n]
 
         # To rob or not to rob house n: T[n] = max(nums[n] + T[n-2], T[n-1]).
-        amount_in_n = nums[n] + self._recurMemo(nums, n - 2, T)
-        amount_ex_n = self._recurMemo(nums, n - 1, T)
-        T[n] = max(amount_in_n, amount_ex_n)
+        amount_in = nums[n] + self._recurMemo(nums, n - 2, T)
+        amount_ex = self._recurMemo(nums, n - 1, T)
+        T[n] = max(amount_in, amount_ex)
         return T[n]
 
     def rob(self, nums):
