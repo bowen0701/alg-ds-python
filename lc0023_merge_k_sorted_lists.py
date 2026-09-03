@@ -3,21 +3,35 @@ Hard
 
 URL: https://leetcode.com/problems/merge-k-sorted-lists/
 
-Merge k sorted linked lists and return it as one sorted list.
-Analyze and describe its complexity.
+You are given an array of k linked-lists lists, each linked-list is sorted in
+ascending order.
 
-Example:
-Input:
-[
-  1->4->5,
-  1->3->4,
-  2->6
-]
-Output: 1->1->2->3->4->4->5->6
+Merge all the linked-lists into one sorted linked-list and return it.
+
+Example 1:
+Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+Explanation: The linked-lists are [1->4->5, 1->3->4, 2->6], and merging them
+into one sorted list: 1->1->2->3->4->4->5->6.
+
+Example 2:
+Input: lists = []
+Output: []
+
+Example 3:
+Input: lists = [[]]
+Output: []
+
+Constraints:
+- k == lists.length
+- 0 <= k <= 10^4
+- 0 <= lists[i].length <= 500
+- -10^4 <= lists[i][j] <= 10^4
+- lists[i] is sorted in ascending order.
+- The sum of lists[i].length will not exceed 10^4.
 """
 
 from typing import List
-import heapq
 
 
 # Definition for singly-linked list.
@@ -78,16 +92,23 @@ class SolutionMergeTwoToFirst:
         :type lists: List[ListNode]
         :rtype: ListNode
 
-        Merge two lists to the first.
+        Merge two lists to the first:
+        https://github.com/bowen0701/alg-ds-python/blob/master/lc0021_merge_two_sorted_lists.py
 
-        Time complexity: O(k^2n)
+        Time complexity: O(k^2 * n)
           - n is the max number of nodes in one list.
           - k is the length of lists.
-        Space complexity: O(n*logk)
+          - Merge #1: n + n = 2n, merge #2: 2n + n = 3n, ...,
+            merge #(k-1): (k-1)n + n = kn.
+          - Total: 2n + 3n + ... + kn = n * k*(k+1)/2 = O(k^2 * n).
+        Space complexity: O(kn)
+          - Recursive _merge2Lists stack depth = total length of both lists.
+          - By the last merge, lists[0] has (k-1)*n nodes, so depth = kn.
         """
         n = len(lists)
 
-        # Merge two lists to the first.
+        # Sequentially merge each list into lists[0].
+        # lists[0] grows after each merge, making later merges more expensive.
         for i in range(1, n):
             lists[0] = self._merge2Lists(lists[0], lists[i])
 
@@ -112,20 +133,24 @@ class SolutionMergeTwoRecur:
         :type lists: List[ListNode]
         :rtype: ListNode
 
-        Merge each pair of two lists at a time. 
+        Merge each pair of two lists at a time (divide and conquer).
 
-        Time complexity: O(nk*logk), where
+        Time complexity: O(nk * logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
-          - nk/2 in each run, logk runs.
-        Space complexity: O(n*logk).
+          - Each round merges k/2 pairs, each pair touching 2n nodes,
+            so nk nodes per round.
+          - logk rounds to reduce k lists down to 1.
+        Space complexity: O(nk)
+          - Recursive _merge2Lists stack depth = total length of both lists.
+          - In the final round, one pair has ~nk nodes, so depth = O(nk).
         """
         if not lists:
             return None
 
         n = len(lists)
 
-        # For each pair of leftmost & rightmost lists, merge them to the former.
+        # Pair up lists from both ends and merge inward; halve k each round.
         while n > 1:
             for i in range(n // 2):
                 lists[i] = self._merge2Lists(lists[i], lists[n - 1 - i])
@@ -165,10 +190,12 @@ class SolutionMergeTwoIter:
         :type lists: List[ListNode]
         :rtype: ListNode
 
-        Time complexity: O(nk*logk), where
+        Time complexity: O(nk * logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
-          - nk/2 in each run, logk runs.
+          - Each round merges k/2 pairs, each pair touching 2n nodes,
+            so nk nodes per round.
+          - logk rounds to reduce k lists down to 1.
         Space complexity: O(1).
         """
         if not lists:
@@ -188,39 +215,44 @@ class SolutionMergeTwoIter:
 
 
 class SolutionMinHeap:
-    ListNode.__lt__ = lambda self, other: self.val < other.val
-
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """
         :type lists: List[ListNode]
         :rtype: ListNode
 
-        Time complexity: O(nk*logk), where
+        Push (val, sid, node) tuples to avoid comparing ListNode directly.
+        sid is a unique tiebreaker for equal vals.
+
+        Time complexity: O(nk * logk), where
           - n is the max number of nodes in one list.
           - k is the length of lists.
-          - nk nodes to connect, logk for heap push.
+          - nk nodes to connect, logk for heap push/pop.
         Space complexity: O(k).
         """
-        # Edge case.
+        import heapq
+
         if not lists:
             return None
 
-        # Use min heap to collect list nodes.
-        minheap = [l for l in lists if l]
-        heapq.heapify(minheap)
+        # Push (val, sid, node); sid breaks ties for equal vals.
+        sid = 0
+        minheap = []
+        for node in lists:
+            if node:
+                heapq.heappush(minheap, (node.val, sid, node))
+                sid += 1
 
         pre_head = ListNode(None)
         current = pre_head
 
-        # Pop min heap's head and link that min node to list.
         while minheap:
-            nxt = heapq.heappop(minheap)
-            current.next = nxt
+            val, _, node = heapq.heappop(minheap)
+            current.next = node
             current = current.next
 
-            # If min heap's head has a next, push to min heap.
             if current.next:
-                heapq.heappush(minheap, current.next)
+                heapq.heappush(minheap, (current.next.val, sid, current.next))
+                sid += 1
 
         return pre_head.next
 
