@@ -3,18 +3,37 @@ Hard
 
 URL: https://leetcode.com/problems/minimum-window-substring/
 
-Given a string S and a string T, find the minimum window in S which will contain
-all the characters in T in complexity O(n).
+Given two strings s and t of lengths m and n respectively, return the minimum
+window substring of s such that every character in t (including duplicates) is
+included in the window. If there is no such substring, return the empty
+string "".
 
-Example:
-Input: S = "ADOBECODEBANC", T = "ABC"
+The testcases will be generated such that the answer is unique.
+
+Example 1:
+Input: s = "ADOBECODEBANC", t = "ABC"
 Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C'
+from string t.
 
-Note:
-- If there is no such window in S that covers all characters in T, return the
-  empty string "".
-- If there is such window, you are guaranteed that there will always be only one
-  unique minimum window in S.
+Example 2:
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+
+Example 3:
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window. Since the largest
+window of s only has one 'a', return empty string.
+
+Constraints:
+- m == s.length
+- n == t.length
+- 1 <= m, n <= 10^5
+- s and t consist of uppercase and lowercase English letters.
+
+Follow up: Could you find an algorithm that runs in O(m + n) time?
 """
 
 class SolutionCharCountDictTwoPointers:
@@ -31,37 +50,41 @@ class SolutionCharCountDictTwoPointers:
         """
         from collections import Counter
 
-        # Use dict to collect t's char->count.
+        # Remaining need: positive = still needed, 0 = satisfied, negative = surplus.
+        # Counter acts as defaultdict(int), so non-t chars default to 0.
         t_char_count_d = Counter(t)
 
-        # Track min left & len, and t_counter.
+        # Total chars still needed to complete a valid window.
+        t_counter = len(t)
+
         min_left = 0
         min_len = float('inf')
 
-        t_counter = len(t)
-
-        # Apply two pointers with left & right from head as a window.
         left, right = 0, 0
 
-        # In s, move right to increase window to satify t.
+        # Expand window by moving right.
         while right < len(s):
-            # If right char exits in t, decrement t_counter.
+            # Only decrement t_counter when this char is genuinely needed (count > 0).
+            # Non-t chars have count 0; surplus t-chars have count 0 or below.
             if t_char_count_d[s[right]] > 0:
                 t_counter -= 1
 
-            # Decrement t_char_count_d and increment right.
+            # Always decrement: tracks how many more of this char the window needs.
+            # Non-t chars go negative (e.g., -1), which is harmless.
             t_char_count_d[s[right]] -= 1
             right += 1
 
-            # While window satisfies t, move left to shorten it.
+            # Window contains all of t: shrink from left to find minimum.
             while t_counter == 0:
-                # Update min_len and min_left if improve min_len.
                 if right - left < min_len:
                     min_len = right - left
                     min_left = left
 
-                # Before increment left, add back t_char_count_d & t_counter.
+                # Restore count for the char leaving the window.
                 t_char_count_d[s[left]] += 1
+
+                # If count goes positive, this char is now needed again.
+                # Non-t chars go from negative back toward 0, never triggering this.
                 if t_char_count_d[s[left]] > 0:
                     t_counter += 1
 
