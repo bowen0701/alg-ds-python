@@ -1,10 +1,10 @@
 """Leetcode 347. Top K Frequent Elements
+Medium
 
 URL: https://leetcode.com/problems/top-k-frequent-elements/
 
-Medium
-
-Given a non-empty array of integers, return the k most frequent elements.
+Given an integer array nums and an integer k, return the k most frequent
+elements. You may return the answer in any order.
 
 Example 1:
 Input: nums = [1,1,1,2,2,3], k = 2
@@ -14,16 +14,20 @@ Example 2:
 Input: nums = [1], k = 1
 Output: [1]
 
-Note:
-You may assume k is always valid, 1 <= k <= number of unique elements.
-Your algorithm's time complexity must be better than O(n log n),
+Constraints:
+- 1 <= nums.length <= 10^5
+- -10^4 <= nums[i] <= 10^4
+- k is in the range [1, the number of unique elements in the array].
+- It is guaranteed that the answer is unique.
+
+Follow up: Your algorithm's time complexity must be better than O(n log n),
 where n is the array's size.
 """
 
 from typing import List
 
 
-class SolutionNubmerFreqDictBruteForce:
+class SolutionNumberFreqDictBruteForce:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         """
         Time complexity: O(n*k), where n is the number of nums.
@@ -102,7 +106,7 @@ class SolutionNumberFreqDictMinHeap:
         Time complexity: O(n*log(k)), where n is the number of nums.
         Space complexity: O(n+k).
         """
-        from collections import Counter, deque
+        from collections import Counter
         import heapq
 
         num_freq_d = Counter(nums)
@@ -116,13 +120,13 @@ class SolutionNumberFreqDictMinHeap:
             if len(minheap) > k:
                 heapq.heappop(minheap)
 
-        # Pop number from minheap and collect result.
-        result = deque([])
+        # Pop number from minheap; output order doesn't matter.
+        result = []
         while minheap:
-            (freq, num) = heapq.heappop(minheap)
-            result.appendleft(num)
+            freq, num = heapq.heappop(minheap)
+            result.append(num)
 
-        return list(result)
+        return result
 
 
 class SolutionNumberFreqDictBucketSort:
@@ -162,8 +166,8 @@ def main():
     k = 2
 
     start_time = time.time()
-    print(SolutionNubmerFreqDictBruteForce().topKFrequent(nums, k))
-    print(f"NubmerFreqDictBruteForce: {time.time() - start_time}")
+    print(SolutionNumberFreqDictBruteForce().topKFrequent(nums, k))
+    print(f"NumberFreqDictBruteForce: {time.time() - start_time}")
 
     start_time = time.time()
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
@@ -186,8 +190,8 @@ def main():
     k = 1
 
     start_time = time.time()
-    print(SolutionNubmerFreqDictBruteForce().topKFrequent(nums, k))
-    print(f"NubmerFreqDictBruteForce: {time.time() - start_time}")
+    print(SolutionNumberFreqDictBruteForce().topKFrequent(nums, k))
+    print(f"NumberFreqDictBruteForce: {time.time() - start_time}")
 
     start_time = time.time()
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
@@ -210,8 +214,8 @@ def main():
     k = 10
 
     start_time = time.time()
-    print(SolutionNubmerFreqDictBruteForce().topKFrequent(nums, k))
-    print(f"NubmerFreqDictBruteForce: {time.time() - start_time}")
+    print(SolutionNumberFreqDictBruteForce().topKFrequent(nums, k))
+    print(f"NumberFreqDictBruteForce: {time.time() - start_time}")
 
     start_time = time.time()
     print(SolutionNumberFreqDictSort().topKFrequent(nums, k))
