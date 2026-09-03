@@ -37,20 +37,22 @@ class SolutionCharPosDict:
         Time complexity: O(n).
         Space complexity: O(k), k is the number of characters.
         """
+        from collections import defaultdict
+
         start = 0
         max_len = 0
-        char_pos = {}
+        char_pos_d = defaultdict(int)
 
         for i, c in enumerate(s):
-            if c in char_pos and start <= char_pos[c]:
+            if c in char_pos_d and start <= char_pos_d[c]:
                 # When repeating char is visited.
-                start = char_pos[c] + 1
+                start = char_pos_d[c] + 1
             else:
                 # If not, update max length.
                 max_len = max(max_len, i - start + 1)
 
             # Always update char dict for every char in s.
-            char_pos[c] = i
+            char_pos_d[c] = i
 
         return max_len
 
