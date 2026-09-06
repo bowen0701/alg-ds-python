@@ -3,23 +3,26 @@ Medium
 
 URL: https://leetcode.com/problems/jump-game/
 
-Given an array of non-negative integers, you are initially positioned at the 
-first index of the array.
+You are given an integer array nums. You are initially positioned at the
+array's first index, and each element in the array represents your maximum
+jump length at that position.
 
-Each element in the array represents your maximum jump length at that position.
-
-Determine if you are able to reach the last index.
+Return true if you can reach the last index, or false otherwise.
 
 Example 1:
-Input: [2,3,1,1,4]
+Input: nums = [2,3,1,1,4]
 Output: true
 Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
 
 Example 2:
-Input: [3,2,1,0,4]
+Input: nums = [3,2,1,0,4]
 Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
 jump length is 0, which makes it impossible to reach the last index.
+
+Constraints:
+- 1 <= nums.length <= 10^4
+- 0 <= nums[i] <= 10^5
 """
 
 
@@ -31,7 +34,7 @@ class SolutionRecur:
         if start == n - 1:
             return True
 
-        # Iterate through jumps to check if reachable from any jump.
+        # Try each jump size 1..nums[start]; skip 0 to avoid self-recursion.
         for jump in range(1, nums[start] + 1):
             if start + jump <= n - 1 and self.jumpRecur(start + jump, nums):
                 return True
@@ -75,7 +78,8 @@ class SolutionMemo:
         :rtype: boole
 
         Time complexity: O(n^2), where n is the length of nums.
-        Space complexity: O(2n)=O(n).
+          - n positions, each computed once; each iterates up to n jumps.
+        Space complexity: O(n).
         """
         start = 0
         T = [False] * len(nums)
@@ -103,13 +107,15 @@ class SolutionDP:
                     T[start + jump] = True
         return T[-1]
 
+
 class SolutionDP2:
     def canJump(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
 
-        Time complexity: O(n).
+        Time complexity: O(n^2).
+          - For each r, scan backward up to r positions.
         Space complexity: O(n).
         """
         # Apply bottom-up DP with table T, where T[i]=True means reachable.
@@ -117,10 +123,12 @@ class SolutionDP2:
         T = [False] * n
         T[0] = True
 
-        # Iterate through nums to check reachable from previous reachable index.
+        # For each position r, check if any reachable l can jump to r.
         for r in range(1, n):
             for l in range(r - 1, -1, -1):
+                # r - l is the distance; nums[l] is max jump size from l.
                 if r - l <= nums[l] and T[l]:
+                    # If reachable, early stopping.
                     T[r] = True
                     break
         return T[-1]
@@ -136,15 +144,15 @@ class SolutionGreedy:
         Space complexity: O(1).
         """
         # Apply greedy approach for max reach with early stopping.
-        reach = 0
+        max_reach = 0
 
         # Iterate through nums to check if index i is not reachable.
         for i in range(len(nums)):
-            if reach < i:
+            if max_reach < i:
                 return False
 
             # Greedily update max reach.
-            reach = max(reach, i + nums[i])
+            max_reach = max(max_reach, i + nums[i])
 
         return True
 
