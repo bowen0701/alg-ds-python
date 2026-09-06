@@ -28,33 +28,36 @@ Constraints:
 """
 
 class SolutionSelect:
-    def _findKth(self, nums1, nums2, k):
-        # Base cases for the divide-and-conquer method.
-        if not nums1:
-            return nums2[k]
-        if not nums2:
-            return nums1[k]
+    def _selectKth(self, nums1, lo1, hi1, nums2, lo2, hi2, k):
+        # Base cases: one array exhausted, select kth from the other.
+        if lo1 > hi1:
+            return nums2[lo2 + k]
+        if lo2 > hi2:
+            return nums1[lo1 + k]
 
-        i1, i2 = len(nums1) // 2, len(nums2) // 2
-        n1, n2 = nums1[i1], nums2[i2]
+        i1 = (lo1 + hi1) // 2
+        i2 = (lo2 + hi2) // 2
+        mid1, mid2 = nums1[i1], nums2[i2]
 
-        if k <= i1 + i2:
-            # When k is smaller than or equal to the sum of nums1 & nums2's 
-            # middle indices.
-            if n1 > n2:
-                # When nums1's middle element is bigger than nums2's,
-                # the 2nd half of nums1 does not contain the kth. 
-                return self._findKth(nums1[:i1], nums2, k)
+        # Combined elements before midpoints in both arrays.
+        if k <= (i1 - lo1) + (i2 - lo2):
+            # kth is in the first halves; discard the larger's second half.
+            if mid1 > mid2:
+                return self._selectKth(nums1, lo1, i1 - 1, nums2, lo2, hi2, k)
             else:
-                return self._findKth(nums1, nums2[:i2], k)
+                return self._selectKth(nums1, lo1, hi1, nums2, lo2, i2 - 1, k)
         else:
-            # When k is bigger than the sum of nums1 & nums2's middle indices.
-            if n1 > n2:
-                # When nums1's middle element is bigger than nums2's,
-                # the 1st half of nums2 does not contain the kth.
-                return self._findKth(nums1, nums2[(i2 + 1):], k - i2 - 1)
+            # kth is in the second halves; discard the smaller's first half.
+            if mid1 > mid2:
+                return self._selectKth(
+                    nums1, lo1, hi1, nums2, i2 + 1, hi2,
+                    k - (i2 - lo2) - 1
+                )
             else:
-                return self._findKth(nums1[(i1 + 1):], nums2, k - i1 - 1)
+                return self._selectKth(
+                    nums1, i1 + 1, hi1, nums2, lo2, hi2,
+                    k - (i1 - lo1) - 1
+                )
 
     def findMedianSortedArrays(self, nums1, nums2):
         """
@@ -63,16 +66,29 @@ class SolutionSelect:
         :rtype: float
 
         Time complexity: O(log(m + n)).
-        Space complexity: O(m + n).
+        Space complexity: O(log(m + n)), for recursion stack.
         """
         # Apply selection method. Note: starting index is 0.
         l = len(nums1) + len(nums2)
         if l % 2 == 1:
-            return self._findKth(nums1, nums2, l // 2)
+            return self._selectKth(
+                nums1, 0, len(nums1) - 1,
+                nums2, 0, len(nums2) - 1,
+                l // 2
+            )
         else:
             return (
-                self._findKth(nums1, nums2, l // 2 - 1)
-                + self._findKth(nums1, nums2, l // 2)) / 2.0
+                self._selectKth(
+                    nums1, 0, len(nums1) - 1,
+                    nums2, 0, len(nums2) - 1,
+                    l // 2 - 1
+                )
+                + self._selectKth(
+                    nums1, 0, len(nums1) - 1,
+                    nums2, 0, len(nums2) - 1,
+                    l // 2
+                )
+            ) / 2.0
 
 
 def main():
