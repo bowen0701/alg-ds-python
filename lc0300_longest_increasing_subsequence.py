@@ -43,7 +43,7 @@ class SolutionRecur:
         Time limit exceeded.
 
         Time complexity: O(2^n).
-        Space complexity: O(n^2).
+        Space complexity: O(n).
         """
         # Apply top-down recursion starting from left index.
         cur_idx = 0
