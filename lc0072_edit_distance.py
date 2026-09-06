@@ -57,7 +57,9 @@ class SolutionRecurNaive:
         :rtype: int
 
         Time complexity: O((n1+n2)*3^(n1+n2)).
-        Space complexity: O((n1*n2)^2).
+          - 3^(n1+n2) calls, each O(n1+n2) for string slicing.
+        Space complexity: O((n1+n2)^2).
+          - Stack depth O(n1+n2), each frame holds slices of size O(n1+n2).
         """
         # Apply top-down DP by recursion.
         return self._editRecur(word1, word2)
@@ -90,7 +92,7 @@ class SolutionRecurPointer:
         :rtype: int
 
         Time complexity: O(3^(n1+n2)).
-        Space complexity: O(n1*n2).
+        Space complexity: O(n1+n2).
         """
         # Apply top-down recursion with two pointers.
         self.n1, self.n2 = len(word1), len(word2)
@@ -136,7 +138,7 @@ class SolutionMemo:
         self.n1, self.n2 = len(word1), len(word2)
         i1, i2 = 0, 0
 
-        # Use a table T[i1][i2] for dist for word1[:i1] & word2[:i2].
+        # Use a table T[i1][i2] for dist for word1[i1:] & word2[i2:].
         T = [[0] * self.n2 for _ in range(self.n1)]
         return self._editRecur(word1, word2, i1, i2, T)
 
