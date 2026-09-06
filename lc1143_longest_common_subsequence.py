@@ -51,7 +51,8 @@ class SolutionRecur:
 
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         """
-        Time complexity: O(3^(n1+n2)), where ni is the length of texti.
+        Time complexity: O(2^(n1+n2)), where ni is the length of texti.
+          - Each call branches at most 2 ways (match: 1 call, mismatch: 2 calls).
         Space complexity: O(n1+n2).
         """
         # Apply top-down recursion. 
