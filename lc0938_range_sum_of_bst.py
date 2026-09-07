@@ -44,7 +44,12 @@ class SolutionPreorderBT:
         self._preorder(root.left, low, high)
         self._preorder(root.right, low, high)
 
-    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+    def rangeSumBST(
+        self,
+        root: Optional[TreeNode],
+        low: int,
+        high: int,
+    ) -> int:
         """
         Time complexity: O(n).
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
@@ -60,7 +65,12 @@ class SolutionPreorderBT:
 
 
 class SolutionBFSLevelBT:
-    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+    def rangeSumBST(
+        self,
+        root: Optional[TreeNode],
+        low: int,
+        high: int,
+    ) -> int:
         """
         Time complexity: O(n).
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.
@@ -95,7 +105,12 @@ class SolutionBFSLevelBT:
 
 
 class SolutionBST:
-    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+    def rangeSumBST(
+        self,
+        root: Optional[TreeNode],
+        low: int,
+        high: int,
+    ) -> int:
         """
         Time complexity: O(n).
         Space complexity: O(logn) for balanced BST, O(n) for singly-linked list.

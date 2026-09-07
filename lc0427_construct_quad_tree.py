@@ -34,7 +34,15 @@ Note:
 
 # Definition for a QuadTree node.
 class Node:
-    def __init__(self, val, isLeaf, topLeft, topRight, bottomLeft, bottomRight):
+    def __init__(
+        self,
+        val,
+        isLeaf,
+        topLeft,
+        topRight,
+        bottomLeft,
+        bottomRight,
+    ):
         self.val = val
         self.isLeaf = isLeaf
         self.topLeft = topLeft

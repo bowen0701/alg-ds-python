@@ -48,7 +48,12 @@ from typing import Dict, List
 
 
 class SolutionNodeIdDictDFSRecur:
-    def _dfs(self, i: int, graph: List[List[int]], node_setid_d: Dict[int, int]) -> bool:
+    def _dfs(
+        self,
+        i: int,
+        graph: List[List[int]],
+        node_setid_d: Dict[int, int],
+    ) -> bool:
         for j in graph[i]:
             if j in node_setid_d:
                 # If connected nodes have the same setid: contradict bipartite def.

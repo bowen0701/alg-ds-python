@@ -52,7 +52,13 @@ class SolutionRecur:
 
 
 class SolutionMemo:
-    def _LIS(self, nums: List[int], prev_idx: int, cur_idx: int, T: List[List[int]]) -> int:
+    def _LIS(
+        self,
+        nums: List[int],
+        prev_idx: int,
+        cur_idx: int,
+        T: List[List[int]],
+    ) -> int:
         # Base case: current index out of boundary.
         if cur_idx == len(nums):
             return 0

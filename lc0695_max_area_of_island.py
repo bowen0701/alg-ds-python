@@ -33,7 +33,13 @@ from typing import Dict, List, Tuple
 
 
 class SolutionDFSRecurVisitedDict:
-    def _dfs(self, r: int, c: int, grid: List[List[int]], visited_d: Dict[Tuple[int, int], bool]) -> int:
+    def _dfs(
+        self,
+        r: int,
+        c: int,
+        grid: List[List[int]],
+        visited_d: Dict[Tuple[int, int], bool],
+    ) -> int:
         # Base case: out of boundary or visited.
         if (r < 0 or r >= len(grid) 
             or c < 0 or c >= len(grid[0])
@@ -79,7 +85,13 @@ class SolutionDFSRecurVisitedDict:
 
 
 class SolutionBFSVisitedDict:
-    def _bfs(self, r: int, c: int, grid: List[List[int]], visited_d: Dict[Tuple[int, int], bool]) -> int:
+    def _bfs(
+        self,
+        r: int,
+        c: int,
+        grid: List[List[int]],
+        visited_d: Dict[Tuple[int, int], bool],
+    ) -> int:
         from collections import deque
 
         n_rows, n_cols = len(grid), len(grid[0])

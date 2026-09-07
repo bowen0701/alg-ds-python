@@ -69,7 +69,13 @@ class SolutionListComprehension:
 
 
 class SolutionDFSRecur:
-    def _dfsRecur(self, result: List[str], digits: str, cur_str: str, i: int) -> None:
+    def _dfsRecur(
+        self,
+        result: List[str],
+        digits: str,
+        cur_str: str,
+        i: int,
+    ) -> None:
         # If index is out of boundary, complete combination.
         if i == len(digits):
             result.append(cur_str)

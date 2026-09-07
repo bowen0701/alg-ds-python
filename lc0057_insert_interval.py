@@ -47,7 +47,11 @@ from typing import List
 
 
 class SolutionIter:
-    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    def insert(
+        self,
+        intervals: List[List[int]],
+        newInterval: List[int],
+    ) -> List[List[int]]:
         """
         Time complexity: O(n).
         Space complexity: O(n).

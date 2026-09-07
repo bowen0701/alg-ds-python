@@ -29,7 +29,13 @@ from typing import List
 
 
 class SolutionDFSRecur:
-    def _dfs(self, r: int, c: int, distance: int, rooms: List[List[int]]) -> None:
+    def _dfs(
+        self,
+        r: int,
+        c: int,
+        distance: int,
+        rooms: List[List[int]],
+    ) -> None:
         # Base case: out of boundary, or have smaller distance or hit a wall.
         if (r < 0 or r >= len(rooms) 
             or c < 0 or c >= len(rooms[0]) 

@@ -39,7 +39,12 @@ class TreeNode:
 
 
 class SolutionConvert2ArrayTwoPointers:
-    def _preorder(self, vals: List[int], left: int, right: int) -> Optional[TreeNode]:
+    def _preorder(
+        self,
+        vals: List[int],
+        left: int,
+        right: int,
+    ) -> Optional[TreeNode]:
         # Base case.
         if left > right:
             return None

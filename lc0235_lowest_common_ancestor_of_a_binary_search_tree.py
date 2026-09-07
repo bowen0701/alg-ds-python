@@ -44,7 +44,12 @@ class TreeNode:
 
 
 class SolutionRecur:
-    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    def lowestCommonAncestor(
+        self,
+        root: TreeNode,
+        p: TreeNode,
+        q: TreeNode,
+    ) -> TreeNode:
         """
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(logn) or O(n).
@@ -61,7 +66,12 @@ class SolutionRecur:
 
 
 class SolutionIter:
-    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    def lowestCommonAncestor(
+        self,
+        root: TreeNode,
+        p: TreeNode,
+        q: TreeNode,
+    ) -> TreeNode:
         """
         Time complexity: O(logn) for balanced tree; O(n) for single sided tree.
         Space complexity: O(1).

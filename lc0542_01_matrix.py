@@ -38,7 +38,13 @@ from typing import List
 
 
 class SolutionDFSRecur:
-    def _dfs(self, r: int, c: int, distance: int, mat: List[List[int]]) -> None:
+    def _dfs(
+        self,
+        r: int,
+        c: int,
+        distance: int,
+        mat: List[List[int]],
+    ) -> None:
         # Base cases: out of boundary or longer distance.
         if (r < 0 or r >= len(mat)
             or c < 0 or c >= len(mat[0])

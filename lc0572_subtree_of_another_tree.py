@@ -49,7 +49,11 @@ class TreeNode:
 
 
 class SolutionPreorderSubtreeTreeMatchRecur:
-    def _isTreeMatch(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    def _isTreeMatch(
+        self,
+        root: Optional[TreeNode],
+        subRoot: Optional[TreeNode],
+    ) -> bool:
         # Base case.
         if (root and not subRoot) or (not root and subRoot):
             return False
@@ -64,7 +68,11 @@ class SolutionPreorderSubtreeTreeMatchRecur:
         return (self._isTreeMatch(root.left, subRoot.left)
                 and self._isTreeMatch(root.right, subRoot.right))
 
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    def isSubtree(
+        self,
+        root: Optional[TreeNode],
+        subRoot: Optional[TreeNode],
+    ) -> bool:
         """
         Time complexity: O(m*n), where m, n is the number of nodes in T and S.
         Space complexity: O(logm+logn), for balanced tree, O(m+n) for single sided tree.
@@ -83,7 +91,11 @@ class SolutionPreorderSubtreeTreeMatchRecur:
 
 
 class SolutionTreeSerializationBruteForceSubstringSearch:
-    def _serialize(self, root: Optional[TreeNode], root_chars: List[Optional[int]]) -> None:
+    def _serialize(
+        self,
+        root: Optional[TreeNode],
+        root_chars: List[Optional[int]],
+    ) -> None:
         # Base cases.
         if not root:
             root_chars.append('#')
@@ -94,7 +106,11 @@ class SolutionTreeSerializationBruteForceSubstringSearch:
         self._serialize(root.left, root_chars)
         self._serialize(root.right, root_chars)
 
-    def _substring_search(self, root_strs: List[str], sub_root_strs: List[str]) -> int:
+    def _substring_search(
+        self,
+        root_strs: List[str],
+        sub_root_strs: List[str],
+    ) -> int:
         n_root = len(root_strs)
         n_sub_root = len(sub_root_strs)
 
@@ -109,7 +125,11 @@ class SolutionTreeSerializationBruteForceSubstringSearch:
         # Substring is not matched.
         return n_root
 
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    def isSubtree(
+        self,
+        root: Optional[TreeNode],
+        subRoot: Optional[TreeNode],
+    ) -> bool:
         """
         Time complexity: O(m*n + m + n) = O(m*n)
         Space complexity: O(m + n)
@@ -134,7 +154,11 @@ class SolutionTreeSerializationBruteForceSubstringSearch:
 
 
 class SolutionTreeSerializationKMPSubstringSearch:
-    def _serialize(self, root: Optional[TreeNode], root_vals: List[str]) -> None:
+    def _serialize(
+        self,
+        root: Optional[TreeNode],
+        root_vals: List[str],
+    ) -> None:
         """
         Time complexity: O(n), where n is the number of nodes in tree.
         Space complexity: O(n).
@@ -206,7 +230,11 @@ class SolutionTreeSerializationKMPSubstringSearch:
 
         return False
 
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    def isSubtree(
+        self,
+        root: Optional[TreeNode],
+        subRoot: Optional[TreeNode],
+    ) -> bool:
         """
         Time complexity: O(m + n).
         Space complexity: O(m + n).

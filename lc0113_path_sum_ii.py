@@ -57,7 +57,11 @@ class SolutionPreorderBacktrackingRecur:
         self._preorder_backtrack(root.left, targetSum - root.val, result, temp[:])
         self._preorder_backtrack(root.right, targetSum - root.val, result, temp[:])
 
-    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+    def pathSum(
+        self,
+        root: Optional[TreeNode],
+        targetSum: int,
+    ) -> List[List[int]]:
         """
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
@@ -70,7 +74,11 @@ class SolutionPreorderBacktrackingRecur:
 
 
 class SolutionPreorderBacktrackingIter:
-    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+    def pathSum(
+        self,
+        root: Optional[TreeNode],
+        targetSum: int,
+    ) -> List[List[int]]:
         """
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.
@@ -125,7 +133,11 @@ class SolutionPostorderRecurBacktracking:
             result.append(temp[:])
             return
     
-    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+    def pathSum(
+        self,
+        root: Optional[TreeNode],
+        targetSum: int,
+    ) -> List[List[int]]:
         """
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree; O(n) for single sided.

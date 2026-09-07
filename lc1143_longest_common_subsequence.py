@@ -61,7 +61,14 @@ class SolutionRecur:
 
 
 class SolutionMemo:
-    def _lcs_memo(self, text1: str, text2: str, n1: int, n2: int, T: List[List[int]]) -> int:
+    def _lcs_memo(
+        self,
+        text1: str,
+        text2: str,
+        n1: int,
+        n2: int,
+        T: List[List[int]],
+    ) -> int:
         # Base case.
         if n1 == 0 or n2 == 0:
             return 0

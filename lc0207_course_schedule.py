@@ -38,7 +38,12 @@ from typing import Dict, List
 
 
 class SolutionPrereqCoursesDFS:
-    def _has_cycle_dfs(self, course: int, states: List[int], prereq_courses_d: Dict[int, List[int]]) -> bool:
+    def _has_cycle_dfs(
+        self,
+        course: int,
+        states: List[int],
+        prereq_courses_d: Dict[int, List[int]],
+    ) -> bool:
         # If the course completed visiting
         if states[course] == 1:
             return False
@@ -58,7 +63,11 @@ class SolutionPrereqCoursesDFS:
         states[course] = 1
         return False
 
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    def canFinish(
+        self,
+        numCourses: int,
+        prerequisites: List[List[int]],
+    ) -> bool:
         """
         Time complexity: O(|V|+|E|), where
           - |V|: number of vertices, i.e. courses.
@@ -87,7 +96,11 @@ class SolutionPrereqCoursesDFS:
 
 
 class SolutionPrereqCoursesBFSTopologicalSort:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    def canFinish(
+        self,
+        numCourses: int,
+        prerequisites: List[List[int]],
+    ) -> bool:
         """
         Time complexity: O(|V|+|E|), where
           - |V|: number of vertices, i.e. courses.

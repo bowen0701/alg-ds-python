@@ -52,7 +52,12 @@ class SolutionPreorderRecur:
 
 
 class SolutionPreorderRecurTwoPointers:
-    def _preorderRecur(self, nums: List[int], left: int, right: int) -> Optional[TreeNode]:
+    def _preorderRecur(
+        self,
+        nums: List[int],
+        left: int,
+        right: int,
+    ) -> Optional[TreeNode]:
         # Base case.
         if left > right:
             return None
@@ -80,7 +85,12 @@ class SolutionPreorderRecurTwoPointers:
 
 
 class SolutionInorderRecurTwoPointers:
-    def _inorderRecur(self, nums: List[int], left: int, right: int) -> Optional[TreeNode]:
+    def _inorderRecur(
+        self,
+        nums: List[int],
+        left: int,
+        right: int,
+    ) -> Optional[TreeNode]:
         if left > right:
             return None
 
