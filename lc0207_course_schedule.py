@@ -3,31 +3,35 @@ Medium
 
 URL: https://leetcode.com/problems/course-schedule/
 
-There are a total of n courses you have to take, labeled from 0 to n-1.
+There are a total of numCourses courses you have to take, labeled from
+0 to numCourses - 1. You are given an array prerequisites where
+prerequisites[i] = [ai, bi] indicates that you must take course bi first
+if you want to take course ai.
 
-Some courses may have prerequisites, for example to take course 0 you have
-to first take course 1, which is expressed as a pair: [0,1]
+For example, the pair [0, 1], indicates that to take course 0 you have to
+first take course 1.
 
-Given the total number of courses and a list of prerequisite pairs, is it
-possible for you to finish all courses?
+Return true if you can finish all courses. Otherwise, return false.
 
 Example 1:
-Input: 2, [[1,0]] 
+Input: numCourses = 2, prerequisites = [[1,0]]
 Output: true
-Explanation: There are a total of 2 courses to take. 
+Explanation: There are a total of 2 courses to take.
 To take course 1 you should have finished course 0. So it is possible.
 
 Example 2:
-Input: 2, [[1,0],[0,1]]
+Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
 Output: false
-Explanation: There are a total of 2 courses to take. 
-To take course 1 you should have finished course 0, and to take
-course 0 you should also have finished course 1. So it is impossible.
+Explanation: There are a total of 2 courses to take.
+To take course 1 you should have finished course 0, and to take course 0
+you should also have finished course 1. So it is impossible.
 
-Note:
-- The input prerequisites is a graph represented by a list of edges,
-  not adjacency matrices. Read more about how a graph is represented.
-- You may assume that there are no duplicate edges in the input prerequisites.
+Constraints:
+- 1 <= numCourses <= 2000
+- 0 <= prerequisites.length <= 5000
+- prerequisites[i].length == 2
+- 0 <= ai, bi < numCourses
+- All the pairs prerequisites[i] are unique.
 """
 
 from typing import Dict, List
