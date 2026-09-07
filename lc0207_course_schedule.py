@@ -44,11 +44,11 @@ class SolutionPrereqCoursesDFS:
         states: List[int],
         prereq_courses_d: Dict[int, List[int]],
     ) -> bool:
-        # If the course completed visiting
+        # If the course completed visiting.
         if states[course] == 1:
             return False
 
-        # If the course is being process: detected cycle.
+        # If the course is being processed: detected cycle.
         if states[course] == -1:
             return True
 
@@ -72,7 +72,7 @@ class SolutionPrereqCoursesDFS:
         Time complexity: O(|V|+|E|), where
           - |V|: number of vertices, i.e. courses.
           - |E|: number of edges.
-        Space complexity: O(|V|).
+        Space complexity: O(|V|+|E|), for adjacency list built in function.
         """
         from collections import defaultdict
 
@@ -105,13 +105,13 @@ class SolutionPrereqCoursesBFSTopologicalSort:
         Time complexity: O(|V|+|E|), where
           - |V|: number of vertices, i.e. courses.
           - |E|: number of edges.
-        Space complexity: O(|V|).
+        Space complexity: O(|V|+|E|), for adjacency list built in function.
         """
         # Apply BFS Topological Sort to take courses.
         from collections import defaultdict
         from collections import deque
 
-        # Build graph by dict: prereq->list(courses) & courses's indegrees.
+        # Build graph by dict: prereq->list(courses) & course indegrees.
         prereq_courses_d = defaultdict(list)
         n_prereqs = [0] * numCourses
 
@@ -130,14 +130,14 @@ class SolutionPrereqCoursesBFSTopologicalSort:
             course = queue.pop()
             numCourses -= 1
 
-            # Take prereq's next courses after taking prereq.
-            for nxt_course in prereq_courses_d[course]:
+            # Unlock follow-up courses that depend on this course.
+            for next_course in prereq_courses_d[course]:
                 # Decrement number of prerequisites of next course as prereq was taken.
-                n_prereqs[nxt_course] -= 1
+                n_prereqs[next_course] -= 1
 
                 # If no more prereq, add next course to queue to start taking it.
-                if n_prereqs[nxt_course] == 0:
-                    queue.appendleft(nxt_course)
+                if n_prereqs[next_course] == 0:
+                    queue.appendleft(next_course)
 
         return numCourses == 0
 
