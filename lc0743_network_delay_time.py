@@ -45,7 +45,7 @@ from typing import List
 class SolutionDijkstra:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
         """
-        Time complexity: O((|V|+|E|)log|V|).
+        Time complexity: O((|V|+|E|) * log|V|).
         Space complexity: O(|V|+|E|).
         """
         # Build adjacency dict from edge list.
@@ -71,8 +71,8 @@ class SolutionDijkstra:
                     dist[v] = dist[u] + w
                     heapq.heappush(min_heap, (dist[v], v))
 
-        ans = max(dist.values())
-        return ans if ans < float('inf') else -1
+        result = max(dist.values())
+        return result if result < float('inf') else -1
 
 
 def main():
