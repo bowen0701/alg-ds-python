@@ -148,24 +148,29 @@ class SolutionBinarySearchGreedy:
         #   (1) If n is larger than all tails, append it (new longest subsequence).
         #   (2) If T[i-1] < n <= T[i], update T[i] (smaller tail for same length).
         T = [0] * len(nums)
-        size = 0
+        n_piles = 0
 
         for n in nums:
-            # Binary search for insertion position in sorted T[0:size].
-            #   just finds "leftmost pile whose top >= card".
-            left, right = 0, size
-            while left < right:
-                mid = left + (right - left) // 2
+            # Binary search for insertion position in sorted T[0:n_piles].
+            # Finds leftmost pile whose top >= n (the card).
+            l, r = 0, n_piles
+            while l < r:
+                mid = l + (r - l) // 2
                 if T[mid] < n:
-                    left = mid + 1
+                    # Pile top too small, search right half.
+                    l = mid + 1
                 else:
-                    right = mid
+                    # Pile top >= n, could place here; search left for earlier pile.
+                    r = mid
 
-            T[left] = n
+            # pos = pile index to place the card.
+            pos = l
+            T[pos] = n
 
-            size = max(left + 1, size)
+            # If pos == n_piles, we opened a new pile; otherwise no change.
+            n_piles = max(pos + 1, n_piles)
 
-        return size
+        return n_piles
 
 
 class SolutionBinarySearchBisectLeftGreedy:
@@ -183,17 +188,18 @@ class SolutionBinarySearchBisectLeftGreedy:
         # Prefix subproblem: same as SolutionBinarySearchGreedy + bisect_left.
         # T[i]: smallest tail for that length i+1.
         T = [0] * len(nums)
-        size = 0
+        n_piles = 0
 
         for n in nums:
-            # bisect_left finds insertion position in sorted T[0:size].
-            #   just finds "leftmost pile whose top >= card".
-            left = bisect_left(T, n, lo=0, hi=size)
-            T[left] = n
+            # bisect_left finds insertion position in sorted T[0:n_piles].
+            # Finds leftmost pile whose top >= n (the card).
+            pos = bisect_left(T, n, lo=0, hi=n_piles)
+            T[pos] = n
 
-            size = max(left + 1, size)
+            # If pos == n_piles, we opened a new pile; otherwise no change.
+            n_piles = max(pos + 1, n_piles)
 
-        return size
+        return n_piles
 
 
 def main():
