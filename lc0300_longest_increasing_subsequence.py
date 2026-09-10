@@ -32,18 +32,19 @@ from typing import List
 
 
 class SolutionRecur:
-    def _LIS(self, nums: List[int], cur_idx: int, prev_max: int) -> int:
+    def _LIS(self, nums: List[int], prev_idx: int, cur_idx: int) -> int:
         # Base case: current index out of boundary.
         if cur_idx == len(nums):
             return 0
 
-        # LIS is 1 + LIS including nums[cur_idx], if bigger than prev_max.
+        # Include nums[cur_idx], then solve LIS of nums[cur_idx+1:n].
+        # Valid if bigger than last included (or none included yet).
         lis_in = 0
-        if nums[cur_idx] > prev_max:
-            lis_in = 1 + self._LIS(nums, cur_idx + 1, nums[cur_idx])
+        if prev_idx < 0 or nums[cur_idx] > nums[prev_idx]:
+            lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1)
 
-        # LIS of nums[cur_idx+1:n], excluding nums[cur_idx].
-        lis_out = self._LIS(nums, cur_idx + 1, prev_max)
+        # Exclude nums[cur_idx], solve LIS of nums[cur_idx+1:n] with same prev.
+        lis_out = self._LIS(nums, prev_idx, cur_idx + 1)
 
         return max(lis_in, lis_out)
 
@@ -54,10 +55,12 @@ class SolutionRecur:
         Time complexity: O(2^n).
         Space complexity: O(n).
         """
-        # Apply top-down recursion starting from left index.
-        cur_idx = 0
-        prev_max = -float('inf')
-        return self._LIS(nums, cur_idx, prev_max)
+        # Suffix subproblem: LIS in nums[cur_idx:n] with last chosen at prev_idx.
+        # At each step, include or exclude nums[cur_idx], shrink toward base cur_idx=n.
+        #   prev_idx: index of last included element (-1 = none yet).
+        #   cur_idx: index we're deciding to include or exclude.
+        prev_idx, cur_idx = -1, 0
+        return self._LIS(nums, prev_idx, cur_idx)
 
 
 class SolutionMemo:
@@ -75,12 +78,13 @@ class SolutionMemo:
         if T[prev_idx][cur_idx] >= 0:
             return T[prev_idx][cur_idx]
 
-        # LIS is 1 + LIS including nums[cur_idx], if bigger than prev_max.
+        # Include nums[cur_idx], then solve LIS of nums[cur_idx+1:n].
+        # Valid if bigger than last included (or none included yet).
         lis_in = 0
         if prev_idx < 0 or nums[cur_idx] > nums[prev_idx]:
             lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1, T)
 
-        # LIS of nums[cur_idx+1:n], excluding nums[cur_idx].
+        # Exclude nums[cur_idx], solve LIS of nums[cur_idx+1:n] with same prev.
         lis_out = self._LIS(nums, prev_idx, cur_idx + 1, T)
 
         T[prev_idx][cur_idx] = max(lis_in, lis_out)
@@ -93,10 +97,13 @@ class SolutionMemo:
         Time complexity: O(n^2).
         Space complexity: O(n^2).
         """
-        # Apply top-down recursion with memoization, starting from left index.
+        # Suffix subproblem: LIS in nums[cur_idx:n] with last chosen at prev_idx.
+        # Same as SolutionRecur + memo table T[prev_idx][cur_idx].
+        #   prev_idx: index of last included element (-1 = none yet).
+        #   cur_idx: index we're deciding to include or exclude.
         prev_idx, cur_idx = -1, 0
 
-        # Use memoization table T where T[i][j] is LIS from index j with previous chosen index i.
+        # T[i][j]: LIS from index j with previous chosen index i.
         n = len(nums)
         T = [[-float('inf')] * n for _ in range(n)]
         return self._LIS(nums, prev_idx, cur_idx, T)
@@ -112,18 +119,17 @@ class SolutionDP:
         if not nums:
             return 0
 
-        # Apply bottom-up DP with table T with T[i] denoting LIS up to i.
+        # Prefix subproblem: T[r] = LIS of nums[0:r+1], ending at index r.
+        # For each r, scan all l < r: if nums[l] < nums[r], extend LIS ending at l.
         n = len(nums)
 
         T = [1] * n
 
-        # Apply two pointer method: for each r, check if num[l] < num[r], l < r.
-        for r in range(n):
+        for r in range(1, n):
             for l in range(r):
-                if nums[l] < nums[r] and T[l] + 1 > T[r]:
-                    T[r] = T[l] + 1
+                if nums[l] < nums[r]:
+                    T[r] = max(T[r], T[l] + 1)
 
-        # Return max length.
         return max(T)
 
 
@@ -137,15 +143,16 @@ class SolutionBinarySearchGreedy:
         if not nums:
             return 0
 
-        # Store the smallest tails T of all increasing subsequences with len i+1 in T[i]:
-        # (1) If n is larger than all smallest tails, append it and increase length by 1.
-        # (2) if T[i-1] < n <= T[i], update T[i]
-        # This will maintain the tails invariant. Then the result is just the size.
+        # Prefix subproblem: process nums[0:i+1] left to right, maintain tails invariant.
+        # T[i]: smallest tail for that length i+1
+        #   (1) If n is larger than all tails, append it (new longest subsequence).
+        #   (2) If T[i-1] < n <= T[i], update T[i] (smaller tail for same length).
         T = [0] * len(nums)
         size = 0
- 
+
         for n in nums:
-            # Apply binary search to append to the last or update T[i].
+            # Binary search for insertion position in sorted T[0:size].
+            #   just finds "leftmost pile whose top >= card".
             left, right = 0, size
             while left < right:
                 mid = left + (right - left) // 2
@@ -173,15 +180,14 @@ class SolutionBinarySearchBisectLeftGreedy:
         if not nums:
             return 0
 
-        # Store the smallest tails T of all increasing subsequences with len i+1 in T[i]:
-        # (1) If n is larger than all smallest tails, append it and increase length by 1.
-        # (2) if T[i-1] < n <= T[i], update T[i]
-        # This will maintain the tails invariant. Then the result is just the size.
+        # Prefix subproblem: same as SolutionBinarySearchGreedy + bisect_left.
+        # T[i]: smallest tail for that length i+1.
         T = [0] * len(nums)
         size = 0
- 
+
         for n in nums:
-            # Apply binary search to append to the last or update T[i].
+            # bisect_left finds insertion position in sorted T[0:size].
+            #   just finds "leftmost pile whose top >= card".
             left = bisect_left(T, n, lo=0, hi=size)
             T[left] = n
 
