@@ -107,7 +107,8 @@ class SolutionDP:
         # Apply bottom-up dynamic programming.
         n1, n2 = len(text1), len(text2)
 
-        # Create memoization table of n1*n2.
+        # T[r][c] = LCS length of text1[:r] and text2[:c].
+        # T[0][*] = T[*][0] = 0 (empty string base cases).
         T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
 
         for r in range(1, n1 + 1):
