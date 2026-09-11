@@ -38,13 +38,17 @@ from typing import List
 
 class SolutionRecur:
     def _lcs_recur(self, text1: str, text2: str, n1: int, n2: int) -> int:
-        # Base case.
+        # n1, n2: number of chars considered, i.e. LCS of text1[:n1] and text2[:n2].
+
+        # Base case: one string is empty.
         if n1 == 0 or n2 == 0:
             return 0
 
         if text1[n1 - 1] == text2[n2 - 1]:
+            # Last chars match: include it, solve text1[:n1-1] and text2[:n2-1].
             return self._lcs_recur(text1, text2, n1 - 1, n2 - 1) + 1
         else:
+            # Last chars differ: skip one char from either string, take max.
             lcs1 = self._lcs_recur(text1, text2, n1 - 1, n2)
             lcs2 = self._lcs_recur(text1, text2, n1, n2 - 1)
             return max(lcs1, lcs2)
@@ -55,13 +59,13 @@ class SolutionRecur:
           - Each call branches at most 2 ways (match: 1 call, mismatch: 2 calls).
         Space complexity: O(n1+n2).
         """
-        # Apply top-down recursion. 
+        # Suffix subproblem: LCS of text1[:n1] and text2[:n2], shrink toward n1=0 or n2=0.
         n1, n2 = len(text1), len(text2)
         return self._lcs_recur(text1, text2, n1, n2)
 
 
 class SolutionMemo:
-    def _lcs_memo( 
+    def _lcs_memo(
         self,
         text1: str,
         text2: str,
@@ -69,7 +73,9 @@ class SolutionMemo:
         n2: int,
         T: List[List[int]],
     ) -> int:
-        # Base case.
+        # n1, n2: number of chars considered, i.e. LCS of text1[:n1] and text2[:n2].
+
+        # Base case: one string is empty.
         if n1 == 0 or n2 == 0:
             return 0
 
@@ -78,8 +84,10 @@ class SolutionMemo:
             return T[n1][n2]
 
         if text1[n1 - 1] == text2[n2 - 1]:
+            # Last chars match: include it, solve text1[:n1-1] and text2[:n2-1].
             result = self._lcs_memo(text1, text2, n1 - 1, n2 - 1, T) + 1
         else:
+            # Last chars differ: skip one char from either string, take max.
             lcs1 = self._lcs_memo(text1, text2, n1 - 1, n2, T)
             lcs2 = self._lcs_memo(text1, text2, n1, n2 - 1, T)
             result = max(lcs1, lcs2)
@@ -92,7 +100,7 @@ class SolutionMemo:
         Time complexity: O(n1*n2), where ni is the length of texti.
         Space complexity: O(n1*n2).
         """
-        # Apply top-down recursion with memoization.
+        # Same as SolutionRecur + memo table T[n1][n2].
         n1, n2 = len(text1), len(text2)
         T = [[0] * (n2 + 1) for _ in range(n1 + 1)]
         return self._lcs_memo(text1, text2, n1, n2, T)
