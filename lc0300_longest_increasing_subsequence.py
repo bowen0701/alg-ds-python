@@ -32,7 +32,7 @@ from typing import List
 
 
 class SolutionRecur:
-    def _LIS(self, nums: List[int], prev_idx: int, cur_idx: int) -> int:
+    def _lis_recur(self, nums: List[int], prev_idx: int, cur_idx: int) -> int:
         # Base case: current index out of boundary.
         if cur_idx == len(nums):
             return 0
@@ -41,10 +41,10 @@ class SolutionRecur:
         # Valid if bigger than last included (or none included yet).
         lis_in = 0
         if prev_idx < 0 or nums[cur_idx] > nums[prev_idx]:
-            lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1)
+            lis_in = 1 + self._lis_recur(nums, cur_idx, cur_idx + 1)
 
         # Exclude nums[cur_idx], solve LIS of nums[cur_idx+1:n] with same prev.
-        lis_out = self._LIS(nums, prev_idx, cur_idx + 1)
+        lis_out = self._lis_recur(nums, prev_idx, cur_idx + 1)
 
         return max(lis_in, lis_out)
 
@@ -60,11 +60,11 @@ class SolutionRecur:
         #   prev_idx: index of last included element (-1 = none yet).
         #   cur_idx: index we're deciding to include or exclude.
         prev_idx, cur_idx = -1, 0
-        return self._LIS(nums, prev_idx, cur_idx)
+        return self._lis_recur(nums, prev_idx, cur_idx)
 
 
 class SolutionMemo:
-    def _LIS(
+    def _lis_memo(
         self,
         nums: List[int],
         prev_idx: int,
@@ -82,10 +82,10 @@ class SolutionMemo:
         # Valid if bigger than last included (or none included yet).
         lis_in = 0
         if prev_idx < 0 or nums[cur_idx] > nums[prev_idx]:
-            lis_in = 1 + self._LIS(nums, cur_idx, cur_idx + 1, T)
+            lis_in = 1 + self._lis_memo(nums, cur_idx, cur_idx + 1, T)
 
         # Exclude nums[cur_idx], solve LIS of nums[cur_idx+1:n] with same prev.
-        lis_out = self._LIS(nums, prev_idx, cur_idx + 1, T)
+        lis_out = self._lis_memo(nums, prev_idx, cur_idx + 1, T)
 
         T[prev_idx][cur_idx] = max(lis_in, lis_out)
         return T[prev_idx][cur_idx]
@@ -106,7 +106,7 @@ class SolutionMemo:
         # T[i][j]: LIS from index j with previous chosen index i.
         n = len(nums)
         T = [[-float('inf')] * n for _ in range(n)]
-        return self._LIS(nums, prev_idx, cur_idx, T)
+        return self._lis_memo(nums, prev_idx, cur_idx, T)
 
 
 class SolutionDP:

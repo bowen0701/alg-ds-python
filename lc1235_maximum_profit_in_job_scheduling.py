@@ -45,12 +45,12 @@ import bisect
 
 
 class SolutionRecur:
-    def _recur(self, i: int, jobs: List[tuple]) -> int:
+    def _schedule_recur(self, i: int, jobs: List[tuple]) -> int:
         if i >= len(jobs):
             return 0
 
         # Option 1: skip job i.
-        skip_profit = self._recur(i + 1, jobs)
+        skip_profit = self._schedule_recur(i + 1, jobs)
 
         # Option 2: take job i, find next non-overlapping job by linear scan.
         end_time = jobs[i][1]
@@ -58,7 +58,7 @@ class SolutionRecur:
         while next_job < len(jobs) and jobs[next_job][0] < end_time:
             next_job += 1
 
-        take_profit = jobs[i][2] + self._recur(next_job, jobs)
+        take_profit = jobs[i][2] + self._schedule_recur(next_job, jobs)
 
         return max(skip_profit, take_profit)
 
@@ -75,11 +75,11 @@ class SolutionRecur:
         Space complexity: O(n), for recursion stack.
         """
         jobs = sorted(zip(startTime, endTime, profit))
-        return self._recur(0, jobs)
+        return self._schedule_recur(0, jobs)
 
 
 class SolutionMemo:
-    def _recur(self, i: int, jobs: List[tuple], memo: dict) -> int:
+    def _schedule_recur(self, i: int, jobs: List[tuple], memo: dict) -> int:
         if i >= len(jobs):
             return 0
 
@@ -87,7 +87,7 @@ class SolutionMemo:
             return memo[i]
 
         # Option 1: skip job i.
-        skip_profit = self._recur(i + 1, jobs, memo)
+        skip_profit = self._schedule_recur(i + 1, jobs, memo)
 
         # Option 2: take job i, find next non-overlapping job by linear scan.
         end_time = jobs[i][1]
@@ -95,7 +95,7 @@ class SolutionMemo:
         while next_job < len(jobs) and jobs[next_job][0] < end_time:
             next_job += 1
 
-        take_profit = jobs[i][2] + self._recur(next_job, jobs, memo)
+        take_profit = jobs[i][2] + self._schedule_recur(next_job, jobs, memo)
 
         memo[i] = max(skip_profit, take_profit)
         return memo[i]
@@ -113,11 +113,11 @@ class SolutionMemo:
         """
         jobs = sorted(zip(startTime, endTime, profit))
         memo = {}
-        return self._recur(0, jobs, memo)
+        return self._schedule_recur(0, jobs, memo)
 
 
 class SolutionMemo2:
-    def _recur(self, i: int, jobs: List[tuple], memo: dict) -> int:
+    def _schedule_recur(self, i: int, jobs: List[tuple], memo: dict) -> int:
         if i >= len(jobs):
             return 0
 
@@ -125,7 +125,7 @@ class SolutionMemo2:
             return memo[i]
 
         # Option 1: skip job i.
-        skip_profit = self._recur(i + 1, jobs, memo)
+        skip_profit = self._schedule_recur(i + 1, jobs, memo)
 
         # Option 2: take job i, find next non-overlapping job.
         end_time = jobs[i][1]
@@ -138,7 +138,7 @@ class SolutionMemo2:
             else:
                 hi = mid
 
-        take_profit = jobs[i][2] + self._recur(lo, jobs, memo)
+        take_profit = jobs[i][2] + self._schedule_recur(lo, jobs, memo)
 
         memo[i] = max(skip_profit, take_profit)
         return memo[i]
@@ -156,11 +156,11 @@ class SolutionMemo2:
         """
         jobs = sorted(zip(startTime, endTime, profit))
         memo = {}
-        return self._recur(0, jobs, memo)
+        return self._schedule_recur(0, jobs, memo)
 
 
 class SolutionMemo3:
-    def _recur(
+    def _schedule_recur(
         self,
         i: int,
         jobs: List[tuple],
@@ -174,11 +174,11 @@ class SolutionMemo3:
             return memo[i]
 
         # Option 1: skip job i.
-        skip_profit = self._recur(i + 1, jobs, start_times, memo)
+        skip_profit = self._schedule_recur(i + 1, jobs, start_times, memo)
 
         # Option 2: take job i, find next non-overlapping job via bisect.
         next_job = bisect.bisect_left(start_times, jobs[i][1])
-        take_profit = jobs[i][2] + self._recur(next_job, jobs, start_times, memo)
+        take_profit = jobs[i][2] + self._schedule_recur(next_job, jobs, start_times, memo)
 
         memo[i] = max(skip_profit, take_profit)
         return memo[i]
@@ -197,7 +197,7 @@ class SolutionMemo3:
         jobs = sorted(zip(startTime, endTime, profit))
         start_times = [j[0] for j in jobs]
         memo = {}
-        return self._recur(0, jobs, start_times, memo)
+        return self._schedule_recur(0, jobs, start_times, memo)
 
 
 class SolutionDP:

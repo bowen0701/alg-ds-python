@@ -101,7 +101,7 @@ class SolutionRecurPointer:
 
 
 class SolutionMemo:
-    def _editRecur(self, word1, word2, i1, i2, T):
+    def _editMemo(self, word1, word2, i1, i2, T):
         # If word1 and word2 are empty strings.
         if i1 == self.n1 and i2 == self.n2:
             return 0
@@ -116,12 +116,12 @@ class SolutionMemo:
 
         if word1[i1] == word2[i2]:
             # If 1st chars are equal, edit the remaining words.
-            T[i1][i2] = self._editRecur(word1, word2, i1 + 1, i2 + 1, T)
+            T[i1][i2] = self._editMemo(word1, word2, i1 + 1, i2 + 1, T)
         else:
             # If not, recursively get min of insert, delete, and replace.
-            insert = 1 + self._editRecur(word1, word2, i1, i2 + 1, T)
-            delete = 1 + self._editRecur(word1, word2, i1 + 1, i2, T)
-            replace = 1 + self._editRecur(word1, word2, i1 + 1, i2 + 1, T)
+            insert = 1 + self._editMemo(word1, word2, i1, i2 + 1, T)
+            delete = 1 + self._editMemo(word1, word2, i1 + 1, i2, T)
+            replace = 1 + self._editMemo(word1, word2, i1 + 1, i2 + 1, T)
             T[i1][i2] = min(insert, delete, replace)
         return T[i1][i2]
 
@@ -140,7 +140,7 @@ class SolutionMemo:
 
         # Use a table T[i1][i2] for dist for word1[i1:] & word2[i2:].
         T = [[0] * self.n2 for _ in range(self.n1)]
-        return self._editRecur(word1, word2, i1, i2, T)
+        return self._editMemo(word1, word2, i1, i2, T)
 
 
 class SolutionDP:

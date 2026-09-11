@@ -57,7 +57,7 @@ class SolutionTopDownRecur:
 
 
 class SolutionBottomUpRecur:
-    def _recur(self, sx, sy, tx, ty):
+    def _reach_recur(self, sx, sy, tx, ty):
         if tx == sx and ty == sy:
             return True
 
@@ -78,8 +78,8 @@ class SolutionBottomUpRecur:
             else:
                 return False
 
-        return (self._recur(sx, sy, tx - ty, ty) or
-                self._recur(sx, sy, tx, ty - tx))
+        return (self._reach_recur(sx, sy, tx - ty, ty) or
+                self._reach_recur(sx, sy, tx, ty - tx))
 
     def reachingPoints(self, sx, sy, tx, ty):
         """
@@ -94,7 +94,7 @@ class SolutionBottomUpRecur:
         Time complexity: O(log(max(tx, ty))).
         Space complexity: O(log(max(tx, ty))).
         """
-        return self._recur(sx, sy, tx, ty)
+        return self._reach_recur(sx, sy, tx, ty)
 
 
 class SolutionBottomUpIter:

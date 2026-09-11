@@ -33,7 +33,7 @@ from typing import List
 
 
 class SolutionRecur:
-    def _recur(self, nums: List[int], i: int) -> int:
+    def _lcis_recur(self, nums: List[int], i: int) -> int:
         # Base case: first element, LCIS length is 1.
         if i == 0:
             return 1
@@ -41,7 +41,7 @@ class SolutionRecur:
         # Top-down: shrink i toward base case i=0; bottom-up DP iterates i=1,..., n-1.
         # If strictly increasing, extend LCIS ending at i-1.
         if nums[i - 1] < nums[i]:
-            return self._recur(nums, i - 1) + 1
+            return self._lcis_recur(nums, i - 1) + 1
         else:
             return 1
 
@@ -52,11 +52,11 @@ class SolutionRecur:
         Space complexity: O(n).
         """
         n = len(nums)
-        return max(self._recur(nums, i) for i in range(n))
+        return max(self._lcis_recur(nums, i) for i in range(n))
 
 
 class SolutionMemo:
-    def _memo(
+    def _lcis_memo(
         self,
         nums: List[int],
         i: int,
@@ -73,7 +73,7 @@ class SolutionMemo:
         # Top-down: shrink i toward base case i=0; bottom-up DP iterates i=1,..., n-1.
         # If strictly increasing, extend LCIS ending at i-1.
         if nums[i - 1] < nums[i]:
-            T[i] = self._memo(nums, i - 1, T) + 1
+            T[i] = self._lcis_memo(nums, i - 1, T) + 1
         else:
             T[i] = 1
 
@@ -86,7 +86,7 @@ class SolutionMemo:
         """
         n = len(nums)
         T = [0] * n
-        return max(self._memo(nums, i, T) for i in range(n))
+        return max(self._lcis_memo(nums, i, T) for i in range(n))
 
 
 class SolutionDP:

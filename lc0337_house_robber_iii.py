@@ -38,19 +38,19 @@ class TreeNode:
 
 
 class SolutionRecur:
-    def _recur(self, root):
+    def _rob_recur(self, root):
         if not root:
             return 0
 
         # Rob root: skip children, rob grandchildren.
         amount_in = root.val
         if root.left:
-            amount_in += self._recur(root.left.left) + self._recur(root.left.right)
+            amount_in += self._rob_recur(root.left.left) + self._rob_recur(root.left.right)
         if root.right:
-            amount_in += self._recur(root.right.left) + self._recur(root.right.right)
+            amount_in += self._rob_recur(root.right.left) + self._rob_recur(root.right.right)
 
         # Skip root: rob children.
-        amount_ex = self._recur(root.left) + self._recur(root.right)
+        amount_ex = self._rob_recur(root.left) + self._rob_recur(root.right)
 
         return max(amount_in, amount_ex)
 
@@ -63,11 +63,11 @@ class SolutionRecur:
         Space complexity: O(n).
         """
         # Apply top-down recursion.
-        return self._recur(root)
+        return self._rob_recur(root)
 
 
 class SolutionMemo:
-    def _recur(self, root, T):
+    def _rob_recur(self, root, T):
         if not root:
             return 0
 
@@ -77,12 +77,12 @@ class SolutionMemo:
         # Rob root: skip children, rob grandchildren.
         amount_in = root.val
         if root.left:
-            amount_in += self._recur(root.left.left, T) + self._recur(root.left.right, T)
+            amount_in += self._rob_recur(root.left.left, T) + self._rob_recur(root.left.right, T)
         if root.right:
-            amount_in += self._recur(root.right.left, T) + self._recur(root.right.right, T)
+            amount_in += self._rob_recur(root.right.left, T) + self._rob_recur(root.right.right, T)
 
         # Skip root: rob children.
-        amount_ex = self._recur(root.left, T) + self._recur(root.right, T)
+        amount_ex = self._rob_recur(root.left, T) + self._rob_recur(root.right, T)
 
         T[root] = max(amount_in, amount_ex)
         return T[root]
@@ -97,17 +97,17 @@ class SolutionMemo:
         """
         # Apply top-down recursion with memoization.
         T = {}
-        return self._recur(root, T)
+        return self._rob_recur(root, T)
 
 
 class SolutionPostorder:
-    def _postOrder(self, root):
+    def _rob_postorder(self, root):
         """Return (rob_root, skip_root) for the subtree."""
         if not root:
             return (0, 0)
 
-        left_in, left_ex = self._postOrder(root.left)
-        right_in, right_ex = self._postOrder(root.right)
+        left_in, left_ex = self._rob_postorder(root.left)
+        right_in, right_ex = self._rob_postorder(root.right)
 
         # Rob root: must skip both children.
         amount_in = root.val + left_ex + right_ex
@@ -128,7 +128,7 @@ class SolutionPostorder:
         Space complexity: O(n).
         """
         # (Only) Postorder returning (rob, skip) tuple eliminates redundant subtree visits.
-        return max(self._postOrder(root))
+        return max(self._rob_postorder(root))
 
 
 def main():

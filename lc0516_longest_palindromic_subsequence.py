@@ -22,7 +22,7 @@ One possible longest palindromic subsequence is "bb".
 """
 
 class SolutionRecur:
-    def _LPS(self, s, l, r):
+    def _lps_recur(self, s, l, r):
         # Base case.
         if l > r:
             return 0
@@ -32,10 +32,10 @@ class SolutionRecur:
 
         if s[l] == s[r]:
             # Check LPS in subsequence between s[l] and s[r].
-            return self._LPS(s, l + 1, r - 1) + 2
+            return self._lps_recur(s, l + 1, r - 1) + 2
         else:
             # Check max of LPS's in s[l+1:r-1] and s[l:r].
-            return max(self._LPS(s, l + 1, r), self._LPS(s, l, r - 1))
+            return max(self._lps_recur(s, l + 1, r), self._lps_recur(s, l, r - 1))
 
     def longestPalindromeSubseq(self, s):
         """
@@ -49,11 +49,11 @@ class SolutionRecur:
         """
         # Apply top-down DP by recursion.
         l, r = 0, len(s) - 1
-        return self._LPS(s, l, r)
+        return self._lps_recur(s, l, r)
 
 
 class SolutionMemo:
-    def _LPS(self, s, l, r, T):
+    def _lps_memo(self, s, l, r, T):
         # Base case.
         if l > r:
             return 0
@@ -67,10 +67,10 @@ class SolutionMemo:
 
         if s[l] == s[r]:
             # Check LPS in subsequence between s[l] and s[r].
-            T[l][r] = self._LPS(s, l + 1, r - 1, T) + 2
+            T[l][r] = self._lps_memo(s, l + 1, r - 1, T) + 2
         else:
             # Check max of LPS's in s[l+1:r-1] and s[l:r].
-            T[l][r] = max(self._LPS(s, l + 1, r, T), self._LPS(s, l, r - 1, T))
+            T[l][r] = max(self._lps_memo(s, l + 1, r, T), self._lps_memo(s, l, r - 1, T))
 
         return T[l][r]
 
@@ -87,7 +87,7 @@ class SolutionMemo:
         T = [[None] * n for _ in range(n)]
 
         l, r = 0, len(s) - 1
-        return self._LPS(s, l, r, T)
+        return self._lps_memo(s, l, r, T)
 
 
 class SolutionDP:

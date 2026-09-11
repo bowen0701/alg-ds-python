@@ -61,7 +61,7 @@ class SolutionRecur:
 
 
 class SolutionMemo:
-    def _lcs_memo(
+    def _lcs_memo( 
         self,
         text1: str,
         text2: str,

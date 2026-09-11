@@ -31,14 +31,14 @@ Constraints:
 """
 
 class SolutionRecur:
-    def _recur(self, nums, n):
+    def _rob_recur(self, nums, n):
         # Base case.
         if n < 0:
             return 0
 
         # To rob or not to rob house n: T[n] = max(nums[n] + T[n-2], T[n-1]).
-        amount_in = nums[n] + self._recur(nums, n - 2)
-        amount_ex = self._recur(nums, n - 1)
+        amount_in = nums[n] + self._rob_recur(nums, n - 2)
+        amount_ex = self._rob_recur(nums, n - 1)
         return max(amount_in, amount_ex)
 
     def rob(self, nums):
@@ -53,11 +53,11 @@ class SolutionRecur:
         if not nums:
             return 0
 
-        return self._recur(nums, len(nums) - 1)
+        return self._rob_recur(nums, len(nums) - 1)
 
 
 class SolutionMemo:
-    def _recurMemo(self, nums, n, T):
+    def _rob_memo(self, nums, n, T):
         # Base case.
         if n < 0:
             return 0
@@ -67,8 +67,8 @@ class SolutionMemo:
             return T[n]
 
         # To rob or not to rob house n: T[n] = max(nums[n] + T[n-2], T[n-1]).
-        amount_in = nums[n] + self._recurMemo(nums, n - 2, T)
-        amount_ex = self._recurMemo(nums, n - 1, T)
+        amount_in = nums[n] + self._rob_memo(nums, n - 2, T)
+        amount_ex = self._rob_memo(nums, n - 1, T)
         T[n] = max(amount_in, amount_ex)
         return T[n]
 
@@ -85,7 +85,7 @@ class SolutionMemo:
             return 0
 
         T = [None] * len(nums)
-        return self._recurMemo(nums, len(nums) - 1, T)
+        return self._rob_memo(nums, len(nums) - 1, T)
 
 
 class SolutionDP:

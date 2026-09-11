@@ -37,14 +37,14 @@ Constraints:
 
 
 class SolutionRecur:
-    def _recur(self, nums, start, end):
+    def _rob_recur(self, nums, start, end):
         """House Robber I recursion on nums[start:end+1]."""
         if start > end:
             return 0
 
         # To rob or not to rob house end.
-        amount_in = nums[end] + self._recur(nums, start, end - 2)
-        amount_ex = self._recur(nums, start, end - 1)
+        amount_in = nums[end] + self._rob_recur(nums, start, end - 2)
+        amount_ex = self._rob_recur(nums, start, end - 1)
         return max(amount_in, amount_ex)
 
     def rob(self, nums):
@@ -65,13 +65,13 @@ class SolutionRecur:
             return nums[0]
 
         return max(
-            self._recur(nums, 0, len(nums) - 2),
-            self._recur(nums, 1, len(nums) - 1),
+            self._rob_recur(nums, 0, len(nums) - 2),
+            self._rob_recur(nums, 1, len(nums) - 1),
         )
 
 
 class SolutionMemo:
-    def _recur(self, nums, start, end, T):
+    def _rob_recur(self, nums, start, end, T):
         """House Robber I recursion + memo on nums[start:end+1]."""
         if start > end:
             return 0
@@ -80,8 +80,8 @@ class SolutionMemo:
             return T[end]
 
         # To rob or not to rob house end.
-        amount_in = nums[end] + self._recur(nums, start, end - 2, T)
-        amount_ex = self._recur(nums, start, end - 1, T)
+        amount_in = nums[end] + self._rob_recur(nums, start, end - 2, T)
+        amount_ex = self._rob_recur(nums, start, end - 1, T)
         T[end] = max(amount_in, amount_ex)
         return T[end]
 
@@ -105,8 +105,8 @@ class SolutionMemo:
         T1 = [None] * len(nums)
         T2 = [None] * len(nums)
         return max(
-            self._recur(nums, 0, len(nums) - 2, T1),
-            self._recur(nums, 1, len(nums) - 1, T2),
+            self._rob_recur(nums, 0, len(nums) - 2, T1),
+            self._rob_recur(nums, 1, len(nums) - 1, T2),
         )
 
 
