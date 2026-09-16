@@ -20,7 +20,7 @@ Constraints:
 - 0 <= starti < endi <= 10^6
 """
 
-class SolutionSortEndMinHeapEnd:
+class SolutionSortStartMinHeapEnd:
     def minMeetingRooms(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -38,21 +38,21 @@ class SolutionSortEndMinHeapEnd:
         intervals.sort()
 
         # Use min heap to store end times.
-        end_minhq = []
-        heapq.heappush(end_minhq, intervals[0][1])
+        end_hq = []
+        heapq.heappush(end_hq, intervals[0][1])
 
         for i in range(1, len(intervals)):
             # If next start time is after min end time, remove min end time.
-            if intervals[i][0] >= end_minhq[0]:
-                heapq.heappop(end_minhq)
+            if intervals[i][0] >= end_hq[0]:
+                heapq.heappop(end_hq)
 
             # Add next end time to min heap.
-            heapq.heappush(end_minhq, intervals[i][1])
+            heapq.heappush(end_hq, intervals[i][1])
 
-        return len(end_minhq)
+        return len(end_hq)
 
 
-class SolutionTimeCounterListInsort:
+class SolutionTimeCountersInsort:
     def minMeetingRooms(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -80,13 +80,13 @@ class SolutionTimeCounterListInsort:
 def main():
     # Output: 2.
     intervals = [[0,30],[5,10],[15,20]]
-    print(SolutionSortEndMinHeapEnd().minMeetingRooms(intervals))
-    print(SolutionTimeCounterListInsort().minMeetingRooms(intervals))
+    print(SolutionSortStartMinHeapEnd().minMeetingRooms(intervals))
+    print(SolutionTimeCountersInsort().minMeetingRooms(intervals))
 
     # Output: 1.
     intervals = [[7, 10], [2, 4]]
-    print(SolutionSortEndMinHeapEnd().minMeetingRooms(intervals))
-    print(SolutionTimeCounterListInsort().minMeetingRooms(intervals))
+    print(SolutionSortStartMinHeapEnd().minMeetingRooms(intervals))
+    print(SolutionTimeCountersInsort().minMeetingRooms(intervals))
 
 
 if __name__ == '__main__':
