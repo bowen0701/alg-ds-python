@@ -153,18 +153,18 @@ class SolutionBinarySearchGreedy:
         for n in nums:
             # Binary search for insertion position in sorted T[0:n_piles].
             # Finds leftmost pile whose top >= n (the card).
-            l, r = 0, n_piles
-            while l < r:
-                mid = l + (r - l) // 2
+            left, right = 0, n_piles
+            while left < right:
+                mid = left + (right - left) // 2
                 if T[mid] < n:
                     # Pile top too small, search right half.
-                    l = mid + 1
+                    left = mid + 1
                 else:
                     # Pile top >= n, could place here; search left for earlier pile.
-                    r = mid
+                    right = mid
 
             # pos = pile index to place the card.
-            pos = l
+            pos = left
             T[pos] = n
 
             # If pos == n_piles, we opened a new pile; otherwise no change.
