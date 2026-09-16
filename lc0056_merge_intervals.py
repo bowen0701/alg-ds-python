@@ -38,7 +38,7 @@ class SolutionSortAppendOrMerge:
                 # Append non-overlapping interval.
                 result.append(intervals[i])
             else:
-                # Merge overlapped interval.
+                # Merge overlapped interval by merging the intervals' ends.
                 result[-1][1] = max(intervals[i][1], result[-1][1])
 
         return result
