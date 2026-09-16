@@ -3,32 +3,37 @@ Hard
 
 URL: https://leetcode.com/problems/find-median-from-data-stream/
 
-Median is the middle value in an ordered integer list. 
-If the size of the list is even, there is no middle value. 
-So the median is the mean of the two middle value.
+The median is the middle value in an ordered integer list. If the size
+of the list is even, there is no middle value, and the median is the
+mean of the two middle values.
 
-For example,
-[2,3,4], the median is 3
-[2,3], the median is (2 + 3) / 2 = 2.5
+For example, for arr = [2,3,4], the median is 3.
+For example, for arr = [2,3], the median is (2 + 3) / 2 = 2.5.
 
-Design a data structure that supports the following two operations:
-- void addNum(int num) - Add a integer number from the data stream to 
+Implement the MedianFinder class:
+- MedianFinder() initializes the MedianFinder object.
+- void addNum(int num) adds the integer num from the data stream to
   the data structure.
-- double findMedian() - Return the median of all elements so far.
- 
-Example:
+- double findMedian() returns the median of all elements so far.
+  Answers within 10^-5 of the actual answer will be accepted.
 
-addNum(1)
-addNum(2)
-findMedian() -> 1.5
-addNum(3) 
-findMedian() -> 2
- 
+Example 1:
+Input: ["MedianFinder", "addNum", "addNum", "findMedian", "addNum",
+"findMedian"]
+[[], [1], [2], [], [3], []]
+Output: [null, null, null, 1.5, null, 2.0]
+
+Constraints:
+- -10^5 <= num <= 10^5
+- There will be at least one element in the data structure before
+  calling findMedian.
+- At most 5 * 10^4 calls will be made to addNum and findMedian.
+
 Follow up:
-- If all integer numbers from the stream are between 0 and 100, 
+- If all integer numbers from the stream are in the range [0, 100],
   how would you optimize it?
-- If 99% of all integer numbers from the stream are between 0 and 100, 
-  how would you optimize it?
+- If 99% of all integer numbers from the stream are in the range
+  [0, 100], how would you optimize it?
 """
 
 import heapq
@@ -47,7 +52,7 @@ class MedianFinder:
         :type num: int
         :rtype: None
         """
-        # Store small half and large one to max heap and min heap, respectively. 
+        # Store small half and large half to max heap and min heap, respectively. 
         if not self.small_maxheap or num < -self.small_maxheap[0]:
             # To obtain a max heap, push negative item to a negative min heap.
             heapq.heappush(self.small_maxheap, -num)
