@@ -34,22 +34,23 @@ class TreeNode:
         self.right = None
 
 
-class SolutionLeftRightMaxPathDownSumRecur:
+class SolutionLeftOrRightMaxPathDownSumPostOrder:
     def _maxPathDownSum(self, root):
-        # Edge case.
+        """Post-order DFS: recurse left/right first, then process current node."""
         if not root:
             return 0
 
-        # Collect max path sum from root value, down paths from left/right nodes.
-        # If one branch sum is less than 0, do not connect that branch by max(0, .).
+        # Max downward path sum from left/right children; clamp to 0 to skip negative branches.
         left_max_down_sum = max(0, self._maxPathDownSum(root.left))
         right_max_down_sum = max(0, self._maxPathDownSum(root.right))
 
+        # Side effect to get the best path that forks at this node (left + root + right).
         self.max_path_sum = max(
             left_max_down_sum + root.val + right_max_down_sum,
             self.max_path_sum)
 
-        # Return max path down sum from left or right, including root values.
+        # Return single-branch max: parent can only extend through one child,
+        # not both, otherwise the path would fork and become invalid.
         return root.val + max(left_max_down_sum, right_max_down_sum)
 
     def maxPathSum(self, root):
@@ -76,7 +77,7 @@ def main():
     root = TreeNode(1)
     root.left = TreeNode(2)
     root.right = TreeNode(3)
-    print(SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root))
+    print(SolutionLeftOrRightMaxPathDownSumPostOrder().maxPathSum(root))
 
     # Output: 42
     #  -10
@@ -89,7 +90,7 @@ def main():
     root.right = TreeNode(20)
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
-    print(SolutionLeftRightMaxPathDownSumRecur().maxPathSum(root))
+    print(SolutionLeftOrRightMaxPathDownSumPostOrder().maxPathSum(root))
 
 
 if __name__ == '__main__':
