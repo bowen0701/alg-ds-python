@@ -39,17 +39,17 @@ class SolutionCharPosDict:
         """
         from collections import defaultdict
 
-        start = 0
+        max_start = 0
         max_len = 0
         char_pos_d = defaultdict(int)
 
         for i, c in enumerate(s):
-            if c in char_pos_d and start <= char_pos_d[c]:
+            if c in char_pos_d and max_start <= char_pos_d[c]:
                 # When repeating char is visited.
-                start = char_pos_d[c] + 1
+                max_start = char_pos_d[c] + 1
             else:
                 # If not, update max length.
-                max_len = max(max_len, i - start + 1)
+                max_len = max(max_len, i - max_start + 1)
 
             # Always update char dict for every char in s.
             char_pos_d[c] = i
