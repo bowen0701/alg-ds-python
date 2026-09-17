@@ -37,63 +37,51 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
 """
 
 class SolutionCharCountDictTwoPointers:
-    def minWindow(self, s, t):
+    def minWindow(self, s: str, t: str) -> str:
         """
-        :type s: str
-        :type t: str
-        :rtype: str
-
-        Time complexity: O(m+n), where
-          - m: lenght of s,
-          - n: lenght of t.
+        Time complexity: O(m+n), where m = len(s), n = len(t).
         Space complexity: O(m+n).
         """
         from collections import Counter
 
-        # Remaining need: positive = still needed, 0 = satisfied, negative = surplus.
-        # Counter acts as defaultdict(int), so non-t chars default to 0.
+        # How many more of each char the window still needs.
+        # Positive = still needed, 0 = exactly satisfied, negative = surplus.
+        # Counter also defaults to 0 for non-t chars (acts as defaultdict(int)).
         t_char_count_d = Counter(t)
 
-        # Total chars still needed to complete a valid window.
-        t_counter = len(t)
+        # Number of t-chars still missing from the window.
+        n_missing = len(t)
 
         min_left = 0
         min_len = float('inf')
 
-        left, right = 0, 0
+        left = 0
 
         # Expand window by moving right.
-        while right < len(s):
-            # Only decrement t_counter when this char is genuinely needed (count > 0).
-            # Non-t chars have count 0; surplus t-chars have count 0 or below.
+        for right in range(len(s)):
+            # If this char is still needed (count > 0), one fewer char is missing.
             if t_char_count_d[s[right]] > 0:
-                t_counter -= 1
+                n_missing -= 1
 
-            # Always decrement: tracks how many more of this char the window needs.
-            # Non-t chars go negative (e.g., -1), which is harmless.
+            # Always decrement: surplus chars go negative, which is harmless.
             t_char_count_d[s[right]] -= 1
-            right += 1
 
-            # Window contains all of t: shrink from left to find minimum.
-            while t_counter == 0:
-                if right - left < min_len:
-                    min_len = right - left
+            # Contract window from left while all t-chars are satisfied.
+            while n_missing == 0:
+                if right - left + 1 < min_len:
+                    min_len = right - left + 1
                     min_left = left
 
                 # Restore count for the char leaving the window.
                 t_char_count_d[s[left]] += 1
 
-                # If count goes positive, this char is now needed again.
-                # Non-t chars go from negative back toward 0, never triggering this.
+                # If count goes positive, this char is missing again.
                 if t_char_count_d[s[left]] > 0:
-                    t_counter += 1
+                    n_missing += 1
 
                 left += 1
 
-        if min_len < float('inf'):
-            return s[min_left:(min_left + min_len)]
-        else:
-            return ''
+        return s[min_left:min_left + min_len] if min_len < float('inf') else ""
 
 
 def main():
@@ -102,6 +90,7 @@ def main():
     t = "ABC"
     print(SolutionCharCountDictTwoPointers().minWindow(s, t))
 
+    # OutputL "ABBBBBBBBBA"
     s = "ABBBBBBBBBA"
     t = "AA"
     print(SolutionCharCountDictTwoPointers().minWindow(s, t))
