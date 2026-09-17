@@ -94,7 +94,7 @@ class SolutionNumberFreqDictMaxHeap:
 
         # Pop the first k from max_heap.
         result = []
-        for i in range(k):
+        for _ in range(k):
             result.append(heapq.heappop(maxheap)[1])
 
         return result
