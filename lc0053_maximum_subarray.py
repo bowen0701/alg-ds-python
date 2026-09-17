@@ -46,6 +46,7 @@ class SolutionDP:
 
         for i in range(1, len(nums)):
             # Compute max sum at i: to include previous subarray or not.
+            # When cur_max_sum < 0, it's better to restart the subarray.
             cur_max_sums[i] = max(cur_max_sums[i - 1] + nums[i], nums[i])
             max_sum = max(max_sum, cur_max_sums[i])
 
@@ -67,6 +68,7 @@ class SolutionIter:
 
         for i in range(1, len(nums)):
             # Compute max sum at i: to include previous subarray or not?
+            # When cur_max_sum < 0, it's better to restart the subarray.
             cur_max_sum = max(cur_max_sum + nums[i], nums[i])
             max_sum = max(max_sum, cur_max_sum)
 
