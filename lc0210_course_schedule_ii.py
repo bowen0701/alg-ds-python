@@ -48,7 +48,7 @@ from collections import defaultdict, deque
 
 
 class SolutionCoursePrereqsDFS:
-    def _has_cycle_dfs(
+    def _dfs_has_cycle_recur(
         self,
         course: int,
         states: List[int],
@@ -67,7 +67,7 @@ class SolutionCoursePrereqsDFS:
         states[course] = -1
 
         for prereq in course_prereqs_d[course]:
-            if self._has_cycle_dfs(prereq, states, course_prereqs_d, order):
+            if self._dfs_has_cycle_recur(prereq, states, course_prereqs_d, order):
                 return True
 
         # If no cycle was detected, completed visiting.
@@ -101,7 +101,7 @@ class SolutionCoursePrereqsDFS:
         order = []
 
         for course in range(numCourses):
-            if self._has_cycle_dfs(course, states, course_prereqs_d, order):
+            if self._dfs_has_cycle_recur(course, states, course_prereqs_d, order):
                 return []
 
         # If using prereq->courses (prereq_courses_d), need order[::-1].
