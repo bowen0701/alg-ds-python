@@ -28,35 +28,35 @@ Constraints:
 """
 
 class SolutionSelect:
-    def _selectKth(self, nums1, lo1, hi1, nums2, lo2, hi2, k):
+    def _selectKth(self, nums1, l1, r1, nums2, l2, r2, k):
         # Base cases: one array exhausted, select kth from the other.
-        if lo1 > hi1:
-            return nums2[lo2 + k]
-        if lo2 > hi2:
-            return nums1[lo1 + k]
+        if l1 > r1:
+            return nums2[l2 + k]
+        if l2 > r2:
+            return nums1[l1 + k]
 
-        i1 = (lo1 + hi1) // 2
-        i2 = (lo2 + hi2) // 2
-        mid1, mid2 = nums1[i1], nums2[i2]
+        mid1 = l1 + (r1 - l1) // 2
+        mid2 = l2 + (r2 - l2) // 2
+        mid_num1, mid_num2 = nums1[mid1], nums2[mid2]
 
         # Combined elements before midpoints in both arrays.
-        if k <= (i1 - lo1) + (i2 - lo2):
+        if k <= (mid1 - l1) + (mid2 - l2):
             # kth is in the first halves; discard the larger's second half.
-            if mid1 > mid2:
-                return self._selectKth(nums1, lo1, i1 - 1, nums2, lo2, hi2, k)
+            if mid_num1 > mid_num2:
+                return self._selectKth(nums1, l1, mid1 - 1, nums2, l2, r2, k)
             else:
-                return self._selectKth(nums1, lo1, hi1, nums2, lo2, i2 - 1, k)
+                return self._selectKth(nums1, l1, r1, nums2, l2, mid2 - 1, k)
         else:
             # kth is in the second halves; discard the smaller's first half.
-            if mid1 > mid2:
+            if mid_num1 > mid_num2:
                 return self._selectKth(
-                    nums1, lo1, hi1, nums2, i2 + 1, hi2,
-                    k - (i2 - lo2) - 1
+                    nums1, l1, r1, nums2, mid2 + 1, r2,
+                    k - (mid2 - l2) - 1
                 )
             else:
                 return self._selectKth(
-                    nums1, i1 + 1, hi1, nums2, lo2, hi2,
-                    k - (i1 - lo1) - 1
+                    nums1, mid1 + 1, r1, nums2, l2, r2,
+                    k - (mid1 - l1) - 1
                 )
 
     def findMedianSortedArrays(self, nums1, nums2):
