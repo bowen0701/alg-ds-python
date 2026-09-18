@@ -57,18 +57,18 @@ class SolutionBellmanFord:
         Space complexity: O(n).
         """
         # Bellman-Ford: relax all edges k+1 times.
-        prices = [float('inf')] * n
-        prices[src] = 0
+        min_cost = [float('inf')] * n
+        min_cost[src] = 0
 
         for _ in range(k + 1):
             # Use a copy to avoid using updates from the same iteration.
-            prev = prices[:]
+            prev = min_cost[:]
 
             for u, v, w in flights:
-                if prev[u] + w < prices[v]:
-                    prices[v] = prev[u] + w
+                if prev[u] + w < min_cost[v]:
+                    min_cost[v] = prev[u] + w
 
-        return prices[dst] if prices[dst] != float('inf') else -1
+        return min_cost[dst] if min_cost[dst] != float('inf') else -1
 
 
 class SolutionBFS:
