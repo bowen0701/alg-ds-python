@@ -94,6 +94,7 @@ class SolutionMemo:
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a).
         """
+        # T[a]: min coins to make amount a; 0 = not yet computed.
         T = [0] * (amount + 1)
         return self._coin_change_recur(coins, amount, T)
 
@@ -105,22 +106,23 @@ class SolutionDP:
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a*n).
         """
-        # Apply DP with tabular T: n_coints x (amount + 1).
+        # Apply DP with tabular T: n_coints x (amount + 1):
+        # T[r][c]: min coins to make amount c using coins[0:r+1].
         n = len(coins)
         T = [[float('inf')] * (amount + 1) for _ in range(n)]
 
         # For amount 0, set coin change equal 0.
-        for i in range(n):
-            T[i][0] = 0
+        for r in range(n):
+            T[r][0] = 0
 
-        for j in range(1, amount + 1):
-            for i in range(n):
-                if coins[i] <= j:
-                    # If coin i can be includedd: to change or not to change.
-                    T[i][j] = min(1 + T[i][j - coins[i]], T[i - 1][j])
+        for c in range(1, amount + 1):
+            for r in range(n):
+                if coins[r] <= c:
+                    # If coin r can be included: to change or not to change.
+                    T[r][c] = min(1 + T[r][c - coins[r]], T[r - 1][c])
                 else:
                     # If not, use previous #coins.
-                    T[i][j] = T[i - 1][j]
+                    T[r][c] = T[r - 1][c]
 
         if T[-1][-1] < float('inf'):
             return T[-1][-1]
@@ -135,15 +137,16 @@ class SolutionDP1D:
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a).
         """
+        # T[a]: min coins to make amount a.
         T = [float('inf')] * (amount + 1)
 
         # For amount 0, set coin change to 0.
         T[0] = 0
 
-        for j in range(1, amount + 1):
-            for i in range(len(coins)):
-                if coins[i] <= j:
-                    T[j] = min(1 + T[j - coins[i]], T[j])
+        for a in range(1, amount + 1):
+            for c in coins:
+                if c <= a:
+                    T[a] = min(1 + T[a - c], T[a])
 
         if T[-1] < float('inf'):
             return T[-1]
@@ -168,12 +171,12 @@ class SolutionDP1DEarlyStop:
         # For amount 0, set coin change to 0.
         T[0] = 0
 
-        for j in range(1, amount + 1):
-            for i in range(len(coins)):
-                if coins[i] <= j:
-                    T[j] = min(1 + T[j - coins[i]], T[j])
+        for a in range(1, amount + 1):
+            for c in range(len(coins)):
+                if coins[c] <= a:
+                    T[a] = min(1 + T[a - coins[c]], T[a])
                 else:
-                    # Early stop: remaining coins all > j.
+                    # Early stop: remaining coins all > a.
                     break
 
         if T[-1] < float('inf'):
