@@ -114,39 +114,26 @@ class SolutionDFSVisitRecur:
 
 
 class SolutionDFSUpdateIter:
-    def _get_tovisits(self, v_start: Tuple[int, int], grid: List[List[str]]):
-        (r, c) = v_start
-        tovisits = []
-
-        # Visit up, down, left and right.
-        dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-        for r_next, c_next in dirs:
-            if (0 <= r_next < len(grid) and 0 <= c_next < len(grid[0]) and
-                grid[r_next][c_next] == '1'):
-                tovisits.append((r_next, c_next))
-
-        return tovisits
-
     def _dfs(self, r: int, c: int, grid: List[List[str]]):
-        # Update (r, c) as visited.
-        grid[r][c] = '0'
+        n_rows, n_cols = len(grid), len(grid[0])
 
         # Apply iterative DFS with stack.
         stack = [(r, c)]
 
         while stack:
-            tovisits = self._get_tovisits(stack[-1], grid)
+            r, c = stack.pop()
 
-            if tovisits:
-                for (r_next, c_next) in tovisits:
-                    # Mark (r_next, c_next) as visited.
-                    grid[r_next][c_next] = '0'
-                    stack.append((r_next, c_next))
-                    # break for "pure" DFS traversal.
-                    break
-            else:
-                # Backtrack by popping stack.
-                stack.pop()
+            # Exit condition: skip if out of bounds or visited.
+            if (r < 0 or r >= n_rows or c < 0 or c >= n_cols
+                or grid[r][c] == '0'):
+                continue
+
+            # Update (r, c) as visited.
+            grid[r][c] = '0'
+
+            # Push all neighbors onto stack.
+            for r_next, c_next in [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]:
+                stack.append((r_next, c_next))
 
     def numIslands(self, grid: List[List[str]]) -> int:
         """Number of islands by iteration using stack.
@@ -325,21 +312,17 @@ class SolutionBFSUpdate:
         # Apply BFS with queue.
         queue = deque([(r, c)])
 
-        # Visit neighbors: top/down/left/down.
+        # Visit neighbors: up/down/left/right.
         while queue:
-            r, c = queue.pop()
+            r, c = queue.popleft()
 
             dirs = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
             for r_next, c_next in dirs:
-                # Skip if out of boundary or visited.
-                if (r_next < 0 or r_next >= n_rows
-                    or c_next < 0 or c_next >= n_cols
-                    or grid[r_next][c_next] == '0'):
-                    continue
-
-                # Update grid to mark as visited, visit neighbors.
-                grid[r_next][c_next] = '0'
-                queue.appendleft((r_next, c_next))
+                # Entry condition: enqueue only if in bounds and unvisited land.
+                if (0 <= r_next < n_rows and 0 <= c_next < n_cols
+                    and grid[r_next][c_next] == '1'):
+                    grid[r_next][c_next] = '0'
+                    queue.append((r_next, c_next))
 
     def numIslands(self, grid: List[List[str]]) -> int:
         """Number of islands by (iterative) BFS.
@@ -351,12 +334,10 @@ class SolutionBFSUpdate:
         if not grid or not grid[0]:
             return 0
 
-        n_rows, n_cols = len(grid), len(grid[0])
-
         # Apply BFS with queue.
         n_islands = 0
-        for r in range(n_rows):
-            for c in range(n_cols):
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
                 if grid[r][c] == '1':
                     n_islands += 1
                     self._bfs(r, c, grid)
