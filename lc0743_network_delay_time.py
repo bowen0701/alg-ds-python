@@ -46,7 +46,10 @@ class SolutionDijkstra:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
         """
         Time complexity: O((|V|+|E|) * log|V|).
+          - |V| heap pops (stale skipped), each O(log|V|).
+          - Up to |E| heap pushes (one per edge relaxation), each O(log|V|).
         Space complexity: O(|V|+|E|).
+          - graph: O(|V|+|E|), dist: O(|V|), heap: O(|E|).
         """
         # Build adjacency dict from edge list.
         graph = defaultdict(dict)
