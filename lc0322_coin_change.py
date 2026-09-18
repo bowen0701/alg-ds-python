@@ -40,8 +40,6 @@ class SolutionRecur:
         Space complexity: O(c).
         """
         # Base cases.
-        if amount < 0:
-            return -1
         if amount == 0:
             return 0
 
@@ -65,8 +63,6 @@ class SolutionMemo:
     def _coin_change_recur(self, coins, amount, T):
         """Helper function for coin_change_memo()."""
         # Base cases.
-        if amount < 0:
-            return -1
         if amount == 0:
             return 0
 
