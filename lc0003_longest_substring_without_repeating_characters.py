@@ -45,7 +45,8 @@ class SolutionCharPosDict:
 
         for i, c in enumerate(s):
             if c in char_pos_d and max_start <= char_pos_d[c]:
-                # When repeating char is visited.
+                # When repeating char is visited, to exclude it, 
+                # you move the window start to one position after it
                 max_start = char_pos_d[c] + 1
             else:
                 # If not, update max length.
