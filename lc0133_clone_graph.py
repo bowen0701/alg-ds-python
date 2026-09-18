@@ -50,15 +50,18 @@ Constraints:
   node.
 """
 
+from typing import Dict, List, Optional
+
+
 # Definition for a Node.
 class Node:
-    def __init__(self, val, neighbors):
+    def __init__(self, val: int, neighbors: List['Node']):
         self.val = val
         self.neighbors = neighbors
 
 
 class SolutionNodeCopyDictDFSRecur:
-    def _dfs(self, node, node_copy_d):
+    def _dfs(self, node: Node, node_copy_d: Dict[Node, Node]) -> None:
         for neighbor in node.neighbors:
             if neighbor not in node_copy_d:
                 # If neighbor is not visited, create neighbor's copy.
@@ -71,12 +74,9 @@ class SolutionNodeCopyDictDFSRecur:
             # Add neighbor's copy to node copy's neighbor.
             node_copy_d[node].neighbors.append(node_copy_d[neighbor])
 
-    def cloneGraph(self, node):
+    def cloneGraph(self, node: Optional[Node]) -> Optional[Node]:
         """
-        :type node: Node
-        :rtype: Node
-
-        Apply recursive DFS travdersal on the graph.
+        Apply recursive DFS traversal on the graph.
 
         Time complexity: O(|V|+|E|), where
           - |V|: number of nodes.
@@ -102,12 +102,9 @@ class SolutionNodeCopyDictDFSRecur:
 
 
 class SolutionNodeCopyDictDFSIter:
-    def cloneGraph(self, node):
+    def cloneGraph(self, node: Optional[Node]) -> Optional[Node]:
         """
-        :type node: Node
-        :rtype: Node
-
-        Apply iterative DFS travdersal on the graph.
+        Apply iterative DFS traversal on the graph.
 
         Time complexity: O(|V|+|E|), where
           - |V|: number of nodes.
@@ -146,12 +143,9 @@ class SolutionNodeCopyDictDFSIter:
 
 
 class SolutionNodeCopyDictBFS:
-    def cloneGraph(self, node):
+    def cloneGraph(self, node: Optional[Node]) -> Optional[Node]:
         """
-        :type node: Node
-        :rtype: Node
-
-        Apply BFS travdersal with a queue on the graph.
+        Apply BFS traversal with a queue on the graph.
 
         Time complexity: O(|V|+|E|), where
           - |V|: number of nodes.
