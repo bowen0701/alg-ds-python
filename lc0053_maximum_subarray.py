@@ -29,36 +29,72 @@ Follow up: If you have figured out the O(n) solution, try coding another
 solution using the divide and conquer approach, which is more subtle.
 """
 
-class SolutionDP:
-    def maxSubArray(self, nums):
+from typing import List
+
+
+class SolutionRecur:
+    def _max_subarray_sum(self, nums: List[int], i: int) -> int:
+        """Max subarray sum ending at index i, considering nums[:i+1]."""
+        if i == 0:
+            return nums[0]
+
+        # Extend previous subarray or restart at nums[i].
+        return max(self._max_subarray_sum(nums, i - 1) + nums[i], nums[i])
+
+    def maxSubArray(self, nums: List[int]) -> int:
         """
-        :type nums: List[int]
-        :rtype: int
-        
+        Time complexity: O(2^n).
+        Space complexity: O(n).
+        """
+        return max(self._max_subarray_sum(nums, i) for i in range(len(nums)))
+
+
+class SolutionMemo:
+    def _max_subarray_sum(self, nums: List[int], i: int, memo: List[int]) -> int:
+        """Max subarray sum ending at index i, considering nums[:i+1], with memoization."""
+        if i == 0:
+            return nums[0]
+
+        if memo[i] is not None:
+            return memo[i]
+
+        memo[i] = max(self._max_subarray_sum(nums, i - 1, memo) + nums[i], nums[i])
+        return memo[i]
+
+    def maxSubArray(self, nums: List[int]) -> int:
+        """
+        Time complexity: O(n).
+        Space complexity: O(n).
+        """
+        memo = [None] * len(nums)
+        return max(self._max_subarray_sum(nums, i, memo) for i in range(len(nums)))
+
+
+class SolutionDP:
+    def maxSubArray(self, nums: List[int]) -> int:
+        """
         Maximum subarray sum by Kadane's algorithm.
 
         Time complexity: O(n).
         Space complexity: O(n).
         """
-        cur_max_sums = [0] * len(nums)
-        cur_max_sums[0] = nums[0]
-        max_sum = cur_max_sums[0]
+        # T[i]: max subarray sum ending at index i.
+        T = [0] * len(nums)
+        T[0] = nums[0]
+        max_sum = T[0]
 
         for i in range(1, len(nums)):
             # Compute max sum at i: to include previous subarray or not.
             # When cur_max_sum < 0, it's better to restart the subarray.
-            cur_max_sums[i] = max(cur_max_sums[i - 1] + nums[i], nums[i])
-            max_sum = max(max_sum, cur_max_sums[i])
+            T[i] = max(T[i - 1] + nums[i], nums[i])
+            max_sum = max(max_sum, T[i])
 
         return max_sum
 
 
 class SolutionIter:
-    def maxSubArray(self, nums):
+    def maxSubArray(self, nums: List[int]) -> int:
         """
-        :type nums: List[int]
-        :rtype: int
-        
         Maximum subarray sum by Kadane's algorithm w/ optimized space.
 
         Time complexity: O(n).
@@ -78,6 +114,8 @@ class SolutionIter:
 def main():
     # Output: 6.
     nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+    print(SolutionRecur().maxSubArray(nums))
+    print(SolutionMemo().maxSubArray(nums))
     print(SolutionDP().maxSubArray(nums))
     print(SolutionIter().maxSubArray(nums))
 
