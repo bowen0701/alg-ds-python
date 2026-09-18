@@ -18,8 +18,8 @@ Output: true
 class SolutionSortStart:
     def canAttendMeetings(self, intervals):
         """
-        :type intervals: List[List[int]]
-        :rtype: bool
+        Time complexity: O(n*log(n)), where n is the number of intervals.
+        Space complexity: O(1).
         """
         # Sort start times.
         intervals.sort()
