@@ -26,16 +26,19 @@ Input: [-10,9,20,null,null,15,7]
 Output: 42
 """
 
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode:
-    def __init__(self, val):
+    def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
 
 
 class SolutionLeftOrRightMaxPathDownSumPostOrder:
-    def _maxPathDownSum(self, root):
+    def _maxPathDownSum(self, root: Optional[TreeNode]) -> int:
         """Post-order DFS: recurse left/right first, then process current node."""
         if not root:
             return 0
@@ -53,11 +56,8 @@ class SolutionLeftOrRightMaxPathDownSumPostOrder:
         # not both, otherwise the path would fork and become invalid.
         return root.val + max(left_max_down_sum, right_max_down_sum)
 
-    def maxPathSum(self, root):
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
         """
-        :type root: TreeNode
-        :rtype: int
-
         Time complexity: O(n).
         Space complexity: O(logn) for balanced tree, O(n) for singly linked list.
         """
