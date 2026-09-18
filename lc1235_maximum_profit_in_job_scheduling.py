@@ -64,14 +64,13 @@ class SolutionRecur:
         profit: List[int],
     ) -> int:
         """
-        Suffix subproblem: T[i] = max profit from jobs[i:].
-        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
-
         Time complexity: O(n * 2^n), where n is the number of jobs.
           - Each job has 2 choices (skip or take), no memoization.
           - Linear scan O(n) per call to find next non-overlapping job.
         Space complexity: O(n), for recursion stack.
         """
+        # Suffix subproblem: T[i] = max profit from jobs[i:].
+        # Top-down: starts at i=0 (data head), recurses toward i=n (base case).
         jobs = sorted(zip(startTime, endTime, profit))
         return self._schedule_recur(0, jobs)
 
@@ -105,13 +104,12 @@ class SolutionMemo:
         profit: List[int],
     ) -> int:
         """
-        Suffix subproblem: T[i] = max profit from jobs[i:].
-        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
-
         Time complexity: O(n^2).
           - n subproblems, each does O(n) linear scan.
         Space complexity: O(n).
         """
+        # Suffix subproblem: T[i] = max profit from jobs[i:].
+        # Top-down: starts at i=0 (data head), recurses toward i=n (base case).
         jobs = sorted(zip(startTime, endTime, profit))
         memo = {}
         return self._schedule_recur(0, jobs, memo)
@@ -151,13 +149,12 @@ class SolutionMemo2:
         profit: List[int],
     ) -> int:
         """
-        Suffix subproblem: T[i] = max profit from jobs[i:].
-        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
-
         Time complexity: O(n * log(n)).
           - Sorting O(n*logn); n subproblems, each O(logn) binary search.
         Space complexity: O(n).
         """
+        # Suffix subproblem: T[i] = max profit from jobs[i:].
+        # Top-down: starts at i=0 (data head), recurses toward i=n (base case).
         jobs = sorted(zip(startTime, endTime, profit))
         memo = {}
         return self._schedule_recur(0, jobs, memo)
@@ -194,13 +191,12 @@ class SolutionMemo3:
         profit: List[int],
     ) -> int:
         """
-        Suffix subproblem: T[i] = max profit from jobs[i:].
-        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
-
         Time complexity: O(n * log(n)).
           - Sorting O(n*logn); n subproblems, each O(logn) bisect search.
         Space complexity: O(n).
         """
+        # Suffix subproblem: T[i] = max profit from jobs[i:].
+        # Top-down: starts at i=0 (data head), recurses toward i=n (base case).
         jobs = sorted(zip(startTime, endTime, profit))
         start_times = [j[0] for j in jobs]
         memo = {}
@@ -215,13 +211,12 @@ class SolutionDP:
         profit: List[int],
     ) -> int:
         """
-        Suffix subproblem: T[i] = max profit from jobs[i:].
-        Bottom-up: starts at i=n-1 (data tail), iterates toward i=0 (answer).
-
         Time complexity: O(n^2).
           - n iterations, each does O(n) linear scan.
         Space complexity: O(n).
         """
+        # Suffix subproblem: T[i] = max profit from jobs[i:].
+        # Bottom-up: starts at i=n-1 (data tail), iterates toward i=0 (answer).
         n = len(startTime)
         jobs = sorted(zip(startTime, endTime, profit))
 
@@ -249,13 +244,12 @@ class SolutionDP2:
         profit: List[int],
     ) -> int:
         """
-        Suffix subproblem: T[i] = max profit from jobs[i:].
-        Bottom-up: starts at i=n-1 (data tail), iterates toward i=0 (answer).
-
         Time complexity: O(n * log(n)).
           - Sorting O(n*logn); n iterations, each O(logn) bisect search.
         Space complexity: O(n).
         """
+        # Suffix subproblem: T[i] = max profit from jobs[i:].
+        # Bottom-up: starts at i=n-1 (data tail), iterates toward i=0 (answer).
         n = len(startTime)
         jobs = sorted(zip(startTime, endTime, profit))
         start_times = [j[0] for j in jobs]
