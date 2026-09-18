@@ -38,7 +38,7 @@ from typing import Dict, List
 
 
 class SolutionPrereqCoursesDFS:
-    def _has_cycle_dfs(
+    def _dfs_has_cycle_recur(
         self,
         course: int,
         states: List[int],
@@ -56,7 +56,7 @@ class SolutionPrereqCoursesDFS:
         states[course] = -1
 
         for next_course in prereq_courses_d[course]:
-            if self._has_cycle_dfs(next_course, states, prereq_courses_d):
+            if self._dfs_has_cycle_recur(next_course, states, prereq_courses_d):
                 return True
 
         # If no cycle was detected, completed visiting.
@@ -89,7 +89,7 @@ class SolutionPrereqCoursesDFS:
         states = [0] * numCourses
 
         for course in range(numCourses):
-            if self._has_cycle_dfs(course, states, prereq_courses_d):
+            if self._dfs_has_cycle_recur(course, states, prereq_courses_d):
                 return False
 
         return True
@@ -123,11 +123,11 @@ class SolutionPrereqCoursesBFSTopologicalSort:
         queue = deque()
         for course in range(numCourses):
             if n_prereqs[course] == 0:
-                queue.appendleft(course)
+                queue.append(course)
 
         while queue:
             # Take course w/o prerequisites.
-            course = queue.pop()
+            course = queue.popleft()
             numCourses -= 1
 
             # Unlock follow-up courses that depend on this course.
@@ -137,7 +137,7 @@ class SolutionPrereqCoursesBFSTopologicalSort:
 
                 # If no more prereq, add next course to queue to start taking it.
                 if n_prereqs[next_course] == 0:
-                    queue.appendleft(next_course)
+                    queue.append(next_course)
 
         return numCourses == 0
 
