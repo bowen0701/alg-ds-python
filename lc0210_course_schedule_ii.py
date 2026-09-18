@@ -132,13 +132,13 @@ class SolutionPrereqCoursesBFSTopologicalSort:
         queue = deque()
         for course in range(numCourses):
             if n_prereqs[course] == 0:
-                queue.appendleft(course)
+                queue.append(course)
 
         order = []
 
         while queue:
             # Take course w/o prerequisites.
-            course = queue.pop()
+            course = queue.popleft()
             order.append(course)
 
             # Unlock follow-up courses that depend on this course.
@@ -147,7 +147,7 @@ class SolutionPrereqCoursesBFSTopologicalSort:
 
                 # If no more prereq, add next course to queue to start taking it.
                 if n_prereqs[next_course] == 0:
-                    queue.appendleft(next_course)
+                    queue.append(next_course)
 
         if len(order) == numCourses:
             return order

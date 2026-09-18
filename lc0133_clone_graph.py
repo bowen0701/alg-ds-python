@@ -175,7 +175,7 @@ class SolutionNodeCopyDictBFS:
         queue = deque([node])
 
         while queue:
-            current = queue.pop()
+            current = queue.popleft()
 
             for neighbor in current.neighbors:
                 if neighbor not in node_copy_d:
@@ -183,7 +183,7 @@ class SolutionNodeCopyDictBFS:
                     neighbor_copy = Node(neighbor.val, [])
                     node_copy_d[neighbor] = neighbor_copy
 
-                    queue.appendleft(neighbor)
+                    queue.append(neighbor)
 
                 # Add neighbor's copy to current copy's neighbor.
                 node_copy_d[current].neighbors.append(node_copy_d[neighbor])

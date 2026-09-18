@@ -105,12 +105,12 @@ class SolutionBfs:
         queue = deque([beginWord])
 
         while queue:
-            w = queue.pop()
+            w = queue.popleft()
 
             # Start BFS if word neighbor is not visited yet.
             for w_neighbor in words_graph[w]:
                 if lengths[w_neighbor] == float('inf'):
-                    queue.appendleft(w_neighbor)
+                    queue.append(w_neighbor)
                     lengths[w_neighbor] = lengths[w] + 1
 
         return lengths[endWord]
