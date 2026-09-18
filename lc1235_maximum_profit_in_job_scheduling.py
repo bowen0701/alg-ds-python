@@ -39,11 +39,6 @@ from typing import List
 import bisect
 
 
-# Suffix subproblem: T[i] = max profit from jobs[i:].
-# Top-down (recur/memo): starts at i=0 (data head), recurses toward i=n (base case).
-# Bottom-up (DP): starts at i=n-1 (data tail), iterates toward i=0 (answer).
-
-
 class SolutionRecur:
     def _schedule_recur(self, i: int, jobs: List[tuple]) -> int:
         if i >= len(jobs):
@@ -69,6 +64,9 @@ class SolutionRecur:
         profit: List[int],
     ) -> int:
         """
+        Suffix subproblem: T[i] = max profit from jobs[i:].
+        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
+
         Time complexity: O(n * 2^n), where n is the number of jobs.
           - Each job has 2 choices (skip or take), no memoization.
           - Linear scan O(n) per call to find next non-overlapping job.
@@ -107,6 +105,9 @@ class SolutionMemo:
         profit: List[int],
     ) -> int:
         """
+        Suffix subproblem: T[i] = max profit from jobs[i:].
+        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
+
         Time complexity: O(n^2).
           - n subproblems, each does O(n) linear scan.
         Space complexity: O(n).
@@ -150,6 +151,9 @@ class SolutionMemo2:
         profit: List[int],
     ) -> int:
         """
+        Suffix subproblem: T[i] = max profit from jobs[i:].
+        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
+
         Time complexity: O(n * log(n)).
           - Sorting O(n*logn); n subproblems, each O(logn) binary search.
         Space complexity: O(n).
@@ -190,6 +194,9 @@ class SolutionMemo3:
         profit: List[int],
     ) -> int:
         """
+        Suffix subproblem: T[i] = max profit from jobs[i:].
+        Top-down: starts at i=0 (data head), recurses toward i=n (base case).
+
         Time complexity: O(n * log(n)).
           - Sorting O(n*logn); n subproblems, each O(logn) bisect search.
         Space complexity: O(n).
@@ -208,6 +215,9 @@ class SolutionDP:
         profit: List[int],
     ) -> int:
         """
+        Suffix subproblem: T[i] = max profit from jobs[i:].
+        Bottom-up: starts at i=n-1 (data tail), iterates toward i=0 (answer).
+
         Time complexity: O(n^2).
           - n iterations, each does O(n) linear scan.
         Space complexity: O(n).
@@ -239,6 +249,9 @@ class SolutionDP2:
         profit: List[int],
     ) -> int:
         """
+        Suffix subproblem: T[i] = max profit from jobs[i:].
+        Bottom-up: starts at i=n-1 (data tail), iterates toward i=0 (answer).
+
         Time complexity: O(n * log(n)).
           - Sorting O(n*logn); n iterations, each O(logn) bisect search.
         Space complexity: O(n).
