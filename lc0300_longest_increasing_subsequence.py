@@ -144,7 +144,7 @@ class SolutionBinarySearchGreedy:
             return 0
 
         # Prefix subproblem: process nums[0:i+1] left to right, maintain tails invariant.
-        # T[i]: smallest tail for that length i+1
+        # T[0:n_piles] is active; T[i] = smallest tail element value for increasing subseq of length i+1.
         #   (1) If n is larger than all tails, append it (new longest subsequence).
         #   (2) If T[i-1] < n <= T[i], update T[i] (smaller tail for same length).
         T = [0] * len(nums)
@@ -186,7 +186,7 @@ class SolutionBinarySearchBisectLeftGreedy:
             return 0
 
         # Prefix subproblem: same as SolutionBinarySearchGreedy + bisect_left.
-        # T[i]: smallest tail for that length i+1.
+        # T[0:n_piles] is active; T[i] = smallest tail element value for increasing subseq of length i+1.
         T = [0] * len(nums)
         n_piles = 0
 
