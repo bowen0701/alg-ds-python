@@ -44,7 +44,7 @@ class SolutionCusumCountDict:
         """
         from collections import defaultdict
 
-        # cusum_count_d[s]: number of indices i where sum(nums[0:i+1]) == s.
+        # cusum_count_d[s]: count of indices i where sum(nums[0:i+1]) == s.
         # Init 0->1 to handle cusum itself equals k (subarray starts from index 0).
         cusum_count_d = defaultdict(int)
         cusum_count_d[0] = 1
