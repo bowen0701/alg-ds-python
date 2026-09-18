@@ -48,7 +48,7 @@ class SolutionRecur:
 
         n_ways = 0
 
-        # Start from 'start' to avoid counting permutations.
+        # Start from 'start' to avoid counting permutations (e.g., 1+2 and 2+1).
         for i in range(start, len(coins)):
             n_ways += self._change_recur(amount - coins[i], coins, i)
 
@@ -62,7 +62,8 @@ class SolutionRecur:
           - a is amount.
         Space complexity: O(a).
         """
-        return self._change_recur(amount, coins, 0)
+        start = 0
+        return self._change_recur(amount, coins, start)
 
 
 class SolutionMemo:
@@ -90,6 +91,7 @@ class SolutionMemo:
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a*n).
         """
+        # T[(amount, start)]: #ways to make amount using coins[start:].
         T = {}
         return self._change_recur(amount, coins, 0, T)
 
@@ -101,22 +103,22 @@ class SolutionDP:
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a*n).
         """
-        # Apply DP with tabular T: n_coins x (amount + 1).
+        # T[r][c]: #ways to make amount c using coins[0:r+1].
         n = len(coins)
         T = [[0] * (amount + 1) for _ in range(n)]
 
         # For amount 0, there is 1 way: use no coins.
-        for i in range(n):
-            T[i][0] = 1
+        for r in range(n):
+            T[r][0] = 1
 
-        for j in range(1, amount + 1):
-            for i in range(n):
-                if coins[i] <= j:
-                    # Use coin i (stay on row i for reuse) + skip coin i.
-                    T[i][j] = T[i][j - coins[i]] + T[i - 1][j]
+        for c in range(1, amount + 1):
+            for r in range(n):
+                if coins[r] <= c:
+                    # Use coin r (stay on row r for reuse) + skip coin r.
+                    T[r][c] = T[r][c - coins[r]] + T[r - 1][c]
                 else:
-                    # Coin i doesn't fit, use previous coins only.
-                    T[i][j] = T[i - 1][j]
+                    # Coin r doesn't fit, use previous coins only.
+                    T[r][c] = T[r - 1][c]
 
         return T[-1][-1]
 
@@ -128,15 +130,16 @@ class SolutionDP1D:
         Time complexity: O(a*n), where a is amount, and n is number of coins.
         Space complexity: O(a).
         """
+        # T[a]: #ways to make amount a.
         T = [0] * (amount + 1)
 
         # For amount 0, there is 1 way: use no coins.
         T[0] = 1
 
         # Iterate coins in outer loop to count combinations, not permutations.
-        for i in range(len(coins)):
-            for j in range(coins[i], amount + 1):
-                T[j] += T[j - coins[i]]
+        for coin in coins:
+            for a in range(coin, amount + 1):
+                T[a] += T[a - coin]
 
         return T[-1]
 
@@ -153,16 +156,17 @@ class SolutionDP1DEarlyStop:
         # Sort coins to enable early stopping.
         coins = sorted(coins)
 
+        # T[a]: #ways to make amount a.
         T = [0] * (amount + 1)
 
         # For amount 0, there is 1 way: use no coins.
         T[0] = 1
 
         # Iterate coins in outer loop to count combinations, not permutations.
-        for i in range(len(coins)):
-            if coins[i] <= amount:
-                for j in range(coins[i], amount + 1):
-                    T[j] += T[j - coins[i]]
+        for coin in coins:
+            if coin <= amount:
+                for a in range(coin, amount + 1):
+                    T[a] += T[a - coin]
             else:
                 # Early stop: remaining coins all > amount.
                 break
